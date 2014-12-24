@@ -16,7 +16,7 @@
 <p>Make sure you are in the project folder you just cloned down and run <pre><code>npm install</code></pre></p>
 
 ### NOTE: For Mac users
-<p>Installing node and any dependencies via ```npm``` may require you to run the commands with ```sudo```.
+<p>Installing node and any dependencies via <code>npm</code> may require you to run the commands with <code>sudo</code>.
 
 #### gulp watch
 Run <code>gulp watch</code> from your project directory.  You can also run <code>npm run dev</code> which has been configured via the package.json.
