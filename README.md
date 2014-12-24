@@ -13,7 +13,7 @@
 <p>If you haven't already done so, clone the repo.</p>
 
 ### Installing the remaining dependencies for Gulp.
-<p>Make sure you are in the project folder you just cloned down and run <pre><code>npm install</code></pre></p>
+<p>Make sure you are in the project folder you just cloned down and run <code>npm install</code></p>
 
 ### NOTE: For Mac users
 <p>Installing node and any dependencies via <code>npm</code> may require you to run the commands with <code>sudo</code>.
