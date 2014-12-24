@@ -7,13 +7,13 @@
 <p>View the <a href='http://nodejs.org/'>node.js</a> homepage and install.</p>
 
 ### Installing Gulp if you do not have it already.
-<p>View the <a href='http://gulpjs.com'>Gulp</a> homepage.  If you have node installed, you can just run: <pre><code>npm install --global gulp</code></pre>
+<p>View the <a href='http://gulpjs.com'>Gulp</a> homepage.  If you have node installed, you can just run: <pre><code>npm install --global gulp</code></pre></p>
 
 ### Clone the Repo
 <p>If you haven't already done so, clone the repo.</p>
 
 ### Installing the remaining dependencies for Gulp.
-<p>Make sure you are in the project folder you just cloned down and run <code>npm install</code></p>
+<p>Make sure you are in the project folder you just cloned down and run <pre><code>npm install</code></pre></p>
 
 ### NOTE: For Mac users
 <p>Installing node and any dependencies via <code>npm</code> may require you to run the commands with <code>sudo</code>.
