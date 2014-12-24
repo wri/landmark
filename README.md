@@ -34,7 +34,7 @@ Run <code>npm run build</code> from your project directory.  If this fails on wi
 ### Pages
 
 <strong> When working on an individual page, make sure to edit the appropriate .styl file and index.jade file for that page, see table below.</strong>
-
+<br/>
 <table>
 	<tr>
 		<th>Page</th>
@@ -62,7 +62,7 @@ Run <code>npm run build</code> from your project directory.  If this fails on wi
 		<td> src/css/contact.styl </td>
 	</tr>
 </table>
-
+<br/>
 <p>Not every page may have a need for esri or dojo code so in those cases, do not use the dojoBootstrap.js file.</p>
 
 <strong>NOTE: Do not modify .html files, modify their .jade counterparts or else your changes will be overwritten on build.</strong>
