@@ -5,7 +5,6 @@ define([
 	'use strict';
 
 	var Controller = {
-
 		/**
 		* Toggle the legend container open or close
 		*/
