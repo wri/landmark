@@ -1,6 +1,9 @@
 var config = require('./gulp-config.js'),
+		requirejs = require('requirejs'),
 		stylus = require('gulp-stylus'),
+		uglify = require('gulp-uglify'),
 		watch = require('gulp-watch'),
+		react = require('gulp-react'),
 		jade = require('gulp-jade'),
 		gulp = require('gulp');
 
@@ -49,5 +52,29 @@ gulp.task('copy-access', function () {
 		.pipe(gulp.dest(config.copy.access.out));
 });
 
+gulp.task('optimize', ['optimize-map-page']);
+
+gulp.task('optimize-map-page', function () {
+	requirejs.optimize(config.optimizer.map.options, function (res) {});
+});
+
+gulp.task('minify', ['minify-js']);
+
+gulp.task('minify-js', function () {
+  return gulp.src(config.uglify.src)
+    .pipe(uglify())
+    .pipe(gulp.dest(config.uglify.dest));
+});
+
+gulp.task('react-watch', function () {
+	gulp.watch(config.react.src, ['react-jsx']);
+});
+
+gulp.task('react-jsx', function () {
+	return gulp.src(config.react.src)
+		.pipe(react())
+		.pipe(gulp.dest(config.react.out));
+});
+
 gulp.task('watch', ['stylus-dev', 'stylus-watch', 'jade-dev', 'jade-watch']);
-gulp.task('build', ['copy', 'stylus-build', 'jade-build']);		
+gulp.task('build', ['copy', 'minify', 'stylus-build', 'jade-build', 'optimize']);

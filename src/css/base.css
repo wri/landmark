@@ -1,12 +1,12 @@
 
-/* line 48 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 286 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 /* Import Common Variables and Functions */
 
-/* line 286 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
+/* line 22 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
@@ -64,7 +64,7 @@
 .app-header {
   background-color: #fff;
   position: absolute;
-  height: 75px;
+  height: 70px;
   right: 0;
   left: 0;
   top: 0;
@@ -73,7 +73,7 @@
 /* line 39 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 .app-body {
   position: absolute;
-  top: 75px;
+  top: 70px;
   bottom: 0;
   right: 0;
   left: 0;
@@ -84,7 +84,7 @@
 
 /* line 21 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
-/* line 21 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
+/* line 22 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
 .wri-header-attribution {
@@ -96,7 +96,22 @@
   width: 100%;
 }
 
-/* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
+/* line 11 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
 .top-bar.expanded {
-  z-index: 1;
+  z-index: 1000;
+}
+
+/* line 14 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
+.top-bar.expanded .top-bar-section ul {
+  width: 200px;
+}
+
+/* line 17 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
+.top-bar.expanded .top-bar-section li a:hover {
+  background-color: #ddd;
+}
+
+/* line 20 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
+.top-bar.expanded .top-bar-section li a {
+  padding: 0 0 0 12px;
 }

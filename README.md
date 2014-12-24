@@ -74,8 +74,15 @@ Run <code>npm run build</code> from your project directory.  If this fails on wi
 
 ## Git Workflow
 
-#### Coming Soon
-<p>Where to commit and what branch to branch off of as well as which branch will have the latest code.</p>
+<p>There is a develop branch which should at any given time be able to be pulled down and generate a build without any modification. When you begin working, checkout a new branch from the develop branch and only merge back in when whatever feature your on is completed.</p>
+<p>When we are ready to release the application.  We should commit a new tag and name the tag as a Release-Version-X.X or something similar.  If your creating the first release you can name whatever you like but after that, every subsequent release should follow that same naming convention.  If you do not know how to tag, view <a href='http://git-scm.com/book/en/v2/Git-Basics-Tagging'>this post here</a> for details or just follow the steps below.</p>
+
+<ol>
+<li>Make sure you are on the develop branch.</li>
+<li>Make sure all code is up to date and is tested and ready for release.</li>
+<li>Run <code>git tag -a nameOfTag -m 'Annotation for nameOfTag'</code></li>
+<li>Example: <code>git tag -a Release-1.0 -m 'Stable 1.0 version of the Global Map of Indigenous and Community Lands application.'</code></li>
+</ol>
 
 ## Contribution
 <p> See Git Workflow above to know how and where to commit your code.</p>

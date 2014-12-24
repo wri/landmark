@@ -20,8 +20,9 @@ html
 		div.root
 			include templates/header.jade
 			div.app-body
+				include templates/map.jade
 		script(src='https://code.jquery.com/jquery-2.1.3.min.js')
 		script(src='libs/foundation.min.js')
-		script(src='js/dojoBootstrap.js')
+		script(src='js/map/dojoBootstrap.js')
 		script.
 			$(document).foundation();

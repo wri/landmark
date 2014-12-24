@@ -3,6 +3,161 @@
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
 
-/* line 21 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
+/* line 22 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
+
+/* line 3 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .map-component {
+  box-sizing: initial;
+  position: absolute;
+  z-index: 30;
+}
+
+/* line 14 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .esriControlsBR {
+  right: 300px;
+}
+
+/* line 17 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .HomeButton .home {
+  background: url("images/ico-home.png") no-repeat center;
+  border-bottom: 1px solid #000;
+  background-color: #fff;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  padding: 0;
+}
+
+/* line 27 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .HomeButton .home:hover {
+  background-color: #eee;
+}
+
+/* line 30 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .legend-container {
+  width: 220px;
+  right: 20px;
+  bottom: 0;
+}
+
+/* line 35 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .legend-title-pane {
+  border-bottom: 1px solid #888;
+  padding-right: 5px;
+  text-align: right;
+}
+
+/* line 40 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .legend-title {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  border: 1px solid #888;
+  display: inline-block;
+  background: #fff;
+  line-height: 30px;
+  border-bottom: 0;
+  padding: 0 20px;
+  font-size: 14px;
+  height: 30px;
+}
+
+/* line 51 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .legend-content {
+  border: 1px solid #888;
+  background-color: #fff;
+  border-bottom: 0;
+  border-top: 0;
+}
+
+/* line 57 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .button-widget {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  height: 30px;
+  width: 30px;
+  right: 20px;
+}
+
+/* line 65 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .basemap-button,
+.brMap .basemap-connector {
+  top: 120px;
+}
+
+/* line 69 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .locator-button {
+  top: 160px;
+}
+
+/* line 72 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .share-button {
+  top: 200px;
+}
+
+/* line 75 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .basemap-icon {
+  background: url("images/basemap.png");
+}
+
+/* line 78 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .locate-icon {
+  background: url("images/locate.png");
+}
+
+/* line 81 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .locate-icon,
+.brMap .basemap-icon {
+  background-position: -2px -2px;
+  height: 100%;
+  width: 100%;
+}
+
+/* line 87 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .locate-icon:hover,
+.brMap .basemap-icon:hover {
+  background-position: -2px -36px;
+}
+
+/* line 91 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .basemap-container {
+  border: 1px solid #000;
+  background-color: #fff;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  overflow-y: auto;
+  height: 210px;
+  width: 200px;
+  right: 60px;
+  top: 20px;
+}
+
+/* line 101 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .connector {
+  border-bottom: 1px solid #000;
+  border-top: 1px solid #000;
+  background-color: #fff;
+  height: 30px;
+  right: 48px;
+  width: 13px;
+}

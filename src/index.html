@@ -38,11 +38,34 @@
           </section>
         </nav>
       </header>
-      <div class="app-body"></div>
+      <div class="app-body">
+        <div id="brMap" class="brMap">
+          <div id="tree-widget-container" class="map-component tree-widget-container"></div>
+          <div id="geocoder-container" class="map-component geocoder-container"></div>
+          <div id="analysis-button" class="map-component analysis-button"></div>
+          <div id="locator-button" class="map-component button-widget locator-button pointer">
+            <div class="locate-icon"></div>
+          </div>
+          <div id="basemap-button" class="map-component button-widget basemap-button pointer">
+            <div class="basemap-icon"></div>
+          </div>
+          <div class="map-component basemap-container hidden">
+            <div id="basemap-gallery"></div>
+          </div>
+          <div class="map-component basemap-connector connector hidden"></div>
+          <div id="legend-container" class="map-component legend-container">
+            <div class="legend-title-pane"><span title="Legend" id="legend-toggle" class="legend-title pointer">Legend</span></div>
+            <div class="legend-content active">
+              <div id="legend"></div>
+            </div>
+          </div>
+          <div id="share-button" class="map-component button-widget share-button pointer"></div>
+        </div>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="libs/foundation.min.js"></script>
-    <script src="js/dojoBootstrap.js"></script>
+    <script src="js/map/dojoBootstrap.js"></script>
     <script>$(document).foundation();</script>
   </body>
 </html>

@@ -1,1 +1,107 @@
 @import "config"
+
+.brMap
+	height 100%
+	width 100%
+	padding 0
+	margin 0
+	
+.brMap .map-component	
+	box-sizing initial
+	position absolute
+	z-index 30
+	
+.brMap .esriControlsBR
+	right 300px
+	
+.brMap .HomeButton .home
+	background url('images/ico-home.png') no-repeat center
+	border-bottom 1px solid black
+	background-color white
+	border-radius 0
+	cursor pointer
+	height 30px
+	width 30px
+	padding 0
+	
+.brMap .HomeButton .home:hover
+	background-color $esriHover
+	
+.brMap .legend-container
+	width 220px
+	right 20px
+	bottom 0
+	
+.brMap .legend-title-pane
+	border-bottom 1px solid $mainBorder
+	padding-right 5px
+	text-align right
+	
+.brMap .legend-title
+	border-radius-top(3px)
+	border 1px solid $mainBorder
+	display inline-block
+	background white
+	line-height 30px
+	border-bottom 0
+	padding 0 20px
+	font-size 14px
+	height 30px
+	
+.brMap .legend-content
+	border 1px solid $mainBorder
+	background-color white
+	border-bottom 0
+	border-top 0
+
+.brMap .button-widget
+	background-color white
+	border 1px solid black
+	border-radius(5px)
+	height 30px
+	width 30px
+	right 20px
+	
+.brMap .basemap-button
+.brMap .basemap-connector
+	top 120px
+	
+.brMap .locator-button
+	top 160px
+
+.brMap .share-button	
+	top 200px
+
+.brMap .basemap-icon
+	background url('images/basemap.png')
+	
+.brMap .locate-icon
+	background url('images/locate.png')
+	
+.brMap .locate-icon
+.brMap .basemap-icon
+	background-position -2px -2px
+	height 100%
+	width 100%	
+
+.brMap .locate-icon:hover
+.brMap .basemap-icon:hover
+	background-position -2px -36px
+	
+.brMap .basemap-container
+	border 1px solid black
+	background-color white
+	border-radius(5px)
+	overflow-y auto
+	height 210px
+	width 200px
+	right 60px
+	top 20px
+
+.brMap .connector
+	border-bottom 1px solid black
+	border-top 1px solid black
+	background-color white
+	height 30px
+	right 48px
+	width 13px
