@@ -1,10 +1,16 @@
 div#brMap.brMap
-	div.map-component.tree-widget-container#tree-widget-container
-	div.map-component.geocoder-container#geocoder-container
-	div.map-component.analysis-button#analysis-button
-	div.map-component.button-widget.locator-button.pointer#locator-button
+	div.map-component.tree-widget-container.hideOnLoad#tree-widget-container
+		div.tree-widget-title-pane
+			div.tree-title-text.tree-width
+				span Land Recognition Status
+			div.tree-container-toggle.pointer#tree-container-toggle &minus;
+		div.tree-content.tree-width.active#tree-content
+			div.tester
+	div.map-component.geocoder-container.hideOnLoad#geocoder-container
+	div.map-component.analysis-button.hideOnLoad#analysis-button
+	div.map-component.button-widget.locator-button.pointer.hideOnLoad#locator-button
 		div.locate-icon
-	div.map-component.button-widget.basemap-button.pointer#basemap-button
+	div.map-component.button-widget.basemap-button.pointer.hideOnLoad#basemap-button
 		div.basemap-icon
 	div.map-component.basemap-container.hidden
 		div#basemap-gallery
@@ -14,4 +20,4 @@ div#brMap.brMap
 			span(class='legend-title pointer', title='Legend', id='legend-toggle') Legend
 		div.legend-content.active
 			div#legend
-	div.map-component.button-widget.share-button.pointer#share-button
+	div.map-component.button-widget.share-button.pointer.hideOnLoad#share-button

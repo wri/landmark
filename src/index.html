@@ -40,13 +40,21 @@
       </header>
       <div class="app-body">
         <div id="brMap" class="brMap">
-          <div id="tree-widget-container" class="map-component tree-widget-container"></div>
-          <div id="geocoder-container" class="map-component geocoder-container"></div>
-          <div id="analysis-button" class="map-component analysis-button"></div>
-          <div id="locator-button" class="map-component button-widget locator-button pointer">
+          <div id="tree-widget-container" class="map-component tree-widget-container hideOnLoad">
+            <div class="tree-widget-title-pane">
+              <div class="tree-title-text tree-width"><span>Land Recognition Status</span></div>
+              <div id="tree-container-toggle" class="tree-container-toggle pointer">&minus;</div>
+            </div>
+            <div id="tree-content" class="tree-content tree-width active">
+              <div class="tester"></div>
+            </div>
+          </div>
+          <div id="geocoder-container" class="map-component geocoder-container hideOnLoad"></div>
+          <div id="analysis-button" class="map-component analysis-button hideOnLoad"></div>
+          <div id="locator-button" class="map-component button-widget locator-button pointer hideOnLoad">
             <div class="locate-icon"></div>
           </div>
-          <div id="basemap-button" class="map-component button-widget basemap-button pointer">
+          <div id="basemap-button" class="map-component button-widget basemap-button pointer hideOnLoad">
             <div class="basemap-icon"></div>
           </div>
           <div class="map-component basemap-container hidden">
@@ -59,7 +67,7 @@
               <div id="legend"></div>
             </div>
           </div>
-          <div id="share-button" class="map-component button-widget share-button pointer"></div>
+          <div id="share-button" class="map-component button-widget share-button pointer hideOnLoad"></div>
         </div>
       </div>
     </div>

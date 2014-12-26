@@ -1,8 +1,9 @@
 define([
 	'esri/config',
 	'main/config',
+	'utils/Helper',
 	'map/MapController'
-], function (esriConfig, AppConfig, MapController) {
+], function (esriConfig, AppConfig, Helper, MapController) {
 	'use strict';
 
 	var Main = {
@@ -40,6 +41,9 @@ define([
 		*/
 		launchApp: function () {
 			brApp.debug('Main.js >>> launchApp');
+			// Enable Responsive Layout
+			Helper.enableLayout();
+			// Init the Map
 			MapController.init();
 		}
 

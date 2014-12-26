@@ -44,7 +44,8 @@ module.exports = {
 					'js'   : 'js',
 					'libs' : 'libs',
 					'main' : 'js/map/main',
-					'map'  : 'js/map/esriMap'
+					'map'  : 'js/map/esriMap',
+					'utils': 'js/map/utils'
 				},
 				name: 'js/map/loader',
 				out : 'build/js/map/loader.js'

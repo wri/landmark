@@ -4,6 +4,8 @@ define([
 ], function (Fx, domClass) {
 	'use strict';
 
+	var DURATION = 300;
+
 	var Controller = {
 		/**
 		* Toggle the legend container open or close
@@ -22,7 +24,7 @@ define([
 				properties: {
 					height: height
 				},
-				duration: 500,
+				duration: DURATION,
 				onEnd: function () {
 					if (height !== 0) {
 						// Update the size of the legend as it grows so no scrollbars
@@ -44,6 +46,35 @@ define([
 				domClass.toggle(connector, 'hidden');
 				domClass.toggle(container, 'hidden');
 			}
+
+		},
+
+		/**
+		* Toggle the tree widget container open or close
+		*/
+		toggleTreeContainer: function () {
+			brApp.debug('WidgetsController >>> toggleTreeContainer');
+			var labelNode = document.getElementById('tree-container-toggle'),
+					node = document.getElementById('tree-content'),
+					active = domClass.contains(node, 'active'),
+					height = active ? 0 : node.scrollHeight;
+
+			labelNode.innerHTML = active ? '&plus;' : '&minus;';
+			domClass.toggle(node, 'active');			
+
+			Fx.animateProperty({
+				node: node,
+				properties: {
+					height: height
+				},
+				duration: DURATION,
+				onEnd: function () {
+					if (height !== 0) {
+						// Update the size of the legend as it grows so no scrollbars
+						node.style.height = 'auto';
+					}
+				}
+			}).play();
 
 		}
 

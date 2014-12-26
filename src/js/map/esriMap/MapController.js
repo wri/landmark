@@ -4,9 +4,10 @@ define([
 	'map/WidgetsController',
 	'dojo/on',	
 	'dojo/query',
+	'dojo/dom-class',
 	'dojo/dom-construct',
 	'esri/dijit/HomeButton'
-], function (Map, MapConfig, WidgetsController, on, dojoQuery, domConstruct, HomeButton) {
+], function (Map, MapConfig, WidgetsController, on, dojoQuery, domClass, domConstruct, HomeButton) {
 	'use strict';
 
 	var MapController = {
@@ -28,6 +29,7 @@ define([
 
 			on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
 			on(document.getElementById('basemap-button'), 'click', WidgetsController.toggleBasemapGallery);
+			on(document.getElementById('tree-container-toggle'), 'click', WidgetsController.toggleTreeContainer);
 
 		},
 
@@ -36,7 +38,6 @@ define([
 		*/
 		renderComponents: function () {
 			brApp.debug('MapController >>> renderComponents');
-
 			var homeWidget,
 					legend,
 					node;
@@ -48,6 +49,11 @@ define([
 
 			// Start all widgets that need to be started
 			homeWidget.startup();
+
+			// remove hideOnLoad classes
+			dojoQuery('body .hideOnLoad').forEach(function (node) {
+				domClass.remove(node, 'hideOnLoad');
+			});
 
 		}
 

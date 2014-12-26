@@ -19,7 +19,8 @@
 					{name: 'js', location: base + '/js'},
 					{name: 'libs', location: base + '/libs'},
 					{name: 'main', location: base + '/js/map/main'},
-					{name: 'map', location: base + '/js/map/esriMap'}
+					{name: 'map', location: base + '/js/map/esriMap'},
+					{name: 'utils', location: base + '/js/map/utils'}
 				],
 				aliases: [
 					//['react', 'http://fb.me/react-0.12.2.min.js']

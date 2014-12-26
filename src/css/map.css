@@ -161,3 +161,53 @@
   right: 48px;
   width: 13px;
 }
+
+/* line 109 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .tree-widget-container {
+  left: 20px;
+  top: 20px;
+}
+
+/* line 113 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .tree-widget-title-pane {
+  border: 1px solid #888;
+  background-color: #fff;
+  box-sizing: initial;
+  line-height: 45px;
+  height: 45px;
+}
+
+/* line 120 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .tree-width {
+  width: 280px;
+}
+
+/* line 123 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .tree-title-text {
+  border-right: 1px solid #888;
+  display: inline-block;
+}
+
+/* line 127 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .tree-title-text span {
+  padding: 0 12px;
+}
+
+/* line 130 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .tree-container-toggle {
+  display: inline-block;
+  margin-left: -4px;
+  padding: 0 12px;
+}
+
+/* line 136 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .tree-content {
+  border: 1px solid #888;
+  background-color: #fff;
+  border-top: 0;
+}
+
+/* line 141 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .tree-content .tester {
+  height: 200px;
+}

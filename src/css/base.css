@@ -14,53 +14,54 @@
 /* Generic Classes */
 
 /* line 4 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
-.hidden {
+.hidden,
+.hideOnLoad {
   display: none;
 }
 
-/* line 7 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 8 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 .clearfix {
   clear: both;
 }
 
-/* line 10 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 11 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 .relative {
   position: relative;
 }
 
-/* line 13 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 14 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 .text-center {
   text-align: center;
 }
 
-/* line 16 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 17 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 .inline {
   display: inline-block;
 }
 
-/* line 19 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 20 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 .pointer {
   cursor: pointer;
 }
 
-/* line 22 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 23 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 .inner {
   max-width: 960px;
   margin: auto;
 }
 
-/* line 25 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 26 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 /* Generic Classes */
 
-/* line 27 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 28 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 /* Base CSS for App */
 
-/* line 28 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 29 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 .root {
   background-color: #eee;
 }
 
-/* line 31 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 32 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 .app-header {
   background-color: #fff;
   position: absolute;
@@ -70,7 +71,7 @@
   top: 0;
 }
 
-/* line 39 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 40 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 .app-body {
   position: absolute;
   top: 70px;
@@ -79,7 +80,7 @@
   left: 0;
 }
 
-/* line 46 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 47 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 /* Base CSS for App */
 
 /* line 21 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
