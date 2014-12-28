@@ -1,7 +1,8 @@
 define([
+	'dojo/fx',
 	'dojo/_base/fx',
 	'dojo/dom-class'
-], function (Fx, domClass) {
+], function (CoreFx, Fx, domClass) {
 	'use strict';
 
 	var DURATION = 300;
@@ -62,7 +63,7 @@ define([
 			labelNode.innerHTML = active ? '&plus;' : '&minus;';
 			domClass.toggle(node, 'active');			
 
-			Fx.animateProperty({
+			var animateHeight = Fx.animateProperty({
 				node: node,
 				properties: {
 					height: height

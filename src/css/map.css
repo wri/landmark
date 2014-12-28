@@ -211,3 +211,57 @@
 .brMap .tree-content .tester {
   height: 200px;
 }
+
+/* line 144 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .analysis-button {
+  border: 1px solid #888;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 32px;
+  height: 32px;
+  right: 80px;
+  top: 20px;
+}
+
+/* line 154 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .analysis-button-label,
+.brMap .data-completeness-label,
+.brMap .data-completeness-toggle {
+  padding: 0 10px;
+}
+
+/* line 159 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .data-completeness-container {
+  border: 1px solid #888;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 32px;
+  height: 32px;
+  right: 180px;
+  top: 20px;
+}
+
+/* line 169 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .data-completeness-toggle {
+  border-right: 1px solid #888;
+  display: inline-block;
+  height: 32px;
+}
+
+/* line 174 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .geocoder-container {
+  right: 440px;
+  top: 20px;
+}
+
+/* line 178 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .simpleGeocoder .esriGeocoder input {
+  box-shadow: none;
+  height: 20px;
+}

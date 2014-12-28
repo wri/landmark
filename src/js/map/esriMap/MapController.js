@@ -6,8 +6,9 @@ define([
 	'dojo/query',
 	'dojo/dom-class',
 	'dojo/dom-construct',
+	'esri/dijit/Geocoder',
 	'esri/dijit/HomeButton'
-], function (Map, MapConfig, WidgetsController, on, dojoQuery, domClass, domConstruct, HomeButton) {
+], function (Map, MapConfig, WidgetsController, on, dojoQuery, domClass, domConstruct, Geocoder, HomeButton) {
 	'use strict';
 
 	var MapController = {
@@ -39,6 +40,7 @@ define([
 		renderComponents: function () {
 			brApp.debug('MapController >>> renderComponents');
 			var homeWidget,
+					geocoder,
 					legend,
 					node;
 
@@ -46,9 +48,15 @@ define([
 			node = dojoQuery('.esriSimpleSliderIncrementButton')[0];
 			domConstruct.create('div', {'id': 'homeButton'}, node, 'after');
 			homeWidget = new HomeButton({ map: brApp.map }, 'homeButton');
+			geocoder = new Geocoder({
+				map: brApp.map,
+				autoComplete: true,
+      	arcgisGeocoder: { placeholder: "Enter address" }
+			}, "geocoder");
 
 			// Start all widgets that need to be started
 			homeWidget.startup();
+			geocoder.startup();
 
 			// remove hideOnLoad classes
 			dojoQuery('body .hideOnLoad').forEach(function (node) {

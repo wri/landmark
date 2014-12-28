@@ -41,16 +41,17 @@
       <div class="app-body">
         <div id="brMap" class="brMap">
           <div id="tree-widget-container" class="map-component tree-widget-container hideOnLoad">
-            <div class="tree-widget-title-pane">
-              <div class="tree-title-text tree-width"><span>Land Recognition Status</span></div>
-              <div id="tree-container-toggle" class="tree-container-toggle pointer">&minus;</div>
-            </div>
+            <div id="tree-title-pane" class="tree-widget-title-pane"><span id="tree-title" class="tree-title-text tree-width"><span>Land Recognition Status</span></span><span id="tree-container-toggle" class="tree-container-toggle pointer">&minus;</span></div>
             <div id="tree-content" class="tree-content tree-width active">
               <div class="tester"></div>
             </div>
           </div>
-          <div id="geocoder-container" class="map-component geocoder-container hideOnLoad"></div>
-          <div id="analysis-button" class="map-component analysis-button hideOnLoad"></div>
+          <div id="geocoder-container" class="map-component geocoder-container hideOnLoad">
+            <div id="geocoder"></div>
+          </div>
+          <div id="data-completeness-container" class="map-component data-completeness-container hideOnLoad"><span class="data-completeness-toggle">
+              <input type="checkbox" value="complete" id="data-complete-checkbox"></span><span class="data-completeness-label">Show Data Completeness</span></div>
+          <div id="analysis-button" class="map-component analysis-button hideOnLoad pointer"><span class="analysis-button-label">Analysis</span></div>
           <div id="locator-button" class="map-component button-widget locator-button pointer hideOnLoad">
             <div class="locate-icon"></div>
           </div>

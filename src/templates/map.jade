@@ -1,13 +1,19 @@
 div#brMap.brMap
 	div.map-component.tree-widget-container.hideOnLoad#tree-widget-container
-		div.tree-widget-title-pane
-			div.tree-title-text.tree-width
+		div.tree-widget-title-pane#tree-title-pane
+			span.tree-title-text.tree-width#tree-title
 				span Land Recognition Status
-			div.tree-container-toggle.pointer#tree-container-toggle &minus;
+			span.tree-container-toggle.pointer#tree-container-toggle &minus;
 		div.tree-content.tree-width.active#tree-content
 			div.tester
 	div.map-component.geocoder-container.hideOnLoad#geocoder-container
-	div.map-component.analysis-button.hideOnLoad#analysis-button
+		div#geocoder
+	div.map-component.data-completeness-container.hideOnLoad#data-completeness-container
+		span.data-completeness-toggle
+			input(type='checkbox',value='complete',id='data-complete-checkbox')
+		span.data-completeness-label Show Data Completeness
+	div.map-component.analysis-button.hideOnLoad.pointer#analysis-button
+		span.analysis-button-label Analysis
 	div.map-component.button-widget.locator-button.pointer.hideOnLoad#locator-button
 		div.locate-icon
 	div.map-component.button-widget.basemap-button.pointer.hideOnLoad#basemap-button
