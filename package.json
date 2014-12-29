@@ -24,6 +24,7 @@
   "author": "BlueRaster",
   "dependencies": {
     "gulp": "^3.8.10",
+    "gulp-imagemin": "^2.0.0",
     "gulp-jade": "^0.10.0",
     "gulp-react": "^2.0.0",
     "gulp-stylus": "^1.3.4",

@@ -5,7 +5,16 @@ div#brMap.brMap
 				span Land Recognition Status
 			span.tree-container-toggle.pointer#tree-container-toggle &minus;
 		div.tree-content.tree-width.active#tree-content
-			div.tester
+			div.tree-data-section
+				div.radio-button-container
+					input(type='radio',id='national-level-toggle',name='tree-data-toggle')
+					label(for='national-level-toggle') National Level Data
+				div.national-level-data-container.hidden#national-level-data-container
+			div.tree-data-section
+				div.radio-button-container
+					input(type='radio',id='community-level-toggle',name='tree-data-toggle',checked='checked')
+					label(for='community-level-toggle') Community Level Data
+				div.community-level-data-container#community-level-data-container
 	div.map-component.geocoder-container.hideOnLoad#geocoder-container
 		div#geocoder
 	div.map-component.data-completeness-container.hideOnLoad#data-completeness-container
@@ -15,7 +24,7 @@ div#brMap.brMap
 	div.map-component.analysis-button.hideOnLoad.pointer#analysis-button
 		span.analysis-button-label Analysis
 	div.map-component.button-widget.locator-button.pointer.hideOnLoad#locator-button
-		div.locate-icon
+		div.locate-icon#location-widget
 	div.map-component.button-widget.basemap-button.pointer.hideOnLoad#basemap-button
 		div.basemap-icon
 	div.map-component.basemap-container.hidden
@@ -24,6 +33,6 @@ div#brMap.brMap
 	div.map-component.legend-container#legend-container
 		div.legend-title-pane
 			span(class='legend-title pointer', title='Legend', id='legend-toggle') Legend
-		div.legend-content.active
+		div.legend-content.active#legend-content
 			div#legend
 	div.map-component.button-widget.share-button.pointer.hideOnLoad#share-button

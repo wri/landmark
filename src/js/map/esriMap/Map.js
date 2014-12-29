@@ -79,8 +79,7 @@ define([
 
 		/**
 		* @param {string} key - Layer ID
-		* @param {object} layerConfig - See map/config.js in the layers object for an example, all config necessary
-		*															- for the layer and for the ui elements associated with the layer
+		* @param {object} layerConfig - See map/config.js in the layers object for an example
 		* @return {object} newly created dynamic layer
 		*/
 		addDynamicLayer: function (key, layerConfig) {

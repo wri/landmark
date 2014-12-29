@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
-    <style>html,body,.root{height:100%;width:100%;padding:0;margin:0;}	</style>
+    <style>html,body,.root{height:100%;width:100%;padding:0;margin:0;overflow:hidden}	</style>
     <link rel="stylesheet" href="libs/foundation.min.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/map.css"><!--[if lt IE 9]>
@@ -17,33 +17,48 @@
   <body class="tundra crl">
     <div class="root">
       <header class="app-header">
-        <div class="wri-header-attribution">
-          <div class="inner">A Partnership covened by the Instituto del Bien Comun and the World Resources Institute in collaboration with numerous other organizations.</div>
-        </div>
-        <nav role="navigation" data-topbar class="top-bar">
-          <ul class="title-area">
-            <li class="name">
-              <h1><a>Global Map of Indigenous and Community Lands</a></h1>
-            </li>
-            <li class="toggle-topbar menu-icon"><a><span></span></a></li>
-          </ul>
-          <section class="top-bar-section">
-            <ul class="right">
-              <li><a href="./">Home</a></li>
-              <li><a href="./">Map</a></li>
-              <li><a href="./data">Data</a></li>
-              <li><a href="./about">About</a></li>
-              <li><a href="./contact">Contact Us</a></li>
+        <div style="position: relative;">
+          <div class="wri-header-attribution">
+            <div class="inner">A Partnership covened by the Instituto del Bien Comun and the World Resources Institute in collaboration with numerous other organizations.</div>
+          </div>
+          <nav role="navigation" data-topbar class="top-bar">
+            <ul class="title-area">
+              <li class="name">
+                <h1><a>Global Map of Indigenous and Community Lands</a></h1>
+              </li>
+              <li class="toggle-topbar menu-icon"><a><span></span></a></li>
             </ul>
-          </section>
-        </nav>
+            <section class="top-bar-section">
+              <ul class="right">
+                <li><a id="home-page-link" href="./">Home</a></li>
+                <li><a id="map-page-link" href="./">Map</a></li>
+                <li><a id="data-page-link" href="./data">Data</a></li>
+                <li><a id="about-page-link" href="./about">About</a></li>
+                <li><a id="contact-page-link" href="./contact">Contact Us</a></li>
+              </ul>
+            </section>
+          </nav>
+        </div>
       </header>
       <div class="app-body">
         <div id="brMap" class="brMap">
           <div id="tree-widget-container" class="map-component tree-widget-container hideOnLoad">
             <div id="tree-title-pane" class="tree-widget-title-pane"><span id="tree-title" class="tree-title-text tree-width"><span>Land Recognition Status</span></span><span id="tree-container-toggle" class="tree-container-toggle pointer">&minus;</span></div>
             <div id="tree-content" class="tree-content tree-width active">
-              <div class="tester"></div>
+              <div class="tree-data-section">
+                <div class="radio-button-container">
+                  <input type="radio" id="national-level-toggle" name="tree-data-toggle">
+                  <label for="national-level-toggle">National Level Data</label>
+                </div>
+                <div id="national-level-data-container" class="national-level-data-container hidden"></div>
+              </div>
+              <div class="tree-data-section">
+                <div class="radio-button-container">
+                  <input type="radio" id="community-level-toggle" name="tree-data-toggle" checked="checked">
+                  <label for="community-level-toggle">Community Level Data</label>
+                </div>
+                <div id="community-level-data-container" class="community-level-data-container"></div>
+              </div>
             </div>
           </div>
           <div id="geocoder-container" class="map-component geocoder-container hideOnLoad">
@@ -53,7 +68,7 @@
               <input type="checkbox" value="complete" id="data-complete-checkbox"></span><span class="data-completeness-label">Show Data Completeness</span></div>
           <div id="analysis-button" class="map-component analysis-button hideOnLoad pointer"><span class="analysis-button-label">Analysis</span></div>
           <div id="locator-button" class="map-component button-widget locator-button pointer hideOnLoad">
-            <div class="locate-icon"></div>
+            <div id="location-widget" class="locate-icon"></div>
           </div>
           <div id="basemap-button" class="map-component button-widget basemap-button pointer hideOnLoad">
             <div class="basemap-icon"></div>
@@ -64,7 +79,7 @@
           <div class="map-component basemap-connector connector hidden"></div>
           <div id="legend-container" class="map-component legend-container">
             <div class="legend-title-pane"><span title="Legend" id="legend-toggle" class="legend-title pointer">Legend</span></div>
-            <div class="legend-content active">
+            <div id="legend-content" class="legend-content active">
               <div id="legend"></div>
             </div>
           </div>

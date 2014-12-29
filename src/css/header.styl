@@ -10,6 +10,13 @@
 /* Overrides for Foundation CSS */
 .top-bar.expanded
 	z-index 1000
+	
+/* Override Dojo Blue Outline */
+.top-bar .top-bar-section li a
+	outline none
+
+.top-bar:not(.expanded) .top-bar-section ul
+	margin-right 30px
 
 .top-bar.expanded .top-bar-section ul
 	width 200px

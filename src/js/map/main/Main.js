@@ -2,8 +2,9 @@ define([
 	'esri/config',
 	'main/config',
 	'utils/Helper',
-	'map/MapController'
-], function (esriConfig, AppConfig, Helper, MapController) {
+	'map/MapController',
+	'main/AppController'
+], function (esriConfig, AppConfig, Helper, MapController, AppController) {
 	'use strict';
 
 	var Main = {
@@ -45,6 +46,8 @@ define([
 			Helper.enableLayout();
 			// Init the Map
 			MapController.init();
+			// Init the AppController, Override Events, General Events, and Changing App State are in AppController
+			AppController.init();
 		}
 
 	};

@@ -1,5 +1,15 @@
 @import "config"
 
+.launch-dialog-title
+	margin 0
+
+.launch-dialog-subtitle
+	font-style italic
+	font-size 14px
+	
+.launch-dialog-content
+	font-size 15px
+
 .brMap
 	height 100%
 	width 100%
@@ -54,6 +64,9 @@
 	border-bottom 0
 	border-top 0
 
+.brMap .legend-content:not(.active)
+	overflow hidden
+
 .brMap .button-widget
 	background-color white
 	border 1px solid black
@@ -75,16 +88,19 @@
 .brMap .basemap-icon
 	background url('images/basemap.png')
 	
-.brMap .locate-icon
+.brMap .LocateButton .zoomLocateButton
 	background url('images/locate.png')
-	
-.brMap .locate-icon
+	background-position -2px -2px
+
 .brMap .basemap-icon
 	background-position -2px -2px
 	height 100%
 	width 100%	
 
-.brMap .locate-icon:hover
+.brMap .LocateButton .zoomLocateButton:hover
+	background url('images/locate.png')
+	background-position -2px -36px
+	
 .brMap .basemap-icon:hover
 	background-position -2px -36px
 	
@@ -93,10 +109,17 @@
 	background-color white
 	border-radius(5px)
 	overflow-y auto
-	height 210px
-	width 200px
+	height 400px
+	width 380px
 	right 60px
-	top 20px
+	top 65px
+	
+.brMap .esriBasemapGalleryLabelContainer
+	font-size 13px
+	padding 5px 0
+	
+.brMap .esriBasemapGallery
+	margin 10px 5px
 
 .brMap .connector
 	border-bottom 1px solid black
@@ -114,8 +137,8 @@
 	border 1px solid $mainBorder
 	background-color white
 	box-sizing initial
-	line-height 45px
-	height 45px
+	line-height 32px
+	height 32px
 	
 .brMap .tree-width
 	width 280px
@@ -129,13 +152,15 @@
 
 .brMap .tree-container-toggle
 	display inline-block
-	// Override something strange from foundation
-	margin-left -4px
 	padding 0 12px
 
 .brMap .tree-content
-	border 1px solid $mainBorder
 	background-color white
+	position absolute
+	overflow hidden
+	
+.brMap .tree-content.active
+	border 1px solid $mainBorder
 	border-top 0
 
 .brMap .tree-content .tester
@@ -178,3 +203,22 @@
 .brMap .simpleGeocoder .esriGeocoder input
 	box-shadow none
 	height 20px
+	
+.brMap .tree-data-section
+	margin 10px
+	
+.brMap .tree-data-section input[type='radio']
+	margin 0
+	
+/** MOBILE CSS **/
+.mobile .brMap .basemap-container
+	height 250px
+	width 150px
+	
+.mobile .brMap .esriBasemapGallery
+	margin 10px
+	
+.mobile .brMap .basemap-container
+	top 20px
+	
+/** MOBILE CSS **/

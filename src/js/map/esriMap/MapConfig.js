@@ -1,5 +1,7 @@
 define([], function () {
 
+	var indigenousLandsUrl = 'http://gis-stage.wri.org/arcgis/rest/services/CommunityLands/CommunityLands/MapServer';
+
 	var MapConfig = {
 
 		options: {
@@ -8,6 +10,15 @@ define([], function () {
 			centerX: -19,
 			centerY: 19,
 			zoom: 3
+		},
+
+		layers: {
+			'indigenousLands': {
+				url: indigenousLandsUrl,
+				type: 'dynamic',
+				defaultLayers: [],
+				visible: false
+			}
 		}
 
 	};

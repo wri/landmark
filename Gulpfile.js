@@ -1,4 +1,5 @@
 var config = require('./gulp-config.js'),
+		imagemin = require('gulp-imagemin'),
 		requirejs = require('requirejs'),
 		stylus = require('gulp-stylus'),
 		uglify = require('gulp-uglify'),
@@ -58,12 +59,25 @@ gulp.task('optimize-map-page', function () {
 	requirejs.optimize(config.optimizer.map.options, function (res) {});
 });
 
-gulp.task('minify', ['minify-js']);
+gulp.task('minify', ['minify-js', 'minify-images']);
 
 gulp.task('minify-js', function () {
   return gulp.src(config.uglify.src)
     .pipe(uglify())
     .pipe(gulp.dest(config.uglify.dest));
+});
+
+gulp.task('minify-images', function () {
+	return gulp.src(config.imagemin.src)
+    .pipe(imagemin({
+        pngquant: true,
+        optimizationLevel: 7,
+        progressive: true,
+        interlaced: true,
+        svgoPlugins: [{removeViewBox: false}]
+    }))
+    .on('error', console.error)
+    .pipe(gulp.dest(config.imagemin.dest));
 });
 
 gulp.task('react-watch', function () {

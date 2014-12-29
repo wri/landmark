@@ -5,7 +5,7 @@
 			appVersion = '1.0',
 			esriVersion = '3.12',
 			js = [
-				'//js.arcgis.com/' + esriVersion + '/'
+				'//js.arcgis.com/' + esriVersion + '/init.js'
 			],
 			css = [
 				'//js.arcgis.com/' + esriVersion + '/esri/css/esri.css',

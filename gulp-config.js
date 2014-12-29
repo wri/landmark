@@ -9,6 +9,10 @@ module.exports = {
 			out: 'build'
 		}
 	},
+	imagemin: {
+		src: 'src/**/*.{png,jpg,gif}',
+		dest: 'build'
+	},
 	stylus: {
 		base    : 'src/css',
 		watch   : 'src/css/**/*.styl',

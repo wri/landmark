@@ -83,7 +83,7 @@
 /* line 47 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 /* Base CSS for App */
 
-/* line 21 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
+/* line 28 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
 /* line 22 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
 
@@ -102,17 +102,27 @@
   z-index: 1000;
 }
 
-/* line 14 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
+/* line 15 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
+.top-bar .top-bar-section li a {
+  outline: none;
+}
+
+/* line 18 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
+.top-bar:not(.expanded) .top-bar-section ul {
+  margin-right: 30px;
+}
+
+/* line 21 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
 .top-bar.expanded .top-bar-section ul {
   width: 200px;
 }
 
-/* line 17 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
+/* line 24 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
 .top-bar.expanded .top-bar-section li a:hover {
   background-color: #ddd;
 }
 
-/* line 20 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
+/* line 27 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
 .top-bar.expanded .top-bar-section li a {
   padding: 0 0 0 12px;
 }
