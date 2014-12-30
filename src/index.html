@@ -41,7 +41,14 @@
         </div>
       </header>
       <div class="app-body">
+        <div id="mobileMenu" class="mobile-menu">
+          <div id="menuControls" class="menu-controls"><span id="layersMenuButton" class="segmented-menu-button active">Layers</span><span id="legendMenuButton" class="segmented-menu-button">Legend</span><span id="toolsMenuButton" class="segmented-menu-button">Tools</span></div>
+          <div id="mobile-layers-content" class="mobile-menu-content mobile-layers-content active"></div>
+          <div id="mobile-legend-content" class="mobile-menu-content mobile-legend-content"></div>
+          <div id="mobile-tools-content" class="mobile-menu-content mobile-tools-content"></div>
+        </div>
         <div id="brMap" class="brMap">
+          <div id="mobile-menu-toggle" class="map-component mobile-menu-toggle-button hideOnLoad pointer">&#9881;</div>
           <div id="tree-widget-container" class="map-component tree-widget-container hideOnLoad">
             <div id="tree-title-pane" class="tree-widget-title-pane"><span id="tree-title" class="tree-title-text tree-width"><span>Land Recognition Status</span></span><span id="tree-container-toggle" class="tree-container-toggle pointer">&minus;</span></div>
             <div id="tree-content" class="tree-content tree-width active">
@@ -77,7 +84,7 @@
             <div id="basemap-gallery"></div>
           </div>
           <div class="map-component basemap-connector connector hidden"></div>
-          <div id="legend-container" class="map-component legend-container">
+          <div id="legend-container" class="map-component legend-container hideOnLoad">
             <div class="legend-title-pane"><span title="Legend" id="legend-toggle" class="legend-title pointer">Legend</span></div>
             <div id="legend-content" class="legend-content active">
               <div id="legend"></div>

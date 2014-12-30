@@ -24,3 +24,6 @@ html
 		script(src='libs/foundation.min.js')
 		script.
 			$(document).foundation();
+			// Thanks Foundation, Hack because the only foundation component
+			// does not work on mobile unless I do this, but it works on the map page
+			$('.toggle-topbar a').click(function(){});

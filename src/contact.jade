@@ -7,7 +7,7 @@ html
 		meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
 		meta(http-equiv='X-UA-Compatible', content='IE=7, IE=9, IE=10')
 		style.
-			html,body,.root{height:100%;width:100%;padding:0;margin:0;}
+			html,body,.root{height:100%;width:100%;padding:0;margin:0;overflow:hidden;}
 		link(rel='stylesheet', href='libs/foundation.min.css')
 		link(rel='stylesheet', href='css/base.css')
 		link(rel='stylesheet', href='css/contact.css')
@@ -24,3 +24,6 @@ html
 		script(src='libs/foundation.min.js')
 		script.
 			$(document).foundation();
+			// Thanks Foundation, Hack because the only foundation component
+			// does not work on mobile unless I do this, but it works on the map page
+			$('.toggle-topbar a').click(function(){});

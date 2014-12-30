@@ -38,6 +38,10 @@ define([
 			on(document.getElementById('tree-container-toggle'), 'click', WidgetsController.toggleTreeContainer);
 			on(document.getElementById('national-level-toggle'), 'change', WidgetsController.toggleDataContainer);
 			on(document.getElementById('community-level-toggle'), 'change', WidgetsController.toggleDataContainer);
+			on(document.getElementById('mobile-menu-toggle'), 'click', WidgetsController.toggleMobileMenu);
+			on(document.getElementById('layersMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
+			on(document.getElementById('legendMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
+			on(document.getElementById('toolsMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
 
 		},
 

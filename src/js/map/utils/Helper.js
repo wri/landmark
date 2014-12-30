@@ -7,7 +7,7 @@ define([
 ], function (on, topic, domClass, domGeom, win) {
 
 	var body = win.body(),
-			threshold = 900,
+			threshold = 800,
 			prevWidth,
 			width;
 

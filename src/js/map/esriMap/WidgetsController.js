@@ -99,7 +99,82 @@ define([
 				}
 			}).play();
 
-		},		
+		},
+
+		/**
+		* Toggle the mobile menu open or close
+		*/
+		toggleMobileMenu: function () {
+			brApp.debug('WidgetsController >>> toggleMobileMenu');
+			var mapNode = document.getElementById('brMap'),
+					menuNodeId = 'mobileMenu',
+					menuButton = 'mobile-menu-toggle',
+					isClosing = domClass.contains(menuNodeId, 'open'),
+					left = isClosing ? 0 : 290;
+
+			if (!isClosing) {
+				domClass.toggle(menuNodeId, 'open');
+				// domClass.toggle(menuButton, 'hidden');
+			}
+
+			Fx.animateProperty({
+				node: mapNode,
+				properties: {
+					left: left
+				},
+				duration: DURATION,
+				onEnd: function () {
+					brApp.map.resize();
+					if (isClosing) {
+						domClass.toggle(menuNodeId, 'open');
+						// domClass.toggle(menuButton, 'hidden');
+					}
+				}
+			}).play();
+
+		},
+
+		/**
+		* Toggle the appropriate container's visibility based on which button was clicked in the UI
+		*/
+		toggleMobileMenuContainer: function (evt) {
+			brApp.debug('WidgetsController >>> toggleMobileMenuContainer');
+			var target = evt.target ? evt.target : evt.srcElement,
+					menuNode = document.querySelector('.segmented-menu-button.active'),
+					containerNode = document.querySelector('.mobile-menu-content.active'),
+					id;
+
+			// If section is already active, back out now
+			// Else remove active class from target and containerNode
+			if (domClass.contains(target, 'active')) {
+				return;
+			}
+
+			if (menuNode) {
+				domClass.remove(menuNode, 'active');
+			}
+
+			if (containerNode) {
+				domClass.remove(containerNode, 'active');
+			}
+			
+			// Now add the active class to the target and to the container
+			switch (target.id) {
+				case "legendMenuButton":
+					id = 'mobile-legend-content';
+					break;
+				case "toolsMenuButton":
+					id = 'mobile-tools-content';
+					break;
+				case "layersMenuButton":
+					id = 'mobile-layers-content';
+					break;
+			}
+
+			domClass.add(target, 'active');
+			domClass.add(id, 'active');
+
+		},
 
 		/**
 		* Show the Welcome Dialog/Launch Screen for the Map
@@ -111,7 +186,7 @@ define([
 
 			// Add a Close button to the dialog
 			if (!registry.byId('launch-dialog')) {
-				dialogContent += "<button id='launch-map' class='right'>Launch Interactive Map</button>";
+				dialogContent += "<button id='launch-map' class='launch-map-button'>Launch Interactive Map</button>";
 				launchDialog = new Dialog({
 					id: 'launch-dialog',
 					content: dialogContent,

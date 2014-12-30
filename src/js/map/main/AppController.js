@@ -1,8 +1,11 @@
 define([
 	'dojo/on',
 	'dojo/topic',
+	'dojo/dom-style',
+	'dojo/dom-construct',
+	'utils/Helper',
 	'map/WidgetsController'
-], function (on, topic, WidgetsController) {
+], function (on, topic, domStyle, domConstruct, Helper, WidgetsController) {
 	'use strict';
 
 	var AppController = {
@@ -14,6 +17,12 @@ define([
 			brApp.debug('AppController >>> init');
 			this.overrideEvents();
 			this.bindEvents();
+
+			// If we are loading on a mobile device, move the content into the correct panel
+			if (Helper.isMobile()) {
+				this.layoutChangedToMobile();
+			}
+
 		},
 
 		/**
@@ -64,6 +73,19 @@ define([
 		*/
 		layoutChangedToMobile: function () {
 			brApp.debug('AppController >>> layoutChangedToMobile');
+			var legendTabContainer = document.getElementById('mobile-legend-content'),
+					layersTabContainer = document.getElementById('mobile-layers-content'),
+					toolsTabContainer = document.getElementById('mobile-tools-content');
+
+			// Move Nodes to their new containers
+			// Layers Tab
+			var treeContent = document.getElementById('tree-content');
+			domConstruct.place(treeContent, layersTabContainer, 'last');
+			// Legend Tab
+			var legend = document.getElementById('legend');
+			domConstruct.place(legend, legendTabContainer, 'last');
+			// Tools Tab
+
 		},
 
 		/**
@@ -71,7 +93,18 @@ define([
 		*/
 		layoutChangedToDesktop: function () {
 			brApp.debug('AppController >>> layoutChangedToDesktop');
+			var legendContainer = document.getElementById('legend-content'),
+					treeContainer = document.getElementById('tree-widget-container');
+			// Layers Tab
+			var treeContent = document.getElementById('tree-content');
+			domConstruct.place(treeContent, treeContainer, 'last');
+			// Legend Content
+			var legend = document.getElementById('legend');
+			domConstruct.place(legend, legendContainer, 'last');
+			// Tools Tab
 
+			// Ensure our menu is close and reset the css to default
+			domStyle.set('brMap', 'left', '0');
 		}
 
 	};

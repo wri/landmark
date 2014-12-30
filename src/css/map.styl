@@ -11,10 +11,12 @@
 	font-size 15px
 
 .brMap
-	height 100%
-	width 100%
-	padding 0
-	margin 0
+	background-color $mainBackground
+	position absolute
+	bottom 0
+	right 0
+	left 0
+	top 0
 	
 .brMap .map-component	
 	box-sizing initial
@@ -173,7 +175,7 @@
 	text-align center
 	line-height 32px
 	height 32px
-	right 80px
+	right 70px
 	top 20px
 	
 .brMap .analysis-button-label
@@ -188,7 +190,7 @@
 	text-align center
 	line-height 32px
 	height 32px
-	right 180px
+	right 160px
 	top 20px
 	
 .brMap .data-completeness-toggle
@@ -197,7 +199,7 @@
 	height 32px
 	
 .brMap .geocoder-container
-	right 440px
+	right 415px
 	top 20px
 	
 .brMap .simpleGeocoder .esriGeocoder input
@@ -210,15 +212,6 @@
 .brMap .tree-data-section input[type='radio']
 	margin 0
 	
-/** MOBILE CSS **/
-.mobile .brMap .basemap-container
-	height 250px
-	width 150px
-	
-.mobile .brMap .esriBasemapGallery
-	margin 10px
-	
-.mobile .brMap .basemap-container
-	top 20px
-	
-/** MOBILE CSS **/
+body:not(.mobile) .launch-map-button
+	margin-right 10px
+	float right
