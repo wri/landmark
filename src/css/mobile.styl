@@ -21,6 +21,9 @@
 	left 20px
 	top 20px
 	
+.mobile-menu-content
+	margin 20px 10px
+	
 .mobile-menu:not(.open)
 	display none
 	
@@ -53,11 +56,6 @@ body:not(.mobile) .mobile-menu
 body:not(.mobile) .mobile-menu-toggle-button
 	display none
 	
-@media (max-width: 1000px)
-	.brMap .geocoder-container
-		right 70px !important
-		top 70px !important
-	
 /** These Styles are Activated when the Helper class adds a mobile class to the body tag **/
 .mobile .launch-map-button
 	display block
@@ -84,3 +82,15 @@ body:not(.mobile) .mobile-menu-toggle-button
 .mobile .title-area .name h1
 .mobile .esriAttribution
 	display none
+	
+/** These Are Styles we need to override with Media Queries as they may need to be 
+		applied before the JavaScript can detect were on mobile and add the mobile class **/
+@media (max-width: 1000px)
+	.brMap .geocoder-container
+		right 70px !important
+		top 70px !important
+		
+@media (max-width: 800px)
+	.title-area .name h1
+		display none
+	
