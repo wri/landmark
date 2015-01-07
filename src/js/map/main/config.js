@@ -5,6 +5,11 @@ define([], function () {
 
 		corsEnabledServers: [],
 
+		portalGenerateFeaturesURL: 'http://www.arcgis.com/sharing/rest/content/features/generate',
+
+
+		// Content Dynamically Added to Dialogs goes below
+
 		// Launch Button to Close Dialog added in Code
 		welcomeDialogContent: "<h2 class='launch-dialog-title'>About Global Map of Indigenous and Community Lands</h2>" + 
 			"<p class='launch-dialog-subtitle'>A Partnership covened by the Instituto del Bien Comun and the World" +  
@@ -16,6 +21,7 @@ define([], function () {
 					" sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi." + 
 					" Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet," + 
 					" felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu.</p>"
+	
 	};
 
 	return config;

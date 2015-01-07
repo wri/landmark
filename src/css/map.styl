@@ -1,4 +1,5 @@
 @import "config"
+@import "analysis"
 
 .launch-dialog-title
 	margin 0
@@ -9,6 +10,9 @@
 	
 .launch-dialog-content
 	font-size 15px
+	
+.dijitDialog .dijitDialogCloseIcon
+	outline none !important
 
 .brMap
 	background-color $mainBackground
@@ -84,7 +88,8 @@
 .brMap .locator-button
 	top 160px
 
-.brMap .share-button	
+.brMap .share-button
+.brMap .share-connector	
 	top 200px
 
 .brMap .basemap-icon
@@ -132,6 +137,17 @@
 	
 .brMap .esriBasemapGallery
 	margin 10px 5px
+	
+.brMap .share-container
+	border 1px solid black
+	background-color white
+	border-radius(5px)
+	overflow-y auto
+	min-width 50px
+	height 60px
+	width auto
+	right 60px
+	top 185px
 
 .brMap .connector
 	border-bottom 1px solid black

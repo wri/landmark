@@ -1,11 +1,13 @@
 define([
 	'main/config',
+	'map/Uploader',
+	'map/DrawTool',
 	'dojo/on',
 	'dijit/Dialog',
 	'dojo/_base/fx',
 	'dojo/dom-class',
 	'dijit/registry'
-], function (AppConfig, on, Dialog, Fx, domClass, registry) {
+], function (AppConfig, Uploader, DrawTool, on, Dialog, Fx, domClass, registry) {
 	'use strict';
 
 	var DURATION = 300;
@@ -46,11 +48,48 @@ define([
 			var connector = document.querySelector('.brMap .basemap-container'),
 					container = document.querySelector('.brMap .basemap-connector');
 
+			if (this.shareContainerVisible()) {
+				this.toggleShareContainer();
+			}
+
 			if (connector && container) {
 				domClass.toggle(connector, 'hidden');
 				domClass.toggle(container, 'hidden');
 			}
 
+		},
+
+		/**
+		* Toggle the basemap gallery container open or close
+		*/
+		toggleShareContainer: function () {
+			brApp.debug('WidgetsController >>> toggleShareContainer');
+			var connector = document.querySelector('.brMap .share-container'),
+					container = document.querySelector('.brMap .share-connector');
+
+			if (this.basemapContainerVisible()) {
+				this.toggleBasemapGallery();
+			}
+
+			if (connector && container) {
+				domClass.toggle(connector, 'hidden');
+				domClass.toggle(container, 'hidden');
+			}
+
+		},
+
+		/**
+		* @return {boolean} boolean representing state of the container, true if it is visible
+		*/
+		shareContainerVisible: function () {
+			return !domClass.contains(document.querySelector('.brMap .share-container'), 'hidden');
+		},
+
+		/**
+		* @return {boolean} boolean representing state of the container, true if it is visible
+		*/
+		basemapContainerVisible: function () {
+			return !domClass.contains(document.querySelector('.brMap .basemap-container'), 'hidden');
 		},
 
 		/**
@@ -182,24 +221,68 @@ define([
 		showWelcomeDialog: function () {
 			brApp.debug('WidgetsController >>> showWelcomeDialog');
 			var dialogContent = AppConfig.welcomeDialogContent,
+					id = 'launch-dialog', 
 					launchDialog;
 
 			// Add a Close button to the dialog
-			if (!registry.byId('launch-dialog')) {
+			if (!registry.byId(id)) {
 				dialogContent += "<button id='launch-map' class='launch-map-button'>Launch Interactive Map</button>";
 				launchDialog = new Dialog({
-					id: 'launch-dialog',
+					id: id,
 					content: dialogContent,
 					style: "width: 90%;max-width: 760px;" 
 				});
 
 				launchDialog.show();
 				on(document.getElementById('launch-map'), 'click', function () {
-					registry.byId('launch-dialog').hide();
+					registry.byId(id).hide();
 				});
 
 			} else {
-				registry.byId('launch-dialog').show();
+				registry.byId(id).show();
+			}
+
+		},
+
+		/**
+		* Show the Analysis Dialog with the draw and upload buttons
+		*/
+		showAnalysisDialog: function () {
+			brApp.debug('WidgetsController >>> showAnalysisDialog');
+			var id = 'analysis-dialog',
+					analysisDialog,
+					content;
+
+			if (!registry.byId(id)) {
+				content = "<div id='analysis-content'><div class='analysis-buttons'><button id='draw-shape'>&#9998; Draw Shape</button>";
+				content += "<button id='upload-shapefile'>Upload File</button></div>";
+				// Give the Upload Instructions a container to hide in until upload is clicked
+				content += "<div id='upload-form-content' class='hidden'><hr>" + Uploader.getMarkup() + "</div></div>";
+
+				analysisDialog = new Dialog({
+					content: content,
+					title: "Select an area to analyze",
+					style: "width: 400px;",
+					id: id
+				});
+				analysisDialog.show();
+
+				// Initialize the Draw Tools
+				DrawTool.init();
+
+				on(document.getElementById('draw-shape'), 'click', function (evt) {
+					DrawTool.activate();
+					analysisDialog.hide();
+				});
+
+				on(document.getElementById('upload-shapefile'), 'click', function (evt) {
+					domClass.toggle('upload-form-content', 'hidden');
+				});
+
+				on(document.uploadForm, 'change', Uploader.beginUpload.bind(Uploader));
+
+			} else {
+				registry.byId(id).show();
 			}
 
 		}

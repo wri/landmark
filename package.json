@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Global Map of Indigenous and Community Lands",
   "scripts": {
-    "dev": "gulp watch",
+    "start": "gulp watch",
     "build": "rm -rf build && gulp build"
   },
   "repository": {

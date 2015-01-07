@@ -34,10 +34,16 @@ define([
 			});
 
 			on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
-			on(document.getElementById('basemap-button'), 'click', WidgetsController.toggleBasemapGallery);
+			on(document.getElementById('basemap-button'), 'click', WidgetsController.toggleBasemapGallery.bind(WidgetsController));
+			on(document.getElementById('share-button'), 'click', WidgetsController.toggleShareContainer.bind(WidgetsController));
 			on(document.getElementById('tree-container-toggle'), 'click', WidgetsController.toggleTreeContainer);
 			on(document.getElementById('national-level-toggle'), 'change', WidgetsController.toggleDataContainer);
 			on(document.getElementById('community-level-toggle'), 'change', WidgetsController.toggleDataContainer);
+			on(document.getElementById('analysis-button'), 'click', WidgetsController.showAnalysisDialog);
+
+			// Mobile Specific Events
+			// If we are ok with the app not responding to mobile, only loading in mobile or loading in Desktop
+			// We could conditionally add handles for the above and below events by using Helper.isMobile()
 			on(document.getElementById('mobile-menu-toggle'), 'click', WidgetsController.toggleMobileMenu);
 			on(document.getElementById('layersMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
 			on(document.getElementById('legendMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
