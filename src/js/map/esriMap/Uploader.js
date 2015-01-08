@@ -15,33 +15,6 @@ define([
 	'use strict';
 
 	var Uploader = {
-
-		/**
-		* Contains the html markup for shapefile upload and a list of instructions/cautions for the user
-		* @return {string} html markup to be used for the upload form
-		*/
-		getMarkup: function () {
-			return (
-				"<ul class='upload-instructions'>" + 
-					"<li>Select a zip file(.zip) containing a shapefile(.shp,.dbf,.prj) from your local file system.</li>" +
-					"<li>The shapefile must be in Geographic Coordinate System (WGS84).</li>" +
-					"<li>The shapefile must be of POLYGON geometry type.</li>" +
-					"<li>The shapefile must not exceed 1 Megabyte.</li>" +
-				"</ul>" + 
-				"<form enctype='multipart/form-data' method='post' id='uploadForm' name='uploadForm'>" +
-					"<label><input type='file' name='file' id='shapefileUpload' /></label>" +
-					// These Normally dont need to be included but this fails on first upload
-					// because esri is too slow to add them in programmatically, possibly because
-					// this is nested inside a dijit/Dialog
-					'<input type="hidden" name="publishParameters" value="{}">' +
-					'<input type="hidden" name="filetype" value="shapefile">' +
-					'<input type="hidden" name="f" value="json">' +
-					// End not normally needed inputs
-				"</form>" + 
-				"<div id='uploadNameSelectContainer'></div>"
-			);
-		},
-
 		/**
 		* @param {object} evt - Form Event from the change of the input in the form
 		*/

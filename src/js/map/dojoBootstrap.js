@@ -12,7 +12,7 @@
         '//js.arcgis.com/' + esriVersion + '/dijit/themes/tundra/tundra.css'
 			],
 			config = {
-				parseOnLoad: false,
+				parseOnLoad: true,
 				async: true,
 				cacheBust: "v=" + appVersion,
 				packages: [

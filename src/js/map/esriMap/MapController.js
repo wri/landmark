@@ -1,5 +1,7 @@
 define([
 	'map/Map',
+	'map/Uploader',
+	'map/DrawTool',
 	'map/MapConfig',
 	'map/WidgetsController',
 	'dojo/on',	
@@ -11,7 +13,7 @@ define([
 	'esri/dijit/HomeButton',
 	'esri/dijit/LocateButton',
 	'esri/dijit/BasemapGallery'
-], function (Map, MapConfig, WidgetsController, on, dojoQuery, domClass, domConstruct, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery) {
+], function (Map, Uploader, DrawTool, MapConfig, WidgetsController, on, dojoQuery, domClass, domConstruct, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery) {
 	'use strict';
 
 	var MapController = {
@@ -40,6 +42,9 @@ define([
 			on(document.getElementById('national-level-toggle'), 'change', WidgetsController.toggleDataContainer);
 			on(document.getElementById('community-level-toggle'), 'change', WidgetsController.toggleDataContainer);
 			on(document.getElementById('analysis-button'), 'click', WidgetsController.showAnalysisDialog);
+			on(document.getElementById('upload-shapefile'), 'click', WidgetsController.toggleUploadForm);
+			on(document.getElementById('draw-shape'), 'click', DrawTool.activate);
+			on(document.uploadForm, 'change', Uploader.beginUpload.bind(Uploader));
 
 			// Mobile Specific Events
 			// If we are ok with the app not responding to mobile, only loading in mobile or loading in Desktop
@@ -90,13 +95,15 @@ define([
 				highlightLocation: false
 			}, 'location-widget');
 
-			locateButton.startup();
-
 			// Start all widgets that need to be started
 			basemapGallery.startup();
+			locateButton.startup();
 			homeWidget.startup();
 			geocoder.startup();
 			legend.startup();
+
+			// Initialize the draw tools
+			DrawTool.init();
 
 			// remove hideOnLoad classes
 			dojoQuery('body .hideOnLoad').forEach(function (node) {

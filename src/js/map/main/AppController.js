@@ -1,11 +1,12 @@
 define([
 	'dojo/on',
 	'dojo/topic',
+	'dijit/registry',
 	'dojo/dom-style',
 	'dojo/dom-construct',
 	'utils/Helper',
 	'map/WidgetsController'
-], function (on, topic, domStyle, domConstruct, Helper, WidgetsController) {
+], function (on, topic, registry, domStyle, domConstruct, Helper, WidgetsController) {
 	'use strict';
 
 	var AppController = {
@@ -85,6 +86,8 @@ define([
 			var legend = document.getElementById('legend');
 			domConstruct.place(legend, legendTabContainer, 'last');
 			// Tools Tab
+			var analyzeTools = document.getElementById('analysis-content');
+			domConstruct.place(analyzeTools, toolsTabContainer, 'first');
 
 		},
 
@@ -102,6 +105,8 @@ define([
 			var legend = document.getElementById('legend');
 			domConstruct.place(legend, legendContainer, 'last');
 			// Tools Tab
+			var analyzeTools = document.getElementById('analysis-content');
+			registry.byId('analysis-dialog').setContent(analyzeTools);
 
 			// Ensure our menu is close and reset the css to default
 			domStyle.set('brMap', 'left', '0');

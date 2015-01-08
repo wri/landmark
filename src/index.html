@@ -32,9 +32,9 @@
               <ul class="right">
                 <li><a id="home-page-link" href="./">Home</a></li>
                 <li><a id="map-page-link" href="./">Map</a></li>
-                <li><a id="data-page-link" href="./data">Data</a></li>
-                <li><a id="about-page-link" href="./about">About</a></li>
-                <li><a id="contact-page-link" href="./contact">Contact Us</a></li>
+                <li><a id="data-page-link" href="./data.html">Data</a></li>
+                <li><a id="about-page-link" href="./about.html">About</a></li>
+                <li><a id="contact-page-link" href="./contact.html">Contact Us</a></li>
               </ul>
             </section>
           </nav>
@@ -97,6 +97,34 @@
             <div id="share-widgets"></div>
           </div>
           <div class="map-component share-connector connector hidden"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hidden">
+      <div id="analysis-dialog" title="Select an area to analyze" data-dojo-type="dijit/Dialog">
+        <div id="analysis-content">
+          <div class="analysis-buttons">
+            <button id="draw-shape">&#9998; Draw Shape</button>
+            <button id="upload-shapefile">Upload File</button>
+          </div>
+          <div id="upload-form-content" class="hidden">
+            <hr>
+            <ul class="upload-instructions">
+              <li>Select a zip file(.zip) containing a shapefile(.shp,.dbf,.prj) from your local file system.</li>
+              <li>The shapefile must be in Geographic Coordinate System (WGS84).</li>
+              <li>The shapefile must be of POLYGON geometry type.</li>
+              <li>The shapefile must not exceed 1 Megabyte.</li>
+            </ul>
+            <form enctype="multipart/form-data" method="post" id="uploadForm" name="uploadForm">
+              <label>
+                <input type="file" name="file" id="shapefileUpload">
+              </label>
+              <input type="hidden" name="publishParameters" value="{}">
+              <input type="hidden" name="filetype" value="shapefile">
+              <input type="hidden" name="f" value="json">
+            </form>
+            <div id="uploadNameSelectContainer"></div>
+          </div>
         </div>
       </div>
     </div>
