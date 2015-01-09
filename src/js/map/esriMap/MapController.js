@@ -3,6 +3,7 @@ define([
 	'map/Uploader',
 	'map/DrawTool',
 	'map/MapConfig',
+	'components/Tree',
 	'map/WidgetsController',
 	'dojo/on',	
 	'dojo/query',
@@ -13,7 +14,7 @@ define([
 	'esri/dijit/HomeButton',
 	'esri/dijit/LocateButton',
 	'esri/dijit/BasemapGallery'
-], function (Map, Uploader, DrawTool, MapConfig, WidgetsController, on, dojoQuery, domClass, domConstruct, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery) {
+], function (Map, Uploader, DrawTool, MapConfig, ReactTree, WidgetsController, on, dojoQuery, domClass, domConstruct, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery) {
 	'use strict';
 
 	var MapController = {
@@ -63,6 +64,7 @@ define([
 			brApp.debug('MapController >>> renderComponents');
 			var basemapGallery,
 					locateButton,
+					treeWidget,
 					homeWidget,
 					geocoder,
 					legend,
@@ -94,6 +96,8 @@ define([
 				map: brApp.map,
 				highlightLocation: false
 			}, 'location-widget');
+
+      treeWidget = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
 
 			// Start all widgets that need to be started
 			basemapGallery.startup();

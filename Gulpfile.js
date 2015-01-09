@@ -8,7 +8,6 @@ var config = require('./gulp-config.js'),
 		jade = require('gulp-jade'),
 		gulp = require('gulp');
 
-
 gulp.task('stylus-watch', function () {
 	gulp.watch(config.stylus.watch, ['stylus-dev']);
 });

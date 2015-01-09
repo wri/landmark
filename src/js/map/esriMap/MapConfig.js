@@ -19,7 +19,40 @@ define([], function () {
 				defaultLayers: [],
 				visible: false
 			}
-		}
+		},
+
+		communityLevelTreeData: [
+			{ 
+				label: 'Indigenous Lands (self recognized)', 
+				id: 'indigenousLands', 
+				children: [
+					{ label: 'Officially recognized (by law or decree)', id: 'indigenousOfficial' },
+					{ label: 'Not officially recognized', id: 'indigenousUnofficial' }
+				]
+			},
+			{ 
+				label: 'Community Lands',
+				id: 'communityLands',
+				children: [
+					{ 
+						label: 'Officially recognized (by law or decree)',
+						id: 'communityOfficial',
+						children: [
+							{ label: 'Formal Document/Title', id: 'communityFormalTitle' },
+							{ label: 'In process of titling', id: 'communityInProcess' }
+						]
+					},
+					{ 
+						label: 'Not officially recognized',
+						id: 'communityUnofficial',
+						children: [
+							{ label: 'Formal land claim', id: 'communityLandClaim' },
+							{ label: 'Occupied/used without formal land claim', id: 'communityNoLandClaim' }
+						]
+					}
+				]
+			}
+		]
 
 	};
 

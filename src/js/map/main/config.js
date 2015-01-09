@@ -7,9 +7,6 @@ define([], function () {
 
 		portalGenerateFeaturesURL: 'http://www.arcgis.com/sharing/rest/content/features/generate',
 
-
-		// Content Dynamically Added to Dialogs goes below
-
 		// Launch Button to Close Dialog added in Code
 		welcomeDialogContent: "<h2 class='launch-dialog-title'>About Global Map of Indigenous and Community Lands</h2>" + 
 			"<p class='launch-dialog-subtitle'>A Partnership covened by the Instituto del Bien Comun and the World" +  

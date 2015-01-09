@@ -3,11 +3,11 @@
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
 
-/* line 39 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
+/* line 40 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
-/* line 243 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
+/* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
 /* line 243 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 
@@ -377,7 +377,69 @@
   margin: 0;
 }
 
-/* line 241 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 34 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
+
+/* line 34 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+
+/* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.checkbox-tree .collapsed ul {
+  display: none;
+}
+
+/* line 4 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.checkbox-tree {
+  padding-left: 5px;
+  font-size: 12px;
+}
+
+/* line 8 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.checkbox-tree ul {
+  text-indent: -30px;
+  margin-left: 50px;
+  padding: 0;
+}
+
+/* line 13 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.checkbox-tree,
+.checkbox-tree ul {
+  list-style-type: none;
+}
+
+/* line 17 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.checkbox-tree input[type='checkbox'] {
+  margin: 0 5px;
+}
+
+/* line 20 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.checkbox-tree .tree-row-content {
+  padding: 5px 0;
+}
+
+/* line 23 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.checkbox-tree .tree-toggle-symbol {
+  font-size: 16px;
+}
+
+/* line 26 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.mobile .checkbox-tree input[type='checkbox'] {
+  border: 1px solid #888;
+  -webkit-appearance: none;
+  vertical-align: middle;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  height: 20px;
+  width: 20px;
+}
+
+/* line 36 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.mobile .checkbox-tree input[type='checkbox']:checked {
+  background: #2982ff;
+}
+
+/* line 243 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 body:not(.mobile) .launch-map-button {
   margin-right: 10px;
   float: right;
