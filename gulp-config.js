@@ -40,16 +40,17 @@ module.exports = {
 			options: {
 				baseUrl: 'src',
 				paths: {
-					'dojo' : 'empty:',
-					'esri' : 'empty:',
-					'dijit': 'empty:',
-					'dojox': 'empty:',
-					'react': 'empty:',
-					'js'   : 'js',
-					'libs' : 'libs',
-					'main' : 'js/map/main',
-					'map'  : 'js/map/esriMap',
-					'utils': 'js/map/utils'
+					'dojo' 			: 'empty:',
+					'esri' 			: 'empty:',
+					'dijit'			: 'empty:',
+					'dojox'			: 'empty:',
+					'react'			: 'empty:',
+					'js'   			: 'js',
+					'libs' 			: 'libs',
+					'main' 			: 'js/map/main',
+					'map'  			: 'js/map/esriMap',
+					'utils'			: 'js/map/utils',
+					'components': 'js/components'
 				},
 				name: 'js/map/loader',
 				out : 'build/js/map/loader.js'

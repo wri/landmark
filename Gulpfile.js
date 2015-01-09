@@ -90,5 +90,5 @@ gulp.task('react-jsx', function () {
 		.pipe(gulp.dest(config.react.out));
 });
 
-gulp.task('watch', ['stylus-dev', 'stylus-watch', 'jade-dev', 'jade-watch']);
+gulp.task('watch', ['stylus-dev', 'stylus-watch', 'jade-dev', 'jade-watch', 'react-jsx', 'react-watch']);
 gulp.task('build', ['copy', 'minify', 'stylus-build', 'jade-build', 'optimize']);
