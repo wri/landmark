@@ -9,12 +9,13 @@ define([
 	'dojo/query',
 	'dojo/dom-class',
 	'dojo/dom-construct',
+	'dijit/registry',
 	'esri/dijit/Legend',
 	'esri/dijit/Geocoder',
 	'esri/dijit/HomeButton',
 	'esri/dijit/LocateButton',
 	'esri/dijit/BasemapGallery'
-], function (Map, Uploader, DrawTool, MapConfig, ReactTree, WidgetsController, on, dojoQuery, domClass, domConstruct, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery) {
+], function (Map, Uploader, DrawTool, MapConfig, ReactTree, WidgetsController, on, dojoQuery, domClass, domConstruct, registry, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery) {
 	'use strict';
 
 	var MapController = {
@@ -116,7 +117,7 @@ define([
 		},
 
 		refreshLegend: function () {
-
+			registry.byId('legend').refresh();
 		}
 
 	};
