@@ -85,7 +85,7 @@
 
 /* line 28 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
-/* line 39 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
+/* line 40 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
 .wri-header-attribution {
@@ -130,9 +130,9 @@
 /* line 49 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 /** MOBILE CSS **/
 
-/* line 95 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
+/* line 102 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
 
-/* line 34 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 262 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 
 /* line 40 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 
@@ -167,15 +167,21 @@
 
 /* line 24 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile-menu-content {
-  margin: 20px 10px;
+  position: absolute;
+  overflow-y: auto;
+  padding: 0 10px;
+  bottom: 5px;
+  top: 50px;
+  right: 0;
+  left: 0;
 }
 
-/* line 27 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 33 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile-menu:not(.open) {
   display: none;
 }
 
-/* line 30 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 36 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile-menu .segmented-menu-button {
   border: 1px solid #000;
   text-align: center;
@@ -183,24 +189,24 @@
   color: #000;
 }
 
-/* line 36 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 42 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile-menu .segmented-menu-button.active {
   background-color: #888;
   color: #fff;
 }
 
-/* line 40 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 46 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile-menu-content:not(.active) {
   display: none;
 }
 
-/* line 43 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 49 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile-menu .menu-controls {
   text-align: center;
   margin-top: 10px;
 }
 
-/* line 47 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 53 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile-menu .segmented-menu-button:first-of-type {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -211,7 +217,7 @@
   border-right: 0;
 }
 
-/* line 51 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 57 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile-menu .segmented-menu-button:last-of-type {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -222,52 +228,53 @@
   border-left: 0;
 }
 
-/* line 55 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 61 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 body:not(.mobile) .mobile-menu,
 body:not(.mobile) .mobile-menu-toggle-button {
   display: none;
 }
 
-/* line 60 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 66 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile .launch-map-button {
   display: block;
   margin: 0 auto;
 }
 
-/* line 64 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 70 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile .brMap .basemap-container {
   height: 250px;
   width: 150px;
 }
 
-/* line 68 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 74 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile .brMap .esriBasemapGallery {
   margin: 10px;
 }
 
-/* line 71 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 77 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile .brMap .basemap-container {
   top: 20px;
 }
 
-/* line 74 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 80 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile .brMap .esriControlsBR {
   right: 5px;
 }
 
-/* line 77 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 83 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile .brMap .data-completeness-container,
 .mobile .brMap .tree-widget-container,
 .mobile .brMap .geocoder-container,
 .mobile .brMap .legend-container,
 .mobile .brMap .analysis-button,
 .mobile .title-area .name h1,
-.mobile .esriAttribution {
+.mobile .esriAttribution,
+.mobile #upload-shapefile {
   display: none;
 }
 @media (max-width: 1000px) {
 
-/* line 89 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 96 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
   .brMap .geocoder-container {
     right: 70px !important;
     top: 70px !important;
@@ -275,7 +282,7 @@ body:not(.mobile) .mobile-menu-toggle-button {
 }
 @media (max-width: 800px) {
 
-/* line 94 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 101 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
   .title-area .name h1 {
     display: none;
   }

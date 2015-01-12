@@ -9,7 +9,7 @@
 
 /* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
-/* line 243 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
+/* line 245 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 .upload-instructions li {
@@ -51,6 +51,8 @@
 /* line 17 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap {
   background-color: #ddd;
+/* For Mobile Menu When Open */
+  box-shadow: -3px 0 2px #bbb;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -58,19 +60,19 @@
   top: 0;
 }
 
-/* line 25 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 27 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .map-component {
   box-sizing: initial;
   position: absolute;
   z-index: 30;
 }
 
-/* line 30 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 32 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .esriControlsBR {
   right: 300px;
 }
 
-/* line 33 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 35 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .HomeButton .home {
   background: url("images/ico-home.png") no-repeat center;
   border-bottom: 1px solid #000;
@@ -84,26 +86,27 @@
   padding: 0;
 }
 
-/* line 43 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 45 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .HomeButton .home:hover {
   background-color: #eee;
 }
 
-/* line 46 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 48 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .legend-container {
-  width: 220px;
+  width: 260px;
   right: 20px;
+  z-index: 50;
   bottom: 0;
 }
 
-/* line 51 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 54 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .legend-title-pane {
   border-bottom: 1px solid #888;
   padding-right: 5px;
   text-align: right;
 }
 
-/* line 56 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 59 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .legend-title {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -121,20 +124,43 @@
   height: 30px;
 }
 
-/* line 67 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 70 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .legend-content {
   border: 1px solid #888;
   background-color: #fff;
   border-bottom: 0;
+  font-size: 13px;
   border-top: 0;
 }
 
-/* line 73 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 77 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .legend-content:not(.active) {
   overflow: hidden;
 }
 
-/* line 76 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 80 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap #legend {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* line 84 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap #legend #legend_msg,
+.brMap #legend .esriLegendServiceLabel {
+  display: none;
+}
+
+/* line 88 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap #legend .esriLegendService {
+  padding-bottom: 0px;
+}
+
+/* line 91 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap #legend > div:nth-last-child(2) {
+  padding-bottom: 10px;
+}
+
+/* line 94 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .button-widget {
   background-color: #fff;
   border: 1px solid #000;
@@ -146,69 +172,69 @@
   right: 20px;
 }
 
-/* line 84 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 102 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .basemap-button,
 .brMap .basemap-connector {
   top: 120px;
 }
 
-/* line 88 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 106 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .locator-button {
   top: 160px;
 }
 
-/* line 91 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 109 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .share-button,
 .brMap .share-connector {
   top: 200px;
 }
 
-/* line 95 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 113 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .basemap-icon {
   background: url("images/basemap.png");
 }
 
-/* line 98 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 116 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .share-icon {
   background: url("images/share-icon.png");
   background-position: -3px -1px;
 }
 
-/* line 102 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 120 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .basemap-icon,
 .brMap .share-icon {
   height: 100%;
   width: 100%;
 }
 
-/* line 107 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 125 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .LocateButton .zoomLocateButton {
   background: url("images/locate.png");
 }
 
-/* line 110 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 128 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .LocateButton .zoomLocateButton:hover {
   background: url("images/locate.png");
 }
 
-/* line 113 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 131 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .LocateButton .zoomLocateButton,
 .brMap .basemap-icon {
   background-position: -2px -2px;
 }
 
-/* line 117 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 135 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .LocateButton .zoomLocateButton:hover,
 .brMap .basemap-icon:hover {
   background-position: -2px -36px;
 }
 
-/* line 121 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 139 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .share-icon:hover {
   background-position: -3px -36px;
 }
 
-/* line 124 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 142 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .basemap-container {
   border: 1px solid #000;
   background-color: #fff;
@@ -222,18 +248,18 @@
   top: 65px;
 }
 
-/* line 134 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 152 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .esriBasemapGalleryLabelContainer {
   font-size: 13px;
   padding: 5px 0;
 }
 
-/* line 138 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 156 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .esriBasemapGallery {
   margin: 10px 5px;
 }
 
-/* line 141 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 159 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .share-container {
   border: 1px solid #000;
   background-color: #fff;
@@ -248,7 +274,7 @@
   top: 185px;
 }
 
-/* line 152 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 170 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .connector {
   border-bottom: 1px solid #000;
   border-top: 1px solid #000;
@@ -258,13 +284,13 @@
   width: 13px;
 }
 
-/* line 160 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 178 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .tree-widget-container {
   left: 20px;
   top: 20px;
 }
 
-/* line 164 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 182 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .tree-widget-title-pane {
   border: 1px solid #888;
   background-color: #fff;
@@ -273,47 +299,47 @@
   height: 32px;
 }
 
-/* line 171 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 189 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .tree-width {
   width: 280px;
 }
 
-/* line 174 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 192 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .tree-title-text {
   border-right: 1px solid #888;
   display: inline-block;
 }
 
-/* line 178 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 196 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .tree-title-text span {
   padding: 0 12px;
 }
 
-/* line 181 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 199 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .tree-container-toggle {
   display: inline-block;
   padding: 0 12px;
 }
 
-/* line 185 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 203 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .tree-content {
   background-color: #fff;
   position: absolute;
   overflow: hidden;
 }
 
-/* line 190 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 208 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .tree-content.active {
   border: 1px solid #888;
   border-top: 0;
 }
 
-/* line 194 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 212 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .tree-content .tester {
   height: 200px;
 }
 
-/* line 197 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 215 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .analysis-button {
   border: 1px solid #888;
   border-radius: 5px;
@@ -327,14 +353,14 @@
   top: 20px;
 }
 
-/* line 207 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 225 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .analysis-button-label,
 .brMap .data-completeness-label,
 .brMap .data-completeness-toggle {
   padding: 0 10px;
 }
 
-/* line 212 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 230 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .data-completeness-container {
   border: 1px solid #888;
   border-radius: 5px;
@@ -348,38 +374,38 @@
   top: 20px;
 }
 
-/* line 222 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 240 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .data-completeness-toggle {
   border-right: 1px solid #888;
   display: inline-block;
   height: 32px;
 }
 
-/* line 227 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 245 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .geocoder-container {
   right: 415px;
   top: 20px;
 }
 
-/* line 231 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 249 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .simpleGeocoder .esriGeocoder input {
   box-shadow: none;
   height: 20px;
 }
 
-/* line 235 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 253 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .tree-data-section {
   margin: 10px;
 }
 
-/* line 238 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 256 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .tree-data-section input[type='radio'] {
-  margin: 0;
+  margin: 0 0 0 5px;
 }
 
-/* line 34 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
+/* line 58 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 
-/* line 34 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 102 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .checkbox-tree .collapsed ul {
@@ -390,37 +416,60 @@
 .checkbox-tree {
   padding-left: 5px;
   font-size: 12px;
+  margin: 0;
 }
 
-/* line 8 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .checkbox-tree ul {
   text-indent: -30px;
   margin-left: 50px;
   padding: 0;
 }
 
-/* line 13 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 14 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .checkbox-tree,
 .checkbox-tree ul {
   list-style-type: none;
 }
 
-/* line 17 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 18 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.tree-node-label {
+  padding: 5px;
+}
+
+/* line 21 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.tree-node-label:active {
+  text-shadow: -1px -1px 1px #ddd;
+  outline: 1px solid #2982ff;
+}
+
+/* line 26 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.tree-widget-container {
+  height: 95%;
+}
+
+/* line 30 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+body:not(.mobile) .tree-widget-container .tree-content {
+  overflow-y: auto;
+  max-height: 80%;
+}
+
+/* line 35 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .checkbox-tree input[type='checkbox'] {
   margin: 0 5px;
 }
 
-/* line 20 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 38 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .checkbox-tree .tree-row-content {
   padding: 5px 0;
 }
 
-/* line 23 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 41 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .checkbox-tree .tree-toggle-symbol {
   font-size: 16px;
 }
 
-/* line 26 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 44 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .mobile .checkbox-tree input[type='checkbox'] {
   border: 1px solid #888;
   -webkit-appearance: none;
@@ -434,12 +483,17 @@
   width: 20px;
 }
 
-/* line 36 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 54 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .mobile .checkbox-tree input[type='checkbox']:checked {
   background: #2982ff;
 }
 
-/* line 243 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 57 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.mobile .checkbox-tree {
+  font-size: 14px;
+}
+
+/* line 261 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 body:not(.mobile) .launch-map-button {
   margin-right: 10px;
   float: right;

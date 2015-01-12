@@ -1,13 +1,11 @@
 define([
 	'main/config',
-	'map/Uploader',
-	'map/DrawTool',
 	'dojo/on',
 	'dijit/Dialog',
 	'dojo/_base/fx',
 	'dojo/dom-class',
-	'dijit/registry'
-], function (AppConfig, Uploader, DrawTool, on, Dialog, Fx, domClass, registry) {
+	'dijit/registry'	
+], function (AppConfig, on, Dialog, Fx, domClass, registry) {
 	'use strict';
 
 	var DURATION = 300;
@@ -166,11 +164,18 @@ define([
 					brApp.map.resize();
 					if (isClosing) {
 						domClass.toggle(menuNodeId, 'open');
-						// domClass.toggle(menuButton, 'hidden');
 					}
 				}
 			}).play();
 
+		},
+
+		/**
+		* notifies of the status of the mobile settings menu
+		* @return {boolean}
+		*/
+		mobileMenuIsOpen: function () {
+			return domClass.contains('mobileMenu', 'open');
 		},
 
 		/**

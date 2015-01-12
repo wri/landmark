@@ -4,11 +4,14 @@ define([
 	'dojo/_base/declare',
 	// My Modules
 	'map/MapConfig',
+	// Dojo Modules
+	'dojo/on',
+	'dijit/registry',
 	// Esri Modules
 	'esri/map',
 	'esri/layers/ImageParameters',
 	'esri/layers/ArcGISDynamicMapServiceLayer'
-], function (Evented, declare, MapConfig, Map, ImageParameters, ArcGISDynamicMapServiceLayer) {
+], function (Evented, declare, MapConfig, on, registry, Map, ImageParameters, ArcGISDynamicMapServiceLayer) {
 	'use strict';
 
 	var _map = declare([Evented], {
@@ -39,11 +42,11 @@ define([
 			});
 
       self.map.on('load', function () {
+      	self.emit('map-ready', {});
       	// Clear out Phantom Graphics thanks to esri's graphics layer
 				self.map.graphics.clear();
 				self.map.resize();
-				self.emit('map-ready', {});
-				//self.addLayers();
+				self.addLayers();
 			});
 
 		},
@@ -70,11 +73,16 @@ define([
 			}
 
 			on.once(this.map, 'layers-add-result', function (response) {
-				self.emit('layers-loaded', response);
+				self.emit('layers-loaded', response);				
+				
+				var layerInfos = response.layers.map(function (item) {
+					return { layer: item.layer };
+				});
+				
+				registry.byId("legend").refresh(layerInfos);
 			});
 
 			this.map.addLayers(layers);
-
 		},
 
 		/**
@@ -91,7 +99,7 @@ define([
 			params.format = 'png32';
 
 			layer = new ArcGISDynamicMapServiceLayer(layerConfig.url, {
-				visible: layerConfig.visible,
+				visible: layerConfig.visible || false,
 				imageParameters: params,
 				id: key
 			});

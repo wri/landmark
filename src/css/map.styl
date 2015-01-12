@@ -16,6 +16,8 @@
 
 .brMap
 	background-color $mainBackground
+	/* For Mobile Menu When Open */
+	box-shadow -3px 0 2px #BBB
 	position absolute
 	bottom 0
 	right 0
@@ -44,8 +46,9 @@
 	background-color $esriHover
 	
 .brMap .legend-container
-	width 220px
+	width 260px
 	right 20px
+	z-index 50
 	bottom 0
 	
 .brMap .legend-title-pane
@@ -68,10 +71,25 @@
 	border 1px solid $mainBorder
 	background-color white
 	border-bottom 0
+	font-size 13px
 	border-top 0
 
 .brMap .legend-content:not(.active)
 	overflow hidden
+	
+.brMap #legend
+	max-height 300px
+	overflow-y auto
+	
+.brMap #legend #legend_msg 
+.brMap #legend .esriLegendServiceLabel
+	display none
+
+.brMap #legend .esriLegendService
+	padding-bottom 0px
+
+.brMap #legend > div:nth-last-child(2)
+	padding-bottom 10px
 
 .brMap .button-widget
 	background-color white
@@ -236,7 +254,7 @@
 	margin 10px
 	
 .brMap .tree-data-section input[type='radio']
-	margin 0
+	margin 0 0 0 5px	
 	
 @import "ReactTree"
 	

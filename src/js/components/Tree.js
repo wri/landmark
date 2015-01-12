@@ -15,6 +15,11 @@ define([
       };
     },
     
+    /**
+    * this.state.data is kind of like a book keeper of the state of the tree, it knows
+    * the state of the while tree and which nodes are checked, may add which nodes are collapsed
+    * or not into this.state.data as well
+    */
     handleChange: function (evt) {
       var checked = evt.target.checked;
       var key = evt.target.getAttribute('data-key');

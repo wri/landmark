@@ -3,10 +3,11 @@ define([
 	'dojo/topic',
 	'dijit/registry',
 	'dojo/dom-style',
+	'dojo/dom-class',
 	'dojo/dom-construct',
 	'utils/Helper',
 	'map/WidgetsController'
-], function (on, topic, registry, domStyle, domConstruct, Helper, WidgetsController) {
+], function (on, topic, registry, domStyle, domClass, domConstruct, Helper, WidgetsController) {
 	'use strict';
 
 	var AppController = {
@@ -110,6 +111,7 @@ define([
 
 			// Ensure our menu is close and reset the css to default
 			domStyle.set('brMap', 'left', '0');
+			domClass.remove('mobileMenu', 'open');
 		}
 
 	};

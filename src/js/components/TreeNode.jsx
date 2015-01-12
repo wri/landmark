@@ -55,7 +55,7 @@ define([
 		          onChange={this.props.handleChange}
 		          data-key={node.id}
 		         />
-		        <span onClick={this.handleClick} onTouchEnd={this.handleClick}>{node.label}</span>
+		        <span className='tree-node-label' onClick={this.handleClick} onTouchEnd={this.handleClick}>{node.label}</span>
 		      </section>
 	        {childNodes}
 	      </li>

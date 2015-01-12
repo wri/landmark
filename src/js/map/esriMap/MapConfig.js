@@ -16,8 +16,8 @@ define([], function () {
 			'indigenousLands': {
 				url: indigenousLandsUrl,
 				type: 'dynamic',
-				defaultLayers: [],
-				visible: false
+				defaultLayers: [0,1,2,3,4,5,6,7,8,9],
+				visible: true
 			}
 		},
 

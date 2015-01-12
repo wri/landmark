@@ -105,7 +105,6 @@ define([
 			homeWidget.startup();
 			geocoder.startup();
 			legend.startup();
-
 			// Initialize the draw tools
 			DrawTool.init();
 
@@ -113,6 +112,10 @@ define([
 			dojoQuery('body .hideOnLoad').forEach(function (node) {
 				domClass.remove(node, 'hideOnLoad');
 			});
+
+		},
+
+		refreshLegend: function () {
 
 		}
 

@@ -12,6 +12,9 @@ define([
 	    };
 	  },
 
+	  /**
+	  * Update the state of the component to hide or show the children
+	  */
 	  handleClick: function () {
 	    this.setState({
 	      collapsed: !this.state.collapsed
@@ -52,7 +55,7 @@ define([
 		          onChange: this.props.handleChange, 
 		          "data-key": node.id}
 		         ), 
-		        React.createElement("span", {onClick: this.handleClick, onTouchEnd: this.handleClick}, node.label)
+		        React.createElement("span", {className: "tree-node-label", onClick: this.handleClick, onTouchEnd: this.handleClick}, node.label)
 		      ), 
 	        childNodes
 	      )

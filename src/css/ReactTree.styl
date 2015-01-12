@@ -4,6 +4,7 @@
 .checkbox-tree
 	padding-left 5px
 	font-size 12px
+	margin 0
 	
 .checkbox-tree ul	
 	text-indent -30px
@@ -13,6 +14,23 @@
 .checkbox-tree
 .checkbox-tree ul
 	list-style-type none
+
+.tree-node-label
+	padding 5px
+	
+.tree-node-label:active
+	text-shadow -1px -1px 1px #DDD
+	outline 1px solid $webkitBlue
+	
+/* Let the tree grow but not bigger then the page */
+.tree-widget-container
+	height 95%
+	
+/* Make sure this only targets .tree-content when in desktop view */
+body:not(.mobile) .tree-widget-container .tree-content
+	overflow-y auto
+	max-height 80%
+/* Let the tree grow but not bigger then the page */
 	
 .checkbox-tree input[type='checkbox']
 	margin 0 5px
@@ -35,3 +53,6 @@
 	
 .mobile .checkbox-tree input[type='checkbox']:checked
 	background $webkitBlue
+	
+.mobile .checkbox-tree
+	font-size 14px

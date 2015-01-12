@@ -1,10 +1,11 @@
 define([
 	"map/MapAssets",
+	"map/WidgetsController",
 	"esri/graphic",
 	"dijit/registry",
 	"esri/toolbars/draw",
 	"esri/geometry/Polygon"
-], function (MapAssets, Graphic, registry, Draw, Polygon) {
+], function (MapAssets, WidgetsController, Graphic, registry, Draw, Polygon) {
 	'use strict';
 
 	var isActive,
@@ -52,8 +53,12 @@ define([
 		*/
 		activate: function () {
 			toolbar.activate(Draw.FREEHAND_POLYGON);
-			registry.byId('analysis-dialog').hide();
 			isActive = true;
+			// Close containers if they are open
+			registry.byId('analysis-dialog').hide();
+			if (WidgetsController.mobileMenuIsOpen()) {
+				WidgetsController.toggleMobileMenu();
+			}
 		},
 
 		/**
