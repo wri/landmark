@@ -1,8 +1,9 @@
 /** @jsx React.DOM */
 define([
   'react',
-  'components/TreeNode'
-], function (React, TreeNode) {
+  'components/TreeNode',
+  'map/LayerController'
+], function (React, TreeNode, LayerController) {
   'use strict';
 
   /* jshint ignore:start */
@@ -17,7 +18,7 @@ define([
     
     /**
     * this.state.data is kind of like a book keeper of the state of the tree, it knows
-    * the state of the while tree and which nodes are checked, may add which nodes are collapsed
+    * the state of the whole tree and which nodes are checked, may add which nodes are collapsed
     * or not into this.state.data as well
     */
     handleChange: function (evt) {
@@ -35,9 +36,13 @@ define([
       };
         
       var checkAllNodes = function (node) {
-        node.checked = checked;
-        if (node.children) { node.children.forEach(checkAllNodes); }
+        if (!node.disabled) {
+          node.checked = checked;
+          if (node.children) { node.children.forEach(checkAllNodes); }
+        }
       };
+
+      LayerController.updateVisibleLayers();
         
       var dataSource = Object.create(this.state.data);
       dataSource.forEach(traverseNodes);

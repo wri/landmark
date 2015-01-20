@@ -9,7 +9,7 @@
 
 /* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
-/* line 245 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
+/* line 263 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 .upload-instructions li {
@@ -403,9 +403,9 @@
   margin: 0 0 0 5px;
 }
 
-/* line 58 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
+/* line 63 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 
-/* line 102 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 63 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .checkbox-tree .collapsed ul {
@@ -427,49 +427,56 @@
 }
 
 /* line 14 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+.checkbox-tree .disabled .tree-node-label {
+  cursor: not-allowed;
+  color: #bbb;
+}
+
+/* line 18 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .checkbox-tree,
 .checkbox-tree ul {
   list-style-type: none;
 }
 
-/* line 18 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 22 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .tree-node-label {
+  cursor: pointer;
   padding: 5px;
 }
 
-/* line 21 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 26 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .tree-node-label:active {
   text-shadow: -1px -1px 1px #ddd;
   outline: 1px solid #2982ff;
 }
 
-/* line 26 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 31 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .tree-widget-container {
   height: 95%;
 }
 
-/* line 30 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 35 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 body:not(.mobile) .tree-widget-container .tree-content {
   overflow-y: auto;
   max-height: 80%;
 }
 
-/* line 35 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 40 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .checkbox-tree input[type='checkbox'] {
   margin: 0 5px;
 }
 
-/* line 38 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 43 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .checkbox-tree .tree-row-content {
   padding: 5px 0;
 }
 
-/* line 41 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 46 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .checkbox-tree .tree-toggle-symbol {
   font-size: 16px;
 }
 
-/* line 44 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 49 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .mobile .checkbox-tree input[type='checkbox'] {
   border: 1px solid #888;
   -webkit-appearance: none;
@@ -483,12 +490,12 @@ body:not(.mobile) .tree-widget-container .tree-content {
   width: 20px;
 }
 
-/* line 54 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 59 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .mobile .checkbox-tree input[type='checkbox']:checked {
   background: #2982ff;
 }
 
-/* line 57 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 62 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 .mobile .checkbox-tree {
   font-size: 14px;
 }

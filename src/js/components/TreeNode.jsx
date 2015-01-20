@@ -8,7 +8,7 @@ define([
 		/* jshint ignore:start */
 		getInitialState: function () {
 	    return {
-	      collapsed: false
+	      collapsed: this.props.node.collapsed || false
 	    };
 	  },
 
@@ -24,7 +24,10 @@ define([
 	  render: function() {
 	    var containerClass = this.state.collapsed ? 'collapsed' : '';
 	    var node = this.props.node;
+	    var disabled = node.disabled || false;
 	    var childNodes;
+
+	    containerClass += (disabled ? ' disabled' : '');
 	    
 	    if (node.children) {
 	      childNodes = node.children.map(function (child, index) {
@@ -54,6 +57,7 @@ define([
 		          checked={node.checked || false}
 		          onChange={this.props.handleChange}
 		          data-key={node.id}
+		          disabled={disabled}
 		         />
 		        <span className='tree-node-label' onClick={this.handleClick} onTouchEnd={this.handleClick}>{node.label}</span>
 		      </section>
