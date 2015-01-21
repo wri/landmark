@@ -2,9 +2,10 @@ define([
 	'esri/config',
 	'main/config',
 	'utils/Helper',
+	'main/Dispatcher',
 	'map/MapController',
 	'main/AppController'
-], function (esriConfig, AppConfig, Helper, MapController, AppController) {
+], function (esriConfig, AppConfig, Helper, Dispatcher, MapController, AppController) {
 	'use strict';
 
 	var Main = {
@@ -44,6 +45,8 @@ define([
 			brApp.debug('Main.js >>> launchApp');
 			// Enable Responsive Layout
 			Helper.enableLayout();
+			// Have the dispatcher start listnening for events
+			Dispatcher.listen();
 			// Init the Map
 			MapController.init();
 			// Init the AppController, Override Events, General Events, and Changing App State are in AppController

@@ -117,6 +117,7 @@ define([
 		},
 
 		refreshLegend: function () {
+			brApp.debug('MapController >>> refreshLegend');
 			registry.byId('legend').refresh();
 		}
 

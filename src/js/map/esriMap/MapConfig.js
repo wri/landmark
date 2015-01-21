@@ -16,7 +16,8 @@ define([], function () {
 			'indigenousLands': {
 				url: indigenousLandsUrl,
 				type: 'dynamic',
-				defaultLayers: [0,1,2,3,4,5,6,7,8,9],
+				// Not all the layers are present in the tree, when they are, include 0 - 9
+				defaultLayers: [2,4,5,7,8,9], //[0,1,2,3,4,5,6,7,8,9]
 				visible: true
 			}
 		},
@@ -30,21 +31,24 @@ define([], function () {
 		communityLevelTreeData: [
 			{ 
 				label: 'Indigenous Lands (self recognized)', 
-				id: 'indigenousLands', 
+				id: 'indigenousLands',
+				checked: true, 
 				children: [
 					{ 
 						label: 'Officially recognized (by law or decree)', 
 						id: 'indigenousOfficial',
+						checked: true,
 						children: [
-							{ label: 'Formal Document/Title', id: 'indigenousFormalTitle' },
-							{ label: 'In process of titling', id: 'indigenousInProcess' }
+							{ label: 'Formal Document/Title', id: 'indigenousFormalTitle', checked: true },
+							{ label: 'In process of titling', id: 'indigenousInProcess', checked: true }
 						]
 					},
 					{ 
 						label: 'Not officially recognized',
 						id: 'indigenousUnofficial',
+						checked: true,
 						children: [
-							{ label: 'Formal land claim', id: 'indigenousLandClaim' },
+							{ label: 'Formal land claim', id: 'indigenousLandClaim', checked: true },
 							{ label: 'Occupied/used without formal land claim', id: 'indigenousNoLandClaim', disabled: true }
 						]
 					}
@@ -54,6 +58,7 @@ define([], function () {
 				label: 'Community Lands',
 				id: 'communityLands',
 				collapsed: true,
+				disabled: true,
 				children: [
 					{ 
 						label: 'Officially recognized (by law or decree)',
@@ -76,7 +81,7 @@ define([], function () {
 		],
 
 		layerMapping: {
-			'indigenousLands': [2, 4, 5],
+			'indigenousLands': [2],
 			'indigenousOfficial': [4],
 			'indigenousUnofficial': [5],
 			'indigenousFormalTitle': [7],

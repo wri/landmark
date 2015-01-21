@@ -24,10 +24,19 @@ define([
     handleChange: function (evt) {
       var checked = evt.target.checked;
       var key = evt.target.getAttribute('data-key');
+      var activeKeys = [];
       var traverseNodes = function (node) {
         if (node.id === key) {
           node.checked = checked;
           if (node.children) { node.children.forEach(checkAllNodes); }
+        }
+
+        // Get a list of active keys while Im in here so I dont have to query the dom or 
+        // do some regex to manipulate the visible layers
+        if (node.id === key) {
+          if (checked) { activeKeys.push(key); }
+        } else {
+          if (node.checked) { activeKeys.push(node.id); }
         }
           
         if (node.children) {
@@ -41,12 +50,13 @@ define([
           if (node.children) { node.children.forEach(checkAllNodes); }
         }
       };
-
-      LayerController.updateVisibleLayers();
         
       var dataSource = Object.create(this.state.data);
       dataSource.forEach(traverseNodes);
+      // Update the Tree Component
       this.setState({ data: dataSource });
+      // Update the Layer UI
+      LayerController.updateVisibleLayers(activeKeys);
     },
     
     render: function () {
