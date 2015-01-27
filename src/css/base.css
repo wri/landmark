@@ -241,32 +241,32 @@ body:not(.mobile) .mobile-menu-toggle-button {
 }
 
 /* line 70 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
-.mobile .brMap .basemap-container {
+.mobile .basemap-container {
   height: 250px;
   width: 150px;
 }
 
 /* line 74 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
-.mobile .brMap .esriBasemapGallery {
+.mobile .esriBasemapGallery {
   margin: 10px;
 }
 
 /* line 77 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
-.mobile .brMap .basemap-container {
+.mobile .basemap-container {
   top: 20px;
 }
 
 /* line 80 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
-.mobile .brMap .esriControlsBR {
+.mobile .esriControlsBR {
   right: 5px;
 }
 
 /* line 83 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
-.mobile .brMap .data-completeness-container,
-.mobile .brMap .tree-widget-container,
-.mobile .brMap .geocoder-container,
-.mobile .brMap .legend-container,
-.mobile .brMap .analysis-button,
+.mobile .data-completeness-container,
+.mobile .tree-widget-container,
+.mobile .geocoder-container,
+.mobile .legend-container,
+.mobile .analysis-button,
 .mobile .title-area .name h1,
 .mobile .esriAttribution,
 .mobile #upload-shapefile {
@@ -275,7 +275,7 @@ body:not(.mobile) .mobile-menu-toggle-button {
 @media (max-width: 1000px) {
 
 /* line 96 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
-  .brMap .geocoder-container {
+  .geocoder-container {
     right: 70px !important;
     top: 70px !important;
   }
