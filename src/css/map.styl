@@ -32,7 +32,7 @@
 .esriControlsBR
 	right 300px
 	
-.HomeButton .home
+.brMap .HomeButton .home
 	background url('images/ico-home.png') no-repeat center
 	border-bottom 1px solid black
 	background-color white
@@ -42,7 +42,7 @@
 	width 30px
 	padding 0
 	
-.HomeButton .home:hover
+.brMap .HomeButton .home:hover
 	background-color $esriHover
 	
 .legend-container
@@ -122,17 +122,19 @@
 	height 100%
 	width 100%
 	
-.LocateButton .zoomLocateButton
-	background url('images/locate.png')
+.brMap .LocateButton .zoomLocateButton
+	background-color transparent
+	background-image url('images/locate.png')
 
-.LocateButton .zoomLocateButton:hover
-	background url('images/locate.png')
+.brMap .LocateButton .zoomLocateButton:hover
+	background-color transparent
+	background-image url('images/locate.png')
 	
 .brMap .LocateButton .zoomLocateButton
 .basemap-icon
 	background-position -2px -2px
 	
-.LocateButton .zoomLocateButton:hover
+.brMap .LocateButton .zoomLocateButton:hover
 .basemap-icon:hover
 	background-position -2px -36px
 	
@@ -205,7 +207,7 @@
 	position absolute
 	overflow hidden
 	
-.tree-content.active
+.brMap .tree-content.active
 	border 1px solid $mainBorder
 	border-top 0
 

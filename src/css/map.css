@@ -7,7 +7,7 @@
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
-/* line 263 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
+/* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
 /* line 263 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 
@@ -73,7 +73,7 @@
 }
 
 /* line 35 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
-.HomeButton .home {
+.brMap .HomeButton .home {
   background: url("images/ico-home.png") no-repeat center;
   border-bottom: 1px solid #000;
   background-color: #fff;
@@ -87,7 +87,7 @@
 }
 
 /* line 45 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
-.HomeButton .home:hover {
+.brMap .HomeButton .home:hover {
   background-color: #eee;
 }
 
@@ -208,33 +208,35 @@
 }
 
 /* line 125 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
-.LocateButton .zoomLocateButton {
-  background: url("images/locate.png");
+.brMap .LocateButton .zoomLocateButton {
+  background-color: transparent;
+  background-image: url("images/locate.png");
 }
 
-/* line 128 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
-.LocateButton .zoomLocateButton:hover {
-  background: url("images/locate.png");
+/* line 129 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .LocateButton .zoomLocateButton:hover {
+  background-color: transparent;
+  background-image: url("images/locate.png");
 }
 
-/* line 131 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 133 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .brMap .LocateButton .zoomLocateButton,
 .basemap-icon {
   background-position: -2px -2px;
 }
 
-/* line 135 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
-.LocateButton .zoomLocateButton:hover,
+/* line 137 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .LocateButton .zoomLocateButton:hover,
 .basemap-icon:hover {
   background-position: -2px -36px;
 }
 
-/* line 139 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 141 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .share-icon:hover {
   background-position: -3px -36px;
 }
 
-/* line 142 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 144 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .basemap-container {
   border: 1px solid #000;
   background-color: #fff;
@@ -248,18 +250,18 @@
   top: 65px;
 }
 
-/* line 152 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 154 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .esriBasemapGalleryLabelContainer {
   font-size: 13px;
   padding: 5px 0;
 }
 
-/* line 156 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 158 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .esriBasemapGallery {
   margin: 10px 5px;
 }
 
-/* line 159 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 161 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .share-container {
   border: 1px solid #000;
   background-color: #fff;
@@ -274,7 +276,7 @@
   top: 185px;
 }
 
-/* line 170 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 172 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .connector {
   border-bottom: 1px solid #000;
   border-top: 1px solid #000;
@@ -284,13 +286,13 @@
   width: 13px;
 }
 
-/* line 178 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 180 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .tree-widget-container {
   left: 20px;
   top: 20px;
 }
 
-/* line 182 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 184 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .tree-widget-title-pane {
   border: 1px solid #888;
   background-color: #fff;
@@ -299,47 +301,47 @@
   height: 32px;
 }
 
-/* line 189 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 191 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .tree-width {
   width: 280px;
 }
 
-/* line 192 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 194 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .tree-title-text {
   border-right: 1px solid #888;
   display: inline-block;
 }
 
-/* line 196 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 198 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .tree-title-text span {
   padding: 0 12px;
 }
 
-/* line 199 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 201 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .tree-container-toggle {
   display: inline-block;
   padding: 0 12px;
 }
 
-/* line 203 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 205 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .tree-content {
   background-color: #fff;
   position: absolute;
   overflow: hidden;
 }
 
-/* line 208 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
-.tree-content.active {
+/* line 210 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+.brMap .tree-content.active {
   border: 1px solid #888;
   border-top: 0;
 }
 
-/* line 212 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 214 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .tree-content .tester {
   height: 200px;
 }
 
-/* line 215 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 217 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .analysis-button {
   border: 1px solid #888;
   border-radius: 5px;
@@ -353,14 +355,14 @@
   top: 20px;
 }
 
-/* line 225 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 227 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .analysis-button-label,
 .data-completeness-label,
 .data-completeness-toggle {
   padding: 0 10px;
 }
 
-/* line 230 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 232 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .data-completeness-container {
   border: 1px solid #888;
   border-radius: 5px;
@@ -374,36 +376,36 @@
   top: 20px;
 }
 
-/* line 240 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 242 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .data-completeness-toggle {
   border-right: 1px solid #888;
   display: inline-block;
   height: 32px;
 }
 
-/* line 245 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 247 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .geocoder-container {
   right: 415px;
   top: 20px;
 }
 
-/* line 249 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 251 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .simpleGeocoder .esriGeocoder input {
   box-shadow: none;
   height: 20px;
 }
 
-/* line 253 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 255 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .tree-data-section {
   margin: 10px;
 }
 
-/* line 256 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 258 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .tree-data-section input[type='radio'] {
   margin: 0 0 0 5px;
 }
 
-/* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
+/* line 63 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 
 /* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 
@@ -500,7 +502,7 @@ body:not(.mobile) .tree-widget-container .tree-content {
   font-size: 14px;
 }
 
-/* line 261 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
+/* line 263 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 body:not(.mobile) .launch-map-button {
   margin-right: 10px;
   float: right;
