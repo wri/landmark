@@ -52,7 +52,7 @@ define([
 	    return (
 	      <li className={containerClass}>
 	      	<section className='tree-row-content'>
-		        <span className='tree-toggle-symbol' onClick={this.handleClick} onTouchEnd={this.handleClick}>
+		        <span className='tree-toggle-symbol' onClick={this.handleClick} >
 		          { node.children === undefined ? 
 		            '' :
 		            (this.state.collapsed ? String.fromCharCode(43) : String.fromCharCode(8722))
@@ -65,7 +65,7 @@ define([
 		          data-key={node.id}
 		          disabled={disabled}
 		         />
-		        <span className='tree-node-label' onClick={this.handleClick} onTouchEnd={this.handleClick}>{node.label}</span>
+		        <span className='tree-node-label' onClick={this.handleClick}>{node.label}</span>
 		      </section>
 	        {childNodes}
 	      </li>

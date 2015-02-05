@@ -52,7 +52,7 @@ define([
 	    return (
 	      React.createElement("li", {className: containerClass}, 
 	      	React.createElement("section", {className: "tree-row-content"}, 
-		        React.createElement("span", {className: "tree-toggle-symbol", onClick: this.handleClick, onTouchEnd: this.handleClick}, 
+		        React.createElement("span", {className: "tree-toggle-symbol", onClick: this.handleClick}, 
 		           node.children === undefined ? 
 		            '' :
 		            (this.state.collapsed ? String.fromCharCode(43) : String.fromCharCode(8722))
@@ -65,7 +65,7 @@ define([
 		          "data-key": node.id, 
 		          disabled: disabled}
 		         ), 
-		        React.createElement("span", {className: "tree-node-label", onClick: this.handleClick, onTouchEnd: this.handleClick}, node.label)
+		        React.createElement("span", {className: "tree-node-label", onClick: this.handleClick}, node.label)
 		      ), 
 	        childNodes
 	      )

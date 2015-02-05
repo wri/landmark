@@ -4,4 +4,4 @@ node_modules
 *.sublime-workspace
 *.sublime-project
 build
-**/*.styl
+**/*.css
