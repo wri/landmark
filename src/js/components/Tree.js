@@ -62,7 +62,7 @@ define([
     render: function () {
       return (
         React.createElement("ul", {className: "checkbox-tree"}, 
-          this.state.data.map(function (node, i) {
+          this.state.data.map(function (node) {
             return (
               React.createElement(TreeNode, {
                 key: node.id, 

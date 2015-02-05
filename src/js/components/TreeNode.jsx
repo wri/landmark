@@ -15,7 +15,12 @@ define([
 	  /**
 	  * Update the state of the component to hide or show the children
 	  */
-	  handleClick: function () {
+	  handleClick: function (evt) {
+	  	
+	  	if (this.props.node.disabled) {
+	  		return;
+	  	}
+
 	    this.setState({
 	      collapsed: !this.state.collapsed
 	    });
@@ -31,6 +36,7 @@ define([
 	    
 	    if (node.children) {
 	      childNodes = node.children.map(function (child, index) {
+	      	child.disabled = child.disabled || disabled;
 	        return (
 	          <ul key={[node.id, index].join('/')}>
 	            <TreeNode
