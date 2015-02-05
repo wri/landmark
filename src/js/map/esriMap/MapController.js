@@ -26,8 +26,6 @@ define([
 		init: function () {
 			brApp.debug('MapController >>> init');
 			var self = this;
-			// Show Home Page/ Welcome Dialog
-			WidgetsController.showWelcomeDialog();
 			// mapObject is not esri/map, it is a wrapper for creating the map and layers
 			var mapObject = new Map(MapConfig.options);
 			// Make the esri/map available in the global context so other modules can access easily

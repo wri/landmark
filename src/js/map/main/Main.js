@@ -2,10 +2,12 @@ define([
 	'esri/config',
 	'main/config',
 	'utils/Helper',
+	'dojo/io-query',
 	'main/Dispatcher',
 	'map/MapController',
-	'main/AppController'
-], function (esriConfig, AppConfig, Helper, Dispatcher, MapController, AppController) {
+	'main/AppController',
+	'map/WidgetsController'
+], function (esriConfig, AppConfig, Helper, ioQuery, Dispatcher, MapController, AppController, WidgetsController) {
 	'use strict';
 
 	var Main = {
@@ -16,7 +18,7 @@ define([
 		init: function () {
 			// Store Globals in brApp if you must have a global
 			window.brApp = {
-				debugEnabled: true,
+				debugEnabled: false,
 				debug: function (msg) {
 					if (this.debugEnabled) { 
 						if (typeof msg === 'string') { console.log(msg); } 
@@ -43,6 +45,13 @@ define([
 		*/
 		launchApp: function () {
 			brApp.debug('Main.js >>> launchApp');
+			var queryString = location.href.split('?')[1],
+					params;
+
+			if (queryString) {
+				params = ioQuery.queryToObject(queryString);
+			}
+
 			// Enable Responsive Layout
 			Helper.enableLayout();
 			// Have the dispatcher start listnening for events
@@ -51,6 +60,13 @@ define([
 			MapController.init();
 			// Init the AppController, Override Events, General Events, and Changing App State are in AppController
 			AppController.init();
+			// Show Home Page/ Welcome Dialog if params.intro is not no, if it is, just return
+			if (params && params.intro === "no") {
+				return;
+			}
+
+			WidgetsController.showWelcomeDialog();
+
 		}
 
 	};

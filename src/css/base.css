@@ -1,12 +1,12 @@
 
-/* line 50 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
+/* line 286 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 /* Import Common Variables and Functions */
 
-/* line 286 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
+/* line 40 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
@@ -83,7 +83,7 @@
 /* line 47 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 /* Base CSS for App */
 
-/* line 40 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
+/* line 28 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
 /* line 40 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
 
@@ -130,9 +130,9 @@
 /* line 49 : /Users/Robert/Projects/github_work/Community-Rights/src/css/base.styl */
 /** MOBILE CSS **/
 
-/* line 28 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
+/* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/header.styl */
 
-/* line 102 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 105 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 
 /* line 40 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 
@@ -262,6 +262,11 @@ body:not(.mobile) .mobile-menu-toggle-button {
 }
 
 /* line 83 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+.mobile #legend {
+  max-height: inherit;
+}
+
+/* line 86 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
 .mobile .data-completeness-container,
 .mobile .tree-widget-container,
 .mobile .geocoder-container,
@@ -274,7 +279,7 @@ body:not(.mobile) .mobile-menu-toggle-button {
 }
 @media (max-width: 1000px) {
 
-/* line 96 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 99 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
   .geocoder-container {
     right: 70px !important;
     top: 70px !important;
@@ -282,7 +287,7 @@ body:not(.mobile) .mobile-menu-toggle-button {
 }
 @media (max-width: 800px) {
 
-/* line 101 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
+/* line 104 : /Users/Robert/Projects/github_work/Community-Rights/src/css/mobile.styl */
   .title-area .name h1 {
     display: none;
   }
