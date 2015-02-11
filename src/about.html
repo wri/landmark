@@ -40,10 +40,43 @@
           </nav>
         </div>
       </header>
-      <div class="app-body"></div>
+      <div class="app-body">
+        <div id="aboutTitle"></div>
+        <div id="aboutAccordion"></div>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="libs/foundation.min.js"></script>
+    <script>
+      var base = location.pathname.replace(/\/[^/]+$/, '');
+      window.require = {
+      	baseUrl: base,
+      	packages: [
+      		{name: 'libs', location: base + '/libs'},
+      		{name: 'about', location: base + '/js/about'},
+      		{name: 'components', location: base + '/js/components'}
+      	],
+      	map: {
+      		'*': {
+      			'react': 'http://fb.me/react-0.12.2.min.js'
+      		}
+      	}
+      	//- ,
+      	//- deps: [
+      	//- 	'about/aboutLoader'
+      	//- ],
+      	//- callback: function (about) {
+      	//- 	if (doc.readyState === "complete") {
+      	//- 		about.init();
+      	//- 	} else {
+      	//- 		win.onload = Main.init;
+      	//- 	}
+      	//- }
+      };
+      
+      
+    </script>
+    <script data-main="js/about/aboutLoader" src="libs/require.js"></script>
     <script>
       $(document).foundation();
       // Thanks Foundation, Hack because the only foundation component

@@ -1,7 +1,4 @@
-define([
-    'dojo/topic',
-    'map/MapController'
-], function(topic, MapController) {
+define([], function() {
     'use strict';
 
     var Dispatcher = {
@@ -12,7 +9,9 @@ define([
         listen: function() {
             brApp.debug('Dispatcher >>> listen');
             // Map Controller Functions
-            topic.subscribe('refresh-legend', MapController.refreshLegend);
+            //topic.subscribe('refresh-legend', MapController.refreshLegend);
+
+            //TODO: Subscribe to other functions here?
 
         }
 
