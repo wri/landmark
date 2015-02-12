@@ -1,11 +1,12 @@
 define([
     'main/config',
     'dojo/on',
+    'dojo/dom',
     'dijit/Dialog',
     'dojo/_base/fx',
     'dojo/dom-class',
     'dijit/registry'
-], function(AppConfig, on, Dialog, Fx, domClass, registry) {
+], function(AppConfig, on, dom, Dialog, Fx, domClass, registry) {
     'use strict';
 
     var DURATION = 300;
@@ -218,6 +219,34 @@ define([
             domClass.add(target, 'active');
             domClass.add(id, 'active');
 
+        },
+
+        showEmbedCode: function() {
+            if (registry.byId("embedCodeShareDialog")) {
+                registry.byId("embedCodeShareDialog").destroy();
+            }
+            var embedCode = "<iframe src='" + window.location + "' height='600' width='900'></iframe>",
+                dialog = new Dialog({
+                    title: "Embed Code",
+                    style: "width: 350px",
+                    id: "embedCodeShareDialog",
+                    content: "Copy the code below to embed in your site. (Ctrl+C on PC and Cmd+C on Mac)" +
+                        "<div class='dijitDialogPaneActionBar'>" +
+                        '<input id="embedInput" type="text" value="' + embedCode + '" autofocus /></div>'
+                }),
+                cleanup;
+
+
+            cleanup = function() {
+                dialog.destroy();
+            };
+
+            dialog.show();
+            dom.byId("embedInput").select();
+
+            dialog.on('cancel', function() {
+                cleanup();
+            });
         },
 
         /**

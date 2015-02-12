@@ -15,12 +15,16 @@ define([
 
     accordionOnClick: function(click) {
       var newPanel = click.target.getAttribute('data-name');
+      var panelToRender = $("#panel" + newPanel);
+      $(panelToRender).addClass("active");
+      var panelToLeave = $("#panel" + this.state.activePanel);
+      $(panelToLeave).removeClass("active");
       this.setState({activePanel:newPanel});
     },
     
     render: function () {
       return (
-        <div className='about-Accordion'>
+        <div className='about-Accordion-Whole'>
           <AccordionControls handleClick={this.accordionOnClick} />
           <AccordionContent activePanel={this.state.activePanel}/>
         </div>

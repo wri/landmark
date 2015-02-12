@@ -14,19 +14,33 @@ define([
       };
     },
     
+    componentWillReceiveProps: function(nextProps) {
+      this.setState({activePanel: nextProps.activePanel})    
+
+    },
     
     render: function () {
 
       var sectionTitles = aboutConfig.accordionSectionTitles.map(function(item, index) {
-        return (
-          <div data-name={index} onClick={this.props.handleClick} key={'panel' + index} className='panel-Title'>
+        if (index !=0) {
+          return (
+            <div data-name={index} onClick={this.props.handleClick} id={'panel' + index} key={'panel' + index} className='panel-Title'>
+              {item}
+            </div>
+          )
+        } else {
+      return (
+          <div data-name={index} onClick={this.props.handleClick} id={'panel' + index} key={'panel' + index} className='panel-Title active'>
             {item}
           </div>
-        ) 
-      }, this);
+            ) 
+          }
+        }, this);
+        
 
       return (
         <div className='accordion-Controls'>
+          <div className='accordion-Title'><i className='caret-down'></i></div>
           {sectionTitles}
         </div>
       );
@@ -35,7 +49,7 @@ define([
   });
 
 
-    return AccordionControls;
+  return AccordionControls;
 
 
   /* jshint ignore:end */
