@@ -238,7 +238,7 @@ define([
 
 
             cleanup = function() {
-                dialog.destroy();
+                //dialog.destroy(); //TODO- Why destroy on close??
             };
 
             dialog.show();

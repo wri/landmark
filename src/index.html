@@ -9,7 +9,21 @@
     <style>html,body,.root{height:100%;width:100%;padding:0;margin:0;overflow:hidden}	</style>
     <link rel="stylesheet" href="libs/foundation.min.css">
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/map.css"><!--[if lt IE 9]>
+    <link rel="stylesheet" href="css/map.css">
+    <script async="" type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53ab205a21ddceee&amp;async=1"></script>
+    <script type="text/javascript">
+      var addthis_share = {
+      	url_transforms: {
+      		shorten: {
+      			twitter: 'bitly',
+      			facebook: 'bitly'
+      		}
+      	},
+      	shorteners: {
+      		bitly: {}
+      	}
+      }; //end addThis_share
+    </script><!--[if lt IE 9]>
     <script src="libs/es5-shim.min.js"></script>
     <script src="libs/es5-sham.min.js"></script>
     <script src="libs/html5shiv.js"></script><![endif]-->
@@ -97,12 +111,10 @@
           </div>
           <div class="map-component share-container hidden">
             <div id="share-widgets">
-              <div id="twitterShare"></div>
-              <div id="facebookShare"></div>
-              <div id="moreShare"></div>
-              <div id="emailShare"></div>
-              <div id="googleShare"></div>
-              <div id="embedShare"></div>
+              <div class="sharing_toolbox">
+                <div data-title="Global Forest Watch Commodities" class="addthis_sharing_toolbox"></div>
+                <div id="embedShare"></div>
+              </div>
             </div>
           </div>
           <div class="map-component share-connector connector hidden"></div>

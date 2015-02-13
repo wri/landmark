@@ -114,6 +114,9 @@ define([
             });
 
             this.map.addLayers(layers);
+
+            // Initialize Add This
+            addthis.init();
         },
 
         /**

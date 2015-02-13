@@ -30,6 +30,7 @@ define([
             var mapObject = new Map(MapConfig.options);
             // Make the esri/map available in the global context so other modules can access easily
             brApp.map = mapObject.map;
+            console.log(brApp.map);
             // Bind Events now, Map Events then UI Events
             mapObject.on('map-ready', function() {
                 self.renderComponents();
@@ -45,6 +46,7 @@ define([
             on(document.getElementById('upload-shapefile'), 'click', WidgetsController.toggleUploadForm);
             on(document.getElementById('draw-shape'), 'click', DrawTool.activate);
             on(document.uploadForm, 'change', Uploader.beginUpload.bind(Uploader));
+            on(document.getElementById('brMap'), 'click', self.handleClick);
 
             // Mobile Specific Events
             // If we are ok with the app not responding to mobile, only loading in mobile or loading in Desktop
@@ -119,6 +121,28 @@ define([
                 domClass.remove(node, 'hideOnLoad');
             });
 
+        },
+
+        handleClick: function(evt) {
+            brApp.debug('MapController >>> handleClick');
+
+            var mapPoint = evt.mapPoint,
+                deferreds = [],
+                features = [],
+                self = this,
+                layer;
+
+            brApp.map.infoWindow.clearFeatures();
+
+            for (layer in MapConfig.layers) {
+                console.log(layer);
+            }
+            // layer = brMap.getLayer(MapConfig.fires.id);
+            // if (layer) {
+            //     if (layer.visible) {
+            //         deferreds.push(self.identifyFires(mapPoint));
+            //     }
+            // }
         },
 
         refreshLegend: function() {

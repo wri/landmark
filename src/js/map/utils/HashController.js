@@ -19,10 +19,6 @@ define(["dojo/hash", "dojo/topic", "dojo/_base/lang", "dojo/io-query", "dojo/_ba
 
             var _initialState;
             var url = window.location.href;
-            console.log(url);
-            console.log(url);
-            console.log(url);
-            console.log(url);
             var hasHash = (url.split("#").length == 2 && url.split("#")[1].length > 1);
             //debugger;
             if (hasHash) {
