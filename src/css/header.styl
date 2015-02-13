@@ -1,3 +1,7 @@
+
+body
+	font-family Georgia
+
 .wri-header-attribution
 	background-color $mainBackground
 	font-style italic
@@ -6,6 +10,8 @@
 	height 25px
 	width 100%
 	
+a:-webkit-any-link
+	text-decoration none
 
 /* Overrides for Foundation CSS */
 .top-bar.expanded
@@ -26,3 +32,29 @@
 
 .top-bar.expanded .top-bar-section li a
 	padding 0 0 0 12px
+	
+.name > h1
+	font-size 20px !important
+	
+.top-bar
+	background-color #06457B
+	font-family Georgia
+	
+.top-bar-section ul li
+	background-color #06457B
+	font-family Georgia
+	
+.top-bar-section ul li > a
+	font-family Georgia
+	font-size 14px
+	
+.top-bar-section ul
+	background-color #06457B
+	
+.right
+	background-color #06457B
+	
+.top-bar-section li:not(.has-form) a:not(.button)
+	background-color #06457B
+	
+	

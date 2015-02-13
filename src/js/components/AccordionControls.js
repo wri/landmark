@@ -40,7 +40,7 @@ define([
 
       return (
         React.createElement("div", {className: "accordion-Controls"}, 
-          React.createElement("div", {className: "accordion-Title"}, React.createElement("i", {className: "caret-down"})), 
+          
           sectionTitles
         )
       );

@@ -24,6 +24,14 @@
 	left 0
 	top 0
 	
+body
+	font-family Arial
+	color #131313
+
+label
+	font-family Arial
+	color #131313
+	
 .map-component	
 	box-sizing initial
 	position absolute
@@ -54,7 +62,12 @@
 .legend-title-pane
 	border-bottom 1px solid $mainBorder
 	padding-right 5px
-	text-align right
+	text-align left
+	
+#legend-toggle
+	width 218px
+	color white
+	background-color #06457b
 	
 .legend-title
 	border-radius-top(3px)
@@ -191,6 +204,28 @@
 	right 48px
 	width 13px
 	
+.popup-header
+	font-weight bold
+	padding-top 10px
+	color #06457b
+
+.odd-row
+	background-color #F0EFF4
+	
+.popup-last
+	padding-top 10px
+	font-size 10px
+	
+.esriPopup .titlePane
+	padding 10px
+	-webkit-border-radius 0px 0px 0px 0px !important
+	border-bottom 1px solid black
+	font-size 14px
+	background-color #06457b !important
+		
+.esriPopup .contentPane
+	max-height none !important
+
 .tree-widget-container
 	left 20px
 	top 20px

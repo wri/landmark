@@ -14,8 +14,9 @@ define([
     'esri/map',
     "esri/geometry/webMercatorUtils",
     'esri/layers/ImageParameters',
-    'esri/layers/ArcGISDynamicMapServiceLayer'
-], function(Evented, declare, number, MapConfig, on, registry, HashController, Map, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer) {
+    'esri/layers/ArcGISDynamicMapServiceLayer',
+    "esri/layers/GraphicsLayer",
+], function(Evented, declare, number, MapConfig, on, registry, HashController, Map, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, GraphicsLayer) {
     'use strict';
 
     var _map = declare([Evented], {
@@ -96,6 +97,10 @@ define([
                     case 'dynamic':
                         layers.push(self.addDynamicLayer(key, layerConfig[key]));
                         break;
+                    case 'graphic':
+
+                        layers.push(self.addGraphicLayer(key, layerConfig[key]));
+                        break;
                     default:
                         break;
                 }
@@ -140,6 +145,15 @@ define([
 
             layer.on('error', this.addLayerError.bind(this));
             return layer;
+        },
+
+        addGraphicLayer: function(key, layerConfig) {
+            var customGraphicsLayer = new GraphicsLayer({
+                id: key
+            });
+
+            customGraphicsLayer.on('error', this.addLayerError.bind(this));
+            return customGraphicsLayer;
         },
 
         /**

@@ -40,7 +40,7 @@ define([
 
       return (
         <div className='accordion-Controls'>
-          <div className='accordion-Title'><i className='caret-down'></i></div>
+          
           {sectionTitles}
         </div>
       );

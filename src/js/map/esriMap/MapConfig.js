@@ -19,6 +19,12 @@ define([], function() {
                 // Not all the layers are present in the tree, when they are, include 0 - 9
                 defaultLayers: [2, 4, 5, 7, 8, 9], //[0,1,2,3,4,5,6,7,8,9]
                 visible: true
+            },
+            'CustomFeatures': {
+                type: 'graphic',
+                infoTemplate: {
+                    content: "<table><tr><td>Unique ID:</td><td>${WRI_ID:checkAvailable}</td></tr></table>"
+                }
             }
         },
 
