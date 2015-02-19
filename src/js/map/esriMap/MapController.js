@@ -338,6 +338,46 @@ define([
                 if (!value) {
                     return;
                 }
+                var unique = {};
+                var distinct = [];
+                var compositeRecognized = 0;
+                var compositeNotRecognized = 0;
+                for (var i in value.features) {
+                    if (typeof(unique[value.features[i].layerId]) == "undefined") {
+                        distinct.push(value.features[i].layerId);
+                    }
+                    unique[value.features[i].layerId] = 0;
+                }
+                arrayUtils.forEach(value.features, function(feature) {
+                    if (distinct.indexOf(7) > -1 || distinct.indexOf(8) > -1) { //no 4's
+                        if (feature.layerId === 7 | feature.layerId === 8) {
+                            compositeRecognized += parseInt(feature.feature.attributes.Area_GIS);
+                        }
+                    } else {
+                        if (feature.layerId === 4) {
+                            compositeRecognized += parseInt(feature.feature.attributes.Area_GIS);
+                        }
+                    }
+                    if (distinct.indexOf(9) > -1) { //no 5's
+                        if (feature.layerId === 9) {
+                            compositeNotRecognized += parseInt(feature.feature.attributes.Area_GIS);
+                        }
+                    } else {
+                        if (feature.layerId === 5) {
+                            compositeNotRecognized += parseInt(feature.feature.attributes.Area_GIS);
+                        }
+                    }
+                });
+                console.log(compositeRecognized);
+                console.log(compositeNotRecognized); //TODO: Also calculate new area now; probably one more geometry service call for the union & areaCompute
+
+                self.createPie(compositeRecognized, compositeNotRecognized);
+
+            });
+            /*deferred.then(function(value) {
+                if (!value) {
+                    return;
+                }
 
                 arrayUtils.forEach(value.features, function(feature) {
 
@@ -352,11 +392,11 @@ define([
                     unionedGeometry = self.generalizePoly(unionedGeometry);
                     //geometryService.project([poly], sr, projectionCallback, failure);
                 }, failure);
-            });
+            });*/
 
             function success(result) {
                 console.log("success");
-                self.renderAnalysisResults(MapConfig.chart);
+                //self.renderAnalysisResults(MapConfig.chart);
                 if (result.areas.length === 1) {
                     var area = dojoNumber.format(result.areas[0], {
                         places: 2
@@ -365,6 +405,9 @@ define([
                     var area = errorString;
                 }
                 document.getElementById("total-area").innerHTML = area;
+                brApp.map.infoWindow.resize(550); //TODO: make the close button and other icon's background color the same as the header's normal background color so that they show up in this view and don't look different in the normal pop-ups 
+                $(".titlePane").addClass("analysis-header");
+                brApp.map.infoWindow.show(brApp.mapPoint);
             }
 
             function failure(err) {
@@ -379,7 +422,7 @@ define([
 
             //TODO: If our custom polygon overlaps nothing, set the info window content to something special (or nothing?)
             title = "<span style='padding: 25px;'>Analysis Results Feature " + mapPoint.graphic.attributes.attributeID + "</span>";
-            content = "<div id='resultsPie'></div><div style='width: 250px; padding: 25px; color: black;'><strong>Total Area of the polygon:</strong><br /><span id='total-area'></span> Ha<br /><br />" + "<strong>Area that intersects with Indigenous and Community Lands:</strong><br /><span id='intersect-area'></span> Ha</div><br /><button id='printAnalysis' class='analysis-popup-button'>Print</button><button id='exportAnalysis' class='analysis-popup-button'>Export</button>";
+            content = "<div id='resultsPie'></div><div style='width: 250px; padding: 25px; color: black; padding-top: 0px;'><strong>Total Area of the polygon:</strong><br /><span id='total-area'></span> Ha<br /><br />" + "<strong>Area that intersects with Indigenous and Community Lands:</strong><br /><span id='intersect-area'></span> Ha</div><br /><button id='printAnalysis' class='analysis-popup-button'>Print</button><button id='exportAnalysis' class='analysis-popup-button'>Export</button>";
 
             brApp.map.infoWindow.clearFeatures();
 
@@ -476,6 +519,62 @@ define([
 
         //     // });
         // },
+
+        createPie: function(recognzied, notRecognized) {
+            brApp.debug('MapController >>> createPie');
+            var total, recognziedPercent, notRecognizedPercent;
+
+            total = recognzied + notRecognized;
+
+            recognziedPercent = (recognzied / total) * 100;
+            notRecognizedPercent = (notRecognized / total) * 100;
+
+            $('#resultsPie').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                legend: {
+                    align: 'right',
+                    verticalAlign: 'top',
+                    enabled: true
+                },
+                title: {
+                    text: null
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    // name: 'Percent Recognzied',
+                    data: [
+                        // ['Firefox', 45.0],
+                        // ['IE', 26.8], {
+                        //     name: 'Chrome',
+                        //     y: 12.8,
+                        //     sliced: true,
+                        //     selected: true
+                        // },
+                        ['Officially Recognzied', recognziedPercent],
+                        ['Not Officially Recognzied', notRecognizedPercent]
+                    ]
+                }]
+            });
+
+        },
 
         exportAnalysis: function(config) {
             brApp.debug('MapController >>> exportAnalysis');
