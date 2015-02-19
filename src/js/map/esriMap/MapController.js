@@ -12,16 +12,21 @@ define([
     "dojo/_base/array",
     "dojo/promise/all",
     "dojo/Deferred",
+    "dojo/number",
     'dijit/registry',
     'esri/dijit/Legend',
     'esri/dijit/Geocoder',
     'esri/dijit/HomeButton',
     'esri/dijit/LocateButton',
     'esri/dijit/BasemapGallery',
+    "esri/geometry/Polygon",
     "esri/tasks/IdentifyTask",
     "esri/tasks/IdentifyParameters",
-    "esri/InfoTemplate"
-], function(Map, Uploader, DrawTool, MapConfig, ReactTree, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, registry, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, IdentifyTask, IdentifyParameters, InfoTemplate) {
+    "esri/InfoTemplate",
+    "esri/tasks/query",
+    "esri/tasks/GeometryService",
+    "esri/tasks/AreasAndLengthsParameters"
+], function(Map, Uploader, DrawTool, MapConfig, ReactTree, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, registry, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, GeometryService, AreasAndLengthsParameters) {
     'use strict';
 
     var MapController = {
@@ -55,6 +60,14 @@ define([
             //on(document.getElementById('brMap_root'), 'click', self.handleClick.bind(self));
             on(brApp.map, 'click', self.handleClick.bind(self));
 
+            on(brApp.map, 'layer-add-result', function(layerAdded) {
+                if (layerAdded.layer.id === "CustomFeatures") {
+                    on(brApp.map.getLayer("CustomFeatures"), "click", function(evt) {
+                        self.selectCustomGraphics(evt);
+                    });
+                }
+            });
+
             // Mobile Specific Events
             // If we are ok with the app not responding to mobile, only loading in mobile or loading in Desktop
             // We could conditionally add handles for the above and below events by using Helper.isMobile()
@@ -72,6 +85,7 @@ define([
         renderComponents: function() {
             brApp.debug('MapController >>> renderComponents');
             var basemapGallery,
+                self = this,
                 locateButton,
                 treeWidget,
                 homeWidget,
@@ -122,24 +136,32 @@ define([
             legend.startup();
             // Initialize the draw tools
             DrawTool.init();
+            self.geometryService = new GeometryService(MapConfig.geometryServiceURL);
 
             // remove hideOnLoad classes
             dojoQuery('body .hideOnLoad').forEach(function(node) {
                 domClass.remove(node, 'hideOnLoad');
             });
 
+
+
         },
 
         handleClick: function(evt) {
             brApp.debug('MapController >>> handleClick');
+
             var mapPoint = evt.mapPoint,
                 deferreds = [],
                 features = [],
                 self = this,
                 indigenousLayer,
+                userGraphics,
                 layer;
 
             brApp.map.infoWindow.clearFeatures();
+            if (brApp.map.infoWindow.isShowing) {
+                brApp.map.infoWindow.hide();
+            }
 
             // for (layer in MapConfig.layers) {
             //     mapLayer = layer;
@@ -153,13 +175,12 @@ define([
                 }
             }
 
-            userGraphics = brApp.map.getLayer('CustomGraphics');
-
-            if (userGraphics) {
-                if (userGraphics.visible) {
-                    deferreds.push(self.identifyUserShapes(mapPoint));
-                }
-            }
+            // userGraphics = brApp.map.getLayer('CustomFeatures');
+            // if (userGraphics) {
+            //     if (userGraphics.visible) {
+            //         deferreds.push(self.identifyUserShapes(mapPoint));
+            //     }
+            // }
 
             if (deferreds.length === 0) {
                 return;
@@ -176,9 +197,9 @@ define([
                         case "inidigenousLands":
                             features = features.concat(self.setIndigenousTemplates(item.features));
                             break;
-                            // case "CustomGraphics":
-                            //     // This will only contain a single feature and return a single feature
-                            //     // instead of an array of features
+                            // case "CustomFeatures":
+                            //     //     // This will only contain a single feature and return a single feature
+                            //     //     // instead of an array of features
                             //     features.push(self.setCustomGraphicTemplates(item.feature));
                             //     break;
                         default: // Do Nothing
@@ -188,9 +209,10 @@ define([
 
                 if (features.length > 0) {
                     brApp.map.infoWindow.setFeatures(features);
+                    brApp.map.infoWindow.resize(270);
+                    $(".titlePane").removeClass("analysis-header");
                     brApp.map.infoWindow.show(mapPoint);
                 }
-
             });
 
         },
@@ -238,7 +260,6 @@ define([
                 self = this;
 
             arrayUtils.forEach(featureObjects, function(item) {
-                // debugger;
                 // if (item.layerId === 2) {
                 template = new InfoTemplate(item.value,
                     "<div class='popup-header'>Layer Name</div>" + item.layerName +
@@ -250,42 +271,53 @@ define([
                     "<div class='popup-header'>Ethnicity</div>" + item.feature.attributes.Ethncity_1 +
                     "<div class='odd-row'><div class='popup-header'>Data Contributor</div>" + item.feature.attributes.Data_Ctrb + '</div>' +
                     "<div class='popup-header'>Data Source</div>" + item.feature.attributes.Data_Src +
-                    "<div class='popup-last'>Last Updated: " + item.feature.attributes.Last_Updt + '</div> ' +
-                    "<div><button id='popup-analyze-area' class='popupAnalyzeButton' data-label='" +
-                    item.value + "' data-type='RSPO Oil palm concession' data-id='${OBJECTID}'>" +
-                    "Analyze this area</button></div>"
+                    "<div class='popup-last'>Last Updated: " + item.feature.attributes.Last_Updt + '</div> '
                 );
                 item.feature.setInfoTemplate(template);
                 features.push(item.feature);
-                // } else {
-                //     template = new InfoTemplate(item.value,
-                //         "<div>Layer Name: " + item.layerName + "</div>" +
-                //         "<div><button id='popup-analyze-area' class='popupAnalyzeButton' data-label='" +
-                //         item.value + "' data-type='${TYPE}' data-id='${OBJECTID}'>" +
-                //         "Analyze this area</button></div>"
-                //     );
-                //     item.feature.setInfoTemplate(template);
-                //     features.push(item.feature);
-                // }
             });
             return features;
         },
 
-        identifyUserShapes: function(mapPoint) {
-            brApp.debug('MapController >>> identifyUserShapes');
+        selectCustomGraphics: function(mapPoint) {
+            brApp.debug('MapController >>> selectCustomGraphics');
+
+            //TODO: Store the results somehow in case the user clicks on a feature they have already clicked on and gotten data for; then we can check some array based on the feature's 'attributeID' and if it exists, fetch the data for that shape rather than re-calculating
+            brApp.mapPoint = mapPoint;
+
+            var graphic = mapPoint.graphic,
+                uniqueIdField = "attributeID",
+                parameters = new AreasAndLengthsParameters(),
+                graphicsLayer = brApp.map.getLayer("CustomFeatures"),
+                dataLayer = brApp.map.getLayer("indigenousLands"),
+                query = new Query(),
+                self = this,
+                polys = [],
+                poly,
+                content,
+                title;
+
+            mapPoint.stopPropagation();
+            // query.geometry = mapPoint.graphic.geometry;
+            // query.spatialRelationship = esri.tasks.Query.SPATIAL_REL_INTERSECTS;
+
+            var failure = function(err) {
+                // Handle This Issue Here
+                // Discuss with Adrienne How to Handle
+                console.log(err);
+            };
 
             var deferred = new Deferred(),
-                identifyTask = new IdentifyTask(MapConfig.layers.indigenousLands.url),
-                params = new IdentifyParameters(),
-                mapLayer = brApp.map.getLayer('indigenousLands');;
+                identifyTask = new IdentifyTask(dataLayer.url),
+                params = new IdentifyParameters();
 
             params.tolerance = 3;
             params.returnGeometry = true;
             params.width = brApp.map.width;
             params.height = brApp.map.height;
-            params.geometry = mapPoint;
+            params.geometry = mapPoint.graphic.geometry;
             params.mapExtent = brApp.map.extent;
-            params.layerIds = mapLayer.visibleLayers;
+            params.layerIds = dataLayer.visibleLayers;
             params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
 
             identifyTask.execute(params, function(features) {
@@ -296,13 +328,163 @@ define([
                         features: features
                     });
                 } else {
+                    console.log("no feats returned");
                     deferred.resolve(false);
                 }
             }, function(error) {
                 deferred.resolve(false);
             });
+            deferred.then(function(value) {
+                if (!value) {
+                    return;
+                }
 
-            return deferred.promise;
+                arrayUtils.forEach(value.features, function(feature) {
+
+                    poly = new Polygon();
+                    poly.addRing(feature.feature.geometry.rings[0]);
+                    polys.push(poly);
+                });
+
+                self.geometryService.union(polys, function(unionedGeometry) { //TODO: Ensure that after Adrienne fixes the service's data layers, this now reflects the proper area of the layers that are TURNED ON Only
+                    console.log(unionedGeometry);
+                    //self.calculateBreakdown(polys, unionedGeometry, value);
+                    unionedGeometry = self.generalizePoly(unionedGeometry);
+                    //geometryService.project([poly], sr, projectionCallback, failure);
+                }, failure);
+            });
+
+            function success(result) {
+                console.log("success");
+                self.renderAnalysisResults(MapConfig.chart);
+                if (result.areas.length === 1) {
+                    var area = dojoNumber.format(result.areas[0], {
+                        places: 2
+                    });
+                } else {
+                    var area = errorString;
+                }
+                document.getElementById("total-area").innerHTML = area;
+            }
+
+            function failure(err) {
+                console.log("failures");
+                //document.getElementById("resultsPie").innerHTML = errorString;
+                console.log(err);
+            }
+
+            parameters.areaUnit = GeometryService.UNIT_HECTARES;
+            parameters.polygons = [graphic.geometry];
+            self.geometryService.areasAndLengths(parameters, success, failure);
+
+            //TODO: If our custom polygon overlaps nothing, set the info window content to something special (or nothing?)
+            title = "<span style='padding: 25px;'>Analysis Results Feature " + mapPoint.graphic.attributes.attributeID + "</span>";
+            content = "<div id='resultsPie'></div><div style='width: 250px; padding: 25px; color: black;'><strong>Total Area of the polygon:</strong><br /><span id='total-area'></span> Ha<br /><br />" + "<strong>Area that intersects with Indigenous and Community Lands:</strong><br /><span id='intersect-area'></span> Ha</div><br /><button id='printAnalysis' class='analysis-popup-button'>Print</button><button id='exportAnalysis' class='analysis-popup-button'>Export</button>";
+
+            brApp.map.infoWindow.clearFeatures();
+
+            brApp.map.infoWindow.setTitle(title);
+            brApp.map.infoWindow.setContent(content);
+
+            on(document.getElementById('exportAnalysis'), 'click', self.exportAnalysis);
+            on(document.getElementById('printAnalysis'), 'click', self.printAnalysis);
+
+            //brApp.map.infoWindow.setFeatures(features);
+            //brApp.map.infoWindow.show(mapPoint);
+
+        },
+
+        generalizePoly: function(poly) {
+            brApp.debug('MapController >>> generalizePoly');
+
+            var parameters = new AreasAndLengthsParameters(),
+                errorString = "Not Available",
+                self = this,
+                area;
+
+            function success(result) {
+                console.log("success");
+
+                if (result.areas.length === 1) {
+                    area = dojoNumber.format(result.areas[0], {
+                        places: 2
+                    });
+                } else {
+                    area = errorString;
+                }
+                document.getElementById("intersect-area").innerHTML = area;
+                brApp.map.infoWindow.resize(550); //TODO: make the close button and other icon's background color the same as the header's normal background color so that they show up in this view and don't look different in the normal pop-ups 
+                $(".titlePane").addClass("analysis-header");
+                brApp.map.infoWindow.show(brApp.mapPoint);
+
+            }
+
+            function failure(err) {
+                console.log("failures");
+                //document.getElementById("resultsPie").innerHTML = errorString;
+                console.log(err);
+            }
+
+            parameters.areaUnit = GeometryService.UNIT_HECTARES;
+
+            self.geometryService.intersect([brApp.mapPoint.graphic.geometry], poly, function(intersectedGeom) {
+                parameters.polygons = intersectedGeom;
+
+
+                self.geometryService.areasAndLengths(parameters, success, failure);
+            }, failure);
+            // self.geometryService.simplify([poly], function(simplifiedGeometry) {
+            //     parameters.polygons = simplifiedGeometry;
+            //     //self.geometryService.intersect(geometries, geometry, callback, errback);
+            //     self.geometryService.areasAndLengths(parameters, success, failure);
+            // }, failure);
+
+        },
+
+        renderAnalysisResults: function(config) {
+            brApp.debug('MapController >>> renderAnalysisResults');
+
+            var fragment = document.createDocumentFragment(),
+                node = document.createElement('div');
+
+            node.id = config.id;
+            node.className = "result-container";
+            node.innerHTML = "<div class='right-panel'>" +
+                "<div id='" + config.id + "_chart' class='suitability-chart'><div class='loader-wheel'></div></div></div>";
+
+            // Append root to fragment and then fragment to document
+            fragment.appendChild(node);
+            document.getElementById('resultsPie').appendChild(fragment);
+        },
+
+        // calculateBreakdown: function(polys, unionedGeometry, identifyFeats) {
+        //     brApp.debug('MapController >>> calculateBreakdown');
+
+        //     var unique = {};
+        //     var distinct = [];
+        //     var compositeAreas = [];
+        //     for (var i in identifyFeats.features) {
+        //         if (typeof(unique[identifyFeats.features[i].layerId]) == "undefined") {
+        //             distinct.push(identifyFeats.features[i].layerId);
+        //         }
+        //         unique[identifyFeats.features[i].layerId] = 0;
+        //     }
+        //     debugger;
+        //     // compositeAreas.length = distinct.length;
+
+        //     // arrayUtils.forEach(polys, function(feature) {
+
+        //     // });
+        // },
+
+        exportAnalysis: function(config) {
+            brApp.debug('MapController >>> exportAnalysis');
+
+        },
+
+        printAnalysis: function(config) {
+            brApp.debug('MapController >>> printAnalysis');
+            window.print();
 
         },
 

@@ -3,7 +3,7 @@ define([], function() {
 
     var config = {
 
-        corsEnabledServers: [],
+        corsEnabledServers: ["utility.arcgisonline.com"],
 
         defaultState: {
             x: -19,

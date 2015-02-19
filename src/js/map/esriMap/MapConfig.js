@@ -28,6 +28,25 @@ define([], function() {
             }
         },
 
+        geometryServiceURL: "http://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer",
+
+        chart: {
+            id: 'graphNode',
+            title: 'Analysis Results',
+            suitable: {
+                color: '#461D7C',
+                name: 'Officially Recognized',
+                id: 'donut-Suitable'
+            },
+            unsuitable: {
+                color: '#FDD023',
+                name: 'Not Officially Recognized',
+                id: 'donut-Unsuitable'
+            } //,
+            // childrenLabels: ['HP/HPT', 'HPK', 'APL'],
+            // childrenColors: ['#74C476', '#E69800', '#FFFFBE']
+        },
+
         // If adding content to the tree, the ID must be unique and present, and the label must be present
         // Other Options
         // children: array of children objects

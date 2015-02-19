@@ -5,7 +5,8 @@
         appVersion = '1.0',
         esriVersion = '3.12',
         js = [
-            '//js.arcgis.com/' + esriVersion + '/init.js'
+            '//js.arcgis.com/' + esriVersion + '/init.js',
+            'http://code.highcharts.com/highcharts.js'
         ],
         css = [
             '//js.arcgis.com/' + esriVersion + '/esri/css/esri.css',
