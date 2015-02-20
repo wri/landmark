@@ -13,19 +13,20 @@ define([
       };
     },
 
-    accordionOnClick: function(click) {
-      var newPanel = click.target.getAttribute('data-name');
-      var panelToRender = $("#panel" + newPanel);
-      $(panelToRender).addClass("active");
-      var panelToLeave = $("#panel" + this.state.activePanel);
-      $(panelToLeave).removeClass("active");
-      this.setState({activePanel:newPanel});
+    accordionOnClick: function(activePanel) {
+      // console.log(arguments);
+      // var newPanel = click.target.getAttribute('data-name');
+      // var panelToRender = $("#panel" + newPanel);
+      // $(panelToRender).addClass("active");
+      // var panelToLeave = $("#panel" + this.state.activePanel);
+      // $(panelToLeave).removeClass("active");
+      this.setState({activePanel:activePanel.toString()});
     },
     
     render: function () {
       return (
         <div className='about-Accordion-Whole'>
-          <AccordionControls handleClick={this.accordionOnClick} />
+          <AccordionControls activePanel={this.state.activePanel} handleClick={this.accordionOnClick} />
           <AccordionContent activePanel={this.state.activePanel}/>
         </div>
       );

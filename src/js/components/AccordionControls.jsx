@@ -8,9 +8,8 @@ define([
   var AccordionControls = React.createClass({
 
     getInitialState: function () {
-      console.dir(this.props);
       return {
-        
+       activePanel: this.props.activePanel
       };
     },
     
@@ -22,19 +21,13 @@ define([
     render: function () {
 
       var sectionTitles = aboutConfig.accordionSectionTitles.map(function(item, index) {
-        if (index !=0) {
-          return (
-            <div data-name={index} onClick={this.props.handleClick} id={'panel' + index} key={'panel' + index} className='panel-Title'>
-              {item}
-            </div>
-          )
-        } else {
+
       return (
-          <div data-name={index} onClick={this.props.handleClick} id={'panel' + index} key={'panel' + index} className='panel-Title active'>
+
+          <div data-name={index} onClick={this.props.handleClick.bind(this,index)} id={'panel' + index} key={'panel' + index} className={'panel-Title '+(index===parseInt(this.state.activePanel) ? 'active':null)} >
             {item}
           </div>
             ) 
-          }
         }, this);
         
 
