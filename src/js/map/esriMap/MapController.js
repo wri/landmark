@@ -158,6 +158,9 @@ define([
                 userGraphics,
                 layer;
 
+            brApp.mapPoint = mapPoint;
+            brApp.mapPoint.clientY = evt.clientY;
+
             brApp.map.infoWindow.clearFeatures();
             if (brApp.map.infoWindow.isShowing) {
                 brApp.map.infoWindow.hide();
@@ -223,7 +226,7 @@ define([
             var deferred = new Deferred(),
                 identifyTask = new IdentifyTask(MapConfig.layers.indigenousLands.url),
                 params = new IdentifyParameters(),
-                mapLayer = brApp.map.getLayer('indigenousLands');;
+                mapLayer = brApp.map.getLayer('indigenousLands');
 
             params.tolerance = 3;
             params.returnGeometry = true;
@@ -262,7 +265,7 @@ define([
             arrayUtils.forEach(featureObjects, function(item) {
                 // if (item.layerId === 2) {
                 template = new InfoTemplate(item.value,
-                    "<div class='popup-header'>Layer Name</div>" + item.layerName +
+                    // "<div class='popup-header'>Layer Name</div>" + item.layerName +
                     "<div class='odd-row'><div class='popup-header'>Official Recognition</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
                     "<div class='popup-header'>Status</div>" + item.feature.attributes.Ofcl_Rec +
                     "<div class='odd-row'><div class='popup-header'>Category</div>" + item.feature.attributes.Category + '</div>' +
@@ -282,8 +285,10 @@ define([
         selectCustomGraphics: function(mapPoint) {
             brApp.debug('MapController >>> selectCustomGraphics');
 
+
             //TODO: Store the results somehow in case the user clicks on a feature they have already clicked on and gotten data for; then we can check some array based on the feature's 'attributeID' and if it exists, fetch the data for that shape rather than re-calculating
             brApp.mapPoint = mapPoint;
+
 
             var graphic = mapPoint.graphic,
                 uniqueIdField = "attributeID",
@@ -352,10 +357,16 @@ define([
                     if (distinct.indexOf(7) > -1 || distinct.indexOf(8) > -1) { //no 4's
                         if (feature.layerId === 7 | feature.layerId === 8) {
                             compositeRecognized += parseInt(feature.feature.attributes.Area_GIS);
+                            poly = new Polygon();
+                            poly.addRing(feature.feature.geometry.rings[0]);
+                            polys.push(poly);
                         }
                     } else {
                         if (feature.layerId === 4) {
                             compositeRecognized += parseInt(feature.feature.attributes.Area_GIS);
+                            poly = new Polygon();
+                            poly.addRing(feature.feature.geometry.rings[0]);
+                            polys.push(poly);
                         }
                     }
                     if (distinct.indexOf(9) > -1) { //no 5's
@@ -372,6 +383,12 @@ define([
                 console.log(compositeNotRecognized); //TODO: Also calculate new area now; probably one more geometry service call for the union & areaCompute
 
                 self.createPie(compositeRecognized, compositeNotRecognized);
+                self.geometryService.union(polys, function(unionedGeometry) { //TODO: Ensure that after Adrienne fixes the service's data layers, this now reflects the proper area of the layers that are TURNED ON Only
+                    console.log(unionedGeometry);
+                    //self.calculateBreakdown(polys, unionedGeometry, value);
+                    unionedGeometry = self.generalizePoly(unionedGeometry);
+                    //geometryService.project([poly], sr, projectionCallback, failure);
+                }, failure);
 
             });
             /*deferred.then(function(value) {
@@ -407,6 +424,7 @@ define([
                 document.getElementById("total-area").innerHTML = area;
                 brApp.map.infoWindow.resize(550); //TODO: make the close button and other icon's background color the same as the header's normal background color so that they show up in this view and don't look different in the normal pop-ups 
                 $(".titlePane").addClass("analysis-header");
+                // if (brApp.mapPoint)
                 brApp.map.infoWindow.show(brApp.mapPoint);
             }
 
@@ -421,8 +439,9 @@ define([
             self.geometryService.areasAndLengths(parameters, success, failure);
 
             //TODO: If our custom polygon overlaps nothing, set the info window content to something special (or nothing?)
-            title = "<span style='padding: 25px;'>Analysis Results Feature " + mapPoint.graphic.attributes.attributeID + "</span>";
-            content = "<div id='resultsPie'></div><div style='width: 250px; padding: 25px; color: black; padding-top: 0px;'><strong>Total Area of the polygon:</strong><br /><span id='total-area'></span> Ha<br /><br />" + "<strong>Area that intersects with Indigenous and Community Lands:</strong><br /><span id='intersect-area'></span> Ha</div><br /><button id='printAnalysis' class='analysis-popup-button'>Print</button><button id='exportAnalysis' class='analysis-popup-button'>Export</button>";
+            //title = "<span style='padding: 25px;'>Analysis Results Feature " + mapPoint.graphic.attributes.attributeID + "</span>";
+            title = "<span style='padding: 25px;'>Analysis Results</span>";
+            content = "<div id='resultsPie'></div><div style='width: 250px; padding: 25px; color: black; padding-top: 0px; margin-top: -10px;'><strong>Total Area of the polygon:</strong><br /><span id='total-area'></span> Ha<br /><br />" + "<strong>Area that intersects with Indigenous and Community Lands:</strong><br /><span id='intersect-area'></span> Ha</div><br /><button id='printAnalysis' class='analysis-popup-button'>Print</button><button id='exportAnalysis' class='analysis-popup-button'>Export</button>";
 
             brApp.map.infoWindow.clearFeatures();
 
@@ -431,9 +450,6 @@ define([
 
             on(document.getElementById('exportAnalysis'), 'click', self.exportAnalysis);
             on(document.getElementById('printAnalysis'), 'click', self.printAnalysis);
-
-            //brApp.map.infoWindow.setFeatures(features);
-            //brApp.map.infoWindow.show(mapPoint);
 
         },
 
@@ -531,13 +547,45 @@ define([
 
             $('#resultsPie').highcharts({
                 chart: {
-                    plotBackgroundColor: null,
+                    plotBackgroundColor: '#F7F7F7',
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
                     plotBorderWidth: null,
-                    plotShadow: false
+                    // marginLeft: -20,
+                    // margin: [-20, -20, -20, -20],
+                    // spacing: [-10, 0, 0, 0],
+                    // spacingLeft: -30,
+                    // spacingRight: -30,
+                    plotShadow: false //,
+                    //margin: [10, 10, 10, 10]
+                    // marginRight: 5,
+                    // marginLeft: 5
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    formatter: function() {
+                        if (this.point.name) { // the pie chart
+                            return false;
+                        }
+                    }
                 },
                 legend: {
                     align: 'right',
-                    verticalAlign: 'top',
+                    title: {
+                        text: 'Indigenous Lands',
+                        style: {
+                            fontStyle: 'normal',
+                            fontSize: 18
+                        }
+                    },
+                    verticalAlign: 'middle',
+                    layout: 'vertical',
+                    itemMarginBottom: 10,
+                    itemMarginTop: 10,
+                    symbolHeight: 18,
+                    symbolWidth: 18,
+                    symbolRadius: 9,
                     enabled: true
                 },
                 title: {
@@ -546,13 +594,17 @@ define([
                 plotOptions: {
                     pie: {
                         allowPointSelect: true,
+                        size: 200,
                         cursor: 'pointer',
                         dataLabels: {
-                            enabled: false,
-                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                            style: {
-                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                            }
+                            enabled: true,
+                            //inside: true,
+                            //format: '<p>' + this + '</p>'
+                            format: '{point.percentage:.1f}%',
+                            distance: -30
+                            // style: {
+                            //     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            // }
                         },
                         showInLegend: true
                     }
