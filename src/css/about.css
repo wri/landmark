@@ -9,7 +9,7 @@
 
 /* line 3 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/about.styl */
 body {
-  font-family: Arial;
+  font-family: Arial Narrow;
 }
 
 /* line 6 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/about.styl */
@@ -173,6 +173,24 @@ body {
 /* line 114 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/about.styl */
 .active {
   background: #fff !important;
-  border-bottom: 4px solid #06457b;
+  border-bottom: 4px solid #036;
   border-right: none;
+}
+
+/* line 119 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/about.styl */
+@media (max-width: 1500px) {
+
+/* line 120 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/about.styl */
+  .accordion-Controls {
+    margin-left: 0px;
+  }
+}
+
+/* line 123 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/about.styl */
+@media (max-width: 1000px) {
+
+/* line 124 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/about.styl */
+  .about-Accordion {
+    width: auto;
+  }
 }

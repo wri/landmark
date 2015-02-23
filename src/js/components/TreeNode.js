@@ -26,6 +26,11 @@ define([
 	    });
 	  },
 
+	  // handleInfo: function (evt) {
+	  // 	<span visible={this.props.node.info || false} className='tree-node-info' onClick={this.handleInfo}>{node.info}</span>
+	  // 	debugger;
+	  // },
+
 	  render: function() {
 	    var containerClass = this.state.collapsed ? 'collapsed' : '';
 	    var node = this.props.node;
@@ -66,10 +71,13 @@ define([
 		          disabled: disabled}
 		         ), 
 		        React.createElement("span", {className: "tree-node-label", onClick: this.handleClick}, node.label)
+		        
 		      ), 
 	        childNodes
 	      )
 	    );
+
+	    
 	  }
 		/* jshint ignore:end */
 	});

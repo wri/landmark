@@ -48,67 +48,67 @@ define([], function() {
         aliansiText: 'Aliansi Masyarakat Adat Nusantara',
         lizAldenText: 'Liz Alden Wily -independent land tenure specialist',
         SteeringGroupsText: '<a target="_blank" href="http://www.wri.org/"><img class="aboutImageLeft" id="wriLink" src="css/images/wriLogo.png"></a>' +
-            '<div id="wriDiv"><p style="font-weight: bold;">World Resources Institute (WRI)</p>' +
-            '<p>Established: <strong>1982</strong></p>' +
-            '<p>Headquarters: <strong>Washington DC, USA</strong></p>' +
-            '<p>Mission: <strong>To move human society to live in ways that protect Earth’s environment and its capacity to provide for the needs and aspirations of current and future generations.</strong></p>' +
-            '<p>Interests: <strong>WRI’s Land and Resource Rights (LRR) project works with governments, civil society organizations, development agencies, and other actors to strengthen communities’ land, resource, and property rights as a path to poverty reduction, sustainable development, and environmental management. Operating across Latin America, Africa, and Asia, LRR’s work focuses on connections between land and equitable access to forests, food, and water.</strong></p></div>' +
+            '<div id="wriDiv"><p style="font-weight: bold; font-size: 18px;">World Resources Institute (WRI)</p>' +
+            '<p><strong>Established:</strong> 1982</p>' +
+            '<p><strong>Headquarters: </strong>Washington DC, USA</p>' +
+            '<p><strong>Mission: </strong>To move human society to live in ways that protect Earth’s environment and its capacity to provide for the needs and aspirations of current and future generations.</p>' +
+            '<p><strong>Interests: </strong>WRI’s Land and Resource Rights (LRR) project works with governments, civil society organizations, development agencies, and other actors to strengthen communities’ land, resource, and property rights as a path to poverty reduction, sustainable development, and environmental management. Operating across Latin America, Africa, and Asia, LRR’s work focuses on connections between land and equitable access to forests, food, and water.</p></div>' +
             '<a target="_blank" href="http://www.ibcperu.org/"><img style="margin-top: 375px;" class="aboutImageLeft" src="css/images/bienLogo.png"></a>' +
-            '<div id="ibc"><p style="font-weight: bold;">Instituto del Bien Común (IBC)</p>' +
-            '<p>Established: <strong>1998</strong></p>' +
-            '<p>Headquarters: <strong>Lima, Peru</strong></p>' +
-            '<p>Mission: <strong>To work with rural communities in Peru for the care of common goods (water bodies, forests, fisheries, protected areas and communal lands), thus contributing to the welfare of these populations and of all Peruvians.</strong></p>' +
-            '<p>Interests: <strong>IBC works across landscapes of the central and northern Andean Amazon, on projects related to territorial planning, governance of the commons, preservation of the environment, sustainable development, and respect for the rights and culture of indigenous and non-indigenous and scientific and local knowledge.</strong></p></div>' +
+            '<div id="ibc"><p style="font-weight: bold; font-size: 18px;">Instituto del Bien Común (IBC)</p>' +
+            '<p><strong>Established: </strong>1998</p>' +
+            '<p><strong>Headquarters: </strong>Lima, Peru</p>' +
+            '<p><strong>Mission: </strong>To work with rural communities in Peru for the care of common goods (water bodies, forests, fisheries, protected areas and communal lands), thus contributing to the welfare of these populations and of all Peruvians.</p>' +
+            '<p><strong>Interests: </strong>IBC works across landscapes of the central and northern Andean Amazon, on projects related to territorial planning, governance of the commons, preservation of the environment, sustainable development, and respect for the rights and culture of indigenous and non-indigenous and scientific and local knowledge.</p></div>' +
             '<a target="_blank" href="http://www.iheal.univ-paris3.fr/en/recherche/waipt-project"><img class="aboutImageLeft" src="css/images/amanLogo.png"></a>' +
-            '<div id="waipt"><p style="font-weight: bold;">World Atlas of Indigenous Peoples\' Territories (WAIPT)</p>' +
-            '<p>Established: <strong>2013</strong></p>' +
-            '<p>Headquarters: <strong>Paris, France</strong></p>' +
-            '<p>Mission: <strong>To create and maintain a global collaborative database of geographic information related to indigenous lands, giving higher visibility to indigenous peoples and organizations, thus encouraging greater awareness of indigenous presence and territorial issues.</strong></p>' +
-            '<p>Interests: <strong>WAIPT is a collaborative project between Centre National de la Recherche Scientifique (CNRS), Survival International (France), and the Sorbonne Nouvelle University, Paris III, with the support of the Ile-de-France region. WAIPT aims to gather and analyse geographic information regarding indigenous lands and resources in order to present a global depiction of the political situation of indigenous territories and the threats they are facing.</strong></p></div>' +
+            '<div id="waipt"><p style="font-weight: bold; font-size: 18px;">World Atlas of Indigenous Peoples\' Territories (WAIPT)</p>' +
+            '<p><strong>Established: </strong>2013</p>' +
+            '<p><strong>Headquarters: </strong>Paris, France</p>' +
+            '<p><strong>Mission: </strong>To create and maintain a global collaborative database of geographic information related to indigenous lands, giving higher visibility to indigenous peoples and organizations, thus encouraging greater awareness of indigenous presence and territorial issues.</p>' +
+            '<p><strong>Interests: </strong>WAIPT is a collaborative project between Centre National de la Recherche Scientifique (CNRS), Survival International (France), and the Sorbonne Nouvelle University, Paris III, with the support of the Ile-de-France region. WAIPT aims to gather and analyse geographic information regarding indigenous lands and resources in order to present a global depiction of the political situation of indigenous territories and the threats they are facing.</p></div>' +
             '<a target="_blank" href="http://www.rightsandresources.org/"><img class="aboutImageLeft" src="css/images/rightsLogo.jpg"></a>' +
-            '<div id="rri"><p style="font-weight: bold;">Rights and Resource Initiative (RRI)</p>' +
-            '<p>Established: <strong>2006</strong></p>' +
-            '<p>Headquarters: <strong>Washington DC, USA</strong></p>' +
-            '<p>Mission: <strong>To support local communities’ and Indigenous Peoples’ struggles against poverty and marginalization by promoting greater global commitment and action towards policy, market and legal reforms that secure their rights to own, control and benefit from natural resources, especially land and forests.</strong></p>' +
-            '<p>Interests: <strong>RRI works together with community organizations, civil society, governments, international institutions, and the private sector to promote and accelerate global efforts to improve local livelihoods, reform forest tenure and governance, combat poverty, mitigate the effects of climate change, and deliver sustainable development.</strong></p></div>' +
+            '<div id="rri"><p style="font-weight: bold; font-size: 18px;">Rights and Resource Initiative (RRI)</p>' +
+            '<p><strong>Established: </strong>2006</p>' +
+            '<p><strong>Headquarters: </strong>Washington DC, USA</p>' +
+            '<p><strong>Mission: </strong>To support local communities’ and Indigenous Peoples’ struggles against poverty and marginalization by promoting greater global commitment and action towards policy, market and legal reforms that secure their rights to own, control and benefit from natural resources, especially land and forests.</p>' +
+            '<p><strong>Interests: </strong>RRI works together with community organizations, civil society, governments, international institutions, and the private sector to promote and accelerate global efforts to improve local livelihoods, reform forest tenure and governance, combat poverty, mitigate the effects of climate change, and deliver sustainable development.</p></div>' +
             '<a target="_blank" href="http://www.forestpeoples.org/"><img style="margin-top: 300px;" class="aboutImageLeft" src="css/images/forestPeoplesLogo.gif"></a>' +
-            '<div id="fpp"><p style="font-weight: bold;">Forest Peoples Program (FPP)</p>' +
-            '<p>Established: <strong>1990</strong></p>' +
-            '<p>Headquarters: <strong>Moreton in Marsh, UK</strong></p>' +
-            '<p>Mission: <strong>To support the rights of peoples who live in forests and depend on them for their livelihoods. FPP works to create political space for forest peoples to secure their rights, control their lands and decide their own futures.</strong></p>' +
-            '<p>Interests: <strong>FPP advocates an alternative vision of how forests should be managed and controlled, based on respect for the rights of the peoples who know them best. FPP works with forest peoples in South America, Africa, and Asia, to help them secure their rights, build up their own organizations and negotiate with governments and companies as to how economic development and conservation are best achieved on their lands.</strong></p></div>' +
+            '<div id="fpp"><p style="font-weight: bold; font-size: 18px;">Forest Peoples Program (FPP)</p>' +
+            '<p><strong>Established: </strong>1990</p>' +
+            '<p><strong>Headquarters: </strong>Moreton in Marsh, UK</p>' +
+            '<p><strong>Mission: </strong>To support the rights of peoples who live in forests and depend on them for their livelihoods. FPP works to create political space for forest peoples to secure their rights, control their lands and decide their own futures.</p>' +
+            '<p><strong>Interests: </strong>FPP advocates an alternative vision of how forests should be managed and controlled, based on respect for the rights of the peoples who know them best. FPP works with forest peoples in South America, Africa, and Asia, to help them secure their rights, build up their own organizations and negotiate with governments and companies as to how economic development and conservation are best achieved on their lands.</p></div>' +
             '<a target="_blank" href="http://www.landcoalition.org/"><img class="aboutImageLeft" src="css/images/landCOLogo.png"></a>' +
-            '<div id="ilc"><p style="font-weight: bold;">International Land Coalition (ILC)</p>' +
-            '<p>Established: <strong>2003</strong></p>' +
-            '<p>Headquarters: <strong>Rome, Italy</strong></p>' +
-            '<p>Mission: <strong>ILC is a coalition of 152 organizations representing 56 countries working together to promote secure and equitable access to land for rural people, mainly through capacity building, knowledge sharing and advocacy.</strong></p>' +
-            '<p>Interests: <strong>The shared vision of ILC’s members is that secure and equitable access to land, and control over land, reduce poverty and contribute to identity, dignity, and inclusion. ILC strives to overcome any practices in its operations or those of its members that perpetuate the marginalization of any section of society, and in particular of women.</strong></p></div>' +
+            '<div id="ilc"><p style="font-weight: bold; font-size: 18px;">International Land Coalition (ILC)</p>' +
+            '<p><strong>Established: </strong>2003</p>' +
+            '<p><strong>Headquarters: </strong>Rome, Italy</p>' +
+            '<p><strong>Mission: </strong>ILC is a coalition of 152 organizations representing 56 countries working together to promote secure and equitable access to land for rural people, mainly through capacity building, knowledge sharing and advocacy.</p>' +
+            '<p><strong>Interests: </strong>The shared vision of ILC’s members is that secure and equitable access to land, and control over land, reduce poverty and contribute to identity, dignity, and inclusion. ILC strives to overcome any practices in its operations or those of its members that perpetuate the marginalization of any section of society, and in particular of women.</p></div>' +
         // '<img class="aboutImageLeft" src="css/images/rainUKLogo.png">' +
         '<a target="_blank" href="http://www.rainforestfoundationuk.org/"><img class="aboutImageLeft" id="rainForestUKLogo"></a>' +
-            '<div id="rfuk"><p style="font-weight: bold;">Rainforest Foundation UK (RFUK)</p>' +
-            '<p>Established: <strong>1989</strong></p>' +
-            '<p>Headquarters: <strong>London, UK</strong></p>' +
-            '<p>Mission: <strong>To support indigenous peoples and traditional populations of the world’s rainforest in their efforts to protect their environment and fulfil their rights to land, life, and livelihood by assisting them with: 1) Securing and controlling the natural resources necessary for their long term well-being and managing these resources in ways which do not harm their environment, violate their culture or compromise their future; 2) Developing means to protect their individual and collective rights and obtain, shape and control basic services from the state.</strong></p>' +
-            '<p>Interests: <strong>RFUK promotes the establishment of community rights over rainforest lands, tackling the root of the problems related to deforestation and paving the way for local people to benefit fairly from the use and protection of forest resources.</strong></p></div>' +
+            '<div id="rfuk"><p style="font-weight: bold; font-size: 18px;">Rainforest Foundation UK (RFUK)</p>' +
+            '<p><strong>Established: </strong>1989</p>' +
+            '<p><strong>Headquarters: </strong>London, UK</p>' +
+            '<p><strong>Mission: </strong>To support indigenous peoples and traditional populations of the world’s rainforest in their efforts to protect their environment and fulfil their rights to land, life, and livelihood by assisting them with: 1) Securing and controlling the natural resources necessary for their long term well-being and managing these resources in ways which do not harm their environment, violate their culture or compromise their future; 2) Developing means to protect their individual and collective rights and obtain, shape and control basic services from the state.</p>' +
+            '<p><strong>Interests: </strong>RFUK promotes the establishment of community rights over rainforest lands, tackling the root of the problems related to deforestation and paving the way for local people to benefit fairly from the use and protection of forest resources.</p></div>' +
             '<a target="_blank" href="http://fes.org.in/"><img style="margin-top: 475px;" class="aboutImageLeft" src="css/images/fesLogo.gif"></a>' +
-            '<div id="fes"><p style="font-weight: bold;">Foundation for Ecological Security (FES)</p>' +
-            '<p>Established: <strong>2001</strong></p>' +
-            '<p>Headquarters: <strong>Gajurat, India</strong></p>' +
-            '<p>Mission: <strong>As ‘ecological security’ is the foundation of sustainable and equitable development, FES is committed to strengthening, reviving or restoring, where necessary, the process of ecological succession and the conservation of land, forest and water resources in the country.</strong></p>' +
-            '<p>Interests: <strong>FES presently works with 5,900 village institutions in 31 districts across 8 states, and assists the village communities in protecting more than 637,000 hectares of common lands including revenue wastelands, degraded forest lands and Panchayat grazing lands (Charagah lands). FES supports Panchayats and their subcommittees, Village Forest Committees, Gramya Jungle Committees, Water Users Associations and Watershed Committees in order to improve the governance of natural resources. </strong></p></div>' +
+            '<div id="fes"><p style="font-weight: bold; font-size: 18px;">Foundation for Ecological Security (FES)</p>' +
+            '<p><strong>Established: </strong>2001</p>' +
+            '<p><strong>Headquarters: </strong>Gajurat, India</p>' +
+            '<p><strong>Mission: </strong>As ‘ecological security’ is the foundation of sustainable and equitable development, FES is committed to strengthening, reviving or restoring, where necessary, the process of ecological succession and the conservation of land, forest and water resources in the country.</p>' +
+            '<p><strong>Interests: </strong>FES presently works with 5,900 village institutions in 31 districts across 8 states, and assists the village communities in protecting more than 637,000 hectares of common lands including revenue wastelands, degraded forest lands and Panchayat grazing lands (Charagah lands). FES supports Panchayats and their subcommittees, Village Forest Committees, Gramya Jungle Committees, Water Users Associations and Watershed Committees in order to improve the governance of natural resources. </p></div>' +
             '<a target="_blank" href="http://www.pafid.org.ph/"><img style="margin-top: 475px;" class="aboutImageLeft" src="css/images/pafidLogo.png"></a>' +
-            '<div id="pafid"><p style="font-weight: bold;">Philippine Association for Intercultural Development, Inc. (PAFID)</p>' +
-            '<p>Established: <strong>1967</strong></p>' +
-            '<p>Headquarters: <strong>Quezon City, Philippines</strong></p>' +
-            '<p>Mission: <strong>An association of people interested in the problems of cultural minority groups.</strong></p>' +
-            '<p>Interests: <strong>PAFID is engaged in the development of indigenous social organizations, management of ancestral domains, community-based natural resources management planning, community mapping, agro-forestry, technical services, policy advocacy and more.</strong></p></div>' +
+            '<div id="pafid"><p style="font-weight: bold; font-size: 18px;">Philippine Association for Intercultural Development, Inc. (PAFID)</p>' +
+            '<p><strong>Established: </strong>1967</p>' +
+            '<p><strong>Headquarters: </strong>Quezon City, Philippines</p>' +
+            '<p><strong>Mission: </strong>An association of people interested in the problems of cultural minority groups.</p>' +
+            '<p><strong>Interests: </strong>PAFID is engaged in the development of indigenous social organizations, management of ancestral domains, community-based natural resources management planning, community mapping, agro-forestry, technical services, policy advocacy and more.</p></div>' +
 
         '<a target="_blank" href="http://www.aman.or.id/"><img style="margin-top: 350px;" class="aboutImageLeft" src="css/images/amanLogo.png"></a>' +
-            '<div id="aman"><p style="font-weight: bold;">Aliansi Masyarakat Adat Nusantara (AMAN)</p>' +
-            '<p>Established: <strong>1999</strong></p>' +
-            '<p>Headquarters: <strong>Jakarta, Indonesia</strong></p>' +
-            '<p>Mission: <strong>Realization of justice and prosperity in indigenous people’s lives; Political sovereignty, economic independence, and cultural dignity for indigenous peoples.</strong></p>' +
-            '<p>Interests: <strong>AMAN is an independent organization of indigenous peoples on the basis of membership are indigenous communities that agree to and uphold the principles, vision, mission and goal lines struggle as contained in the decisions of the Congress of the indigenous peoples and continuously engage actively fight enforcement of customary rights and the sovereignty of indigenous peoples as a whole.</strong></p></div>' +
+            '<div id="aman"><p style="font-weight: bold; font-size: 18px;">Aliansi Masyarakat Adat Nusantara (AMAN)</p>' +
+            '<p><strong>Established: </strong>1999</p>' +
+            '<p><strong>Headquarters: </strong>Jakarta, Indonesia</p>' +
+            '<p><strong>Mission: </strong>Realization of justice and prosperity in indigenous people’s lives; Political sovereignty, economic independence, and cultural dignity for indigenous peoples.</p>' +
+            '<p><strong>Interests: </strong>AMAN is an independent organization of indigenous peoples on the basis of membership are indigenous communities that agree to and uphold the principles, vision, mission and goal lines struggle as contained in the decisions of the Congress of the indigenous peoples and continuously engage actively fight enforcement of customary rights and the sovereignty of indigenous peoples as a whole.</p></div>' +
             '<p style="font-weight: bold;">Liz Alden Wily</p>' +
             '<p style="font-style: italic;">independent land tenure specialist</p>'
 

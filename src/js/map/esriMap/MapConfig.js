@@ -1,6 +1,7 @@
 define([], function() {
 
     var indigenousLandsUrl = 'http://gis-stage.wri.org/arcgis/rest/services/CommunityLands/CommunityLands/MapServer';
+    var indigenousLandsInfo = "So much text about this layer";
 
     var MapConfig = {
 
@@ -17,7 +18,7 @@ define([], function() {
                 url: indigenousLandsUrl,
                 type: 'dynamic',
                 // Not all the layers are present in the tree, when they are, include 0 - 9
-                defaultLayers: [2, 4, 5, 7, 8, 9], //[0,1,2,3,4,5,6,7,8,9]
+                defaultLayers: [0, 1, 2, 3], //[0,1,2,3,4,5,6,7,8,9]
                 visible: true
             },
             'CustomFeatures': {
@@ -30,22 +31,6 @@ define([], function() {
 
         geometryServiceURL: "http://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer",
 
-        chart: {
-            id: 'graphNode',
-            title: 'Analysis Results',
-            suitable: {
-                color: '#461D7C',
-                name: 'Officially Recognized',
-                id: 'donut-Suitable'
-            },
-            unsuitable: {
-                color: '#FDD023',
-                name: 'Not Officially Recognized',
-                id: 'donut-Unsuitable'
-            } //,
-            // childrenLabels: ['HP/HPT', 'HPK', 'APL'],
-            // childrenColors: ['#74C476', '#E69800', '#FFFFBE']
-        },
 
         // If adding content to the tree, the ID must be unique and present, and the label must be present
         // Other Options
@@ -57,6 +42,7 @@ define([], function() {
             label: 'Indigenous Lands (self recognized)',
             id: 'indigenousLands',
             checked: true,
+            info: indigenousLandsInfo,
             children: [{
                 label: 'Officially recognized (by law or decree)',
                 id: 'indigenousOfficial',
@@ -112,15 +98,22 @@ define([], function() {
             }]
         }],
 
+        // layerMapping: {
+        //     'indigenousLands': [2],
+        //     'indigenousOfficial': [4],
+        //     'indigenousUnofficial': [5],
+        //     'indigenousFormalTitle': [7],
+        //     'indigenousInProcess': [8],
+        //     'indigenousLandClaim': [9]
+        // }
         layerMapping: {
-            'indigenousLands': [2],
-            'indigenousOfficial': [4],
-            'indigenousUnofficial': [5],
-            'indigenousFormalTitle': [7],
-            'indigenousInProcess': [8],
-            'indigenousLandClaim': [9]
+            'indigenousLands': [0],
+            'indigenousOfficial': [1, 2],
+            'indigenousUnofficial': [3],
+            'indigenousFormalTitle': [1],
+            'indigenousInProcess': [2],
+            'indigenousLandClaim': [3]
         }
-
     };
 
     return MapConfig;

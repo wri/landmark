@@ -215,6 +215,7 @@ define([
                     brApp.map.infoWindow.resize(270);
                     $(".titlePane").removeClass("analysis-header");
                     brApp.map.infoWindow.show(mapPoint);
+                    $(".esriPopup .titleButton.close").html("&#10005;");
                 }
             });
 
@@ -263,9 +264,8 @@ define([
                 self = this;
 
             arrayUtils.forEach(featureObjects, function(item) {
-                // if (item.layerId === 2) {
                 template = new InfoTemplate(item.value,
-                    // "<div class='popup-header'>Layer Name</div>" + item.layerName +
+                    "<div class='popup-header'>Layer Name</div>" + item.layerName + " - " + item.layerId +
                     "<div class='odd-row'><div class='popup-header'>Official Recognition</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
                     "<div class='popup-header'>Status</div>" + item.feature.attributes.Ofcl_Rec +
                     "<div class='odd-row'><div class='popup-header'>Category</div>" + item.feature.attributes.Category + '</div>' +
@@ -276,6 +276,15 @@ define([
                     "<div class='popup-header'>Data Source</div>" + item.feature.attributes.Data_Src +
                     "<div class='popup-last'>Last Updated: " + item.feature.attributes.Last_Updt + '</div> '
                 );
+
+                if (item.layerId === 1) {
+                    template.title = "<img style='margin-bottom: 3px;' src='css/images/formalDocIcon.png'> " + template.title;
+                } else if (item.layerId === 2) {
+                    template.title = "<img style='margin-bottom: 3px;' src='css/images/tiltingIcon.png'> " + template.title;
+                } else if (item.layerId === 3) {
+                    template.title = "<img style='margin-bottom: 3px;' src='css/images/formalLandIcon.png'> " + template.title;
+                }
+                console.log(item.layerId);
                 item.feature.setInfoTemplate(template);
                 features.push(item.feature);
             });
@@ -544,6 +553,10 @@ define([
 
             recognziedPercent = (recognzied / total) * 100;
             notRecognizedPercent = (notRecognized / total) * 100;
+
+            Highcharts.setOptions({
+                colors: ['#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
+            });
 
             $('#resultsPie').highcharts({
                 chart: {

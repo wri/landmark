@@ -63,11 +63,12 @@ label
 	border-bottom 1px solid $mainBorder
 	padding-right 5px
 	text-align left
+	height 30px
 	
 #legend-toggle
 	width 218px
 	color white
-	background-color #06457b
+	background-color #003366
 	
 .legend-title
 	border-radius-top(3px)
@@ -207,7 +208,7 @@ label
 .popup-header
 	font-weight bold
 	padding-top 10px
-	color #06457b
+	color #003366
 
 .odd-row
 	background-color #F0EFF4
@@ -216,12 +217,21 @@ label
 	padding-top 10px
 	font-size 10px
 	
+.esriPopup .titleButton.close
+	background none
+	top 10px
+	right 15px !important
+	font-size 22px
+	
+.esriPopup .titleButton.maximize
+	display none
+
 .esriPopup .titlePane
 	padding 10px
 	-webkit-border-radius 0px 0px 0px 0px !important
 	border-bottom 1px solid black
 	font-size 14px
-	background-color #06457b !important
+	background-color #003366 !important
 		
 .esriPopup .contentPane
 	max-height none !important
@@ -230,6 +240,17 @@ label
 .tree-widget-container
 	left 20px
 	top 20px
+	
+.tree-node-info
+	background url(images/info-icon.png) no-repeat #fff
+	float right
+	background-size 20px 20px
+	height 20px
+	width 20px
+	margin-top -2px
+	margin-left -48px
+	color grey
+	cursor pointer
 	
 .tree-widget-title-pane	
 	border 1px solid $mainBorder
@@ -241,9 +262,12 @@ label
 .tree-width
 	width 280px
 	
+#tree-title
+	background-color #036
+	
 .tree-title-text
-	border-right 1px solid $mainBorder
 	display inline-block
+	color white
 	
 .tree-title-text span
 	padding 0 12px
@@ -251,6 +275,10 @@ label
 .tree-container-toggle
 	display inline-block
 	padding 0 12px
+	margin-left -34px
+	border-left 1px solid $mainBorder
+	color white
+	background-color #6699CC
 
 .tree-content
 	background-color white
@@ -316,6 +344,17 @@ label
 	padding-top 12px
 	padding-bottom 12px
 	width 80px
+	
+#legend-toggle-icon
+	//background url(images/legendToggle.png) no-repeat #fff
+	// height 25px
+	// width 25px
+	position relative
+	// background-color yellow
+	top -30px
+	left 215px
+	font-size 24px
+	cursor pointer
 	
 .titlePane.analysis-header
 	font-size 21px !important

@@ -1,7 +1,7 @@
 @import "config"
 
 body
-	font-family Arial
+	font-family Arial Narrow
 
 #aboutTitle
 	text-align center
@@ -113,8 +113,14 @@ body
 
 .active
 	background white !important
-	border-bottom 4px solid #06457B
+	border-bottom 4px solid #003366
 	border-right none
 	
-
+@media (max-width: 1500px)
+	.accordion-Controls
+		margin-left 0px
+		
+@media (max-width: 1000px)
+	.about-Accordion
+		width auto
 	
