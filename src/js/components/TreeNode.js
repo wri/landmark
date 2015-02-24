@@ -72,6 +72,7 @@ define([
 		         ), 
 		        React.createElement("span", {className: "tree-node-label", onClick: this.handleClick}, node.label)
 		        
+		        
 		      ), 
 	        childNodes
 	      )

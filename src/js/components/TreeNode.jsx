@@ -72,6 +72,7 @@ define([
 		         />
 		        <span className='tree-node-label' onClick={this.handleClick}>{node.label}</span>
 		        
+		        
 		      </section>
 	        {childNodes}
 	      </li>

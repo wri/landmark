@@ -273,7 +273,7 @@ define([
                     return;
                 }
                 template = new InfoTemplate(item.value,
-                    "<div class='even-row'><div class='popup-header'>Layer Name</div>" + item.layerName + " - " + item.layerId + '</div>' +
+                    // "<div class='even-row'><div class='popup-header'>Layer Name</div>" + item.layerName + " - " + item.layerId + '</div>' +
                     "<div class='odd-row'><div class='popup-header'>Official Recognition</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
                     "<div class='even-row'><div class='popup-header'>Status</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
                     "<div class='odd-row'><div class='popup-header'>Category</div>" + item.feature.attributes.Category + '</div>' +
@@ -373,7 +373,7 @@ define([
                 arrayUtils.forEach(value.features, function(feature) {
                     //if (distinct.indexOf(1) > -1 || distinct.indexOf(2) > -1) { //no 0's
                     if (feature.layerId === 1 || feature.layerId === 2) {
-                        compositeRecognized += parseInt(feature.feature.attributes.Area_GIS);
+                        compositeRecognized += parseInt(feature.feature.attributes.Area_Ofcl);
                         poly = new Polygon();
                         poly.addRing(feature.feature.geometry.rings[0]);
                         polys.push(poly);
@@ -388,7 +388,7 @@ define([
                     //}
                     //if (distinct.indexOf(3) > -1) { //no 5's
                     if (feature.layerId === 3) {
-                        compositeNotRecognized += parseInt(feature.feature.attributes.Area_GIS);
+                        compositeNotRecognized += parseInt(feature.feature.attributes.Area_Ofcl);
                     }
 
                     //} else {

@@ -98,14 +98,6 @@ define([], function() {
             }]
         }],
 
-        // layerMapping: {
-        //     'indigenousLands': [2],
-        //     'indigenousOfficial': [4],
-        //     'indigenousUnofficial': [5],
-        //     'indigenousFormalTitle': [7],
-        //     'indigenousInProcess': [8],
-        //     'indigenousLandClaim': [9]
-        // }
         layerMapping: {
             'indigenousLands': [1, 2, 3, 4],
             'indigenousOfficial': [1, 2],
@@ -114,6 +106,14 @@ define([], function() {
             'indigenousInProcess': [2],
             'indigenousLandClaim': [3]
         }
+        // layerMappingCommunityLans: { //Add these arrays to layerMapping above
+        //     'communityLands': [6, 7, 8, 9],
+        //     'communityOfficial': [6, 7],
+        //     'communityUnofficial': [8, 9],
+        //     'communityFormalTitle': [6],
+        //     'communityInProcess': [7],
+        //     'communityLandClaim': [8]
+        // }
     };
 
     return MapConfig;
