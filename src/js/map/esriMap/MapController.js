@@ -371,30 +371,31 @@ define([
                     unique[value.features[i].layerId] = 0;
                 }
                 arrayUtils.forEach(value.features, function(feature) {
-                    if (distinct.indexOf(7) > -1 || distinct.indexOf(8) > -1) { //no 4's
-                        if (feature.layerId === 7 | feature.layerId === 8) {
-                            compositeRecognized += parseInt(feature.feature.attributes.Area_GIS);
-                            poly = new Polygon();
-                            poly.addRing(feature.feature.geometry.rings[0]);
-                            polys.push(poly);
-                        }
-                    } else {
-                        if (feature.layerId === 4) {
-                            compositeRecognized += parseInt(feature.feature.attributes.Area_GIS);
-                            poly = new Polygon();
-                            poly.addRing(feature.feature.geometry.rings[0]);
-                            polys.push(poly);
-                        }
+                    //if (distinct.indexOf(1) > -1 || distinct.indexOf(2) > -1) { //no 0's
+                    if (feature.layerId === 1 || feature.layerId === 2) {
+                        compositeRecognized += parseInt(feature.feature.attributes.Area_GIS);
+                        poly = new Polygon();
+                        poly.addRing(feature.feature.geometry.rings[0]);
+                        polys.push(poly);
                     }
-                    if (distinct.indexOf(9) > -1) { //no 5's
-                        if (feature.layerId === 9) {
-                            compositeNotRecognized += parseInt(feature.feature.attributes.Area_GIS);
-                        }
-                    } else {
-                        if (feature.layerId === 5) {
-                            compositeNotRecognized += parseInt(feature.feature.attributes.Area_GIS);
-                        }
+                    //} else {
+                    // if (feature.layerId === 0) {
+                    //     compositeRecognized += parseInt(feature.feature.attributes.Area_GIS);
+                    //     poly = new Polygon();
+                    //     poly.addRing(feature.feature.geometry.rings[0]);
+                    //     polys.push(poly);
+                    // }
+                    //}
+                    //if (distinct.indexOf(3) > -1) { //no 5's
+                    if (feature.layerId === 3) {
+                        compositeNotRecognized += parseInt(feature.feature.attributes.Area_GIS);
                     }
+
+                    //} else {
+                    // if (feature.layerId === 5) {
+                    //     compositeNotRecognized += parseInt(feature.feature.attributes.Area_GIS);
+                    // }
+                    //}
                 });
                 console.log(compositeRecognized);
                 console.log(compositeNotRecognized); //TODO: Also calculate new area now; probably one more geometry service call for the union & areaCompute
@@ -563,7 +564,7 @@ define([
             notRecognizedPercent = (notRecognized / total) * 100;
 
             Highcharts.setOptions({
-                colors: ['#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
+                colors: ['#A6050E', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
             });
 
             $('#resultsPie').highcharts({
