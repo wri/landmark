@@ -22,38 +22,44 @@ html
             div.app-body
                 div#backgroundImage
                 div#homeText
-                    div(style='font-size:14px;')
+                    div(style='font-size:16px;')
                         p.launch-dialog-content
-                            | The 
-                            i Global Platform of Indigenous and Community Lands (Global Platform)
-                            |  is a dynamic, online mapping tool that provides critical information on collective land and natural resource rights around the world. The 
-                            i Global Platform
-                            |  supports local livelihoods and well-being by increasing the visibility of indigenous and community lands, and presenting crucial information on the state of land rights. It provides indigenous peoples and communities with a way to show the world the land and resources that they hold and use, and to be proactive in responding to the growing threats they face.
-                          p
-                            | The 
-                            i Instituto del Bien Com&uacute;n
-                            |  (IBC) and the World Resources Institute (WRI) have co-led the development of the 
-                            i Global Platform
-                            |  with guidance from a Steering Group that includes some of the world&rsquo;s leading land rights organizations (see 
-                            i About
-                            |  page).  The 
-                            i Global Platform
-                            |  presents national and local level information, providing both an overview of collective land rights within each country and detailed information on the location and legal status of specific indigenous and communities lands.
-                          p
-                            | We need your help to ensure that the 
-                            i Global Platform
-                            |  is current and comprehensive. The status of collective land rights and the state of indigenous and community lands can change when national laws and regulations are reformed, when communities map and demarcate their lands, and when indigenous peoples register their lands for formal recognition.
-                          p
-                            | We call on individuals and organizations with first-hand knowledge of indigenous and community lands to help complete the 
-                            i Global Platform
-                            | .  Many representatives of indigenous peoples and communities, civil society organizations, governments and researchers from around the world have contributed to the current database, but there remain many gaps. We encourage all users to explore the 
-                            i Global Platform
-                            | , provide feedback on how to improve the tool, and, for those who hold data, work with us to add your information on indigenous and community lands (
-                            i Contact Us).
+                            div(style='font-size:14px;')
+                                p.launch-dialog-content
+                                    span.introTextTitle The Global Platform of Indigenous and Community Lands
+                                    |  is a dynamic, online mapping tool that provides critical information on collective land and natural resource rights around the world. The 
+                                    i Global Platform
+                                    |  supports local livelihoods and well-being by increasing the visibility of indigenous and community lands, and presenting crucial information on the state of land rights. It provides indigenous peoples and communities with a way to show the world the land and resources that they hold and use, and to be proactive in responding to the growing threats they face.
+                                  p
+                                    | The 
+                                    i Instituto del Bien Com&uacute;n
+                                    |  (IBC) and the World Resources Institute (WRI) have co-led the development of the 
+                                    i Global Platform
+                                    |  with guidance from a Steering Group that includes some of the world&rsquo;s leading land rights organizations (see 
+                                    i About
+                                    |  page).  The 
+                                    i Global Platform
+                                    |  presents national and local level information, providing both an overview of collective land rights within each country and detailed information on the location and legal status of specific indigenous and communities lands.
+                                  p
+                                    | We need your help to ensure that the 
+                                    i Global Platform
+                                    |  is current and comprehensive. The status of collective land rights and the state of indigenous and community lands can change when national laws and regulations are reformed, when communities map and demarcate their lands, and when indigenous peoples register their lands for formal recognition.
+                                  p
+                                    | We call on individuals and organizations with first-hand knowledge of indigenous and community lands to help complete the 
+                                    i Global Platform
+                                    | .  Many representatives of indigenous peoples and communities, civil society organizations, governments and researchers from around the world have contributed to the current database, but there remain many gaps. We encourage all users to explore the 
+                                    i Global Platform
+                                    | , provide feedback on how to improve the tool, and, for those who hold data, work with us to add your information on indigenous and community lands (
+                                    i Contact Us).
+                    button#launch-map.launch-map-button Launch Interactive Map
+
         script(src='https://code.jquery.com/jquery-2.1.3.min.js')
         script(src='libs/foundation.min.js')
         script.
             $(document).foundation();
+            $('#launch-map').click(function() {
+                location.href = 'map.html';
+            });
             // Thanks Foundation, Hack because the only foundation component
             // does not work on mobile unless I do this, but it works on the map page
             $('.toggle-topbar a').click(function(){});
