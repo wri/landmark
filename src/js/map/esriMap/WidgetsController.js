@@ -260,27 +260,27 @@ define([
          */
         showWelcomeDialog: function() {
             brApp.debug('WidgetsController >>> showWelcomeDialog');
-            var dialogContent = AppConfig.welcomeDialogContent,
-                id = 'launch-dialog',
-                launchDialog;
+            // var dialogContent = AppConfig.welcomeDialogContent,
+            //     id = 'launch-dialog',
+            //     launchDialog;
 
-            // Add a Close button to the dialog
-            if (!registry.byId(id)) {
-                dialogContent += "<button id='launch-map' class='launch-map-button'>Launch Interactive Map</button>";
-                launchDialog = new Dialog({
-                    id: id,
-                    content: dialogContent,
-                    style: "width: 90%;max-width: 760px;"
-                });
+            // // Add a Close button to the dialog
+            // if (!registry.byId(id)) {
+            //     dialogContent += "<button id='launch-map' class='launch-map-button'>Launch Interactive Map</button>";
+            //     launchDialog = new Dialog({
+            //         id: id,
+            //         content: dialogContent,
+            //         style: "width: 90%;max-width: 760px;"
+            //     });
 
-                launchDialog.show();
-                on(document.getElementById('launch-map'), 'click', function() {
-                    registry.byId(id).hide();
-                });
+            //     launchDialog.show();
+            //     on(document.getElementById('launch-map'), 'click', function() {
+            //         registry.byId(id).hide();
+            //     });
 
-            } else {
-                registry.byId(id).show();
-            }
+            // } else {
+            //     registry.byId(id).show();
+            // }
 
         },
 

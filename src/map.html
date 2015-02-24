@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Community Rights</title>
+    <meta name="author" content="BlueRaster, WRI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
+    <style>html,body,.root{height:100%;width:100%;padding:0;margin:0;overflow:hidden}	</style>
+    <link rel="stylesheet" href="libs/foundation.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/map.css">
+    <script async="" type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53ab205a21ddceee&amp;async=1"></script>
+    <script type="text/javascript">
+      var addthis_share = {
+      	url_transforms: {
+      		shorten: {
+      			twitter: 'bitly',
+      			facebook: 'bitly'
+      		}
+      	},
+      	shorteners: {
+      		bitly: {}
+      	}
+      }; //end addThis_share
+    </script><!--[if lt IE 9]>
+    <script src="libs/es5-shim.min.js"></script>
+    <script src="libs/es5-sham.min.js"></script>
+    <script src="libs/html5shiv.js"></script><![endif]-->
+  </head>
+  <body class="tundra crl">
+    <div class="root">
+      <header class="app-header">
+        <div style="position: relative;">
+          <div class="wri-header-attribution">
+            <div class="inner">A partnership covened by the Instituto del Bien Comun and the World Resources Institute in collaboration with numerous other organizations.</div>
+          </div>
+          <nav role="navigation" data-topbar class="top-bar">
+            <ul class="title-area">
+              <li class="name">
+                <h1><a>Global Platform of Indigenous and Community Lands</a></h1>
+              </li>
+              <li class="toggle-topbar menu-icon"><a><span></span></a></li>
+            </ul>
+            <section class="top-bar-section">
+              <ul class="right">
+                <li><a id="home-page-link" href="./index.html">Home</a></li>
+                <li><a id="map-page-link" href="./map.html?intro=no">Map</a></li>
+                <li><a id="data-page-link" href="./data.html">Data</a></li>
+                <li><a id="about-page-link" href="./about.html">About</a></li>
+                <li><a id="contact-page-link" href="./contact.html">Contact Us</a></li>
+              </ul>
+            </section>
+          </nav>
+        </div>
+      </header>
+      <div class="app-body">
+        <div id="mobileMenu" class="mobile-menu">
+          <div id="menuControls" class="menu-controls"><span id="layersMenuButton" class="segmented-menu-button active">Layers</span><span id="legendMenuButton" class="segmented-menu-button">Legend</span><span id="toolsMenuButton" class="segmented-menu-button">Tools</span></div>
+          <div id="mobile-layers-content" class="mobile-menu-content mobile-layers-content active"></div>
+          <div id="mobile-legend-content" class="mobile-menu-content mobile-legend-content"></div>
+          <div id="mobile-tools-content" class="mobile-menu-content mobile-tools-content"></div>
+        </div>
+        <div id="brMap" class="brMap">
+          <div id="mobile-menu-toggle" class="map-component mobile-menu-toggle-button hideOnLoad pointer">&#9881;</div>
+          <div id="tree-widget-container" class="map-component tree-widget-container hideOnLoad">
+            <div id="tree-title-pane" class="tree-widget-title-pane"><span id="tree-title" class="tree-title-text tree-width"><span>Land Recognition Status</span></span><span id="tree-container-toggle" class="tree-container-toggle pointer">&minus;</span></div>
+            <div id="tree-content" class="tree-content tree-width active">
+              <div class="tree-data-section">
+                <div class="radio-button-container">
+                  <input type="radio" id="national-level-toggle" name="tree-data-toggle">
+                  <label for="national-level-toggle">National Level Data</label>
+                </div>
+                <div id="national-level-data-container" class="national-level-data-container hidden"></div>
+              </div>
+              <div class="tree-data-section">
+                <div class="radio-button-container">
+                  <input type="radio" id="community-level-toggle" name="tree-data-toggle" checked="checked">
+                  <label for="community-level-toggle">Community Level Data</label>
+                </div>
+                <div id="community-level-data-container" class="community-level-data-container">
+                  <div id="community-level-tree"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="geocoder-container" class="map-component geocoder-container hideOnLoad">
+            <div id="geocoder"></div>
+          </div>
+          <div id="data-completeness-container" class="map-component data-completeness-container hideOnLoad"><span class="data-completeness-toggle">
+              <input type="checkbox" value="complete" id="data-complete-checkbox"></span><span class="data-completeness-label">Show Data Completeness</span></div>
+          <div id="analysis-button" class="map-component analysis-button hideOnLoad pointer"><span class="analysis-button-label">Analysis</span></div>
+          <div id="locator-button" class="map-component button-widget locator-button pointer hideOnLoad">
+            <div id="location-widget" class="locate-icon"></div>
+          </div>
+          <div id="basemap-button" class="map-component button-widget basemap-button pointer hideOnLoad">
+            <div class="basemap-icon"></div>
+          </div>
+          <div class="map-component basemap-container hidden">
+            <div id="basemap-gallery"></div>
+          </div>
+          <div class="map-component basemap-connector connector hidden"></div>
+          <div id="legend-container" class="map-component legend-container hideOnLoad">
+            <div class="legend-title-pane"><span title="Legend" id="legend-toggle" class="legend-title pointer">Legend
+                <div id="legend-toggle-icon">-</div></span></div>
+            <div id="legend-content" class="legend-content active">
+              <div id="legend"></div>
+            </div>
+          </div>
+          <div id="share-button" class="map-component button-widget share-button pointer hideOnLoad">
+            <div class="share-icon"></div>
+          </div>
+          <div class="map-component share-container hidden">
+            <div id="share-widgets">
+              <div class="sharing_toolbox">
+                <div data-title="Global Forest Watch Commodities" class="addthis_sharing_toolbox"></div>
+                <div id="embedShare"></div>
+              </div>
+            </div>
+          </div>
+          <div class="map-component share-connector connector hidden"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hidden">
+      <div id="analysis-dialog" title="Select an area to analyze" data-dojo-type="dijit/Dialog">
+        <div id="analysis-content">
+          <div class="analysis-buttons">
+            <button id="draw-shape">&#9998; Draw Shape</button>
+            <button id="upload-shapefile">Upload File</button>
+          </div>
+          <div id="upload-form-content" class="hidden">
+            <hr>
+            <ul class="upload-instructions">
+              <li>Select a zip file(.zip) containing a shapefile(.shp,.dbf,.prj) from your local file system.</li>
+              <li>The shapefile must be in Geographic Coordinate System (WGS84).</li>
+              <li>The shapefile must be of POLYGON geometry type.</li>
+              <li>The shapefile must not exceed 1 Megabyte.</li>
+            </ul>
+            <form enctype="multipart/form-data" method="post" id="uploadForm" name="uploadForm">
+              <label>
+                <input type="file" name="file" id="shapefileUpload">
+              </label>
+              <input type="hidden" name="publishParameters" value="{}">
+              <input type="hidden" name="filetype" value="shapefile">
+              <input type="hidden" name="f" value="json">
+            </form>
+            <div id="uploadNameSelectContainer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="libs/foundation.min.js"></script>
+    <script src="js/map/dojoBootstrap.js"></script>
+    <script>$(document).foundation();</script>
+  </body>
+</html>

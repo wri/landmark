@@ -236,6 +236,9 @@ define([
             params.geometry = mapPoint;
             params.mapExtent = brApp.map.extent;
             params.layerIds = mapLayer.visibleLayers;
+            if (params.layerIds.indexOf(4) > -1) {
+                params.layerIds.splice(params.layerIds.indexOf(4), 1);
+            }
             params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
 
             identifyTask.execute(params, function(features) {
@@ -259,11 +262,16 @@ define([
         setIndigenousTemplates: function(featureObjects) {
             brApp.debug('MapController >>> setIndigenousTemplates');
 
+
+
             var template,
                 features = [],
                 self = this;
 
             arrayUtils.forEach(featureObjects, function(item) {
+                if (item.layerId === 4) {
+                    return;
+                }
                 template = new InfoTemplate(item.value,
                     "<div class='even-row'><div class='popup-header'>Layer Name</div>" + item.layerName + " - " + item.layerId + '</div>' +
                     "<div class='odd-row'><div class='popup-header'>Official Recognition</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +

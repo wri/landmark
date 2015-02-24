@@ -107,9 +107,9 @@ define([], function() {
         //     'indigenousLandClaim': [9]
         // }
         layerMapping: {
-            'indigenousLands': [0],
+            'indigenousLands': [1, 2, 3, 4],
             'indigenousOfficial': [1, 2],
-            'indigenousUnofficial': [3],
+            'indigenousUnofficial': [3, 4],
             'indigenousFormalTitle': [1],
             'indigenousInProcess': [2],
             'indigenousLandClaim': [3]

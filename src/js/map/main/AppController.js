@@ -32,7 +32,7 @@ define([
          */
         overrideEvents: function() {
             brApp.debug('AppController >>> overrideEvents');
-            on(document.getElementById('home-page-link'), 'click', this.overrideNav);
+            //on(document.getElementById('home-page-link'), 'click', this.overrideNav);
             on(document.getElementById('map-page-link'), 'click', this.overrideNav);
             //TODO: Add event handler here to add underline to active page!
 
@@ -67,10 +67,9 @@ define([
             // Get a reference to the clicked element
             var target = evt.target ? evt.target : evt.srcElement;
             // If they clicked home, show launch dialog
-            if (target.id === 'home-page-link') {
-                console.log("home");
-                WidgetsController.showWelcomeDialog();
-            }
+            // if (target.id === 'map-page-link') {
+            //     WidgetsController.showWelcomeDialog();
+            // }
         },
 
         /**

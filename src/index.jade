@@ -1,67 +1,59 @@
 doctype html
 html
-	head
-		title Community Rights
-		meta(name='author', content='BlueRaster, WRI')
-		meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-		meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
-		meta(http-equiv='X-UA-Compatible', content='IE=7, IE=9, IE=10')
-		style.
-			html,body,.root{height:100%;width:100%;padding:0;margin:0;overflow:hidden}	
-		link(rel='stylesheet', href='libs/foundation.min.css')
-		link(rel='stylesheet', href='css/base.css')
-		link(rel='stylesheet', href='css/map.css')
-		script(async='', type='text/javascript', src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53ab205a21ddceee&async=1')
-		script(type='text/javascript').
-			var addthis_share = {
-				url_transforms: {
-					shorten: {
-						twitter: 'bitly',
-						facebook: 'bitly'
-					}
-				},
-				shorteners: {
-					bitly: {}
-				}
-			}; //end addThis_share
-		<!--[if lt IE 9]>
-		script(src='libs/es5-shim.min.js')
-		script(src='libs/es5-sham.min.js')
-		script(src='libs/html5shiv.js')
-		<![endif]-->
-	body.tundra.crl
-		div.root
-			include templates/header.jade
-			div.app-body
-				include templates/map.jade
-		div.hidden
-			div(id='analysis-dialog',title='Select an area to analyze',data-dojo-type='dijit/Dialog')
-				div(id='analysis-content')
-					div.analysis-buttons
-						button#draw-shape &#9998; Draw Shape
-						button#upload-shapefile Upload File
-					div(id='upload-form-content',class='hidden')
-						hr
-						ul.upload-instructions
-							li Select a zip file(.zip) containing a shapefile(.shp,.dbf,.prj) from your local file system.
-							li The shapefile must be in Geographic Coordinate System (WGS84).
-							li The shapefile must be of POLYGON geometry type.
-							li The shapefile must not exceed 1 Megabyte.
-						form(enctype='multipart/form-data',method='post',id='uploadForm',name='uploadForm')
-							label
-								input(type='file',name='file',id='shapefileUpload')
-							//- These Normally dont need to be included but this fails on first upload
-							//- because esri is too slow to add them in programmatically, possibly because
-							//- this is nested inside a dijit/Dialog
-							input(type='hidden',name='publishParameters',value='{}')
-							input(type='hidden',name='filetype',value='shapefile')
-							input(type='hidden',name='f',value='json')
-							//- End not normally needed inputs
-						div(id='uploadNameSelectContainer')
-		script(src='https://code.jquery.com/jquery-2.1.3.min.js')
-		script(src='http://code.highcharts.com/highcharts.js')
-		script(src='http://code.highcharts.com/modules/exporting.js')
-		script(src='libs/foundation.min.js')
-		script(src='js/map/dojoBootstrap.js')
-		script.
-			$(document).foundation();
+    head
+        title Community Rights
+        meta(name='author', content='BlueRaster, WRI')
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+        meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=7, IE=9, IE=10')
+        style.
+            html,body,.root{height:100%;width:100%;padding:0;margin:0;overflow:hidden;}
+        link(rel='stylesheet', href='libs/foundation.min.css')
+        link(rel='stylesheet', href='css/base.css')
+        link(rel='stylesheet', href='css/home.css')
+        <!--[if lt IE 9]>
+        script(src='libs/es5-shim.min.js')
+        script(src='libs/es5-sham.min.js')
+        script(src='libs/html5shiv.js')
+        <![endif]-->
+    body.tundra.crl
+        div.root
+            include templates/header.jade
+            div.app-body
+                div#backgroundImage
+                div#homeText
+                    div(style='font-size:14px;')
+                        p.launch-dialog-content
+                            | The 
+                            i Global Platform of Indigenous and Community Lands (Global Platform)
+                            |  is a dynamic, online mapping tool that provides critical information on collective land and natural resource rights around the world. The 
+                            i Global Platform
+                            |  supports local livelihoods and well-being by increasing the visibility of indigenous and community lands, and presenting crucial information on the state of land rights. It provides indigenous peoples and communities with a way to show the world the land and resources that they hold and use, and to be proactive in responding to the growing threats they face.
+                          p
+                            | The 
+                            i Instituto del Bien Com&uacute;n
+                            |  (IBC) and the World Resources Institute (WRI) have co-led the development of the 
+                            i Global Platform
+                            |  with guidance from a Steering Group that includes some of the world&rsquo;s leading land rights organizations (see 
+                            i About
+                            |  page).  The 
+                            i Global Platform
+                            |  presents national and local level information, providing both an overview of collective land rights within each country and detailed information on the location and legal status of specific indigenous and communities lands.
+                          p
+                            | We need your help to ensure that the 
+                            i Global Platform
+                            |  is current and comprehensive. The status of collective land rights and the state of indigenous and community lands can change when national laws and regulations are reformed, when communities map and demarcate their lands, and when indigenous peoples register their lands for formal recognition.
+                          p
+                            | We call on individuals and organizations with first-hand knowledge of indigenous and community lands to help complete the 
+                            i Global Platform
+                            | .  Many representatives of indigenous peoples and communities, civil society organizations, governments and researchers from around the world have contributed to the current database, but there remain many gaps. We encourage all users to explore the 
+                            i Global Platform
+                            | , provide feedback on how to improve the tool, and, for those who hold data, work with us to add your information on indigenous and community lands (
+                            i Contact Us).
+        script(src='https://code.jquery.com/jquery-2.1.3.min.js')
+        script(src='libs/foundation.min.js')
+        script.
+            $(document).foundation();
+            // Thanks Foundation, Hack because the only foundation component
+            // does not work on mobile unless I do this, but it works on the map page
+            $('.toggle-topbar a').click(function(){});
