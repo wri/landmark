@@ -68,10 +68,14 @@ gulp.task('copy-access', function() {
         .pipe(gulp.dest(config.copy.access.out));
 });
 
-gulp.task('optimize', ['optimize-map-page']);
+gulp.task('optimize', ['optimize-map-page', 'optimize-about-page']);
 
 gulp.task('optimize-map-page', function() {
     requirejs.optimize(config.optimizer.map.options, function(res) {});
+});
+
+gulp.task('optimize-about-page', function () {
+    requirejs.optimize(config.optimizer.about.options);
 });
 
 gulp.task('minify', ['minify-js', 'minify-images']);

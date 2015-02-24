@@ -55,6 +55,24 @@ module.exports = {
                 name: 'js/map/loader',
                 out: 'build/js/map/loader.js'
             }
+        },
+        about: {
+            options: {
+                baseUrl: 'src',
+                paths: {
+                    'dojo': 'empty:',
+                    'esri': 'empty:',
+                    'dijit': 'empty:',
+                    'dojox': 'empty:',
+                    'react': 'empty:',
+                    'js': 'js',
+                    'libs': 'libs',
+                    'about': 'js/about',
+                    'components': 'js/components'
+                },
+                name: 'js/about/aboutLoader',
+                out: 'build/js/about/aboutLoader.js'
+            }
         }
     }
 };
