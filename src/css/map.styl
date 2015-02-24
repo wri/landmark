@@ -25,11 +25,11 @@
 	top 0
 	
 body
-	font-family Arial
+	font-family Arial Narrow
 	color #131313
 
 label
-	font-family Arial
+	font-family Arial Narrow
 	color #131313
 	
 .map-component	
@@ -69,6 +69,8 @@ label
 	width 218px
 	color white
 	background-color #003366
+	font-family Arial
+	font-size 13px
 	
 .legend-title
 	border-radius-top(3px)
@@ -216,6 +218,33 @@ label
 .popup-last
 	padding-top 10px
 	font-size 10px
+	background-color rgb(226, 226, 226)
+	border-top 1px solid gray
+	padding-bottom 10px
+	margin-top 5px
+	padding-left 10px
+	
+#additionalInfo
+	float right
+	padding-right 10px
+	color #036
+	text-decoration underline
+	font-weight bold
+	cursor pointer
+
+.esriSimpleSlider
+	border-radius 0px !important
+	-webkit-border-radius 0px !important
+	color #69c !important
+
+.simpleGeocoder .esriGeocoder
+	border-radius 0px !important
+	-webkit-border-radius 0px !important
+	font-family Arial Narrow !important
+	
+.map-component
+	border-radius 0px !important
+	-webkit-border-radius 0px !important
 	
 .esriPopup .titleButton.close
 	background none
@@ -235,7 +264,13 @@ label
 		
 .esriPopup .contentPane
 	max-height none !important
-	padding 0px 6px 6px 10px
+	padding 10px 0px 0px 0px !important
+
+.odd-row, .even-row
+	margin-left 10px
+	
+.actionsPane
+	display none
 
 .tree-widget-container
 	left 20px
@@ -271,14 +306,17 @@ label
 	
 .tree-title-text span
 	padding 0 12px
+	font-size 14px
+	font-family Arial
 
 .tree-container-toggle
 	display inline-block
 	padding 0 12px
-	margin-left -34px
+	margin-left -33px
 	border-left 1px solid $mainBorder
 	color white
 	background-color #6699CC
+	padding-bottom 1px
 
 .tree-content
 	background-color white
@@ -301,6 +339,13 @@ label
 	height 32px
 	right 70px
 	top 20px
+	
+.simpleGeocoder .esriGeocoder input
+	font-family Arial
+
+.data-completeness-label, .analysis-button-label
+	font-size 13px
+	font-family Arial
 	
 .analysis-button-label
 .data-completeness-label
@@ -363,8 +408,7 @@ label
 	border-bottom none
 	
 .title
-	margin-top 10px
-	margin-bottom -10px
+	margin-bottom -5px
 	
 .highcharts-container
 	margin-top -20px

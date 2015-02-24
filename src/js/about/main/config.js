@@ -59,13 +59,13 @@ define([], function() {
             '<p><strong>Headquarters: </strong>Lima, Peru</p>' +
             '<p><strong>Mission: </strong>To work with rural communities in Peru for the care of common goods (water bodies, forests, fisheries, protected areas and communal lands), thus contributing to the welfare of these populations and of all Peruvians.</p>' +
             '<p><strong>Interests: </strong>IBC works across landscapes of the central and northern Andean Amazon, on projects related to territorial planning, governance of the commons, preservation of the environment, sustainable development, and respect for the rights and culture of indigenous and non-indigenous and scientific and local knowledge.</p></div>' +
-            '<a target="_blank" href="http://www.iheal.univ-paris3.fr/en/recherche/waipt-project"><img class="aboutImageLeft" src="css/images/amanLogo.png"></a>' +
+            '<a target="_blank" href="http://www.iheal.univ-paris3.fr/en/recherche/waipt-project"><img class="aboutImageLeft" src="css/images/waiptIcon.png"></a>' +
             '<div id="waipt"><p style="font-weight: bold; font-size: 18px;">World Atlas of Indigenous Peoples\' Territories (WAIPT)</p>' +
             '<p><strong>Established: </strong>2013</p>' +
             '<p><strong>Headquarters: </strong>Paris, France</p>' +
             '<p><strong>Mission: </strong>To create and maintain a global collaborative database of geographic information related to indigenous lands, giving higher visibility to indigenous peoples and organizations, thus encouraging greater awareness of indigenous presence and territorial issues.</p>' +
             '<p><strong>Interests: </strong>WAIPT is a collaborative project between Centre National de la Recherche Scientifique (CNRS), Survival International (France), and the Sorbonne Nouvelle University, Paris III, with the support of the Ile-de-France region. WAIPT aims to gather and analyse geographic information regarding indigenous lands and resources in order to present a global depiction of the political situation of indigenous territories and the threats they are facing.</p></div>' +
-            '<a target="_blank" href="http://www.rightsandresources.org/"><img class="aboutImageLeft" src="css/images/rightsLogo.jpg"></a>' +
+            '<a target="_blank" href="http://www.rightsandresources.org/"><img id="rightsMedia" class="aboutImageLeft" src="css/images/rightsLogo.jpg"></a>' +
             '<div id="rri"><p style="font-weight: bold; font-size: 18px;">Rights and Resource Initiative (RRI)</p>' +
             '<p><strong>Established: </strong>2006</p>' +
             '<p><strong>Headquarters: </strong>Washington DC, USA</p>' +
@@ -90,13 +90,13 @@ define([], function() {
             '<p><strong>Headquarters: </strong>London, UK</p>' +
             '<p><strong>Mission: </strong>To support indigenous peoples and traditional populations of the world’s rainforest in their efforts to protect their environment and fulfil their rights to land, life, and livelihood by assisting them with: 1) Securing and controlling the natural resources necessary for their long term well-being and managing these resources in ways which do not harm their environment, violate their culture or compromise their future; 2) Developing means to protect their individual and collective rights and obtain, shape and control basic services from the state.</p>' +
             '<p><strong>Interests: </strong>RFUK promotes the establishment of community rights over rainforest lands, tackling the root of the problems related to deforestation and paving the way for local people to benefit fairly from the use and protection of forest resources.</p></div>' +
-            '<a target="_blank" href="http://fes.org.in/"><img style="margin-top: 475px;" class="aboutImageLeft" src="css/images/fesLogo.gif"></a>' +
+            '<a target="_blank" href="http://fes.org.in/"><img style="margin-top: 475px;" id="fesMedia" class="aboutImageLeft" src="css/images/fesLogo.gif"></a>' +
             '<div id="fes"><p style="font-weight: bold; font-size: 18px;">Foundation for Ecological Security (FES)</p>' +
             '<p><strong>Established: </strong>2001</p>' +
             '<p><strong>Headquarters: </strong>Gajurat, India</p>' +
             '<p><strong>Mission: </strong>As ‘ecological security’ is the foundation of sustainable and equitable development, FES is committed to strengthening, reviving or restoring, where necessary, the process of ecological succession and the conservation of land, forest and water resources in the country.</p>' +
             '<p><strong>Interests: </strong>FES presently works with 5,900 village institutions in 31 districts across 8 states, and assists the village communities in protecting more than 637,000 hectares of common lands including revenue wastelands, degraded forest lands and Panchayat grazing lands (Charagah lands). FES supports Panchayats and their subcommittees, Village Forest Committees, Gramya Jungle Committees, Water Users Associations and Watershed Committees in order to improve the governance of natural resources. </p></div>' +
-            '<a target="_blank" href="http://www.pafid.org.ph/"><img style="margin-top: 475px;" class="aboutImageLeft" src="css/images/pafidLogo.png"></a>' +
+            '<a target="_blank" href="http://www.pafid.org.ph/"><img style="margin-top: 475px;" id="pafidMedia" class="aboutImageLeft" src="css/images/pafidLogo.png"></a>' +
             '<div id="pafid"><p style="font-weight: bold; font-size: 18px;">Philippine Association for Intercultural Development, Inc. (PAFID)</p>' +
             '<p><strong>Established: </strong>1967</p>' +
             '<p><strong>Headquarters: </strong>Quezon City, Philippines</p>' +

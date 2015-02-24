@@ -33,6 +33,11 @@ define(['components/aboutAccordion', 'about/main/config'], function(AboutAccordi
         bindEvents: function() {
             brApp.debug('AppController >>> bindEvents');
             var self = this;
+            // $(".right > li").on("click", function() {
+            //     $(".right > li").removeClass("active-page");
+            //     $(this).addClass("active-page");
+            //     debugger;
+            // });
 
         },
 

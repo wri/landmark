@@ -212,7 +212,7 @@ define([
 
                 if (features.length > 0) {
                     brApp.map.infoWindow.setFeatures(features);
-                    brApp.map.infoWindow.resize(270);
+                    brApp.map.infoWindow.resize(350);
                     $(".titlePane").removeClass("analysis-header");
                     brApp.map.infoWindow.show(mapPoint);
                     $(".esriPopup .titleButton.close").html("&#10005;");
@@ -265,24 +265,24 @@ define([
 
             arrayUtils.forEach(featureObjects, function(item) {
                 template = new InfoTemplate(item.value,
-                    "<div class='popup-header'>Layer Name</div>" + item.layerName + " - " + item.layerId +
+                    "<div class='even-row'><div class='popup-header'>Layer Name</div>" + item.layerName + " - " + item.layerId + '</div>' +
                     "<div class='odd-row'><div class='popup-header'>Official Recognition</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
-                    "<div class='popup-header'>Status</div>" + item.feature.attributes.Ofcl_Rec +
+                    "<div class='even-row'><div class='popup-header'>Status</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
                     "<div class='odd-row'><div class='popup-header'>Category</div>" + item.feature.attributes.Category + '</div>' +
-                    "<div class='popup-header'>Size</div>" + item.feature.attributes.Area_Ofcl +
+                    "<div class='even-row'><div class='popup-header'>Size</div>" + item.feature.attributes.Area_Ofcl + '</div>' +
                     "<div class='odd-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
-                    "<div class='popup-header'>Ethnicity</div>" + item.feature.attributes.Ethncity_1 +
+                    "<div class='even-row'><div class='popup-header'>Ethnicity</div>" + item.feature.attributes.Ethncity_1 + '</div>' +
                     "<div class='odd-row'><div class='popup-header'>Data Contributor</div>" + item.feature.attributes.Data_Ctrb + '</div>' +
-                    "<div class='popup-header'>Data Source</div>" + item.feature.attributes.Data_Src +
-                    "<div class='popup-last'>Last Updated: " + item.feature.attributes.Last_Updt + '</div> '
+                    "<div class='even-row'><div class='popup-header'>Data Source</div>" + item.feature.attributes.Data_Src + '</div>' +
+                    "<div class='popup-last'>Last Updated: " + item.feature.attributes.Last_Updt + '<span id="additionalInfo"> Additional Info</span></div>'
                 );
 
                 if (item.layerId === 1) {
-                    template.title = "<img style='margin-bottom: 3px;' src='css/images/formalDocIcon.png'> " + template.title;
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalDocIcon.png'> " + template.title;
                 } else if (item.layerId === 2) {
-                    template.title = "<img style='margin-bottom: 3px;' src='css/images/tiltingIcon.png'> " + template.title;
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/tiltingIcon.png'> " + template.title;
                 } else if (item.layerId === 3) {
-                    template.title = "<img style='margin-bottom: 3px;' src='css/images/formalLandIcon.png'> " + template.title;
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalLandIcon.png'> " + template.title;
                 }
                 console.log(item.layerId);
                 item.feature.setInfoTemplate(template);
