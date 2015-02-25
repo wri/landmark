@@ -55,6 +55,7 @@ define([
             on(document.getElementById('community-level-toggle'), 'change', WidgetsController.toggleDataContainer);
             on(document.getElementById('analysis-button'), 'click', WidgetsController.showAnalysisDialog);
             on(document.getElementById('upload-shapefile'), 'click', WidgetsController.toggleUploadForm);
+            on(document.getElementById('data-complete-checkbox'), 'click', self.showDataComplete);
             on(document.getElementById('draw-shape'), 'click', DrawTool.activate);
             on(document.uploadForm, 'change', Uploader.beginUpload.bind(Uploader));
             //on(document.getElementById('brMap_root'), 'click', self.handleClick.bind(self));
@@ -648,6 +649,20 @@ define([
                 }]
             });
 
+        },
+
+        showDataComplete: function() {
+            brApp.debug('MapController >>> showDataComplete');
+            var dynamicLayer = brApp.map.getLayer('indigenousLands');
+
+            if (this.checked === true) {
+                dynamicLayer.visibleLayers.push(11);
+            } else {
+                var index = dynamicLayer.visibleLayers.indexOf(11);
+                dynamicLayer.visibleLayers.splice(index, 1);
+            }
+
+            dynamicLayer.setVisibleLayers(dynamicLayer.visibleLayers);
         },
 
         exportAnalysis: function(config) {
