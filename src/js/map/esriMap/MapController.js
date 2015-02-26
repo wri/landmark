@@ -13,6 +13,7 @@ define([
     "dojo/promise/all",
     "dojo/Deferred",
     "dojo/number",
+    'dojo/topic',
     'dijit/registry',
     'esri/dijit/Legend',
     'esri/dijit/Geocoder',
@@ -26,7 +27,7 @@ define([
     "esri/tasks/query",
     "esri/tasks/GeometryService",
     "esri/tasks/AreasAndLengthsParameters"
-], function(Map, Uploader, DrawTool, MapConfig, ReactTree, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, registry, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, GeometryService, AreasAndLengthsParameters) {
+], function(Map, Uploader, DrawTool, MapConfig, ReactTree, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, registry, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, GeometryService, AreasAndLengthsParameters) {
     'use strict';
 
     var MapController = {
@@ -240,6 +241,10 @@ define([
             if (params.layerIds.indexOf(4) > -1) {
                 params.layerIds.splice(params.layerIds.indexOf(4), 1);
             }
+            if (params.layerIds.indexOf(11) > -1) {
+                params.layerIds.splice(params.layerIds.indexOf(11), 1);
+            }
+            //TODO: IF they don't change around the configuration of the layers, we will need to check which layers are turned on for each identify task in order to splice out duplicate layers in higher up branches of the tree
             params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
 
             identifyTask.execute(params, function(features) {
@@ -278,7 +283,7 @@ define([
                     "<div class='odd-row'><div class='popup-header'>Official Recognition</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
                     "<div class='even-row'><div class='popup-header'>Status</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
                     "<div class='odd-row'><div class='popup-header'>Category</div>" + item.feature.attributes.Category + '</div>' +
-                    "<div class='even-row'><div class='popup-header'>Size</div>" + item.feature.attributes.Area_Ofcl + '</div>' +
+                    "<div class='even-row'><div class='popup-header'>Size</div>Official Size: " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + " ha<br>GIS Area: " + self.numberWithCommas(item.feature.attributes.Area_GIS) + " ha</div>" +
                     "<div class='odd-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
                     "<div class='even-row'><div class='popup-header'>Ethnicity</div>" + item.feature.attributes.Ethncity_1 + '</div>' +
                     "<div class='odd-row'><div class='popup-header'>Data Contributor</div>" + item.feature.attributes.Data_Ctrb + '</div>' +
@@ -401,7 +406,7 @@ define([
                 console.log(compositeRecognized);
                 console.log(compositeNotRecognized); //TODO: Also calculate new area now; probably one more geometry service call for the union & areaCompute
 
-                self.createPie(compositeRecognized, compositeNotRecognized);
+                //self.createPie(compositeRecognized, compositeNotRecognized);
                 self.geometryService.union(polys, function(unionedGeometry) { //TODO: Ensure that after Adrienne fixes the service's data layers, this now reflects the proper area of the layers that are TURNED ON Only
                     console.log(unionedGeometry);
                     //self.calculateBreakdown(polys, unionedGeometry, value);
@@ -661,13 +666,20 @@ define([
                 var index = dynamicLayer.visibleLayers.indexOf(11);
                 dynamicLayer.visibleLayers.splice(index, 1);
             }
-
+            topic.publish('refresh-legend');
             dynamicLayer.setVisibleLayers(dynamicLayer.visibleLayers);
         },
 
         exportAnalysis: function(config) {
             brApp.debug('MapController >>> exportAnalysis');
 
+        },
+
+        numberWithCommas: function(x) {
+            var parts = x.toString().split(".");
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            //return parts.join(".");
+            return parts[0];
         },
 
         printAnalysis: function(config) {

@@ -70,8 +70,10 @@ define([
 		          "data-key": node.id, 
 		          disabled: disabled}
 		         ), 
-		        React.createElement("span", {className: "tree-node-label", onClick: this.handleClick}, node.label)
-		        
+		         React.createElement("span", {className: "tree-node-label", onClick: this.handleClick}, node.label), 
+					 node.info ? 
+						React.createElement("span", {className: "help-marker"}): null
+							        
 		        
 		      ), 
 	        childNodes

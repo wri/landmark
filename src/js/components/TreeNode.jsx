@@ -70,8 +70,10 @@ define([
 		          data-key={node.id}
 		          disabled={disabled}
 		         />
-		        <span className='tree-node-label' onClick={this.handleClick}>{node.label}</span>
-		        
+		         <span className='tree-node-label' onClick={this.handleClick}>{node.label}</span>
+					{ node.info ? 
+						<span className='help-marker'></span>: null
+					}		        
 		        
 		      </section>
 	        {childNodes}

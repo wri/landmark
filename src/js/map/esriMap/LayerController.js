@@ -30,7 +30,11 @@ define([
                 });
             }
             console.log(visibleLayers);
+            if (document.getElementById('data-complete-checkbox').checked === true) {
+                visibleLayers.push(11);
+            }
             dynamicLayer.setVisibleLayers(visibleLayers);
+
             topic.publish('refresh-legend');
         },
 
