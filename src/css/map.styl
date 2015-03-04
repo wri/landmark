@@ -41,7 +41,7 @@ label
 	right 300px
 	
 .brMap .HomeButton .home
-	background url('images/ico-home.png') no-repeat center
+	background url('images/map_tools_home.png') no-repeat center
 	border-bottom 1px solid black
 	background-color white
 	border-radius 0
@@ -154,17 +154,22 @@ label
 	
 .brMap .LocateButton .zoomLocateButton
 	background-color transparent
-	background-image url('images/locate.png')
+	background-image url('images/map_tools_location.png')
+	padding 0
 
 .brMap .LocateButton .zoomLocateButton:hover
 	background-color transparent
-	background-image url('images/locate.png')
+	background-image url('images/map_tools_location.png')
+	background-position 6px 6px
 	
-.brMap .LocateButton .zoomLocateButton
+.brMap .LocateButton
+	background-position 6px 6px
+
+.brMap .zoomLocateButton
 .basemap-icon
 	background-position -2px -2px
 	
-.brMap .LocateButton .zoomLocateButton:hover
+.brMap .zoomLocateButton:hover
 .basemap-icon:hover
 	background-position -2px -36px
 	
@@ -241,10 +246,19 @@ label
 	font-weight bold
 	cursor pointer
 
+.esriSimpleSliderDecrementButton
+	border-top 1px solid gray
+	background url(images/map_tools_minus.png) no-repeat #fff
+	background-position 7px 14px
+	
+.esriSimpleSliderIncrementButton
+	background url(images/map_tools_plus.png) no-repeat #fff
+	background-position 8px 7px
+
 .esriSimpleSlider
 	border-radius 0px !important
 	-webkit-border-radius 0px !important
-	color #69c !important
+	color transparent !important
 
 .esriPopup
 	font-family Arial Narrow !important
@@ -463,7 +477,7 @@ label
 	-moz-border-radius-bottomright 5px
 	-webkit-border-top-right-radius 5px
 	-webkit-border-bottom-right-radius 5px
-	border-left 0
+	border-left 1px solid black
 	
 .national-segmented-menu-button.active
 	background-color #888

@@ -53,7 +53,10 @@ define([
             on(document.getElementById('basemap-button'), 'click', WidgetsController.toggleBasemapGallery.bind(WidgetsController));
             on(document.getElementById('share-button'), 'click', WidgetsController.toggleShareContainer.bind(WidgetsController));
             on(document.getElementById('nationalCommunityMenuButton'), 'click', self.handleNationalToggle.bind(self));
-            on(document.getElementById('nationalPercentageMenuButton'), 'click', self.handleNationalToggle.bind(self));
+            //on(document.getElementById('nationalPercentageMenuButton'), 'click', self.handleNationalToggle.bind(self));//todo: on 'change' ?
+
+            on(document.getElementById('land-tenure-toggle'), 'click', self.handleNationalToggle.bind(self));
+            on(document.getElementById('percent-national-toggle'), 'click', self.handleNationalToggle.bind(self));
 
             on(document.getElementById('nationalIndigenousMenuButton'), 'click', self.handleNationalToggle.bind(self));
             on(document.getElementById('tree-container-toggle'), 'click', WidgetsController.toggleTreeContainer);
@@ -705,26 +708,39 @@ define([
             // if (containerNode) {
             //     domClass.remove(containerNode, 'active');
             // }
-
+            debugger;
             // Now add the active class to the target and to the container
             switch (target.id) {
                 case "nationalCommunityMenuButton":
                     id = 'national-level-tree-community';
                     domClass.add('national-level-tree-indigenous', 'hidden');
                     domClass.add('national-level-tree-percentage', 'hidden');
-                    //hide the other two groups, and set their visible layers to []
                     break;
                 case "nationalIndigenousMenuButton":
                     id = 'national-level-tree-indigenous';
                     domClass.add('national-level-tree-community', 'hidden');
                     domClass.add('national-level-tree-percentage', 'hidden');
-
                     break;
                 case "nationalPercentageMenuButton":
                     id = 'national-level-tree-percentage';
                     domClass.add('national-level-tree-indigenous', 'hidden');
                     domClass.add('national-level-tree-community', 'hidden');
+                    break;
+                case "land-tenure-toggle":
+                    if (domClass.contains(target, 'active')) {
+                        return;
+                    }
 
+                    id = 'national-level-data-container';
+                    domClass.add('national-level-toggle', 'hidden');
+                    domClass.remove('national-level-data-container', 'hidden');
+                    //domClass.add('national-level-tree-community', 'hidden');
+                    break;
+                case "percent-national-toggle":
+
+                    id = 'national-level-tree-percentage';
+                    domClass.add('national-level-data-container', 'hidden');
+                    domClass.remove('national-level-tree-percentage', 'hidden');
                     break;
 
             }

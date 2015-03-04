@@ -1,76 +1,80 @@
 div.mobile-menu#mobileMenu
-	div.mobile-menu-close-button.pointer#mobile-menu-close
-	div.menu-controls#menuControls
-		span.segmented-menu-button.active.pointer#layersMenuButton Layers
-		span.segmented-menu-button.pointer#legendMenuButton Legend
-		span.segmented-menu-button.pointer#toolsMenuButton Tools
-	div.mobile-menu-content.mobile-layers-content.active#mobile-layers-content
-	div.mobile-menu-content.mobile-legend-content#mobile-legend-content
-	div.mobile-menu-content.mobile-tools-content#mobile-tools-content
+    div.mobile-menu-close-button.pointer#mobile-menu-close
+    div.menu-controls#menuControls
+        span.segmented-menu-button.active.pointer#layersMenuButton Layers
+        span.segmented-menu-button.pointer#legendMenuButton Legend
+        span.segmented-menu-button.pointer#toolsMenuButton Tools
+    div.mobile-menu-content.mobile-layers-content.active#mobile-layers-content
+    div.mobile-menu-content.mobile-legend-content#mobile-legend-content
+    div.mobile-menu-content.mobile-tools-content#mobile-tools-content
 div#brMap.brMap
-	//- HTML Entity for the Gear Icon (Unfortunately not supported in all browsers) - &#9881;
-	div.map-component.mobile-menu-toggle-button.hideOnLoad.pointer#mobile-menu-toggle
-	div.map-component.tree-widget-container.hideOnLoad#tree-widget-container
-		div.tree-widget-title-pane#tree-title-pane
-			span.tree-title-text.tree-width#tree-title
-				span Land Recognition Status
-			span.tree-container-toggle.pointer#tree-container-toggle &minus;
-		div.tree-content.tree-width.active#tree-content
-			div#national-level-toggle.tree-data-section National Level Data
-				//- div.radio-button-container
-				//- 	input(type='radio',id='national-level-toggle',name='tree-data-toggle')
-				//- 	label(for='national-level-toggle') National Level Data
-				//- div.national-level-data-container.hidden#national-level-data-container.hidden TODO: Eventually I just want to get rid of the 2 radio button's and their input/label children and add the 'National/Community Level data' labels to each tree section div itself; then add onclick's for that class to remove the hidden class onClick
-				div.national-level-data-container.hidden#national-level-data-container
-					div.national-menu-controls#nationalMenuControls
-						span.national-segmented-menu-button.active#nationalCommunityMenuButton Comm
-						span.national-segmented-menu-button#nationalIndigenousMenuButton Indig
-						span.national-segmented-menu-button#nationalPercentageMenuButton Percent
-					div#national-level-tree-community
-					div#national-level-tree-indigenous.hidden
-					div#national-level-tree-percentage.hidden
-			div#community-level-toggle.tree-data-section Community Level Data
-				//- div.radio-button-container
-				//- 	input(type='radio',id='community-level-toggle',name='tree-data-toggle',checked='checked')
-				//- 	label(for='community-level-toggle') Community Level Data
-				div.community-level-data-container#community-level-data-container
-					div#community-level-tree
-	div.map-component.geocoder-container.hideOnLoad#geocoder-container
-		div#geocoder
-	div.map-component.data-completeness-container.hideOnLoad#data-completeness-container
-		span.data-completeness-toggle
-			input(type='checkbox',value='complete',id='data-complete-checkbox')
-		span.data-completeness-label Show Data Completeness
-			span.help-marker(style='margin-top: 9px;')
-	div.map-component.analysis-button.hideOnLoad.pointer#analysis-button
-		span.analysis-button-label Analysis
-	div.map-component.button-widget.locator-button.pointer.hideOnLoad#locator-button
-		div.locate-icon#location-widget
-	div.map-component.button-widget.basemap-button.pointer.hideOnLoad#basemap-button
-		div.basemap-icon
-	div.map-component.basemap-container.hidden
-		div#basemap-gallery
-	div.map-component.basemap-connector.connector.hidden
-	div.map-component.legend-container.hideOnLoad#legend-container
-		div.legend-title-pane
-			span(class='legend-title pointer', title='Legend', id='legend-toggle') Legend
-				div(id="legend-toggle-icon")!='-'
-		div.legend-content.active#legend-content
-			div#legend
-	div.map-component.button-widget.share-button.pointer.hideOnLoad#share-button
-		div.share-icon
-	div.map-component.share-container.hidden
-		div#share-widgets
-			.sharing_toolbox
-				.addthis_sharing_toolbox(data-title='Global Forest Watch Commodities')
-				div#embedShare
-			//- div#twitterShare
-			//- div#facebookShare
-			//- div#moreShare
-			//- div#emailShare
-			//- div#googleShare
-			//- 	a(href='https://plus.google.com/share?url={window.url}', onclick="javascript:window.open(this.href,\
-			//- 	'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;")
-			//- 		img(src='https://www.gstatic.com/images/icons/gplus-32.png', alt='Share on Google+')
-			
-	div.map-component.share-connector.connector.hidden
+    //- HTML Entity for the Gear Icon (Unfortunately not supported in all browsers) - &#9881;
+    div.map-component.mobile-menu-toggle-button.hideOnLoad.pointer#mobile-menu-toggle
+    div.map-component.tree-widget-container.hideOnLoad#tree-widget-container
+        div.tree-widget-title-pane#tree-title-pane
+            span.tree-title-text.tree-width#tree-title
+                span Land Recognition Status
+            span.tree-container-toggle.pointer#tree-container-toggle &minus;
+         div.tree-content.tree-width.active#tree-content
+            div#national-level-toggle.tree-data-section National Level Data
+                div#landTenureRadio.radio-button-container.hidden
+                    input(type='radio', checked=true, id='land-tenure-toggle',class='radio-button-container')
+                    label(for='national-level-toggle') National Level Data - Land Tenure Security Indicators
+                    //- div.national-level-data-container.hidden#national-level-data-container.hidden TODO: Eventually I just want to get rid of the 2 radio button's and their input/label children and add the 'National/Community Level data' labels to each tree section div itself; then add onclick's for that class to remove the hidden class onClick
+                    div.national-level-data-container.hidden#national-level-data-container
+                        div.national-menu-controls#nationalMenuControls
+                            span.national-segmented-menu-button.active#nationalCommunityMenuButton Comm
+                            span.national-segmented-menu-button#nationalIndigenousMenuButton Indig
+                            //-span.national-segmented-menu-button#nationalPercentageMenuButton Percent
+                        div#national-level-tree-community
+                        div#national-level-tree-indigenous.hidden
+                        //-div#national-level-tree-percentage.hidden
+                div#percentNational.hidden
+                    input(type='radio',id='percent-national-toggle',class='radio-button-container')
+                    label(for='national-level-toggle') National Level Data - Pct of Indigenous and Community Lands
+                        div#national-level-tree-percentage.hidden
+            div#community-level-toggle.tree-data-section Community Level Data
+                //- div.radio-button-container
+                //-     input(type='radio',id='community-level-toggle',name='tree-data-toggle',checked='checked')
+                //-     label(for='community-level-toggle') Community Level Data
+                div.community-level-data-container#community-level-data-container
+                    div#community-level-tree
+    div.map-component.geocoder-container.hideOnLoad#geocoder-container
+        div#geocoder
+    div.map-component.data-completeness-container.hideOnLoad#data-completeness-container
+        span.data-completeness-toggle
+            input(type='checkbox',value='complete',id='data-complete-checkbox')
+        span.data-completeness-label Show Data Completeness
+            span.help-marker(style='margin-top: 9px;')
+    div.map-component.analysis-button.hideOnLoad.pointer#analysis-button
+        span.analysis-button-label Analysis
+    div.map-component.button-widget.locator-button.pointer.hideOnLoad#locator-button
+        div.locate-icon#location-widget
+    div.map-component.button-widget.basemap-button.pointer.hideOnLoad#basemap-button
+        div.basemap-icon
+    div.map-component.basemap-container.hidden
+        div#basemap-gallery
+    div.map-component.basemap-connector.connector.hidden
+    div.map-component.legend-container.hideOnLoad#legend-container
+        div.legend-title-pane
+            span(class='legend-title pointer', title='Legend', id='legend-toggle') Legend
+                div(id="legend-toggle-icon")!='-'
+        div.legend-content.active#legend-content
+            div#legend
+    div.map-component.button-widget.share-button.pointer.hideOnLoad#share-button
+        div.share-icon
+    div.map-component.share-container.hidden
+        div#share-widgets
+            .sharing_toolbox
+                .addthis_sharing_toolbox(data-title='Global Forest Watch Commodities')
+                div#embedShare
+            //- div#twitterShare
+            //- div#facebookShare
+            //- div#moreShare
+            //- div#emailShare
+            //- div#googleShare
+            //-     a(href='https://plus.google.com/share?url={window.url}', onclick="javascript:window.open(this.href,\
+            //-     '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;")
+            //-         img(src='https://www.gstatic.com/images/icons/gplus-32.png', alt='Share on Google+')
+            
+    div.map-component.share-connector.connector.hidden

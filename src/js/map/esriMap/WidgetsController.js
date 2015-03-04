@@ -105,9 +105,13 @@ define([
             if (target.id === 'national-level-toggle') {
                 domClass.add('community-level-data-container', 'hidden');
                 domClass.remove('national-level-data-container', 'hidden');
+                domClass.remove('landTenureRadio', 'hidden');
+                domClass.remove('percentNational', 'hidden');
             } else if (target.id === 'community-level-toggle') {
                 domClass.add('national-level-data-container', 'hidden');
                 domClass.remove('community-level-data-container', 'hidden');
+                domClass.add('landTenureRadio', 'hidden');
+                domClass.add('percentNational', 'hidden');
             }
         },
 

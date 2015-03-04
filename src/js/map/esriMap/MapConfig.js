@@ -1,6 +1,10 @@
 define([], function() {
 
-    var indigenousLandsUrl = 'http://gis-stage.wri.org/arcgis/rest/services/CommunityLands/CommunityLands/MapServer';
+    // var indigenousLandsUrl = 'http://gis-stage.wri.org/arcgis/rest/services/CommunityLands/CommunityLands/MapServer';
+    var indigenousLandsUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer';
+
+    var nationalLevelUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer';
+
     var indigenousLandsInfo = "Placeholder so this layer's info icon appears in the tree";
     var landTenureSecurityInfo = "Placeholder so this layer's info icon appears in the tree";
 
@@ -19,7 +23,14 @@ define([], function() {
                 url: indigenousLandsUrl,
                 type: 'dynamic',
                 // Not all the layers are present in the tree, when they are, include 0 - 9
-                defaultLayers: [0, 1, 2, 3], //[0,1,2,3,4,5,6,7,8,9]
+                defaultLayers: [0, 1, 2, 3, 4], //[0,1,2,3,4,5,6,7,8,9]
+                visible: true
+            },
+            'communityLands': {
+                url: indigenousLandsUrl,
+                type: 'dynamic',
+                // Not all the layers are present in the tree, when they are, include 0 - 9
+                defaultLayers: [5, 6, 7, 8, 9], //[0,1,2,3,4,5,6,7,8,9]
                 visible: true
             },
             'CustomFeatures': {

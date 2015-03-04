@@ -57,9 +57,6 @@ define([
       return (
         <ul className='checkbox-tree'>
           {this.state.data.map(function (node) {
-            console.log(node);
-            console.log(this.state.active);
-            console.log(this.state.data);
             return (
               <CommunityTreeNode
                 key={node.id}
