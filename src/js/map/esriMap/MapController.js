@@ -4,6 +4,7 @@ define([
     'map/DrawTool',
     'map/MapConfig',
     'components/Tree',
+    'components/CommunityTree',
     'map/WidgetsController',
     'dojo/on',
     'dojo/query',
@@ -27,7 +28,7 @@ define([
     "esri/tasks/query",
     "esri/tasks/GeometryService",
     "esri/tasks/AreasAndLengthsParameters"
-], function(Map, Uploader, DrawTool, MapConfig, ReactTree, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, registry, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, GeometryService, AreasAndLengthsParameters) {
+], function(Map, Uploader, DrawTool, MapConfig, ReactTree, CommunityTree, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, registry, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, GeometryService, AreasAndLengthsParameters) {
     'use strict';
 
     var MapController = {
@@ -51,9 +52,13 @@ define([
             on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
             on(document.getElementById('basemap-button'), 'click', WidgetsController.toggleBasemapGallery.bind(WidgetsController));
             on(document.getElementById('share-button'), 'click', WidgetsController.toggleShareContainer.bind(WidgetsController));
+            on(document.getElementById('nationalCommunityMenuButton'), 'click', self.handleNationalToggle.bind(self));
+            on(document.getElementById('nationalPercentageMenuButton'), 'click', self.handleNationalToggle.bind(self));
+
+            on(document.getElementById('nationalIndigenousMenuButton'), 'click', self.handleNationalToggle.bind(self));
             on(document.getElementById('tree-container-toggle'), 'click', WidgetsController.toggleTreeContainer);
-            on(document.getElementById('national-level-toggle'), 'change', WidgetsController.toggleDataContainer);
-            on(document.getElementById('community-level-toggle'), 'change', WidgetsController.toggleDataContainer);
+            on(document.getElementById('national-level-toggle'), 'click', WidgetsController.toggleDataContainer);
+            on(document.getElementById('community-level-toggle'), 'click', WidgetsController.toggleDataContainer);
             on(document.getElementById('analysis-button'), 'click', WidgetsController.showAnalysisDialog);
             on(document.getElementById('upload-shapefile'), 'click', WidgetsController.toggleUploadForm);
             on(document.getElementById('data-complete-checkbox'), 'click', self.showDataComplete);
@@ -90,6 +95,7 @@ define([
                 self = this,
                 locateButton,
                 treeWidget,
+                treeWidgetNational,
                 homeWidget,
                 geocoder,
                 legend,
@@ -129,6 +135,9 @@ define([
             }, 'location-widget');
 
             treeWidget = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
+            treeWidgetNational = new CommunityTree(MapConfig.nationalLevelTreeData, 'national-level-tree-community');
+            treeWidgetNational = new CommunityTree(MapConfig.nationalLevelTreeDataIndigenous, 'national-level-tree-indigenous');
+            treeWidgetNational = new CommunityTree(MapConfig.nationalLevelPercentData, 'national-level-tree-percentage');
 
             // Start all widgets that need to be started
             basemapGallery.startup();
@@ -216,6 +225,7 @@ define([
                     brApp.map.infoWindow.setFeatures(features);
                     brApp.map.infoWindow.resize(350);
                     $(".titlePane").removeClass("analysis-header");
+                    $(".titleButton.close").css("color", "white");
                     brApp.map.infoWindow.show(mapPoint);
                     $(".esriPopup .titleButton.close").html("&#10005;");
                 }
@@ -448,6 +458,7 @@ define([
                 document.getElementById("total-area").innerHTML = area;
                 brApp.map.infoWindow.resize(550); //TODO: make the close button and other icon's background color the same as the header's normal background color so that they show up in this view and don't look different in the normal pop-ups 
                 $(".titlePane").addClass("analysis-header");
+                $(".titleButton.close").css("color", "white");
                 // if (brApp.mapPoint)
                 brApp.map.infoWindow.show(brApp.mapPoint);
             }
@@ -498,6 +509,7 @@ define([
                 document.getElementById("intersect-area").innerHTML = area;
                 brApp.map.infoWindow.resize(550); //TODO: make the close button and other icon's background color the same as the header's normal background color so that they show up in this view and don't look different in the normal pop-ups 
                 $(".titlePane").addClass("analysis-header");
+                $(".titleButton.close").css("color", "black");
                 brApp.map.infoWindow.show(brApp.mapPoint);
 
             }
@@ -668,6 +680,58 @@ define([
             }
             topic.publish('refresh-legend');
             dynamicLayer.setVisibleLayers(dynamicLayer.visibleLayers);
+        },
+
+        handleNationalToggle: function(evt) {
+            brApp.debug('MapController >>> handleNationalToggle');
+            var target = evt.target ? evt.target : evt.srcElement,
+                menuNode = document.querySelector('.national-segmented-menu-button.active'),
+                //containerNode = document.querySelector('.mobile-menu-content.active'),
+                id;
+
+            // If section is already active, back out now
+            // Else remove active class from target and containerNode
+            if (domClass.contains(target, 'active')) {
+                return;
+            }
+
+            if (menuNode) {
+                domClass.remove(menuNode, 'active');
+                //TODO?
+                // domClass.add(menuNode, 'hidden');
+            }
+
+            // if (containerNode) {
+            //     domClass.remove(containerNode, 'active');
+            // }
+
+            // Now add the active class to the target and to the container
+            switch (target.id) {
+                case "nationalCommunityMenuButton":
+                    id = 'national-level-tree-community';
+                    domClass.add('national-level-tree-indigenous', 'hidden');
+                    domClass.add('national-level-tree-percentage', 'hidden');
+                    //hide the other two groups, and set their visible layers to []
+                    break;
+                case "nationalIndigenousMenuButton":
+                    id = 'national-level-tree-indigenous';
+                    domClass.add('national-level-tree-community', 'hidden');
+                    domClass.add('national-level-tree-percentage', 'hidden');
+
+                    break;
+                case "nationalPercentageMenuButton":
+                    id = 'national-level-tree-percentage';
+                    domClass.add('national-level-tree-indigenous', 'hidden');
+                    domClass.add('national-level-tree-community', 'hidden');
+
+                    break;
+
+            }
+            //debugger;
+            domClass.add(target, 'active');
+            domClass.add(id, 'active');
+            domClass.remove(id, 'hidden');
+
         },
 
         exportAnalysis: function(config) {

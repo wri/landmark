@@ -14,15 +14,23 @@ div#brMap.brMap
 				span Land Recognition Status
 			span.tree-container-toggle.pointer#tree-container-toggle &minus;
 		div.tree-content.tree-width.active#tree-content
-			div.tree-data-section
-				div.radio-button-container
-					input(type='radio',id='national-level-toggle',name='tree-data-toggle')
-					label(for='national-level-toggle') National Level Data
+			div#national-level-toggle.tree-data-section National Level Data
+				//- div.radio-button-container
+				//- 	input(type='radio',id='national-level-toggle',name='tree-data-toggle')
+				//- 	label(for='national-level-toggle') National Level Data
+				//- div.national-level-data-container.hidden#national-level-data-container.hidden TODO: Eventually I just want to get rid of the 2 radio button's and their input/label children and add the 'National/Community Level data' labels to each tree section div itself; then add onclick's for that class to remove the hidden class onClick
 				div.national-level-data-container.hidden#national-level-data-container
-			div.tree-data-section
-				div.radio-button-container
-					input(type='radio',id='community-level-toggle',name='tree-data-toggle',checked='checked')
-					label(for='community-level-toggle') Community Level Data
+					div.national-menu-controls#nationalMenuControls
+						span.national-segmented-menu-button.active#nationalCommunityMenuButton Comm
+						span.national-segmented-menu-button#nationalIndigenousMenuButton Indig
+						span.national-segmented-menu-button#nationalPercentageMenuButton Percent
+					div#national-level-tree-community
+					div#national-level-tree-indigenous.hidden
+					div#national-level-tree-percentage.hidden
+			div#community-level-toggle.tree-data-section Community Level Data
+				//- div.radio-button-container
+				//- 	input(type='radio',id='community-level-toggle',name='tree-data-toggle',checked='checked')
+				//- 	label(for='community-level-toggle') Community Level Data
 				div.community-level-data-container#community-level-data-container
 					div#community-level-tree
 	div.map-component.geocoder-container.hideOnLoad#geocoder-container
