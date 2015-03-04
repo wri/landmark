@@ -158,7 +158,9 @@ define([
 
             if (!isClosing) {
                 domClass.toggle(menuNodeId, 'open');
-                // domClass.toggle(menuButton, 'hidden');
+                domClass.toggle(menuButton, 'hidden');
+            } else {
+                domClass.remove(menuButton, 'hidden');
             }
 
             Fx.animateProperty({
