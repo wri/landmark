@@ -69,7 +69,7 @@
             <div id="tree-content" class="tree-content tree-width active">
               <div id="national-level-toggle" class="tree-data-section">National Level Data
                 <div id="landTenureRadio" class="radio-button-container hidden">
-                  <input type="radio" checked id="land-tenure-toggle" class="radio-button-container">
+                  <input type="radio" name="national-radio" checked id="land-tenure-toggle" class="radio-button-container">
                   <label for="national-level-toggle">National Level Data - Land Tenure Security Indicators</label>
                   <div id="national-level-data-container" class="national-level-data-container hidden">
                     <div id="nationalMenuControls" class="national-menu-controls"><span id="nationalCommunityMenuButton" class="national-segmented-menu-button active">Comm</span><span id="nationalIndigenousMenuButton" class="national-segmented-menu-button">Indig</span>
@@ -79,7 +79,7 @@
                   </div>
                 </div>
                 <div id="percentNational" class="hidden">
-                  <input type="radio" id="percent-national-toggle" class="radio-button-container">
+                  <input type="radio" name="national-radio" id="percent-national-toggle" class="radio-button-container">
                   <label for="national-level-toggle">National Level Data - Pct of Indigenous and Community Lands
                     <div id="national-level-tree-percentage" class="hidden"></div>
                   </label>
@@ -95,8 +95,7 @@
           <div id="geocoder-container" class="map-component geocoder-container hideOnLoad">
             <div id="geocoder"></div>
           </div>
-          <div id="data-completeness-container" class="map-component data-completeness-container hideOnLoad"><span class="data-completeness-toggle">
-              <input type="checkbox" value="complete" id="data-complete-checkbox"></span><span class="data-completeness-label">Show Data Completeness<span style="margin-top: 9px;" class="help-marker"></span></span></div>
+          <div id="data-completeness-container" class="map-component data-completeness-container hideOnLoad"><span class="data-completeness-toggle"><span id="data-complete-checkbox" data-checked="false" class="data-complete-checkbox-class"></span></span><span class="data-completeness-label">Show Data Completeness<span style="margin-top: 9px;" class="help-marker"></span></span></div>
           <div id="analysis-button" class="map-component analysis-button hideOnLoad pointer"><span class="analysis-button-label">Analysis</span></div>
           <div id="locator-button" class="map-component button-widget locator-button pointer hideOnLoad">
             <div id="location-widget" class="locate-icon"></div>
@@ -110,7 +109,7 @@
           <div class="map-component basemap-connector connector hidden"></div>
           <div id="legend-container" class="map-component legend-container hideOnLoad">
             <div class="legend-title-pane"><span title="Legend" id="legend-toggle" class="legend-title pointer">Legend
-                <div id="legend-toggle-icon">-</div></span></div>
+                <div id="legend-toggle-icon"></div></span></div>
             <div id="legend-content" class="legend-content active">
               <div id="legend"></div>
             </div>

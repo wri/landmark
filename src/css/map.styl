@@ -141,13 +141,21 @@ label
 	top 200px
 
 .basemap-icon
-	background url('images/basemap.png')	
+	background url('images/map_tools_basemaps.png')	no-repeat
+	height 16px
+	width 19px
+	margin-top 7px
+	margin-left 6px
+
+.basemap-button:hover, .LocateButton:hover, .share-icon:hover
+	background-color: #eee;
 	
+
+
 .share-icon
-	background url('images/share-icon.png')
-	background-position -3px -1px
+	background url('images/map_tools_share.png') no-repeat
+	background-position 8px 8px
 	
-.basemap-icon
 .share-icon
 	height 100%
 	width 100%
@@ -164,17 +172,10 @@ label
 	
 .brMap .LocateButton
 	background-position 6px 6px
-
-.brMap .zoomLocateButton
-.basemap-icon
-	background-position -2px -2px
 	
 .brMap .zoomLocateButton:hover
-.basemap-icon:hover
 	background-position -2px -36px
 	
-.share-icon:hover
-	background-position -3px -36px
 	
 .basemap-container
 	border 1px solid black
@@ -219,9 +220,10 @@ label
 
 .odd-row
 	background-color #F0EFF4
-	
+
+
 .help-marker
-	background-image url('images/questionMark.png')
+	background url('images/icon_question_mark.png') no-repeat
 	height 16px
 	width 16px
 	position absolute
@@ -394,9 +396,23 @@ label
 	top 20px
 	
 .data-completeness-toggle
+	background-color #d0cfcf
 	border-right 1px solid $mainBorder
 	display inline-block
 	height 32px
+	
+.data-complete-checkbox-class
+	background url('images/checkbox_unchecked.png') no-repeat
+
+.data-complete-checkbox-class-checked
+	background url('images/checkbox_checked.png') no-repeat
+
+#data-complete-checkbox
+	
+	height: 11px
+	width: 11px
+	display inline-block
+	cursor pointer
 	
 .geocoder-container
 	right 415px
@@ -422,15 +438,15 @@ label
 	width 80px
 	
 #legend-toggle-icon
+	background url('images/close_minus_symbol.png')
 	//background url(images/legendToggle.png) no-repeat #fff
-	// height 25px
-	// width 25px
+	height 1px
+	width 13px
 	position relative
-	// background-color yellow
-	top -30px
+	top -15px
 	left 215px
-	font-size 24px
-	cursor pointer
+	// font-size 24px
+	// cursor pointer
 	
 .titlePane.analysis-header
 	font-size 21px !important
