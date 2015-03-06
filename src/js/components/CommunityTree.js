@@ -52,26 +52,20 @@ define([
       // Update the Layer UI
 
       //TODO: Map the activeKey's name to the proper Attribute here, so I can use that variable in the layer's Pop-Up to show the correct attributes --> Require layercontroller in map controller? how to get the react state in the map controller when we are assigning the correct fields in the popup??
-      //debugger;
+      
       //Determine whether we are in the National Tree when updating data
       var nationalLayer = this.getDOMNode().dataset.reactid;
       brApp.currentLayer = evt.target['dataset'].key;
-      if (nationalLayer === '.1' || nationalLayer === '.2') {
-        switch (activeKeys[0]) {
+
+        switch (nationalLayer) {
                     case ".1": //Community Land Tenure
-                      visibleLayers = [0];
+                      activeKeys = [0];
                       break;
                     case ".2": //Indigenous Land Tenure
-                      visibleLayers = [1];
-                      break;
-                    case ".3": //Percent of Community and Indigenous
-                      keys[0] += 2; //--> To get around the two Land Tenure Security Layers
-                      visibleLayers = keys;
+                      activeKeys = [1];
                       break;
                 }
 
-
-      }
       LayerController.updateVisibleLayers(activeKeys, nationalLayer); //TODO When we get data
     },
     

@@ -899,6 +899,8 @@ define([
             //     domClass.remove(containerNode, 'active');
             // }
 
+            //TODO: Why does the whole list shift to the left and hide the tree-toggle-symbol and its span label And its span 'tree-node-lablal'??? -->Its a React thing: the whole 'checkbox-tree' class (which is a parent of all of these) is replaced by a new one which doesn't have that  --> Also this is not where this happens; its probably within the React tree logic itself
+
             // Now add the active class to the target and to the container
             switch (target.id) {
                 case "nationalCommunityMenuButton":
@@ -917,9 +919,6 @@ define([
                     domClass.add('national-level-tree-community', 'hidden');
                     break;
                 case "land-tenure-toggle":
-                    // if (domClass.contains(target.id, 'active')) {
-                    //     return;
-                    // }
 
                     id = 'national-level-data-container';
                     domClass.add('national-level-tree-percentage', 'hidden');
@@ -928,9 +927,7 @@ define([
                     //domClass.add('national-level-tree-community', 'hidden');
                     break;
                 case "percent-national-toggle":
-                    // if (domClass.contains(target.id, 'active')) {
-                    //     return;
-                    // }
+
                     id = 'national-level-tree-percentage';
                     //domClass.remove('national-level-tree-percentage', 'hidden');
                     domClass.add('national-level-data-container', 'hidden');

@@ -22,10 +22,10 @@ define([
 
                 switch (layer) {
                     case ".1": //Community Land Tenure
-                        visibleLayers = [0];
+                        visibleLayers = [1];
                         break;
                     case ".2": //Indigenous Land Tenure
-                        visibleLayers = [1];
+                        visibleLayers = [0];
                         break;
                     case ".3": //Percent of Community and Indigenous
                         keys[0] += 2; //--> To get around the two Land Tenure Security Layers
