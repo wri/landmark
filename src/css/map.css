@@ -7,7 +7,7 @@
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
-/* line 543 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
+/* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
 /* line 543 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 
@@ -726,17 +726,12 @@ label {
   border: 1px solid #000;
 }
 
-/* line 532 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
-#community-level-toggle {
-  margin-top: -11px;
-}
-
 /* line 535 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
 .tree-data-section input[type='radio'] {
   margin: 0 0 0 5px;
 }
 
-/* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
+/* line 60 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 
 /* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 
@@ -828,7 +823,7 @@ body:not(.mobile) .tree-widget-container .tree-content {
   font-size: 14px;
 }
 
-/* line 60 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 68 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 
@@ -897,14 +892,30 @@ body:not(.mobile) .tree-widget-container .tree-content {
 
 /* line 52 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 .national-layer-list-item {
+  padding-left: 5px;
   cursor: pointer;
   font-size: 13px;
   color: #464646;
 }
 
-/* line 57 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+/* line 58 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 .national-layer-list-item-question {
   display: none;
+}
+
+/* line 61 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+.national-layer-list-item.active {
+  border-left: 5px solid #c6d9f0;
+}
+
+/* line 64 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+.national-layer-list-item.active .national-layer-list-item-question {
+  display: block;
+}
+
+/* line 67 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+.national-layer-list-item.active .national-layer-list-item-label {
+  font-weight: bold;
 }
 
 /* line 541 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */

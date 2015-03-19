@@ -50,9 +50,21 @@ $darkFont = #464646
 	border-left 1px solid $mildBlue
 	
 .national-layer-list-item
+	padding-left 5px
 	cursor pointer
 	font-size 13px
 	color $darkFont
 	
 .national-layer-list-item-question
 	display none
+
+.national-layer-list-item.active
+	border-left 5px solid $lightBlue
+	
+.national-layer-list-item.active .national-layer-list-item-question
+	display block
+
+.national-layer-list-item.active .national-layer-list-item-label
+	font-weight bold
+	
+
