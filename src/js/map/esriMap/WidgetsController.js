@@ -100,32 +100,15 @@ define([
         },
 
         /**
-         * Show the appropriate data container when radio button is toggled
-         */
-        toggleDataContainer: function(evt) {
-            var target = evt.target ? evt.target : evt.srcElement;
-            if (target.id === 'national-level-toggle') {
-                domClass.add('community-level-data-container', 'hidden');
-                domClass.remove('national-level-data-container', 'hidden');
-                domClass.remove('landTenureRadio', 'hidden');
-                domClass.remove('percentNational', 'hidden');
-            } else if (target.id === 'community-level-toggle') {
-                domClass.add('national-level-data-container', 'hidden');
-                domClass.remove('community-level-data-container', 'hidden');
-                domClass.add('landTenureRadio', 'hidden');
-                domClass.add('percentNational', 'hidden');
-            }
-        },
-
-        /**
          * Toggle the tree widget container open or close
          */
         toggleTreeContainer: function() {
             brApp.debug('WidgetsController >>> toggleTreeContainer');
             var labelNode = document.getElementById('tree-container-toggle'),
+                container = document.getElementById('tree-widget-container'),
                 node = document.getElementById('tree-content'),
                 active = domClass.contains(node, 'active'),
-                height = active ? 0 : node.scrollHeight;
+                height = active ? 0 : (container.offsetHeight - 34);
 
             labelNode.innerHTML = active ? '&plus;' : '&minus;';
             if (!active) {
@@ -142,7 +125,7 @@ define([
                 onEnd: function() {
                     if (height !== 0) {
                         // Update the size of the legend as it grows so no scrollbars
-                        node.style.height = 'auto';
+                        // node.style.height = 'auto';
                     } else {
                         domClass.toggle(node, 'active');
                     }
@@ -157,6 +140,7 @@ define([
         toggleMobileMenu: function() {
             brApp.debug('WidgetsController >>> toggleMobileMenu');
             var mapNode = document.getElementById('brMap'),
+                accordion = registry.byId('layer-accordion'),
                 menuNodeId = 'mobileMenu',
                 menuButton = 'mobile-menu-toggle',
                 isClosing = domClass.contains(menuNodeId, 'open'),
@@ -179,6 +163,9 @@ define([
                     brApp.map.resize();
                     if (isClosing) {
                         domClass.toggle(menuNodeId, 'open');
+                    }
+                    if (accordion) {
+                        accordion.resize();
                     }
                 }
             }).play();

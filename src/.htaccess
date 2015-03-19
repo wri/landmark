@@ -1,4 +1,5 @@
-ErrorDocument 404 http://localhost/github_work/Community-Rights/src/index.html
+# If we want to redirect to homepage when a bad url is visited in this domain, change url to homepage of app
+# ErrorDocument 404 http://localhost/github_work/Community-Rights/src/index.html
 SetOutputFilter DEFLATE
 <FilesMatch "index\.(html|htm)$">
 	FileETag None

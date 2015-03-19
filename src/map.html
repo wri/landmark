@@ -67,27 +67,14 @@
           <div id="tree-widget-container" class="map-component tree-widget-container hideOnLoad">
             <div id="tree-title-pane" class="tree-widget-title-pane"><span id="tree-title" class="tree-title-text tree-width"><span>Land Recognition Status</span></span><span id="tree-container-toggle" class="tree-container-toggle pointer">&minus;</span></div>
             <div id="tree-content" class="tree-content tree-width active">
-              <div id="national-level-toggle" class="tree-data-section">National Level Data
-                <div id="landTenureRadio" class="radio-button-container hidden">
-                  <input type="radio" name="national-radio" checked id="land-tenure-toggle" class="radio-button-container">
-                  <label for="national-level-toggle">National Level Data - Land Tenure Security Indicators</label>
-                  <div id="national-level-data-container" class="national-level-data-container hidden">
-                    <div id="nationalMenuControls" class="national-menu-controls"><span id="nationalCommunityMenuButton" class="national-segmented-menu-button active">Comm</span><span id="nationalIndigenousMenuButton" class="national-segmented-menu-button">Indig</span>
-                    </div>
-                    <div id="national-level-tree-community"></div>
-                    <div id="national-level-tree-indigenous" class="hidden"></div>
+              <div id="layer-accordion" class="layer-accordion">
+                <div id="national-level-toggle">
+                  <div id="national-layer-lists"></div>
+                </div>
+                <div id="community-level-toggle">
+                  <div id="community-level-data-container" class="community-level-data-container">
+                    <div id="community-level-tree"></div>
                   </div>
-                </div>
-                <div id="percentNational" class="hidden">
-                  <input type="radio" name="national-radio" id="percent-national-toggle" class="radio-button-container">
-                  <label for="national-level-toggle">National Level Data - Pct of Indigenous and Community Lands
-                    <div id="national-level-tree-percentage" class="hidden"></div>
-                  </label>
-                </div>
-              </div>
-              <div id="community-level-toggle" class="tree-data-section">Community Level Data
-                <div id="community-level-data-container" class="community-level-data-container">
-                  <div id="community-level-tree"></div>
                 </div>
               </div>
             </div>
@@ -120,7 +107,7 @@
           <div class="map-component share-container hidden">
             <div id="share-widgets">
               <div class="sharing_toolbox">
-                <div data-title="Global Forest Watch Commodities" class="addthis_sharing_toolbox"></div>
+                <div data-title="Global Platform of Indigenous and Community Lands" class="addthis_sharing_toolbox"></div>
                 <div id="embedShare"></div>
               </div>
             </div>
