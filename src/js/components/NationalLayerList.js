@@ -16,6 +16,13 @@ define([
 		each item in the array must have id, label, and question properties
 	*/
 	var LayerList = React.createClass({displayName: "LayerList",
+
+		getInitialState: function () {
+			return {
+				active: ''
+			};
+		},
+
 		/* jshint ignore:start */
 		render: function () {
 			return (
@@ -27,13 +34,21 @@ define([
 
 		dataMapper: function (item, index) {
 			return (
-				React.createElement("div", {className: "national-layer-list-item", key: index + ':' + item.id}, 
+				React.createElement("div", {className: 'national-layer-list-item ' + (this.state.active === item.id ? 'active' : ''), 
+					key: item.id, 
+					onClick: this.setActiveLayer.bind(this, item.id)
+				}, 
 					React.createElement("div", {className: "national-layer-list-item-label"}, item.label), 
-					React.createElement("div", {className: ""}, item.question)
+					React.createElement("div", {className: "national-layer-list-item-question"}, item.question)
 				)
 			);
-		}
+		},
 		/* jshint ignore:end */
+		setActiveLayer: function (id) {
+			this.setState({
+				'active': id
+			});
+		}
 
 	});
 

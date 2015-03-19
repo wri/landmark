@@ -7,7 +7,7 @@
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
-/* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
+/* line 543 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
 /* line 543 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 
@@ -736,7 +736,7 @@ label {
   margin: 0 0 0 5px;
 }
 
-/* line 60 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
+/* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 
 /* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 
@@ -828,23 +828,23 @@ body:not(.mobile) .tree-widget-container .tree-content {
   font-size: 14px;
 }
 
-/* line 49 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 60 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 
-/* line 4 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+/* line 5 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 .dijitAccordionTitleFocus {
   outline: none !important;
 }
 
-/* line 7 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+/* line 8 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 .dijitAccordionTitle {
   background: #c6d9f0 !important;
   font-size: 15px;
   color: #047;
 }
 
-/* line 12 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+/* line 13 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 .national-layer-selection-label {
   font-weight: bold;
   font-size: 13px;
@@ -852,13 +852,13 @@ body:not(.mobile) .tree-widget-container .tree-content {
   padding: 0 5px;
 }
 
-/* line 18 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+/* line 19 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 .land-tenure-menu-controls {
   text-align: center;
   margin: 5px 0;
 }
 
-/* line 22 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+/* line 23 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 .land-tenure-menu-button {
   border: 1px solid #8db3e2;
   color: #8db3e2;
@@ -867,13 +867,13 @@ body:not(.mobile) .tree-widget-container .tree-content {
   font-size: 13px;
 }
 
-/* line 29 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+/* line 30 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 .land-tenure-menu-button.active {
   background: #8db3e2;
   color: #fff;
 }
 
-/* line 33 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+/* line 34 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 .land-tenure-menu-button:first-of-type {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -884,7 +884,7 @@ body:not(.mobile) .tree-widget-container .tree-content {
   border-right: 0;
 }
 
-/* line 42 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+/* line 43 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 .land-tenure-menu-button:last-of-type {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -893,6 +893,18 @@ body:not(.mobile) .tree-widget-container .tree-content {
   -webkit-border-top-right-radius: 5px;
   -webkit-border-bottom-right-radius: 5px;
   border-left: 1px solid #8db3e2;
+}
+
+/* line 52 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+.national-layer-list-item {
+  cursor: pointer;
+  font-size: 13px;
+  color: #464646;
+}
+
+/* line 57 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
+.national-layer-list-item-question {
+  display: none;
 }
 
 /* line 541 : /Users/Robert/Projects/github_work/Community-Rights/src/css/map.styl */
