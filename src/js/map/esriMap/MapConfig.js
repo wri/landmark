@@ -1,4 +1,4 @@
-define([], function() {
+define(["esri/InfoTemplate"], function(InfoTemplate) {
 
     // var indigenousLandsUrl = 'http://gis-stage.wri.org/arcgis/rest/services/CommunityLands/CommunityLands/MapServer';
     var indigenousLandsUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer';
@@ -9,6 +9,14 @@ define([], function() {
     var landTenureSecurityInfo = "Placeholder so this layer's info icon appears in the tree";
 
     var MapConfig = {
+
+        // nationalLevelInfoTemplatePercent: new InfoTemplate(item.value,
+        //     "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>" + item.feature.attributes['Percent Indigenous and Community Land'] + "% (" + item.feature.attributes['Contributor of % Community Lands Data'] + ", " + item.feature.attributes['Year of Pct Indigenous & Community Lands Data'] + ")</div>" +
+        //     "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>" + item.feature.attributes['Percent of Indigenous Lands'] + "% (" + item.feature.attributes['Contributor of Percent Indigenous Lands Data'] + ", " + item.feature.attributes['Year of Pct Indigenous Lands Data'] + ")</div>" +
+        //     "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>" + item.feature.attributes['Percent Community Lands'] + "% (" + item.feature.attributes['Contributor of % Community Lands Data'] + ", " + item.feature.attributes['Year of % Community Lands Data'] + ")</div>" +
+        //     "<div class='popup-last'>Last Updated: " + item.feature.attributes['Date of Last Update'] + '<span id="additionalInfo"> Additional Info</span></div>'
+
+        // ),
 
         options: {
             sliderPosition: 'top-right',
@@ -26,11 +34,20 @@ define([], function() {
                 defaultLayers: [0, 1, 2, 3, 4], //[0,1,2,3,4,5,6,7,8,9]
                 visible: true
             },
-            'communityLands': {
-                url: indigenousLandsUrl,
+            // 'communityLands': {
+            //     url: indigenousLandsUrl,
+            //     type: 'dynamic',
+            //     defaultLayers: [5, 6, 7, 8, 9], //[0,1,2,3,4,5,6,7,8,9]
+            //     visible: true
+            // },
+            'nationalLevel': {
+                url: nationalLevelUrl,
                 type: 'dynamic',
-                // Not all the layers are present in the tree, when they are, include 0 - 9
-                defaultLayers: [5, 6, 7, 8, 9], //[0,1,2,3,4,5,6,7,8,9]
+                defaultLayers: [], //[1,2,3,4]
+                // infoTemplate: {
+                //     title: "${Country}",
+                //     content: "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>${Country}</div>"
+                // }
                 visible: true
             },
             'CustomFeatures': {
@@ -168,7 +185,7 @@ define([], function() {
                 question: "Are sub-surface minerals (i.e., not surface minerals) within community lands under community jurisdiction?"
             }, {
                 label: 'Oil and natural gas',
-                id: 'unregisteredTenure',
+                id: 'oilAndGasTenure',
                 question: "Are oil, natural gas and other forms of hydrocarbons within community lands under community jurisdiction?"
             }, {
                 label: 'Right to consent',
@@ -208,7 +225,7 @@ define([], function() {
 
         nationalLevelTreeDataIndigenous: [{
             label: 'Indicators of Indigenous Land Tenure Security, as Stated by Law:',
-            id: 'tenureSecurityLandsCommunity',
+            id: 'tenureSecurityLandsIndigenous',
             question: false,
             info: landTenureSecurityInfo,
             children: [{

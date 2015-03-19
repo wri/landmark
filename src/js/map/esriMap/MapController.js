@@ -153,6 +153,8 @@ define([
             DrawTool.init();
             self.geometryService = new GeometryService(MapConfig.geometryServiceURL);
 
+
+
             // remove hideOnLoad classes
             dojoQuery('body .hideOnLoad').forEach(function(node) {
                 domClass.remove(node, 'hideOnLoad');
@@ -170,6 +172,7 @@ define([
                 features = [],
                 self = this,
                 indigenousLayer,
+                nationalLayer,
                 userGraphics,
                 layer;
 
@@ -190,6 +193,15 @@ define([
             if (indigenousLayer) {
                 if (indigenousLayer.visible) {
                     deferreds.push(self.identifyIndigenous(mapPoint));
+                }
+            }
+
+            nationalLayer = brApp.map.getLayer('nationalLevel');
+
+            if (nationalLayer) {
+
+                if (nationalLayer.visible) {
+                    deferreds.push(self.identifyNational(mapPoint));
                 }
             }
 
@@ -215,6 +227,9 @@ define([
                         case "inidigenousLands":
                             features = features.concat(self.setIndigenousTemplates(item.features));
                             break;
+                        case "nationalLevel":
+                            features = features.concat(self.setNationalTemplates(item.features));
+                            break;
                             // case "CustomFeatures":
                             //     //     // This will only contain a single feature and return a single feature
                             //     //     // instead of an array of features
@@ -227,7 +242,7 @@ define([
 
                 if (features.length > 0) {
                     brApp.map.infoWindow.setFeatures(features);
-                    brApp.map.infoWindow.resize(350);
+                    brApp.map.infoWindow.resize(450);
                     $(".titlePane").removeClass("analysis-header");
                     $(".titleButton.close").css("color", "white");
                     brApp.map.infoWindow.show(mapPoint);
@@ -279,10 +294,50 @@ define([
 
         },
 
+        identifyNational: function(mapPoint) {
+            brApp.debug('MapController >>> identifyNational');
+
+            var deferred = new Deferred(),
+                identifyTask = new IdentifyTask(MapConfig.layers.nationalLevel.url),
+                params = new IdentifyParameters(),
+                mapLayer = brApp.map.getLayer('nationalLevel');
+
+            params.tolerance = 3;
+            params.returnGeometry = true;
+            params.width = brApp.map.width;
+            params.height = brApp.map.height;
+            params.geometry = mapPoint;
+            params.mapExtent = brApp.map.extent;
+            params.layerIds = mapLayer.visibleLayers;
+            // if (params.layerIds.indexOf(4) > -1) {
+            //     params.layerIds.splice(params.layerIds.indexOf(4), 1);
+            // }
+            // if (params.layerIds.indexOf(11) > -1) {
+            //     params.layerIds.splice(params.layerIds.indexOf(11), 1);
+            // }
+
+            params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+
+            identifyTask.execute(params, function(features) {
+                if (features.length > 0) {
+                    console.log(features);
+                    deferred.resolve({
+                        layer: "nationalLevel",
+                        features: features
+                    });
+                } else {
+                    deferred.resolve(false);
+                }
+            }, function(error) {
+                deferred.resolve(false);
+            });
+
+            return deferred.promise;
+
+        },
+
         setIndigenousTemplates: function(featureObjects) {
             brApp.debug('MapController >>> setIndigenousTemplates');
-
-
 
             var template,
                 features = [],
@@ -317,6 +372,134 @@ define([
                 features.push(item.feature);
             });
             return features;
+        },
+
+        setNationalTemplates: function(featureObjects) {
+            brApp.debug('MapController >>> setNationalTemplates');
+
+
+            var template,
+                features = [],
+                self = this;
+
+            arrayUtils.forEach(featureObjects, function(item) {
+                if (item.layerId === 5) {
+                    return;
+                }
+
+                if (item.layerId === 2 || item.layerId === 3 || item.layerId === 4) {
+                    template = new InfoTemplate(item.value,
+                        "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>" + item.feature.attributes['Percent Indigenous and Community Land'] + "% (" + item.feature.attributes['Contributor of % Community Lands Data'] + ", " + item.feature.attributes['Year of Pct Indigenous & Community Lands Data'] + ")</div>" +
+                        "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>" + item.feature.attributes['Percent of Indigenous Lands'] + "% (" + item.feature.attributes['Contributor of Percent Indigenous Lands Data'] + ", " + item.feature.attributes['Year of Pct Indigenous Lands Data'] + ")</div>" +
+                        "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>" + item.feature.attributes['Percent Community Lands'] + "% (" + item.feature.attributes['Contributor of % Community Lands Data'] + ", " + item.feature.attributes['Year of % Community Lands Data'] + ")</div>" +
+                        "<div class='popup-last'>Last Updated: " + item.feature.attributes['Date of Last Update'] + '<span id="additionalInfo"> Additional Info</span></div>'
+
+                    );
+                    item.feature.setInfoTemplate(template);
+                } else { //layers 0 and 1
+                    // template = new InfoTemplate(item.value,
+                    //     "<div class='odd-row'><div class='popup-header'>Groups targeted by the legal framework</div>" + item.feature.attributes['Framework'] + "</div>" +
+                    //     "<div class='even-row'><div class='popup-header'>Indicator score</div>" + item.feature.attributes.I10_Scr + "</div>" +
+                    //     "<div class='odd-row'><div class='popup-header'>Comments</div>" + item.feature.attributes.I10_Com + "</div>" +
+                    //     "<div class='odd-row'><div class='popup-header'>Laws and provisions reviewed</div>" + item.feature.attributes.I10_Lap + "</div>" +
+                    //     "<div class='odd-row'><div class='popup-header'>Laws and provisions reviewed</div>" + item.feature.attributes.I10_Rev + " (" + item.feature.attributes.I10_Year + ")</div>" +
+                    //     "<div class='popup-last'>Last Updated: " + item.feature.attributes.Last_Updt + '<span id="additionalInfo"> Additional Info</span></div>'
+                    // );
+                    item.feature.setInfoTemplate(self.setCustomNationalTemplate(item.feature));
+                }
+
+
+                // if (item.layerId === 1) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalDocIcon.png'> " + template.title;
+                // } else if (item.layerId === 2) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/tiltingIcon.png'> " + template.title;
+                // } else if (item.layerId === 3) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalLandIcon.png'> " + template.title;
+                // }
+                console.log(item.layerId);
+                //item.feature.setInfoTemplate(template);
+
+                features.push(item.feature);
+            });
+            return features;
+        },
+
+        setCustomNationalTemplate: function(feature) {
+
+            //do this
+
+            brApp.debug('MapController >>> setCustomNationalTemplate');
+            var nationalIndicatorCode;
+            switch (brApp.currentLayer) {
+                case "legalForceTenure":
+                    nationalIndicatorCode = "1";
+                    break;
+                case "perpetuityTenure":
+                    nationalIndicatorCode = "2";
+                    break;
+                case "commonPropertyTenure":
+                    nationalIndicatorCode = "3";
+                    break;
+                case "unregisteredTenure":
+                    nationalIndicatorCode = "4";
+                    break;
+                case "registrationTenure":
+                    nationalIndicatorCode = "5";
+                    break;
+                case "selfGovernanceTenure":
+                    nationalIndicatorCode = "6";
+                    break;
+                case "treesForestsRights":
+                    nationalIndicatorCode = "7a";
+                    break;
+                case "watersRights":
+                    nationalIndicatorCode = "7b";
+                    break;
+                case "wildlifeRights":
+                    nationalIndicatorCode = "7c";
+                    break;
+                case "subsurfaceMinerals":
+                    nationalIndicatorCode = "7d";
+                    break;
+                case "oilAndGasTenure":
+                    nationalIndicatorCode = "7e";
+                    break;
+                case "rightToConsent":
+                    nationalIndicatorCode = "8";
+                    break;
+                case "landAcquisition":
+                    nationalIndicatorCode = "9";
+                    break;
+                case "cadasterObligation":
+                    nationalIndicatorCode = "10";
+                    break;
+                case "disputeMechanism":
+                    nationalIndicatorCode = "11";
+                    break;
+                case "womenEqualLand":
+                    nationalIndicatorCode = "12a";
+                    break;
+                case "newMembersEqualLand":
+                    nationalIndicatorCode = "12b";
+                    break;
+                case "minoritiesEqualLand":
+                    nationalIndicatorCode = "12c";
+                    break;
+            }
+
+
+            var nationalLevelInfoTemplatePercent = new InfoTemplate("${Country}",
+                "<div class='odd-row'><div class='popup-header'>" + brApp.currentLayer + "</div>" +
+                "<div class='odd-row'><div class='popup-header'>Groups targeted by the legal framework</div>${Framework}</div>" +
+                "<div class='even-row'><div class='popup-header'>Indicator score</div>${I" + nationalIndicatorCode + "_Scr}</div>" +
+                "<div class='odd-row'><div class='popup-header'>Comments</div>${I" + nationalIndicatorCode + "_Com}</div>" +
+                "<div class='odd-row'><div class='popup-header'>Laws and provisions reviewed</div>${I" + nationalIndicatorCode + "_Lap}</div>" +
+                "<div class='odd-row'><div class='popup-header'>Review source and date</div>${I" + nationalIndicatorCode + "_Rev} (${I" + nationalIndicatorCode + "_Year})</div>" +
+                "<div class='popup-last'>Last Updated: ${Last_Updt} <span id='additionalInfo'> Additional Info</span></div>"
+            );
+
+            return nationalLevelInfoTemplatePercent;
+
         },
 
         selectCustomGraphics: function(mapPoint) {
@@ -674,13 +857,20 @@ define([
 
         showDataComplete: function() {
             brApp.debug('MapController >>> showDataComplete');
-            var dynamicLayer = brApp.map.getLayer('indigenousLands');
+            var dynamicLayer = brApp.map.getLayer('nationalLevel');
+            var imageUrlChecked = "url('css/images/checkbox_checked.png')";
+            var imageUrlUnchecked = "css/images/checkbox_unchecked.png";
 
-            if (this.checked === true) {
-                dynamicLayer.visibleLayers.push(11);
+
+            if (this.dataset.checked === 'false') {
+                $('#data-complete-checkbox').removeClass('data-complete-checkbox-class').addClass('data-complete-checkbox-class-checked');
+                dynamicLayer.visibleLayers.push(5);
+                this.dataset.checked = 'true';
             } else {
-                var index = dynamicLayer.visibleLayers.indexOf(11);
+                $('#data-complete-checkbox').removeClass('data-complete-checkbox-class-checked').addClass('data-complete-checkbox-class');
+                var index = dynamicLayer.visibleLayers.indexOf(5);
                 dynamicLayer.visibleLayers.splice(index, 1);
+                this.dataset.checked = 'false';
             }
             topic.publish('refresh-legend');
             dynamicLayer.setVisibleLayers(dynamicLayer.visibleLayers);
@@ -708,7 +898,9 @@ define([
             // if (containerNode) {
             //     domClass.remove(containerNode, 'active');
             // }
-            debugger;
+
+            //TODO: Why does the whole list shift to the left and hide the tree-toggle-symbol and its span label And its span 'tree-node-lablal'??? -->Its a React thing: the whole 'checkbox-tree' class (which is a parent of all of these) is replaced by a new one which doesn't have that  --> Also this is not where this happens; its probably within the React tree logic itself
+
             // Now add the active class to the target and to the container
             switch (target.id) {
                 case "nationalCommunityMenuButton":
@@ -727,20 +919,19 @@ define([
                     domClass.add('national-level-tree-community', 'hidden');
                     break;
                 case "land-tenure-toggle":
-                    if (domClass.contains(target, 'active')) {
-                        return;
-                    }
 
                     id = 'national-level-data-container';
-                    domClass.add('national-level-toggle', 'hidden');
+                    domClass.add('national-level-tree-percentage', 'hidden');
+                    domClass.remove('national-level-tree-percentage', 'active');
                     domClass.remove('national-level-data-container', 'hidden');
                     //domClass.add('national-level-tree-community', 'hidden');
                     break;
                 case "percent-national-toggle":
 
                     id = 'national-level-tree-percentage';
+                    //domClass.remove('national-level-tree-percentage', 'hidden');
                     domClass.add('national-level-data-container', 'hidden');
-                    domClass.remove('national-level-tree-percentage', 'hidden');
+                    //domClass.remove('national-level-tree-percentage', 'hidden');
                     break;
 
             }
@@ -772,6 +963,7 @@ define([
         refreshLegend: function() {
             brApp.debug('MapController >>> refreshLegend');
             registry.byId('legend').refresh();
+
         }
 
     };

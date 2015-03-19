@@ -21,11 +21,13 @@ define([
                 legendNode = document.querySelector('.brMap .legend-content'),
                 active = domClass.contains(legendNode, 'active'),
                 height = active ? 0 : node.scrollHeight;
-            console.log(active);
+
             if (active) {
-                $("#legend-toggle-icon").html("+");
+                //$("#legend-toggle-icon").html("+");
+                //$("#legend-toggle-icon").css("background", "url('css/images/checkbox_checked.png')");
             } else {
-                $("#legend-toggle-icon").html("-");
+                //$("#legend-toggle-icon").html("-");
+                //$("#legend-toggle-icon").css("background", "url('css/images/close_minus_symbol.png')");
             }
 
             domClass.toggle(legendNode, 'active');

@@ -32,14 +32,14 @@ define([
       if (this.state.data[0].children) {
         for (var i = 0; i < this.state.data[0].children.length; i++) {
           if (this.state.data[0].children[i].id === key) {
-            activeKeys.push(key);
+            activeKeys.push(key); //TODO: or push i? --> See how layers are put together
           }
         }
         this.state.data = this.state.data[0].children;
       } else {
         for (var i = 0; i < this.state.data.length; i++) {
           if (this.state.data[i].id === key) {
-            activeKeys.push(key);
+            activeKeys.push(i);
           }
         }
       }
@@ -50,7 +50,23 @@ define([
       // Update the Tree Component
       this.setState({ data: dataSource });
       // Update the Layer UI
-      //LayerController.updateVisibleLayers(activeKeys); //TODO When we get data
+
+      //TODO: Map the activeKey's name to the proper Attribute here, so I can use that variable in the layer's Pop-Up to show the correct attributes --> Require layercontroller in map controller? how to get the react state in the map controller when we are assigning the correct fields in the popup??
+      
+      //Determine whether we are in the National Tree when updating data
+      var nationalLayer = this.getDOMNode().dataset.reactid;
+      brApp.currentLayer = evt.target['dataset'].key;
+
+        switch (nationalLayer) {
+                    case ".1": //Community Land Tenure
+                      activeKeys = [0];
+                      break;
+                    case ".2": //Indigenous Land Tenure
+                      activeKeys = [1];
+                      break;
+                }
+
+      LayerController.updateVisibleLayers(activeKeys, nationalLayer); //TODO When we get data
     },
     
     render: function () {
