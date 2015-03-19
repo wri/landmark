@@ -15,6 +15,7 @@ define([
     "dojo/Deferred",
     "dojo/number",
     'dojo/topic',
+    'dojo/fx/Toggler',
     'dijit/registry',
     'esri/dijit/Legend',
     'esri/dijit/Geocoder',
@@ -28,7 +29,7 @@ define([
     "esri/tasks/query",
     "esri/tasks/GeometryService",
     "esri/tasks/AreasAndLengthsParameters"
-], function(Map, Uploader, DrawTool, MapConfig, ReactTree, CommunityTree, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, registry, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, GeometryService, AreasAndLengthsParameters) {
+], function(Map, Uploader, DrawTool, MapConfig, ReactTree, CommunityTree, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, GeometryService, AreasAndLengthsParameters) {
     'use strict';
 
     var MapController = {
@@ -153,7 +154,27 @@ define([
             DrawTool.init();
             self.geometryService = new GeometryService(MapConfig.geometryServiceURL);
 
+            brApp.map.infoWindow.on("selection-change", function() {
 
+                // if (brApp.map.infoWindow.isShowing) {
+                //     // var toggler = new Toggler({
+                //     //     node: brApp.map.infoWindow.domNode,
+                //     //     showDuration: 50,
+                //     //     hideDuration: 50
+                //     // });
+                //     // toggler.hide();
+                //     // setTimeout(function() { //TODO: Do this synchronously...but after the hide operation has completed
+                //     //     toggler.show();
+                //     // }, 50);
+
+                //     $(brApp.map.infoWindow.domNode).fadeToggle(50);
+                //     $(brApp.map.infoWindow.domNode).fadeToggle(50);
+                //     //$(brApp.map.infoWindow.domNode).fadeToggle("fast");
+                //     //$(brApp.map.infoWindow.domNode).fadeToggle("fast");
+                // }
+
+
+            });
 
             // remove hideOnLoad classes
             dojoQuery('body .hideOnLoad').forEach(function(node) {
@@ -178,6 +199,8 @@ define([
 
             brApp.mapPoint = mapPoint;
             brApp.mapPoint.clientY = evt.clientY;
+
+
 
             brApp.map.infoWindow.clearFeatures();
             if (brApp.map.infoWindow.isShowing) {
@@ -898,7 +921,7 @@ define([
             // if (containerNode) {
             //     domClass.remove(containerNode, 'active');
             // }
-
+            debugger;
             //TODO: Why does the whole list shift to the left and hide the tree-toggle-symbol and its span label And its span 'tree-node-lablal'??? -->Its a React thing: the whole 'checkbox-tree' class (which is a parent of all of these) is replaced by a new one which doesn't have that  --> Also this is not where this happens; its probably within the React tree logic itself
 
             // Now add the active class to the target and to the container
@@ -906,12 +929,14 @@ define([
                 case "nationalCommunityMenuButton":
                     id = 'national-level-tree-community';
                     domClass.add('national-level-tree-indigenous', 'hidden');
-                    domClass.add('national-level-tree-percentage', 'hidden');
+                    domClass.remove('national-level-tree-percentage', 'hidden');
                     break;
                 case "nationalIndigenousMenuButton":
                     id = 'national-level-tree-indigenous';
-                    domClass.add('national-level-tree-community', 'hidden');
+                    domClass.remove('national-level-tree-indigenous', 'hidden');
                     domClass.add('national-level-tree-percentage', 'hidden');
+
+                    domClass.remove
                     break;
                 case "nationalPercentageMenuButton":
                     id = 'national-level-tree-percentage';
@@ -919,26 +944,30 @@ define([
                     domClass.add('national-level-tree-community', 'hidden');
                     break;
                 case "land-tenure-toggle":
-
                     id = 'national-level-data-container';
                     domClass.add('national-level-tree-percentage', 'hidden');
-                    domClass.remove('national-level-tree-percentage', 'active');
+                    //domClass.remove('national-level-tree-percentage', 'active');
                     domClass.remove('national-level-data-container', 'hidden');
                     //domClass.add('national-level-tree-community', 'hidden');
                     break;
                 case "percent-national-toggle":
-
                     id = 'national-level-tree-percentage';
                     //domClass.remove('national-level-tree-percentage', 'hidden');
+                    domClass.remove('national-level-tree-percentage', 'hidden');
                     domClass.add('national-level-data-container', 'hidden');
                     //domClass.remove('national-level-tree-percentage', 'hidden');
+                case "none-toggle":
+                    debugger;
+                    //id = 'national-level-tree-percentage';
+                    domClass.add('national-level-data-container', 'hidden');
+                    domClass.add('national-level-tree-percentage', 'hidden');
                     break;
 
             }
             //debugger;
             domClass.add(target, 'active');
-            domClass.add(id, 'active');
-            domClass.remove(id, 'hidden');
+            // domClass.add(id, 'active');
+            // domClass.remove(id, 'hidden');
 
         },
 

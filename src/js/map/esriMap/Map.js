@@ -77,6 +77,10 @@ define([
                     l: lod.level
                 });
 
+                // if (brApp.map.infoWindow.isShowing) {
+                //     brApp.map.infoWindow.reposition(); //TODO: What is this function actually doing??
+                // }
+
             });
 
         },

@@ -17,9 +17,12 @@ div#brMap.brMap
             span.tree-container-toggle.pointer#tree-container-toggle &minus;
          div.tree-content.tree-width.active#tree-content
             div#national-level-toggle.tree-data-section National Level Data
-                div#landTenureRadio.radio-button-container.hidden
+                div#noneRadio.hidden
+                    input(type='radio', name='national-radio', id='none-toggle', class='radio-button-container')
+                    label(for='none-toggle') None
+                div#landTenureRadio.hidden
                     input(type='radio', name='national-radio', checked=true, id='land-tenure-toggle',class='radio-button-container')
-                    label(for='national-level-toggle') National Level Data - Land Tenure Security Indicators
+                    label(for='national-level-toggle') Land Tenure Security Indicators
                     //- div.national-level-data-container.hidden#national-level-data-container.hidden TODO: Eventually I just want to get rid of the 2 radio button's and their input/label children and add the 'National/Community Level data' labels to each tree section div itself; then add onclick's for that class to remove the hidden class onClick
                     div.national-level-data-container.hidden#national-level-data-container
                         div.national-menu-controls#nationalMenuControls
@@ -32,7 +35,7 @@ div#brMap.brMap
                 div#percentNational.hidden
                     input(type='radio', name='national-radio', id='percent-national-toggle',class='radio-button-container')
                     label(for='national-level-toggle') National Level Data - Pct of Indigenous and Community Lands
-                        div#national-level-tree-percentage.hidden
+                    div#national-level-tree-percentage
             div#community-level-toggle.tree-data-section Community Level Data
                 //- div.radio-button-container
                 //-     input(type='radio',id='community-level-toggle',name='tree-data-toggle',checked='checked')
@@ -67,7 +70,7 @@ div#brMap.brMap
     div.map-component.share-container.hidden
         div#share-widgets
             .sharing_toolbox
-                .addthis_sharing_toolbox(data-title='Global Forest Watch Commodities')
+                .addthis_sharing_toolbox(data-title='Global Platform of Indigenous and Community Lands')
                 div#embedShare
             //- div#twitterShare
             //- div#facebookShare
