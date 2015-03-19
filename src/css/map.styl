@@ -303,8 +303,13 @@ label
 	display none
 
 .tree-widget-container
+	bottom 20px
 	left 20px
 	top 20px
+	
+.layer-accordion
+	height 100%
+	width 100%
 	
 .tree-node-info
 	background url(images/info-icon.png) no-repeat #fff
@@ -325,7 +330,10 @@ label
 	height 32px
 	
 .tree-width
-	width 280px
+	width 320px
+	
+.mobile .tree-width
+	width 290px
 	
 #tree-title
 	background-color #036
@@ -353,6 +361,17 @@ label
 	position absolute
 	overflow hidden
 	
+.mobile .tree-content
+	bottom 0
+	left 0
+	top 0
+	
+.radio-button-container label
+	font-size 13px
+	
+.mobile .radio-button-container label
+	margin 0
+
 .brMap .tree-content.active
 	border 1px solid $mainBorder
 	border-top 0
@@ -472,38 +491,38 @@ label
 	cursor pointer
 	margin 0
 	
-.national-menu-controls
-	text-align center
-	margin-top 10px
-	margin-bottom 3px
+// .national-menu-controls
+// 	text-align center
+// 	margin-top 10px
+// 	margin-bottom 3px
 	
-.national-segmented-menu-button:first-of-type
-	border-top-left-radius 5px
-	border-bottom-left-radius 5px
-	-moz-border-radius-topleft 5px
-	-moz-border-radius-bottomleft 5px
-	-webkit-border-top-left-radius 5px
-	-webkit-border-bottom-left-radius 5px
-	border-right 0
+// .national-segmented-menu-button:first-of-type
+// 	border-top-left-radius 5px
+// 	border-bottom-left-radius 5px
+// 	-moz-border-radius-topleft 5px
+// 	-moz-border-radius-bottomleft 5px
+// 	-webkit-border-top-left-radius 5px
+// 	-webkit-border-bottom-left-radius 5px
+// 	border-right 0
 	
-.national-segmented-menu-button:last-of-type
-	border-top-right-radius 5px
-	border-bottom-right-radius 5px
-	-moz-border-radius-topright 5px
-	-moz-border-radius-bottomright 5px
-	-webkit-border-top-right-radius 5px
-	-webkit-border-bottom-right-radius 5px
-	border-left 1px solid black
+// .national-segmented-menu-button:last-of-type
+// 	border-top-right-radius 5px
+// 	border-bottom-right-radius 5px
+// 	-moz-border-radius-topright 5px
+// 	-moz-border-radius-bottomright 5px
+// 	-webkit-border-top-right-radius 5px
+// 	-webkit-border-bottom-right-radius 5px
+// 	border-left 1px solid black
 	
-.national-segmented-menu-button.active
-	background-color #888
-	color #fff
+// .national-segmented-menu-button.active
+// 	background-color #888
+// 	color #fff
 	
-.national-segmented-menu-button
-	border 1px solid #000
-	text-align center
-	padding 5px 10px
-	color #000
+// .national-segmented-menu-button
+// 	border 1px solid #000
+// 	text-align center
+// 	padding 5px 10px
+// 	color #000
 	
 	
 .national-active-indicator
@@ -517,6 +536,7 @@ label
 	margin 0 0 0 5px	
 	
 @import "ReactTree"
+@import "nationalLayerList"
 	
 body:not(.mobile) .launch-map-button
 	margin-right 10px

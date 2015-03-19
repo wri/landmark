@@ -27,15 +27,12 @@
 	text-shadow -1px -1px 1px #DDD
 	outline 1px solid $webkitBlue
 	
-/* Let the tree grow but not bigger then the page */
-.tree-widget-container
-	height 95%
-	
 /* Make sure this only targets .tree-content when in desktop view */
 body:not(.mobile) .tree-widget-container .tree-content
-	overflow-y auto
-	max-height 80%
-/* Let the tree grow but not bigger then the page */
+	// overflow-y auto
+	// max-height 80%
+	bottom 0
+	top 32px
 	
 .checkbox-tree input[type='checkbox']
 	margin 0 5px

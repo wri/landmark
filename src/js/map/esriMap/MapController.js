@@ -5,6 +5,7 @@ define([
     'map/MapConfig',
     'components/Tree',
     'components/CommunityTree',
+    'components/NationalLayerList',
     'map/WidgetsController',
     'dojo/on',
     'dojo/query',
@@ -16,6 +17,8 @@ define([
     "dojo/number",
     'dojo/topic',
     'dijit/registry',
+    'dijit/layout/ContentPane',
+    'dijit/layout/AccordionContainer',
     'esri/dijit/Legend',
     'esri/dijit/Geocoder',
     'esri/dijit/HomeButton',
@@ -28,7 +31,7 @@ define([
     "esri/tasks/query",
     "esri/tasks/GeometryService",
     "esri/tasks/AreasAndLengthsParameters"
-], function(Map, Uploader, DrawTool, MapConfig, ReactTree, CommunityTree, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, registry, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, GeometryService, AreasAndLengthsParameters) {
+], function(Map, Uploader, DrawTool, MapConfig, ReactTree, CommunityTree, NationalLayerList, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, GeometryService, AreasAndLengthsParameters) {
     'use strict';
 
     var MapController = {
@@ -43,25 +46,23 @@ define([
             var mapObject = new Map(MapConfig.options);
             // Make the esri/map available in the global context so other modules can access easily
             brApp.map = mapObject.map;
-            console.log(brApp.map);
             // Bind Events now, Map Events then UI Events
             mapObject.on('map-ready', function() {
                 self.renderComponents();
+                registry.byId('layer-accordion').resize();
             });
 
             on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
             on(document.getElementById('basemap-button'), 'click', WidgetsController.toggleBasemapGallery.bind(WidgetsController));
             on(document.getElementById('share-button'), 'click', WidgetsController.toggleShareContainer.bind(WidgetsController));
-            on(document.getElementById('nationalCommunityMenuButton'), 'click', self.handleNationalToggle.bind(self));
+            // on(document.getElementById('nationalCommunityMenuButton'), 'click', self.handleNationalToggle.bind(self));
             //on(document.getElementById('nationalPercentageMenuButton'), 'click', self.handleNationalToggle.bind(self));//todo: on 'change' ?
 
-            on(document.getElementById('land-tenure-toggle'), 'click', self.handleNationalToggle.bind(self));
-            on(document.getElementById('percent-national-toggle'), 'click', self.handleNationalToggle.bind(self));
+            // on(document.getElementById('land-tenure-toggle'), 'click', self.handleNationalToggle.bind(self));
+            // on(document.getElementById('percent-national-toggle'), 'click', self.handleNationalToggle.bind(self));
+            // on(document.getElementById('nationalIndigenousMenuButton'), 'click', self.handleNationalToggle.bind(self));
 
-            on(document.getElementById('nationalIndigenousMenuButton'), 'click', self.handleNationalToggle.bind(self));
             on(document.getElementById('tree-container-toggle'), 'click', WidgetsController.toggleTreeContainer);
-            on(document.getElementById('national-level-toggle'), 'click', WidgetsController.toggleDataContainer);
-            on(document.getElementById('community-level-toggle'), 'click', WidgetsController.toggleDataContainer);
             on(document.getElementById('analysis-button'), 'click', WidgetsController.showAnalysisDialog);
             on(document.getElementById('upload-shapefile'), 'click', WidgetsController.toggleUploadForm);
             on(document.getElementById('data-complete-checkbox'), 'click', self.showDataComplete);
@@ -100,6 +101,7 @@ define([
                 locateButton,
                 treeWidget,
                 treeWidgetNational,
+                layerAccordion,
                 homeWidget,
                 geocoder,
                 legend,
@@ -138,12 +140,28 @@ define([
                 highlightLocation: false
             }, 'location-widget');
 
-            treeWidget = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
-            treeWidgetNational = new CommunityTree(MapConfig.nationalLevelTreeData, 'national-level-tree-community');
-            treeWidgetNational = new CommunityTree(MapConfig.nationalLevelTreeDataIndigenous, 'national-level-tree-indigenous');
-            treeWidgetNational = new CommunityTree(MapConfig.nationalLevelPercentData, 'national-level-tree-percentage');
+            layerAccordion = new Accordion({
+                id: 'layer-accordion'
+            }, 'layer-accordion');
 
-            // Start all widgets that need to be started
+            layerAccordion.startup();
+
+            layerAccordion.addChild(new ContentPane({
+                title: 'National Level Data'
+            }, 'national-level-toggle'));
+
+            layerAccordion.addChild(new ContentPane({
+                title: 'Community Level Data'
+            }, 'community-level-toggle'));
+
+            treeWidget = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
+            // console.dir(NationalLayerList)
+            var nationalLayerList = new NationalLayerList('national-layer-lists');
+            // treeWidgetNational = new CommunityTree(MapConfig.nationalLevelTreeData, 'national-level-tree-community');
+            // treeWidgetNational = new CommunityTree(MapConfig.nationalLevelTreeDataIndigenous, 'national-level-tree-indigenous');
+            // treeWidgetNational = new CommunityTree(MapConfig.nationalLevelPercentData, 'national-level-tree-percentage');
+
+            // Start all widgets that still need to be started
             basemapGallery.startup();
             locateButton.startup();
             homeWidget.startup();
@@ -153,14 +171,10 @@ define([
             DrawTool.init();
             self.geometryService = new GeometryService(MapConfig.geometryServiceURL);
 
-
-
             // remove hideOnLoad classes
             dojoQuery('body .hideOnLoad').forEach(function(node) {
                 domClass.remove(node, 'hideOnLoad');
             });
-
-
 
         },
 
