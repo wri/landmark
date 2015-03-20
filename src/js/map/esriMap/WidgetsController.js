@@ -5,8 +5,9 @@ define([
     'dijit/Dialog',
     'dojo/_base/fx',
     'dojo/dom-class',
+    'dojo/dom-style',
     'dijit/registry'
-], function(AppConfig, on, dom, Dialog, Fx, domClass, registry) {
+], function(AppConfig, on, dom, Dialog, Fx, domClass, domStyle, registry) {
     'use strict';
 
     var DURATION = 300;
@@ -108,13 +109,19 @@ define([
                 container = document.getElementById('tree-widget-container'),
                 node = document.getElementById('tree-content'),
                 active = domClass.contains(node, 'active'),
-                height = active ? 0 : (container.offsetHeight - 34);
+                height;
 
             labelNode.innerHTML = active ? '&plus;' : '&minus;';
             if (!active) {
                 // If not active. add class now, else, add when animation done
                 domClass.toggle(node, 'active');
+                domStyle.set(container,'bottom','20px');
+            } else {
+                domStyle.set(container,'bottom','auto');
             }
+
+            // Set the height
+            height = active ? 0 : (container.offsetHeight - 34);
 
             Fx.animateProperty({
                 node: node,
