@@ -5,9 +5,10 @@ define([
     'dojo/dom-style',
     'dojo/dom-class',
     'dojo/dom-construct',
+    'dojo/cookie',
     'utils/Helper',
     'map/WidgetsController'
-], function(on, topic, registry, domStyle, domClass, domConstruct, Helper, WidgetsController) {
+], function(on, topic, registry, domStyle, domClass, domConstruct, cookie, Helper, WidgetsController) {
     'use strict';
 
     var AppController = {
@@ -24,6 +25,7 @@ define([
             if (Helper.isMobile()) {
                 this.layoutChangedToMobile();
             }
+            // brApp.hideDialog = false;
 
         },
 
@@ -67,9 +69,9 @@ define([
             // Get a reference to the clicked element
             var target = evt.target ? evt.target : evt.srcElement;
             // If they clicked home, show launch dialog
-            // if (target.id === 'map-page-link') {
-            //     WidgetsController.showWelcomeDialog();
-            // }
+            if (target.id === 'map-page-link') {
+                WidgetsController.showWelcomeDialog();
+            }
         },
 
         /**

@@ -53,10 +53,7 @@ define(['components/aboutAccordion', 'about/main/config'], function(AboutAccordi
             // Get a reference to the clicked element
             var target = evt.target ? evt.target : evt.srcElement;
             // If they clicked home, show launch dialog
-            if (target.id === 'home-page-link') {
-                console.log("home");
-                WidgetsController.showWelcomeDialog();
-            }
+
         },
 
         renderComponents: function() {

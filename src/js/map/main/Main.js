@@ -19,7 +19,7 @@ define([
         init: function() {
             // Store Globals in brApp if you must have a global
             window.brApp = {
-                debugEnabled: false,
+                debugEnabled: true,
                 debug: function(msg) {
                     if (this.debugEnabled) {
                         if (typeof msg === 'string') {

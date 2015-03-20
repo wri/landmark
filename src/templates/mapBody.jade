@@ -57,8 +57,8 @@ div#brMap.brMap
     div.map-component.legend-container.hideOnLoad#legend-container
         div.legend-title-pane
             span(class='legend-title pointer', title='Legend', id='legend-toggle') Legend
-                //- div(id="legend-toggle-icon")!='-'
-                div(id="legend-toggle-icon")
+                div(id="legend-toggle-icon")!='&ndash;'
+                //-div(id="legend-toggle-icon")
         div.legend-content.active#legend-content
             div#legend
     div.map-component.button-widget.share-button.pointer.hideOnLoad#share-button

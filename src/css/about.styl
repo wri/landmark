@@ -1,10 +1,10 @@
 @import "config"
 
 body
-	font-family Arial Narrow
+	font-family Arial
 
 #aboutTitle
-	text-align center
+	margin-left 475px
 
 .accordion-Controls
 	float left
@@ -116,8 +116,18 @@ body
 @media (max-width: 1500px)
 	.accordion-Controls
 		margin-left 0px
+	#aboutTitle
+		margin-left 250px
+		
+@media (max-width: 1250px)
+	#aboutTitle
+		text-align center
+		margin-right 20px
 		
 @media (max-width: 1000px)
+	#aboutTitle
+		margin-left 20px
+		margin-right 20px
 	.about-Accordion
 		width auto
 	.aboutImageLeft

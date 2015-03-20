@@ -8,8 +8,7 @@ define([], function() {
          */
         listen: function() {
             brApp.debug('Dispatcher >>> listen');
-            // Map Controller Functions
-            //topic.subscribe('refresh-legend', MapController.refreshLegend);
+
 
             //TODO: Subscribe to other functions here?
 

@@ -73,6 +73,24 @@ module.exports = {
                 name: 'js/about/aboutLoader',
                 out: 'build/js/about/aboutLoader.js'
             }
+        },
+        home: {
+            options: {
+                baseUrl: 'src',
+                paths: {
+                    'dojo': 'empty:',
+                    'esri': 'empty:',
+                    'dijit': 'empty:',
+                    'dojox': 'empty:',
+                    'react': 'empty:',
+                    'js': 'js',
+                    'libs': 'libs',
+                    'home': 'js/home',
+                    'components': 'js/components'
+                },
+                name: 'js/home/homeLoader',
+                out: 'build/js/home/homeLoader.js'
+            }
         }
     }
 };

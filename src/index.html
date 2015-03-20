@@ -9,7 +9,9 @@
     <style>html,body,.root{height:100%;width:100%;padding:0;margin:0;overflow:hidden;}</style>
     <link rel="stylesheet" href="libs/foundation.min.css">
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/home.css"><!--[if lt IE 9]>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" type="text/css" href="//cloud.github.com/downloads/lafeber/world-flags-sprite/flags16.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.4.1/slick.css"><!--[if lt IE 9]>
     <script src="libs/es5-shim.min.js"></script>
     <script src="libs/es5-sham.min.js"></script>
     <script src="libs/html5shiv.js"></script><![endif]-->
@@ -43,6 +45,35 @@
       <div class="app-body">
         <div id="backgroundImage" alt="Credit: BC Gov Photos" title="Credit: BC Gov Photos"></div>
         <div id="homeText">
+          <div class="single-item"></div>
+          <div id="luke" data-slick="{&quot;slidesToShow&quot;: 4, &quot;slidesToScroll&quot;: 4}">
+            <div>
+              <h3>1 </h3>
+            </div>
+            <div>
+              <h3>2</h3>
+            </div>
+            <div>
+              <h3>3</h3>
+            </div>
+            <div>
+              <h3>4</h3>
+            </div>
+            <div>
+              <h3>5</h3>
+            </div>
+            <div>
+              <h3>6 </h3>
+            </div>
+          </div>
+          <button id="launch-map" class="launch-map-button">Launch Interactive Map</button>
+          <div id="language-flags" class="f16">Language:
+            <li id="britishFlag" class="flag flags gb"></li>
+            <li id="germanFlag" class="flag flags de"></li>
+            <li id="japanFlag" class="flag flags jp"></li>
+            <li id="chinaFlag" class="flag flags cn"></li>
+            <li id="frenchFlag" class="flag flags fr"></li>
+          </div>
           <div style="font-size:18px;">
             <p class="launch-dialog-content">
               <div style="font-size:18px;">
@@ -53,12 +84,13 @@
               </div>
             </p>
           </div>
-          <button id="launch-map" class="launch-map-button">Launch Interactive Map</button>
         </div>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="libs/foundation.min.js"></script>
+    <script src="//cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js"></script>
+    <script data-main="js/home/homeLoader" src="libs/require.js"></script>
     <script>
       $(document).foundation();
       $("#home-page-link").addClass("exampleClass");

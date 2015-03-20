@@ -5,8 +5,9 @@ define([
     'dijit/Dialog',
     'dojo/_base/fx',
     'dojo/dom-class',
+    "dojo/cookie",
     'dijit/registry'
-], function(AppConfig, on, dom, Dialog, Fx, domClass, registry) {
+], function(AppConfig, on, dom, Dialog, Fx, domClass, cookie, registry) {
     'use strict';
 
     var DURATION = 300;
@@ -23,10 +24,10 @@ define([
                 height = active ? 0 : node.scrollHeight;
 
             if (active) {
-                //$("#legend-toggle-icon").html("+");
+                $("#legend-toggle-icon").html("+");
                 //$("#legend-toggle-icon").css("background", "url('css/images/checkbox_checked.png')");
             } else {
-                //$("#legend-toggle-icon").html("-");
+                $("#legend-toggle-icon").html("&ndash;");
                 //$("#legend-toggle-icon").css("background", "url('css/images/close_minus_symbol.png')");
             }
 
@@ -255,23 +256,78 @@ define([
          */
         showWelcomeDialog: function() {
             brApp.debug('WidgetsController >>> showWelcomeDialog');
-            // var dialogContent = AppConfig.welcomeDialogContent,
-            //     id = 'launch-dialog',
-            //     launchDialog;
+            //Check is the user has specified to hide the dialog
+            // if (brApp.hideDialog) {
+            //     return;
+            // }
 
-            // // Add a Close button to the dialog
-            // if (!registry.byId(id)) {
-            //     dialogContent += "<button id='launch-map' class='launch-map-button'>Launch Interactive Map</button>";
-            //     launchDialog = new Dialog({
-            //         id: id,
-            //         content: dialogContent,
-            //         style: "width: 90%;max-width: 760px;"
-            //     });
+            var dialogContent = AppConfig.welcomeDialogContent,
+                id = 'launch-dialog',
+                currentCookie,
+                setCookie,
+                okHandle,
+                cleanup,
+                launchDialog;
 
-            //     launchDialog.show();
-            //     on(document.getElementById('launch-map'), 'click', function() {
-            //         registry.byId(id).hide();
-            //     });
+            cleanup = function(destroyDialog) {
+                setCookie();
+
+                if (okHandle) {
+                    okHandle.remove();
+                }
+                launchDialog.hide();
+            };
+
+            setCookie = function() {
+                if (dom.byId("welcomeDialogMemory")) {
+                    if (dom.byId("welcomeDialogMemory").checked) {
+                        cookie("launch-dialog", 'dontShow', {
+                            expires: 7
+                        });
+                    }
+                }
+            };
+
+            // Add a Close button to the dialog
+            if (!registry.byId(id)) {
+                dialogContent += "<input type='checkbox' id='welcomeDialogMemory'> Don't show this dialog again<br><button id='launch-map' class='launch-map-button'>Launch Interactive Map</button>";
+                launchDialog = new Dialog({
+                    id: id,
+                    content: dialogContent,
+                    style: "width: 90%;max-width: 760px;"
+                });
+            } else {
+                launchDialog = registry.byId(id);
+            }
+            currentCookie = cookie("launch-dialog");
+            // if launchDialog.open == true, return
+
+            if (currentCookie === undefined || currentCookie !== "dontShow") {
+
+                launchDialog.show();
+                // cbox = new CheckBox({
+                //     checked: false,
+                // }, "remembershowInstructions");
+                okHandle = on(document.getElementById('launch-map'), 'click', function() {
+                    cleanup(true);
+                });
+                launchDialog.on('cancel', function() {
+                    cleanup(false);
+                });
+            } else {
+                cleanup(true);
+            }
+
+
+            // if (document.getElementById('welcomeDialogMemory').checked == true) {
+            //     brApp.hideDialog = true;
+            // }
+            //     registry.byId(id).hide();
+            // });
+            // cleanup(true);
+
+
+
 
             // } else {
             //     registry.byId(id).show();
