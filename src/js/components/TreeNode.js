@@ -63,13 +63,16 @@ define([
 		            (this.state.collapsed ? String.fromCharCode(43) : String.fromCharCode(8722))
 		          
 		        ), 
-		        React.createElement("input", {
-		          type: "checkbox", 
-		          checked: node.checked || false, 
-		          onChange: this.props.handleChange, 
-		          "data-key": node.id, 
-		          disabled: disabled}
-		         ), 
+		        
+		        	node.noCheckbox ? null : 
+		        	React.createElement("input", {
+			          type: "checkbox", 
+			          checked: node.checked || false, 
+			          onChange: this.props.handleChange, 
+			          "data-key": node.id, 
+			          disabled: disabled}
+		         	), 
+		        
 		         React.createElement("span", {className: "tree-node-label", onClick: this.handleClick}, node.label), 
 					 node.info ? 
 						React.createElement("span", {className: "help-marker"}): null

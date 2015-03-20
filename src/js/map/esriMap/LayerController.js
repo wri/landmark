@@ -1,8 +1,10 @@
 define([
     'dojo/topic',
     'map/MapConfig',
-    'dojo/_base/array'
-], function(topic, MapConfig, arrayUtils) {
+    'map/MapAssets',
+    'dojo/_base/array',
+    'esri/layers/LayerDrawingOptions'
+], function(topic, MapConfig, MapAssets, arrayUtils, LayerDrawingOptions) {
     'use strict';
 
 
@@ -15,26 +17,26 @@ define([
          */
         updateVisibleLayers: function(keys, layer) {
             brApp.debug('LayerController >>> updateVisibleLayers');
-            console.log(keys);
-            var visibleLayers = [];
-            if (layer) { //We know we're in the National Level Data w/ the exception of Data Completeness
-                var dynamicLayer = brApp.map.getLayer('nationalLevel');
+            var visibleLayers = [],
+                dynamicLayer;
 
-                switch (layer) {
-                    case ".1": //Community Land Tenure
-                        visibleLayers = [1];
-                        break;
-                    case ".2": //Indigenous Land Tenure
-                        visibleLayers = [0];
-                        break;
-                    case ".3": //Percent of Community and Indigenous
-                        keys[0] += 2; //--> To get around the two Land Tenure Security Layers
-                        visibleLayers = keys;
-                        break;
+            if (layer) { //We know we're in the National Level Data w/ the exception of Data Completeness
+                visibleLayers = keys;
+                dynamicLayer = brApp.map.getLayer('nationalLevel');
+
+                if (keys[0] === 0 || keys[0] === 1) {
+                    this.setNationalLevelRenderer(visibleLayers);
+                    // Update Dynamic Layers but dont refresh
+                    dynamicLayer.setVisibleLayers(visibleLayers, true);
+                    return;
                 }
 
+                dynamicLayer.setVisibleLayers(visibleLayers);
+                topic.publish('refresh-legend');
+
             } else {
-                var dynamicLayer = brApp.map.getLayer('indigenousLands');
+                
+                dynamicLayer = brApp.map.getLayer('indigenousLands');
 
                 if (keys.length === 0) {
                     visibleLayers.push(-1);
@@ -43,15 +45,41 @@ define([
                         visibleLayers = visibleLayers.concat(MapConfig.layerMapping[key]);
                     });
                 }
-                console.log(visibleLayers);
+
                 if (document.getElementById('data-complete-checkbox').checked === true) {
                     visibleLayers.push(5);
                 }
 
+                dynamicLayer.setVisibleLayers(visibleLayers);
+                topic.publish('refresh-legend');
+
             }
-            dynamicLayer.setVisibleLayers(visibleLayers);
+        },
 
+        /**
+        * @param {array} visibleLayers - Array of layers to be set to visible
+        */
+        setNationalLevelRenderer: function (visibleLayers) {
 
+            var layerDrawingOptionsArray = [],
+                layerDrawingOption,
+                nationalIndicator,
+                nationalLayer,
+                fieldName,
+                renderer;
+
+            nationalIndicator = MapAssets.getNationalLevelIndicatorCode();
+            fieldName = ["I", nationalIndicator, "_Scr"].join('');
+            layerDrawingOption = new LayerDrawingOptions();
+            renderer = MapAssets.getUniqueValueRendererForNationalDataWithField(fieldName);
+            layerDrawingOption.renderer = renderer;
+
+            arrayUtils.forEach(visibleLayers, function (layer) {
+                layerDrawingOptionsArray[layer] = layerDrawingOption;
+            });
+
+            nationalLayer = brApp.map.getLayer('nationalLevel');
+            nationalLayer.setLayerDrawingOptions(layerDrawingOptionsArray);
             topic.publish('refresh-legend');
         },
 

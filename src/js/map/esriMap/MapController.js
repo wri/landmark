@@ -3,6 +3,7 @@ define([
     'map/Uploader',
     'map/DrawTool',
     'map/MapConfig',
+    'map/MapAssets',
     'components/Tree',
     'components/CommunityTree',
     'components/NationalLayerList',
@@ -33,7 +34,7 @@ define([
     "esri/tasks/GeometryService",
     "esri/tasks/AreasAndLengthsParameters"
 
-], function(Map, Uploader, DrawTool, MapConfig, ReactTree, CommunityTree, NationalLayerList, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, GeometryService, AreasAndLengthsParameters) {
+], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, CommunityTree, NationalLayerList, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, GeometryService, AreasAndLengthsParameters) {
 
     'use strict';
 
@@ -103,7 +104,7 @@ define([
                 self = this,
                 locateButton,
                 treeWidget,
-                treeWidgetNational,
+                nationalLayerList,
                 layerAccordion,
                 homeWidget,
                 geocoder,
@@ -158,8 +159,7 @@ define([
             }, 'community-level-toggle'));
 
             treeWidget = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
-            // console.dir(NationalLayerList)
-            var nationalLayerList = new NationalLayerList('national-layer-lists');
+            nationalLayerList = new NationalLayerList('national-layer-lists');
             // treeWidgetNational = new CommunityTree(MapConfig.nationalLevelTreeData, 'national-level-tree-community');
             // treeWidgetNational = new CommunityTree(MapConfig.nationalLevelTreeDataIndigenous, 'national-level-tree-indigenous');
             // treeWidgetNational = new CommunityTree(MapConfig.nationalLevelPercentData, 'national-level-tree-percentage');
@@ -218,12 +218,15 @@ define([
 
             brApp.mapPoint = mapPoint;
             brApp.mapPoint.clientY = evt.clientY;
-
-
-
             brApp.map.infoWindow.clearFeatures();
+
             if (brApp.map.infoWindow.isShowing) {
                 brApp.map.infoWindow.hide();
+            }
+
+            // If drawing tools enabled, dont continue 
+            if (DrawTool.isActive()) {
+                return;
             }
 
             // for (layer in MapConfig.layers) {
@@ -255,11 +258,6 @@ define([
             // }
 
             if (deferreds.length === 0) {
-                return;
-            }
-
-            // If drawing tools enabled, dont continue 
-            if (DrawTool.isActive()) {
                 return;
             }
 
@@ -306,6 +304,7 @@ define([
             params.returnGeometry = true;
             params.width = brApp.map.width;
             params.height = brApp.map.height;
+            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
             params.geometry = mapPoint;
             params.mapExtent = brApp.map.extent;
             params.layerIds = mapLayer.visibleLayers;
@@ -346,6 +345,7 @@ define([
 
             params.tolerance = 3;
             params.returnGeometry = true;
+            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
             params.width = brApp.map.width;
             params.height = brApp.map.height;
             params.geometry = mapPoint;
@@ -362,7 +362,6 @@ define([
 
             identifyTask.execute(params, function(features) {
                 if (features.length > 0) {
-                    console.log(features);
                     deferred.resolve({
                         layer: "nationalLevel",
                         features: features
@@ -471,67 +470,9 @@ define([
             //do this
 
             brApp.debug('MapController >>> setCustomNationalTemplate');
-            var nationalIndicatorCode;
-            switch (brApp.currentLayer) {
-                case "legalForceTenure":
-                    nationalIndicatorCode = "1";
-                    break;
-                case "perpetuityTenure":
-                    nationalIndicatorCode = "2";
-                    break;
-                case "commonPropertyTenure":
-                    nationalIndicatorCode = "3";
-                    break;
-                case "unregisteredTenure":
-                    nationalIndicatorCode = "4";
-                    break;
-                case "registrationTenure":
-                    nationalIndicatorCode = "5";
-                    break;
-                case "selfGovernanceTenure":
-                    nationalIndicatorCode = "6";
-                    break;
-                case "treesForestsRights":
-                    nationalIndicatorCode = "7a";
-                    break;
-                case "watersRights":
-                    nationalIndicatorCode = "7b";
-                    break;
-                case "wildlifeRights":
-                    nationalIndicatorCode = "7c";
-                    break;
-                case "subsurfaceMinerals":
-                    nationalIndicatorCode = "7d";
-                    break;
-                case "oilAndGasTenure":
-                    nationalIndicatorCode = "7e";
-                    break;
-                case "rightToConsent":
-                    nationalIndicatorCode = "8";
-                    break;
-                case "landAcquisition":
-                    nationalIndicatorCode = "9";
-                    break;
-                case "cadasterObligation":
-                    nationalIndicatorCode = "10";
-                    break;
-                case "disputeMechanism":
-                    nationalIndicatorCode = "11";
-                    break;
-                case "womenEqualLand":
-                    nationalIndicatorCode = "12a";
-                    break;
-                case "newMembersEqualLand":
-                    nationalIndicatorCode = "12b";
-                    break;
-                case "minoritiesEqualLand":
-                    nationalIndicatorCode = "12c";
-                    break;
-            }
-
-
+            var nationalIndicatorCode = MapAssets.getNationalLevelIndicatorCode();
             var nationalLevelInfoTemplatePercent = new InfoTemplate("${Country}",
-                "<div class='odd-row'><div class='popup-header'>" + brApp.currentLayer + "</div>" +
+                // "<div class='odd-row'><div class='popup-header'>" + brApp.currentLayer + "</div>" +
                 "<div class='odd-row'><div class='popup-header'>Groups targeted by the legal framework</div>${Framework}</div>" +
                 "<div class='even-row'><div class='popup-header'>Indicator score</div>${I" + nationalIndicatorCode + "_Scr}</div>" +
                 "<div class='odd-row'><div class='popup-header'>Comments</div>${I" + nationalIndicatorCode + "_Com}</div>" +
@@ -940,7 +881,6 @@ define([
             // if (containerNode) {
             //     domClass.remove(containerNode, 'active');
             // }
-            debugger;
             //TODO: Why does the whole list shift to the left and hide the tree-toggle-symbol and its span label And its span 'tree-node-lablal'??? -->Its a React thing: the whole 'checkbox-tree' class (which is a parent of all of these) is replaced by a new one which doesn't have that  --> Also this is not where this happens; its probably within the React tree logic itself
 
             // Now add the active class to the target and to the container
