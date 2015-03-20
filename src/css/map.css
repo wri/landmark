@@ -7,7 +7,7 @@
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
-/* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
+/* line 543 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
 /* line 543 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 
@@ -731,7 +731,7 @@ label {
   margin: 0 0 0 5px;
 }
 
-/* line 60 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
+/* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/analysis.styl */
 
 /* line 9 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 
@@ -823,7 +823,7 @@ body:not(.mobile) .tree-widget-container .tree-content {
   font-size: 14px;
 }
 
-/* line 68 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
+/* line 60 : /Users/Robert/Projects/github_work/Community-Rights/src/css/ReactTree.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 
@@ -892,7 +892,7 @@ body:not(.mobile) .tree-widget-container .tree-content {
 
 /* line 52 : /Users/Robert/Projects/github_work/Community-Rights/src/css/nationalLayerList.styl */
 .national-layer-list-item {
-  padding-left: 5px;
+  padding: 3px 5px;
   cursor: pointer;
   font-size: 13px;
   color: #464646;

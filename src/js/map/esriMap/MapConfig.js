@@ -559,10 +559,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
 
         /* OLD MAY BE ABLE TO DELETE SOON ABOVE */
 
+        // Only leafs in the tree should control any layers, use blank arrays for any branch or root nodes
         layerMapping: {
-            'indigenousLands': [1, 2, 3, 4],
-            'indigenousOfficial': [1, 2],
-            'indigenousUnofficial': [3, 4],
+            'indigenousLands': [],
+            'indigenousOfficial': [],
+            'indigenousUnofficial': [],
             'indigenousFormalTitle': [1],
             'indigenousInProcess': [2],
             'indigenousLandClaim': [3],

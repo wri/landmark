@@ -54,14 +54,14 @@ define([
 			);
 		},
 		/* jshint ignore:end */
-		setActiveLayer: function (id, layer) {
+		setActiveLayer: function (key, layer) {
 			
 			this.setState({
-				'active': id
+				'active': key
 			});
 
 			// Notify Parent and let parent dispatch updates
-			this.props.change(layer);
+			this.props.change(key, layer);
 
 		}
 
@@ -86,14 +86,28 @@ define([
         active: LandTenure,
         landTenureCategory: LandTenureInd,
         landTenureLayer: 1,
-        activePercentIndigenousLayer: 2
+        activePercentIndigenousLayer: 2,
+        activeCommunityKey: MapConfig.landTenureCommunityLayers[0].id,
+        activeIndigenousKey: MapConfig.landTenureIndigenousLayers[0].id
       };
     },
 
-    componentDidUpdate: function () {
-    	var visibleLayers;
+    componentDidMount: function () {
+    	// If we need to set the state based on the url, do so here, but also set up global defaults for other
+    	// parts of the app to use, such as currentLayer
 
-    	switch (this.state.active) {
+    	brApp.currentLayer = (
+    		this.state.landTenureCategory === LandTenureInd ? 
+    			this.state.activeIndigenousKey : 
+    			this.state.activeCommunityKey
+    	);
+    },
+
+    componentDidUpdate: function () {
+    	var visibleLayers,
+    			state = this.state;
+
+    	switch (state.active) {
     		case 'none':
     			visibleLayers = [-1];
     		break;
@@ -102,9 +116,12 @@ define([
     			visibleLayers = (this.state.landTenureCategory === LandTenureInd ? [1] : [0]);
     		break;
     		case PercentIndigenous:
-    			visibleLayers = [this.state.activePercentIndigenousLayer];
+    			visibleLayers = [state.activePercentIndigenousLayer];
     		break;
     	}
+
+    	// Update the currentLayer in brApp, Our popup needs to know the selection so it can format the content correctly
+    	brApp.currentLayer = (state.landTenureCategory === LandTenureInd ? state.activeIndigenousKey : state.activeCommunityKey);
 
     	// The true signifies that this is the national layer being updated
     	// This needs 
@@ -118,16 +135,26 @@ define([
     	});
     },
 
-    changePercentIndigenousLayer: function (layer) {
+    changePercentIndigenousLayer: function (key, layer) {
     	this.setState({
     		activePercentIndigenousLayer: layer
     	});
     },
 
-    changeLandTenureLayer: function (layer) {
-    	this.setState({
+    changeLandTenureLayer: function (key, layer) {
+    	var newState = {
     		landTenureLayer: layer
-    	});
+    	};
+
+    	// If layer === 0, update Active Community Key, else, update Active Indigenous Key
+    	if (layer === 0) {
+    		newState.activeCommunityKey = key;
+    	} else {
+    		newState.activeIndigenousKey = key;
+    	}
+
+    	this.setState(newState);
+
     },
 
     handleRadioChange: function (evt) {
