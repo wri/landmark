@@ -86,7 +86,7 @@ module.exports = {
                     'js': 'js',
                     'libs': 'libs',
                     'home': 'js/home',
-                    'components': 'js/components'
+                    'main': 'js/home/main'
                 },
                 name: 'js/home/homeLoader',
                 out: 'build/js/home/homeLoader.js'

@@ -88,6 +88,18 @@ html
         script(src='libs/foundation.min.js')
         script(src='//cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js')
 
+        script.
+            var base = location.pathname.replace(/\/[^/]+$/, '');
+            window.require = {
+                baseUrl: base,
+                packages: [
+                    {name: 'libs', location: base + '/libs'},
+                    {name: 'home', location: base + '/js/home'},
+                    {name: 'main', location: base + '/js/home/main'}
+                ]
+
+            };
+
         script(data-main='js/home/homeLoader', src='libs/require.js')
 
         script.
