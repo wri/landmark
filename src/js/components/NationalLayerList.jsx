@@ -182,6 +182,13 @@ define([
     				</label>
     			</div>
 
+    			<div className='radio-button-container'>
+    				<label>
+    					<input name='national-layer-selection' type='radio' value={PercentIndigenous} onChange={this.handleRadioChange} />
+    					<span className='national-layer-selection-label'>Percent of Indigenous and Community Lands</span>
+    				</label>
+    			</div>
+
     			<div className='land-tenure-layer-list' 
     					 style={{'display': (this.state.active === LandTenure ? 'block' : 'none')}}>
     					 
@@ -203,13 +210,6 @@ define([
     					   <LayerList data={MapConfig.landTenureCommunityLayers} change={this.changeLandTenureLayer} />
     					 </div>
 
-    			</div>
-
-    			<div className='radio-button-container'>
-    				<label>
-    					<input name='national-layer-selection' type='radio' value={PercentIndigenous} onChange={this.handleRadioChange} />
-    					<span className='national-layer-selection-label'>Percent of Indigenous and Community Lands</span>
-    				</label>
     			</div>
 
     			<div className='percent-indigenous-layer-list' 
