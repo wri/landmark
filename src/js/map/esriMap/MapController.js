@@ -599,7 +599,7 @@ define([
                 }
                 // if (i == value.features.length - 1) {
 
-                template.content += "<tr id='identifyNote'><td colspan='5'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefor, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</td></tr></table>";
+                template.content += "<tr id='identifyNote'><td colspan='5'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</td></tr></table>";
                 brApp.map.infoWindow.setTitle("<i>Intersection Analysis</i>");
 
                 brApp.map.infoWindow.setContent(template.content);
