@@ -288,7 +288,7 @@ define([
 
                 if (features.length > 0) {
                     brApp.map.infoWindow.setFeatures(features);
-                    brApp.map.infoWindow.resize(450);
+                    brApp.map.infoWindow.resize(450); //todo: give both for some browsers
                     $(".titlePane").removeClass("analysis-header");
                     $(".titleButton.close").css("color", "white");
                     brApp.map.infoWindow.show(mapPoint);
@@ -553,37 +553,67 @@ define([
                 var template = new InfoTemplate();
 
 
-                template.setContent("<table><tr id='first-row'><b>The area of interest intersects with <i>" + value.features.length + "</i> inidigenous and/or community lands</b></tr><tr><td>Country</td><td>Name</td><td>Identity</td><td>Official Recognition</td><td>Recognition Status</td></tr>");
+                template.setContent("<table id='analysisTable'><tr><td  colspan='5' id='aoiIntersect'><b>The area of interest intersects with <i>" + value.features.length + "</i> indigenous and/or community lands</b></td></tr><tr><td>Country</td><td>Name</td><td>Identity</td><td>Official Recognition</td><td>Recognition Status</td></tr>");
 
-                function getTextContent(graphic) {
+                function getTextContent(graphic, even) {
+                    if (graphic.feature.attributes.Identity === "Indigenous (self-identified)") {
+                        graphic.feature.attributes.Identity = "Indigenous";
+                    }
+                    if (graphic.feature.attributes.Identity === "Non-indigenous (self-identified)") {
+                        graphic.feature.attributes.Identity = "Community";
+                    }
+                    if (graphic.feature.attributes.Ofcl_Rec === "Officially recognized (by law or decree)") {
+                        graphic.feature.attributes.Ofcl_Rec = "Officially recognized";
+                    }
+                    var str;
+                    if (even === "even") {
 
-                    var str = "<tr><td>" + graphic.feature.attributes.Country + "</td><td>" +
-                        graphic.feature.attributes.Name + "</td><td>" +
-                        graphic.feature.attributes.Identity + "</td><td>" +
-                        graphic.feature.attributes.Ofcl_Rec + "</td><td>" +
-                        graphic.feature.attributes.Rec_Status + "</td></tr>";
+                        str = "<tr><td>" + graphic.feature.attributes.Country + "</td><td>" +
+                            graphic.feature.attributes.Name + "</td><td>" +
+                            graphic.feature.attributes.Identity + "</td><td>" +
+                            graphic.feature.attributes.Ofcl_Rec + "</td><td>" +
+                            graphic.feature.attributes.Rec_Status + "</td></tr>";
+                    } else {
+                        str = "<tr class='odd-row'><td>" + graphic.feature.attributes.Country + "</td><td>" +
+                            graphic.feature.attributes.Name + "</td><td>" +
+                            graphic.feature.attributes.Identity + "</td><td>" +
+                            graphic.feature.attributes.Ofcl_Rec + "</td><td>" +
+                            graphic.feature.attributes.Rec_Status + "</td></tr>";
+                    }
+
 
                     return str;
                 }
 
 
-                arrayUtils.forEach(value.features, function(feature) {
+                for (var i = 0; i < value.features.length; i++) {
+                    //if i is odd use odd row else use even row class
+                    if (i % 2 == 0) {
+                        template.content = template.content + getTextContent(value.features[i], 'even');
+                    } else {
+                        template.content = template.content + getTextContent(value.features[i], 'odd');
+                    }
 
-                    template.setContent(template.content + getTextContent(feature));
 
-                });
-                debugger;
 
-                template.setContent(template.content + "<br /><tr id='identifyNote'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefor, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</tr></table");
+                }
+                // if (i == value.features.length - 1) {
+
+                template.content += "<tr id='identifyNote'><td colspan='5'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefor, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</td></tr></table>";
                 brApp.map.infoWindow.setTitle("<i>Intersection Analysis</i>");
 
                 brApp.map.infoWindow.setContent(template.content);
 
-                brApp.map.infoWindow.resize(450, 400);
+                brApp.map.infoWindow.resize(650, 350);
+
                 $(".titlePane").removeClass("analysis-header");
                 $(".titleButton.close").css("color", "white");
                 brApp.map.infoWindow.show(brApp.mapPoint);
                 $(".esriPopup .titleButton.close").html("&#10005;");
+                //}
+
+
+
 
 
             });
@@ -677,14 +707,14 @@ define([
                     domClass.add('national-level-data-container', 'hidden');
                     //domClass.remove('national-level-tree-percentage', 'hidden');
                 case "none-toggle":
-                    debugger;
+
                     //id = 'national-level-tree-percentage';
                     domClass.add('national-level-data-container', 'hidden');
                     domClass.add('national-level-tree-percentage', 'hidden');
                     break;
 
             }
-            //debugger;
+
             domClass.add(target, 'active');
             // domClass.add(id, 'active');
             // domClass.remove(id, 'hidden');
