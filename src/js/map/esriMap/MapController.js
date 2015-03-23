@@ -645,8 +645,8 @@ define([
 
             //TODO: If our custom polygon overlaps nothing, set the info window content to something special (or nothing?)
             //title = "<span style='padding: 25px;'>Analysis Results Feature " + mapPoint.graphic.attributes.attributeID + "</span>";
-            title = "<span style='padding: 25px;'>Analysis Results</span>";
-            content = "<div id='resultsPie'></div><div style='width: 250px; padding: 25px; color: black; padding-top: 0px; margin-top: -10px;'><strong>Total Area of the polygon:</strong><br /><span id='total-area'></span> Ha<br /><br />" + "<strong>Area that intersects with Indigenous and Community Lands:</strong><br /><span id='intersect-area'></span> Ha</div><br /><button id='printAnalysis' class='analysis-popup-button'>Print</button><button id='exportAnalysis' class='analysis-popup-button'>Export</button>";
+            title = "<span style='padding: 25px;'>Intersection Analysis</span>";
+            content = "<div class='odd-row'>The area of interest intersects with " + features.length + "inidigenous and/or community lands</div><div id='resultsPie'></div><div style='width: 250px; padding: 25px; color: black; padding-top: 0px; margin-top: -10px;'><strong>Total Area of the polygon:</strong><br /><span id='total-area'></span> Ha<br /><br />" + "<strong>Area that intersects with Indigenous and Community Lands:</strong><br /><span id='intersect-area'></span> Ha</div><br /><button id='printAnalysis' class='analysis-popup-button'>Print</button><button id='exportAnalysis' class='analysis-popup-button'>Export</button>";
 
             brApp.map.infoWindow.clearFeatures();
 

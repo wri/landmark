@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
-    <style>html,body,.root{height:100%;width:100%;padding:0;margin:0;overflow:hidden;}</style>
+    <style>html,body,.root,.app{height:100%;width:100%;padding:0;margin:0;overflow:hidden;}</style>
     <link rel="stylesheet" href="libs/foundation.min.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/home.css">
@@ -43,29 +43,26 @@
         </div>
       </header>
       <div class="app-body">
-        <div id="backgroundImage" alt="Credit: BC Gov Photos" title="Credit: BC Gov Photos"></div>
-        <div id="homeText">
-          <div class="single-item"></div>
-          <div id="luke" data-slick="{&quot;slidesToShow&quot;: 4, &quot;slidesToScroll&quot;: 4}">
-            <div>
-              <h3>1 </h3>
+        <div id="backgroundImage">
+          <div id="slides">
+            <div id="imageOne">
+              <label for="carousel-item-1" class="slideLabel">This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI</label>
             </div>
-            <div>
-              <h3>2</h3>
+            <div id="imageTwo">
+              <label for="carousel-item-2" class="slideLabel">This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI</label>
             </div>
-            <div>
-              <h3>3</h3>
+            <div id="imageThree">
+              <label for="carousel-item-3" class="slideLabel">This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI</label>
             </div>
-            <div>
-              <h3>4</h3>
+            <div id="imageFour">
+              <label for="carousel-item-4" class="slideLabel">This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI</label>
             </div>
-            <div>
-              <h3>5</h3>
-            </div>
-            <div>
-              <h3>6 </h3>
+            <div id="imageFive">
+              <label for="carousel-item-5" class="slideLabel">This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI</label>
             </div>
           </div>
+        </div>
+        <div id="homeText">
           <button id="launch-map" class="launch-map-button">Launch Interactive Map</button>
           <div id="language-flags" class="f16">Language:
             <li id="britishFlag" class="flag flags gb"></li>
