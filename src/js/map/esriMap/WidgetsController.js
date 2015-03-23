@@ -116,9 +116,9 @@ define([
             if (!active) {
                 // If not active. add class now, else, add when animation done
                 domClass.toggle(node, 'active');
-                domStyle.set(container,'bottom','20px');
+                domStyle.set(container, 'bottom', '20px');
             } else {
-                domStyle.set(container,'bottom','auto');
+                domStyle.set(container, 'bottom', 'auto');
             }
 
             // Set the height
@@ -272,16 +272,12 @@ define([
                 id = 'launch-dialog',
                 currentCookie,
                 setCookie,
-                okHandle,
                 cleanup,
                 launchDialog;
 
             cleanup = function(destroyDialog) {
                 setCookie();
 
-                if (okHandle) {
-                    okHandle.remove();
-                }
                 launchDialog.hide();
             };
 
@@ -297,11 +293,11 @@ define([
 
             // Add a Close button to the dialog
             if (!registry.byId(id)) {
-                dialogContent += "<input type='checkbox' id='welcomeDialogMemory'> Don't show this dialog again<br><button id='launch-map' class='launch-map-button'>Launch Interactive Map</button>";
+                dialogContent += "<input type='checkbox' id='welcomeDialogMemory'> Don't show this dialog again";
                 launchDialog = new Dialog({
                     id: id,
                     content: dialogContent,
-                    style: "width: 90%;max-width: 760px;"
+                    style: "width: 450px;max-width: 760px;"
                 });
             } else {
                 launchDialog = registry.byId(id);
@@ -315,9 +311,7 @@ define([
                 // cbox = new CheckBox({
                 //     checked: false,
                 // }, "remembershowInstructions");
-                okHandle = on(document.getElementById('launch-map'), 'click', function() {
-                    cleanup(true);
-                });
+
                 launchDialog.on('cancel', function() {
                     cleanup(false);
                 });

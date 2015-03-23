@@ -30,11 +30,9 @@ define([
     "esri/tasks/IdentifyTask",
     "esri/tasks/IdentifyParameters",
     "esri/InfoTemplate",
-    "esri/tasks/query",
-    "esri/tasks/GeometryService",
-    "esri/tasks/AreasAndLengthsParameters"
+    "esri/tasks/query"
 
-], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, CommunityTree, NationalLayerList, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, GeometryService, AreasAndLengthsParameters) {
+], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, CommunityTree, NationalLayerList, WidgetsController, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query) {
 
     'use strict';
 
@@ -53,7 +51,9 @@ define([
             // Bind Events now, Map Events then UI Events
             mapObject.on('map-ready', function() {
                 self.renderComponents();
+
                 registry.byId('layer-accordion').resize();
+                //$("#national-level-toggle_button").click();
             });
 
             on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
@@ -151,12 +151,14 @@ define([
             layerAccordion.startup();
 
             layerAccordion.addChild(new ContentPane({
+                title: 'Community Level Data'
+            }, 'community-level-toggle'));
+
+            layerAccordion.addChild(new ContentPane({
                 title: 'National Level Data'
             }, 'national-level-toggle'));
 
-            layerAccordion.addChild(new ContentPane({
-                title: 'Community Level Data'
-            }, 'community-level-toggle'));
+
 
             treeWidget = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
             nationalLayerList = new NationalLayerList('national-layer-lists');
@@ -172,7 +174,7 @@ define([
             legend.startup();
             // Initialize the draw tools
             DrawTool.init();
-            self.geometryService = new GeometryService(MapConfig.geometryServiceURL);
+
 
             //brApp.map.infoWindow.on("selection-change", function() {
 
@@ -194,7 +196,11 @@ define([
             // }
 
 
+
             //});
+
+            //$("#national-level-toggle_button").click(); //TODO: turn the national toggle on by default -->Remove the jquery click after renderComponents is called
+
 
 
             // remove hideOnLoad classes
@@ -264,7 +270,7 @@ define([
             all(deferreds).then(function(featureSets) {
                 arrayUtils.forEach(featureSets, function(item) {
                     switch (item.layer) {
-                        case "inidigenousLands":
+                        case "indigenousLands":
                             features = features.concat(self.setIndigenousTemplates(item.features));
                             break;
                         case "nationalLevel":
@@ -314,14 +320,14 @@ define([
             if (params.layerIds.indexOf(11) > -1) {
                 params.layerIds.splice(params.layerIds.indexOf(11), 1);
             }
-            //TODO: IF they don't change around the configuration of the layers, we will need to check which layers are turned on for each identify task in order to splice out duplicate layers in higher up branches of the tree
+
             params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
 
             identifyTask.execute(params, function(features) {
                 if (features.length > 0) {
                     console.log(features);
                     deferred.resolve({
-                        layer: "inidigenousLands",
+                        layer: "indigenousLands",
                         features: features
                     });
                 } else {
@@ -362,6 +368,7 @@ define([
 
             identifyTask.execute(params, function(features) {
                 if (features.length > 0) {
+                    console.log(features.length);
                     deferred.resolve({
                         layer: "nationalLevel",
                         features: features
@@ -488,17 +495,13 @@ define([
         selectCustomGraphics: function(mapPoint) {
             brApp.debug('MapController >>> selectCustomGraphics');
 
-
-            //TODO: Store the results somehow in case the user clicks on a feature they have already clicked on and gotten data for; then we can check some array based on the feature's 'attributeID' and if it exists, fetch the data for that shape rather than re-calculating
             brApp.mapPoint = mapPoint;
-
 
             var graphic = mapPoint.graphic,
                 uniqueIdField = "attributeID",
-                parameters = new AreasAndLengthsParameters(),
                 graphicsLayer = brApp.map.getLayer("CustomFeatures"),
                 dataLayer = brApp.map.getLayer("indigenousLands"),
-                query = new Query(),
+
                 self = this,
                 polys = [],
                 poly,
@@ -506,8 +509,7 @@ define([
                 title;
 
             mapPoint.stopPropagation();
-            // query.geometry = mapPoint.graphic.geometry;
-            // query.spatialRelationship = esri.tasks.Query.SPATIAL_REL_INTERSECTS;
+
 
             var failure = function(err) {
                 // Handle This Issue Here
@@ -529,10 +531,11 @@ define([
             params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
 
             identifyTask.execute(params, function(features) {
+
                 if (features.length > 0) {
                     console.log(features);
                     deferred.resolve({
-                        layer: "inidigenousLands",
+                        layer: "indigenousLands",
                         features: features
                     });
                 } else {
@@ -546,297 +549,55 @@ define([
                 if (!value) {
                     return;
                 }
-                var unique = {};
-                var distinct = [];
-                var compositeRecognized = 0;
-                var compositeNotRecognized = 0;
-                for (var i in value.features) {
-                    if (typeof(unique[value.features[i].layerId]) == "undefined") {
-                        distinct.push(value.features[i].layerId);
-                    }
-                    unique[value.features[i].layerId] = 0;
+
+                var template = new InfoTemplate();
+
+
+                template.setContent("<table><tr id='first-row'><b>The area of interest intersects with <i>" + value.features.length + "</i> inidigenous and/or community lands</b></tr><tr><td>Country</td><td>Name</td><td>Identity</td><td>Official Recognition</td><td>Recognition Status</td></tr>");
+
+                function getTextContent(graphic) {
+
+                    var str = "<tr><td>" + graphic.feature.attributes.Country + "</td><td>" +
+                        graphic.feature.attributes.Name + "</td><td>" +
+                        graphic.feature.attributes.Identity + "</td><td>" +
+                        graphic.feature.attributes.Ofcl_Rec + "</td><td>" +
+                        graphic.feature.attributes.Rec_Status + "</td></tr>";
+
+                    return str;
                 }
-                arrayUtils.forEach(value.features, function(feature) {
-                    //if (distinct.indexOf(1) > -1 || distinct.indexOf(2) > -1) { //no 0's
-                    if (feature.layerId === 1 || feature.layerId === 2) {
-                        compositeRecognized += parseInt(feature.feature.attributes.Area_Ofcl);
-                        poly = new Polygon();
-                        poly.addRing(feature.feature.geometry.rings[0]);
-                        polys.push(poly);
-                    }
-                    //} else {
-                    // if (feature.layerId === 0) {
-                    //     compositeRecognized += parseInt(feature.feature.attributes.Area_GIS);
-                    //     poly = new Polygon();
-                    //     poly.addRing(feature.feature.geometry.rings[0]);
-                    //     polys.push(poly);
-                    // }
-                    //}
-                    //if (distinct.indexOf(3) > -1) { //no 5's
-                    if (feature.layerId === 3) {
-                        compositeNotRecognized += parseInt(feature.feature.attributes.Area_Ofcl);
-                    }
 
-                    //} else {
-                    // if (feature.layerId === 5) {
-                    //     compositeNotRecognized += parseInt(feature.feature.attributes.Area_GIS);
-                    // }
-                    //}
-                });
-                console.log(compositeRecognized);
-                console.log(compositeNotRecognized); //TODO: Also calculate new area now; probably one more geometry service call for the union & areaCompute
-
-                //self.createPie(compositeRecognized, compositeNotRecognized);
-                self.geometryService.union(polys, function(unionedGeometry) { //TODO: Ensure that after Adrienne fixes the service's data layers, this now reflects the proper area of the layers that are TURNED ON Only
-                    console.log(unionedGeometry);
-                    //self.calculateBreakdown(polys, unionedGeometry, value);
-                    unionedGeometry = self.generalizePoly(unionedGeometry);
-                    //geometryService.project([poly], sr, projectionCallback, failure);
-                }, failure);
-
-            });
-            /*deferred.then(function(value) {
-                if (!value) {
-                    return;
-                }
 
                 arrayUtils.forEach(value.features, function(feature) {
 
-                    poly = new Polygon();
-                    poly.addRing(feature.feature.geometry.rings[0]);
-                    polys.push(poly);
+                    template.setContent(template.content + getTextContent(feature));
+
                 });
+                debugger;
 
-                self.geometryService.union(polys, function(unionedGeometry) { //TODO: Ensure that after Adrienne fixes the service's data layers, this now reflects the proper area of the layers that are TURNED ON Only
-                    console.log(unionedGeometry);
-                    //self.calculateBreakdown(polys, unionedGeometry, value);
-                    unionedGeometry = self.generalizePoly(unionedGeometry);
-                    //geometryService.project([poly], sr, projectionCallback, failure);
-                }, failure);
-            });*/
+                template.setContent(template.content + "<br /><tr id='identifyNote'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefor, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</tr></table");
+                brApp.map.infoWindow.setTitle("<i>Intersection Analysis</i>");
 
-            function success(result) {
-                console.log("success");
-                //self.renderAnalysisResults(MapConfig.chart);
-                if (result.areas.length === 1) {
-                    var area = dojoNumber.format(result.areas[0], {
-                        places: 2
-                    });
-                } else {
-                    var area = errorString;
-                }
-                document.getElementById("total-area").innerHTML = area;
-                brApp.map.infoWindow.resize(550); //TODO: make the close button and other icon's background color the same as the header's normal background color so that they show up in this view and don't look different in the normal pop-ups 
-                $(".titlePane").addClass("analysis-header");
+                brApp.map.infoWindow.setContent(template.content);
+
+                brApp.map.infoWindow.resize(450, 400);
+                $(".titlePane").removeClass("analysis-header");
                 $(".titleButton.close").css("color", "white");
-                // if (brApp.mapPoint)
                 brApp.map.infoWindow.show(brApp.mapPoint);
-            }
-
-            function failure(err) {
-                console.log("failures");
-                //document.getElementById("resultsPie").innerHTML = errorString;
-                console.log(err);
-            }
-
-            parameters.areaUnit = GeometryService.UNIT_HECTARES;
-            parameters.polygons = [graphic.geometry];
-            self.geometryService.areasAndLengths(parameters, success, failure);
-
-            //TODO: If our custom polygon overlaps nothing, set the info window content to something special (or nothing?)
-            //title = "<span style='padding: 25px;'>Analysis Results Feature " + mapPoint.graphic.attributes.attributeID + "</span>";
-            title = "<span style='padding: 25px;'>Intersection Analysis</span>";
-            content = "<div class='odd-row'>The area of interest intersects with " + features.length + "inidigenous and/or community lands</div><div id='resultsPie'></div><div style='width: 250px; padding: 25px; color: black; padding-top: 0px; margin-top: -10px;'><strong>Total Area of the polygon:</strong><br /><span id='total-area'></span> Ha<br /><br />" + "<strong>Area that intersects with Indigenous and Community Lands:</strong><br /><span id='intersect-area'></span> Ha</div><br /><button id='printAnalysis' class='analysis-popup-button'>Print</button><button id='exportAnalysis' class='analysis-popup-button'>Export</button>";
-
-            brApp.map.infoWindow.clearFeatures();
-
-            brApp.map.infoWindow.setTitle(title);
-            brApp.map.infoWindow.setContent(content);
-
-            on(document.getElementById('exportAnalysis'), 'click', self.exportAnalysis);
-            on(document.getElementById('printAnalysis'), 'click', self.printAnalysis);
-
-        },
-
-        generalizePoly: function(poly) {
-            brApp.debug('MapController >>> generalizePoly');
-
-            var parameters = new AreasAndLengthsParameters(),
-                errorString = "Not Available",
-                self = this,
-                area;
-
-            function success(result) {
-                console.log("success");
-
-                if (result.areas.length === 1) {
-                    area = dojoNumber.format(result.areas[0], {
-                        places: 2
-                    });
-                } else {
-                    area = errorString;
-                }
-                document.getElementById("intersect-area").innerHTML = area;
-                brApp.map.infoWindow.resize(550); //TODO: make the close button and other icon's background color the same as the header's normal background color so that they show up in this view and don't look different in the normal pop-ups 
-                $(".titlePane").addClass("analysis-header");
-                $(".titleButton.close").css("color", "black");
-                brApp.map.infoWindow.show(brApp.mapPoint);
-
-            }
-
-            function failure(err) {
-                console.log("failures");
-                //document.getElementById("resultsPie").innerHTML = errorString;
-                console.log(err);
-            }
-
-            parameters.areaUnit = GeometryService.UNIT_HECTARES;
-
-            self.geometryService.intersect([brApp.mapPoint.graphic.geometry], poly, function(intersectedGeom) {
-                parameters.polygons = intersectedGeom;
+                $(".esriPopup .titleButton.close").html("&#10005;");
 
 
-                self.geometryService.areasAndLengths(parameters, success, failure);
-            }, failure);
-            // self.geometryService.simplify([poly], function(simplifiedGeometry) {
-            //     parameters.polygons = simplifiedGeometry;
-            //     //self.geometryService.intersect(geometries, geometry, callback, errback);
-            //     self.geometryService.areasAndLengths(parameters, success, failure);
-            // }, failure);
-
-        },
-
-        renderAnalysisResults: function(config) {
-            brApp.debug('MapController >>> renderAnalysisResults');
-
-            var fragment = document.createDocumentFragment(),
-                node = document.createElement('div');
-
-            node.id = config.id;
-            node.className = "result-container";
-            node.innerHTML = "<div class='right-panel'>" +
-                "<div id='" + config.id + "_chart' class='suitability-chart'><div class='loader-wheel'></div></div></div>";
-
-            // Append root to fragment and then fragment to document
-            fragment.appendChild(node);
-            document.getElementById('resultsPie').appendChild(fragment);
-        },
-
-        // calculateBreakdown: function(polys, unionedGeometry, identifyFeats) {
-        //     brApp.debug('MapController >>> calculateBreakdown');
-
-        //     var unique = {};
-        //     var distinct = [];
-        //     var compositeAreas = [];
-        //     for (var i in identifyFeats.features) {
-        //         if (typeof(unique[identifyFeats.features[i].layerId]) == "undefined") {
-        //             distinct.push(identifyFeats.features[i].layerId);
-        //         }
-        //         unique[identifyFeats.features[i].layerId] = 0;
-        //     }
-        //     debugger;
-        //     // compositeAreas.length = distinct.length;
-
-        //     // arrayUtils.forEach(polys, function(feature) {
-
-        //     // });
-        // },
-
-        createPie: function(recognzied, notRecognized) {
-            brApp.debug('MapController >>> createPie');
-            var total, recognziedPercent, notRecognizedPercent;
-
-            total = recognzied + notRecognized;
-
-            recognziedPercent = (recognzied / total) * 100;
-            notRecognizedPercent = (notRecognized / total) * 100;
-
-            Highcharts.setOptions({
-                colors: ['#A6050E', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
             });
 
-            $('#resultsPie').highcharts({
-                chart: {
-                    plotBackgroundColor: '#F7F7F7',
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    plotBorderWidth: null,
-                    // marginLeft: -20,
-                    // margin: [-20, -20, -20, -20],
-                    // spacing: [-10, 0, 0, 0],
-                    // spacingLeft: -30,
-                    // spacingRight: -30,
-                    plotShadow: false //,
-                    //margin: [10, 10, 10, 10]
-                    // marginRight: 5,
-                    // marginLeft: 5
-                },
-                credits: {
-                    enabled: false
-                },
-                tooltip: {
-                    formatter: function() {
-                        if (this.point.name) { // the pie chart
-                            return false;
-                        }
-                    }
-                },
-                legend: {
-                    align: 'right',
-                    title: {
-                        text: 'Indigenous Lands',
-                        style: {
-                            fontStyle: 'normal',
-                            fontSize: 18
-                        }
-                    },
-                    verticalAlign: 'middle',
-                    layout: 'vertical',
-                    itemMarginBottom: 10,
-                    itemMarginTop: 10,
-                    symbolHeight: 18,
-                    symbolWidth: 18,
-                    symbolRadius: 9,
-                    enabled: true
-                },
-                title: {
-                    text: null
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        size: 200,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: true,
-                            //inside: true,
-                            //format: '<p>' + this + '</p>'
-                            format: '{point.percentage:.1f}%',
-                            distance: -30
-                            // style: {
-                            //     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                            // }
-                        },
-                        showInLegend: true
-                    }
-                },
-                series: [{
-                    type: 'pie',
-                    // name: 'Percent Recognzied',
-                    data: [
-                        // ['Firefox', 45.0],
-                        // ['IE', 26.8], {
-                        //     name: 'Chrome',
-                        //     y: 12.8,
-                        //     sliced: true,
-                        //     selected: true
-                        // },
-                        ['Officially Recognzied', recognziedPercent],
-                        ['Not Officially Recognzied', notRecognizedPercent]
-                    ]
-                }]
-            });
+            // title = "<span style='padding: 25px;'>Intersection Analysis</span>";
+            // content = "<div class='odd-row'>The area of interest intersects with 4 inidigenous and/or community lands</div><div id='resultsPie'></div><div style='width: 250px; padding: 25px; color: black; padding-top: 0px; margin-top: -10px;'><strong>Total Area of the polygon:</strong><br /><span id='total-area'></span> Ha<br /><br />" + "<strong>Area that intersects with Indigenous and Community Lands:</strong><br /><span id='intersect-area'></span> Ha</div>";
+
+            // brApp.map.infoWindow.clearFeatures();
+
+            // brApp.map.infoWindow.setTitle(title);
+            // brApp.map.infoWindow.setContent(content);
 
         },
+
 
         showDataComplete: function() {
             brApp.debug('MapController >>> showDataComplete');

@@ -53,6 +53,16 @@ label
 .brMap .HomeButton .home:hover
 	background-color $esriHover
 	
+.tundra .dijitDialogTitleBar
+	background #003366 !important
+	
+.tundra .dijitDialogCloseIcon
+	background url('images/close_x_symbol.png') no-repeat !important
+	top 10px !important
+	
+.tundra .dijitDialogTitle
+	color white
+	
 .legend-container
 	width 260px
 	right 20px
@@ -231,6 +241,9 @@ label
 
 .odd-row
 	background-color #F0EFF4
+	
+#first-row
+	background-color blue
 
 
 .help-marker
@@ -470,11 +483,13 @@ label
 #legend-toggle-icon
 	//-background url('images/close_minus_symbol.png')
 	//background url(images/legendToggle.png) no-repeat #fff
-	height 1px
-	width 13px
+	height 30px
+	width 30px
 	position relative
 	top -30px
-	left 215px
+	left 208px
+	text-align center
+	background-color #69c
 	// font-size 24px
 	// cursor pointer
 	

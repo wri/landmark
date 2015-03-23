@@ -36,7 +36,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'nationalLevel': {
                 url: nationalLevelUrl,
                 type: 'dynamic',
-                defaultLayers: [1], //[1,2,3,4]
+                defaultLayers: [-1], //[1,2,3,4]
                 // infoTemplate: {
                 //     title: "${Country}",
                 //     content: "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>${Country}</div>"
@@ -130,218 +130,212 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
         }],
 
 
-        landTenureCommunityLayers: [
-            {
-                label: 'Legal Force',
-                id: 'legalForceTenure',
-                question: "Do community land rights, including customary rights, have the same legal force as statutory rights?",
-                layer: 0
-            }, {
-                label: 'Perpetuity',
-                id: 'perpetuityTenure',
-                question: "Are community land rights - customary and statutory - perpetual (i.e., not just for a fixed term)?",
-                layer: 0
-            }, {
-                label: 'Common Property',
-                id: 'commonPropertyTenure',
-                question: "Does government recognize all community land, including homesteads, family farms and common property (e.g., forests, pasture)?",
-                layer: 0
-            }, {
-                label: 'Unregistered Land',
-                id: 'unregisteredTenure',
-                question: "Does government recognize community land rights even if not formally demarcated or registered?",
-                layer: 0
-            }, {
-                label: 'Registration Procedures',
-                id: 'registrationTenure',
-                question: "Are there established procedures for formally registering community land rights in a public registry?",
-                layer: 0
-            }, {
-                label: 'Self-governance',
-                id: 'selfGovernanceTenure',
-                question: "Are community institutions - traditional or modern - recognized as the legal authority over community lands?",
-                layer: 0
-            }, {
-                label: 'Resource Rights: Trees and forests',
-                id: 'treesForestsRights',
-                question: "Are trees and forests within community lands under community jurisdiction?",
-                layer: 0
-            }, {
-                label: 'Resource Rights: Waters',
-                id: 'watersRights',
-                question: "Are waters (including groundwater, rivers and natural water bodies) within community lands under community jurisdiction?",
-                layer: 0
-            }, {
-                label: 'Resource Rights: Wildlife',
-                id: 'wildlifeRights',
-                question: "Are wildlife (i.e., wild animals) within community lands under community jurisdiction?",
-                layer: 0
-            }, {
-                label: 'Sub-surface minerals',
-                id: 'subsurfaceMinerals',
-                question: "Are sub-surface minerals (i.e., not surface minerals) within community lands under community jurisdiction?",
-                layer: 0
-            }, {
-                label: 'Oil and natural gas',
-                id: 'oilAndGasTenure',
-                question: "Are oil, natural gas and other forms of hydrocarbons within community lands under community jurisdiction?",
-                layer: 0
-            }, {
-                label: 'Right to consent',
-                id: 'rightToConsent',
-                question: "Is community consent required before an outside actor, including government, can acquire community land (excluding compulsory land acquisition)?",
-                layer: 0
-            }, {
-                label: 'Land acquisition',
-                id: 'landAcquisition',
-                question: "Is an outside actor, including government, required to prove that sought land is not claimed or registered as community land?",
-                layer: 0
-            }, {
-                label: 'Cadaster obligation',
-                id: 'cadasterObligation',
-                question: "Must government develop an official map of all legal tenure types, including community land?",
-                layer: 0
-            }, {
-                label: 'Dispute resolution mechanism',
-                id: 'disputeMechanism',
-                question: "Are dispute resolution mechanisms established for land conflicts with actors outside the community?",
-                layer: 0
-            }, {
-                label: 'Equal Rights to Land: Women',
-                id: 'womenEqualLand',
-                question: "Are land interests of women community members equally protected?",
-                layer: 0
-            }, {
-                label: 'Equal Rights to Land: New Members',
-                id: 'newMembersEqualLand',
-                question: "Are land interests of people joining the community by marriage, settlement or other customarily-approved means equally protected?",
-                layer: 0
-            }, {
-                label: 'Equal Rights to Land: Minorities',
-                id: 'minoritiesEqualLand',
-                question: "Are land interests of minorities by virtue of ethnicity, livelihood or other distinctive attribute equally protected?",
-                layer: 0
-            }
-        ],
+        landTenureCommunityLayers: [{
+            label: 'Legal Force',
+            id: 'legalForceTenure',
+            question: "Do community land rights, including customary rights, have the same legal force as statutory rights?",
+            layer: 0
+        }, {
+            label: 'Perpetuity',
+            id: 'perpetuityTenure',
+            question: "Are community land rights - customary and statutory - perpetual (i.e., not just for a fixed term)?",
+            layer: 0
+        }, {
+            label: 'Common Property',
+            id: 'commonPropertyTenure',
+            question: "Does government recognize all community land, including homesteads, family farms and common property (e.g., forests, pasture)?",
+            layer: 0
+        }, {
+            label: 'Unregistered Land',
+            id: 'unregisteredTenure',
+            question: "Does government recognize community land rights even if not formally demarcated or registered?",
+            layer: 0
+        }, {
+            label: 'Registration Procedures',
+            id: 'registrationTenure',
+            question: "Are there established procedures for formally registering community land rights in a public registry?",
+            layer: 0
+        }, {
+            label: 'Self-governance',
+            id: 'selfGovernanceTenure',
+            question: "Are community institutions - traditional or modern - recognized as the legal authority over community lands?",
+            layer: 0
+        }, {
+            label: 'Resource Rights: Trees and forests',
+            id: 'treesForestsRights',
+            question: "Are trees and forests within community lands under community jurisdiction?",
+            layer: 0
+        }, {
+            label: 'Resource Rights: Waters',
+            id: 'watersRights',
+            question: "Are waters (including groundwater, rivers and natural water bodies) within community lands under community jurisdiction?",
+            layer: 0
+        }, {
+            label: 'Resource Rights: Wildlife',
+            id: 'wildlifeRights',
+            question: "Are wildlife (i.e., wild animals) within community lands under community jurisdiction?",
+            layer: 0
+        }, {
+            label: 'Sub-surface minerals',
+            id: 'subsurfaceMinerals',
+            question: "Are sub-surface minerals (i.e., not surface minerals) within community lands under community jurisdiction?",
+            layer: 0
+        }, {
+            label: 'Oil and natural gas',
+            id: 'oilAndGasTenure',
+            question: "Are oil, natural gas and other forms of hydrocarbons within community lands under community jurisdiction?",
+            layer: 0
+        }, {
+            label: 'Right to consent',
+            id: 'rightToConsent',
+            question: "Is community consent required before an outside actor, including government, can acquire community land (excluding compulsory land acquisition)?",
+            layer: 0
+        }, {
+            label: 'Land acquisition',
+            id: 'landAcquisition',
+            question: "Is an outside actor, including government, required to prove that sought land is not claimed or registered as community land?",
+            layer: 0
+        }, {
+            label: 'Cadaster obligation',
+            id: 'cadasterObligation',
+            question: "Must government develop an official map of all legal tenure types, including community land?",
+            layer: 0
+        }, {
+            label: 'Dispute resolution mechanism',
+            id: 'disputeMechanism',
+            question: "Are dispute resolution mechanisms established for land conflicts with actors outside the community?",
+            layer: 0
+        }, {
+            label: 'Equal Rights to Land: Women',
+            id: 'womenEqualLand',
+            question: "Are land interests of women community members equally protected?",
+            layer: 0
+        }, {
+            label: 'Equal Rights to Land: New Members',
+            id: 'newMembersEqualLand',
+            question: "Are land interests of people joining the community by marriage, settlement or other customarily-approved means equally protected?",
+            layer: 0
+        }, {
+            label: 'Equal Rights to Land: Minorities',
+            id: 'minoritiesEqualLand',
+            question: "Are land interests of minorities by virtue of ethnicity, livelihood or other distinctive attribute equally protected?",
+            layer: 0
+        }],
 
-        landTenureIndigenousLayers: [
-            {
-                label: 'Legal Force',
-                id: 'legalForceTenure',
-                question: "Do indigenous land rights, including customary rights, have the same legal force as statutory rights?",
-                layer: 1
-            }, {
-                label: 'Perpetuity',
-                id: 'perpetuityTenure',
-                question: "Are indigenous land rights - customary and statutory - perpetual (i.e., not just for a fixed term)?",
-                layer: 1
+        landTenureIndigenousLayers: [{
+            label: 'Legal Force',
+            id: 'legalForceTenure',
+            question: "Do indigenous land rights, including customary rights, have the same legal force as statutory rights?",
+            layer: 1
+        }, {
+            label: 'Perpetuity',
+            id: 'perpetuityTenure',
+            question: "Are indigenous land rights - customary and statutory - perpetual (i.e., not just for a fixed term)?",
+            layer: 1
 
-            }, {
-                label: 'Common Property',
-                id: 'commonPropertyTenure',
-                question: "Does government recognize all indigenous land, including homesteads, family farms and common property (e.g., forests, pasture)?",
-                layer: 1
+        }, {
+            label: 'Common Property',
+            id: 'commonPropertyTenure',
+            question: "Does government recognize all indigenous land, including homesteads, family farms and common property (e.g., forests, pasture)?",
+            layer: 1
 
-            }, {
-                label: 'Unregistered Land',
-                id: 'unregisteredTenure',
-                question: "Does government recognize indigenous land rights even if not formally demarcated or registered?",
-                layer: 1
+        }, {
+            label: 'Unregistered Land',
+            id: 'unregisteredTenure',
+            question: "Does government recognize indigenous land rights even if not formally demarcated or registered?",
+            layer: 1
 
-            }, {
-                label: 'Registration Procedures',
-                id: 'registrationTenure',
-                question: "Are there established procedures for formally registering indigenous land rights in a public registry?",
-                layer: 1
+        }, {
+            label: 'Registration Procedures',
+            id: 'registrationTenure',
+            question: "Are there established procedures for formally registering indigenous land rights in a public registry?",
+            layer: 1
 
-            }, {
-                label: 'Self-governance',
-                id: 'selfGovernanceTenure',
-                question: "Are indigenous institutions - traditional or modern - recognized as the legal authority over indigenous lands?",
-                layer: 1
+        }, {
+            label: 'Self-governance',
+            id: 'selfGovernanceTenure',
+            question: "Are indigenous institutions - traditional or modern - recognized as the legal authority over indigenous lands?",
+            layer: 1
 
-            }, {
-                label: 'Resource Rights: Trees and forests',
-                id: 'treesForestsRights',
-                question: false,
-                layer: 1
-            }, {
-                label: 'Resource Rights: Waters',
-                id: 'watersRights',
-                question: "Are waters (including groundwater, rivers and natural water bodies) within community lands under community jurisdiction?",
-                layer: 1
-            }, {
-                label: 'Resource Rights: Wildlife',
-                id: 'wildlifeRights',
-                question: "Are wildlife (i.e., wild animals) within indigenous lands under indigenous jurisdiction?",
-                layer: 1
-            }, {
-                label: 'Sub-surface minerals',
-                id: 'subsurfaceMinerals',
-                question: "Are sub-surface minerals (i.e., not surface minerals)  within indigenous lands under indigenous jurisdiction?",
-                layer: 1
-            }, {
-                label: 'Oil and natural gas',
-                id: 'oilAndGasTenure',
-                question: "Are oil, natural gas and other forms of hydrocarbons  within indigenous lands under indigenous jurisdiction?",
-                layer: 1
-            }, {
-                label: 'Right to consent',
-                id: 'rightToConsent',
-                question: "Is consent of the indigenous group required before an outside actor, including government, can acquire indigenous land (excluding compulsory land acquisition)?",
-                layer: 1
-            }, {
-                label: 'Land acquisition',
-                id: 'landAcquisition',
-                question: "Is an outside actor, including government, required to prove that sought land is not claimed or registered as indigenous land?",
-                layer: 1
-            }, {
-                label: 'Cadaster obligation',
-                id: 'cadasterObligation',
-                question: "Must government develop an official map of all legal tenure types, including indigenous land?",
-                layer: 1
-            }, {
-                label: 'Dispute resolution mechanism',
-                id: 'disputeMechanism',
-                question: "Are dispute resolution mechanisms established for land conflicts with actors outside the indigenous group?",
-                layer: 1
-            }, {
-                label: 'Equal Rights to Land: Women',
-                id: 'womenEqualLand',
-                question: "Are land interests of women indigenous members equally protected?",
-                layer: 1
-            }, {
-                label: 'Equal Rights to Land: New Members',
-                id: 'newMembersEqualLand',
-                question: "Are land interests of people joining the indigenous community by marriage, settlement or other customarily-approved means equally protected?",
-                layer: 1
-            }, {
-                label: 'Equal Rights to Land: Minorities',
-                id: 'minoritiesEqualLand',
-                question: "Are land interests of minorities by virtue of ethnicity, livelihood or other distinctive attribute equally protected?",
-                layer: 1
-            }
-        ],
+        }, {
+            label: 'Resource Rights: Trees and forests',
+            id: 'treesForestsRights',
+            question: false,
+            layer: 1
+        }, {
+            label: 'Resource Rights: Waters',
+            id: 'watersRights',
+            question: "Are waters (including groundwater, rivers and natural water bodies) within community lands under community jurisdiction?",
+            layer: 1
+        }, {
+            label: 'Resource Rights: Wildlife',
+            id: 'wildlifeRights',
+            question: "Are wildlife (i.e., wild animals) within indigenous lands under indigenous jurisdiction?",
+            layer: 1
+        }, {
+            label: 'Sub-surface minerals',
+            id: 'subsurfaceMinerals',
+            question: "Are sub-surface minerals (i.e., not surface minerals)  within indigenous lands under indigenous jurisdiction?",
+            layer: 1
+        }, {
+            label: 'Oil and natural gas',
+            id: 'oilAndGasTenure',
+            question: "Are oil, natural gas and other forms of hydrocarbons  within indigenous lands under indigenous jurisdiction?",
+            layer: 1
+        }, {
+            label: 'Right to consent',
+            id: 'rightToConsent',
+            question: "Is consent of the indigenous group required before an outside actor, including government, can acquire indigenous land (excluding compulsory land acquisition)?",
+            layer: 1
+        }, {
+            label: 'Land acquisition',
+            id: 'landAcquisition',
+            question: "Is an outside actor, including government, required to prove that sought land is not claimed or registered as indigenous land?",
+            layer: 1
+        }, {
+            label: 'Cadaster obligation',
+            id: 'cadasterObligation',
+            question: "Must government develop an official map of all legal tenure types, including indigenous land?",
+            layer: 1
+        }, {
+            label: 'Dispute resolution mechanism',
+            id: 'disputeMechanism',
+            question: "Are dispute resolution mechanisms established for land conflicts with actors outside the indigenous group?",
+            layer: 1
+        }, {
+            label: 'Equal Rights to Land: Women',
+            id: 'womenEqualLand',
+            question: "Are land interests of women indigenous members equally protected?",
+            layer: 1
+        }, {
+            label: 'Equal Rights to Land: New Members',
+            id: 'newMembersEqualLand',
+            question: "Are land interests of people joining the indigenous community by marriage, settlement or other customarily-approved means equally protected?",
+            layer: 1
+        }, {
+            label: 'Equal Rights to Land: Minorities',
+            id: 'minoritiesEqualLand',
+            question: "Are land interests of minorities by virtue of ethnicity, livelihood or other distinctive attribute equally protected?",
+            layer: 1
+        }],
 
-        percentIndigenousLayers: [
-            {
-                label: 'Indigenous Peoples and Communities',
-                id: 'percentIndigAndCommunity',
-                question: true,
-                layer: 2
-            }, {
-                label: 'Indigenous Peoples only',
-                id: 'percentIndigNational',
-                question: false,
-                layer: 3
-            }, {
-                label: 'Communities (Non-indigenous) only',
-                id: 'percentNonIndigenous',
-                question: false,
-                layer: 4
+        percentIndigenousLayers: [{
+            label: 'Indigenous Peoples and Communities',
+            id: 'percentIndigAndCommunity',
+            question: true,
+            layer: 2
+        }, {
+            label: 'Indigenous Peoples only',
+            id: 'percentIndigNational',
+            question: false,
+            layer: 3
+        }, {
+            label: 'Communities (Non-indigenous) only',
+            id: 'percentNonIndigenous',
+            question: false,
+            layer: 4
 
-            }
-        ],
+        }],
 
 
 
