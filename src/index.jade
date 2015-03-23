@@ -7,7 +7,7 @@ html
         meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
         meta(http-equiv='X-UA-Compatible', content='IE=7, IE=9, IE=10')
         style.
-            html,body,.root{height:100%;width:100%;padding:0;margin:0;overflow:hidden;}
+            html,body,.root,.app{height:100%;width:100%;padding:0;margin:0;overflow:hidden;}
         link(rel='stylesheet', href='libs/foundation.min.css')
         link(rel='stylesheet', href='css/base.css')
         link(rel='stylesheet', href='css/home.css')
@@ -23,22 +23,21 @@ html
         div.root
             include templates/header.jade
             div.app-body
-                div#backgroundImage(alt='Credit: BC Gov Photos', title='Credit: BC Gov Photos')
+                div#backgroundImage
+                    div#slides
+                        div#imageOne
+                            label.slideLabel(for='carousel-item-1') This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI
+                        div#imageTwo
+                            label.slideLabel(for='carousel-item-2') This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI
+                        div#imageThree
+                            label.slideLabel(for='carousel-item-3') This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI
+                        div#imageFour
+                            label.slideLabel(for='carousel-item-4') This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI
+                        div#imageFive
+                            label.slideLabel(for='carousel-item-5') This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI
+
                 div#homeText
-                    div.single-item
-                    div#luke(data-slick='{"slidesToShow": 4, "slidesToScroll": 4}')
-                        div
-                            h3 1 
-                        div
-                            h3 2
-                        div
-                            h3 3
-                        div
-                            h3 4
-                        div
-                            h3 5
-                        div
-                            h3 6 
+                    
                     button#launch-map.launch-map-button Launch Interactive Map
                     div#language-flags.f16 Language:
                             li#britishFlag.flag.flags.gb

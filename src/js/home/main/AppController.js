@@ -21,10 +21,9 @@ define(['main/config'], function(homeConfig) {
                 self.displayEnglish();
             });
 
-            $("#luke").slick({
-                dots: true,
-                speed: 500
-            });
+
+
+
 
         },
 
@@ -68,6 +67,25 @@ define(['main/config'], function(homeConfig) {
 
         renderComponents: function() {
             brApp.debug('AppController >>> renderComponents');
+
+            $("#slides").slick({
+                dots: true,
+                //autoplay: true,
+                speed: 2000
+            });
+            $(".slick-prev").html("");
+            $(".slick-next").html("");
+
+            $("#slides > ul > li > button").html("");
+
+            $(".slick-prev").css("background", "url(css/images/arrow_prev_pop.png) no-repeat center");
+            $(".slick-next").css("background", "url(css/images/arrow_next_pop.png) no-repeat center");
+            $(".slick-next").css("background-color", "black");
+            $(".slick-prev").css("background-color", "black");
+
+            //$(".slick-prev").html("<");
+            //$(".slick-next").html(">");
+
         },
 
         displayEnglish: function() {

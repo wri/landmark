@@ -3,7 +3,7 @@
 
     var base = location.pathname.replace(/\/[^/]+$/, ''),
         appVersion = '1.0',
-        esriVersion = '3.12',
+        esriVersion = '3.13',
         js = [
             '//js.arcgis.com/' + esriVersion + '/init.js'
         ],
