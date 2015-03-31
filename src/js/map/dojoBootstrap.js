@@ -80,6 +80,7 @@
         }
     };
 
+
     if (win.requestAnimationFrame) {
         win.requestAnimationFrame(launch);
     } else if (doc.readyState === "loaded") {

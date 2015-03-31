@@ -46,11 +46,11 @@ define([
 
 			// Add Values to the Unique Value Renderer attached with label for the legend and the correct symbol
 			// value is relative to the field Name
-			renderer.addValue({
-				value: 0,
-				symbol: noReviewSymbol,
-				label: "No review yet done"
-			});
+            renderer.addValue({
+                value: 0,
+                symbol: noReviewSymbol,
+                label: "No review yet done"
+            });
 
 			renderer.addValue({
 				value: 1,

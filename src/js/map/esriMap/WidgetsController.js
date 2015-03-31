@@ -155,9 +155,11 @@ define([
                 left = isClosing ? 0 : 290;
 
             if (!isClosing) {
+                $("#mobile-menu-toggle").css("display", "none");
                 domClass.toggle(menuNodeId, 'open');
                 domClass.toggle(menuButton, 'hidden');
             } else {
+                $("#mobile-menu-toggle").css("display", "block");
                 domClass.remove(menuButton, 'hidden');
             }
 
@@ -346,8 +348,14 @@ define([
         /**
          * Show the Analysis Dialog with the draw and upload buttons
          */
-        showAnalysisDialog: function() {
+        showAnalysisDialog: function(customGraphics) {
             brApp.debug('WidgetsController >>> showAnalysisDialog');
+
+            if (customGraphics.graphics.length > 0) {
+                $('#remove-graphics').removeClass('hidden');
+            } else {
+                $('#remove-graphics').addClass('hidden');
+            }
             registry.byId('analysis-dialog').show();
         }
 

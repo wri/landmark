@@ -67,10 +67,16 @@ define([
             // on(document.getElementById('nationalIndigenousMenuButton'), 'click', self.handleNationalToggle.bind(self));
 
             on(document.getElementById('tree-container-toggle'), 'click', WidgetsController.toggleTreeContainer);
-            on(document.getElementById('analysis-button'), 'click', WidgetsController.showAnalysisDialog);
+
+            on(document.getElementById('analysis-button'), 'click', function() {
+                var customGraphics = brApp.map.getLayer("CustomFeatures");
+                WidgetsController.showAnalysisDialog(customGraphics);
+            });
+
             on(document.getElementById('upload-shapefile'), 'click', WidgetsController.toggleUploadForm);
             on(document.getElementById('data-complete-checkbox'), 'click', self.showDataComplete);
             on(document.getElementById('draw-shape'), 'click', DrawTool.activate);
+            on(document.getElementById('remove-graphics'), 'click', self.removeAllGraphics);
             on(document.uploadForm, 'change', Uploader.beginUpload.bind(Uploader));
             //on(document.getElementById('brMap_root'), 'click', self.handleClick.bind(self));
             on(brApp.map, 'click', self.handleClick.bind(self));
@@ -288,11 +294,12 @@ define([
 
                 if (features.length > 0) {
                     brApp.map.infoWindow.setFeatures(features);
-                    brApp.map.infoWindow.resize(450); //todo: give both for some browsers
-                    $(".titlePane").removeClass("analysis-header");
-                    $(".titleButton.close").css("color", "white");
+                    brApp.map.infoWindow.resize(450, 600); //todo: give both for some browsers
+
+                    $(".esriPopup").removeClass("analysis-location");
+                    $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
                     brApp.map.infoWindow.show(mapPoint);
-                    $(".esriPopup .titleButton.close").html("&#10005;");
+                    //$(".esriPopup .titleButton.close").html("&#10005;");
                 }
             });
 
@@ -473,15 +480,37 @@ define([
         },
 
         setCustomNationalTemplate: function(feature) {
-
-            //do this
-
             brApp.debug('MapController >>> setCustomNationalTemplate');
+            var indScore;
             var nationalIndicatorCode = MapAssets.getNationalLevelIndicatorCode();
+            var stringified = "I" + nationalIndicatorCode + "_Scr";
+
+            var indicator = feature.attributes[stringified];
+
+            switch (indicator) {
+                case "0":
+                    indScore = 'No review yet done';
+                    break;
+                case "1":
+                    indScore = 'The law is either silent on an issue or there is express exclusion';
+                    break;
+                case "2":
+                    indScore = 'The legal framework addresses the indicator but not substantively';
+                    break;
+                case "3":
+                    indScore = 'The legal framework substantially meets the indicator';
+                    break;
+                case "4":
+                    indScore = 'The legal framework fully meets the indicator';
+                    break;
+                case "9":
+                    indScore = 'The indicator is not applicable';
+                    break;
+            }
             var nationalLevelInfoTemplatePercent = new InfoTemplate("${Country}",
                 // "<div class='odd-row'><div class='popup-header'>" + brApp.currentLayer + "</div>" +
                 "<div class='odd-row'><div class='popup-header'>Groups targeted by the legal framework</div>${Framework}</div>" +
-                "<div class='even-row'><div class='popup-header'>Indicator score</div>${I" + nationalIndicatorCode + "_Scr}</div>" +
+                "<div class='even-row'><div class='popup-header'>Indicator score</div>" + indScore + "</div>" +
                 "<div class='odd-row'><div class='popup-header'>Comments</div>${I" + nationalIndicatorCode + "_Com}</div>" +
                 "<div class='odd-row'><div class='popup-header'>Laws and provisions reviewed</div>${I" + nationalIndicatorCode + "_Lap}</div>" +
                 "<div class='odd-row'><div class='popup-header'>Review source and date</div>${I" + nationalIndicatorCode + "_Rev} (${I" + nationalIndicatorCode + "_Year})</div>" +
@@ -540,6 +569,24 @@ define([
                     });
                 } else {
                     console.log("no feats returned");
+                    //TODO: Here open up an info window with Just a Remove button!
+                    var template = new InfoTemplate();
+                    template.setContent("<b>The area of interest intersects with <i>Zero!</i> indigenous and/or community lands</b><button id='removeGraphic'>Remove</button>");
+                    brApp.map.infoWindow.setContent(template.content);
+                    brApp.map.infoWindow.setTitle("<i>Intersection Analysis</i>");
+                    $(".esriPopup").addClass("analysis-location");
+                    $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
+                    brApp.map.infoWindow.show();
+
+
+                    var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
+                        self.removeCustomGraphic(graphic.attributes.attributeID);
+                        brApp.map.infoWindow.hide();
+                    });
+
+                    on.once(brApp.map.infoWindow, "hide", function() {
+                        handle.remove();
+                    });
                     deferred.resolve(false);
                 }
             }, function(error) {
@@ -554,6 +601,7 @@ define([
 
 
                 template.setContent("<table id='analysisTable'><tr><td  colspan='5' id='aoiIntersect'><b>The area of interest intersects with <i>" + value.features.length + "</i> indigenous and/or community lands</b></td></tr><tr><td>Country</td><td>Name</td><td>Identity</td><td>Official Recognition</td><td>Recognition Status</td></tr>");
+
 
                 function getTextContent(graphic, even) {
                     if (graphic.feature.attributes.Identity === "Indigenous (self-identified)") {
@@ -597,24 +645,30 @@ define([
 
 
                 }
-                // if (i == value.features.length - 1) {
 
-                template.content += "<tr id='identifyNote'><td colspan='5'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</td></tr></table>";
+                template.content += "<tr id='identifyNote'><td colspan='5'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</td></tr></table><button id='removeGraphic'>Remove</button>";
                 brApp.map.infoWindow.setTitle("<i>Intersection Analysis</i>");
 
                 brApp.map.infoWindow.setContent(template.content);
 
+
                 brApp.map.infoWindow.resize(650, 350);
 
-                $(".titlePane").removeClass("analysis-header");
-                $(".titleButton.close").css("color", "white");
-                brApp.map.infoWindow.show(brApp.mapPoint);
-                $(".esriPopup .titleButton.close").html("&#10005;");
-                //}
+                $(".esriPopup").addClass("analysis-location");
+                $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
+                brApp.map.infoWindow.show();
 
 
+                var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
+                    self.removeCustomGraphic(graphic.attributes.attributeID);
+                    brApp.map.infoWindow.hide();
+                });
 
+                on.once(brApp.map.infoWindow, "hide", function() {
+                    handle.remove();
+                });
 
+                //$(".esriPopup .titleButton.close").html("&#10005;");
 
             });
 
@@ -628,6 +682,32 @@ define([
 
         },
 
+        removeCustomGraphic: function(uniqueId) {
+
+            var graphics = brApp.map.getLayer("CustomFeatures"),
+                graphicToRemove;
+
+            arrayUtils.some(graphics.graphics, function(graphic) {
+                if (graphic.attributes["attributeID"] === uniqueId) {
+                    graphicToRemove = graphic;
+                    return true;
+                }
+                return false;
+            });
+
+            if (graphicToRemove) {
+
+                graphics.remove(graphicToRemove);
+
+            }
+        },
+
+        removeAllGraphics: function() {
+            var graphics = brApp.map.getLayer("CustomFeatures");
+            graphics.clear();
+            graphics.redraw();
+
+        },
 
         showDataComplete: function() {
             brApp.debug('MapController >>> showDataComplete');

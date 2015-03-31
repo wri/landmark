@@ -112,4 +112,18 @@ body:not(.mobile) .mobile-menu-toggle-button
 @media (max-width: 800px)
 	.title-area .name h1
 		display none
+	#mobile-menu-toggle
+		display block !important //This 'important' tag is making it so the mobile menu never disappears after a toggle, hide, resize operation, but it also forces us to always show the menu icon (even when the menu is open)
+		
+@media (max-width: 500px)
+	#legendMenuButton
+		border-top-right-radius 5px
+		border-bottom-right-radius 5px
+		-moz-border-radius-topright 5px
+		-moz-border-radius-bottomright 5px
+		-webkit-border-top-right-radius 5px
+		-webkit-border-bottom-right-radius 5px
+	#toolsMenuButton
+		display none	
+
 	
