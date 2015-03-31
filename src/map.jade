@@ -11,6 +11,7 @@ html
 		link(rel='stylesheet', href='libs/foundation.min.css')
 		link(rel='stylesheet', href='css/base.css')
 		link(rel='stylesheet', href='css/map.css')
+		script(src='libs/FileSaver.js')
 		script(async='', type='text/javascript', src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53ab205a21ddceee&async=1')
 		script(type='text/javascript').
 			var addthis_share = {
@@ -40,8 +41,8 @@ html
 					div.analysis-buttons
 						button#draw-shape &#9998; Draw Shape
 						button#upload-shapefile Upload File
-						button(id='remove-graphics',class='hidden') Remove All
-						
+						button(id='remove-graphics',class='hidden') Clear All
+
 					div(id='upload-form-content',class='hidden')
 						hr
 						ul.upload-instructions

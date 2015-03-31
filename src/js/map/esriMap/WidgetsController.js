@@ -342,7 +342,31 @@ define([
          * Toggle the upload form visible or not
          */
         toggleUploadForm: function() {
+            brApp.debug('WidgetsController >>> toggleUploadForm');
             domClass.toggle('upload-form-content', 'hidden');
+        },
+
+        printMap: function() {
+            brApp.debug('WidgetsController >>> printMap');
+            var body = document.getElementsByTagName("body")[0];
+
+            domClass.add(body, "map-view-print");
+            $(".app-header").resize();
+            $("#brMap").resize();
+            brApp.map.resize()
+            //debugger;
+            // o.map.resize();
+            on.once(brApp.map, 'resize', function() {
+                // Allow Layers to redraw themselves, wind layer takes 1500ms 
+                setTimeout(function() {
+                    window.print();
+
+                    domClass.remove(body, "map-view-print");
+                    //registry.byId("stackContainer").resize();
+                    brApp.map.resize();
+                }, 2000);
+            });
+
         },
 
         /**

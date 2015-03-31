@@ -59,12 +59,7 @@ define([
             on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
             on(document.getElementById('basemap-button'), 'click', WidgetsController.toggleBasemapGallery.bind(WidgetsController));
             on(document.getElementById('share-button'), 'click', WidgetsController.toggleShareContainer.bind(WidgetsController));
-            // on(document.getElementById('nationalCommunityMenuButton'), 'click', self.handleNationalToggle.bind(self));
-            //on(document.getElementById('nationalPercentageMenuButton'), 'click', self.handleNationalToggle.bind(self));//todo: on 'change' ?
-
-            // on(document.getElementById('land-tenure-toggle'), 'click', self.handleNationalToggle.bind(self));
-            // on(document.getElementById('percent-national-toggle'), 'click', self.handleNationalToggle.bind(self));
-            // on(document.getElementById('nationalIndigenousMenuButton'), 'click', self.handleNationalToggle.bind(self));
+            on(document.getElementById('print-button'), 'click', WidgetsController.printMap);
 
             on(document.getElementById('tree-container-toggle'), 'click', WidgetsController.toggleTreeContainer);
 
@@ -298,6 +293,7 @@ define([
 
                     $(".esriPopup").removeClass("analysis-location");
                     $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
+                    $("#identifyNote").remove();
                     brApp.map.infoWindow.show(mapPoint);
                     //$(".esriPopup .titleButton.close").html("&#10005;");
                 }
@@ -321,10 +317,10 @@ define([
             params.geometry = mapPoint;
             params.mapExtent = brApp.map.extent;
             params.layerIds = mapLayer.visibleLayers;
-            if (params.layerIds.indexOf(4) > -1) {
+            if (params.layerIds.indexOf(4) > -1) { //TODO: IS this still a valid layer removal??
                 params.layerIds.splice(params.layerIds.indexOf(4), 1);
             }
-            if (params.layerIds.indexOf(11) > -1) {
+            if (params.layerIds.indexOf(11) > -1) { //TODO: IS this still valid??
                 params.layerIds.splice(params.layerIds.indexOf(11), 1);
             }
 
@@ -415,7 +411,7 @@ define([
                     "<div class='popup-last'>Last Updated: " + item.feature.attributes.Last_Updt + '<span id="additionalInfo"> Additional Info</span></div>'
                 );
 
-                if (item.layerId === 1) {
+                if (item.layerId === 1) { //TODO: Use layer 5 ONLY for querying the data based off of what is turned on
                     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalDocIcon.png'> " + template.title;
                 } else if (item.layerId === 2) {
                     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/tiltingIcon.png'> " + template.title;
@@ -431,7 +427,7 @@ define([
 
         setNationalTemplates: function(featureObjects) {
             brApp.debug('MapController >>> setNationalTemplates');
-
+            //TODO: Use layer 5 ONLY for querying the data based off of what is turned on
 
             var template,
                 features = [],
@@ -575,8 +571,8 @@ define([
                     brApp.map.infoWindow.setTitle("<i>Intersection Analysis</i>");
                     $(".esriPopup").addClass("analysis-location");
                     $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
+                    $("#identifyNote").remove();
                     brApp.map.infoWindow.show();
-
 
                     var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
                         self.removeCustomGraphic(graphic.attributes.attributeID);
@@ -601,6 +597,9 @@ define([
 
                 template.setContent("<table id='analysisTable'><tr><td  colspan='5' id='aoiIntersect'><b>The area of interest intersects with <i>" + value.features.length + "</i> indigenous and/or community lands</b></td></tr><tr><td>Country</td><td>Name</td><td>Identity</td><td>Official Recognition</td><td>Recognition Status</td></tr>");
 
+                var fields = ["Country", "Name", "Identity", "Official Recognition", "Recognition Status"];
+
+                brApp.luke = fields.join(",") + '\n';
 
                 function getTextContent(graphic, even) {
                     if (graphic.feature.attributes.Identity === "Indigenous (self-identified)") {
@@ -612,6 +611,7 @@ define([
                     if (graphic.feature.attributes.Ofcl_Rec === "Officially recognized (by law or decree)") {
                         graphic.feature.attributes.Ofcl_Rec = "Officially recognized";
                     }
+
                     var str;
                     if (even === "even") {
 
@@ -620,12 +620,17 @@ define([
                             graphic.feature.attributes.Identity + "</td><td>" +
                             graphic.feature.attributes.Ofcl_Rec + "</td><td>" +
                             graphic.feature.attributes.Rec_Status + "</td></tr>";
+                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Ofcl_Rec, graphic.feature.attributes.Rec_Status];
+                        brApp.luke += fieldValues.join(",") + '\n';
+
                     } else {
                         str = "<tr class='odd-row'><td>" + graphic.feature.attributes.Country + "</td><td>" +
                             graphic.feature.attributes.Name + "</td><td>" +
                             graphic.feature.attributes.Identity + "</td><td>" +
                             graphic.feature.attributes.Ofcl_Rec + "</td><td>" +
                             graphic.feature.attributes.Rec_Status + "</td></tr>";
+                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Ofcl_Rec, graphic.feature.attributes.Rec_Status];
+                        brApp.luke += fieldValues.join(",") + '\n';
                     }
 
 
@@ -641,20 +646,25 @@ define([
                         template.content = template.content + getTextContent(value.features[i], 'odd');
                     }
 
-
-
                 }
 
-                template.content += "<tr id='identifyNote'><td colspan='5'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</td></tr></table><button id='removeGraphic'>Remove</button>";
-                brApp.map.infoWindow.setTitle("<i>Intersection Analysis</i>");
 
+                template.content += "</table>";
+
+                brApp.map.infoWindow.setTitle("<i>Intersection Analysis</i>");
                 brApp.map.infoWindow.setContent(template.content);
 
-
                 brApp.map.infoWindow.resize(650, 350);
+                $("#identifyNote").remove();
+
+
+                $('.esriPopupWrapper').append("<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</div></div>");
+
 
                 $(".esriPopup").addClass("analysis-location");
                 $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
+
+
                 brApp.map.infoWindow.show();
 
 
@@ -665,6 +675,11 @@ define([
 
                 on.once(brApp.map.infoWindow, "hide", function() {
                     handle.remove();
+                });
+
+                on.once(document.getElementById('exportAnalysis'), 'click', function() {
+
+                    self.exportAnalysisResult(brApp.luke);
                 });
 
                 //$(".esriPopup .titleButton.close").html("&#10005;");
@@ -800,8 +815,34 @@ define([
 
         },
 
-        exportAnalysis: function(config) {
-            brApp.debug('MapController >>> exportAnalysis');
+        exportAnalysisResult: function(text) {
+            brApp.debug('MapController >>> exportAnalysisResult');
+
+            //var text = _self._getSettingsCSV();
+
+
+            // arrayUtils.forEach(MapConfig.checkboxItems, function(item) {
+            //     cb = registry.byId(item.node);
+            //     if (cb && cb.get('checked')) {
+            //         lbl = dojoQuery("label[for='" + item.node + "']")[0];
+            //         //console.log(" :: chb '" + item.node + "': checked? " + cb.get('checked'));
+            //         //console.log(" :::: LABEL:", lbl);
+            //         if (item.name == "landcover-checkbox") {
+            //             if (landCoverSelection != "") landCoverSelection += "; ";
+            //             landCoverSelection += lbl.innerHTML;
+            //         } else if (item.name == "soil-type-checkbox") {
+            //             if (soilTypeSelection != "") soilTypeSelection += "; ";
+            //             soilTypeSelection += lbl.innerHTML;
+            //         }
+            //     }
+            // });
+
+
+            var blob = new Blob([text], {
+                type: "text/csv;charset=utf-8;"
+            });
+
+            saveAs(blob, "settings.csv");
 
         },
 

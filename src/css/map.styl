@@ -113,6 +113,7 @@ label
 #analysisTable
 	border-collapse collapse
 	margin-top -11px
+	width 100%
 
 #analysisTable > tbody > tr > td
 	border 1px solid black
@@ -174,6 +175,10 @@ label
 .share-button
 .share-connector	
 	top 200px
+	
+.print-button
+.print-connector	
+	top 240px
 
 .basemap-icon
 	background url('images/map_tools_basemaps.png')	no-repeat
@@ -182,16 +187,20 @@ label
 	margin-top 7px
 	margin-left 6px
 
-.basemap-button:hover, .LocateButton:hover, .share-icon:hover
+.basemap-button:hover, .LocateButton:hover, .share-icon:hover, .print-button:hover
 	background-color: #eee;
 	
-
+.print-icon
+	background url('images/print-icon.png') -2px -35px no-repeat #fff
+	
+.print-icon:hover
+	background-position -2px -1px
 
 .share-icon
 	background url('images/map_tools_share.png') no-repeat
 	background-position 8px 8px
 	
-.share-icon
+.share-icon, .print-icon
 	height 100%
 	width 100%
 	
@@ -247,6 +256,21 @@ label
 	height 30px
 	right 48px
 	width 13px
+	
+.map-view-print .app-header
+	display none
+
+.map-view-print .app-body
+	top 0
+	height 100%
+	
+
+.map-view-print .map-component,
+.map-view-print #legend-container,
+.map-view-print #brMap_zoom_slider,
+.map-view-print #mobile-menu-toggle
+	display none !important
+	
 	
 .popup-header
 	font-weight bold
@@ -313,10 +337,13 @@ label
 	border-radius 0px !important
 	-webkit-border-radius 0px !important
 	
-#removeGraphic
+#removeGraphic, #exportAnalysis
 	padding 10px
 	margin 5px
-	display block
+	display inline-block
+	width 48%
+	background-color #036 !important
+	
 	
 .esriPopup .titleButton.close
 	background none
