@@ -527,7 +527,6 @@ define([
             brApp.mapPoint = mapPoint;
 
             var graphic = mapPoint.graphic,
-                uniqueIdField = "attributeID",
                 graphicsLayer = brApp.map.getLayer("CustomFeatures"),
                 dataLayer = brApp.map.getLayer("indigenousLands"),
 
