@@ -16,7 +16,7 @@ define([], function() {
 
         // Launch Button to Close Dialog added in Code
         // welcomeDialogContent: "<h2 class='launch-dialog-title'>About Global Map of Indigenous and Community Lands</h2>" +
-        //     "<p class='launch-dialog-subtitle'>A partnership covened by the Instituto del Bien Comun and the World" +
+        //     "<p class='launch-dialog-subtitle'>A partnership convened by the Instituto del Bien Comun and the World" +
         //     "Resources Institute in collaboration with numerous other organizations.</p>" +
         //     "<p class='launch-dialog-content'>Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam" +
         //     " varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris." +

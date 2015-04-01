@@ -47,7 +47,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 url: indigenousLandsUrl,
                 type: 'dynamic',
                 // Not all the layers are present in the tree, when they are, include 0 - 9
-                defaultLayers: [0, 1, 2, 3, 4], //[0,1,2,3,4,5,6,7,8,9]
+                defaultLayers: [1, 2, 3, 4], //[0,1,2,3,4,5,6,7,8,9]
                 visible: true
             },
             'CustomFeatures': {

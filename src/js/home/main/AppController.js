@@ -70,7 +70,7 @@ define(['main/config'], function(homeConfig) {
 
             $("#slides").slick({
                 dots: true,
-                autoplay: true,
+                autoplay: false,
                 speed: 1000
             });
             $(".slick-prev").html("");
