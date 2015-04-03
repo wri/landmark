@@ -191,6 +191,7 @@ define([
     				React.createElement("label", null, 
     					React.createElement("input", {name: "national-layer-selection", type: "radio", value: LandTenure, onChange: this.handleRadioChange}), 
     					React.createElement("span", {className: "national-layer-selection-label"}, "Land Tenure Security Indicators, as stated by law")
+                        
     				)
     			), 
 

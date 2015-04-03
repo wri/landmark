@@ -191,6 +191,7 @@ define([
     				<label>
     					<input name='national-layer-selection' type='radio' value={LandTenure} onChange={this.handleRadioChange} />
     					<span className='national-layer-selection-label'>Land Tenure Security Indicators, as stated by law</span>
+                        
     				</label>
     			</div>
 

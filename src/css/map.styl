@@ -414,14 +414,13 @@ label
 	cursor pointer
 	
 .tree-widget-title-pane	
-	border 1px solid $mainBorder
 	background-color white
 	box-sizing initial
 	line-height 32px
 	height 32px
 	
 .tree-width
-	width 320px
+	width 340px
 	
 .mobile .tree-width
 	width 295px
@@ -442,15 +441,18 @@ label
 	display inline-block
 	padding 0 12px
 	margin-left -33px
-	border-left 1px solid $mainBorder
 	color white
 	background-color #6699CC
-	padding-bottom 1px
 
 .tree-content
 	background-color white
 	position absolute
 	overflow hidden
+	
+.tundra .dijitAccordionTitleSelected, .dijitAccordionContainer
+	border none !important
+	border-top 1px solid $mainBorder !important
+	border-bottom 1px solid $mainBorder !important
 	
 .mobile .tree-content
 	bottom 0
@@ -464,7 +466,7 @@ label
 	margin 0
 
 .brMap .tree-content.active
-	border 1px solid $mainBorder
+	border none !important
 	border-top 0
 
 .tree-content .tester
