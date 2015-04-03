@@ -854,16 +854,16 @@ define([
             var imageUrlUnchecked = "css/images/checkbox_unchecked.png";
 
 
-            if (this.dataset.checked === 'false') {
+            if (this.getAttribute("data-checked") === 'false') {
                 $('#data-complete-checkbox').removeClass('data-complete-checkbox-class').addClass('data-complete-checkbox-class-checked');
                 dynamicLayer.visibleLayers.push(5);
-                this.dataset.checked = 'true';
+                this.setAttribute("data-checked", "true")
                 $("#completeness-slider").show();
             } else {
                 $('#data-complete-checkbox').removeClass('data-complete-checkbox-class-checked').addClass('data-complete-checkbox-class');
                 var index = dynamicLayer.visibleLayers.indexOf(5);
                 dynamicLayer.visibleLayers.splice(index, 1);
-                this.dataset.checked = 'false';
+                this.setAttribute("data-checked", "false")
                 $("#completeness-slider").hide();
             }
             topic.publish('refresh-legend');
