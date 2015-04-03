@@ -16,14 +16,14 @@ module.exports = {
     stylus: {
         base: 'src/css',
         watch: 'src/css/**/*.styl',
-        src: ['src/css/base.styl', 'src/css/map.styl', 'src/css/home.styl', 'src/css/about.styl', 'src/css/contact.styl', 'src/css/data.styl'],
+        src: ['src/css/base.styl', 'src/css/map.styl', 'src/css/home.styl', 'src/css/about.styl', 'src/css/contact.styl', 'src/css/data.styl', 'src/css/institutions.styl'],
         devOut: 'src/css',
         buildOut: 'build/css'
     },
     jade: {
         base: 'src',
         watch: 'src/**/*.jade',
-        src: ['src/index.jade', 'src/about.jade', 'src/map.jade', 'src/data.jade', 'src/contact.jade'],
+        src: ['src/index.jade', 'src/about.jade', 'src/map.jade', 'src/data.jade', 'src/contact.jade', 'src/institutions.jade'],
         devOut: 'src',
         buildOut: 'build'
     },
@@ -72,6 +72,24 @@ module.exports = {
                 },
                 name: 'js/about/aboutLoader',
                 out: 'build/js/about/aboutLoader.js'
+            }
+        },
+        institutions: {
+            options: {
+                baseUrl: 'src',
+                paths: {
+                    'dojo': 'empty:',
+                    'esri': 'empty:',
+                    'dijit': 'empty:',
+                    'dojox': 'empty:',
+                    'react': 'empty:',
+                    'js': 'js',
+                    'libs': 'libs',
+                    'institutions': 'js/institutions',
+                    'components': 'js/components'
+                },
+                name: 'js/institutions/institutionsLoader',
+                out: 'build/js/institutions/institutionsLoader.js'
             }
         },
         home: {

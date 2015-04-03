@@ -35,7 +35,7 @@ define([
                 topic.publish('refresh-legend');
 
             } else {
-                
+
                 dynamicLayer = brApp.map.getLayer('indigenousLands');
 
                 if (keys.length === 0) {
@@ -57,9 +57,9 @@ define([
         },
 
         /**
-        * @param {array} visibleLayers - Array of layers to be set to visible
-        */
-        setNationalLevelRenderer: function (visibleLayers) {
+         * @param {array} visibleLayers - Array of layers to be set to visible
+         */
+        setNationalLevelRenderer: function(visibleLayers) {
 
             var layerDrawingOptionsArray = [],
                 layerDrawingOption,
@@ -74,7 +74,7 @@ define([
             renderer = MapAssets.getUniqueValueRendererForNationalDataWithField(fieldName);
             layerDrawingOption.renderer = renderer;
 
-            arrayUtils.forEach(visibleLayers, function (layer) {
+            arrayUtils.forEach(visibleLayers, function(layer) {
                 layerDrawingOptionsArray[layer] = layerDrawingOption;
             });
 

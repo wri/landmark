@@ -20,7 +20,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
 
         options: {
             sliderPosition: 'top-right',
-            basemap: 'gray',
+            basemap: 'osm',
             centerX: -19,
             centerY: 19,
             zoom: 3

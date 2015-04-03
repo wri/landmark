@@ -68,7 +68,7 @@ gulp.task('copy-access', function() {
         .pipe(gulp.dest(config.copy.access.out));
 });
 
-gulp.task('optimize', ['optimize-map-page', 'optimize-about-page', 'optimize-home-page']);
+gulp.task('optimize', ['optimize-map-page', 'optimize-about-page', 'optimize-home-page', 'optimize-institutions-page']);
 
 gulp.task('optimize-map-page', function() {
     requirejs.optimize(config.optimizer.map.options, function(res) {});
@@ -76,6 +76,10 @@ gulp.task('optimize-map-page', function() {
 
 gulp.task('optimize-about-page', function() {
     requirejs.optimize(config.optimizer.about.options);
+});
+
+gulp.task('optimize-institutions-page', function() {
+    requirejs.optimize(config.optimizer.institutions.options);
 });
 
 gulp.task('optimize-home-page', function() {

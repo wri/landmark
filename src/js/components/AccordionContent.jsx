@@ -58,21 +58,7 @@ define([
             </div>
           </div>
         );
-      // <ul className='aboutSteeringText'>
-      //           <li className='about-Steering-WRI' dangerouslySetInnerHTML={{__html: aboutConfig.wriText}} />
-      //           <li className='about-Steering-delBien'>{aboutConfig.delBienText}</li>
-      //           <li className='about-Steering-WAIP'>{aboutConfig.WAIPText}<a href={aboutConfig.WAIPTextLink}>{aboutConfig.WAIPTextLink}</a></li>
-      //           <li className='about-Steering-rightsResources'>{aboutConfig.rightsResourcesText}</li>
-      //           <li className='about-Steering-forestPeoples'>{aboutConfig.forestPeoplesText}</li>
-      //           <li className='about-Steering-internationalLand'>{aboutConfig.internationalLandText}</li>
-      //           <li className='about-Steering-rainUK'>{aboutConfig.rainUKText}</li>
-      //           <li className='about-Steering-FES'>{aboutConfig.FESText}</li>
-      //           <li className='about-Steering-PAFID'>{aboutConfig.PAFIDText}</li>
-      //           <li className='about-Steering-aliansi'>{aboutConfig.aliansiText}</li>
-      //           <li className='about-Steering-lizAlden'>{aboutConfig.lizAldenText}</li>
-      //         </ul>
 
-      //}, this);
     }
 
   });

@@ -542,11 +542,6 @@ define([
                 "<div class='odd-row'><div class='popup-header'>Laws and provisions reviewed</div>${I" + nationalIndicatorCode + "_Lap}</div>" +
                 "<div class='odd-row'><div class='popup-header'>Review source and date</div>${I" + nationalIndicatorCode + "_Rev} (${I" + nationalIndicatorCode + "_Year})</div>" +
                 "<div class='popup-last'>Last Updated: ${Last_Updt}");
-            if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '') {
-                template.content += '</div>';
-            } else {
-                template.content += '<a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">Additional Info</a></div>';
-            }
 
 
             return nationalLevelInfoTemplatePercent;
