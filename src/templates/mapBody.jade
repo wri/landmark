@@ -42,10 +42,12 @@ div#brMap.brMap
         div#geocoder
     div.map-component.data-completeness-container.hideOnLoad#data-completeness-container
         span.data-completeness-toggle
-            span(id='data-complete-checkbox',class='data-complete-checkbox-class',data-checked='false')
+            span(id='data-complete-checkbox',class='data-complete-checkbox-class-checked',data-checked='true')
         span.data-completeness-label Show Data Completeness
             span.help-marker(style='margin-top: 9px;')
+        div#completeness-slider 
     div.map-component.analysis-button.hideOnLoad.pointer#analysis-button
+        span#analysisLogo
         span.analysis-button-label Analysis
     div.map-component.button-widget.locator-button.pointer.hideOnLoad#locator-button
         div.locate-icon#location-widget

@@ -112,8 +112,8 @@ define([
     			visibleLayers = [-1];
     		break;
     		case LandTenure:
-    			// If Current Category is Land Tenure Indigenous, visible layers is [1], else, its [0]
-    			visibleLayers = (this.state.landTenureCategory === LandTenureInd ? [1] : [0]);
+    			// If Current Category is Land Tenure Indigenous, visible layers is [0], else, its [1]
+    			visibleLayers = (this.state.landTenureCategory === LandTenureInd ? [0] : [1]);
     		break;
     		case PercentIndigenous:
     			visibleLayers = [state.activePercentIndigenousLayer];
@@ -122,7 +122,7 @@ define([
 
     	// Update the currentLayer in brApp, Our popup needs to know the selection so it can format the content correctly
     	brApp.currentLayer = (state.landTenureCategory === LandTenureInd ? state.activeIndigenousKey : state.activeCommunityKey);
-
+        
     	// The true signifies that this is the national layer being updated
     	// This needs 
     	LayerController.updateVisibleLayers(visibleLayers, true);

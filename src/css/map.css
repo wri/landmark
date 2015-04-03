@@ -485,7 +485,7 @@ label {
 
 /* line 319 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .esriSimpleSliderDecrementButton {
-  border-top: 1px solid #808080;
+  border-top: 1px solid #8db3e2;
   background: url("images/map_tools_minus.png") no-repeat #fff;
   background-position: 7px 14px;
 }
@@ -704,7 +704,6 @@ label {
 
 /* line 473 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .analysis-button {
-  border: 1px solid #888;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -716,33 +715,32 @@ label {
   top: 20px;
 }
 
-/* line 483 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 482 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .simpleGeocoder .esriGeocoder input {
   font-family: Arial;
 }
 
-/* line 486 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 485 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .data-completeness-label,
 .analysis-button-label {
   font-size: 13px;
   font-family: Arial;
 }
 
-/* line 490 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 489 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .analysis-button-label,
 .data-completeness-label,
 .data-completeness-toggle {
   padding: 0 10px;
 }
 
-/* line 495 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 494 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .data-completeness-label {
   padding-right: 30px;
 }
 
-/* line 498 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 497 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .data-completeness-container {
-  border: 1px solid #888;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -750,29 +748,74 @@ label {
   text-align: center;
   line-height: 32px;
   height: 32px;
-  right: 160px;
+  right: 200px;
   top: 20px;
 }
 
-/* line 508 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 507 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .data-completeness-toggle {
-  background-color: #d0cfcf;
-  border-right: 1px solid #888;
+  background-color: #8db3e2;
   display: inline-block;
   height: 32px;
 }
 
-/* line 514 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 512 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+.esriSimpleSliderVertical .esriSimpleSliderIncrementButton {
+  border-bottom: 1px solid #8db3e2 !important;
+}
+
+/* line 515 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+#analysisLogo {
+  background: url("images/icon_analysis.png") no-repeat 9px;
+  background-color: #8db3e2;
+  width: 33px;
+  height: 32px;
+  display: block;
+  margin-left: -34px;
+  position: absolute;
+}
+
+/* line 524 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+.simpleGeocoder .esriGeocoder,
+.esriSimpleSlider,
+.button-widget {
+  border: none !important;
+}
+
+/* line 527 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+.simpleGeocoder .esriGeocoder .esriGeocoderSearch {
+  background: url("images/magnifying_glass_symbol.png") no-repeat 9px !important;
+  background-color: #8db3e2 !important;
+  width: 33px;
+  height: 32px;
+  position: absolute;
+  left: -37px;
+  top: -6px;
+  opacity: 100;
+}
+
+/* line 537 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+.simpleGeocoder .esriGeocoder .esriGeocoderSearch:hover {
+  opacity: 100 !important;
+}
+
+/* line 541 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+#completeness-slider {
+  width: 220px;
+  margin-top: 5px;
+}
+
+/* line 545 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .data-complete-checkbox-class {
   background: url("images/checkbox_unchecked.png") no-repeat;
 }
 
-/* line 517 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 548 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .data-complete-checkbox-class-checked {
   background: url("images/checkbox_checked.png") no-repeat;
 }
 
-/* line 520 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 551 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 #data-complete-checkbox {
   height: 11px;
   width: 11px;
@@ -780,19 +823,46 @@ label {
   cursor: pointer;
 }
 
-/* line 527 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 557 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .geocoder-container {
-  right: 415px;
+  right: 450px;
   top: 20px;
 }
 
-/* line 531 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 561 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+.tundra .dijitSliderLeftBumper,
+.tundra .dijitSliderRightBumper {
+  display: none;
+}
+
+/* line 564 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+.tundra .dijitSliderProgressBarH {
+  background: #8db3e2 !important;
+  height: 8px;
+}
+
+/* line 568 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+.tundra .dijitSliderRemainingBarH {
+  background: #828282 !important;
+  height: 8px;
+}
+
+/* line 573 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+.tundra .dijitSliderImageHandleH {
+  background: #036 !important;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  margin-top: 1px;
+}
+
+/* line 578 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .simpleGeocoder .esriGeocoder input {
   box-shadow: none;
   height: 20px;
 }
 
-/* line 535 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 582 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .analysis-popup-button {
   display: inline-block;
   margin: 5px;
@@ -809,7 +879,7 @@ label {
   width: 80px;
 }
 
-/* line 550 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 597 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 #legend-toggle-icon {
   height: 30px;
   width: 30px;
@@ -820,7 +890,7 @@ label {
   background-color: #69c;
 }
 
-/* line 563 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 610 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .titlePane.analysis-header {
   font-size: 21px !important;
   color: #000 !important;
@@ -828,37 +898,37 @@ label {
   border-bottom: none;
 }
 
-/* line 569 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 616 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 
-/* line 572 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 619 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .highcharts-container {
   margin-top: -20px;
 }
 
-/* line 575 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 622 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 #printAnalysis {
   margin-right: 20px;
 }
 
-/* line 578 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 625 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .tree-data-section {
   margin: 10px;
   padding: 5px;
   border: 1px solid #000;
 }
 
-/* line 583 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 630 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .tree-data-section > span {
   cursor: pointer;
   margin: 0;
 }
 
-/* line 622 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 669 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .national-active-indicator {
   border: 1px solid #000;
 }
 
-/* line 629 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 676 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .tree-data-section input[type='radio'] {
   margin: 0 0 0 5px;
 }
@@ -1052,16 +1122,16 @@ body:not(.mobile) .tree-widget-container .tree-content {
   font-size: 14px;
 }
 
-/* line 635 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 682 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 body:not(.mobile) .launch-map-button {
   margin-right: 10px;
   float: right;
 }
 
-/* line 639 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 686 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 @media (max-width: 800px) {
 
-/* line 640 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+/* line 687 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
   .national-layer-selection-label {
     font-size: 11px;
     padding-right: 0;

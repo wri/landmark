@@ -36,7 +36,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'nationalLevel': {
                 url: nationalLevelUrl,
                 type: 'dynamic',
-                defaultLayers: [-1], //[1,2,3,4]
+                defaultLayers: [5], //[1,2,3,4]
                 // infoTemplate: {
                 //     title: "${Country}",
                 //     content: "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>${Country}</div>"

@@ -24,6 +24,10 @@ define([
                 visibleLayers = keys;
                 dynamicLayer = brApp.map.getLayer('nationalLevel');
 
+                if (document.getElementById('data-complete-checkbox').getAttribute("data-checked") == "true") {
+                    visibleLayers.push(5);
+                }
+
                 if (keys[0] === 0 || keys[0] === 1) {
                     this.setNationalLevelRenderer(visibleLayers);
                     // Update Dynamic Layers but dont refresh
@@ -46,9 +50,7 @@ define([
                     });
                 }
 
-                if (document.getElementById('data-complete-checkbox').checked === true) {
-                    visibleLayers.push(5);
-                }
+
 
                 dynamicLayer.setVisibleLayers(visibleLayers);
                 topic.publish('refresh-legend');

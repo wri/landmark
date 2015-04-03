@@ -317,7 +317,7 @@ label
 	cursor pointer
 
 .esriSimpleSliderDecrementButton
-	border-top 1px solid gray
+	border-top 1px solid #8db3e2
 	background url(images/map_tools_minus.png) no-repeat #fff
 	background-position 7px 14px
 	
@@ -471,7 +471,6 @@ label
 	height 200px
 	
 .analysis-button
-	border 1px solid $mainBorder
 	border-radius(5px)
 	background-color white
 	text-align center
@@ -496,20 +495,52 @@ label
 	padding-right 30px
 	
 .data-completeness-container
-	border 1px solid $mainBorder
+
 	border-radius(5px)
 	background-color white
 	text-align center
 	line-height 32px
 	height 32px
-	right 160px
+	right 200px
 	top 20px
 	
 .data-completeness-toggle
-	background-color #d0cfcf
-	border-right 1px solid $mainBorder
+	background-color #8db3e2
 	display inline-block
 	height 32px
+	
+.esriSimpleSliderVertical .esriSimpleSliderIncrementButton
+	border-bottom 1px solid #8db3e2 !important
+	
+#analysisLogo
+	background url("images/icon_analysis.png") no-repeat 9px
+	background-color #8db3e2
+	width 33px
+	height 32px
+	display block
+	margin-left -34px
+	position absolute
+	
+.simpleGeocoder .esriGeocoder, .esriSimpleSlider, .button-widget
+	border none !important
+	
+.simpleGeocoder .esriGeocoder .esriGeocoderSearch
+	background url("images/magnifying_glass_symbol.png") no-repeat 9px !important
+	background-color #8db3e2 !important
+	width 33px
+	height 32px
+	position absolute
+	left -37px
+	top -6px
+	opacity 100
+	
+.simpleGeocoder .esriGeocoder .esriGeocoderSearch:hover
+	opacity 100 !important
+	
+
+#completeness-slider
+	width 220px
+	margin-top 5px
 	
 .data-complete-checkbox-class
 	background url('images/checkbox_unchecked.png') no-repeat
@@ -518,15 +549,31 @@ label
 	background url('images/checkbox_checked.png') no-repeat
 
 #data-complete-checkbox
-	
 	height: 11px
 	width: 11px
 	display inline-block
 	cursor pointer
 	
 .geocoder-container
-	right 415px
+	right 450px
 	top 20px
+
+.tundra .dijitSliderLeftBumper, .tundra .dijitSliderRightBumper
+	display none
+	
+.tundra .dijitSliderProgressBarH
+	background #8db3e2 !important
+	height 8px
+	
+.tundra .dijitSliderRemainingBarH
+	background rgb(130, 130, 130) !important
+	height 8px
+	
+	
+.tundra .dijitSliderImageHandleH
+	background #036 !important
+	border-radius 50%
+	margin-top 1px
 	
 .simpleGeocoder .esriGeocoder input
 	box-shadow none

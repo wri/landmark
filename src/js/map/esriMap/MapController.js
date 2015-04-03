@@ -31,9 +31,12 @@ define([
     "esri/tasks/IdentifyTask",
     "esri/tasks/IdentifyParameters",
     "esri/InfoTemplate",
-    "esri/tasks/query"
+    "esri/tasks/query",
+    "dijit/form/HorizontalSlider",
+    "dijit/form/HorizontalRuleLabels",
+    "esri/layers/LayerDrawingOptions"
 
-], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, CommunityTree, NationalLayerList, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query) {
+], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, CommunityTree, NationalLayerList, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
 
     'use strict';
 
@@ -73,7 +76,9 @@ define([
             on(document.getElementById('data-complete-checkbox'), 'click', self.showDataComplete);
             on(document.getElementById('draw-shape'), 'click', DrawTool.activate);
             on(document.getElementById('remove-graphics'), 'click', self.removeAllGraphics);
+
             on(document.uploadForm, 'change', Uploader.beginUpload.bind(Uploader));
+
             //on(document.getElementById('brMap_root'), 'click', self.handleClick.bind(self));
             on(brApp.map, 'click', self.handleClick.bind(self));
 
@@ -109,6 +114,7 @@ define([
                 nationalLayerList,
                 layerAccordion,
                 homeWidget,
+                transparencySlider,
                 geocoder,
                 legend,
                 node;
@@ -160,7 +166,19 @@ define([
                 title: 'National Level Data'
             }, 'national-level-toggle'));
 
+            transparencySlider = new HorizontalSlider({
+                value: 100,
+                minimum: 0,
+                maximum: 100,
+                discreteValues: 100,
+                showButtons: false,
+                intermediateChanges: false,
+                onChange: function(value) {
+                    self.changeOpacity(value);
+                }
+            }, "completeness-slider");
 
+            transparencySlider.startup();
 
             treeWidget = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
             nationalLayerList = new NationalLayerList('national-layer-lists');
@@ -176,7 +194,6 @@ define([
             legend.startup();
             // Initialize the draw tools
             DrawTool.init();
-
 
             //brApp.map.infoWindow.on("selection-change", function() {
 
@@ -417,21 +434,75 @@ define([
                 if (item.layerId === 4) {
                     return;
                 }
+                var statsField = item.feature.attributes.Stat_Date;
+                console.log(statsField);
+                if (statsField == "Null") {
+                    statsField = item.feature.attributes.Stat_Year;
+                    console.log(statsField);
+                }
+
+                var ethnStr;
+                var ethn1 = item.feature.attributes.Ethncity_1;
+                var ethn2 = item.feature.attributes.Ethncity_2;
+                var ethn3 = item.feature.attributes.Ethncity_3;
+
+                if (!ethn1) {
+                    ethnStr = '';
+                } else if (ethn1 && !ethn2) {
+                    ethnStr = ethn1;
+                } else if (ethn1 && ethn2 && !ethn3) {
+                    ethnStr = ethn1 + ", " + ethn2;
+                } else {
+                    ethnStr = ethn1 + ", " + ethn2 + ", " + ethn3;
+                }
+
+                var popStr;
+                var population = item.feature.attributes.Populatn;
+                var popSource = item.feature.attributes.Pop_Source;
+                var popYear = item.feature.attributes.Pop_Year;
+
+                if (!population || population == 0) {
+                    popStr = '';
+                } else if (population && !popSource) {
+                    popStr = population;
+                } else if (population && popSource && (!popYear || popYear == 0)) {
+                    popStr = population + ", " + popSource;
+                } else {
+                    popStr = population + ", " + popSource + ", " + popYear;
+                }
+                //todo: display unknown rather than null
+
                 template = new InfoTemplate(item.value,
                     // "<div class='even-row'><div class='popup-header'>Layer Name</div>" + item.layerName + " - " + item.layerId + '</div>' +
-                    "<div class='odd-row'><div class='popup-header'>Official Recognition</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
-                    "<div class='even-row'><div class='popup-header'>Status</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
-                    "<div class='odd-row'><div class='popup-header'>Category</div>" + item.feature.attributes.Category + '</div>' +
-                    "<div class='even-row'><div class='popup-header'>Size</div>Official Size: " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + " ha<br>GIS Area: " + self.numberWithCommas(item.feature.attributes.Area_GIS) + " ha</div>" +
-                    "<div class='odd-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
-                    "<div class='even-row'><div class='popup-header'>Ethnicity</div>" + item.feature.attributes.Ethncity_1 + '</div>' +
-                    "<div class='odd-row'><div class='popup-header'>Data Contributor</div>" + item.feature.attributes.Data_Ctrb + '</div>' +
-                    "<div class='even-row'><div class='popup-header'>Data Source</div>" + item.feature.attributes.Data_Src + '</div>' +
+                    "<div class='odd-row'><div class='popup-header'>Land type</div>" + item.feature.attributes.Identity + '</div>' +
+                    "<div class='even-row'><div class='popup-header'>Land status</div>" + item.feature.attributes.Ofcl_Rec + ' - ' + item.feature.attributes.Rec_Status + ' as of ' + statsField + '</div>' +
+                    "<div class='odd-row'><div class='popup-header'>Land category</div>" + item.feature.attributes.Category + '</div>' +
+                    "<div class='even-row'><div class='popup-header'>Ethnic groups</div>" + ethnStr + '</div>' +
+                    "<div class='odd-row'><div class='popup-header'>Population</div>" + popStr + '</div>' +
+
+                    "<div class='even-row'><div class='popup-header'>Size</div>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>Calculated area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + "</div>" +
+
+                    "<div class='odd-row'><div class='popup-header'>Acquisition scale</div>" + item.feature.attributes.Scale + '</div>' +
+                    "<div class='even-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
+                    "<div class='odd-row'><div class='popup-header'>Land data source</div>" + item.feature.attributes.Data_Src + '</div>' +
+                    "<div class='even-row'><div class='popup-header'>Data Contributor</div>" + item.feature.attributes.Data_Ctrb + '</div>' +
                     "<div class='popup-last'>Last Updated: " + item.feature.attributes.Last_Updt);
+
+
+
+                // "<div class='odd-row'><div class='popup-header'>Official Recognition</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
+                // "<div class='even-row'><div class='popup-header'>Status</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
+                // "<div class='odd-row'><div class='popup-header'>Category</div>" + item.feature.attributes.Category + '</div>' +
+                // "<div class='even-row'><div class='popup-header'>Size</div>Official Size: " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + " ha<br>GIS Area: " + self.numberWithCommas(item.feature.attributes.Area_GIS) + " ha</div>" +
+                // "<div class='odd-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
+                // "<div class='even-row'><div class='popup-header'>Ethnicity</div>" + item.feature.attributes.Ethncity_1 + '</div>' +
+                // "<div class='odd-row'><div class='popup-header'>Data Contributor</div>" + item.feature.attributes.Data_Ctrb + '</div>' +
+                // "<div class='even-row'><div class='popup-header'>Data Source</div>" + item.feature.attributes.Data_Src + '</div>' +
+                // "<div class='popup-last'>Last Updated: " + item.feature.attributes.Last_Updt);
                 if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '') {
                     template.content += '</div>';
                 } else {
-                    template.content += '<a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">Additional Info</a></div>';
+                    template.content += '<a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></div>';
                 }
 
 
@@ -763,6 +834,19 @@ define([
 
         },
 
+        changeOpacity: function(op) {
+            var dataCompleteness = brApp.map.getLayer("nationalLevel"),
+                layerOptions, ldos = new LayerDrawingOptions();
+
+            ldos.transparency = 100 - op;
+            layerOptions = dataCompleteness.layerDrawingOptions || [];
+            layerOptions[5] = ldos;
+
+            dataCompleteness.setLayerDrawingOptions(layerOptions);
+
+        },
+
+
         showDataComplete: function() {
             brApp.debug('MapController >>> showDataComplete');
             var dynamicLayer = brApp.map.getLayer('nationalLevel');
@@ -774,11 +858,13 @@ define([
                 $('#data-complete-checkbox').removeClass('data-complete-checkbox-class').addClass('data-complete-checkbox-class-checked');
                 dynamicLayer.visibleLayers.push(5);
                 this.dataset.checked = 'true';
+                $("#completeness-slider").show();
             } else {
                 $('#data-complete-checkbox').removeClass('data-complete-checkbox-class-checked').addClass('data-complete-checkbox-class');
                 var index = dynamicLayer.visibleLayers.indexOf(5);
                 dynamicLayer.visibleLayers.splice(index, 1);
                 this.dataset.checked = 'false';
+                $("#completeness-slider").hide();
             }
             topic.publish('refresh-legend');
             dynamicLayer.setVisibleLayers(dynamicLayer.visibleLayers);
