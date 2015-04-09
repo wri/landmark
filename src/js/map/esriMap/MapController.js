@@ -130,7 +130,8 @@ define([
 
             node = dojoQuery('.esriSimpleSliderIncrementButton')[0];
             domConstruct.create('div', {
-                'id': 'homeButton'
+                'id': 'homeButton',
+                'title': 'Default map extent'
             }, node, 'after');
             homeWidget = new HomeButton({
                 map: brApp.map
@@ -167,9 +168,10 @@ define([
             }, 'national-level-toggle'));
 
             transparencySlider = new HorizontalSlider({
-                value: 100,
+                //value: 80,
                 minimum: 0,
                 maximum: 100,
+                title: 'Set layer transparency',
                 discreteValues: 100,
                 showButtons: false,
                 intermediateChanges: false,
@@ -179,6 +181,8 @@ define([
             }, "completeness-slider");
 
             transparencySlider.startup();
+
+            transparencySlider.setValue(80);
 
             treeWidget = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
             nationalLayerList = new NationalLayerList('national-layer-lists');
@@ -192,6 +196,7 @@ define([
             homeWidget.startup();
             geocoder.startup();
             legend.startup();
+
             // Initialize the draw tools
             DrawTool.init();
 
@@ -356,9 +361,6 @@ define([
             if (params.layerIds.indexOf(4) > -1) { //TODO: IS this still a valid layer removal??
                 params.layerIds.splice(params.layerIds.indexOf(4), 1);
             }
-            if (params.layerIds.indexOf(11) > -1) { //TODO: IS this still valid??
-                params.layerIds.splice(params.layerIds.indexOf(11), 1);
-            }
 
             params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
 
@@ -396,12 +398,6 @@ define([
             params.geometry = mapPoint;
             params.mapExtent = brApp.map.extent;
             params.layerIds = mapLayer.visibleLayers;
-            // if (params.layerIds.indexOf(4) > -1) {
-            //     params.layerIds.splice(params.layerIds.indexOf(4), 1);
-            // }
-            // if (params.layerIds.indexOf(11) > -1) {
-            //     params.layerIds.splice(params.layerIds.indexOf(11), 1);
-            // }
 
             params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
 
@@ -480,25 +476,15 @@ define([
                     "<div class='even-row'><div class='popup-header'>Ethnic groups</div>" + ethnStr + '</div>' +
                     "<div class='odd-row'><div class='popup-header'>Population</div>" + popStr + '</div>' +
 
-                    "<div class='even-row'><div class='popup-header'>Size</div>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>Calculated area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + "</div>" +
+                    "<div class='even-row'><div class='popup-header'>Land Area</div>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>Calculated area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + "</div>" +
 
                     "<div class='odd-row'><div class='popup-header'>Acquisition scale</div>" + item.feature.attributes.Scale + '</div>' +
+                    //"<div class='odd-row'><div class='popup-header'>Acquisition method</div>" + item.feature.attributes.Method + '</div>' +
                     "<div class='even-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
                     "<div class='odd-row'><div class='popup-header'>Land data source</div>" + item.feature.attributes.Data_Src + '</div>' +
                     "<div class='even-row'><div class='popup-header'>Data Contributor</div>" + item.feature.attributes.Data_Ctrb + '</div>' +
                     "<div class='popup-last'>Last Updated: " + item.feature.attributes.Last_Updt);
 
-
-
-                // "<div class='odd-row'><div class='popup-header'>Official Recognition</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
-                // "<div class='even-row'><div class='popup-header'>Status</div>" + item.feature.attributes.Ofcl_Rec + '</div>' +
-                // "<div class='odd-row'><div class='popup-header'>Category</div>" + item.feature.attributes.Category + '</div>' +
-                // "<div class='even-row'><div class='popup-header'>Size</div>Official Size: " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + " ha<br>GIS Area: " + self.numberWithCommas(item.feature.attributes.Area_GIS) + " ha</div>" +
-                // "<div class='odd-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
-                // "<div class='even-row'><div class='popup-header'>Ethnicity</div>" + item.feature.attributes.Ethncity_1 + '</div>' +
-                // "<div class='odd-row'><div class='popup-header'>Data Contributor</div>" + item.feature.attributes.Data_Ctrb + '</div>' +
-                // "<div class='even-row'><div class='popup-header'>Data Source</div>" + item.feature.attributes.Data_Src + '</div>' +
-                // "<div class='popup-last'>Last Updated: " + item.feature.attributes.Last_Updt);
                 if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '') {
                     template.content += '</div>';
                 } else {
@@ -648,7 +634,7 @@ define([
                 params = new IdentifyParameters();
 
             params.tolerance = 3;
-            params.returnGeometry = true;
+            params.returnGeometry = false;
             params.width = brApp.map.width;
             params.height = brApp.map.height;
             params.geometry = mapPoint.graphic.geometry;
@@ -664,13 +650,14 @@ define([
                         layer: "indigenousLands",
                         features: features
                     });
+
                 } else {
                     console.log("no feats returned");
 
                     var template = new InfoTemplate();
                     template.setContent("<b>The area of interest intersects with <i>Zero</i> indigenous and/or community lands</b><button id='removeGraphic'>Remove</button>");
                     brApp.map.infoWindow.setContent(template.content);
-                    brApp.map.infoWindow.setTitle("<i>Intersection Analysis</i>");
+                    brApp.map.infoWindow.setTitle("Analysis Results");
                     //$(".esriPopup").addClass("analysis-location");
                     $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
                     $("#identifyNote").remove();
@@ -691,6 +678,8 @@ define([
                 deferred.resolve(false);
             });
             deferred.then(function(value) {
+
+
                 if (!value) {
                     return;
                 }
@@ -703,6 +692,7 @@ define([
                 var fields = ["Country", "Name", "Identity", "Official Recognition", "Recognition Status"];
 
                 brApp.csv = fields.join(",") + '\n';
+
 
                 function getTextContent(graphic, even) {
                     if (graphic.feature.attributes.Identity === "Indigenous (self-identified)") {
@@ -754,15 +744,19 @@ define([
 
                 template.content += "</table>";
 
-                brApp.map.infoWindow.setTitle("<i>Intersection Analysis</i>");
+                brApp.map.infoWindow.setTitle("Analysis Results");
                 brApp.map.infoWindow.setContent(template.content);
 
                 brApp.map.infoWindow.resize(650, 350);
+
+
                 $("#identifyNote").remove();
 
+                var extraContent = "<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:5px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</div></div>";
 
-                $('.esriPopupWrapper').append("<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:5px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</div></div>");
 
+                $('.esriPopupWrapper').append(extraContent);
+                $('.esriPopupWrapper').addClass("noPositioning");
 
                 //$(".esriPopup").addClass("analysis-location");
                 $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
@@ -770,7 +764,23 @@ define([
                 // if (Helper.isMobile()) {
                 //     brApp.map.infoWindow.maximize();
                 // }
-                brApp.map.infoWindow.show(mapPoint);
+                //$(".pointer").hide();
+
+
+                arrayUtils.forEach(brApp.map.infoWindow.domNode.children, function(node) {
+                    if (node) {
+                        $("#infowindowContainer").append(node);
+                    }
+                });
+
+
+                $("#infowindowContainer").show();
+
+                //brApp.map.infoWindow.show(mapPoint.mapPoint);
+
+
+                //debugger;
+                // brApp.map.infoWindow.move(screenPoint);
 
                 // brApp.map.infoWindow.maximize();
                 // brApp.map.infoWindow.show();
@@ -779,13 +789,18 @@ define([
 
                 var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
                     self.removeCustomGraphic(graphic.attributes.attributeID);
-                    brApp.map.infoWindow.hide();
+                    //brApp.map.infoWindow.hide();
+                    $("#infowindowContainer").hide();
+                    $('.esriPopupWrapper').removeClass("noPositioning");
                 });
 
-                on.once(brApp.map.infoWindow, "hide", function() {
+
+
+                $("div.titleButton.close").click(function() {
                     //$(".esriPopup").removeClass("analysis-location");
-                    brApp.map.infoWindow.resize(650, 350);
+                    $("#infowindowContainer").hide();
                     handle.remove();
+                    $('.esriPopupWrapper').removeClass("noPositioning");
                 });
 
                 on.once(document.getElementById('exportAnalysis'), 'click', function() {
@@ -797,13 +812,6 @@ define([
 
             });
 
-            // title = "<span style='padding: 25px;'>Intersection Analysis</span>";
-            // content = "<div class='odd-row'>The area of interest intersects with 4 inidigenous and/or community lands</div><div id='resultsPie'></div><div style='width: 250px; padding: 25px; color: black; padding-top: 0px; margin-top: -10px;'><strong>Total Area of the polygon:</strong><br /><span id='total-area'></span> Ha<br /><br />" + "<strong>Area that intersects with Indigenous and Community Lands:</strong><br /><span id='intersect-area'></span> Ha</div>";
-
-            // brApp.map.infoWindow.clearFeatures();
-
-            // brApp.map.infoWindow.setTitle(title);
-            // brApp.map.infoWindow.setContent(content);
 
         },
 
@@ -831,7 +839,9 @@ define([
             var graphics = brApp.map.getLayer("CustomFeatures");
             graphics.clear();
             graphics.redraw();
-
+            $('#remove-graphics').addClass('hidden');
+            $('#draw-shape').removeClass('display-three');
+            $('#upload-shapefile').removeClass('display-three');
         },
 
         changeOpacity: function(op) {

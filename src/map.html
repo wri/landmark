@@ -65,6 +65,7 @@
           <div id="mobile-tools-content" class="mobile-menu-content mobile-tools-content"></div>
         </div>
         <div id="brMap" class="brMap">
+          <div id="infowindowContainer" class="hidden"></div>
           <div id="mobile-menu-toggle" class="map-component mobile-menu-toggle-button hideOnLoad pointer"></div>
           <div id="tree-widget-container" class="map-component tree-widget-container hideOnLoad">
             <div id="tree-title-pane" class="tree-widget-title-pane"><span id="tree-title" class="tree-title-text tree-width"><span>Land Recognition Status</span></span><span id="tree-container-toggle" class="tree-container-toggle pointer">&minus;</span></div>
@@ -85,13 +86,13 @@
             <div id="geocoder"></div>
           </div>
           <div id="data-completeness-container" class="map-component data-completeness-container hideOnLoad"><span class="data-completeness-toggle"><span id="data-complete-checkbox" data-checked="true" class="data-complete-checkbox-class-checked"></span></span><span class="data-completeness-label">Show Data Completeness<span style="margin-top: 9px;" class="help-marker"></span></span>
-            <div id="completeness-slider"> </div>
+            <div id="completeness-slider"></div>
           </div>
           <div id="analysis-button" class="map-component analysis-button hideOnLoad pointer"><span id="analysisLogo"></span><span class="analysis-button-label">Analysis</span></div>
-          <div id="locator-button" class="map-component button-widget locator-button pointer hideOnLoad">
+          <div id="locator-button" title="Find my location" class="map-component button-widget locator-button pointer hideOnLoad">
             <div id="location-widget" class="locate-icon"></div>
           </div>
-          <div id="basemap-button" class="map-component button-widget basemap-button pointer hideOnLoad">
+          <div id="basemap-button" title="Basemaps" class="map-component button-widget basemap-button pointer hideOnLoad">
             <div class="basemap-icon"></div>
           </div>
           <div class="map-component basemap-container hidden">
@@ -105,7 +106,7 @@
               <div id="legend"></div>
             </div>
           </div>
-          <div id="share-button" class="map-component button-widget share-button pointer hideOnLoad">
+          <div id="share-button" title="Share" class="map-component button-widget share-button pointer hideOnLoad">
             <div class="share-icon"></div>
           </div>
           <div class="map-component share-container hidden">
@@ -117,7 +118,7 @@
             </div>
           </div>
           <div class="map-component share-connector connector hidden"></div>
-          <div id="print-button" class="map-component button-widget print-button pointer hideOnLoad">
+          <div id="print-button" title="Print" class="map-component button-widget print-button pointer hideOnLoad">
             <div id="print-widget" class="print-icon"></div>
           </div>
           <div class="map-component print-connector connector hidden"></div>
@@ -127,10 +128,11 @@
     <div class="hidden">
       <div id="analysis-dialog" title="Select an area to analyze" data-dojo-type="dijit/Dialog">
         <div id="analysis-content">
+          <p>Draw an area on the map or upload a shapefile to display a list of indigenous and community lands in your area of interest.</p>
           <div class="analysis-buttons">
             <button id="draw-shape">&#9998; Draw Shape</button>
             <button id="upload-shapefile">Upload File</button>
-            <button id="remove-graphics" class="hidden">Clear All</button>
+            <button id="remove-graphics" class="hidden">Remove All</button>
           </div>
           <div id="upload-form-content" class="hidden">
             <hr>

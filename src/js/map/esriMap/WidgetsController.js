@@ -377,8 +377,16 @@ define([
 
             if (customGraphics.graphics.length > 0) {
                 $('#remove-graphics').removeClass('hidden');
+                $('#draw-shape').addClass('display-three');
+                $('#upload-shapefile').addClass('display-three');
+
+
+
+
             } else {
                 $('#remove-graphics').addClass('hidden');
+                $('#draw-shape').removeClass('display-three');
+                $('#upload-shapefile').removeClass('display-three');
             }
             registry.byId('analysis-dialog').show();
         }

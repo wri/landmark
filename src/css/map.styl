@@ -100,6 +100,32 @@ label
 	font-size 13px
 	border-top 0
 	
+.esriLegendLayerLabel
+	padding-top 0 !important
+	
+#legend_indigenousLands_0_group > table, #legend_nationalLevel_5 > table.esriLegendLayerLabel
+	font-weight bold
+	
+#legend_indigenousLands_1 > table.esriLegendLayerLabel, #legend_indigenousLands_2 > table.esriLegendLayerLabel, #legend_indigenousLands_3 > table.esriLegendLayerLabel
+	font-style italic
+	
+#legend table
+	line-height 1
+	
+#infowindowContainer
+	position absolute
+	margin-left -325px
+	margin-top -260px
+	width 650px
+	height 520px //todo: 520? how to make this sliding depending on number of features?
+	max-height 550px
+	z-index 150
+	left 50%
+	top 50%
+	background-color white
+	overflow-y hidden
+	overflow-x hidden
+	
 .introTextTitle
 	color #074A7C
 	font-weight bold
@@ -111,9 +137,9 @@ label
 	
 #analysisTable
 	border-collapse collapse
-	margin-top -11px
-	width 100%
-
+	margin-top -10px
+	width 635px
+	
 #analysisTable > tbody > tr > td
 	border 1px solid black
 	padding 4px
@@ -343,15 +369,25 @@ label
 	border-radius 0px !important
 	-webkit-border-radius 0px !important
 	
-#removeGraphic, #exportAnalysis
+#removeGraphic, #exportAnalysis, #draw-shape, #upload-shapefile
 	padding 10px
 	margin 5px
 	display inline-block
 	width 48%
 	background-color #036 !important
 	
+#remove-graphics
+	padding 10px
+	margin 5px
+	//display inline-block
+	width 30%
+	background-color #036 !important
 	
-.esriPopup .titleButton.close
+.display-three
+	width 30% !important
+	
+	
+.esriPopup .titleButton.close, 
 	background none
 	top 10px
 	right 15px !important
@@ -359,16 +395,39 @@ label
 	height 13px !important
 	width 13px !important
 	
-.esriPopup .titleButton.maximize
+.titleButton.close
+	background none
+	margin-top -17px
+	margin-right 15px !important
+	font-size 22px
+	height 13px !important
+	width 13px !important
+	float right
+	cursor pointer
+		
+.sizer.content
+	font-size 14px
+	overflow auto
+	
+.noPositioning
+	top 0px !important
+	bottom 0px !important
+	left 0px !important
+	right 0px !important
+	
+.esriPopup .titleButton.maximize, .titleButton.maximize
 	display none
 
-.esriPopup .titlePane
+.esriPopup .titlePane, .titlePane
 	padding 10px
 	-webkit-border-radius 0px 0px 0px 0px !important
 	border-bottom 1px solid black
 	font-size 14px
 	background-color #003366 !important
 	font-family Arial !important
+	
+.titlePane
+	color white
 
 #aoiIntersect
 	background-color #c6d9f0
@@ -383,7 +442,7 @@ label
 // .esriPopup .pointer, .esriPopup .outerPointer
 // 	display none
 
-.esriPopup .contentPane
+.esriPopup .contentPane, .contentPane
 	// max-height none !important
 	padding 10px 0px 0px 0px !important
 
@@ -420,10 +479,13 @@ label
 	height 32px
 	
 .tree-width
-	width 340px
+	width 360px
 	
 .mobile .tree-width
-	width 295px
+	width 310px
+	
+.mobile .dijitAccordionContainer
+	width 290px
 	
 #tree-title
 	background-color #036
@@ -448,6 +510,7 @@ label
 	background-color white
 	position absolute
 	overflow hidden
+	
 	
 .tundra .dijitAccordionTitleSelected, .dijitAccordionContainer
 	border none !important

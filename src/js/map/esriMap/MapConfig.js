@@ -47,7 +47,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 url: indigenousLandsUrl,
                 type: 'dynamic',
                 // Not all the layers are present in the tree, when they are, include 0 - 9
-                defaultLayers: [1, 2, 3, 4], //[0,1,2,3,4,5,6,7,8,9]
+                defaultLayers: [1, 2, 3], //[0,1,2,3,4,5,6,7,8,9]
                 visible: true
             },
             'CustomFeatures': {
@@ -146,9 +146,14 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             question: "Does government recognize all community land, including homesteads, family farms and common property (e.g., forests, pasture)?",
             layer: 0
         }, {
-            label: 'Unregistered Land',
-            id: 'unregisteredTenure',
-            question: "Does government recognize community land rights even if not formally demarcated or registered?",
+            label: 'Unregistered Land: Homesteads & farms',
+            id: 'unregisteredTenureFarms',
+            question: "Does government recognize community rights over lands held and used by individuals and families (i.e., farms and homesteads), even if not formally demarcated or registered?",
+            layer: 0
+        }, {
+            label: 'Unregistered Land: Forests & pastures',
+            id: 'unregisteredTenureForests',
+            question: "Does government recognize community rights over lands held by indigenous peoples and managed as common property (i.e., forests and pastures), even if not formally demarcated or registered?",
             layer: 0
         }, {
             label: 'Registration Procedures',
@@ -240,11 +245,15 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             layer: 1
 
         }, {
-            label: 'Unregistered Land',
-            id: 'unregisteredTenure',
-            question: "Does government recognize indigenous land rights even if not formally demarcated or registered?",
+            label: 'Unregistered Land: Homesteads & farms',
+            id: 'unregisteredTenureFarms',
+            question: "Does government recognize community rights over lands held and used by individuals and families (i.e., farms and homesteads), even if not formally demarcated or registered?",
             layer: 1
-
+        }, {
+            label: 'Unregistered Land: Forests & pastures',
+            id: 'unregisteredTenureForests',
+            question: "Does government recognize community rights over lands held by indigenous peoples and managed as common property (i.e., forests and pastures), even if not formally demarcated or registered?",
+            layer: 1
         }, {
             label: 'Registration Procedures',
             id: 'registrationTenure',
