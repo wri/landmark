@@ -687,7 +687,7 @@ define([
                 var template = new InfoTemplate();
 
 
-                template.setContent("<table id='analysisTable'><tr><td  colspan='5' id='aoiIntersect'><b>The area of interest intersects with <i>" + value.features.length + "</i> indigenous and/or community lands</b></td></tr><tr><td><b>Country</b></td><td><b>Name</b></td><td><b>Identity</b></td><td><b>Official Recognition</b></td><td><b>Recognition Status</b></td></tr>");
+                template.setContent("<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Official Recognition</b></td><td class='rec_status'><b>Recognition Status</b></td></tr><tr style='height: 26px;'><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td></tr>");
 
                 var fields = ["Country", "Name", "Identity", "Official Recognition", "Recognition Status"];
 
@@ -708,19 +708,19 @@ define([
                     var str;
                     if (even === "even") {
 
-                        str = "<tr><td>" + graphic.feature.attributes.Country + "</td><td>" +
-                            graphic.feature.attributes.Name + "</td><td>" +
-                            graphic.feature.attributes.Identity + "</td><td>" +
-                            graphic.feature.attributes.Ofcl_Rec + "</td><td>" +
+                        str = "<tr class='even-row'><td class='country'>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
+                            graphic.feature.attributes.Name + "</td><td class='ident'>" +
+                            graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
+                            graphic.feature.attributes.Ofcl_Rec + "</td><td class='rec_status'>" +
                             graphic.feature.attributes.Rec_Status + "</td></tr>";
                         var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Ofcl_Rec, graphic.feature.attributes.Rec_Status];
                         brApp.csv += fieldValues.join(",") + '\n';
 
                     } else {
-                        str = "<tr class='odd-row'><td>" + graphic.feature.attributes.Country + "</td><td>" +
-                            graphic.feature.attributes.Name + "</td><td>" +
-                            graphic.feature.attributes.Identity + "</td><td>" +
-                            graphic.feature.attributes.Ofcl_Rec + "</td><td>" +
+                        str = "<tr class='odd-row'><td>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
+                            graphic.feature.attributes.Name + "</td><td class='ident'>" +
+                            graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
+                            graphic.feature.attributes.Ofcl_Rec + "</td><td class='rec_status'>" +
                             graphic.feature.attributes.Rec_Status + "</td></tr>";
                         var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Ofcl_Rec, graphic.feature.attributes.Rec_Status];
                         brApp.csv += fieldValues.join(",") + '\n';
@@ -743,8 +743,10 @@ define([
 
 
                 template.content += "</table>";
-
-                brApp.map.infoWindow.setTitle("Analysis Results");
+                var theTitle = "<div id='title_title'>Analysis Results</div>";
+                var titleResults = "<div id='titleResults'><i>The area of interest intersects with " + value.features.length + " indigenous and/or community lands</i></div>";
+                brApp.map.infoWindow.setTitle(theTitle + titleResults);
+                //brApp.map.infoWindow.setTitle("temp");
                 brApp.map.infoWindow.setContent(template.content);
 
                 brApp.map.infoWindow.resize(650, 350);
@@ -769,17 +771,21 @@ define([
 
                 arrayUtils.forEach(brApp.map.infoWindow.domNode.children, function(node) {
                     if (node) {
-                        $("#infowindowContainer").append(node);
+                        var newNode = node.cloneNode(true);
+                        $("#infowindowContainer").append(newNode);
+
                     }
                 });
 
-
+                var newHeight = (value.features.length * 44) + 210; //TODO: we gotta adjust these!
+                newHeight += "px";
+                $("#infowindowContainer").css("height", newHeight);
+                // debugger; //TODO: this is where I left off when resizing this guy based on # of feats
                 $("#infowindowContainer").show();
 
                 //brApp.map.infoWindow.show(mapPoint.mapPoint);
 
 
-                //debugger;
                 // brApp.map.infoWindow.move(screenPoint);
 
                 // brApp.map.infoWindow.maximize();
@@ -788,8 +794,11 @@ define([
 
 
                 var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
+
                     self.removeCustomGraphic(graphic.attributes.attributeID);
+                    $("#infowindowContainer").html('');
                     //brApp.map.infoWindow.hide();
+                    //$("#identifyNote").remove();
                     $("#infowindowContainer").hide();
                     $('.esriPopupWrapper').removeClass("noPositioning");
                 });
@@ -797,12 +806,21 @@ define([
 
 
                 $("div.titleButton.close").click(function() {
+                    $("#infowindowContainer").html('');
                     //$(".esriPopup").removeClass("analysis-location");
                     $("#infowindowContainer").hide();
                     handle.remove();
                     $('.esriPopupWrapper').removeClass("noPositioning");
                 });
+                if (value.features.length > 6) { //todo is 7 the correct # of feats??
 
+                    $("#analysisTable").removeClass("moreWidth");
+                    $("#column-header").removeClass("moreWidth");
+                } else {
+
+                    $("#analysisTable").addClass("moreWidth");
+                    $("#column-header").addClass("moreWidth");
+                }
                 on.once(document.getElementById('exportAnalysis'), 'click', function() {
 
                     self.exportAnalysisResult(brApp.csv);
