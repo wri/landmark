@@ -51,7 +51,15 @@ define([
                 }
 
 
-
+                if (visibleLayers[0] === -1) {
+                    $("#data-completeness-container").hide();
+                    $("#analysis-button").hide();
+                    //$("#geocoder-container").css("right", "80px");
+                } else {
+                    $("#data-completeness-container").show();
+                    $("#analysis-button").show();
+                    //$("#geocoder-container").css("right", "450px");
+                }
                 dynamicLayer.setVisibleLayers(visibleLayers);
                 topic.publish('refresh-legend');
 

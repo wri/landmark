@@ -4,22 +4,48 @@ define([], function() {
     var config = {
 
         accordionSectionTitles: [
-            'Purpose and Context', 'About the Global Map Project', 'Map Development Process', 'Steering Group Members'
+            'What is LandMark?', 'Who should use LandMark?', 'Why was LandMark developed?', 'How was LandMark developed?'
         ],
 
-        purposeText1: 'Land and natural resources lie at the heart of social, political, and economic life in much of rural Africa, Latin America, Asia, and elsewhere. For communities and indigenous peoples, they represent fundamental assets—primary sources of livelihood, nutrition, income, wealth, and employment—and are a basis for security, status, social identity, and political relations. Land and resources also have historical, cultural, and spiritual significance for these men and women.',
+        purposeText1: 'LandMark: The Global Platform of Indigenous and Community Lands',
 
-        purposeText2: 'A transnational mobilization of indigenous peoples over the last 4 decades has resulted in the formal recognition of their rights in various legally-binding international instruments and non-binding agreements. Rights to land and natural resources are cornerstones of these instruments. Still, while many governments in Africa, Asia, and Latin America acknowledge customary or community tenure rights to lands, few have established the strong legal protections needed to secure customary tenure over land. As a consequence, many indigenous peoples and communities throughout the world have lost access to critical natural resources, or lost their land entirely, threatening livelihoods and triggering resource-related conflicts.',
+        purposeText2: ' is the first online, interactive platform to provide maps and other critical information on lands that are held and used by indigenous peoples and local communities globally. It is designed to help indigenous peoples and communities protect their lands. More specifically, ',
 
-        purposeText3: 'Today, more indigenous peoples and communities are taking action to protect their lands. Some have successfully lobbied for legal change providing blanket national protection for unregistered community-based rights. Some are mapping their land as a first step to formal registration, others are submitting paperwork to obtain a land title, a growing number are filing petitions to have their concerns heard in court, and still others are taking to the streets to voice their demands.',
+        purposeText2b: 'LandMark',
 
-        purposeText4: 'New information and communication technologies are providing opportunities to address these challenges and help secure land rights. Indigenous peoples, communities and their partners around the world are using Global Positioning Systems (GPS), drones and other devices to map their land with great precision. Many have effectively used these maps to protect their land from external threats. And as more investors seek to acquire land, many communities want to share their maps with the public to let everyone know of their land claims, and proclaim, “We are here!”',
+        purposeText2c: ':',
 
-        aboutText1: 'The Global Map of Indigenous and Community Lands (Global Map) is the world’s first online, interactive platform to provide maps and other critical information on collectively-held and used lands. The Global Map is designed to help communities protect their lands. It puts the issue of land rights on the global agenda in a visible way, letting the world know of land claims and allowing indigenous peoples and communities to be proactive in asserting their rights rather than reactive to pending threats. Today, they all too often learn of threats late such as when a government official arrives and declares the land now belongs to the state or an investor arrives to begin operations. The Global Map helps build a global picture of indigenous and community lands and populations, supporting their engagement with one another and increasing their visibility to governments, corporations, and other actors.',
+        // purposeText2: 'A transnational mobilization of indigenous peoples over the last 4 decades has resulted in the formal recognition of their rights in various legally-binding international instruments and non-binding agreements. Rights to land and natural resources are cornerstones of these instruments. Still, while many governments in Africa, Asia, and Latin America acknowledge customary or community tenure rights to lands, few have established the strong legal protections needed to secure customary tenure over land. As a consequence, many indigenous peoples and communities throughout the world have lost access to critical natural resources, or lost their land entirely, threatening livelihoods and triggering resource-related conflicts.',
 
-        aboutText2: 'The Global Map is targeted for use by governments, companies, development assistance agencies, civil society organizations as well as indigenous peoples, communities and their representatives. It supports open and accountable governments, and promotes responsible private sector investments. Governments with weak land administration systems can now see which lands are held and used by indigenous peoples and communities, helping guide land use management in ways that respect human rights and boost local livelihoods, challenging global paradigms, such as wildlife conservation and large-scale land acquisition. Public officials can also compare the situations and conditions in their countries with those in other nations, prompting actions to recognize indigenous and community land rights.',
+        purposeText3: 'Enables indigenous peoples and local communities to build a global picture of their populations and lands, supporting their engagement with one another.',
 
-        aboutText3: 'The Global Map can promote changes in corporate behavior and action in identifying lands for investment purposes, reducing company risks and costs by respecting local land and natural resource rights. Companies making investments can use the Global Map to avoid acquiring contested land or learn who they need to negotiate with over rights to indigenous and community land. The Global Map can also inform development assistance agency decisions and help them better target their resources and technical assistance.',
+        purposeText4: 'Places the issue of community land rights on the global agenda in a visible way, allowing communities to be proactive in asserting their rights rather than reactive to threats.',
+
+        purposeText5: 'Provides a global perspective, encouraging governments to recognize and protect community land rights based on the examples of others.',
+
+        purposeText6: 'Promotes government transparency and accountability, helping guide land-use management in ways that respect human rights and boost local livelihoods.',
+
+        purposeText7: 'Encourages changes in corporate behavior and action in identifying lands for investments, reducing company risks and costs by avoiding the acquisition of contested land and respecting local land and natural resource rights.',
+
+        purposeText8: 'Informs development assistance agency decisions, helping them better target their resources and technical assistance.',
+
+
+        purposeText9: ' provides information at two scales–national and community level—allowing users to compare the land tenure situation across countries and within countries. Community-level data include the boundaries of lands held or used by indigenous peoples and communities, including lands that are officially-recognized and those that are not. The national-level data provide two layers of information:',
+        purposeText10: 'A snapshot of land tenure security for indigenous peoples and communities based on a review of national land and resource rights laws for each country, and ',
+        purposeText11: 'The amount of land held and used by indigenous peoples and communities as a percentage of the country’s total land area.',
+
+        purposeText12: 'The “data completeness layer” displays an estimate of the status of data availability in the platform, showing the areas where data are lacking and more contributions are needed.  See the ',
+        purposeText12b: 'Data',
+        purposeText12c: ' page for more information about each of these layers.',
+
+        aboutText1: ' provides an online platform for indigenous peoples, communities and their representatives and supporters to present information on their land rights to the world, whether these rights are formally recognized and registered with the state, or held informally under customary tenure arrangements.',
+
+        aboutText2: 'While ',
+        aboutText2b: ' depends in large measure on data and information contributions from communities and their supporters, the platform is designed to be used by a range of actors:',
+
+        aboutText3: 'Governments can use the information on the platform to guide land-use decisions in ways that respect human rights, reduce conflict and boost local livelihoods. They can also use ',
+        aboutText3b: ' to compare conditions in their countries with those in other nations, prompting reforms and other actions to recognize and better protect indigenous and community land rights.',
+
 
         mapDevelopment1: 'In March 2013, the Rights and Resources Initiative (RRI), Oxfam, and the International Land Coalition (ILC) convened a small group of land rights experts at the Rockefeller Foundation’s Bellagio Center in Italy to develop a common framework to scale actions in support of community land rights. The framework included four components. The Instituto del Bien Común (IBC) in Peru and World Resources Institute (WRI) were asked to lead the “information and documentation” component.',
 

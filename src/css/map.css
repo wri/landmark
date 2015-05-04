@@ -9,7 +9,7 @@
 
 /* line 9 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/config.styl */
 
-/* line 802 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/analysis.styl */
+/* line 819 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/analysis.styl */
 
 /* line 1 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/analysis.styl */
 .upload-instructions li {
@@ -886,7 +886,7 @@ label {
   text-align: center;
   line-height: 32px;
   height: 32px;
-  right: 70px;
+  right: 370px;
   top: 20px;
 }
 
@@ -923,7 +923,7 @@ label {
   text-align: center;
   line-height: 32px;
   height: 32px;
-  right: 200px;
+  right: 505px;
   top: 20px;
 }
 
@@ -1000,7 +1000,7 @@ label {
 
 /* line 687 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .geocoder-container {
-  right: 450px;
+  right: 80px;
   top: 20px;
 }
 

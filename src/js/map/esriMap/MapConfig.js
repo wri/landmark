@@ -181,12 +181,12 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             question: "Are wildlife (i.e., wild animals) within community lands under community jurisdiction?",
             layer: 0
         }, {
-            label: 'Sub-surface minerals',
+            label: 'Resource Rights: Sub-surface minerals',
             id: 'subsurfaceMinerals',
             question: "Are sub-surface minerals (i.e., not surface minerals) within community lands under community jurisdiction?",
             layer: 0
         }, {
-            label: 'Oil and natural gas',
+            label: 'Resource Rights: Oil and natural gas',
             id: 'oilAndGasTenure',
             question: "Are oil, natural gas and other forms of hydrocarbons within community lands under community jurisdiction?",
             layer: 0
@@ -282,12 +282,12 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             question: "Are wildlife (i.e., wild animals) within indigenous lands under indigenous jurisdiction?",
             layer: 1
         }, {
-            label: 'Sub-surface minerals',
+            label: 'Resource Rights: Sub-surface minerals',
             id: 'subsurfaceMinerals',
             question: "Are sub-surface minerals (i.e., not surface minerals)  within indigenous lands under indigenous jurisdiction?",
             layer: 1
         }, {
-            label: 'Oil and natural gas',
+            label: 'Resource Rights: Oil and natural gas',
             id: 'oilAndGasTenure',
             question: "Are oil, natural gas and other forms of hydrocarbons  within indigenous lands under indigenous jurisdiction?",
             layer: 1
