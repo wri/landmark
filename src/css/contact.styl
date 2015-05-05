@@ -3,6 +3,9 @@
 body
 	font-family Arial
 	
+.root
+	background-color white
+	
 .app-body
 	padding 20px
 	
@@ -16,5 +19,20 @@ body
 
 #Message
 	height 100px
+	resize none
+	width 800px
 	
 
+@media (max-width: 1050px)
+	.top-bar .name h1 a
+		font-size 16px
+	.wri-header-attribution
+		display none
+
+@media (max-width: 1000px)
+	#contactForm > div > ul > li > input, #Message
+		width 500px
+		
+@media (max-width: 800px)
+	#contactForm > div > ul > li > input, #Message
+		width 300px

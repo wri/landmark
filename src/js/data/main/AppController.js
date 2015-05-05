@@ -1,4 +1,4 @@
-define(['main/config'], function(dataConfig) {
+define(['components/dataAccordion', 'data/main/config'], function(DataAccordion, dataConfig) {
     'use strict';
 
     var AppController = {
@@ -58,7 +58,7 @@ define(['main/config'], function(dataConfig) {
 
         renderComponents: function() {
             brApp.debug('AppController >>> renderComponents');
-            //var contactForm = new ContactForm(null, "contactForm");
+            var newAccord = new DataAccordion(null, "dataAccordion");
         },
 
 

@@ -2,3 +2,106 @@
 
 body
 	font-family Arial
+
+.root
+	background-color white
+
+#dataTitle
+	margin-left 675px
+	
+table, th, td
+	border 1px solid black
+
+.accordion-Controls
+	float left
+	width 300px
+	margin-left 250px
+	position relative
+	z-index 5
+	
+.accordion-Title
+	border-top 1px solid #ccc
+	border-bottom 1px solid #ccc
+	height 55px
+	padding-left 50px
+	background #f2f2f3
+	
+.caret-down
+	display inline-block
+	height 10px
+	width 8px
+	background url(images/static-icons.png) 0 -222px no-repeat
+	
+.panel-Title
+	display block
+	line-height 56px
+	padding-left 46px
+	border-bottom 1px solid #ccc
+	cursor pointer
+	font-size 14px
+	//font-family fira_sans_otmedium
+	color #464052
+	background #f2f2f3
+	border-right 1px solid #ccc
+
+.data-Accordion-Title
+	text-align center
+
+.dataImageLeft
+	cursor pointer
+	margin-top 400px
+	
+
+#injectPartners > p
+	width 475px
+	float right
+	margin-top 0
+	mergin-left 5px
+	
+	
+.data-Accordion
+	float left
+	width 800px
+	border-left 1px solid #ccc
+	padding 10px 20px
+	margin-left -1px
+	
+.dataSteeringText li
+	list-style none
+	padding-top 10px
+
+.active
+	background white !important
+	border-bottom 4px solid #003366
+	border-right none
+	
+@media (max-width: 1500px)
+	.accordion-Controls
+		margin-left 0px
+	#dataTitle
+		margin-left 250px
+		
+@media (max-width: 1250px)
+	#dataTitle
+		text-align center
+		margin-right 20px
+		
+@media (max-width: 1050px)
+	.top-bar .name h1 a
+		font-size 16px
+	.wri-header-attribution
+		display none
+		
+@media (max-width: 1000px)
+	#dataTitle
+		margin-left 20px
+		margin-right 20px
+	.data-Accordion
+		width auto
+	.dataImageLeft
+		display block
+		margin-top 400px !important
+
+		
+	
+	

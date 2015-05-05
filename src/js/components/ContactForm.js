@@ -52,7 +52,7 @@ define([
           method: 'POST',
           success: function(msg) {
             self.replaceState(self.getInitialState());
-            alert(msg);
+            alert("Your form was successfully submitted");
 
           },
           failure: function(err) {
@@ -78,7 +78,7 @@ define([
               React.createElement("label", null, "Subject:"), 
               React.createElement("input", {id: "Subject", type: "text", placeholder: this.state.subjectPlaceholder, onChange: this.handleChange, value: this.state.Subject}), 
               React.createElement("label", null, "Message:"), 
-              React.createElement("input", {id: "Message", type: "text", placeholder: this.state.messagePlaceholder, onChange: this.handleChange, value: this.state.Message}), 
+              React.createElement("textarea", {id: "Message", type: "text", placeholder: this.state.messagePlaceholder, onChange: this.handleChange, value: this.state.Message}), 
               React.createElement("button", {onClick: this.handleSubmit}, contactConfig.submit)
             ), 
             React.createElement("li", null, contactConfig.step3, React.createElement("a", {href: "http://www.twitter.com"}, contactConfig.step3b), contactConfig.step3c, React.createElement("a", {href: "http://www.facebook.com"}, contactConfig.step3d))

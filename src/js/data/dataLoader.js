@@ -1,5 +1,5 @@
 (function() {
-    require(["main/Main"], function(Main) {
+    require(["data/main/Main"], function(Main) {
         $(document).ready(function() {
             Main.init();
         });

@@ -52,7 +52,7 @@ define([
           method: 'POST',
           success: function(msg) {
             self.replaceState(self.getInitialState());
-            alert(msg);
+            alert("Your form was successfully submitted");
 
           },
           failure: function(err) {
@@ -78,7 +78,7 @@ define([
               <label>Subject:</label>
               <input id='Subject' type="text" placeholder={this.state.subjectPlaceholder} onChange={this.handleChange} value={this.state.Subject} />
               <label>Message:</label>
-              <input id='Message' type="text" placeholder={this.state.messagePlaceholder} onChange={this.handleChange} value={this.state.Message} />
+              <textarea id='Message' type="text" placeholder={this.state.messagePlaceholder} onChange={this.handleChange} value={this.state.Message} />
               <button onClick={this.handleSubmit} >{contactConfig.submit}</button>
             </li>
             <li>{contactConfig.step3}<a href='http://www.twitter.com'>{contactConfig.step3b}</a>{contactConfig.step3c}<a href='http://www.facebook.com'>{contactConfig.step3d}</a></li>

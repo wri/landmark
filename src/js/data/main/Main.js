@@ -1,7 +1,7 @@
 define([
-    'main/config',
-    'main/Dispatcher',
-    'main/AppController'
+    'data/main/config',
+    'data/main/Dispatcher',
+    'data/main/AppController'
 ], function(AppConfig, Dispatcher, AppController) {
     'use strict';
 
