@@ -20,8 +20,31 @@ html
 		div.root
 			include templates/header.jade
 			div.app-body
+				div#contactTitle
+					h1 Contact Us
+				div#contactForm
+
+
 		script(src='libs/jquery-2.1.3.min.js')
 		script(src='libs/foundation.min.js')
+		script.
+			var base = location.pathname.replace(/\/[^/]+$/, '');
+			window.require = {
+				baseUrl: base,
+				packages: [
+					{name: 'libs', location: base + '/libs'},
+					{name: 'contact', location: base + '/js/contact'},
+					{name: 'components', location: base + '/js/components'}
+				],
+				map: {
+					'*': {
+						'react': 'http://fb.me/react-0.12.2.min.js'
+					}
+				}
+			};
+
+		script(data-main='js/contact/contactLoader', src='libs/require.js')
+
 		script.
 			$(document).foundation();
 			$("#contact-page-link").addClass("exampleClass");

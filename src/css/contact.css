@@ -11,3 +11,24 @@
 body {
   font-family: Arial;
 }
+
+/* line 6 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+.app-body {
+  padding: 20px;
+}
+
+/* line 9 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+.contact-bold {
+  font-weight: bold;
+  color: #036;
+}
+
+/* line 13 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+#contactForm > div > ul > li > input {
+  width: 800px;
+}
+
+/* line 17 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+#Message {
+  height: 100px;
+}

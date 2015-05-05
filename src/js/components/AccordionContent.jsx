@@ -19,8 +19,8 @@ define([
     },
 
     componentDidMount: function() {
-      var steeringNode = $("#injectPartners");
-      steeringNode[0].innerHTML = aboutConfig.SteeringGroupsText;
+      // var steeringNode = $("#injectPartners");
+      // steeringNode[0].innerHTML = aboutConfig.SteeringGroupsText;
     },
     
     render: function () {
@@ -30,7 +30,7 @@ define([
         return (
           <div className='about-Accordion'>
             <div style={{'display': (this.state.activePanel === '0' ? 'block' : 'none')}}>
-              <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles[this.state.activePanel]}</h2>
+              <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles1}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.accordionSectionTitles1b}</h2>
               <p><i>{aboutConfig.purposeText1}</i>{aboutConfig.purposeText2}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.purposeText2c}</p>
               <ul>
                 <li>{aboutConfig.purposeText3}</li>
@@ -50,22 +50,31 @@ define([
 
             </div>
             <div style={{'display': (this.state.activePanel === '1' ? 'block' : 'none')}}>
-              <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles[this.state.activePanel]}</h2>
+              <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles2}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.accordionSectionTitles2b}</h2>
               <p><i>{aboutConfig.purposeText2b}</i>{aboutConfig.aboutText1}</p>
               <p>{aboutConfig.aboutText2}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.aboutText2b}</p>
-              <p>{aboutConfig.aboutText3}</p>
+              <ul>
+                <li>{aboutConfig.aboutText3}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.aboutText3b}</li>
+                <li>{aboutConfig.aboutText4}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.aboutText4b}</li>
+                <li>{aboutConfig.aboutText5}</li>
+                <li>{aboutConfig.aboutText6}</li>
+                <li>{aboutConfig.aboutText7}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.aboutText7b}</li>
+              </ul>
+              
             </div>
             <div style={{'display': (this.state.activePanel === '2' ? 'block' : 'none')}}>
-              <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles[this.state.activePanel]}</h2>
-              <p>{aboutConfig.mapDevelopment1}</p>
+              <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles3}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.accordionSectionTitles3b}</h2>
+              <p><i>{aboutConfig.purposeText2b}</i>{aboutConfig.mapDevelopment1}</p>
               <p>{aboutConfig.mapDevelopment2}</p>
               <p>{aboutConfig.mapDevelopment3}</p>
-              <p>{aboutConfig.mapDevelopment4}</p>
-              <p>{aboutConfig.mapDevelopment5}</p>
+              <p>{aboutConfig.mapDevelopment4}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.mapDevelopment4b}</p>
             </div>
             <div style={{'display': (this.state.activePanel === '3' ? 'block' : 'none')}}>
-              <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles[this.state.activePanel]}</h2>
-              <div id='injectPartners'></div>
+              <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles4}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.accordionSectionTitles4b}</h2>
+              <p>{aboutConfig.landmarkDevelopment1}</p>
+              <p>{aboutConfig.landmarkDevelopment2}<i>{aboutConfig.landmarkDevelopment2b}</i>{aboutConfig.landmarkDevelopment2c}</p>
+              <p>{aboutConfig.landmarkDevelopment3}</p>
+              <p>{aboutConfig.landmarkDevelopment4}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.landmarkDevelopment4b}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.landmarkDevelopment4c}</p>
               
             </div>
           </div>

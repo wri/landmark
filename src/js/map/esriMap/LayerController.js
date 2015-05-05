@@ -54,6 +54,7 @@ define([
                 if (visibleLayers[0] === -1) {
                     $("#data-completeness-container").hide();
                     $("#analysis-button").hide();
+                    //todo: hide national level data if its on, add global boolean so that when the comm level data is tuned back on; if that completeness WAS on, turn it back on
                     //$("#geocoder-container").css("right", "80px");
                 } else {
                     $("#data-completeness-container").show();

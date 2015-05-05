@@ -7,6 +7,16 @@ define([], function() {
             'What is LandMark?', 'Who should use LandMark?', 'Why was LandMark developed?', 'How was LandMark developed?'
         ],
 
+        accordionSectionTitles1: 'What is ',
+        accordionSectionTitles1b: '?',
+        accordionSectionTitles2: 'Who should use ',
+        accordionSectionTitles2b: '?',
+        accordionSectionTitles3: 'Why was ',
+        accordionSectionTitles3b: ' developed?',
+        accordionSectionTitles4: 'How was ',
+        accordionSectionTitles4b: ' developed?',
+
+
         purposeText1: 'LandMark: The Global Platform of Indigenous and Community Lands',
 
         purposeText2: ' is the first online, interactive platform to provide maps and other critical information on lands that are held and used by indigenous peoples and local communities globally. It is designed to help indigenous peoples and communities protect their lands. More specifically, ',
@@ -45,17 +55,43 @@ define([], function() {
 
         aboutText3: 'Governments can use the information on the platform to guide land-use decisions in ways that respect human rights, reduce conflict and boost local livelihoods. They can also use ',
         aboutText3b: ' to compare conditions in their countries with those in other nations, prompting reforms and other actions to recognize and better protect indigenous and community land rights.',
+        aboutText4: 'Businesses that invest in land or natural resources or have suppliers of land-based commodities can use ',
+        aboutText4b: ' to conduct due diligence on land rights before making investments, to identify communities over access to land and resources, and to monitor their supply chain for compliance with international land standards.',
+        aboutText5: 'Development assistance agencies can use the platform to identify weaknesses in indigenous and community land rights, and better target their financial resources and technical assistance to the countries and communities most in need.',
+        aboutText6: 'Citizens and civil society groups concerned about the loss of indigenous and community lands can use the platform to check if governments and companies are targeting community land for acquisition and investment.',
+        aboutText7: 'Educators, researchers and the general public can use ',
+        aboutText7b: ' to increase their knowledge and awareness of the nature and extent of land and resource rights for indigenous peoples and local communities around the world.',
 
 
-        mapDevelopment1: 'In March 2013, the Rights and Resources Initiative (RRI), Oxfam, and the International Land Coalition (ILC) convened a small group of land rights experts at the Rockefeller Foundation’s Bellagio Center in Italy to develop a common framework to scale actions in support of community land rights. The framework included four components. The Instituto del Bien Común (IBC) in Peru and World Resources Institute (WRI) were asked to lead the “information and documentation” component.',
 
-        mapDevelopment2: 'In September 2013, IBC and WRI, together with the Aliansi Masyarakat Adat Nusantara (AMAN) from Indonesia, co-led the “Mapping & Documentation” sessions at the follow-up international conference—Scaling-Up Global Efforts to Securing Community Land and Resource Rights—convened in Interlaken, Switzerland, by RRI, ILC and Oxfam. The “Mapping & Documentation” sessions identified a number of scaling efforts, but discussions focused on the development of the Global Map.',
+        mapDevelopment1: ' was developed to fill a critical gap in information on indigenous and community land rights. In the absence of publicly-available information, many indigenous and community lands are invisible and vulnerable. Transparency reduces the likelihood that irregular acquisitions and expropriations go unnoticed, and shines a light on the vulnerability of indigenous and community lands.',
 
-        mapDevelopment3: 'In February 2014, IBC, ILC and WRI convened a group of land rights organizations in Rome to discuss objectives and options for establishing the Global Map. In addition to the co-organizers, participating groups included: AMAN, Foundation for Ecological Security (FES) in India, Philippine Association for Intercultural Development (PAFID), Forest Peoples Programme (FPP), RFUK, RRI, and Liz Alden Wily, independent land tenure specialist. The group agreed to establish themselves into a Steering Group to guide the development of the Global Map.',
+        mapDevelopment2: 'Many governments today acknowledge customary and community land rights, but few have established the strong legal protections needed to secure these tenure systems. Even with supportive legislation, few governments have effectively implemented or enforced these laws. As a consequence, indigenous peoples and communities, especially in Africa, Asia and Latin America, are losing their land to governments and corporations for economic development and commercial investment purposes. Many also face restrictions on how they use their land, which threatens livelihoods and triggers conflicts.',
 
-        mapDevelopment4: "In June 2014, WRI and IBC met in Lima, Peru, to further develop the Global Map with particular attention to developing an initial typology to present the community land maps, various technical protocols and the initial data layers. WRI and IBC were joined by Instituto Socioambiental (ISA) in Brazil and the World Atlas of Indigenous Peoples' Territories (WAIPT) in France. ISA represented Red Amazónica de Información Socioambiental Georreferenciada (RAISG), a coalition of civil society organizations from Amazon Basin countries. The WAIPT project is a collaborative effort between the Centre National de la Recherche Scientifique (CNRS), Survival International (France), and Sorbonne Nouvelle University with the support of the Ile-de-France region. WAIPT has since formally joined the Steering Group.",
+        mapDevelopment3: 'Today, more indigenous peoples and communities are taking action to protect their lands. In some countries, communities and their representatives have successfully lobbied for legal change recognizing their land rights and providing blanket national protection for unregistered community-based rights. Many are submitting the official paperwork needed to have their lands formally registered and to obtain a land certificate or title. A growing number are filing petitions to have their concerns heard in court, and still others are taking to the streets to voice their demands.',
 
-        mapDevelopment5: 'Shortly after the Lima meeting and with the assistance of Blue Raster, a design firm, WRI, IBC and the Steering Group began designing and building the Global Map—collecting and preparing the information for the various data layers, developing wireframes and building out the website. In 2015, with the approval of the Steering Group, the Beta 2 platform of the Global Map was made available to the public for review and input.',
+        mapDevelopment4: "An increasing number of indigenous peoples and communities are also mapping their lands. Many have effectively used their maps, even if it is not formally recognized or endorsed by the state, to protect their lands from external threats. Information and communication technologies are providing new opportunities to address threats and secure land rights. Indigenous peoples, communities and their partners around the world are now using hand-held Global Positioning Systems (GPS), unmanned aerial vehicle (e.g., drones), and other devices to map their lands with greater ease and precision. Some governments and civil society organizations have also developed national maps or online platforms of indigenous and community lands. ",
+
+        mapDevelopment4b: " brings these maps together in a single platform.",
+
+
+        landmarkDevelopment1: "In March 2013, the Rights and Resources Initiative (RRI), Oxfam, and the International Land Coalition (ILC) convened a small group of land rights experts at the Rockefeller Foundation’s Bellagio Center in Italy to develop a common framework to scale actions in support of community land rights. Four framework components were identified with the Instituto del Bien Común (IBC) and the World Resources Institute (WRI) agreeing to lead the “Information and Documentation” component.",
+
+        landmarkDevelopment2: "In September 2013, RRI, ILC and Oxfam convened an international conference—",
+
+        landmarkDevelopment2b: "Scaling-Up Global Efforts to Securing Community Land and Resource Rights",
+
+        landmarkDevelopment2c: "—in Interlaken, Switzerland. IBC and WRI, together with the Aliansi Masyarakat Adat Nusantara (AMAN) from Indonesia, co-led the conference 'Mapping & Documentation' sessions. These sessions identified a number of scaling efforts, but discussions centered on the development of an online, interactive global platform.",
+
+        landmarkDevelopment3: "In February 2014, IBC, WRI and ILC convened a group of land rights organizations in Rome, Italy, to begin the process of developing the global platform. In addition to the organizers, participating groups included: AMAN, RRI, Foundation for Ecological Security (FES) in India, Philippine Association for Intercultural Development (PAFID), Forest Peoples Programme (FPP), Rainforest Foundation United Kingdom (RFUK) and Liz Alden Wily, an independent land tenure specialist. The participants agreed to organize themselves into a Steering Group to provide advice and guide the effort.",
+
+        landmarkDevelopment4: "Following the Rome meeting, WRI and IBC—with help from the web design firm Blue Raster—began designing and building ",
+
+        landmarkDevelopment4b: ". The World Atlas of Indigenous Peoples' Territories (WAIPT) project joined the effort, becoming a member of the Steering Group and co-leading the development with IBC and WRI. WAIPT is a collaborative effort between the Centre National de la Recherche Scientifique (CNRS), Survival International (France), and Sorbonne Nouvelle University with the support of the Ile-de-France region. ",
+
+        landmarkDevelopment4c: " was formally launched in September 2015.",
+
+        // mapDevelopment5: 'Shortly after the Lima meeting and with the assistance of Blue Raster, a design firm, WRI, IBC and the Steering Group began designing and building the Global Map—collecting and preparing the information for the various data layers, developing wireframes and building out the website. In 2015, with the approval of the Steering Group, the Beta 2 platform of the Global Map was made available to the public for review and input.',
 
         // wriText: '<p style="font-weight: bold;">World Resources Institute (WRI)</p>' +
         //     '<p>Established: <strong>1982</strong></p>' +

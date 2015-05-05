@@ -109,6 +109,42 @@ module.exports = {
                 name: 'js/home/homeLoader',
                 out: 'build/js/home/homeLoader.js'
             }
+        },
+        contact: {
+            options: {
+                baseUrl: 'src',
+                paths: {
+                    'dojo': 'empty:',
+                    'esri': 'empty:',
+                    'dijit': 'empty:',
+                    'dojox': 'empty:',
+                    'react': 'empty:',
+                    'js': 'js',
+                    'libs': 'libs',
+                    // 'contact': 'js/contact',
+                    // 'components': 'js/components'
+                },
+                name: 'js/contact/contactLoader',
+                out: 'build/js/contact/contactLoader.js'
+            }
+        },
+        data: {
+            options: {
+                baseUrl: 'src',
+                paths: {
+                    'dojo': 'empty:',
+                    'esri': 'empty:',
+                    'dijit': 'empty:',
+                    'dojox': 'empty:',
+                    'react': 'empty:',
+                    'js': 'js',
+                    'libs': 'libs',
+                    'data': 'js/data',
+                    'components': 'js/components'
+                },
+                name: 'js/data/dataLoader',
+                out: 'build/js/data/dataLoader.js'
+            }
         }
     }
 };
