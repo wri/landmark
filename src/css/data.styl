@@ -11,6 +11,53 @@ body
 	
 table, th, td
 	border 1px solid black
+	
+.odd-row
+	background-color #B7B7B7
+	
+.odd-row-names
+	background-color #CFE0F5
+	
+.names-top-row
+	background-color #4677B3
+	width 100%
+	color white
+	border none !important
+	
+.names-top-row > td
+	font-size 15px !important
+	
+#dataChart
+	padding-left 100px
+	
+
+#data-completeness
+	border none
+	border-collapse collapse
+
+u
+	text-decoration underline
+
+	
+#indicators-table td, #names-table td, #data-completeness td
+	padding 5px
+	font-size 14px
+
+#indicators-table
+	border 1px solid #B7B7B7
+	border-spacing 0
+
+#names-table
+	border-collapse collapse
+	border-spacing 0
+	border 1px solid #4677b3
+	
+#names-table tr
+	border 1.5px solid #8db3e2
+
+#indicators-table th, #indicators-table td, #names-table th, #names-table td
+	border none
+	border-spacing 0
 
 .accordion-Controls
 	float left
@@ -101,7 +148,15 @@ table, th, td
 	.dataImageLeft
 		display block
 		margin-top 400px !important
+		
 
+@media (max-width: 800px)
+	#dataChart
+		padding-left 0
+		
+@media (max-width: 600px)
+	#dataChart
+		width: 400px
 		
 	
 	

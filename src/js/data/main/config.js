@@ -127,6 +127,149 @@ define([], function() {
         dataLevel10: 'Africa',
         dataLevel11: 'Americas and Oceania',
 
+        dataLevel12a: 'Land Tenure Security Indicators, as stated by law.',
+        dataLevel12b: ' A series of 12 indicators (some with sub-indicators) evaluate the security of tenure rights for indigenous peoples or communities, as they are defined in national laws.. The indicators are assessed separately for each tenure type (i.e., indigenous land and community (non-indigenous) land) that is regulated and governed by a different legal framework. For example, laws governing all or certain groups of indigenous peoples’ land rights are assessed separately from laws governing the lands of other non-indigenous communities, if indeed different laws are applicable to each. Note that there can also be different laws applicable to more than one community tenure system within a country, and the references to each law and ethnic group are included in the attribute information that is available by clicking on a country in the interactive map. The indicators for each category are outlined below.',
+
+        dataLevel13: 'Indicators of tenure security for indigenous and community lands, as stated by law:',
+
+        dataLevel14a: 'Category',
+        dataLevel14b: 'Indicator',
+
+        dataCompletenessTable1a: 'Legal Force',
+        dataCompletenessTable1b: 'Do community/indigenous land rights, including customary rights, have the same legal force as land rights based on statutory law? ',
+
+        dataCompletenessTable2a: 'Perpetuity',
+        dataCompletenessTable2b: 'Are community/indigenous land rights - customary and statutory - perpetual (i.e., not just for a fixed term)?',
+
+        dataCompletenessTable3a: 'Government recognition',
+        dataCompletenessTable3b: 'Does government recognize all community/indigenous land, including homesteads, family farms and common property (e.g., forests, pasture)?',
+
+        dataCompletenessTable4a: 'Unregistered Land: Homesteads and farms',
+        dataCompletenessTable4b: 'Does government recognize community/indigenous rights over lands held and used by individuals and families (i.e., farms and homesteads), even if not formally demarcated or registered?',
+
+        dataCompletenessTable5a: 'Unregistered land: Forests and pastures',
+        dataCompletenessTable5b: 'Does government recognize community/indigenous rights over lands held by indigenous peoples and managed as common property (i.e., forests and pastures), even if not formally demarcated or registered?',
+
+        dataCompletenessTable6a: 'Unregistered land: Registering land',
+        dataCompletenessTable6b: 'Is it allowable and are there established procedures to formally register community/indigenous land rights in a public registry?',
+
+        dataCompletenessTable7a: 'Unregistered land: Self-governance',
+        dataCompletenessTable7b: 'Are community/indigenous institutions - traditional or modern - recognized as the legal authority over community lands?',
+
+        dataCompletenessTable8a: 'Resource Rights: Trees and forests',
+        dataCompletenessTable8b: 'Are trees and forests within community/indigenous lands under community jurisdiction?',
+
+        dataCompletenessTable9a: 'Resource Rights: Waters',
+        dataCompletenessTable9b: 'Are waters - including groundwater, rivers and natural water bodies - within community/indigenous lands under community jurisdiction?',
+
+        dataCompletenessTable10a: 'Resource Rights: Wildlife',
+        dataCompletenessTable10b: 'Are wildlife (i.e., wild animals) within community/indigenous lands under community/indigenous peoples’ jurisdiction?',
+
+        dataCompletenessTable11a: 'Resource Rights: Sub-surface minerals',
+        dataCompletenessTable11b: 'Are sub-surface minerals (i.e., excluding sand, pebbles or rocks found on the surface of land) within community/indigenous lands under community/indigenous peoples’ jurisdiction?',
+
+        dataCompletenessTable12a: 'Resource Rights: Oil and natural gas',
+        dataCompletenessTable12b: 'Are oil, natural gas and other forms of hydrocarbons within community/indigenous lands under community/indigenous peoples’ jurisdiction?',
+
+        dataCompletenessTable13a: 'Right to consent',
+        dataCompletenessTable13b: 'Is community consent required before an outside actor, including government, can acquire community/indigenous land (excluding compulsory land acquisition)? ',
+
+        dataCompletenessTable14a: 'Land acquisition',
+        dataCompletenessTable14b: 'Is an outside actor, including government, required to prove that sought land is not claimed or registered as community/indigenous land?',
+
+        dataCompletenessTable15a: 'Cadaster obligation',
+        dataCompletenessTable15b: 'Must government develop an official map of all legal tenure types, including community/indigenous land?',
+
+        dataCompletenessTable16a: 'Dispute resolution mechanism',
+        dataCompletenessTable16b: 'Are dispute resolution mechanisms established for land conflicts with actors outside the community/indigenous peoples?',
+
+        dataCompletenessTable17a: 'Equal Rights to Land: Women',
+        dataCompletenessTable17b: 'Are land interests of women within the community/indigenous peoples equally protected?',
+
+        dataCompletenessTable18a: 'Equal Rights to Land: New members',
+        dataCompletenessTable18b: 'Are land interests of people joining the community/indigenous peoples by marriage, settlement or other customarily-approved means equally protected?',
+
+        dataCompletenessTable19a: 'Equal Rights to Land: Minorities',
+        dataCompletenessTable19b: 'Are land interests of minorities by virtue of ethnicity, livelihood or other distinctive attribute equally protected within the community/indigenous peoples?',
+
+
+        dataLevel15: 'The following documents (in pdf format) describe the method for developing the Land Tenure Security Indicators:',
+
+        dataLevel16: 'Indicators of Community Land Tenure Security: Guidelines for Researching, Scoring and Documenting Findings',
+
+        dataLevel17: 'Community Level',
+
+        dataLevel18: 'The community-level data provide sub-national information at the scale of distinct indigenous or community lands.  The status of data coverage at the community level is shown in the Data Completeness layer (see Data Completeness for additional information about this layer).',
+
+        dataLevel19: 'The community-level data is organized and displayed according to a universal typology based on the identity and legal status of each land. This typology is used as a base reference for displaying the community-level data on the platform, allowing for comparisons of status within and across countries:',
+
+        dataLevel20a: 'Note that a clear distinction between indigenous and non-indigenous lands can sometimes be difficult given the available information and because the community may include both indigenous peoples and non-indigenous peoples. When it is known that the majority of the population within a community is indigenous, it will be categorized as such.  In cases where it is unclear, the lands displayed on the platform default to community (non-indigenous) lands, but might be indigenous lands. Please ',
+
+        dataLevel20b: 'contact us',
+
+        dataLevel20c: ' if you identify indigenous lands that are currently categorized as community lands.',
+
+        dataLevel21: 'Additional descriptive information is available for each indigenous or community land by clicking on it in the interactive map. The information displayed in the attribute box is as follows:',
+
+        dataNamesTableHeader: 'Name given to the selected indigenous or community land',
+
+        dataNamesTable1a: 'Country',
+        dataNamesTable1b: 'In what country is the indigenous/community land located?',
+
+        dataNamesTable2a: 'Identity',
+        dataNamesTable2b: 'How does the community self-identify? (Indigenous or Non-indigenous)',
+        dataNamesTable2c: ' When unclear, it is considered community lands.',
+
+        dataNamesTable3a: 'Official recognition status',
+        dataNamesTable3b: 'Is the indigenous/community territory officially recognized by law or decree? (Officially recognized or Not officially recognized)',
+
+        dataNamesTable3c: 'What is the recognition status?',
+        dataNamesTable3d: 'For lands that are officially recognized:',
+        dataNamesTable3e: 'Formal document/title',
+        dataNamesTable3f: 'In process of titling',
+        dataNamesTable3g: 'For lands that are not officially recognized:',
+        dataNamesTable3h: 'Formal land claim',
+        dataNamesTable3i: 'Occupied and/or used without formal land claim',
+        dataNamesTable3j: 'What is the date of the recognition status?',
+
+        dataNamesTable4a: 'Land category',
+        dataNamesTable4b: 'What is the categorical name that the local state gives to this type of indigenous/community land? (e.g., indigenous reservation, indigenous territory, customary lands, etc.)',
+
+        dataNamesTable5a: 'Ethnic groups',
+        dataNamesTable5b: 'What are the names of the ethnic groups that reside in the community?',
+        dataNamesTable5a: 'May include primary, secondary, and tertiary ethnic groups based on population size.',
+
+        dataNamesTable6a: 'Population',
+        dataNamesTable6b: 'How many people reside in the community?',
+        dataNamesTable6c: ' Includes the source and date of the estimation/census.',
+
+        dataNamesTable7a: 'Land area',
+        dataNamesTable7b: 'What is the area of the community land, as stated in the official documents? ',
+        dataNamesTable7c: '(only applies to officially recognized lands)',
+        dataNamesTable7d: ' and what is the area as calculated in GIS?',
+        dataNamesTable7e: 'All areas are in hectares.',
+
+        dataNamesTable8a: 'Acquisition scale',
+        dataNamesTable8b: 'What is the scale at which the land data were collected or geo-referenced?',
+
+        dataNamesTable9a: 'Acquisition method',
+        dataNamesTable9b: 'What was the method used to acquire the community land data?',
+        dataNamesTable9c: ' (e.g., hand-held GPS, transcribed from land title, hand-digitized from paper maps, etc.)',
+
+        dataNamesTable10a: 'Data source and date',
+        dataNamesTable10b: 'Which organization or individual created the data that is shown on the platform?',
+        dataNamesTable10c: 'May or may not be the same as the contributing institution, and includes date that data were created or last edited',
+
+        dataNamesTable11a: 'Data contributor',
+        dataNamesTable11b: 'Which organization or individual provided the data to the platform?',
+
+        dataNamesTable12a: 'Date uploaded',
+        dataNamesTable12b: 'When were the data uploaded to the platform?',
+
+        dataNamesTable13a: 'More info',
+        dataNamesTable13b: 'Link to additional information about the data source or the community, such as bylaws, etc.',
+
+
     }
 
 
