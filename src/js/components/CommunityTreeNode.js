@@ -70,7 +70,7 @@ define([
 
 			         node.info ? 
 						(React.createElement("span", null, React.createElement("span", {className: "tree-node-label", onClick: this.handleClick}, node.label), 
-						React.createElement("span", {className: "help-marker"}))) : (React.createElement("span", {className: "tree-node-label", onChange: this.props.handleChange, "data-key": node.id, onClick: this.props.handleChange}, node.label)), 
+						React.createElement("span", {id: "community-lands-help", className: "help-marker"}))) : (React.createElement("span", {className: "tree-node-label", onChange: this.props.handleChange, "data-key": node.id, onClick: this.props.handleChange}, node.label)), 
 					
 
 			     

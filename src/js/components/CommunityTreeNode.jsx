@@ -70,7 +70,7 @@ define([
 
 			        { node.info ? 
 						(<span><span className='tree-node-label' onClick={this.handleClick}>{node.label}</span>
-						<span className='help-marker'></span></span>) : (<span className='tree-node-label' onChange={this.props.handleChange} data-key={node.id} onClick={this.props.handleChange}>{node.label}</span>)
+						<span id='community-lands-help' className='help-marker'></span></span>) : (<span className='tree-node-label' onChange={this.props.handleChange} data-key={node.id} onClick={this.props.handleChange}>{node.label}</span>)
 					}
 
 			     

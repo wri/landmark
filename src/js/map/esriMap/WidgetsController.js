@@ -389,6 +389,44 @@ define([
                 $('#upload-shapefile').removeClass('display-three');
             }
             registry.byId('analysis-dialog').show();
+        },
+
+        showHelp: function(click) {
+            brApp.debug('WidgetsController >>> showHelp');
+            var id = click.target.id;
+            var dialog;
+            var left = click.pageX + "px";
+            var top = click.pageY + "px";
+
+            switch (id) {
+                case "indigenous-lands-help":
+
+                    dialog = registry.byId('help-dialog-indigenous');
+                    dialog.show();
+                    $('#help-dialog-indigenous').css("top", top);
+                    $('#help-dialog-indigenous').css("left", left);
+
+                    break;
+                case "community-lands-help":
+                    dialog = registry.byId('help-dialog-community');
+                    dialog.show();
+                    $('#help-dialog-community').css("top", top);
+                    $('#help-dialog-community').css("left", left);
+
+                    break;
+                case "analysis-help":
+
+                    dialog = registry.byId('help-dialog-completeness');
+                    dialog.show();
+                    $('#help-dialog-completeness').css("top", top);
+                    $('#help-dialog-completeness').css("left", left);
+                    break;
+            }
+
+
+
+
+
         }
 
     };

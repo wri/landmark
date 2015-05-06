@@ -7,6 +7,8 @@ define([
 	var TreeNode = React.createClass({
 		/* jshint ignore:start */
 		getInitialState: function () {
+			
+			console.log(this);
 	    return {
 	      collapsed: this.props.node.collapsed || false
 	    };
@@ -75,7 +77,7 @@ define([
 		        }
 		         <span className='tree-node-label' onClick={this.handleClick}>{node.label}</span>
 					{ node.info ? 
-						<span className='help-marker'></span>: null
+						<span id='indigenous-lands-help' className='help-marker'></span>: null
 					}		        
 		        
 		      </section>

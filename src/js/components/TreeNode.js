@@ -7,6 +7,8 @@ define([
 	var TreeNode = React.createClass({displayName: "TreeNode",
 		/* jshint ignore:start */
 		getInitialState: function () {
+			
+			console.log(this);
 	    return {
 	      collapsed: this.props.node.collapsed || false
 	    };
@@ -75,7 +77,7 @@ define([
 		        
 		         React.createElement("span", {className: "tree-node-label", onClick: this.handleClick}, node.label), 
 					 node.info ? 
-						React.createElement("span", {className: "help-marker"}): null
+						React.createElement("span", {id: "indigenous-lands-help", className: "help-marker"}): null
 							        
 		        
 		      ), 

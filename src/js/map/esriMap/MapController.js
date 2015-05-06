@@ -90,6 +90,11 @@ define([
                 }
             });
 
+            //setTimeout(function() {
+
+            //}, 3000);
+
+
             // Mobile Specific Events
             // If we are ok with the app not responding to mobile, only loading in mobile or loading in Desktop
             // We could conditionally add handles for the above and below events by using Helper.isMobile()
@@ -199,6 +204,9 @@ define([
 
             // Initialize the draw tools
             DrawTool.init();
+            on(document.getElementById('indigenous-lands-help'), 'click', WidgetsController.showHelp);
+            //on(document.getElementById('community-lands-help'), 'click', WidgetsController.showHelp);
+            on(document.getElementById('analysis-help'), 'click', WidgetsController.showHelp);
 
             //brApp.map.infoWindow.on("selection-change", function() {
 
@@ -863,6 +871,7 @@ define([
         },
 
         changeOpacity: function(op) {
+            brApp.debug('MapController >>> changeOpacity');
             var dataCompleteness = brApp.map.getLayer("nationalLevel"),
                 layerOptions, ldos = new LayerDrawingOptions();
 
