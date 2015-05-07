@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 define([
-	'react'
-], function (React) {
+	'react', 'map/WidgetsController'
+], function (React, WidgetsController) {
 	'use strict';
 
 	var TreeNode = React.createClass({
@@ -27,6 +27,16 @@ define([
 	      collapsed: !this.state.collapsed
 	    });
 	  },
+
+	  showHelp: function(evt) {
+	  	
+
+	  	if (evt.target.dataset.reactid.indexOf("community") > 0) {
+	  		evt.target.id = "community-lands-help";
+	  	}
+	  	
+	  	WidgetsController.showHelp(evt);
+      },
 
 	  // handleInfo: function (evt) {
 	  // 	<span visible={this.props.node.info || false} className='tree-node-info' onClick={this.handleInfo}>{node.info}</span>
@@ -77,7 +87,7 @@ define([
 		        }
 		         <span className='tree-node-label' onClick={this.handleClick}>{node.label}</span>
 					{ node.info ? 
-						<span id='indigenous-lands-help' className='help-marker'></span>: null
+						<span id='indigenous-lands-help' onClick={this.showHelp} className='help-marker'></span>: null
 					}		        
 		        
 		      </section>
