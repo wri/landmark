@@ -393,6 +393,7 @@ define([
 
         showHelp: function(click) {
             brApp.debug('WidgetsController >>> showHelp');
+
             var id = click.target.id;
             var dialog;
             var left = click.pageX + "px";

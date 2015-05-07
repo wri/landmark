@@ -105,7 +105,8 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             label: 'Community Lands',
             id: 'communityLands',
             collapsed: true,
-            disabled: true,
+            info: landTenureSecurityInfo,
+            //disabled: true,
             children: [{
                 label: 'Officially recognized (by law or decree)',
                 id: 'communityOfficial',
