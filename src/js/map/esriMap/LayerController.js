@@ -23,6 +23,7 @@ define([
             if (layer) { //We know we're in the National Level Data w/ the exception of Data Completeness
                 visibleLayers = keys;
                 dynamicLayer = brApp.map.getLayer('nationalLevel');
+                debugger;
 
                 if (document.getElementById('data-complete-checkbox').getAttribute("data-checked") == "true") {
                     visibleLayers.push(5);

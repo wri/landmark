@@ -7,8 +7,6 @@ define([
 	var TreeNode = React.createClass({displayName: "TreeNode",
 		/* jshint ignore:start */
 		getInitialState: function () {
-			
-			console.log(this);
 	    return {
 	      collapsed: this.props.node.collapsed || false
 	    };

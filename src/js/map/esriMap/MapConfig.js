@@ -1,9 +1,10 @@
 define(["esri/InfoTemplate"], function(InfoTemplate) {
 
-    // var indigenousLandsUrl = 'http://gis-stage.wri.org/arcgis/rest/services/CommunityLands/CommunityLands/MapServer';
+    // var indigenousLandsUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer'; //new
     var indigenousLandsUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer';
 
-    var nationalLevelUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer';
+    var nationalLevelUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer'; //new
+    //var nationalLevelUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer';
 
     var indigenousLandsInfo = "Placeholder so this layer's info icon appears in the tree";
     var landTenureSecurityInfo = "Placeholder so this layer's info icon appears in the tree";
@@ -36,7 +37,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'nationalLevel': {
                 url: nationalLevelUrl,
                 type: 'dynamic',
-                defaultLayers: [5], //[1,2,3,4]
+                defaultLayers: [-1], //[1,2,3,4]
                 // infoTemplate: {
                 //     title: "${Country}",
                 //     content: "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>${Country}</div>"
