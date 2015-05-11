@@ -20,14 +20,13 @@ define([
             var visibleLayers = [],
                 dynamicLayer;
 
+
             if (layer) { //We know we're in the National Level Data w/ the exception of Data Completeness
                 visibleLayers = keys;
                 dynamicLayer = brApp.map.getLayer('nationalLevel');
                 debugger;
 
-                if (document.getElementById('data-complete-checkbox').getAttribute("data-checked") == "true") {
-                    visibleLayers.push(5);
-                }
+
 
                 if (keys[0] === 0 || keys[0] === 1) {
                     this.setNationalLevelRenderer(visibleLayers);
@@ -40,7 +39,8 @@ define([
                 topic.publish('refresh-legend');
 
             } else {
-
+                console.log(keys);
+                //debugger;
                 dynamicLayer = brApp.map.getLayer('indigenousLands');
 
                 if (keys.length === 0) {
@@ -49,6 +49,10 @@ define([
                     arrayUtils.forEach(keys, function(key) {
                         visibleLayers = visibleLayers.concat(MapConfig.layerMapping[key]);
                     });
+                }
+
+                if (document.getElementById('data-complete-checkbox').getAttribute("data-checked") == "true" && keys.length > 0) {
+                    visibleLayers.push(17); //TODO: Incorrect: change to 17 in other service. and set cookie thing here?
                 }
 
 
@@ -64,6 +68,8 @@ define([
                 }
                 dynamicLayer.setVisibleLayers(visibleLayers);
                 topic.publish('refresh-legend');
+
+
 
             }
         },

@@ -1,10 +1,10 @@
 define(["esri/InfoTemplate"], function(InfoTemplate) {
 
-    // var indigenousLandsUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer'; //new
-    var indigenousLandsUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer';
+    var indigenousLandsUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer'; //new
+    //var indigenousLandsUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer';
 
-    var nationalLevelUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer'; //new
-    //var nationalLevelUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer';
+    //var nationalLevelUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer'; //new
+    var nationalLevelUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer';
 
     var indigenousLandsInfo = "Placeholder so this layer's info icon appears in the tree";
     var landTenureSecurityInfo = "Placeholder so this layer's info icon appears in the tree";
@@ -48,7 +48,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 url: indigenousLandsUrl,
                 type: 'dynamic',
                 // Not all the layers are present in the tree, when they are, include 0 - 9
-                defaultLayers: [1, 2, 3], //[0,1,2,3,4,5,6,7,8,9]
+                defaultLayers: [1, 2, 3, 6, 7, 8, 17], //[0,1,2,3,4,5,6,7,8,9]
                 visible: true
             },
             'CustomFeatures': {
@@ -69,6 +69,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
         // collapsed: true/false, default state of the node containing children, default is false
         // disabled: true/false, should the node be disabled or not, default is false	
         // noCheckbox: true/false, should there be a checkbox on this tree node	
+
         communityLevelTreeData: [{
             label: 'Indigenous Lands (self recognized)',
             id: 'indigenousLands',
@@ -99,13 +100,13 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 }, {
                     label: 'Occupied/used without formal land claim',
                     id: 'indigenousNoLandClaim',
-                    disabled: true
+                    checked: false
                 }]
             }]
         }, {
             label: 'Community Lands',
             id: 'communityLands',
-            collapsed: true,
+            collapsed: false,
             info: landTenureSecurityInfo,
             //disabled: true,
             children: [{
@@ -569,11 +570,14 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'indigenousLands': [],
             'indigenousOfficial': [],
             'indigenousUnofficial': [],
-            'indigenousFormalTitle': [1],
-            'indigenousInProcess': [2],
-            'indigenousLandClaim': [3],
-            'indigenousNoLandClaim': [4]
+            'indigenousFormalTitle': [1, 6],
+            'indigenousInProcess': [2, 7],
+            'indigenousLandClaim': [3, 8],
+            'indigenousNoLandClaim': [4, 9]
         }
+
+
+
         // layerMappingCommunityLans: { //Add these arrays to layerMapping above
         //     'communityLands': [6, 7, 8, 9],
         //     'communityOfficial': [6, 7],

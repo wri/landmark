@@ -95,8 +95,8 @@ define([
                 </ul>
                 <p>{dataConfig.dataLevel9}</p>
                 <ul>
-                  <li><a href='Africa_Methods.pdf'>{dataConfig.dataLevel10}</a></li>
-                  <li><a href='AmericasOceania_Methods.pdf'>{dataConfig.dataLevel11}</a></li>
+                  <li><a href='http://communityland.s3.amazonaws.com/pdfs/Africa_MethodsPercentCommunityLands.pdf' target='_blank'>{dataConfig.dataLevel10}</a></li>
+                  <li><a href='http://communityland.s3.amazonaws.com/pdfs/AmericasOceania_MethodsPercentCommunityLands.pdf' target='_blank'>{dataConfig.dataLevel11}</a></li>
                 </ul>
                 </li>
 
@@ -133,7 +133,7 @@ define([
               <p>{dataConfig.dataLevel15}</p>
 
               <ul>
-                <li><a href='IndicatorsCommunity.pdf'>{dataConfig.dataLevel16}</a></li>
+                <li><a href='http://communityland.s3.amazonaws.com/pdfs/IndicatorsCommunityLandTenureSecurityGuidelines.pdf' target='_blank'>{dataConfig.dataLevel16}</a></li>
 
 
               </ul>

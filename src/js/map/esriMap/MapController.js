@@ -32,11 +32,12 @@ define([
     "esri/tasks/IdentifyParameters",
     "esri/InfoTemplate",
     "esri/tasks/query",
+    "esri/tasks/QueryTask",
     "dijit/form/HorizontalSlider",
     "dijit/form/HorizontalRuleLabels",
     "esri/layers/LayerDrawingOptions"
 
-], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, CommunityTree, NationalLayerList, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
+], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, CommunityTree, NationalLayerList, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
 
     'use strict';
 
@@ -52,6 +53,7 @@ define([
             var mapObject = new Map(MapConfig.options);
             // Make the esri/map available in the global context so other modules can access easily
             brApp.map = mapObject.map;
+
             // Bind Events now, Map Events then UI Events
             mapObject.on('map-ready', function() {
                 self.renderComponents();
@@ -89,10 +91,6 @@ define([
                     });
                 }
             });
-
-            //setTimeout(function() {
-
-            //}, 3000);
 
 
             // Mobile Specific Events
@@ -201,6 +199,8 @@ define([
             homeWidget.startup();
             geocoder.startup();
             legend.startup();
+
+            self.queryEmptyLayers();
 
             // Initialize the draw tools
             DrawTool.init();
@@ -366,8 +366,8 @@ define([
             params.geometry = mapPoint;
             params.mapExtent = brApp.map.extent;
             params.layerIds = mapLayer.visibleLayers;
-            if (params.layerIds.indexOf(4) > -1) { //TODO: IS this still a valid layer removal??
-                params.layerIds.splice(params.layerIds.indexOf(4), 1);
+            if (params.layerIds.indexOf(17) > -1) { //TODO: IS this still a valid layer removal??
+                params.layerIds.splice(params.layerIds.indexOf(17), 1);
             }
 
             params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
@@ -435,7 +435,7 @@ define([
                 self = this;
 
             arrayUtils.forEach(featureObjects, function(item) {
-                if (item.layerId === 4) {
+                if (item.layerId === 4 || item.layerId === 9) {
                     return;
                 }
                 var statsField = item.feature.attributes.Stat_Date;
@@ -501,14 +501,14 @@ define([
 
 
 
-
-                if (item.layerId === 1) { //TODO: Use layer 5 ONLY for querying the data based off of what is turned on
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalDocIcon.png'> " + template.title;
-                } else if (item.layerId === 2) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/tiltingIcon.png'> " + template.title;
-                } else if (item.layerId === 3) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalLandIcon.png'> " + template.title;
-                }
+                //TODO: Re-do adding these squares with the correct colors, then re-do them with dots for the equivalent point layerIds
+                // if (item.layerId === 1) { //TODO: Use layer 5 ONLY for querying the data based off of what is turned on
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalDocIcon.png'> " + template.title;
+                // } else if (item.layerId === 2) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/tiltingIcon.png'> " + template.title;
+                // } else if (item.layerId === 3) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalLandIcon.png'> " + template.title;
+                // }
                 console.log(item.layerId);
                 item.feature.setInfoTemplate(template);
                 features.push(item.feature);
@@ -649,6 +649,9 @@ define([
             params.mapExtent = brApp.map.extent;
             params.layerIds = dataLayer.visibleLayers;
             params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+            if (params.layerIds.indexOf(17) > -1) {
+                params.layerIds.splice(params.layerIds.indexOf(17), 1);
+            }
 
             identifyTask.execute(params, function(features) {
 
@@ -872,39 +875,64 @@ define([
 
         changeOpacity: function(op) {
             brApp.debug('MapController >>> changeOpacity');
-            var dataCompleteness = brApp.map.getLayer("nationalLevel"),
+            var dataCompleteness = brApp.map.getLayer("indigenousLands"),
                 layerOptions, ldos = new LayerDrawingOptions();
 
             ldos.transparency = 100 - op;
             layerOptions = dataCompleteness.layerDrawingOptions || [];
-            layerOptions[5] = ldos;
+            layerOptions[17] = ldos;
 
             dataCompleteness.setLayerDrawingOptions(layerOptions);
+
+        },
+
+        queryEmptyLayers: function() {
+            brApp.debug('MapController >>> queryEmptyLayers');
+
+            var notRecognizedQT = new QueryTask("http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/4");
+
+            var recognizeQuery = new Query();
+            recognizeQuery.spatialReference = brApp.map.spatialReference;
+            recognizeQuery.returnGeometry = false;
+            recognizeQuery.outFields = ["OBJECTID"];
+            recognizeQuery.where = "1=1";
+
+            notRecognizedQT.execute(recognizeQuery, function(result) {
+
+                if (result.features.length > 0) {
+                    // TODO: show the two checkboxes
+                }
+
+            });
 
         },
 
 
         showDataComplete: function() {
             brApp.debug('MapController >>> showDataComplete');
-            var dynamicLayer = brApp.map.getLayer('nationalLevel');
+            //var dynamicLayer = brApp.map.getLayer('nationalLevel');
+
+            var complete = brApp.map.getLayer('indigenousLands');
+
+
             var imageUrlChecked = "url('css/images/checkbox_checked.png')";
             var imageUrlUnchecked = "css/images/checkbox_unchecked.png";
 
 
             if (this.getAttribute("data-checked") === 'false') {
                 $('#data-complete-checkbox').removeClass('data-complete-checkbox-class').addClass('data-complete-checkbox-class-checked');
-                dynamicLayer.visibleLayers.push(5);
+                complete.visibleLayers.push(17);
                 this.setAttribute("data-checked", "true")
                 $("#completeness-slider").show();
             } else {
                 $('#data-complete-checkbox').removeClass('data-complete-checkbox-class-checked').addClass('data-complete-checkbox-class');
-                var index = dynamicLayer.visibleLayers.indexOf(5);
-                dynamicLayer.visibleLayers.splice(index, 1);
+                var index = complete.visibleLayers.indexOf(17);
+                complete.visibleLayers.splice(index, 1);
                 this.setAttribute("data-checked", "false")
                 $("#completeness-slider").hide();
             }
             topic.publish('refresh-legend');
-            dynamicLayer.setVisibleLayers(dynamicLayer.visibleLayers);
+            complete.setVisibleLayers(complete.visibleLayers);
         },
 
         handleNationalToggle: function(evt) {

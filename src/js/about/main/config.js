@@ -81,7 +81,7 @@ define([], function() {
 
         landmarkDevelopment2b: "Scaling-Up Global Efforts to Securing Community Land and Resource Rights",
 
-        landmarkDevelopment2c: "—in Interlaken, Switzerland. IBC and WRI, together with the Aliansi Masyarakat Adat Nusantara (AMAN) from Indonesia, co-led the conference 'Mapping & Documentation' sessions. These sessions identified a number of scaling efforts, but discussions centered on the development of an online, interactive global platform.",
+        landmarkDevelopment2c: "—in Interlaken, Switzerland. IBC and WRI, together with the Aliansi Masyarakat Adat Nusantara (AMAN) from Indonesia, co-led the conference “Mapping & Documentation” sessions. These sessions identified a number of scaling efforts, but discussions centered on the development of an online, interactive global platform.",
 
         landmarkDevelopment3: "In February 2014, IBC, WRI and ILC convened a group of land rights organizations in Rome, Italy, to begin the process of developing the global platform. In addition to the organizers, participating groups included: AMAN, RRI, Foundation for Ecological Security (FES) in India, Philippine Association for Intercultural Development (PAFID), Forest Peoples Programme (FPP), Rainforest Foundation United Kingdom (RFUK) and Liz Alden Wily, an independent land tenure specialist. The participants agreed to organize themselves into a Steering Group to provide advice and guide the effort.",
 
@@ -172,10 +172,10 @@ define([], function() {
             '<p><strong>Mission: </strong>Realization of justice and prosperity in indigenous people’s lives; Political sovereignty, economic independence, and cultural dignity for indigenous peoples.</p>' +
             '<p><strong>Interests: </strong>AMAN is an independent organization of indigenous peoples on the basis of membership are indigenous communities that agree to and uphold the principles, vision, mission and goal lines struggle as contained in the decisions of the Congress of the indigenous peoples and continuously engage actively fight enforcement of customary rights and the sovereignty of indigenous peoples as a whole.</p></div>' +
             '<p style="font-weight: bold;">Liz Alden Wily</p>' +
-            '<p style="font-style: italic;">independent land tenure specialist</p>'
+            '<p style="font-style: italic;">independent land tenure specialist</p>',
 
 
-    };
+    }
 
     return config;
 

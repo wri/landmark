@@ -95,8 +95,8 @@ define([
                 ), 
                 React.createElement("p", null, dataConfig.dataLevel9), 
                 React.createElement("ul", null, 
-                  React.createElement("li", null, React.createElement("a", {href: "Africa_Methods.pdf"}, dataConfig.dataLevel10)), 
-                  React.createElement("li", null, React.createElement("a", {href: "AmericasOceania_Methods.pdf"}, dataConfig.dataLevel11))
+                  React.createElement("li", null, React.createElement("a", {href: "http://communityland.s3.amazonaws.com/pdfs/Africa_MethodsPercentCommunityLands.pdf", target: "_blank"}, dataConfig.dataLevel10)), 
+                  React.createElement("li", null, React.createElement("a", {href: "http://communityland.s3.amazonaws.com/pdfs/AmericasOceania_MethodsPercentCommunityLands.pdf", target: "_blank"}, dataConfig.dataLevel11))
                 )
                 ), 
 
@@ -133,7 +133,7 @@ define([
               React.createElement("p", null, dataConfig.dataLevel15), 
 
               React.createElement("ul", null, 
-                React.createElement("li", null, React.createElement("a", {href: "IndicatorsCommunity.pdf"}, dataConfig.dataLevel16))
+                React.createElement("li", null, React.createElement("a", {href: "http://communityland.s3.amazonaws.com/pdfs/IndicatorsCommunityLandTenureSecurityGuidelines.pdf", target: "_blank"}, dataConfig.dataLevel16))
 
 
               ), 
