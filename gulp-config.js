@@ -121,8 +121,8 @@ module.exports = {
                     'react': 'empty:',
                     'js': 'js',
                     'libs': 'libs',
-                    // 'contact': 'js/contact',
-                    // 'components': 'js/components'
+                    'contact': 'js/contact',
+                    'components': 'js/components'
                 },
                 name: 'js/contact/contactLoader',
                 out: 'build/js/contact/contactLoader.js'
