@@ -1,4 +1,12 @@
 
+.app-header
+	border-bottom solid 8px #fbaa18
+	height 106px
+	
+	@media (max-width: 1050px)
+		body:not(.map-page) &
+			height 81px
+
 .wri-header-attribution
 	background-color $mainBackground
 	font-style italic
@@ -6,6 +14,9 @@
 	font-size 12px
 	height 25px
 	width 100%
+	
+	.inner
+		margin 0 46px
 	
 a:-webkit-any-link
 	text-decoration none
@@ -37,14 +48,51 @@ a:-webkit-any-link
 	font-size 20px !important
 	
 .top-bar
-	background-color #003366
+	background-color #055d7d
 	font-family Georgia
+	height 81px
 	
-.top-bar-section ul li
-	background-color #003366
-	font-family Georgia
-	
+	.title-area
+		padding-left 0
+		margin-left 30px
+		height 81px
+		
+		@media (max-width: 939px)
+			margin-left 0
+		
+		.name
+		
+			@media (max-width: 1140px)
+				display none
 
+			img
+				position absolute
+				margin-top -30px
+				top 38px
+				height auto
+				display block
+		
+.top-bar-section ul
+	@media (min-width: 940px)
+		display block
+		height 81px !important
+	
+	li
+		background-color #055d7d
+		font-family Georgia
+		height inherit
+		
+		a
+			-webkit-font-smoothing antialiased
+			-moz-osx-font-smoothing grayscale
+			display block
+			height inherit
+			border none
+			
+			@media (min-width: 940px)
+				font-size 1.3em !important
+				line-height 81px !important
+	
 	// font-family Georgia
 	font-size 14px
 	
@@ -55,12 +103,15 @@ a:-webkit-any-link
 	border-bottom 3px solid green
 	
 .top-bar-section ul
-	background-color #003366
+	background-color #055d7d
 	
 .right
-	background-color #003366
+	background-color #055d7d
 	
 .top-bar-section li:not(.has-form) a:not(.button)
-	background-color #003366
+	background-color #055d7d
+	
+	&:hover, &:active, &:focus
+		background-color #2fa3d9 !important
 	
 	

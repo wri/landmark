@@ -42,10 +42,14 @@ a, u
 	
 .app-body
 	position absolute
-	top 70px
+	top 114px
 	bottom 0
 	right 0
 	left 0
+	
+	@media (max-width: 1050px)
+		body:not(.map-page) &
+			top 89px
 
 /* Base CSS for App */
 @import "header"
