@@ -362,12 +362,14 @@ label
 	
 	
 .popup-header
-	font-weight bold
-	padding-top 10px
+	font-weight normal
+	margin-bottom -2px
+	padding-top 0
+	font-size 14px
 	color #055d7d
 
 .odd-row
-	background-color #F0EFF4
+	background-color #f3f7fc
 	
 .even-row
 	background-color white
@@ -392,22 +394,34 @@ label
 	margin-top 6px
 	margin-left 5px
 	cursor pointer
-	
+
+.esriPopup .esriPopupWrapper
+	box-shadow 0 10px 44px rgba(0, 0, 0, 0.22) !important;
+
+.esriPopup .titleButton.next,
+.esriPopup .titleButton.prev
+	top: 12px
+
 .popup-last
-	padding-top 10px
-	font-size 10px
-	background-color rgb(226, 226, 226)
-	border-top 1px solid gray
-	padding-bottom 10px
-	margin-top 5px
-	padding-left 10px
+	padding 12px 14px
+	font-size 12px
+	border-top 1px solid #c6c6c6
+	color #464646
+	margin-top 0
+	background #f7f7f7
+	
+	a
+		color #055D7D
+		text-decoration underline
+		float: right;
+		margin-left: 1em;
 	
 #additionalInfo
 	float right
 	padding-right 10px
 	color #055D7D
 	text-decoration underline
-	font-weight bold
+	font-weight normal
 	cursor pointer
 
 .esriSimpleSliderDecrementButton
@@ -513,10 +527,10 @@ label
 	display none
 
 .esriPopup .titlePane, .titlePane
-	padding 10px
+	padding 10px 10px 10px 14px !important
 	-webkit-border-radius 0px 0px 0px 0px !important
 	border-bottom 1px solid black
-	font-size 14px
+	font-size 16px
 	background-color #055d7d !important
 	font-family Arial !important
 	
@@ -544,10 +558,16 @@ label
 
 .esriPopup .contentPane, .contentPane
 	// max-height none !important
-	padding 10px 0px 0px 0px !important
+	padding 0 0px 0px 0px !important
 
 .odd-row, .even-row
-	margin-left 10px
+	border-top solid 1px #eee
+	padding 9px 14px
+	margin-left 0
+	font-size: 13px
+	&:first-child
+		padding-top 14px
+		border-top none
 	
 .actionsPane
 	display none
