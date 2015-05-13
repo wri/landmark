@@ -64,53 +64,84 @@ label
 	color white
 	
 .legend-container
-	width 260px
+	overflow hidden
+	width 283px
 	right 20px
 	z-index 50
-	bottom 0
+	bottom 61px
 	
 .legend-title-pane
-	
-	padding-right 5px
+	padding-right 0
 	text-align left
-	height 30px
+	height 37px
 	
 #legend-toggle
-	width 220px
+	width 243px
 	color white
 	background-color #055d7d
 	font-family Arial
-	font-size 13px
+	font-size 16px
 	
 .legend-title
-
 	display inline-block
 	background white
-	line-height 30px
+	line-height 37px
 	border-bottom 0
 	padding 0 20px
 	font-size 14px
-	height 30px
+	height 37px
 	
 .legend-content
-	
 	background-color white
 	border-bottom 0
-	font-size 11px
+	font-size 13px
+	font-weight normal
+	color #464646
 	border-top 0
+	
+	*
+		font-style normal !important
+		line-height: 1.4 !important
+	
+	.esriLegendLeft
+		font-size 13px
 	
 .esriLegendLayerLabel
 	padding-top 0 !important
 	
+#legend_indigenousLands_1 img, #legend_indigenousLands_2 img, #legend_indigenousLands_3 img
+	margin-right 2px !important
+
+// [id^="legend_indigenousLands_"] img
+//	margin-right 8px !important
+
 #legend_indigenousLands_0_group > table, #legend_nationalLevel_5 > table.esriLegendLayerLabel
-	font-weight bold
+	font-size 14px
+	color #23426a
 	
-#legend_indigenousLands_1 > table.esriLegendLayerLabel, #legend_indigenousLands_2 > table.esriLegendLayerLabel, #legend_indigenousLands_3 > table.esriLegendLayerLabel
-	font-style italic
+// #legend_indigenousLands_1 > table.esriLegendLayerLabel, #legend_indigenousLands_2 > table.esriLegendLayerLabel, #legend_indigenousLands_3 > table.esriLegendLayerLabel
+// font-style italic
+
+#legend_indigenousLands_0_group > table > tbody > tr > td,
+#legend_indigenousLands_5_group > table > tbody > tr > td,
+#legend_nationalLevel_2 > table.esriLegendLayerLabel > tbody > tr > td,
+#legend_nationalLevel_0 > table.esriLegendLayerLabel > tbody > tr > td
+	font-size 14px
+	color #23426a
 	
+#legend_indigenousLands_0_group > table:first-child td
+	display block
+	font-size 14px
+	color #23426a
+	margin-bottom 5px
+
 #legend table
-	line-height 1
-	
+	line-height 1.4
+	td[width="35"]
+		width 10px
+		img
+			margin-right 8px
+
 #infowindowContainer
 	position absolute
 	margin-left -325px
@@ -167,10 +198,10 @@ label
 	padding-left 12px
 
 .esriLegendLeft
-	padding-left 20px !important
+	padding-left 0 !important
 
 #legend .esriLegendService > div > table
-	padding-left 10px
+	padding-left 0
 
 .legend-content:not(.active)
 	overflow hidden
@@ -178,14 +209,14 @@ label
 #legend
 	max-height 300px
 	overflow-y auto
-	padding-bottom 5px
+	padding-bottom 12px
 	
 #legend #legend_msg 
 #legend .esriLegendServiceLabel
 	display none
 
 #legend .esriLegendService
-	padding-bottom 0px
+	padding 7px 14px 0
 
 #legend > div:nth-last-child(2)
 	padding-bottom 10px
@@ -232,7 +263,7 @@ label
 	display -webkit-inline-box
 
 .basemap-icon
-	background url('images/map_tools_basemaps.png')	no-repeat
+	background url('images/map_tools_basemaps.png') no-repeat
 	height 16px
 	width 19px
 	margin-top 7px
@@ -254,7 +285,7 @@ label
 	
 .tundra .dijitAccordionTitle
 	font-weight bold !important
-	background url('images/ico-carat-right.png') 97% no-repeat  !important
+	background url('images/ico-carat-right.png') 97% no-repeat	!important
 	
 .tundra .dijitAccordionTitleSelected
 	background url('images/ico-carat-down.png') 95% no-repeat !important
@@ -415,7 +446,7 @@ label
 	left 9px
 	
 // #removeGraphic
-// 	left 9px
+//	left 9px
 	
 #remove-graphics
 	padding 10px
@@ -509,7 +540,7 @@ label
 	margin-top -175px !important
 	
 // .esriPopup .pointer, .esriPopup .outerPointer
-// 	display none
+//	display none
 
 .esriPopup .contentPane, .contentPane
 	// max-height none !important
@@ -541,7 +572,7 @@ label
 	color grey
 	cursor pointer
 	
-.tree-widget-title-pane	
+.tree-widget-title-pane 
 	background-color white
 	box-sizing initial
 	line-height 32px
@@ -732,13 +763,16 @@ label
 #legend-toggle-icon
 	//-background url('images/close_minus_symbol.png')
 	//background url(images/legendToggle.png) no-repeat #fff
-	height 30px
-	width 30px
+	-webkit-font-smoothing antialiased
+	-moz-osx-font-smoothing grayscale
+	height 37px
+	width 37px
 	position relative
-	top -30px
-	left 210px
+	top -37px
+	left 226px
 	text-align center
-	background-color #2FA3D9
+	font-size 22px
+	// background-color #2FA3D9
 	// font-size 24px
 	// cursor pointer
 	
@@ -767,37 +801,37 @@ label
 	margin 0
 	
 // .national-menu-controls
-// 	text-align center
-// 	margin-top 10px
-// 	margin-bottom 3px
+//	text-align center
+//	margin-top 10px
+//	margin-bottom 3px
 	
 // .national-segmented-menu-button:first-of-type
-// 	border-top-left-radius 5px
-// 	border-bottom-left-radius 5px
-// 	-moz-border-radius-topleft 5px
-// 	-moz-border-radius-bottomleft 5px
-// 	-webkit-border-top-left-radius 5px
-// 	-webkit-border-bottom-left-radius 5px
-// 	border-right 0
+//	border-top-left-radius 5px
+//	border-bottom-left-radius 5px
+//	-moz-border-radius-topleft 5px
+//	-moz-border-radius-bottomleft 5px
+//	-webkit-border-top-left-radius 5px
+//	-webkit-border-bottom-left-radius 5px
+//	border-right 0
 	
 // .national-segmented-menu-button:last-of-type
-// 	border-top-right-radius 5px
-// 	border-bottom-right-radius 5px
-// 	-moz-border-radius-topright 5px
-// 	-moz-border-radius-bottomright 5px
-// 	-webkit-border-top-right-radius 5px
-// 	-webkit-border-bottom-right-radius 5px
-// 	border-left 1px solid black
+//	border-top-right-radius 5px
+//	border-bottom-right-radius 5px
+//	-moz-border-radius-topright 5px
+//	-moz-border-radius-bottomright 5px
+//	-webkit-border-top-right-radius 5px
+//	-webkit-border-bottom-right-radius 5px
+//	border-left 1px solid black
 	
 // .national-segmented-menu-button.active
-// 	background-color #888
-// 	color #fff
+//	background-color #888
+//	color #fff
 	
 // .national-segmented-menu-button
-// 	border 1px solid #000
-// 	text-align center
-// 	padding 5px 10px
-// 	color #000
+//	border 1px solid #000
+//	text-align center
+//	padding 5px 10px
+//	color #000
 	
 
 	
@@ -806,7 +840,7 @@ label
 	// background-color green
 
 // #community-level-toggle
-// 	margin-top -11px
+//	margin-top -11px
 	
 .tree-data-section input[type='radio']
 	margin 0 0 0 5px	
