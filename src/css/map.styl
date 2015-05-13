@@ -282,11 +282,33 @@ label
 .share-icon, .print-icon
 	height 100%
 	width 100%
+
+#community-level-tree
+	padding-left 15px
+
+#national-layer-lists
+	padding 9px 0 0 15px
+	span
+		font-weight normal !important
+	
+.tundra .dijitAccordionContainer
+	*
+		color #464646
+		font-size 13px
 	
 .tundra .dijitAccordionTitle
-	font-weight bold !important
-	background url('images/ico-carat-right.png') 97% no-repeat	!important
-	
+	position relative
+	font-weight normal !important
+	margin-bottom: -9px !important
+	background none !important
+	z-index 10
+	// background url('images/ico-carat-right.png') 97% no-repeat	!important
+	+ .dijitAccordionChildWrapper
+		padding-top 10px
+
+.tundra .dijitAccordionTitle
+	padding 12px 8px !important
+
 .tundra .dijitAccordionTitleSelected
 	background url('images/ico-carat-down.png') 95% no-repeat !important
 	
@@ -385,15 +407,17 @@ label
 #first-row
 	background-color blue
 
-
 .help-marker
 	background url('images/icon_question_mark.png') no-repeat
 	height 16px
 	width 16px
-	position absolute
-	margin-top 6px
+	position absolute !important
+	margin-top 3px
 	margin-left 5px
 	cursor pointer
+		
+.tundra .dijitAccordionContainer .help-marker
+	top 5px !important
 
 .esriPopup .esriPopupWrapper
 	box-shadow 0 10px 44px rgba(0, 0, 0, 0.22) !important;
@@ -626,17 +650,27 @@ label
 	margin-left -33px
 	color white
 	background-color #2FA3D9
+	
+#tree-container-toggle
+	margin-left 0
 
 .tree-content
 	background-color white
 	position absolute
 	overflow hidden
 	
+.tundra .dijitAccordionTitle:first-child
+	border-top none !important
+	padding-top 8px
 	
+.tundra .dijitAccordionInnerContainer
+	padding-top 3px
+
 .tundra .dijitAccordionTitleSelected, .dijitAccordionContainer
 	border none !important
 	border-top 1px solid $mainBorder !important
-	border-bottom 1px solid $mainBorder !important
+	background-image none !important
+	padding-bottom 0 !important
 	
 .mobile .tree-content
 	bottom 0
