@@ -479,6 +479,10 @@ label
 .map-component
 	border-radius 0px !important
 	-webkit-border-radius 0px !important
+
+.analysis-buttons button
+	&:focus, &:active
+		outline 0 !important
 	
 #removeGraphic, #exportAnalysis, #draw-shape, #upload-shapefile
 	padding 10px
@@ -487,7 +491,28 @@ label
 	width 47%
 	background-color #055D7D !important
 	left 9px
+	&:hover
+		background-color #0A89B8 !important
+
+#draw-shape
+	margin-left -11px !important
+
+#upload-shapefile
+	position relative
+	text-indent 15px
+	&:before
+		display block
+		position absolute
+		content "\020"
+		width 30px
+		height 38px
+		background url(images/ico-upload.png) center no-repeat
+		background-size 17px
+		top 0
+		left 50%
+		margin-left -61px
 	
+
 // #removeGraphic
 //	left 9px
 	
