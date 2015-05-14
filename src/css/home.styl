@@ -2,6 +2,10 @@
 
 body
 	font-family Arial
+
+button:focus
+button:active
+	outline 0 !important
 	
 #backgroundImage
 	// background url(images/homeBackground.jpg)
@@ -74,19 +78,25 @@ body
 	height 100%
 	overflow scroll
 	
+	a:hover
+		text-decoration underline
+	
 #launch-map
-	color #074a7c
+	color #055D7D
 	padding-bottom 10px
 	padding-top 10px
 	padding-left 30px
 	padding-right 30px
-	border 2px solid #A7C4E8
+	border 2px solid lighten(#2FA3D9, 30%)
 	background-color white
 	border-radius 5px
 	-moz-border-radius 5px
 	-webkit-border-radius 5px
 	font-weight bold
 	margin-top 25px
+	
+	&:hover
+		border-color lighten(#2FA3D9, 5%)
 	
 #language-flags
 	display inline-block
@@ -101,12 +111,12 @@ body
 	margin-top 2px
 	cursor pointer
 
-.introTextSub
-	color #448BD2
+a.introTextSub
+	color #2FA3D9
 	cursor pointer
 
 .introTextTitle
-	color #074A7C
+	color #055D7D
 	font-weight bold
 	font-size 17px
 	

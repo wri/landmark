@@ -4,7 +4,9 @@ body
 	font-family Arial
 
 #institutionsTitle
-	margin-left 475px
+	text-align center
+	*
+		font-style normal
 
 .accordion-Controls
 	float left
@@ -17,6 +19,43 @@ body
 // 	text-decoration underline !important //because this screws up the top bar
 // 	cursor pointer
 
+table
+
+	innerBorderColor = lighten(#ccc, 35%)
+
+	border solid #ccc !important
+	border-width 0 1px 1px 0 !important
+	margin 1.5em 0
+
+	td
+		border-left solid 1px innerBorderColor !important
+		padding 0.35em 0.5em
+		
+		:first-child
+			margin-top 0
+		:last-child
+			margin-bottom 0
+		
+	tr:nth-child(even)
+		background #F3F7FC !important
+	
+	tr:not(:first-child), td
+		border-top solid 1px innerBorderColor !important
+
+table#institutions-developers
+table#institutions-steering-group
+
+	td
+		padding 0.8em 1em
+		
+		&:first-child
+			text-align center
+
+	tr:nth-child(even)
+		background transparent !important
+
+
+
 u
 	text-decoration underline
 	cursor pointer
@@ -25,7 +64,6 @@ img
 	cursor pointer
 
 table, th, td
-	border 1px solid black
 	border-spacing 0
 	
 .developers-website
@@ -54,11 +92,11 @@ table, th, td
 	font-size 14px
 	//font-family fira_sans_otmedium
 	color #464052
-	background #f2f2f3
+	background rgba(242, 242, 243, 0.49) !important
 	border-right 1px solid #ccc
 
-.institutions-Accordion-Title
-	text-align center
+// .institutions-Accordion-Title
+// 	text-align center
 
 .institutionsImageLeft
 	cursor pointer
@@ -123,6 +161,12 @@ table, th, td
 	padding 10px 20px
 	margin-left -1px
 	
+	a
+		color #2FA3D9
+		text-decoration none
+		&:hover
+			text-decoration underline
+	
 .institutionsSteeringText li
 	list-style none
 	padding-top 10px
@@ -171,7 +215,3 @@ table, th, td
 		margin-top 475px !important
 	#rightsMedia
 		margin-top 450px !important
-
-		
-	
-	

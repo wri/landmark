@@ -58,7 +58,7 @@ label
 	
 .tundra .dijitDialogCloseIcon
 	background url('images/close_x_symbol.png') no-repeat !important
-	top 10px !important
+	top 8px !important
 	
 .tundra .dijitDialogTitle
 	color white
@@ -158,7 +158,7 @@ label
 	overflow-x hidden
 	
 .introTextTitle
-	color #074A7C
+	color #055D7D
 	font-weight bold
 	
 #identifyNote
@@ -496,18 +496,31 @@ label
 	&:focus, &:active
 		outline 0 !important
 	
-#removeGraphic, #exportAnalysis, #draw-shape, #upload-shapefile
+#removeGraphic
+#exportAnalysis
+#draw-shape
+#upload-shapefile
 	padding 10px
 	margin 5px
 	display inline-block
 	width 47%
 	background-color #055D7D !important
 	left 9px
+		
+#removeGraphic
+#exportAnalysis
+#draw-shape
+#upload-shapefile
+#remove-graphics
 	&:hover
 		background-color #0A89B8 !important
-
+		
+#remove-graphics
+	margin-left 15px !important
+	margin-right -5px !important
+	
 #draw-shape
-	margin-left -11px !important
+	margin-left -13px !important
 
 #upload-shapefile
 	position relative
@@ -525,6 +538,7 @@ label
 		margin-left -61px
 	
 #removeGraphic
+#remove-graphics
 	position relative
 	text-indent 15px
 	&:before
@@ -538,6 +552,10 @@ label
 		top 0
 		left 50%
 		margin-left -50px
+		
+#remove-graphics
+	&:before
+		margin-left -59px
 
 #exportAnalysis
 	position relative
@@ -566,10 +584,17 @@ label
 	
 .display-three
 	width 30% !important
+
+.tundra .dijitDialog
+	font-size 14px
+	
+.tundra .dijitDialogPaneContent
+	padding-top 0 !important
+	padding-bottom 0 !important
 	
 .tundra .dijitDialogTitle
 	font-weight normal !important
-	
+
 .esriPopup .titleButton.close, 
 	// background none
 	// top 10px
