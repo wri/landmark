@@ -4,8 +4,7 @@
 	height 106px
 	
 	@media (max-width: 1050px)
-		body:not(.map-page) &
-			height 81px
+		height 81px
 
 .wri-header-attribution
 	background-color $mainBackground
@@ -47,13 +46,14 @@ a:-webkit-any-link
 	
 .name > h1
 	font-size 20px !important
-	
+
 .top-bar
 	background-color #055d7d
 	font-family Georgia
 	height 81px
 	
 	.title-area
+		background #055D7D !important
 		padding-left 0
 		margin-left 0
 		height 81px
@@ -63,15 +63,23 @@ a:-webkit-any-link
 		
 		.name
 		
-			@media (max-width: 1140px)
-				display none
+			display block !important
+		
+			a
 
-			img
+				display block
 				position absolute
+				overflow hidden
 				margin-top -30px
 				top 38px
 				height auto
 				display block
+				
+				@media (max-width: 1140px)
+					width 260px
+				
+				img
+					height auto
 		
 .top-bar-section ul
 
@@ -99,7 +107,21 @@ a:-webkit-any-link
 	
 	// font-family Georgia
 	font-size 14px
+
+.top-bar.expanded .top-bar-section ul
+	border-top solid 8px #FBAA18 !important
+
+.top-bar.expanded .toggle-topbar a
+	color white !important
 	
+	span:after
+		box-shadow 0 0 0 1px #FFF,0 7px 0 1px #FFF,0 14px 0 1px #FFF !important
+
+.toggle-topbar
+	-webkit-user-select none !important
+	-moz-user-select none !important
+	user-select none !important
+
 // .top-bar-section ul li > a:active
 // 	border-bottom 3px solid green
 

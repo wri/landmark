@@ -1663,3 +1663,12 @@ body:not(.mobile) .launch-map-button {
     display: none;
   }
 }
+
+/* line 1037 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+@media (max-width: 1050px) {
+
+/* line 1038 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
+  .wri-header-attribution {
+    display: none;
+  }
+}
