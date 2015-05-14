@@ -26,7 +26,7 @@ define([], function() {
         //     " Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet," +
         //     " felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu.</p>"
 
-        welcomeDialogContent: "<div style='font-size:14px;'><p class='launch-dialog-content'><span class='introTextTitle'>The Global Platform</span> is designed to help indigenous peoples and communities protect their lands. To achieve this goal, the platform must be current and comprehensive. Please help us by sharing your impressions and your information on collective lands (<a class='introTextTitle' href='contact.html'>Contact Us</a>).</p></div>"
+        welcomeDialogContent: "<div style='font-size:14px;'><p class='launch-dialog-content'><span class='introTextTitle'>Landmark</span> is designed to help indigenous peoples and communities protect their lands. To achieve this goal, the platform must be current and comprehensive. Please help us by sharing your impressions and your information on collective lands (<a class='introTextTitle' href='contact.html'>Contact Us</a>).</p></div>"
     };
 
     return config;

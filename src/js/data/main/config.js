@@ -1,4 +1,4 @@
-define([], function() {
+define('data/main/config', [], function() {
     'use strict';
 
     var config = {

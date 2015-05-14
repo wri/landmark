@@ -57,7 +57,6 @@ define([
             // Bind Events now, Map Events then UI Events
             mapObject.on('map-ready', function() {
                 self.renderComponents();
-
                 registry.byId('layer-accordion').resize();
                 //$("#national-level-toggle_button").click();
             });
@@ -92,6 +91,8 @@ define([
                 }
             });
 
+            //TODO: Check the presence of the analysis and data completeness buttons on smaller screens AFTER a layer is toggled on (if all layers were off)
+            // --> In layerController's updateVisibleLayers function. 
 
             // Mobile Specific Events
             // If we are ok with the app not responding to mobile, only loading in mobile or loading in Desktop
@@ -202,6 +203,9 @@ define([
 
             self.queryEmptyLayers();
 
+
+
+
             // Initialize the draw tools
             DrawTool.init();
             on(document.getElementById('indigenous-lands-help'), 'click', WidgetsController.showHelp);
@@ -231,10 +235,6 @@ define([
 
             //});
 
-            //$("#national-level-toggle_button").click(); //TODO: turn the national toggle on by default -->Remove the jquery click after renderComponents is called
-
-
-
             // remove hideOnLoad classes
             dojoQuery('body .hideOnLoad').forEach(function(node) {
                 domClass.remove(node, 'hideOnLoad');
@@ -256,20 +256,17 @@ define([
 
             brApp.mapPoint = mapPoint;
             brApp.mapPoint.clientY = evt.clientY;
+            brApp.mapPoint.clientX = evt.clientX;
             brApp.map.infoWindow.clearFeatures();
 
             if (brApp.map.infoWindow.isShowing) {
                 brApp.map.infoWindow.hide();
             }
 
-            // If drawing tools enabled, dont continue 
             if (DrawTool.isActive()) {
                 return;
             }
 
-            // for (layer in MapConfig.layers) {
-            //     mapLayer = layer;
-            // }
 
             indigenousLayer = brApp.map.getLayer('indigenousLands');
 
@@ -288,13 +285,6 @@ define([
                 }
             }
 
-            // userGraphics = brApp.map.getLayer('CustomFeatures');
-            // if (userGraphics) {
-            //     if (userGraphics.visible) {
-            //         deferreds.push(self.identifyUserShapes(mapPoint));
-            //     }
-            // }
-
             if (deferreds.length === 0) {
                 return;
             }
@@ -308,11 +298,6 @@ define([
                         case "nationalLevel":
                             features = features.concat(self.setNationalTemplates(item.features));
                             break;
-                            // case "CustomFeatures":
-                            //     //     // This will only contain a single feature and return a single feature
-                            //     //     // instead of an array of features
-                            //     features.push(self.setCustomGraphicTemplates(item.feature));
-                            //     break;
                         default: // Do Nothing
                             break;
                     }
@@ -336,8 +321,29 @@ define([
                     //     brApp.map.infoWindow.maximize();
                     // }
 
-                    brApp.map.infoWindow.show(mapPoint);
+                    //brApp.map.infoWindow.anchor = "ANCHOR_UPPERLEFT";
 
+                    // if (mapPoint.clientY < 715) {
+                    //     // debugger;
+                    //     // mapPoint.clientY += 400;
+                    //     brApp.map.infoWindow.show();
+                    //     $("div.esriPopupWrapper > div.pointer").hide();
+
+
+                    // } else {
+                    brApp.map.infoWindow.show(mapPoint);
+                    if (window.innerWidth < 1000) {
+                        brApp.map.infoWindow.maximize();
+                    }
+
+                    //     $("div.esriPopupWrapper > div.pointer").show();
+                    // }
+
+
+                    // if (window.innerWidth < 600 || mapPoint.clientY < 400) {
+                    //     debugger;
+                    //     //brApp.map.infoWindow.reposition(); //TODO: Center in screen? Remove arrow to point to feature?
+                    // }
 
                     on.once(brApp.map.infoWindow, "hide", function() {
 
@@ -366,7 +372,7 @@ define([
             params.geometry = mapPoint;
             params.mapExtent = brApp.map.extent;
             params.layerIds = mapLayer.visibleLayers;
-            if (params.layerIds.indexOf(17) > -1) { //TODO: IS this still a valid layer removal??
+            if (params.layerIds.indexOf(17) > -1) {
                 params.layerIds.splice(params.layerIds.indexOf(17), 1);
             }
 
@@ -435,15 +441,15 @@ define([
                 self = this;
 
             arrayUtils.forEach(featureObjects, function(item) {
-                if (item.layerId === 4 || item.layerId === 9) {
-                    return;
-                }
-                var statsField = item.feature.attributes.Stat_Date;
-                console.log(statsField);
-                if (statsField == "Null") {
-                    statsField = item.feature.attributes.Stat_Year;
-                    console.log(statsField);
-                }
+                // if (item.layerId === 4 || item.layerId === 9) {
+                //     return;
+                // }
+                // var statsField = item.feature.attributes.Stat_Date;
+                // console.log(statsField);
+                // if (statsField == "Null") {
+                //     statsField = item.feature.attributes.Stat_Year;
+                //     console.log(statsField);
+                // }
 
                 var ethnStr;
                 var ethn1 = item.feature.attributes.Ethncity_1;
@@ -451,7 +457,7 @@ define([
                 var ethn3 = item.feature.attributes.Ethncity_3;
 
                 if (!ethn1) {
-                    ethnStr = '';
+                    ethnStr = 'Unknown';
                 } else if (ethn1 && !ethn2) {
                     ethnStr = ethn1;
                 } else if (ethn1 && ethn2 && !ethn3) {
@@ -466,49 +472,73 @@ define([
                 var popYear = item.feature.attributes.Pop_Year;
 
                 if (!population || population == 0) {
-                    popStr = '';
+                    popStr = 'Unknown';
                 } else if (population && !popSource) {
                     popStr = population;
                 } else if (population && popSource && (!popYear || popYear == 0)) {
-                    popStr = population + ", " + popSource;
+                    popStr = population + " - " + popSource;
                 } else {
-                    popStr = population + ", " + popSource + ", " + popYear;
+                    popStr = population + " - " + popSource + ", " + popYear;
                 }
-                //todo: display unknown rather than null
+
+                // if (item.feature.attributes.More_info.startsWith("<")) {
+                //     item.feature.attributes.More_info = ''; //TODO: Get them to fix their data
+                // }
+
+                for (var attr in item.feature.attributes) {
+                    if (item.feature.attributes[attr] == "Null") {
+                        item.feature.attributes[attr] = "Unknown";
+                    }
+                }
+
 
                 template = new InfoTemplate(item.value,
                     // "<div class='even-row'><div class='popup-header'>Layer Name</div>" + item.layerName + " - " + item.layerId + '</div>' +
-                    "<div class='odd-row'><div class='popup-header'>Land type</div>" + item.feature.attributes.Identity + '</div>' +
-                    "<div class='even-row'><div class='popup-header'>Land status</div>" + item.feature.attributes.Ofcl_Rec + ' - ' + item.feature.attributes.Rec_Status + ' as of ' + statsField + '</div>' +
+                    "<div class='even-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
+                    "<div class='odd-row'><div class='popup-header'>Identity</div>" + item.feature.attributes.Identity + '</div>' +
+                    "<div class='even-row'><div class='popup-header'>Official recognition status</div>" + item.feature.attributes.Ofcl_Rec + ', ' + item.feature.attributes.Rec_Status + ', ' + item.feature.attributes.Stat_Date + '</div>' +
                     "<div class='odd-row'><div class='popup-header'>Land category</div>" + item.feature.attributes.Category + '</div>' +
                     "<div class='even-row'><div class='popup-header'>Ethnic groups</div>" + ethnStr + '</div>' +
                     "<div class='odd-row'><div class='popup-header'>Population</div>" + popStr + '</div>' +
 
-                    "<div class='even-row'><div class='popup-header'>Land Area</div>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>Calculated area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + "</div>" +
+                    "<div class='even-row'><div class='popup-header'>Land Area</div>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + "</div>" +
 
                     "<div class='odd-row'><div class='popup-header'>Acquisition scale</div>" + item.feature.attributes.Scale + '</div>' +
-                    //"<div class='odd-row'><div class='popup-header'>Acquisition method</div>" + item.feature.attributes.Method + '</div>' +
-                    "<div class='even-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
-                    "<div class='odd-row'><div class='popup-header'>Land data source</div>" + item.feature.attributes.Data_Src + '</div>' +
+                    "<div class='even-row'><div class='popup-header'>Acquisition method</div>" + item.feature.attributes.Method + '</div>' +
+                    //"<div class='even-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
+                    "<div class='odd-row'><div class='popup-header'>Data source</div>" + item.feature.attributes.Data_Src + " " + item.feature.attributes.Data_Date + '</div>' +
                     "<div class='even-row'><div class='popup-header'>Data Contributor</div>" + item.feature.attributes.Data_Ctrb + '</div>' +
-                    "<div class='popup-last'>Last Updated: " + item.feature.attributes.Last_Updt);
+                    "<div class='popup-last'>Date uploaded: " + item.feature.attributes.Upl_Date);
 
                 if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '') {
                     template.content += '</div>';
                 } else {
-                    template.content += '<a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></div>';
+                    template.content += '<div><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></div></div>';
                 }
 
-
-
-                //TODO: Re-do adding these squares with the correct colors, then re-do them with dots for the equivalent point layerIds
-                // if (item.layerId === 1) { //TODO: Use layer 5 ONLY for querying the data based off of what is turned on
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalDocIcon.png'> " + template.title;
-                // } else if (item.layerId === 2) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/tiltingIcon.png'> " + template.title;
-                // } else if (item.layerId === 3) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalLandIcon.png'> " + template.title;
-                // }
+                if (item.layerId === 1) {
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/1/images/d850fab842274d6ab94e9efa4c7a73cc'>" + template.title;
+                } else if (item.layerId === 2) {
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/2/images/e3d181178fcc6a28990bd4a3015232de'>" + template.title;
+                } else if (item.layerId === 3) {
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/3/images/26d0e3d2d2ab679bdaf93ea589f1560a'>" + template.title;
+                } else if (item.layerId === 4) {
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/4/images/0121e9c1b348c6d36126cefe0710db83'>" + template.title;
+                } else if (item.layerId === 6) {
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/6/images/b72ac329a5a45aa83a95f1f39d72a603'>" + template.title;
+                } else if (item.layerId === 7) {
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/7/images/2103e270d242ef28a32d531e4c0a4998'>" + template.title;
+                } else if (item.layerId === 8) {
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/8/images/2fe6dcfe429decc73538da5456f11013'>" + template.title;
+                } else if (item.layerId === 11) {
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/11/images/52aae8e63b7324665f6486cc687d9c26'>" + template.title;
+                } else if (item.layerId === 12) {
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/12/images/17a2ba5e9b800c58f8857ec221f28311'>" + template.title;
+                } else if (item.layerId === 13) {
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/13/images/b5ed0fdf7028b42276c6ce8d68806509'>" + template.title;
+                } else if (item.layerId === 14) {
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/14/images/ee3198dd6bc5cc50c8ffa8074329856e'>" + template.title;
+                }
                 console.log(item.layerId);
                 item.feature.setInfoTemplate(template);
                 features.push(item.feature);
@@ -518,28 +548,62 @@ define([
 
         setNationalTemplates: function(featureObjects) {
             brApp.debug('MapController >>> setNationalTemplates');
-            //TODO: Use layer 5 ONLY for querying the data based off of what is turned on
 
             var template,
                 features = [],
                 self = this;
 
             arrayUtils.forEach(featureObjects, function(item) {
-                if (item.layerId === 5) {
-                    return;
-                }
 
                 if (item.layerId === 2 || item.layerId === 3 || item.layerId === 4) {
-                    template = new InfoTemplate(item.value,
-                        "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>" + item.feature.attributes['Percent Indigenous and Community Land'] + "% (" + item.feature.attributes['Contributor of % Community Lands Data'] + ", " + item.feature.attributes['Year of Pct Indigenous & Community Lands Data'] + ")</div>" +
-                        "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>" + item.feature.attributes['Percent of Indigenous Lands'] + "% (" + item.feature.attributes['Contributor of Percent Indigenous Lands Data'] + ", " + item.feature.attributes['Year of Pct Indigenous Lands Data'] + ")</div>" +
-                        "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>" + item.feature.attributes['Percent Community Lands'] + "% (" + item.feature.attributes['Contributor of % Community Lands Data'] + ", " + item.feature.attributes['Year of % Community Lands Data'] + ")</div>" +
-                        "<div class='popup-last'>Last Updated: " + item.feature.attributes['Date of Last Update']);
-                    if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '') {
-                        template.content += '</div>';
+
+                    template = new InfoTemplate(item.value, '');
+
+                    if (item.feature.attributes['IPC_Pct'] != "Null") {
+                        template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>" + item.feature.attributes['IPC_Pct'] + "% (" + item.feature.attributes['IPC_Src'] + ")";
+
+                        if (item.feature.attributes['IPC_Notes'] == "Null") {
+                            template.content += '</div>';
+                        } else {
+                            template.content += "<div>" + item.feature.attributes['IPC_Notes'] + "</div></div>";
+                        }
                     } else {
-                        template.content += '<a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">Additional Info</a></div>';
+                        template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>Unknown</div></div>";
                     }
+
+
+                    if (item.feature.attributes['Ind_Pct'] != "Null") {
+                        template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>" + item.feature.attributes['Ind_Pct'] + "% (" + item.feature.attributes['Ind_Src'] + ")";
+                        if (item.feature.attributes['Ind_Notes'] == "Null") {
+                            template.content += '</div>';
+                        } else {
+                            template.content += "<div>" + item.feature.attributes['Ind_Notes'] + "</div></div>";
+                        }
+                    } else {
+                        template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>Unknown</div></div>";
+                    }
+
+                    if (item.feature.attributes['Com_Pct'] != "Null") {
+
+                        template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>" + item.feature.attributes['Com_Pct'] + "% (" + item.feature.attributes['Com_Src'] + ")";
+                        if (item.feature.attributes['Com_Notes'] == "Null") {
+                            template.content += '</div>';
+                        } else {
+                            template.content += "<div>" + item.feature.attributes['Com_Notes'] + "</div></div>";
+                        }
+
+                    } else {
+                        template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>Unknown</div></div>";
+                    }
+
+                    template.content += "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'];
+                    template.content += '</div>';
+
+                    // if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '') {
+                    //     template.content += '</div>';
+                    // } else {
+                    //     template.content += '<a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">Additional Info</a></div>';
+                    // }
 
 
                     item.feature.setInfoTemplate(template);
@@ -604,9 +668,9 @@ define([
                 "<div class='odd-row'><div class='popup-header'>Groups targeted by the legal framework</div>${Framework}</div>" +
                 "<div class='even-row'><div class='popup-header'>Indicator score</div>" + indScore + "</div>" +
                 "<div class='odd-row'><div class='popup-header'>Comments</div>${I" + nationalIndicatorCode + "_Com}</div>" +
-                "<div class='odd-row'><div class='popup-header'>Laws and provisions reviewed</div>${I" + nationalIndicatorCode + "_Lap}</div>" +
+                "<div class='even-row'><div class='popup-header'>Laws and provisions reviewed</div>${I" + nationalIndicatorCode + "_Lap}</div>" +
                 "<div class='odd-row'><div class='popup-header'>Review source and date</div>${I" + nationalIndicatorCode + "_Rev} (${I" + nationalIndicatorCode + "_Year})</div>" +
-                "<div class='popup-last'>Last Updated: ${Last_Updt}");
+                "<div class='popup-last'>Last Updated: ${Upl_Date}");
 
 
             return nationalLevelInfoTemplatePercent;
@@ -632,8 +696,6 @@ define([
 
 
             var failure = function(err) {
-                // TODO: Handle This Issue Here
-                // Discuss with Adrienne How to Handle
                 console.log(err);
             };
 
@@ -698,7 +760,7 @@ define([
                 var template = new InfoTemplate();
 
 
-                template.setContent("<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Official Recognition</b></td><td class='rec_status'><b>Recognition Status</b></td></tr><tr style='height: 26px;'><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td></tr>");
+                template.setContent("<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Official Recognition</b></td><td class='rec_status'><b>Recognition Status</b></td></tr><tr id='fillerColumn' style='height: 26px;'><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td></tr>");
 
                 var fields = ["Country", "Name", "Identity", "Official Recognition", "Recognition Status"];
 
@@ -791,7 +853,7 @@ define([
                 var newHeight = (value.features.length * 44) + 210; //TODO: we gotta adjust these!
                 newHeight += "px";
                 $("#infowindowContainer").css("height", newHeight);
-                // debugger; //TODO: this is where I left off when resizing this guy based on # of feats
+
                 $("#infowindowContainer").show();
 
                 //brApp.map.infoWindow.show(mapPoint.mapPoint);
@@ -823,15 +885,30 @@ define([
                     handle.remove();
                     $('.esriPopupWrapper').removeClass("noPositioning");
                 });
-                if (value.features.length > 6) { //todo is 7 the correct # of feats??
+
+
+                var parent = $("#analysisTable").parent()[0];
+                var table = $("#analysisTable")[0];
+
+                if (table.scrollHeight > parent.clientHeight) {
 
                     $("#analysisTable").removeClass("moreWidth");
                     $("#column-header").removeClass("moreWidth");
                 } else {
-
                     $("#analysisTable").addClass("moreWidth");
                     $("#column-header").addClass("moreWidth");
                 }
+                // if (value.features.length > 7) { //todo is 7 the correct # of feats??
+
+                //     //el.scrollHeight > el.clientHeight // this should tell us if there is a vertical scrollbar (and thus to add the extra width). By what is el here?
+
+                //     $("#analysisTable").removeClass("moreWidth");
+                //     $("#column-header").removeClass("moreWidth");
+                // } else {
+
+                //     $("#analysisTable").addClass("moreWidth");
+                //     $("#column-header").addClass("moreWidth");
+                // }
                 on.once(document.getElementById('exportAnalysis'), 'click', function() {
 
                     self.exportAnalysisResult(brApp.csv);
@@ -875,14 +952,8 @@ define([
 
         changeOpacity: function(op) {
             brApp.debug('MapController >>> changeOpacity');
-            var dataCompleteness = brApp.map.getLayer("indigenousLands"),
-                layerOptions, ldos = new LayerDrawingOptions();
-
-            ldos.transparency = 100 - op;
-            layerOptions = dataCompleteness.layerDrawingOptions || [];
-            layerOptions[17] = ldos;
-
-            dataCompleteness.setLayerDrawingOptions(layerOptions);
+            var dataCompleteness = brApp.map.getLayer("indigenousTransparency");
+            dataCompleteness.setOpacity(op / 100);
 
         },
 
@@ -898,11 +969,9 @@ define([
             recognizeQuery.where = "1=1";
 
             notRecognizedQT.execute(recognizeQuery, function(result) {
-
                 if (result.features.length > 0) {
-                    // TODO: show the two checkboxes
+                    $(".layerToShow").show(); //show the two checkboxes
                 }
-
             });
 
         },
@@ -910,14 +979,11 @@ define([
 
         showDataComplete: function() {
             brApp.debug('MapController >>> showDataComplete');
-            //var dynamicLayer = brApp.map.getLayer('nationalLevel');
 
-            var complete = brApp.map.getLayer('indigenousLands');
-
+            var complete = brApp.map.getLayer('indigenousTransparency');
 
             var imageUrlChecked = "url('css/images/checkbox_checked.png')";
             var imageUrlUnchecked = "css/images/checkbox_unchecked.png";
-
 
             if (this.getAttribute("data-checked") === 'false') {
                 $('#data-complete-checkbox').removeClass('data-complete-checkbox-class').addClass('data-complete-checkbox-class-checked');

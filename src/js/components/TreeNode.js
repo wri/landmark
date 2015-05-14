@@ -27,12 +27,17 @@ define([
 	  },
 
 	  showHelp: function(evt) {
-	  	
+	  	if (evt.target.dataset) {
+	  		if (evt.target.dataset.reactid.indexOf("community") > 0) {
+		  		evt.target.id = "community-lands-help";
+		  	}
+		} else {
+			var reactid = evt.target.getAttribute("data-reactid");
+		  	if (reactid.indexOf("community") > 0) {
+		  		evt.target.id = "community-lands-help";
+		  	}		
+		}
 
-	  	if (evt.target.dataset.reactid.indexOf("community") > 0) {
-	  		evt.target.id = "community-lands-help";
-	  	}
-	  	
 	  	WidgetsController.showHelp(evt);
       },
 
@@ -47,7 +52,7 @@ define([
 	    var disabled = node.disabled || false;
 	    var childNodes;
 
-	    containerClass += (disabled ? ' disabled' : '');
+	    containerClass += (disabled ? 'layerToShow' : '');
 	    
 	    if (node.children) {
 	      childNodes = node.children.map(function (child, index) {
@@ -65,7 +70,7 @@ define([
 	    }
 
 	    return (
-	      React.createElement("li", {className: containerClass}, 
+	      React.createElement("li", {hidden: disabled, className: containerClass}, 
 	      	React.createElement("section", {className: "tree-row-content"}, 
 		        React.createElement("span", {className: "tree-toggle-symbol", onClick: this.handleClick}, 
 		           node.children === undefined ? 
@@ -79,8 +84,7 @@ define([
 			          type: "checkbox", 
 			          checked: node.checked || false, 
 			          onChange: this.props.handleChange, 
-			          "data-key": node.id, 
-			          disabled: disabled}
+			          "data-key": node.id}
 		         	), 
 		        
 		         React.createElement("span", {className: "tree-node-label", onClick: this.handleClick}, node.label), 

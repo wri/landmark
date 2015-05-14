@@ -21,7 +21,11 @@ define([
             brApp.debug('WidgetsController >>> toggleLegend');
             var node = document.getElementById('legend-content'),
                 legendNode = document.querySelector('.brMap .legend-content'),
+                topBar = document.getElementById('legend-container'),
+                toggler = document.getElementById('legend-toggle-icon'),
                 active = domClass.contains(legendNode, 'active'),
+                left = active ? 170 : 210,
+                width = active ? 200 : 260,
                 height = active ? 0 : node.scrollHeight;
 
             if (active) {
@@ -46,6 +50,38 @@ define([
                         node.style.height = 'auto';
                     }
                 }
+            }).play();
+
+            Fx.animateProperty({
+                node: topBar,
+                properties: {
+                    width: width
+                },
+                duration: DURATION //,
+                // onEnd: function() {
+                //     if (width != 260) {
+                //         // Update the size of the legend as it grows so no scrollbars
+                //         $("#legend-toggle-icon").css("left", "170px");
+                //     } else {
+                //         $("#legend-toggle-icon").css("left", "230px");
+                //     }
+                // }
+            }).play();
+
+            Fx.animateProperty({
+                node: toggler,
+                properties: {
+                    left: left
+                },
+                duration: 300 //,
+                // onEnd: function() {
+                //     if (width != 260) {
+                //         // Update the size of the legend as it grows so no scrollbars
+                //         $("#legend-toggle-icon").css("left", "170px");
+                //     } else {
+                //         $("#legend-toggle-icon").css("left", "230px");
+                //     }
+                // }
             }).play();
         },
 
@@ -108,9 +144,10 @@ define([
             brApp.debug('WidgetsController >>> toggleTreeContainer');
             var labelNode = document.getElementById('tree-container-toggle'),
                 container = document.getElementById('tree-widget-container'),
+                topBar = document.getElementById('tree-title'),
                 node = document.getElementById('tree-content'),
                 active = domClass.contains(node, 'active'),
-                height;
+                height, width;
 
             labelNode.innerHTML = active ? '&plus;' : '&minus;';
             if (!active) {
@@ -123,11 +160,13 @@ define([
 
             // Set the height
             height = active ? 0 : (container.offsetHeight - 34);
+            width = active ? 225 : 360;
 
             Fx.animateProperty({
                 node: node,
                 properties: {
-                    height: height
+                    height: height,
+                    width: width
                 },
                 duration: DURATION,
                 onEnd: function() {
@@ -138,6 +177,22 @@ define([
                         domClass.toggle(node, 'active');
                     }
                 }
+            }).play();
+
+            Fx.animateProperty({
+                node: topBar,
+                properties: {
+                    width: width
+                },
+                duration: DURATION //,
+                // onEnd: function() {
+                //     if (height !== 0) {
+                //         // Update the size of the legend as it grows so no scrollbars
+                //         // node.style.height = 'auto';
+                //     } else {
+                //         domClass.toggle(node, 'active');
+                //     }
+                // }
             }).play();
 
         },

@@ -38,7 +38,7 @@ label
 	z-index 30
 	
 .esriControlsBR
-	right 300px
+	right 325px !important
 	
 .brMap .HomeButton .home
 	background url('images/map_tools_home.png') no-repeat center
@@ -58,7 +58,7 @@ label
 	
 .tundra .dijitDialogCloseIcon
 	background url('images/close_x_symbol.png') no-repeat !important
-	top 8px !important
+	top 10px !important
 	
 .tundra .dijitDialogTitle
 	color white
@@ -68,7 +68,7 @@ label
 	width 283px
 	right 20px
 	z-index 50
-	bottom 61px
+	bottom 5px
 	
 .legend-title-pane
 	padding-right 0
@@ -147,14 +147,13 @@ label
 	margin-left -325px
 	margin-top -260px
 	width 650px
-	//height 520px //todo: 520? how to make this sliding depending on number of features?
 	height auto
 	max-height 542px
 	min-height 200px
 	z-index 150
 	left 50%
 	top 50%
-	background-color white
+	// background-color white
 	overflow-y hidden
 	overflow-x hidden
 	
@@ -189,6 +188,7 @@ label
 	width 100%
 	font-size 12px
 	border none
+	overflow-x hidden
 
 .esriPopup .pointer.bottom
 	display none
@@ -221,6 +221,14 @@ label
 
 #legend > div:nth-last-child(2)
 	padding-bottom 10px
+	
+.mobileLegendUpdate
+	border-top-right-radius 5px
+	border-bottom-right-radius 5px
+	-moz-border-radius-topright 5px
+	-moz-border-radius-bottomright 5px
+	-webkit-border-top-right-radius 5px
+	-webkit-border-bottom-right-radius 5px
 
 .button-widget
 	background-color white
@@ -261,7 +269,7 @@ label
 	
 #indigenous-lands-help
 	position relative
-	display -webkit-inline-box
+	display inline-block
 
 .basemap-icon
 	background url('images/map_tools_basemaps.png') no-repeat
@@ -396,6 +404,7 @@ label
 	font-size 14px
 	color #055d7d
 
+
 .odd-row
 	background-color #f3f7fc
 	
@@ -450,7 +459,6 @@ label
 	box-shadow 0 10px 44px rgba(0, 0, 0, 0.22) !important;
 
 #additionalInfo
-	float right
 	padding-right 10px
 	color #055D7D
 	text-decoration underline
@@ -458,7 +466,7 @@ label
 	cursor pointer
 
 .esriSimpleSliderDecrementButton
-	border-top 1px solid #8db3e2
+	border-top 1px solid #2fa3d9
 	background url(images/map_tools_minus.png) no-repeat #fff
 	background-position 7px 14px
 	
@@ -488,31 +496,18 @@ label
 	&:focus, &:active
 		outline 0 !important
 	
-#removeGraphic
-#exportAnalysis
-#draw-shape
-#upload-shapefile
+#removeGraphic, #exportAnalysis, #draw-shape, #upload-shapefile
 	padding 10px
 	margin 5px
 	display inline-block
 	width 47%
 	background-color #055D7D !important
 	left 9px
-		
-#removeGraphic
-#exportAnalysis
-#draw-shape
-#upload-shapefile
-#remove-graphics
 	&:hover
 		background-color #0A89B8 !important
-		
-#remove-graphics
-	margin-left 15px !important
-	margin-right -5px !important
-	
+
 #draw-shape
-	margin-left -13px !important
+	margin-left -11px !important
 
 #upload-shapefile
 	position relative
@@ -530,7 +525,6 @@ label
 		margin-left -61px
 	
 #removeGraphic
-#remove-graphics
 	position relative
 	text-indent 15px
 	&:before
@@ -544,10 +538,6 @@ label
 		top 0
 		left 50%
 		margin-left -50px
-		
-#remove-graphics
-	&:before
-		margin-left -59px
 
 #exportAnalysis
 	position relative
@@ -576,17 +566,10 @@ label
 	
 .display-three
 	width 30% !important
-
-.tundra .dijitDialog
-	font-size 14px
-	
-.tundra .dijitDialogPaneContent
-	padding-top 0 !important
-	padding-bottom 0 !important
 	
 .tundra .dijitDialogTitle
 	font-weight normal !important
-
+	
 .esriPopup .titleButton.close, 
 	// background none
 	// top 10px
@@ -680,6 +663,7 @@ label
 	&:first-child
 		padding-top 14px
 		border-top none
+
 	
 .actionsPane
 	display none
@@ -813,16 +797,16 @@ label
 	top 20px
 	
 .data-completeness-toggle
-	background-color #8db3e2
+	background-color #2fa3d9
 	display inline-block
 	height 32px
 	
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton
-	border-bottom 1px solid #8db3e2 !important
+	border-bottom 1px solid #2fa3d9 !important
 	
 #analysisLogo
 	background url("images/icon_analysis.png") no-repeat 9px
-	background-color #8db3e2
+	background-color #2fa3d9
 	width 33px
 	height 32px
 	display block
@@ -834,7 +818,7 @@ label
 	
 .simpleGeocoder .esriGeocoder .esriGeocoderSearch
 	background url("images/magnifying_glass_symbol.png") no-repeat 9px !important
-	background-color #8db3e2 !important
+	background-color #2fa3d9 !important
 	width 33px
 	height 32px
 	position absolute
@@ -870,7 +854,7 @@ label
 	display none
 	
 .tundra .dijitSliderProgressBarH
-	background #8db3e2 !important
+	background #2fa3d9 !important
 	height 8px
 	
 .tundra .dijitSliderRemainingBarH
@@ -999,3 +983,25 @@ body:not(.mobile) .launch-map-button
 	.national-layer-selection-label
 		font-size 11px
 		padding-right 0
+	// #infowindowContainer
+	// 	width 100%
+	#column-header
+		width auto
+	.esriPopupWrapper.noPositioning
+		width auto
+		right initial !important
+	#identifyNote
+		width auto
+		right initial !important
+		
+@media (max-width: 650px)
+	#infowindowContainer
+		width 98%
+		margin-left 0
+		left 1%
+		overflow-x auto
+	#column-header
+		width 98% !important
+		position inherit
+	#fillerColumn
+		display none

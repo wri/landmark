@@ -137,7 +137,7 @@ module.exports = {
                     'dijit': 'empty:',
                     'dojox': 'empty:',
                     'react': 'empty:',
-                    'js': 'js',
+                    // 'js': 'js',
                     'libs': 'libs',
                     'data': 'js/data',
                     'components': 'js/components'

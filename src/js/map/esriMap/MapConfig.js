@@ -3,8 +3,8 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
     var indigenousLandsUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer'; //new
     //var indigenousLandsUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer';
 
-    //var nationalLevelUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer'; //new
-    var nationalLevelUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer';
+    var nationalLevelUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer'; //new
+    //var nationalLevelUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer';
 
     var indigenousLandsInfo = "Placeholder so this layer's info icon appears in the tree";
     var landTenureSecurityInfo = "Placeholder so this layer's info icon appears in the tree";
@@ -34,6 +34,14 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             //     defaultLayers: [5, 6, 7, 8, 9], //[0,1,2,3,4,5,6,7,8,9]
             //     visible: true
             // },
+
+            'indigenousTransparency': {
+                url: indigenousLandsUrl,
+                type: 'dynamic',
+                // Not all the layers are present in the tree, when they are, include 0 - 9
+                defaultLayers: [17], //[0,1,2,3,4,5,6,7,8,9]
+                visible: true
+            },
             'nationalLevel': {
                 url: nationalLevelUrl,
                 type: 'dynamic',
@@ -44,13 +52,15 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 // }
                 visible: true
             },
+
             'indigenousLands': {
                 url: indigenousLandsUrl,
                 type: 'dynamic',
                 // Not all the layers are present in the tree, when they are, include 0 - 9
-                defaultLayers: [1, 2, 3, 6, 7, 8, 17], //[0,1,2,3,4,5,6,7,8,9]
+                defaultLayers: [1, 2, 3, 6, 7, 8, 11, 12, 13], //[0,1,2,3,4,5,6,7,8,9]
                 visible: true
             },
+
             'CustomFeatures': {
                 type: 'graphic',
                 infoTemplate: {
@@ -100,7 +110,8 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 }, {
                     label: 'Occupied/used without formal land claim',
                     id: 'indigenousNoLandClaim',
-                    checked: false
+                    checked: false,
+                    disabled: true
                 }]
             }]
         }, {
@@ -108,26 +119,33 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             id: 'communityLands',
             collapsed: false,
             info: landTenureSecurityInfo,
+            checked: true,
             //disabled: true,
             children: [{
                 label: 'Officially recognized (by law or decree)',
                 id: 'communityOfficial',
+                checked: true,
                 children: [{
                     label: 'Formal Document/Title',
-                    id: 'communityFormalTitle'
+                    id: 'communityFormalTitle',
+                    checked: true
                 }, {
                     label: 'In process of titling',
-                    id: 'communityInProcess'
+                    id: 'communityInProcess',
+                    checked: true
                 }]
             }, {
                 label: 'Not officially recognized',
                 id: 'communityUnofficial',
+                checked: true,
                 children: [{
                     label: 'Formal land claim',
-                    id: 'communityLandClaim'
+                    id: 'communityLandClaim',
+                    checked: true
                 }, {
                     label: 'Occupied/used without formal land claim',
-                    id: 'communityNoLandClaim'
+                    id: 'communityNoLandClaim',
+                    disabled: true
                 }]
             }]
         }],
@@ -573,9 +591,16 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'indigenousFormalTitle': [1, 6],
             'indigenousInProcess': [2, 7],
             'indigenousLandClaim': [3, 8],
-            'indigenousNoLandClaim': [4, 9]
-        }
+            'indigenousNoLandClaim': [4, 9],
+            'communityLands': [],
+            'communityOfficial': [],
+            'communityUnofficial': [],
+            'communityFormalTitle': [11],
+            'communityInProcess': [12],
+            'communityLandClaim': [13],
+            'communityNoLandClaim': [14]
 
+        }
 
 
         // layerMappingCommunityLans: { //Add these arrays to layerMapping above

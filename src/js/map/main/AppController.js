@@ -55,6 +55,15 @@ define([
                 }
             });
 
+            // window.addEventListener("resize", function() {
+            //     if (window.innerWidth > 799 && brApp.showTheseThings === true) {
+            //         debugger;
+            //         $("#data-completeness-container").show();
+            //         $("#analysis-button").show();
+            //         brApp.showTheseThings = false;
+            //     }
+            // });
+
         },
 
         /**

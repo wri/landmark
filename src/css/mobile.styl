@@ -105,6 +105,7 @@ body:not(.mobile) .mobile-menu-toggle-button
 	
 /** These Are Styles we need to override with Media Queries as they may need to be 
 		applied before the JavaScript can detect were on mobile and add the mobile class **/
+
 @media (max-width: 1130px)
 	.geocoder-container, .analysis-button, .data-completeness-container
 		right 70px !important
@@ -119,6 +120,10 @@ body:not(.mobile) .mobile-menu-toggle-button
 		display none
 	#mobile-menu-toggle
 		display block !important //This 'important' tag is making it so the mobile menu never disappears after a toggle, hide, resize operation, but it also forces us to always show the menu icon (even when the menu is open)
+	#data-completeness-container, #analysis-button
+		display none !important
+	
+	
 		
 @media (max-width: 500px)
 	#legendMenuButton

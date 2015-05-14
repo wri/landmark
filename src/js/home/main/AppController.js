@@ -16,14 +16,21 @@ define(['main/config'], function(homeConfig) {
             // if (Helper.isMobile()) {
             //     this.layoutChangedToMobile();
             // }
-
+            $("#spanishFlag").click(function() {
+                self.displaySpanish();
+            });
+            $("#frenchFlag").click(function() {
+                self.displayFrench();
+            });
+            $("#portugalFlag").click(function() {
+                self.displayPortugal();
+            });
+            $("#indonesiaFlag").click(function() {
+                self.displayIndonesia();
+            });
             $("#britishFlag").click(function() {
                 self.displayEnglish();
             });
-
-
-
-
 
         },
 
@@ -88,10 +95,36 @@ define(['main/config'], function(homeConfig) {
 
         },
 
+        displaySpanish: function() {
+            brApp.debug('AppController >>> displaySpanish');
+
+            $("#launch-dialog-content-french").hide();
+            $("#launch-dialog-content").hide();
+            $("#launch-dialog-content-spanish").show();
+        },
+        displayFrench: function() {
+            brApp.debug('AppController >>> displayFrench');
+
+            $("#launch-dialog-content").hide();
+            $("#launch-dialog-content-spanish").hide();
+            $("#launch-dialog-content-french").show();
+        },
+        displayPortugal: function() {
+            brApp.debug('AppController >>> displayPortugal');
+            console.log("needs languages");
+        },
+        displayIndonesia: function() {
+            brApp.debug('AppController >>> displayIndonesia');
+            console.log("needs languages");
+        },
         displayEnglish: function() {
             brApp.debug('AppController >>> displayEnglish');
-            console.log("needs languages");
+
+            $("#launch-dialog-content-french").hide();
+            $("#launch-dialog-content-spanish").hide();
+            $("#launch-dialog-content").show();
         }
+
 
 
     };

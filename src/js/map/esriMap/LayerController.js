@@ -18,15 +18,11 @@ define([
         updateVisibleLayers: function(keys, layer) {
             brApp.debug('LayerController >>> updateVisibleLayers');
             var visibleLayers = [],
-                dynamicLayer;
+                dynamicLayer, dynamicLayer2;
 
-
-            if (layer) { //We know we're in the National Level Data w/ the exception of Data Completeness
+            if (layer) {
                 visibleLayers = keys;
                 dynamicLayer = brApp.map.getLayer('nationalLevel');
-                debugger;
-
-
 
                 if (keys[0] === 0 || keys[0] === 1) {
                     this.setNationalLevelRenderer(visibleLayers);
@@ -39,10 +35,8 @@ define([
                 topic.publish('refresh-legend');
 
             } else {
-                console.log(keys);
-                //debugger;
                 dynamicLayer = brApp.map.getLayer('indigenousLands');
-
+                dynamicLayer2 = brApp.map.getLayer('indigenousTransparency');
                 if (keys.length === 0) {
                     visibleLayers.push(-1);
                 } else {
@@ -52,20 +46,31 @@ define([
                 }
 
                 if (document.getElementById('data-complete-checkbox').getAttribute("data-checked") == "true" && keys.length > 0) {
-                    visibleLayers.push(17); //TODO: Incorrect: change to 17 in other service. and set cookie thing here?
+                    dynamicLayer2.show();
+                } else {
+                    dynamicLayer2.hide();
                 }
 
 
                 if (visibleLayers[0] === -1) {
                     $("#data-completeness-container").hide();
                     $("#analysis-button").hide();
-                    //todo: hide national level data if its on, add global boolean so that when the comm level data is tuned back on; if that completeness WAS on, turn it back on
+
+                    $("#legendMenuButton").addClass("mobileLegendUpdate");
+                    $("#toolsMenuButton").hide();
+
                     //$("#geocoder-container").css("right", "80px");
                 } else {
+
+                    $("#legendMenuButton").removeClass("mobileLegendUpdate");
+                    $("#toolsMenuButton").show();
                     $("#data-completeness-container").show();
                     $("#analysis-button").show();
+
                     //$("#geocoder-container").css("right", "450px");
                 }
+
+                console.log(dynamicLayer);
                 dynamicLayer.setVisibleLayers(visibleLayers);
                 topic.publish('refresh-legend');
 

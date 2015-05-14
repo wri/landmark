@@ -58,6 +58,7 @@ define([
                 self.map.graphics.clear();
                 self.map.resize();
                 self.addLayers();
+                registry.byId("legend").refresh();
             });
 
             self.map.on("extent-change", function(e) {
@@ -96,6 +97,7 @@ define([
                 layers = [],
                 key;
 
+
             for (key in layerConfig) {
                 switch (layerConfig[key].type) {
                     case 'dynamic':
@@ -123,6 +125,12 @@ define([
             });
 
             this.map.addLayers(layers);
+            // var completeness = this.map.getLayer("indigenousTransparency");
+            // setTimeout(function() {
+            //     debugger;
+            //     //self.map.reorderLayer(completeness, 4);
+            // }, 3000);
+
 
             // Initialize Add This
             addthis.init();
