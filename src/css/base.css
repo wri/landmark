@@ -324,7 +324,7 @@ a:-webkit-any-link {
 
 /* line 137 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/header.styl */
 
-/* line 75 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/mobile.styl */
+/* line 87 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/mobile.styl */
 
 /* line 40 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/mobile.styl */
 
@@ -342,9 +342,9 @@ a:-webkit-any-link {
 
 /* line 11 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/mobile.styl */
 .mobile-menu-toggle-button {
-  background: url("images/ico-settings.png") no-repeat center #fff;
+  background: url("images/ico-gear.png") no-repeat center #fff;
   border: 1px solid #000;
-  background-size: 22px;
+  background-size: 19px;
   text-align: center;
   height: 30px;
   width: 30px;

@@ -1380,7 +1380,7 @@ label {
 
 /* line 87 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/analysis.styl */
 
-/* line 9 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/ReactTree.styl */
+/* line 87 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/ReactTree.styl */
 
 /* line 1 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/ReactTree.styl */
 .checkbox-tree .collapsed ul {
@@ -1458,7 +1458,7 @@ label {
 /* line 51 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/ReactTree.styl */
 .tree-node-label:active {
   text-shadow: -1px -1px 1px #ddd;
-  outline: 1px solid #2982ff;
+  outline: 1px solid #2fa3d9;
 }
 
 /* line 56 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/ReactTree.styl */
@@ -1482,23 +1482,9 @@ body:not(.mobile) .tree-widget-container .tree-content {
   display: none;
 }
 
-/* line 73 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/ReactTree.styl */
-.mobile .checkbox-tree input[type='checkbox'] {
-  border: 1px solid #888;
-  -webkit-appearance: none;
-  vertical-align: middle;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  cursor: pointer;
-  outline: none;
-  height: 20px;
-  width: 20px;
-}
-
 /* line 83 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/ReactTree.styl */
 .mobile .checkbox-tree input[type='checkbox']:checked {
-  background: #2982ff;
+  background: #2fa3d9;
 }
 
 /* line 86 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/ReactTree.styl */
