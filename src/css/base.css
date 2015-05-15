@@ -324,7 +324,7 @@ a:-webkit-any-link {
 
 /* line 137 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/header.styl */
 
-/* line 1048 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/mobile.styl */
+/* line 76 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/mobile.styl */
 
 /* line 40 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/mobile.styl */
 
@@ -381,15 +381,15 @@ a:-webkit-any-link {
 
 /* line 45 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/mobile.styl */
 .mobile-menu .segmented-menu-button {
-  border: 1px solid #8db3e2;
+  border: 1px solid #2fa3d9;
   text-align: center;
   padding: 5px 10px;
-  color: #8db3e2;
+  color: #2fa3d9;
 }
 
 /* line 51 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/mobile.styl */
 .mobile-menu .segmented-menu-button.active {
-  background-color: #8db3e2;
+  background-color: #2fa3d9;
   color: #fff;
 }
 
