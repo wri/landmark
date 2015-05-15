@@ -73,7 +73,7 @@ label
 .legend-title-pane
 	padding-right 0
 	text-align left
-	height 37px
+	height 32px
 	
 #legend-toggle
 	width 243px
@@ -89,28 +89,28 @@ label
 	border-bottom 0
 	padding 0 20px
 	font-size 14px
-	height 37px
+	height 32px
 	
 .legend-content
 	background-color white
 	border-bottom 0
-	font-size 13px
+	font-size 11px
 	font-weight normal
 	color #464646
 	border-top 0
 	
 	*
 		font-style normal !important
-		line-height: 1.4 !important
+		line-height: 1.1 !important
 	
 	.esriLegendLeft
-		font-size 13px
+		font-size 11px
 	
 .esriLegendLayerLabel
 	padding-top 0 !important
 	
 #legend_indigenousLands_1 img, #legend_indigenousLands_2 img, #legend_indigenousLands_3 img
-	margin-right 2px !important
+	margin-right -1px !important
 
 // [id^="legend_indigenousLands_"] img
 //	margin-right 8px !important
@@ -123,16 +123,19 @@ label
 // font-style italic
 
 #legend_indigenousLands_0_group > table > tbody > tr > td,
+#legend_indigenousLands_10_group > table > tbody > tr > td,
+#legend_indigenousTransparency_17 > table:first-child > tbody > tr > td,
 #legend_indigenousLands_5_group > table > tbody > tr > td,
 #legend_nationalLevel_2 > table.esriLegendLayerLabel > tbody > tr > td,
 #legend_nationalLevel_0 > table.esriLegendLayerLabel > tbody > tr > td
-	font-size 14px
-	color #23426a
+	font-size 11px
+	font-weight bold
+	color inherit
 	
 #legend_indigenousLands_0_group > table:first-child td
 	display block
-	font-size 14px
-	color #23426a
+	font-size 11px
+	color #464646 !important
 	margin-bottom 5px
 
 #legend table
@@ -140,7 +143,7 @@ label
 	td[width="35"]
 		width 10px
 		img
-			margin-right 8px
+			margin-right 6px
 
 #infowindowContainer
 	position absolute
@@ -200,6 +203,9 @@ label
 
 .esriLegendLeft
 	padding-left 0 !important
+	
+.esriLegendGroupLayer
+	padding-top 7px !important
 
 #legend .esriLegendService > div > table
 	padding-left 0
@@ -210,7 +216,7 @@ label
 #legend
 	max-height 300px
 	overflow-y auto
-	padding-bottom 12px
+	padding-bottom 0
 	
 #legend #legend_msg 
 #legend .esriLegendServiceLabel
@@ -916,8 +922,9 @@ label
 	//background url(images/legendToggle.png) no-repeat #fff
 	-webkit-font-smoothing antialiased
 	-moz-osx-font-smoothing grayscale
-	height 37px
-	width 37px
+	height 32px
+	width 32px
+	line-height 32px
 	position absolute
 	display block
 	top 0
