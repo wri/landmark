@@ -320,9 +320,9 @@ label
 	position relative
 	font-weight normal !important
 	margin-bottom: -9px !important
-	background none !important
+	// background none !important
 	z-index 10
-	// background url('images/ico-carat-right.png') 97% no-repeat	!important
+	background url('images/ico-carat-right.png') 97% no-repeat	!important
 	+ .dijitAccordionChildWrapper
 		padding-top 10px
 
@@ -330,7 +330,7 @@ label
 	padding 12px 8px !important
 
 .tundra .dijitAccordionTitleSelected
-	background url('images/ico-carat-down.png') 95% no-repeat !important
+	background url('images/ico-carat-down.png') 97% 95% no-repeat !important
 	
 .brMap .LocateButton .zoomLocateButton
 	background-color transparent
@@ -772,7 +772,7 @@ label
 .tundra .dijitAccordionTitleSelected, .dijitAccordionContainer
 	border none !important
 	border-top 1px solid $mainBorder !important
-	background-image none !important
+	// background-image none !important
 	padding-bottom 0 !important
 	
 .mobile .tree-content
@@ -993,7 +993,9 @@ label
 //	padding 5px 10px
 //	color #000
 	
-
+#national-level-toggle_button
+	margin-top 5px
+	border-top solid 1px #ccc !important
 	
 .national-active-indicator
 	border 1px solid black
