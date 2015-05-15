@@ -20,10 +20,13 @@ table
 		border-top solid 1px innerBorderColor !important
 
 #aboutTitle
+	max-width 1120px
+	margin-left 0
 	text-align center
-	margin 0 !important
 	*
 		font-style normal
+	@media (min-width: 1500px)
+		margin-left 250px
 
 .accordion-Controls
 	float left
@@ -154,14 +157,6 @@ table
 @media (max-width: 1500px)
 	.accordion-Controls
 		margin-left 0px
-	#aboutTitle
-		margin-left 250px
-		
-@media (max-width: 1250px)
-	#aboutTitle
-		text-align center
-		margin-right 20px
-		font-size 14px
 		
 @media (max-width: 1050px)
 	.top-bar .name h1 a
@@ -170,9 +165,6 @@ table
 		display none
 		
 @media (max-width: 1000px)
-	#aboutTitle
-		margin-left 20px
-		margin-right 20px
 	.about-Accordion
 		width auto
 	.aboutImageLeft

@@ -7,9 +7,13 @@ body
 	background-color white
 
 #dataTitle
+	max-width 1120px
+	margin-left 0
 	text-align center
 	*
 		font-style normal
+	@media (min-width: 1500px)
+		margin-left 250px
 	
 // table, th, td
 // 	border 1px solid #eee
@@ -159,13 +163,6 @@ u
 @media (max-width: 1500px)
 	.accordion-Controls
 		margin-left 0px
-	#dataTitle
-		margin-left 250px
-		
-@media (max-width: 1250px)
-	#dataTitle
-		text-align center
-		margin-right 20px
 		
 @media (max-width: 1050px)
 	.top-bar .name h1 a
@@ -174,9 +171,6 @@ u
 		display none
 		
 @media (max-width: 1000px)
-	#dataTitle
-		margin-left 20px
-		margin-right 20px
 	.data-Accordion
 		width auto
 	.dataImageLeft

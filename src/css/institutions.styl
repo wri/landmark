@@ -4,9 +4,13 @@ body
 	font-family Arial
 
 #institutionsTitle
+	max-width 1120px
+	margin-left 0
 	text-align center
 	*
 		font-style normal
+	@media (min-width: 1500px)
+		margin-left 250px
 
 .accordion-Controls
 	float left
@@ -183,13 +187,6 @@ table, th, td
 @media (max-width: 1500px)
 	.accordion-Controls
 		margin-left 0px
-	#institutionsTitle
-		margin-left 250px
-		
-@media (max-width: 1250px)
-	#institutionsTitle
-		text-align center
-		margin-right 20px
 		
 @media (max-width: 1050px)
 	.top-bar .name h1 a
@@ -198,9 +195,6 @@ table, th, td
 		display none
 		
 @media (max-width: 1000px)
-	#institutionsTitle
-		margin-left 20px
-		margin-right 20px
 	.institutions-Accordion
 		width auto
 	.institutionsImageLeft
