@@ -70,7 +70,9 @@ define([
 	    }
 
 	    return (
-	      React.createElement("li", {hidden: disabled, className: containerClass}, 
+
+	      React.createElement("li", {disabled: disabled, className: containerClass}, 
+
 	      	React.createElement("section", {className: "tree-row-content"}, 
 		        React.createElement("span", {className: "tree-toggle-symbol", onClick: this.handleClick}, 
 		           node.children === undefined ? 
@@ -87,7 +89,7 @@ define([
 			          "data-key": node.id}
 		         	), 
 		        
-		         React.createElement("span", {className: "tree-node-label", onClick: this.handleClick}, node.label), 
+		         React.createElement("span", {className: node.disabled ? 'tree-node-label-disabled' : 'tree-node-label', onClick: this.handleClick}, node.label), 
 					 node.info ? 
 						React.createElement("span", {id: "indigenous-lands-help", onClick: this.showHelp, className: "help-marker"}): null
 							        

@@ -334,11 +334,22 @@ define([
                     brApp.map.infoWindow.show(mapPoint);
                     if (window.innerWidth < 1000) {
                         brApp.map.infoWindow.maximize();
+                        $(".esriPopup .contentPane").css("height", "inherit");
+
                     }
 
                     //     $("div.esriPopupWrapper > div.pointer").show();
                     // }
 
+
+                    //     $("div.esriPopupWrapper > div.pointer").show();
+                    // }
+
+
+                    // if (window.innerWidth < 600 || mapPoint.clientY < 400) {
+                    //     debugger;
+                    //     //brApp.map.infoWindow.reposition(); //TODO: Center in screen? Remove arrow to point to feature?
+                    // }
 
                     // if (window.innerWidth < 600 || mapPoint.clientY < 400) {
                     //     debugger;
@@ -492,6 +503,7 @@ define([
                 }
 
 
+
                 template = new InfoTemplate(item.value,
                     // "<div class='even-row'><div class='popup-header'>Layer Name</div>" + item.layerName + " - " + item.layerId + '</div>' +
                     "<div class='even-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
@@ -570,6 +582,40 @@ define([
                     } else {
                         template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>Unknown</div></div>";
                     }
+
+
+                    if (item.feature.attributes['Ind_Pct'] != "Null") {
+                        template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>" + item.feature.attributes['Ind_Pct'] + "% (" + item.feature.attributes['Ind_Src'] + ")";
+                        if (item.feature.attributes['Ind_Notes'] == "Null") {
+                            template.content += '</div>';
+                        } else {
+                            template.content += "<div>" + item.feature.attributes['Ind_Notes'] + "</div></div>";
+                        }
+                    } else {
+                        template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>Unknown</div></div>";
+                    }
+
+                    if (item.feature.attributes['Com_Pct'] != "Null") {
+
+                        template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>" + item.feature.attributes['Com_Pct'] + "% (" + item.feature.attributes['Com_Src'] + ")";
+                        if (item.feature.attributes['Com_Notes'] == "Null") {
+                            template.content += '</div>';
+                        } else {
+                            template.content += "<div>" + item.feature.attributes['Com_Notes'] + "</div></div>";
+                        }
+
+                    } else {
+                        template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>Unknown</div></div>";
+                    }
+
+                    template.content += "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'];
+                    template.content += '</div>';
+
+                    // if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '') {
+                    //     template.content += '</div>';
+                    // } else {
+                    //     template.content += '<a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">Additional Info</a></div>';
+                    // }
 
 
                     if (item.feature.attributes['Ind_Pct'] != "Null") {
@@ -693,6 +739,10 @@ define([
                 title;
 
             mapPoint.stopPropagation();
+
+            if (brApp.map.infoWindow.isShowing) {
+                brApp.map.infoWindow.hide();
+            }
 
 
             var failure = function(err) {

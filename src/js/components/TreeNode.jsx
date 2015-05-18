@@ -70,7 +70,9 @@ define([
 	    }
 
 	    return (
-	      <li hidden={disabled} className={containerClass}>
+
+	      <li disabled={disabled} className={containerClass}>
+
 	      	<section className='tree-row-content'>
 		        <span className='tree-toggle-symbol' onClick={this.handleClick} >
 		          { node.children === undefined ? 
@@ -87,7 +89,7 @@ define([
 			          data-key={node.id}
 		         	/>
 		        }
-		         <span className='tree-node-label' onClick={this.handleClick}>{node.label}</span>
+		         <span className={node.disabled ? 'tree-node-label-disabled' : 'tree-node-label'} onClick={this.handleClick}>{node.label}</span>
 					{ node.info ? 
 						<span id='indigenous-lands-help' onClick={this.showHelp} className='help-marker'></span>: null
 					}		        

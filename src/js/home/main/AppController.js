@@ -100,6 +100,7 @@ define(['main/config'], function(homeConfig) {
 
             $("#launch-dialog-content-french").hide();
             $("#launch-dialog-content").hide();
+            $("#launch-dialog-content-portuguese").hide();
             $("#launch-dialog-content-spanish").show();
         },
         displayFrench: function() {
@@ -107,11 +108,17 @@ define(['main/config'], function(homeConfig) {
 
             $("#launch-dialog-content").hide();
             $("#launch-dialog-content-spanish").hide();
+            $("#launch-dialog-content-portuguese").hide();
             $("#launch-dialog-content-french").show();
         },
         displayPortugal: function() {
             brApp.debug('AppController >>> displayPortugal');
-            console.log("needs languages");
+
+            $("#launch-dialog-content-french").hide();
+            $("#launch-dialog-content").hide();
+            $("#launch-dialog-content-spanish").hide();
+            $("#launch-dialog-content-portuguese").show();
+
         },
         displayIndonesia: function() {
             brApp.debug('AppController >>> displayIndonesia');
@@ -122,6 +129,8 @@ define(['main/config'], function(homeConfig) {
 
             $("#launch-dialog-content-french").hide();
             $("#launch-dialog-content-spanish").hide();
+            $("#launch-dialog-content-portuguese").hide();
+
             $("#launch-dialog-content").show();
         }
 
