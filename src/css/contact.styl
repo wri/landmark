@@ -1,5 +1,10 @@
 @import "config"
 
+html
+body
+.root
+	overflow auto !important
+
 body
 	font-family Arial
 
@@ -10,7 +15,10 @@ body
 	width 1120px
 	max-width 90%
 	padding 20px
-	margin 0 auto
+	margin 0
+	
+	@media (min-width: 1500px)
+		margin-left 250px
 	
 .contact-bold
 	font-weight bold
