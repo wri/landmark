@@ -438,16 +438,19 @@ label
 	background-color blue
 
 .help-marker
+	position relative !important
+	display inline-block
 	background url('images/icon_question_mark.png') no-repeat
 	height 16px
 	width 16px
-	position absolute !important
-	margin-top 3px
+	vertical-align middle
+	margin-top 0 !important
 	margin-left 5px
+	top 0 !important
 	cursor pointer
 		
-.tundra .dijitAccordionContainer .help-marker
-	top 5px !important
+// .tundra .dijitAccordionContainer .help-marker
+// 	top 5px !important
 
 .esriPopup .esriPopupWrapper
 	box-shadow 0 10px 44px rgba(0, 0, 0, 0.22) !important;
