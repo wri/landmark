@@ -208,15 +208,18 @@ define([
                 menuButton = 'mobile-menu-toggle',
                 isClosing = domClass.contains(menuNodeId, 'open'),
                 left = isClosing ? 0 : 290;
+            $("#community-level-toggle_button").hide();
 
             if (!isClosing) {
                 $("#mobile-menu-toggle").css("display", "none");
                 domClass.toggle(menuNodeId, 'open');
                 domClass.toggle(menuButton, 'hidden');
+
             } else {
                 $("#mobile-menu-toggle").css("display", "block");
                 domClass.remove(menuButton, 'hidden');
             }
+
 
             Fx.animateProperty({
                 node: mapNode,
@@ -232,6 +235,7 @@ define([
                     if (accordion) {
                         accordion.resize();
                     }
+                    $("#community-level-toggle_button").show();
                 }
             }).play();
 
@@ -279,11 +283,17 @@ define([
                     break;
                 case "layersMenuButton":
                     id = 'mobile-layers-content';
+
+
                     break;
             }
 
             domClass.add(target, 'active');
             domClass.add(id, 'active');
+
+            if (id === "mobile-layers-content") {
+                registry.byId("layer-accordion").resize();
+            }
 
         },
 

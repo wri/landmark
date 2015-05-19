@@ -97,7 +97,7 @@ define([
               React.createElement("h2", {className: "institutions-Accordion-Title"}, institutionsConfig.accordionSectionTitles[this.state.activePanel]), 
               
               React.createElement("p", null, institutionsConfig.dataProviders1a, React.createElement("i", null, institutionsConfig.overviewText1a), institutionsConfig.dataProviders1v), 
-              React.createElement("p", null, React.createElement("i", null, React.createElement("u", null, institutionsConfig.dataProviders2a))), 
+              React.createElement("p", null, React.createElement("i", null, React.createElement("u", {className: "levelTitle"}, institutionsConfig.dataProviders2a))), 
 
 
               React.createElement("table", {id: "institutions-providers"}, 

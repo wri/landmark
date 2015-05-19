@@ -201,7 +201,7 @@ define([
             geocoder.startup();
             legend.startup();
 
-            self.queryEmptyLayers();
+            //self.queryEmptyLayers();
 
 
 
@@ -428,7 +428,6 @@ define([
 
             identifyTask.execute(params, function(features) {
                 if (features.length > 0) {
-                    console.log(features.length);
                     deferred.resolve({
                         layer: "nationalLevel",
                         features: features
@@ -455,12 +454,6 @@ define([
                 // if (item.layerId === 4 || item.layerId === 9) {
                 //     return;
                 // }
-                // var statsField = item.feature.attributes.Stat_Date;
-                // console.log(statsField);
-                // if (statsField == "Null") {
-                //     statsField = item.feature.attributes.Stat_Year;
-                //     console.log(statsField);
-                // }
 
                 var ethnStr;
                 var ethn1 = item.feature.attributes.Ethncity_1;
@@ -478,10 +471,25 @@ define([
                 }
 
                 var popStr;
-                var population = item.feature.attributes.Populatn;
-                var popSource = item.feature.attributes.Pop_Source;
-                var popYear = item.feature.attributes.Pop_Year;
 
+                var population = item.feature.attributes.Populatn == "Null" ? null : item.feature.attributes.Populatn;
+                var popSource = item.feature.attributes.Pop_Source == "Null" ? null : item.feature.attributes.Pop_Source;
+                var popYear = item.feature.attributes.Pop_Year == "Null" ? null : item.feature.attributes.Pop_Year;
+
+                // //var population = "Null" ? null : item.feature.attributes.Populatn;
+
+                // var popSource = item.feature.attributes.Pop_Source;
+                // var popYear = item.feature.attributes.Pop_Year;
+                // if (population == "Null") {
+                //     population = null;
+                // }
+                // if (popSource == "Null") {
+                //     popSource = null;
+                // }
+                // if (popYear == "Null") {
+                //     popYear = null;
+                // }
+                //debugger;
                 if (!population || population == 0) {
                     popStr = 'Unknown';
                 } else if (population && !popSource) {
@@ -495,6 +503,7 @@ define([
                 // if (item.feature.attributes.More_info.startsWith("<")) {
                 //     item.feature.attributes.More_info = ''; //TODO: Get them to fix their data
                 // }
+
 
                 for (var attr in item.feature.attributes) {
                     if (item.feature.attributes[attr] == "Null") {
@@ -522,7 +531,7 @@ define([
                     "<div class='even-row'><div class='popup-header'>Data Contributor</div>" + item.feature.attributes.Data_Ctrb + '</div>' +
                     "<div class='popup-last'>Date uploaded: " + item.feature.attributes.Upl_Date);
 
-                if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '') {
+                if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '' || item.feature.attributes.More_info == 'Unknown') {
                     template.content += '</div>';
                 } else {
                     template.content += '<div><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></div></div>';
@@ -551,7 +560,7 @@ define([
                 } else if (item.layerId === 14) {
                     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/14/images/ee3198dd6bc5cc50c8ffa8074329856e'>" + template.title;
                 }
-                console.log(item.layerId);
+
                 item.feature.setInfoTemplate(template);
                 features.push(item.feature);
             });
@@ -566,7 +575,7 @@ define([
                 self = this;
 
             arrayUtils.forEach(featureObjects, function(item) {
-                console.log(item.layerId);
+
 
                 if (item.layerId === 2 || item.layerId === 3 || item.layerId === 4) {
 
@@ -649,7 +658,7 @@ define([
                 // } else if (item.layerId === 3) {
                 //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalLandIcon.png'> " + template.title;
                 // }
-                console.log(item.layerId);
+
                 //item.feature.setInfoTemplate(template);
 
                 features.push(item.feature);
@@ -1041,7 +1050,6 @@ define([
                 $("#completeness-slider").hide();
             }
             topic.publish('refresh-legend');
-            console.log(complete.visibleLayers);
             if (complete.visibleLayers.indexOf(17) > -1) {
                 complete.show();
             }
@@ -1122,26 +1130,6 @@ define([
 
         exportAnalysisResult: function(text) {
             brApp.debug('MapController >>> exportAnalysisResult');
-
-            //var text = _self._getSettingsCSV();
-
-
-            // arrayUtils.forEach(MapConfig.checkboxItems, function(item) {
-            //     cb = registry.byId(item.node);
-            //     if (cb && cb.get('checked')) {
-            //         lbl = dojoQuery("label[for='" + item.node + "']")[0];
-            //         //console.log(" :: chb '" + item.node + "': checked? " + cb.get('checked'));
-            //         //console.log(" :::: LABEL:", lbl);
-            //         if (item.name == "landcover-checkbox") {
-            //             if (landCoverSelection != "") landCoverSelection += "; ";
-            //             landCoverSelection += lbl.innerHTML;
-            //         } else if (item.name == "soil-type-checkbox") {
-            //             if (soilTypeSelection != "") soilTypeSelection += "; ";
-            //             soilTypeSelection += lbl.innerHTML;
-            //         }
-            //     }
-            // });
-
 
             var blob = new Blob([text], {
                 type: "text/csv;charset=utf-8;"

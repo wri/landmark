@@ -97,7 +97,7 @@ define([
               <h2 className='institutions-Accordion-Title'>{institutionsConfig.accordionSectionTitles[this.state.activePanel]}</h2>
               
               <p>{institutionsConfig.dataProviders1a}<i>{institutionsConfig.overviewText1a}</i>{institutionsConfig.dataProviders1v}</p>
-              <p><i><u>{institutionsConfig.dataProviders2a}</u></i></p>
+              <p><i><u className="levelTitle">{institutionsConfig.dataProviders2a}</u></i></p>
 
 
               <table id='institutions-providers'>

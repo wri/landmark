@@ -347,7 +347,7 @@ define([], function() {
         dataProviders16g: ' Publicly available',
         dataProviders16h: 'catalog.data.gov/dataset/tiger-line-shapefile-2013-nation-u-s-current-american-indian-alaska-native-native-',
 
-        dataProviders17: '<i><u>National level data</u></i>',
+        dataProviders17: '<i><u class="levelTitle">National level data</u></i>',
 
         dataProviders18: 'National level data are based on expert knowledge, spatial data analysis, and literature reviews. Lists of primary sources and methods are available in the <a href="./data.html">Data page</a> or in the attributes by clicking on the geographic features in the interactive map. The main data providers for these layers are:',
 

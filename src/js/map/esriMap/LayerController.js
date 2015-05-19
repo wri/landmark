@@ -59,18 +59,19 @@ define([
                     $("#legendMenuButton").addClass("mobileLegendUpdate");
                     $("#toolsMenuButton").hide();
 
-                    //$("#geocoder-container").css("right", "80px");
                 } else {
 
                     $("#legendMenuButton").removeClass("mobileLegendUpdate");
                     $("#toolsMenuButton").show();
+
+                    //if its already showing, dont show it
                     $("#data-completeness-container").show();
                     $("#analysis-button").show();
 
-                    //$("#geocoder-container").css("right", "450px");
                 }
 
                 console.log(dynamicLayer);
+                console.log(visibleLayers);
                 dynamicLayer.setVisibleLayers(visibleLayers);
                 topic.publish('refresh-legend');
 

@@ -101,6 +101,7 @@ define(['main/config'], function(homeConfig) {
             $("#launch-dialog-content-french").hide();
             $("#launch-dialog-content").hide();
             $("#launch-dialog-content-portuguese").hide();
+            $("#launch-dialog-content-indonesia").hide();
             $("#launch-dialog-content-spanish").show();
         },
         displayFrench: function() {
@@ -109,6 +110,7 @@ define(['main/config'], function(homeConfig) {
             $("#launch-dialog-content").hide();
             $("#launch-dialog-content-spanish").hide();
             $("#launch-dialog-content-portuguese").hide();
+            $("#launch-dialog-content-indonesia").hide();
             $("#launch-dialog-content-french").show();
         },
         displayPortugal: function() {
@@ -117,12 +119,19 @@ define(['main/config'], function(homeConfig) {
             $("#launch-dialog-content-french").hide();
             $("#launch-dialog-content").hide();
             $("#launch-dialog-content-spanish").hide();
+            $("#launch-dialog-content-indonesia").hide();
             $("#launch-dialog-content-portuguese").show();
 
         },
         displayIndonesia: function() {
             brApp.debug('AppController >>> displayIndonesia');
-            console.log("needs languages");
+
+            $("#launch-dialog-content").hide();
+            $("#launch-dialog-content-french").hide();
+            $("#launch-dialog-content-spanish").hide();
+            $("#launch-dialog-content-portuguese").hide();
+            $("#launch-dialog-content-indonesia").show();
+
         },
         displayEnglish: function() {
             brApp.debug('AppController >>> displayEnglish');
@@ -130,7 +139,7 @@ define(['main/config'], function(homeConfig) {
             $("#launch-dialog-content-french").hide();
             $("#launch-dialog-content-spanish").hide();
             $("#launch-dialog-content-portuguese").hide();
-
+            $("#launch-dialog-content-indonesia").hide();
             $("#launch-dialog-content").show();
         }
 
