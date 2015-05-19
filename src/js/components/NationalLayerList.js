@@ -125,6 +125,7 @@ define([
         
     	// The true signifies that this is the national layer being updated
     	// This needs 
+        
     	LayerController.updateVisibleLayers(visibleLayers, true);
 
     },

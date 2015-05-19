@@ -25,7 +25,7 @@ if( !isset($_POST['haricolor']) ) {
         $message .= "Email: ".$from_email."\r\n\r\n";
         $message .= "Message: ".$comment;
 
-        $headers = "From: ".$from_email. "\r\n" ."Reply-To: lc07@uw.edu" . "\r\n";
+        $headers = "From: ".$from_email. "\r\n" ."Reply-To: admin@landmarkmap.org" . "\r\n";
 
         
         echo($try);

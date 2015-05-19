@@ -84,6 +84,7 @@ define([
          */
         setNationalLevelRenderer: function(visibleLayers) {
 
+
             var layerDrawingOptionsArray = [],
                 layerDrawingOption,
                 nationalIndicator,
@@ -104,6 +105,7 @@ define([
             nationalLayer = brApp.map.getLayer('nationalLevel');
             nationalLayer.setLayerDrawingOptions(layerDrawingOptionsArray);
             topic.publish('refresh-legend');
+            brApp.map.setExtent(brApp.map.extent);
         },
 
         setVisibleLayers: function(id, layers) {
