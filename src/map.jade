@@ -41,7 +41,9 @@ html
 				div(id='analysis-content')
 					p Draw an area on the map or upload a shapefile to display a list of indigenous and community lands in your area of interest. Then click on your area to view the results.
 					div.analysis-buttons
-						button#draw-shape &#9998; Draw Shape
+						button#draw-shape
+							span#draw-shape-icon &#9998; 
+							span#draw-shape-words Draw Shape
 						button#upload-shapefile Upload File
 						button(id='remove-graphics',class='hidden') Remove All
 

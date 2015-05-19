@@ -96,6 +96,12 @@ define([
             // Layers Tab
             var treeContent = document.getElementById('tree-content');
             domConstruct.place(treeContent, layersTabContainer, 'last');
+
+            //$('#tree-content').addClass("mobile-active");
+            if ($('#tree-content').css("height") === "0px") {
+                $('#tree-content').css("height", "auto");
+            }
+
             // Legend Tab
             var legend = document.getElementById('legend');
             domConstruct.place(legend, legendTabContainer, 'last');
@@ -115,6 +121,8 @@ define([
             // Layers Tab
             var treeContent = document.getElementById('tree-content');
             domConstruct.place(treeContent, treeContainer, 'last');
+
+            //$('#tree-content').removeClass("mobile-active");
             // Legend Content
             var legend = document.getElementById('legend');
             domConstruct.place(legend, legendContainer, 'last');

@@ -204,11 +204,19 @@ define([
             brApp.debug('WidgetsController >>> toggleMobileMenu');
             var mapNode = document.getElementById('brMap'),
                 accordion = registry.byId('layer-accordion'),
+
                 menuNodeId = 'mobileMenu',
                 menuButton = 'mobile-menu-toggle',
                 isClosing = domClass.contains(menuNodeId, 'open'),
                 left = isClosing ? 0 : 290;
+
+            if ($('#tree-content').css("height") === "0px") {
+                $('#tree-content').css("height", "auto");
+            }
+
+
             $("#community-level-toggle_button").hide();
+
 
             if (!isClosing) {
                 $("#mobile-menu-toggle").css("display", "none");
@@ -232,10 +240,12 @@ define([
                     if (isClosing) {
                         domClass.toggle(menuNodeId, 'open');
                     }
-                    if (accordion) {
-                        accordion.resize();
-                    }
+
                     $("#community-level-toggle_button").show();
+                    setTimeout(function() {
+                        accordion.resize();
+                    }, 0);
+
                 }
             }).play();
 

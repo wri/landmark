@@ -538,11 +538,11 @@ define([
                 }
 
                 if (item.layerId === 1) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/1/images/d850fab842274d6ab94e9efa4c7a73cc'>" + template.title;
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/1/images/cb367806430a4eff5023972e9dc7ed51'>" + template.title;
                 } else if (item.layerId === 2) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/2/images/e3d181178fcc6a28990bd4a3015232de'>" + template.title;
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/2/images/6cd8315cd0efb924913ce4d7ce657e68'>" + template.title;
                 } else if (item.layerId === 3) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/3/images/26d0e3d2d2ab679bdaf93ea589f1560a'>" + template.title;
+                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/3/images/bb41d12d06bcb77d2fb2ef6c2105135e'>" + template.title;
                 } else if (item.layerId === 4) {
                     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/4/images/0121e9c1b348c6d36126cefe0710db83'>" + template.title;
                 } else if (item.layerId === 6) {

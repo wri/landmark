@@ -6,9 +6,9 @@ if( !isset($_POST['haricolor']) ) {
         $name = $_POST['name'];
         $subject = $_POST['subject'];
         $comment = $_POST['userMessage'];
-        $to_email = "lcotner@blueraster.com";
+        $to_email = "admin@landmarkmap.org";
 
-        echo ($comment);
+        
 
         // create email headers
 
@@ -28,7 +28,7 @@ if( !isset($_POST['haricolor']) ) {
         $headers = "From: ".$from_email. "\r\n" ."Reply-To: admin@landmarkmap.org" . "\r\n";
 
         
-        echo($try);
+        
         #@mail($geoodk_email, $email_subject, $email_message, $headers); 
         #$t= @mail($to_email , $subject , $message, $headers);
 
