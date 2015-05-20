@@ -144,6 +144,7 @@ define([
             brApp.debug('WidgetsController >>> toggleTreeContainer');
             var labelNode = document.getElementById('tree-container-toggle'),
                 container = document.getElementById('tree-widget-container'),
+                layerAccordion = registry.byId('layer-accordion'),
                 topBar = document.getElementById('tree-title'),
                 node = document.getElementById('tree-content'),
                 active = domClass.contains(node, 'active'),
@@ -160,7 +161,7 @@ define([
 
             // Set the height
             height = active ? 0 : (container.offsetHeight - 34);
-            width = active ? 225 : 360;
+            width = active ? 285 : 360;
 
             Fx.animateProperty({
                 node: node,
@@ -170,9 +171,10 @@ define([
                 },
                 duration: DURATION,
                 onEnd: function() {
-                    if (height !== 0) {
-                        // Update the size of the legend as it grows so no scrollbars
-                        // node.style.height = 'auto';
+                    if (!active) {
+                        if (layerAccordion) {
+                            layerAccordion.resize();
+                        }
                     } else {
                         domClass.toggle(node, 'active');
                     }
@@ -184,15 +186,7 @@ define([
                 properties: {
                     width: width
                 },
-                duration: DURATION //,
-                // onEnd: function() {
-                //     if (height !== 0) {
-                //         // Update the size of the legend as it grows so no scrollbars
-                //         // node.style.height = 'auto';
-                //     } else {
-                //         domClass.toggle(node, 'active');
-                //     }
-                // }
+                duration: DURATION
             }).play();
 
         },
