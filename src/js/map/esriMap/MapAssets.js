@@ -3,6 +3,7 @@ define([
     'esri/symbols/SimpleFillSymbol',
     'esri/symbols/SimpleLineSymbol',
     'esri/renderers/UniqueValueRenderer'
+
 ], function(Color, SimpleFillSymbol, SimpleLineSymbol, UniqueValueRenderer) {
     'use strict';
 
@@ -27,62 +28,110 @@ define([
          *	@param {string} fieldName - Field Name to be used in the Unique Value Renderer
          * @return {UniqueValueRenderer - object} The Created Unique Value Renderer Ready to Use on a Dynamic Layer
          */
-        getUniqueValueRendererForNationalDataWithField: function(fieldName) {
+        getUniqueValueRendererForNationalDataWithField: function(fieldName, layer) {
 
             var noReviewSymbol, lawSilentSymbol, legalAddressesSymbol,
                 legalMeetsSymbol, legalFullyMeetsSymbol, notApplicableSymbol,
                 renderer;
 
-            // Set up all the symbols
-            noReviewSymbol = new SimpleFillSymbol().setColor(new Color([30, 30, 30, 0.90]));
-            lawSilentSymbol = new SimpleFillSymbol().setColor(new Color([215, 25, 28, 0.90]));
-            legalAddressesSymbol = new SimpleFillSymbol().setColor(new Color([253, 174, 97, 0.90]));
-            legalMeetsSymbol = new SimpleFillSymbol().setColor(new Color([166, 217, 106, 0.90]));
-            legalFullyMeetsSymbol = new SimpleFillSymbol().setColor(new Color([26, 150, 65, 0.90]));
-            notApplicableSymbol = new SimpleFillSymbol().setColor(new Color([248, 248, 255, 0.90]));
+            // // Set up all the symbols
+            // noReviewSymbol = new SimpleFillSymbol().setColor(new Color([30, 30, 30, 0.90]));
+            // lawSilentSymbol = new SimpleFillSymbol().setColor(new Color([215, 25, 28, 0.90]));
+            // legalAddressesSymbol = new SimpleFillSymbol().setColor(new Color([253, 174, 97, 0.90]));
+            // legalMeetsSymbol = new SimpleFillSymbol().setColor(new Color([166, 217, 106, 0.90]));
+            // legalFullyMeetsSymbol = new SimpleFillSymbol().setColor(new Color([26, 150, 65, 0.90]));
+            // notApplicableSymbol = new SimpleFillSymbol().setColor(new Color([248, 248, 255, 0.90]));
 
-            // Create the renderer with a default value
+            // // Create the renderer with a default value
+            // renderer = new UniqueValueRenderer(notApplicableSymbol, fieldName);
+
+
+
+            notApplicableSymbol = brApp.landTenureRenderer.uniqueValueInfos[5].symbol;
             renderer = new UniqueValueRenderer(notApplicableSymbol, fieldName);
+
+
+
+            renderer.addValue({
+                value: brApp.landTenureRenderer.uniqueValueInfos[0].value,
+                symbol: brApp.landTenureRenderer.uniqueValueInfos[0].symbol,
+                label: brApp.landTenureRenderer.uniqueValueInfos[0].label
+            });
+
+            renderer.addValue({
+                value: brApp.landTenureRenderer.uniqueValueInfos[1].value,
+                symbol: brApp.landTenureRenderer.uniqueValueInfos[1].symbol,
+                label: brApp.landTenureRenderer.uniqueValueInfos[1].label
+            });
+
+            renderer.addValue({
+                value: brApp.landTenureRenderer.uniqueValueInfos[2].value,
+                symbol: brApp.landTenureRenderer.uniqueValueInfos[2].symbol,
+                label: brApp.landTenureRenderer.uniqueValueInfos[2].label
+            });
+
+            renderer.addValue({
+                value: brApp.landTenureRenderer.uniqueValueInfos[3].value,
+                symbol: brApp.landTenureRenderer.uniqueValueInfos[3].symbol,
+                label: brApp.landTenureRenderer.uniqueValueInfos[3].label
+            });
+
+            renderer.addValue({
+                value: brApp.landTenureRenderer.uniqueValueInfos[4].value,
+                symbol: brApp.landTenureRenderer.uniqueValueInfos[4].symbol,
+                label: brApp.landTenureRenderer.uniqueValueInfos[4].label
+            });
+
+            renderer.addValue({
+                value: brApp.landTenureRenderer.uniqueValueInfos[5].value,
+                symbol: brApp.landTenureRenderer.uniqueValueInfos[5].symbol,
+                label: brApp.landTenureRenderer.uniqueValueInfos[5].label
+            });
+
+            renderer.attributeField = fieldName;
 
             // Add Values to the Unique Value Renderer attached with label for the legend and the correct symbol
             // value is relative to the field Name
-            renderer.addValue({
-                value: 0,
-                symbol: noReviewSymbol,
-                label: "No review yet done"
-            });
+            // renderer.addValue({
+            //     value: 0,
+            //     symbol: noReviewSymbol,
+            //     label: "No review yet done"
+            // });
 
-            renderer.addValue({
-                value: 1,
-                symbol: lawSilentSymbol,
-                label: "The law is either silent on an issue or there is express exclusion"
-            });
+            // renderer.addValue({
+            //     value: 1,
+            //     symbol: lawSilentSymbol,
+            //     label: "The law is either silent on an issue or there is express exclusion"
+            // });
 
-            renderer.addValue({
-                value: 2,
-                symbol: legalAddressesSymbol,
-                label: "The legal framework addresses the indicator but not substantively"
-            });
+            // renderer.addValue({
+            //     value: 2,
+            //     symbol: legalAddressesSymbol,
+            //     label: "The legal framework addresses the indicator but not substantively"
+            // });
 
-            renderer.addValue({
-                value: 3,
-                symbol: legalMeetsSymbol,
-                label: "The legal framework substantially meets the indicator"
-            });
+            // renderer.addValue({
+            //     value: 3,
+            //     symbol: legalMeetsSymbol,
+            //     label: "The legal framework substantially meets the indicator"
+            // });
 
-            renderer.addValue({
-                value: 4,
-                symbol: legalFullyMeetsSymbol,
-                label: "The legal framework fully meets the indicator"
-            });
+            // renderer.addValue({
+            //     value: 4,
+            //     symbol: legalFullyMeetsSymbol,
+            //     label: "The legal framework fully meets the indicator"
+            // });
 
-            renderer.addValue({
-                value: 9,
-                symbol: notApplicableSymbol,
-                label: "The indicator is not applicable"
-            });
+            // renderer.addValue({
+            //     value: 9,
+            //     symbol: notApplicableSymbol,
+            //     label: "The indicator is not applicable"
+            // });
 
             return renderer;
+
+            //return response.drawingInfo.renderer;
+
 
         },
 

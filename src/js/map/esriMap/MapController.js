@@ -27,6 +27,7 @@ define([
     'esri/dijit/HomeButton',
     'esri/dijit/LocateButton',
     'esri/dijit/BasemapGallery',
+    "esri/request",
     "esri/geometry/Polygon",
     "esri/tasks/IdentifyTask",
     "esri/tasks/IdentifyParameters",
@@ -37,7 +38,7 @@ define([
     "dijit/form/HorizontalRuleLabels",
     "esri/layers/LayerDrawingOptions"
 
-], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, CommunityTree, NationalLayerList, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
+], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, CommunityTree, NationalLayerList, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, esriRequest, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
 
     'use strict';
 
@@ -204,7 +205,7 @@ define([
             //self.queryEmptyLayers();
 
 
-
+            self.getLandTenureRenderer();
 
             // Initialize the draw tools
             DrawTool.init();
@@ -1025,6 +1026,25 @@ define([
                 }
             });
 
+        },
+        getLandTenureRenderer: function() {
+            brApp.debug('MapController >>> getLandTenureRenderer');
+            var requestHandle = esriRequest({
+                "url": "http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer/0", //change to layer url
+                "content": {
+                    "f": "json"
+                },
+                "callbackParamName": "callback"
+            });
+            requestHandle.then(function(response) {
+                var noReviewSymbol, lawSilentSymbol, legalAddressesSymbol,
+                    legalMeetsSymbol, legalFullyMeetsSymbol, notApplicableSymbol,
+                    renderer;
+
+
+                brApp.landTenureRenderer = response.drawingInfo.renderer;
+
+            });
         },
 
 

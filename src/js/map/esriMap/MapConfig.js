@@ -6,6 +6,8 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
     var nationalLevelUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer'; //new
     //var nationalLevelUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer';
 
+
+
     var indigenousLandsInfo = "Placeholder so this layer's info icon appears in the tree";
     var landTenureSecurityInfo = "Placeholder so this layer's info icon appears in the tree";
 
@@ -600,7 +602,6 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'communityNoLandClaim': [14]
 
         }
-
 
         // layerMappingCommunityLans: { //Add these arrays to layerMapping above
         //     'communityLands': [6, 7, 8, 9],

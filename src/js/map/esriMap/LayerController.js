@@ -20,6 +20,7 @@ define([
             var visibleLayers = [],
                 dynamicLayer, dynamicLayer2;
 
+
             if (layer) {
                 visibleLayers = keys;
                 dynamicLayer = brApp.map.getLayer('nationalLevel');
@@ -96,14 +97,17 @@ define([
             nationalIndicator = MapAssets.getNationalLevelIndicatorCode();
             fieldName = ["I", nationalIndicator, "_Scr"].join('');
             layerDrawingOption = new LayerDrawingOptions();
-            renderer = MapAssets.getUniqueValueRendererForNationalDataWithField(fieldName);
+
+            nationalLayer = brApp.map.getLayer('nationalLevel');
+            renderer = MapAssets.getUniqueValueRendererForNationalDataWithField(fieldName, nationalLayer);
             layerDrawingOption.renderer = renderer;
 
             arrayUtils.forEach(visibleLayers, function(layer) {
                 layerDrawingOptionsArray[layer] = layerDrawingOption;
             });
 
-            nationalLayer = brApp.map.getLayer('nationalLevel');
+
+
             nationalLayer.setLayerDrawingOptions(layerDrawingOptionsArray);
             topic.publish('refresh-legend');
             brApp.map.setExtent(brApp.map.extent);
