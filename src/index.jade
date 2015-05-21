@@ -10,8 +10,8 @@ html
         style.
             html,body,.root,.app{height:100%;width:100%;padding:0;margin:0;overflow:hidden;}
         link(rel='stylesheet', href='libs/foundation.min.css')
-        link(rel='stylesheet', href='css/base.css')
-        link(rel='stylesheet', href='css/home.css')
+        link(rel='stylesheet', href='css/base.css?#{appVersion}')
+        link(rel='stylesheet', href='css/home.css?#{appVersion}')
         link(rel='stylesheet', type='text/css', href='//cloud.github.com/downloads/lafeber/world-flags-sprite/flags16.css')
         link(rel='stylesheet', type='text/css', href='//cdn.jsdelivr.net/jquery.slick/1.4.1/slick.css')
 
@@ -231,7 +231,7 @@ html
 
             };
 
-        script(data-main='js/home/homeLoader', src='libs/require.js')
+        script(data-main='js/home/homeLoader?#{appVersion}', src='libs/require.js')
 
         script.
             $(document).foundation();

@@ -43,7 +43,10 @@ gulp.task('jade-dev', function() {
             base: config.jade.base
         })
         .pipe(jade({
-            pretty: true
+            pretty: true,
+            locals: {
+                appVersion: config.appVersion
+            }
         }))
         .pipe(gulp.dest(config.jade.devOut));
 });
@@ -52,7 +55,11 @@ gulp.task('jade-build', function() {
     return gulp.src(config.jade.src, {
             base: config.jade.base
         })
-        .pipe(jade())
+        .pipe(jade({
+            locals: {
+                appVersion: config.appVersion
+            }
+        }))
         .pipe(gulp.dest(config.jade.buildOut));
 });
 
