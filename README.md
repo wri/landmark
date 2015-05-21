@@ -45,8 +45,13 @@ There is a cache busting mechanism in place for when we deploy updates of the ap
 		<th>.css filename (using stylus)</th>
 	</tr>
 	<tr>
-		<td> Map/Home Page </td>
+		<td> Home Page </td>
 		<td> src/index.jade </td>
+		<td> src/css/home.styl </td>
+	</tr>
+	<tr>
+		<td> Map Page </td>
+		<td> src/map.jade </td>
 		<td> src/css/map.styl </td>
 	</tr>
 	<tr>
