@@ -2,7 +2,7 @@
     'use strict';
 
     var base = location.pathname.replace(/\/[^/]+$/, ''),
-        appVersion = '1.0',
+        appVersion = '1.0.1',
         esriVersion = '3.13',
         js = [
             '//js.arcgis.com/' + esriVersion + '/init.js'

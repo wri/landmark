@@ -178,7 +178,7 @@ define([
 
                 React.createElement("div", {className: "radio-button-container"}, 
                     React.createElement("label", null, 
-                        React.createElement("input", {name: "national-layer-selection", type: "radio", value: PercentIndigenous, onChange: this.handleRadioChange}), 
+                        React.createElement("input", {name: "national-layer-selection", name: "national-layer-selection", type: "radio", value: PercentIndigenous, onChange: this.handleRadioChange}), 
                         React.createElement("span", {className: "national-layer-selection-label"}, "Percent of Indigenous and Community Lands")
                     )
                 ), 
@@ -190,7 +190,7 @@ define([
 
     			React.createElement("div", {className: "radio-button-container"}, 
     				React.createElement("label", null, 
-    					React.createElement("input", {name: "national-layer-selection", type: "radio", value: LandTenure, onChange: this.handleRadioChange}), 
+    					React.createElement("input", {name: "national-layer-selection", name: "national-layer-selection", type: "radio", value: LandTenure, onChange: this.handleRadioChange}), 
     					React.createElement("span", {className: "national-layer-selection-label"}, "Land Tenure Security Indicators, as stated by law")
                         
     				)

@@ -10,6 +10,7 @@ define([
 
     var LayerController = {
 
+
         /**
          * Update the visible layers on a dynamic layer based on keys from the Checkbox Tree
          * @param {array} keys - Array of keys from the checkbox tree, these are mapped to layer numbers
@@ -19,26 +20,28 @@ define([
             brApp.debug('LayerController >>> updateVisibleLayers');
             var visibleLayers = [],
                 dynamicLayer, dynamicLayer2, oppositeLayer, oppositeLayer2;
-
+            var self = this;
 
             if (layer) {
                 visibleLayers = keys;
                 dynamicLayer = brApp.map.getLayer('nationalLevel');
 
                 oppositeLayer = brApp.map.getLayer('indigenousLands');
+                oppositeLayer2 = brApp.map.getLayer('indigenousTransparency');
+                //debugger; //call this again w/ proper keys! (aka none) and no layer: oppo for below
+                // if (document.getElementById('data-complete-checkbox').getAttribute("data-checked") == "true" && keys.length > 0) {
+                //     dynamicLayer2.show();
+                // } else {
+                //     dynamicLayer2.hide();
+                // }
 
-                debugger; //call this again w/ proper keys! (aka none) and no layer: oppo for below
-                if (document.getElementById('data-complete-checkbox').getAttribute("data-checked") == "true" && keys.length > 0) {
-                    dynamicLayer2.show();
-                } else {
-                    dynamicLayer2.hide();
-                }
-
+                // document.getElementById('data-complete-checkbox').setAttribute("data-checked", "false")
 
                 $("#data-completeness-container").hide();
+                // self.updateVisibleLayers([], null);
 
                 oppositeLayer.setVisibleLayers([-1]);
-                //oppositeLayer2.hide();
+                oppositeLayer2.hide();
 
 
 
@@ -68,13 +71,17 @@ define([
                 oppositeLayer = brApp.map.getLayer('nationalLevel');
 
                 oppositeLayer.setVisibleLayers([-1]);
-                $("#nationalLevelNone").prop("checked", true);
+                //$("#nationalLevelNone").prop("checked", true);
 
-                $(".percent-indigenous-layer-list").hide();
-                $(".land-tenure-layer-list").hide();
 
 
                 if (keys.length === 0) {
+
+
+                    // $(".percent-indigenous-layer-list").hide();
+                    // $(".land-tenure-layer-list").hide();
+
+                    // debugger;
                     visibleLayers.push(-1);
                 } else {
                     arrayUtils.forEach(keys, function(key) {
