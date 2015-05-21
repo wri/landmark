@@ -19,12 +19,15 @@
 <p>Installing node and any dependencies via <code>npm</code> may require you to run the commands with <code>sudo</code>.</p>
 
 #### gulp watch
-Run <code>gulp watch</code> from your project directory.  You can also run <code>npm run dev</code> which has been configured via the package.json.
+Run <code>gulp watch</code> from your project directory.  You can also run <code>npm start</code> which has been configured via the package.json.
 <p>This will run a watch task to listen for any changes to any stylus files or jade files and compile them into css and  .</p>
 
 #### gulp build
 Run <code>npm run build</code> from your project directory.  If this fails on windows, may need to modify package.json script to properly remove the build directory before running the build task.  Optionally, if the build directory is not present, just run <code>gulp build</code>.
 <p>This will do everything necessary to generate a minified build for this project.  This will remove the current build directory and replace it with the new build output so make sure you have a backup if your worried about breaking something.  It will minify images, .styl files, JavaScript, and html and will also copy over any remaining dependencies that are needed and place them in the build directory.</p>
+
+#### Cache Bust Mechanism
+There is a cache busting mechanism in place for when we deploy updates of the application.  To use this, in the `gulp-config.js` file, increment the appVersion variable right near the top.  The Map page uses a bootloader to pull in the remaining modules and ArcGIS modules, you will also need to update the `src/js/map/dojoBootstrap.js` file, again by updating the appVersion variable near the top of the file. After updating these values, run `npm run build` or `gulp build`.
 
 ## Application Architecture
 <p>This is a multi-page application.  The homepage is pretty much the map page except it shows a dialog over the map so they are both index.jade. The remaining pages are in the src directory named after their route.</p>
@@ -42,8 +45,13 @@ Run <code>npm run build</code> from your project directory.  If this fails on wi
 		<th>.css filename (using stylus)</th>
 	</tr>
 	<tr>
-		<td> Map/Home Page </td>
+		<td> Home Page </td>
 		<td> src/index.jade </td>
+		<td> src/css/home.styl </td>
+	</tr>
+	<tr>
+		<td> Map Page </td>
+		<td> src/map.jade </td>
 		<td> src/css/map.styl </td>
 	</tr>
 	<tr>

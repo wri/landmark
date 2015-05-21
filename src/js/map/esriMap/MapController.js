@@ -562,6 +562,10 @@ define([
                     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/14/images/ee3198dd6bc5cc50c8ffa8074329856e'>" + template.title;
                 }
 
+                // Content needs to be wrapped in a single parent div, otherwise on touch ArcGIS JavaScript API
+                // will apply transform to first child and popup will not function and look like garbage, thanks esri/dojo
+                template.content = '<div>' + template.content + '</div>';
+
                 item.feature.setInfoTemplate(template);
                 features.push(item.feature);
             });
@@ -636,7 +640,10 @@ define([
                     // } else {
                     //     template.content += '<a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">Additional Info</a></div>';
                     // }
-
+                    
+                    // Content needs to be wrapped in a single parent div, otherwise on touch ArcGIS JavaScript API
+                    // will apply transform to first child and popup will not function and look like garbage, thanks esri/dojo
+                    template.content = '<div>' + template.content + '</div>';
 
                     item.feature.setInfoTemplate(template);
                 } else { //layers 0 and 1
@@ -710,16 +717,19 @@ define([
             reviewDate = feature.attributes["I" + nationalIndicatorCode + "_Year"];
             uploadDate = feature.attributes["Upl_Date"];
 
-
             var nationalLevelInfoTemplatePercent = new InfoTemplate("${Country}",
                 // "<div class='odd-row'><div class='popup-header'>" + brApp.currentLayer + "</div>" +
+                // Content needs to be wrapped in a single parent div, otherwise on touch ArcGIS JavaScript API
+                // will apply transform to first child and popup will not function and look like garbage, thanks esri/dojo
+                "<div>" + 
                 "<div class='odd-row'><div class='popup-header'>Groups targeted by the legal framework</div>" + framework + "</div>" +
                 "<div class='even-row'><div class='popup-header'>Indicator score</div>" + indScore + "</div>" +
                 "<div class='odd-row'><div class='popup-header'>Comments</div>" + comments + "</div>" +
                 "<div class='even-row'><div class='popup-header'>Laws and provisions reviewed</div>" + laws + "</div>" +
                 "<div class='odd-row'><div class='popup-header'>Review source and date</div>" + reviewSource + " (" + reviewDate + ")</div>" +
-                "<div class='popup-last'>Last Updated: " + uploadDate);
-
+                "<div class='popup-last'>Last Updated: " + uploadDate +
+                "</div>"
+            );
 
             return nationalLevelInfoTemplatePercent;
 

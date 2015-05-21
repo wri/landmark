@@ -10,8 +10,8 @@ html
 		style.
 			html,body,.root{height:100%;width:100%;padding:0;margin:0;overflow:hidden}	
 		link(rel='stylesheet', href='libs/foundation.min.css')
-		link(rel='stylesheet', href='css/base.css')
-		link(rel='stylesheet', href='css/map.css')
+		link(rel='stylesheet', href='css/base.css?#{appVersion}')
+		link(rel='stylesheet', href='css/map.css?#{appVersion}')
 		script(src='libs/FileSaver.js')
 		script(async='', type='text/javascript', src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53ab205a21ddceee&async=1')
 		script(type='text/javascript').
@@ -75,7 +75,7 @@ html
 
 		script(src='libs/jquery-2.1.3.min.js')
 		script(src='libs/foundation.min.js')
-		script(src='js/map/dojoBootstrap.js')
+		script(src='js/map/dojoBootstrap.js?#{appVersion}')
 		script.
 			$(document).foundation();
 			$("#map-page-link").addClass("exampleClass");

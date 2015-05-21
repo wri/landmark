@@ -97,7 +97,6 @@ define([
             var treeContent = document.getElementById('tree-content');
             domConstruct.place(treeContent, layersTabContainer, 'last');
 
-            //$('#tree-content').addClass("mobile-active");
             if ($('#tree-content').css("height") === "0px") {
                 $('#tree-content').css("height", "auto");
             }
@@ -109,6 +108,12 @@ define([
             var analyzeTools = document.getElementById('analysis-content');
             domConstruct.place(analyzeTools, toolsTabContainer, 'first');
 
+            // Resize the accordion since it needs to be resized every time css changes when its hidden
+            // just do it to be safe until we remove the accordion and build our own
+            var layerAccordion = registry.byId('layer-accordion');
+            if (layerAccordion) {
+                layerAccordion.resize();
+            }
         },
 
         /**
@@ -133,6 +138,13 @@ define([
             // Ensure our menu is close and reset the css to default
             domStyle.set('brMap', 'left', '0');
             domClass.remove('mobileMenu', 'open');
+
+            // Resize the accordion since it needs to be resized every time css changes when its hidden
+            // just do it to be safe until we remove the accordion and build our own
+            var layerAccordion = registry.byId('layer-accordion');
+            if (layerAccordion) {
+                layerAccordion.resize();
+            }
         }
 
     };

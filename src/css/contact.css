@@ -1,30 +1,30 @@
 
-/* line 286 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 286 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 
-/* line 1 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
+/* line 1 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
 
-/* line 40 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
+/* line 40 : /Users/Robert/Projects/github_work/Community-Rights/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
 
-/* line 1 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/config.styl */
+/* line 1 : /Users/Robert/Projects/github_work/Community-Rights/src/css/config.styl */
 
-/* line 3 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 3 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 html,
 body,
 .root {
   overflow: auto !important;
 }
 
-/* line 8 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 8 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 body {
   font-family: Arial;
 }
 
-/* line 11 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 11 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 .root {
   background-color: #fff;
 }
 
-/* line 14 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 14 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 .app-body {
   width: 1120px;
   max-width: 90%;
@@ -33,57 +33,57 @@ body {
 }
 @media (min-width: 1500px) {
 
-/* line 20 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 20 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
   .app-body {
     margin-left: 250px;
   }
 }
 
-/* line 23 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 23 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 .contact-bold {
   font-weight: bold;
   color: #055d7d;
 }
 
-/* line 27 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 27 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 #contactForm > div > ul > li > input {
   width: 800px;
 }
 
-/* line 30 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 30 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 
-/* line 31 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 31 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 #contactForm a {
   color: #2fa3d9;
 }
 
-/* line 33 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 33 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 #contactForm a:hover {
   text-decoration: underline;
 }
 
-/* line 36 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 36 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 #contactForm ul {
   padding-left: 1em;
 }
 
-/* line 38 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 38 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 #contactForm ul li {
   margin: 1.2em 0;
 }
 
-/* line 41 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 41 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 #contactForm label {
   margin-top: 1.2em;
 }
 
-/* line 45 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 45 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 #contactForm input[type="text"],
 #contactForm textarea {
   max-width: 100%;
 }
 
-/* line 49 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 49 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 #contactForm input[type="text"]:focus,
 #contactForm textarea:focus {
   box-shadow: 0 0 5px rgba(47,163,217,0.4);
@@ -91,62 +91,62 @@ body {
   background: #fff;
 }
 
-/* line 54 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 54 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 #contactForm button {
   background: #055d7d;
 }
 
-/* line 57 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 57 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 #contactForm button:hover {
   background: #0a89b8;
 }
 
-/* line 60 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 60 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 #contactTitle {
   text-align: center;
   margin-bottom: 2.2em;
 }
 
-/* line 63 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 63 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 #contactTitle h1 {
   margin: 0;
 }
 
-/* line 66 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 66 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 #Message {
   height: 100px;
   resize: none;
   width: 800px;
 }
 
-/* line 72 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 72 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 @media (max-width: 1050px) {
 
-/* line 73 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 73 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
   .top-bar .name h1 a {
     font-size: 16px;
   }
 
-/* line 75 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 75 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
   .wri-header-attribution {
     display: none;
   }
 }
 
-/* line 78 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 78 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 @media (max-width: 1000px) {
 
-/* line 79 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 79 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
   #contactForm > div > ul > li > input,
   #Message {
     width: 500px;
   }
 }
 
-/* line 82 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 82 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
 @media (max-width: 800px) {
 
-/* line 83 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/contact.styl */
+/* line 83 : /Users/Robert/Projects/github_work/Community-Rights/src/css/contact.styl */
   #contactForm > div > ul > li > input,
   #Message {
     width: 300px;
