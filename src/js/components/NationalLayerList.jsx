@@ -178,7 +178,7 @@ define([
 
                 <div className='radio-button-container'>
                     <label>
-                        <input name='national-layer-selection' name='national-layer-selection' type='radio' value={PercentIndigenous} onChange={this.handleRadioChange} />
+                        <input name='national-layer-selection' type='radio' value={PercentIndigenous} onChange={this.handleRadioChange} />
                         <span className='national-layer-selection-label'>Percent of Indigenous and Community Lands</span>
                     </label>
                 </div>
@@ -190,7 +190,7 @@ define([
 
     			<div className='radio-button-container'>
     				<label>
-    					<input name='national-layer-selection' name='national-layer-selection' type='radio' value={LandTenure} onChange={this.handleRadioChange} />
+    					<input name='national-layer-selection' type='radio' value={LandTenure} onChange={this.handleRadioChange} />
     					<span className='national-layer-selection-label'>Land Tenure Security Indicators, as stated by law</span>
                         
     				</label>
