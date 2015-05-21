@@ -30,7 +30,7 @@ define([
         return (
           React.createElement("div", {className: "about-Accordion"}, 
             React.createElement("div", {style: {'display': (this.state.activePanel === '0' ? 'block' : 'none')}}, 
-              React.createElement("h2", {className: "about-Accordion-Title"}, aboutConfig.accordionSectionTitles1, React.createElement("i", null, aboutConfig.purposeText2b), aboutConfig.accordionSectionTitles1b), 
+              React.createElement("h2", {className: "about-Accordion-Title"}, aboutConfig.accordionSectionTitles[this.state.activePanel]), 
               React.createElement("p", null, React.createElement("i", null, aboutConfig.purposeText1), aboutConfig.purposeText2, React.createElement("i", null, aboutConfig.purposeText2b), aboutConfig.purposeText2c), 
               React.createElement("ul", null, 
                 React.createElement("li", null, aboutConfig.purposeText3), 
@@ -50,7 +50,7 @@ define([
 
             ), 
             React.createElement("div", {style: {'display': (this.state.activePanel === '1' ? 'block' : 'none')}}, 
-              React.createElement("h2", {className: "about-Accordion-Title"}, aboutConfig.accordionSectionTitles2, React.createElement("i", null, aboutConfig.purposeText2b), aboutConfig.accordionSectionTitles2b), 
+               React.createElement("h2", {className: "about-Accordion-Title"}, aboutConfig.accordionSectionTitles[this.state.activePanel]), 
               React.createElement("p", null, React.createElement("i", null, aboutConfig.purposeText2b), aboutConfig.aboutText1), 
               React.createElement("p", null, aboutConfig.aboutText2, React.createElement("i", null, aboutConfig.purposeText2b), aboutConfig.aboutText2b), 
               React.createElement("ul", null, 
@@ -63,14 +63,14 @@ define([
               
             ), 
             React.createElement("div", {style: {'display': (this.state.activePanel === '2' ? 'block' : 'none')}}, 
-              React.createElement("h2", {className: "about-Accordion-Title"}, aboutConfig.accordionSectionTitles3, React.createElement("i", null, aboutConfig.purposeText2b), aboutConfig.accordionSectionTitles3b), 
+               React.createElement("h2", {className: "about-Accordion-Title"}, aboutConfig.accordionSectionTitles[this.state.activePanel]), 
               React.createElement("p", null, React.createElement("i", null, aboutConfig.purposeText2b), aboutConfig.mapDevelopment1), 
               React.createElement("p", null, aboutConfig.mapDevelopment2), 
               React.createElement("p", null, aboutConfig.mapDevelopment3), 
               React.createElement("p", null, aboutConfig.mapDevelopment4, React.createElement("i", null, aboutConfig.purposeText2b), aboutConfig.mapDevelopment4b)
             ), 
             React.createElement("div", {style: {'display': (this.state.activePanel === '3' ? 'block' : 'none')}}, 
-              React.createElement("h2", {className: "about-Accordion-Title"}, aboutConfig.accordionSectionTitles4, React.createElement("i", null, aboutConfig.purposeText2b), aboutConfig.accordionSectionTitles4b), 
+               React.createElement("h2", {className: "about-Accordion-Title"}, aboutConfig.accordionSectionTitles[this.state.activePanel]), 
               React.createElement("p", null, aboutConfig.landmarkDevelopment1), 
               React.createElement("p", null, aboutConfig.landmarkDevelopment2, React.createElement("i", null, aboutConfig.landmarkDevelopment2b), aboutConfig.landmarkDevelopment2c), 
               React.createElement("p", null, aboutConfig.landmarkDevelopment3), 

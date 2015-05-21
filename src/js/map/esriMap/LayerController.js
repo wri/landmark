@@ -18,12 +18,38 @@ define([
         updateVisibleLayers: function(keys, layer) {
             brApp.debug('LayerController >>> updateVisibleLayers');
             var visibleLayers = [],
-                dynamicLayer, dynamicLayer2;
+                dynamicLayer, dynamicLayer2, oppositeLayer, oppositeLayer2;
 
 
             if (layer) {
                 visibleLayers = keys;
                 dynamicLayer = brApp.map.getLayer('nationalLevel');
+
+                oppositeLayer = brApp.map.getLayer('indigenousLands');
+
+                debugger; //call this again w/ proper keys! (aka none) and no layer: oppo for below
+                if (document.getElementById('data-complete-checkbox').getAttribute("data-checked") == "true" && keys.length > 0) {
+                    dynamicLayer2.show();
+                } else {
+                    dynamicLayer2.hide();
+                }
+
+
+                $("#data-completeness-container").hide();
+
+                oppositeLayer.setVisibleLayers([-1]);
+                //oppositeLayer2.hide();
+
+
+
+                var checkboxes = new Array();
+                checkboxes = document.getElementsByTagName('input');
+
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].type == 'checkbox') {
+                        checkboxes[i].checked = false;
+                    }
+                }
 
                 if (keys[0] === 0 || keys[0] === 1) {
                     this.setNationalLevelRenderer(visibleLayers);
@@ -38,6 +64,16 @@ define([
             } else {
                 dynamicLayer = brApp.map.getLayer('indigenousLands');
                 dynamicLayer2 = brApp.map.getLayer('indigenousTransparency');
+
+                oppositeLayer = brApp.map.getLayer('nationalLevel');
+
+                oppositeLayer.setVisibleLayers([-1]);
+                $("#nationalLevelNone").prop("checked", true);
+
+                $(".percent-indigenous-layer-list").hide();
+                $(".land-tenure-layer-list").hide();
+
+
                 if (keys.length === 0) {
                     visibleLayers.push(-1);
                 } else {

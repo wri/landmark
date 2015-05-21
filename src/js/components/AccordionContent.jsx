@@ -30,7 +30,7 @@ define([
         return (
           <div className='about-Accordion'>
             <div style={{'display': (this.state.activePanel === '0' ? 'block' : 'none')}}>
-              <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles1}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.accordionSectionTitles1b}</h2>
+              <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles[this.state.activePanel]}</h2>
               <p><i>{aboutConfig.purposeText1}</i>{aboutConfig.purposeText2}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.purposeText2c}</p>
               <ul>
                 <li>{aboutConfig.purposeText3}</li>
@@ -50,7 +50,7 @@ define([
 
             </div>
             <div style={{'display': (this.state.activePanel === '1' ? 'block' : 'none')}}>
-              <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles2}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.accordionSectionTitles2b}</h2>
+               <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles[this.state.activePanel]}</h2>
               <p><i>{aboutConfig.purposeText2b}</i>{aboutConfig.aboutText1}</p>
               <p>{aboutConfig.aboutText2}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.aboutText2b}</p>
               <ul>
@@ -63,14 +63,14 @@ define([
               
             </div>
             <div style={{'display': (this.state.activePanel === '2' ? 'block' : 'none')}}>
-              <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles3}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.accordionSectionTitles3b}</h2>
+               <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles[this.state.activePanel]}</h2>
               <p><i>{aboutConfig.purposeText2b}</i>{aboutConfig.mapDevelopment1}</p>
               <p>{aboutConfig.mapDevelopment2}</p>
               <p>{aboutConfig.mapDevelopment3}</p>
               <p>{aboutConfig.mapDevelopment4}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.mapDevelopment4b}</p>
             </div>
             <div style={{'display': (this.state.activePanel === '3' ? 'block' : 'none')}}>
-              <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles4}<i>{aboutConfig.purposeText2b}</i>{aboutConfig.accordionSectionTitles4b}</h2>
+               <h2 className='about-Accordion-Title'>{aboutConfig.accordionSectionTitles[this.state.activePanel]}</h2>
               <p>{aboutConfig.landmarkDevelopment1}</p>
               <p>{aboutConfig.landmarkDevelopment2}<i>{aboutConfig.landmarkDevelopment2b}</i>{aboutConfig.landmarkDevelopment2c}</p>
               <p>{aboutConfig.landmarkDevelopment3}</p>

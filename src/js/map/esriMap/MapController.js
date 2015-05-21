@@ -187,7 +187,7 @@ define([
 
             transparencySlider.startup();
 
-            transparencySlider.setValue(80);
+            transparencySlider.setValue(50);
 
             treeWidget = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
             nationalLayerList = new NationalLayerList('national-layer-lists');
@@ -507,7 +507,7 @@ define([
 
 
                 for (var attr in item.feature.attributes) {
-                    if (item.feature.attributes[attr] == "Null") {
+                    if (item.feature.attributes[attr] == "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
                         item.feature.attributes[attr] = "Unknown";
                     }
                 }
@@ -1155,7 +1155,7 @@ define([
                 type: "text/csv;charset=utf-8;"
             });
 
-            saveAs(blob, "settings.csv");
+            saveAs(blob, "LandMarkAnalysisResults.csv");
 
         },
 

@@ -125,7 +125,7 @@ define([
         
     	// The true signifies that this is the national layer being updated
     	// This needs 
-        
+
     	LayerController.updateVisibleLayers(visibleLayers, true);
 
     },
@@ -171,7 +171,7 @@ define([
 
     			React.createElement("div", {className: "radio-button-container"}, 
     				React.createElement("label", null, 
-    					React.createElement("input", {name: "national-layer-selection", type: "radio", defaultChecked: true, value: "none", onChange: this.handleRadioChange}), 
+    					React.createElement("input", {id: "nationalLevelNone", name: "national-layer-selection", type: "radio", defaultChecked: true, value: "none", onChange: this.handleRadioChange}), 
     					React.createElement("span", {className: "national-layer-selection-label"}, "None")
     				)
     			), 

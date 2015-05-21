@@ -125,7 +125,7 @@ define([
         
     	// The true signifies that this is the national layer being updated
     	// This needs 
-        
+
     	LayerController.updateVisibleLayers(visibleLayers, true);
 
     },
@@ -171,7 +171,7 @@ define([
 
     			<div className='radio-button-container'>
     				<label>
-    					<input name='national-layer-selection' type='radio' defaultChecked={true} value='none' onChange={this.handleRadioChange} />
+    					<input id='nationalLevelNone' name='national-layer-selection' type='radio' defaultChecked={true} value='none' onChange={this.handleRadioChange} />
     					<span className='national-layer-selection-label'>None</span>
     				</label>
     			</div>

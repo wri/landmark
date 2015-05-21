@@ -4,7 +4,7 @@ define('data/main/config', [], function() {
     var config = {
 
         accordionSectionTitles: [
-            'Data', 'Definitions', 'Data Quality', 'Data Completeness', 'National and Community Level Data'
+            'About the Data', 'Definitions', 'Data Quality', 'Data Completeness', 'National and Community Level Data'
         ],
 
 
