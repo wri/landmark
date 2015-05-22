@@ -5,7 +5,6 @@ define([
     'map/MapConfig',
     'map/MapAssets',
     'components/Tree',
-    'components/CommunityTree',
     'components/NationalLayerList',
     'map/WidgetsController',
     'utils/Helper',
@@ -38,9 +37,13 @@ define([
     "dijit/form/HorizontalRuleLabels",
     "esri/layers/LayerDrawingOptions"
 
-], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, CommunityTree, NationalLayerList, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, esriRequest, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
+], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, NationalLayerList, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, esriRequest, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
 
     'use strict';
+
+    // Some Widgets That will need to be accessed outside the renderComponents method
+    var nationalLayerList,
+        communityTree;
 
     var MapController = {
 
@@ -115,8 +118,6 @@ define([
             var basemapGallery,
                 self = this,
                 locateButton,
-                treeWidget,
-                nationalLayerList,
                 layerAccordion,
                 homeWidget,
                 transparencySlider,
@@ -189,11 +190,8 @@ define([
 
             transparencySlider.setValue(50);
 
-            treeWidget = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
+            communityTree = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
             nationalLayerList = new NationalLayerList('national-layer-lists');
-            // treeWidgetNational = new CommunityTree(MapConfig.nationalLevelTreeData, 'national-level-tree-community');
-            // treeWidgetNational = new CommunityTree(MapConfig.nationalLevelTreeDataIndigenous, 'national-level-tree-indigenous');
-            // treeWidgetNational = new CommunityTree(MapConfig.nationalLevelPercentData, 'national-level-tree-percentage');
 
             // Start all widgets that still need to be started
             basemapGallery.startup();
@@ -241,6 +239,18 @@ define([
                 domClass.remove(node, 'hideOnLoad');
             });
 
+        },
+
+        resetCommunityLevelTree: function () {
+            if (communityTree) {
+                communityTree.toggleOff();
+            }
+        },
+
+        resetNationalLayerList: function () {
+            if (nationalLayerList) {
+                nationalLayerList.setToNone();
+            }
         },
 
         handleClick: function(evt) {

@@ -15,6 +15,20 @@ define([
         data: this.props.data
       };
     },
+
+    toggleOff: function () {
+      var setNodeToFalse = function (node) {
+        node.checked = false;
+        if (node.children) { 
+          node.children.forEach(setNodeToFalse); 
+        }
+      };
+      
+      var dataSource = Object.create(this.state.data);
+      dataSource.forEach(setNodeToFalse);
+      // Update the Tree Component
+      this.setState({ data: dataSource });
+    },
     
     /**
     * this.state.data is kind of like a book keeper of the state of the tree, it knows

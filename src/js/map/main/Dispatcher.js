@@ -13,6 +13,8 @@ define([
             brApp.debug('Dispatcher >>> listen');
             // Map Controller Functions
             topic.subscribe('refresh-legend', MapController.refreshLegend);
+            topic.subscribe('reset-community-tree', MapController.resetCommunityLevelTree);
+            topic.subscribe('reset-national-layer-list', MapController.resetNationalLayerList);
 
         }
 

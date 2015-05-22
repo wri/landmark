@@ -8,7 +8,7 @@ define([
   var getDefaultState = function() {
 
     return {
-        namePlaceholder: 'Username',
+        namePlaceholder: 'Name',
         emailPlaceholder: 'Email',
         subjectPlaceholder: 'Subject',
         messagePlaceholder: 'Message',
@@ -16,8 +16,6 @@ define([
         Email: '',
         Subject: '',
         Message: ''
-
-
       };
   }
 

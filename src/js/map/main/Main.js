@@ -40,7 +40,6 @@ define([
         configureApp: function() {
             brApp.debug('Main.js >>> configureApp');
             AppConfig.corsEnabledServers.forEach(function(server) {
-                console.log(server);
                 esriConfig.defaults.io.corsEnabledServers.push(server);
             });
         },

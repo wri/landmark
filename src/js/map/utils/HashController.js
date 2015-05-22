@@ -5,7 +5,6 @@ define(["dojo/hash", "dojo/topic", "dojo/_base/lang", "dojo/io-query", "dojo/_ba
         var o = {};
         var currentState = {};
         o.newState = {};
-        console.log(window.location.href);
         // var emptyState = lang.clone(Config.defaultState); //take copy from defaultState and empty it
         // console.log(emptyState);
         // for (k in emptyState) {
@@ -27,7 +26,6 @@ define(["dojo/hash", "dojo/topic", "dojo/_base/lang", "dojo/io-query", "dojo/_ba
                 _initialState = Config.defaultState;
                 //state with
             }
-            console.log(_initialState);
             topic.subscribe("/dojo/hashchange", function(changedHash) {
                 // Handle the hash change
                 //alert(changedHash);
@@ -78,25 +76,13 @@ define(["dojo/hash", "dojo/topic", "dojo/_base/lang", "dojo/io-query", "dojo/_ba
 
             var newHashStr = ioQuery.objectToQuery(_currentState);
 
-
-            console.log(newHashStr);
             hash(newHashStr);
-            /*var
-
-
-            hash()*/
 
         };
 
         o.getHash = function() {
             return ioQuery.queryToObject(hash());
         };
-
-        //listen to hash change
-
-        //change the view if needed
-
-
 
         return o;
 

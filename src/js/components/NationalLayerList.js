@@ -81,9 +81,9 @@ define([
 		// So activePercentIndigenousLayer = 2 represents first item, if default is changed
 		// activePercentIndigenousLayer must change, 2 for first item, 3 for second, 4 for third
 
-		getInitialState: function () {
+	getInitialState: function () {
       return {
-        active: "LandTenure",
+        active: "none",
         landTenureCategory: LandTenureInd,
         landTenureLayer: 1,
         activePercentIndigenousLayer: 2,
@@ -101,6 +101,12 @@ define([
     			this.state.activeIndigenousKey : 
     			this.state.activeCommunityKey
     	);
+    },
+
+    setToNone: function () {
+        if (this.state.active !== 'none') {
+            this.setState({ active: 'none' });
+        }
     },
 
     componentDidUpdate: function () {
@@ -124,8 +130,6 @@ define([
     	brApp.currentLayer = (state.landTenureCategory === LandTenureInd ? state.activeIndigenousKey : state.activeCommunityKey);
         
     	// The true signifies that this is the national layer being updated
-    	// This needs 
-
     	LayerController.updateVisibleLayers(visibleLayers, true);
 
     },
@@ -171,14 +175,25 @@ define([
 
     			React.createElement("div", {className: "radio-button-container"}, 
     				React.createElement("label", null, 
-    					React.createElement("input", {id: "nationalLevelNone", name: "national-layer-selection", type: "radio", defaultChecked: true, value: "none", onChange: this.handleRadioChange}), 
+    					React.createElement("input", {
+                            id: "nationalLevelNone", 
+                            name: "national-layer-selection", 
+                            type: "radio", defaultChecked: true, 
+                            value: "none", 
+                            checked: this.state.active === 'none', 
+                            onChange: this.handleRadioChange}), 
     					React.createElement("span", {className: "national-layer-selection-label"}, "None")
     				)
     			), 
 
                 React.createElement("div", {className: "radio-button-container"}, 
                     React.createElement("label", null, 
-                        React.createElement("input", {name: "national-layer-selection", type: "radio", value: PercentIndigenous, onChange: this.handleRadioChange}), 
+                        React.createElement("input", {
+                            name: "national-layer-selection", 
+                            type: "radio", 
+                            value: PercentIndigenous, 
+                            checked: this.state.active === PercentIndigenous, 
+                            onChange: this.handleRadioChange}), 
                         React.createElement("span", {className: "national-layer-selection-label"}, "Percent of Indigenous and Community Lands")
                     )
                 ), 
@@ -190,7 +205,12 @@ define([
 
     			React.createElement("div", {className: "radio-button-container"}, 
     				React.createElement("label", null, 
-    					React.createElement("input", {name: "national-layer-selection", type: "radio", value: LandTenure, onChange: this.handleRadioChange}), 
+    					React.createElement("input", {
+                            name: "national-layer-selection", 
+                            type: "radio", 
+                            value: LandTenure, 
+                            checked: this.state.active === LandTenure, 
+                            onChange: this.handleRadioChange}), 
     					React.createElement("span", {className: "national-layer-selection-label"}, "Land Tenure Security Indicators, as stated by law")
                         
     				)
