@@ -1,53 +1,138 @@
 var config = require('./gulp-config.js'),
-		stylus = require('gulp-stylus'),
-		watch = require('gulp-watch'),
-		jade = require('gulp-jade'),
-		gulp = require('gulp');
+    imagemin = require('gulp-imagemin'),
+    requirejs = require('requirejs'),
+    stylus = require('gulp-stylus'),
+    uglify = require('gulp-uglify'),
+    watch = require('gulp-watch'),
+    react = require('gulp-react'),
+    jade = require('gulp-jade'),
+    gulp = require('gulp');
 
-
-gulp.task('stylus-watch', function () {
-	gulp.watch(config.stylus.watch, ['stylus-dev']);
+gulp.task('stylus-watch', function() {
+    gulp.watch(config.stylus.watch, ['stylus-dev']);
 });
 
-gulp.task('stylus-dev', function () {
-	return gulp.src(config.stylus.src, { base: config.stylus.base })
-		.pipe(stylus({ compress: false, linenos: true }))
-		.pipe(gulp.dest(config.stylus.devOut));
+gulp.task('stylus-dev', function() {
+    return gulp.src(config.stylus.src, {
+            base: config.stylus.base
+        })
+        .pipe(stylus({
+            compress: false,
+            linenos: true
+        }))
+        .pipe(gulp.dest(config.stylus.devOut));
 });
 
-gulp.task('stylus-build', function () {
-	return gulp.src(config.stylus.src, { base: config.stylus.base })
-		.pipe(stylus({ compress: true, linenos: false }))
-		.pipe(gulp.dest(config.stylus.buildOut));
+gulp.task('stylus-build', function() {
+    return gulp.src(config.stylus.src, {
+            base: config.stylus.base
+        })
+        .pipe(stylus({
+            compress: true,
+            linenos: false
+        }))
+        .pipe(gulp.dest(config.stylus.buildOut));
 });
 
-gulp.task('jade-watch', function () {
-	gulp.watch(config.jade.watch, ['jade-dev']);
+gulp.task('jade-watch', function() {
+    gulp.watch(config.jade.watch, ['jade-dev']);
 });
 
-gulp.task('jade-dev', function () {
-	return gulp.src(config.jade.src, { base: config.jade.base })
-		.pipe(jade({ pretty: true }))
-		.pipe(gulp.dest(config.jade.devOut));
+gulp.task('jade-dev', function() {
+    return gulp.src(config.jade.src, {
+            base: config.jade.base
+        })
+        .pipe(jade({
+            pretty: true,
+            locals: {
+                appVersion: config.appVersion
+            }
+        }))
+        .pipe(gulp.dest(config.jade.devOut));
 });
 
-gulp.task('jade-build', function () {
-	return gulp.src(config.jade.src, { base: config.jade.base })
-		.pipe(jade())
-		.pipe(gulp.dest(config.jade.buildOut));
+gulp.task('jade-build', function() {
+    return gulp.src(config.jade.src, {
+            base: config.jade.base
+        })
+        .pipe(jade({
+            locals: {
+                appVersion: config.appVersion
+            }
+        }))
+        .pipe(gulp.dest(config.jade.buildOut));
 });
 
 gulp.task('copy', ['copy-libs', 'copy-access']);
 
-gulp.task('copy-libs', function () {
-	return gulp.src(config.copy.libs.src)
-		.pipe(gulp.dest(config.copy.libs.out));
+gulp.task('copy-libs', function() {
+    return gulp.src(config.copy.libs.src)
+        .pipe(gulp.dest(config.copy.libs.out));
 });
 
-gulp.task('copy-access', function () {
-	return gulp.src(config.copy.access.src)
-		.pipe(gulp.dest(config.copy.access.out));
+gulp.task('copy-access', function() {
+    return gulp.src(config.copy.access.src)
+        .pipe(gulp.dest(config.copy.access.out));
 });
 
-gulp.task('watch', ['stylus-dev', 'stylus-watch', 'jade-dev', 'jade-watch']);
-gulp.task('build', ['copy', 'stylus-build', 'jade-build']);		
+gulp.task('optimize', ['optimize-map-page', 'optimize-about-page', 'optimize-home-page', 'optimize-institutions-page', 'optimize-contact-page', 'optimize-data-page']);
+
+gulp.task('optimize-map-page', function() {
+    requirejs.optimize(config.optimizer.map.options, function(res) {});
+});
+
+gulp.task('optimize-about-page', function() {
+    requirejs.optimize(config.optimizer.about.options);
+});
+
+gulp.task('optimize-institutions-page', function() {
+    requirejs.optimize(config.optimizer.institutions.options);
+});
+
+gulp.task('optimize-home-page', function() {
+    requirejs.optimize(config.optimizer.home.options);
+});
+
+gulp.task('optimize-contact-page', function() {
+    requirejs.optimize(config.optimizer.contact.options);
+});
+
+gulp.task('optimize-data-page', function() {
+    requirejs.optimize(config.optimizer.data.options);
+});
+
+gulp.task('minify', ['minify-js', 'minify-images']);
+
+gulp.task('minify-js', function() {
+    return gulp.src(config.uglify.src)
+        .pipe(uglify())
+        .pipe(gulp.dest(config.uglify.dest));
+});
+
+gulp.task('minify-images', function() {
+    return gulp.src(config.imagemin.src)
+        .pipe(imagemin({
+            pngquant: true,
+            optimizationLevel: 7,
+            progressive: true,
+            interlaced: true,
+            svgoPlugins: [{
+                removeViewBox: false
+            }]
+        }))
+        .on('error', console.error)
+        .pipe(gulp.dest(config.imagemin.dest));
+});
+
+gulp.task('react-watch', function() {
+    gulp.watch(config.react.src, ['react-jsx']);
+});
+
+gulp.task('react-jsx', function() {
+    return gulp.src(config.react.src)
+        .pipe(react())
+        .pipe(gulp.dest(config.react.out));
+});
+
+gulp.task('watch', ['stylus-dev', 'stylus-watch', 'jade-dev', 'jade-watch', 'react-jsx', 'react-watch']);
+gulp.task('build', ['copy', 'minify', 'stylus-build', 'jade-build', 'optimize']);

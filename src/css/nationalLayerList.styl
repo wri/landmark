@@ -1,0 +1,78 @@
+$lightBlue = #2FA3D9
+$mildBlue = #2FA3D9
+$darkFont = #464646
+
+.dijitAccordionTitleFocus
+	outline none !important
+
+.dijitAccordionTitle
+	// background $lightBlue !important
+	font-size 15px
+	color #004477
+	
+.national-layer-selection-label
+	font-weight bold
+	// font-size 14px
+	color $darkFont
+	padding 0 5px
+	
+.land-tenure-menu-controls
+	text-align center
+	margin 4px 0 15px
+	
+.land-tenure-menu-button
+	border 1px solid $mildBlue
+	color $mildBlue
+	padding 5px 10px
+	font-weight bold
+	font-size 13px
+	cursor pointer
+	
+.land-tenure-menu-button.active
+	background $mildBlue
+	color white
+
+.land-tenure-menu-button:first-of-type
+	border-top-left-radius 5px
+	border-bottom-left-radius 5px
+	-moz-border-radius-topleft 5px
+	-moz-border-radius-bottomleft 5px
+	-webkit-border-top-left-radius 5px
+	-webkit-border-bottom-left-radius 5px
+	border-right 0
+	
+.land-tenure-menu-button:last-of-type
+	border-top-right-radius 5px
+	border-bottom-right-radius 5px
+	-moz-border-radius-topright 5px
+	-moz-border-radius-bottomright 5px
+	-webkit-border-top-right-radius 5px
+	-webkit-border-bottom-right-radius 5px
+	border-left 1px solid $mildBlue
+	
+.national-layer-list-item
+	padding 5px 5px
+	cursor pointer
+	font-size 13px
+	color $darkFont
+	
+	
+.national-layer-list-item-question
+	display none
+
+.national-layer-list-item.active
+	border-left 5px solid $lightBlue
+	margin 5px 0 5px -5px
+	
+.national-layer-list-item.active .national-layer-list-item-question
+	display block
+
+.national-layer-list-item.active .national-layer-list-item-label
+	font-weight bold
+	color #2FA3D9
+	
+#national-layer-sublabel
+	padding-left 20px
+	font-style italic
+
+

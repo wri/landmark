@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LandMark: Global Platform of Indigenous and Community Lands</title>
+    <meta name="author" content="BlueRaster, WRI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
+    <link rel="shortcut icon" type="image/png" href="css/images/favicon.png">
+    <style>html,body,.root{height:100%;width:100%;padding:0;margin:0;overflow:hidden}	</style>
+    <link rel="stylesheet" href="libs/foundation.min.css">
+    <link rel="stylesheet" href="css/base.css?1.0.0">
+    <link rel="stylesheet" href="css/map.css?1.0.0">
+    <script src="libs/FileSaver.js"></script>
+    <script async="" type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53ab205a21ddceee&amp;async=1"></script>
+    <script type="text/javascript">
+      var addthis_share = {
+      	url_transforms: {
+      		shorten: {
+      			twitter: 'bitly',
+      			facebook: 'bitly'
+      		}
+      	},
+      	shorteners: {
+      		bitly: {}
+      	}
+      }; //end addThis_share
+    </script><!--[if lt IE 9]>
+    <script src="libs/es5-shim.min.js"></script>
+    <script src="libs/es5-sham.min.js"></script>
+    <script src="libs/html5shiv.js"></script><![endif]-->
+  </head>
+  <body class="tundra crl">
+    <div class="root">
+      <header class="app-header">
+        <div style="position: relative;">
+          <div class="wri-header-attribution">
+            <div class="inner">A partnership convened by the Instituto del Bien Comun and the World Resources Institute in collaboration with numerous other organizations.</div>
+          </div>
+          <nav role="navigation" data-topbar class="top-bar">
+            <ul class="title-area">
+              <li class="name">
+                <h1><a href="./index.html"><img alt="Global Platform of Indigenous and Community Lands" width="515" height="60" src="./css/images/logo.png"></a></h1>
+              </li>
+              <li class="toggle-topbar menu-icon"><a><span></span></a></li>
+            </ul>
+            <section class="top-bar-section">
+              <ul class="right">
+                <li><a id="home-page-link" href="./index.html">Home</a></li>
+                <li><a id="map-page-link" href="./map.html">Map</a></li>
+                <li><a id="data-page-link" href="./data.html">Data</a></li>
+                <li><a id="about-page-link" href="./about.html">About</a></li>
+                <li><a id="institutions-page-link" href="./institutions.html">Institutions</a></li>
+                <li><a id="contact-page-link" href="./contact.html">Contact Us</a></li>
+              </ul>
+            </section>
+          </nav>
+        </div>
+      </header>
+      <div class="app-body">
+        <div id="mobileMenu" class="mobile-menu">
+          <div id="mobile-menu-close" class="mobile-menu-close-button pointer"></div>
+          <div id="menuControls" class="menu-controls"><span id="layersMenuButton" class="segmented-menu-button active pointer">Layers</span><span id="legendMenuButton" class="segmented-menu-button pointer">Legend</span><span id="toolsMenuButton" class="segmented-menu-button pointer">Tools</span></div>
+          <div id="mobile-layers-content" class="mobile-menu-content mobile-layers-content active"></div>
+          <div id="mobile-legend-content" class="mobile-menu-content mobile-legend-content"></div>
+          <div id="mobile-tools-content" class="mobile-menu-content mobile-tools-content"></div>
+        </div>
+        <div id="brMap" class="brMap">
+          <div id="infowindowContainer" class="hidden"></div>
+          <div id="mobile-menu-toggle" class="map-component mobile-menu-toggle-button hideOnLoad pointer"></div>
+          <div id="tree-widget-container" class="map-component tree-widget-container hideOnLoad">
+            <div id="tree-title-pane" class="tree-widget-title-pane"><span id="tree-title" class="tree-title-text tree-width"><span>Land Recognition Status</span></span><span id="tree-container-toggle" class="tree-container-toggle pointer">&minus;</span></div>
+            <div id="tree-content" class="tree-content tree-width active">
+              <div id="layer-accordion" class="layer-accordion">
+                <div id="national-level-toggle">
+                  <div id="national-layer-lists"></div>
+                </div>
+                <div id="community-level-toggle">
+                  <div id="community-level-data-container" class="community-level-data-container">
+                    <div id="community-level-tree"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="geocoder-container" class="map-component geocoder-container hideOnLoad">
+            <div id="geocoder"></div>
+          </div>
+          <div id="data-completeness-container" class="map-component data-completeness-container hideOnLoad"><span class="data-completeness-toggle"><span id="data-complete-checkbox" data-checked="true" class="data-complete-checkbox-class-checked"></span></span><span class="data-completeness-label">Show Data Completeness<span id="analysis-help" style="margin-top: 9px;" class="help-marker"></span></span>
+            <div id="completeness-slider"></div>
+          </div>
+          <div id="analysis-button" class="map-component analysis-button hideOnLoad pointer"><span id="analysisLogo"></span><span class="analysis-button-label">Analysis</span></div>
+          <div id="locator-button" title="Find my location" class="map-component button-widget locator-button pointer hideOnLoad">
+            <div id="location-widget" class="locate-icon"></div>
+          </div>
+          <div id="basemap-button" title="Basemaps" class="map-component button-widget basemap-button pointer hideOnLoad">
+            <div class="basemap-icon"></div>
+          </div>
+          <div class="map-component basemap-container hidden">
+            <div id="basemap-gallery"></div>
+          </div>
+          <div class="map-component basemap-connector connector hidden"></div>
+          <div id="legend-container" class="map-component legend-container hideOnLoad">
+            <div class="legend-title-pane"><span title="Legend" id="legend-toggle" class="legend-title pointer">Legend
+                <div id="legend-toggle-icon">&ndash;</div></span></div>
+            <div id="legend-content" class="legend-content active">
+              <div id="legend"></div>
+            </div>
+          </div>
+          <div id="share-button" title="Share" class="map-component button-widget share-button pointer hideOnLoad">
+            <div class="share-icon"></div>
+          </div>
+          <div class="map-component share-container hidden">
+            <div id="share-widgets">
+              <div class="sharing_toolbox">
+                <div data-title="Global Platform of Indigenous and Community Lands" class="addthis_sharing_toolbox"></div>
+                <div id="embedShare"></div>
+                <div id="twitterShare"></div>
+                <div id="facebookShare"></div>
+                <div id="moreShare"></div>
+                <div id="emailShare"></div>
+                <div id="googleShare">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="map-component share-connector connector hidden"></div>
+          <div id="print-button" title="Print" class="map-component button-widget print-button pointer hideOnLoad">
+            <div id="print-widget" class="print-icon"></div>
+          </div>
+          <div class="map-component print-connector connector hidden"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hidden">
+      <div id="analysis-dialog" title="Create an area to analyze" data-dojo-type="dijit/Dialog">
+        <div id="analysis-content">
+          <p>Draw an area on the map or upload a shapefile to display a list of indigenous and community lands in your area of interest. Then click on your area to view the results.</p>
+          <div class="analysis-buttons">
+            <button id="draw-shape"><span id="draw-shape-icon">&#9998; </span><span id="draw-shape-words">Draw Shape</span></button>
+            <button id="upload-shapefile">Upload File</button>
+            <button id="remove-graphics" class="hidden">Remove All</button>
+          </div>
+          <div id="upload-form-content" class="hidden">
+            <hr>
+            <ul class="upload-instructions">
+              <li>Select a zip file(.zip) containing a shapefile(.shp,.dbf,.prj) from your local file system.</li>
+              <li>The shapefile must be in Geographic Coordinate System (WGS84).</li>
+              <li>The shapefile must be of POLYGON geometry type.</li>
+              <li>The shapefile must not exceed 1 Megabyte.</li>
+            </ul>
+            <form enctype="multipart/form-data" method="post" id="uploadForm" name="uploadForm">
+              <label>
+                <input type="file" name="file" id="shapefileUpload">
+              </label>
+              <input type="hidden" name="publishParameters" value="{}">
+              <input type="hidden" name="filetype" value="shapefile">
+              <input type="hidden" name="f" value="json">
+            </form>
+            <div id="uploadNameSelectContainer"></div>
+          </div>
+        </div>
+      </div>
+      <div id="help-dialog-indigenous" title="Layer Info" data-dojo-type="dijit/Dialog">
+        <p>Indigenous lands are the collectively-held or governed lands and the associated natural resources used by indigenous peoples.</p>
+      </div>
+      <div id="help-dialog-community" title="Layer Info" data-dojo-type="dijit/Dialog">
+        <p>Community lands are the collectively-held or governed lands and the associated natural resources used by communities.</p>
+      </div>
+      <div id="help-dialog-completeness" title="Layer Info" data-dojo-type="dijit/Dialog">
+        <p>The Data Completeness layer shows the estimated level of completeness of the community-level data displayed on LandMark for a particular country. It is based on a comparison between the estimated total percentage of land held and used by indigenous peoples and communities at the national level and the total amount of data displayed on the platform for that country.</p>
+      </div>
+    </div>
+    <script src="libs/jquery-2.1.3.min.js"></script>
+    <script src="libs/foundation.min.js"></script>
+    <script src="js/map/dojoBootstrap.js?1.0.0"></script>
+    <script>
+      $(document).foundation();
+      $("#map-page-link").addClass("exampleClass");
+    </script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+  </body>
+</html>

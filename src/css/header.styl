@@ -1,3 +1,11 @@
+
+.app-header
+	border-bottom solid 8px #fbaa18
+	height 106px
+	
+	@media (max-width: 1050px)
+		height 81px
+
 .wri-header-attribution
 	background-color $mainBackground
 	font-style italic
@@ -6,5 +14,132 @@
 	height 25px
 	width 100%
 	
+	.inner
+		max-width 100% !important
+		margin 0 15px
+	
+a:-webkit-any-link
+	text-decoration none
+
+/* Overrides for Foundation CSS */
 .top-bar.expanded
-	z-index 1
+	z-index 1000
+	
+/* Override Dojo Blue Outline */
+.top-bar .top-bar-section li a
+	outline none
+	font-family Arial
+	font-size 1em
+
+.top-bar:not(.expanded) .top-bar-section ul
+	margin-right 30px
+
+.top-bar.expanded .top-bar-section ul
+	width 200px
+	
+.top-bar.expanded .top-bar-section li a:hover
+	background-color $mainBackground
+	
+
+.top-bar.expanded .top-bar-section li a
+	padding 0 0 0 12px
+	
+.name > h1
+	font-size 20px !important
+	display block !important
+
+.top-bar
+	background-color #055d7d
+	font-family Georgia
+	height 81px
+	
+	.title-area
+		background #055D7D !important
+		padding-left 0
+		margin-left 0
+		height 81px
+		
+		@media (max-width: 939px)
+			margin-left 0
+		
+		.name
+		
+			display block !important
+		
+			a
+
+				display block
+				position absolute
+				color transparent // For IE, removes border
+				overflow hidden
+				margin-top -30px
+				top 38px
+				height auto
+				display block
+				
+				@media (max-width: 1140px)
+					width 260px
+				
+				img
+					height auto
+		
+.top-bar-section ul
+
+	margin-right 0 !important
+
+	@media (min-width: 940px)
+		display block
+		height 81px !important
+	
+	li
+		background-color #055d7d
+		font-family Georgia
+		height inherit
+		
+		a
+			-webkit-font-smoothing antialiased
+			-moz-osx-font-smoothing grayscale
+			display block
+			height inherit
+			border none
+			
+			@media (min-width: 940px)
+				font-size 1.3em !important
+				line-height 81px !important
+	
+	// font-family Georgia
+	font-size 14px
+
+.top-bar.expanded .top-bar-section ul
+	border-top solid 8px #FBAA18 !important
+
+.top-bar.expanded .toggle-topbar a
+	color white !important
+	
+	span:after
+		box-shadow 0 0 0 1px #FFF,0 7px 0 1px #FFF,0 14px 0 1px #FFF !important
+
+.toggle-topbar
+	-webkit-user-select none !important
+	-moz-user-select none !important
+	user-select none !important
+
+// .top-bar-section ul li > a:active
+// 	border-bottom 3px solid green
+
+.active-page
+	border-bottom 3px solid green
+	
+.top-bar-section ul
+	background-color #055d7d
+	
+.right
+	background-color #055d7d
+	
+.top-bar-section li:not(.has-form) a:not(.button)
+	background-color #055d7d
+	
+	&:hover, &:active, &:focus, &.exampleClass
+		background-color #2fa3d9 !important
+	
+	

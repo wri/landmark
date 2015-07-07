@@ -1,0 +1,86 @@
+div.mobile-menu#mobileMenu
+    div.mobile-menu-close-button.pointer#mobile-menu-close
+    div.menu-controls#menuControls
+        span.segmented-menu-button.active.pointer#layersMenuButton Layers
+        span.segmented-menu-button.pointer#legendMenuButton Legend
+        span.segmented-menu-button.pointer#toolsMenuButton Tools
+    div.mobile-menu-content.mobile-layers-content.active#mobile-layers-content
+    div.mobile-menu-content.mobile-legend-content#mobile-legend-content
+    div.mobile-menu-content.mobile-tools-content#mobile-tools-content
+div#brMap.brMap
+    div.hidden#infowindowContainer
+    div.map-component.mobile-menu-toggle-button.hideOnLoad.pointer#mobile-menu-toggle
+    div.map-component.tree-widget-container.hideOnLoad#tree-widget-container
+        div.tree-widget-title-pane#tree-title-pane
+            span.tree-title-text.tree-width#tree-title
+                span Land Recognition Status
+            span.tree-container-toggle.pointer#tree-container-toggle &minus;
+         div.tree-content.tree-width.active#tree-content
+            div#layer-accordion.layer-accordion
+                div#national-level-toggle
+                    div#national-layer-lists
+                    //- div.radio-button-container
+                    //-     input(type='radio', name='national-radio', id='national-level-none',class='radio-button-container')
+                    //-     label(for='national-level-toggle') None
+                    //- div#landTenureRadio.radio-button-container
+                    //-     input(type='radio', name='national-radio', checked=true, id='land-tenure-toggle',class='radio-button-container')
+                    //-     label(for='national-level-toggle') Land Tenure Security Indicators, as Stated by Law
+                    //-     div.national-level-data-container#national-level-data-container
+                    //-         div.national-menu-controls#nationalMenuControls
+                    //-             span.national-segmented-menu-button#nationalIndigenousMenuButton Indigenous
+                    //-             span.national-segmented-menu-button.active#nationalCommunityMenuButton Community
+                    //-         div#national-level-tree-community
+                    //-         div#national-level-tree-indigenous.hidden
+                    //- div#percentNational
+                    //-     input(type='radio', name='national-radio', id='percent-national-toggle',class='radio-button-container')
+                    //-     label(for='national-level-toggle') Pct of Indigenous and Community Lands
+                    //-         div#national-level-tree-percentage.hidden
+                div#community-level-toggle
+                    div.community-level-data-container#community-level-data-container
+                        div#community-level-tree
+
+    div.map-component.geocoder-container.hideOnLoad#geocoder-container
+        div#geocoder
+    div.map-component.data-completeness-container.hideOnLoad#data-completeness-container
+        span.data-completeness-toggle
+            span(id='data-complete-checkbox',class='data-complete-checkbox-class-checked',data-checked='true')
+        span.data-completeness-label Show Data Completeness
+            span#analysis-help.help-marker(style='margin-top: 9px;')
+        div#completeness-slider
+    div.map-component.analysis-button.hideOnLoad.pointer#analysis-button
+        span#analysisLogo
+        span.analysis-button-label Analysis
+    div.map-component.button-widget.locator-button.pointer.hideOnLoad#locator-button(title="Find my location")
+        div.locate-icon#location-widget
+    div.map-component.button-widget.basemap-button.pointer.hideOnLoad#basemap-button(title="Basemaps")
+        div.basemap-icon
+    div.map-component.basemap-container.hidden
+        div#basemap-gallery
+    div.map-component.basemap-connector.connector.hidden
+    div.map-component.legend-container.hideOnLoad#legend-container
+        div.legend-title-pane
+            span(class='legend-title pointer', title='Legend', id='legend-toggle') Legend
+                div(id="legend-toggle-icon")!='&ndash;'
+                //-div(id="legend-toggle-icon")
+        div.legend-content.active#legend-content
+            div#legend
+    div.map-component.button-widget.share-button.pointer.hideOnLoad#share-button(title="Share")
+        div.share-icon
+    div.map-component.share-container.hidden
+        div#share-widgets
+            .sharing_toolbox
+                .addthis_sharing_toolbox(data-title='Global Platform of Indigenous and Community Lands')
+                div#embedShare
+                div#twitterShare
+                div#facebookShare
+                div#moreShare
+                div#emailShare
+                div#googleShare
+                    //- a(href='https://plus.google.com/share?url={window.url}', onclick="javascript:window.open(this.href,\
+                    //- '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;")
+                    //-     img(src='https://www.gstatic.com/images/icons/gplus-32.png', alt='Share on Google+')
+            
+    div.map-component.share-connector.connector.hidden
+    div.map-component.button-widget.print-button.pointer.hideOnLoad#print-button(title="Print")
+        div.print-icon#print-widget
+    div.map-component.print-connector.connector.hidden

@@ -19,12 +19,15 @@
 <p>Installing node and any dependencies via <code>npm</code> may require you to run the commands with <code>sudo</code>.</p>
 
 #### gulp watch
-Run <code>gulp watch</code> from your project directory.  You can also run <code>npm run dev</code> which has been configured via the package.json.
+Run <code>gulp watch</code> from your project directory.  You can also run <code>npm start</code> which has been configured via the package.json.
 <p>This will run a watch task to listen for any changes to any stylus files or jade files and compile them into css and  .</p>
 
 #### gulp build
 Run <code>npm run build</code> from your project directory.  If this fails on windows, may need to modify package.json script to properly remove the build directory before running the build task.  Optionally, if the build directory is not present, just run <code>gulp build</code>.
 <p>This will do everything necessary to generate a minified build for this project.  This will remove the current build directory and replace it with the new build output so make sure you have a backup if your worried about breaking something.  It will minify images, .styl files, JavaScript, and html and will also copy over any remaining dependencies that are needed and place them in the build directory.</p>
+
+#### Cache Bust Mechanism
+There is a cache busting mechanism in place for when we deploy updates of the application.  To use this, in the `gulp-config.js` file, increment the appVersion variable right near the top.  The Map page uses a bootloader to pull in the remaining modules and ArcGIS modules, you will also need to update the `src/js/map/dojoBootstrap.js` file, again by updating the appVersion variable near the top of the file. After updating these values, run `npm run build` or `gulp build`.
 
 ## Application Architecture
 <p>This is a multi-page application.  The homepage is pretty much the map page except it shows a dialog over the map so they are both index.jade. The remaining pages are in the src directory named after their route.</p>
@@ -42,8 +45,13 @@ Run <code>npm run build</code> from your project directory.  If this fails on wi
 		<th>.css filename (using stylus)</th>
 	</tr>
 	<tr>
-		<td> Map/Home Page </td>
+		<td> Home Page </td>
 		<td> src/index.jade </td>
+		<td> src/css/home.styl </td>
+	</tr>
+	<tr>
+		<td> Map Page </td>
+		<td> src/map.jade </td>
 		<td> src/css/map.styl </td>
 	</tr>
 	<tr>
@@ -74,8 +82,15 @@ Run <code>npm run build</code> from your project directory.  If this fails on wi
 
 ## Git Workflow
 
-#### Coming Soon
-<p>Where to commit and what branch to branch off of as well as which branch will have the latest code.</p>
+<p>There is a develop branch which should at any given time be able to be pulled down and generate a build without any modification. When you begin working, checkout a new branch from the develop branch and only merge back in when whatever feature your on is completed.</p>
+<p>When we are ready to release the application.  We should commit a new tag and name the tag as a Release-Version-X.X or something similar.  If your creating the first release you can name whatever you like but after that, every subsequent release should follow that same naming convention.  If you do not know how to tag, view <a href='http://git-scm.com/book/en/v2/Git-Basics-Tagging'>this post here</a> for details or just follow the steps below.</p>
+
+<ol>
+<li>Make sure you are on the develop branch.</li>
+<li>Make sure all code is up to date and is tested and ready for release.</li>
+<li>Run <code>git tag -a nameOfTag -m 'Annotation for nameOfTag'</code></li>
+<li>Example: <code>git tag -a Release-1.0 -m 'Stable 1.0 version of the Global Map of Indigenous and Community Lands application.'</code></li>
+</ol>
 
 ## Contribution
 <p> See Git Workflow above to know how and where to commit your code.</p>

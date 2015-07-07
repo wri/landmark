@@ -2,6 +2,7 @@
 @import "config"
 /* Generic Classes */
 .hidden
+.hideOnLoad
 	display none
 	
 .clearfix
@@ -31,18 +32,31 @@
 .app-header
 	background-color white
 	position absolute
-	height 75px
+	height 70px
 	right 0
 	left 0
 	top 0
 	
+a, u
+	text-decoration none
+	
 .app-body
 	position absolute
-	top 75px
+	top 114px
 	bottom 0
 	right 0
 	left 0
+	
+	@media (max-width: 1050px)
+		top 89px
+
+body
+	overflow-x hidden
+
+*:focus, &:active
+	outline 0 !important
 
 /* Base CSS for App */
-
 @import "header"
+/** MOBILE CSS **/
+@import "mobile"

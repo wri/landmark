@@ -1,0 +1,56 @@
+doctype html
+html
+	head
+		title LandMark: Global Platform of Indigenous and Community Lands
+		meta(name='author', content='BlueRaster, WRI')
+		meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+		meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=7, IE=9, IE=10')
+		link(rel='shortcut icon', type='image/png', href='css/images/favicon.png')
+		style.
+			html,body,.root{padding:0;margin:0;} 
+		link(rel='stylesheet', href='libs/foundation.min.css')
+		link(rel='stylesheet', href='css/base.css?#{appVersion}')
+		link(rel='stylesheet', href='css/institutions.css?#{appVersion}')
+		<!--[if lt IE 9]>
+		script(src='libs/es5-shim.min.js')
+		script(src='libs/es5-sham.min.js')
+		script(src='libs/html5shiv.js')
+		<![endif]-->
+	body.tundra.crl
+		div.root
+			include templates/header.jade
+			div.app-body
+				div#institutionsTitle
+					h1 Collaborating Institutions
+				div#institutionsAccordion
+					
+
+		script(src='libs/jquery-2.1.3.min.js')
+		script(src='libs/foundation.min.js')
+		script.
+			var base = location.pathname.replace(/\/[^/]+$/, '');
+			window.require = {
+				baseUrl: base,
+				packages: [
+					{name: 'libs', location: base + '/libs'},
+					{name: 'institutions', location: base + '/js/institutions'},
+					{name: 'components', location: base + '/js/components'}
+				],
+				map: {
+					'*': {
+						'react': 'http://fb.me/react-0.12.2.min.js'
+					}
+				}
+
+			};
+
+
+		script(data-main='js/institutions/institutionsLoader.js?#{appVersion}', src='libs/require.js')
+
+		script.
+			$(document).foundation();
+			$("#institutions-page-link").addClass("exampleClass");
+			// Thanks Foundation, Hack because the only foundation component
+			// does not work on mobile unless I do this, but it works on the map page
+			$('.toggle-topbar a').click(function(){});

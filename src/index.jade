@@ -1,27 +1,254 @@
 doctype html
 html
-	head
-		title Community Rights
-		meta(name='author', content='BlueRaster, WRI')
-		meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-		meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
-		meta(http-equiv='X-UA-Compatible', content='IE=7, IE=9, IE=10')
-		style.
-			html,body,.root{height:100%;width:100%;padding:0;margin:0;}	
-		link(rel='stylesheet', href='libs/foundation.min.css')
-		link(rel='stylesheet', href='css/base.css')
-		link(rel='stylesheet', href='css/map.css')
-		<!--[if lt IE 9]>
-		script(src='libs/es5-shim.min.js')
-		script(src='libs/es5-sham.min.js')
-		script(src='libs/html5shiv.js')
-		<![endif]-->
-	body.tundra.crl
-		div.root
-			include templates/header.jade
-			div.app-body
-		script(src='https://code.jquery.com/jquery-2.1.3.min.js')
-		script(src='libs/foundation.min.js')
-		script(src='js/dojoBootstrap.js')
-		script.
-			$(document).foundation();
+    head
+        title LandMark: Global Platform of Indigenous and Community Lands
+        meta(name='author', content='BlueRaster, WRI')
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+        meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=7, IE=9, IE=10')
+        link(rel='shortcut icon', type='image/png', href='css/images/favicon.png')
+        style.
+            html,body,.root,.app{height:100%;width:100%;padding:0;margin:0;overflow:hidden;}
+        link(rel='stylesheet', href='libs/foundation.min.css')
+        link(rel='stylesheet', href='css/base.css?#{appVersion}')
+        link(rel='stylesheet', href='css/home.css?#{appVersion}')
+        link(rel='stylesheet', type='text/css', href='//cloud.github.com/downloads/lafeber/world-flags-sprite/flags16.css')
+        link(rel='stylesheet', type='text/css', href='//cdn.jsdelivr.net/jquery.slick/1.4.1/slick.css')
+
+        <!--[if lt IE 9]>
+        script(src='libs/es5-shim.min.js')
+        script(src='libs/es5-sham.min.js')
+        script(src='libs/html5shiv.js')
+        <![endif]-->
+        script.
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-35900039-4', 'auto', {'name':"A"});
+            ga('A.send', 'pageview');
+            ga('create', 'UA-1981181-14', 'auto', {'name':"B"});
+            ga('B.send', 'pageview');
+            ga('create', 'UA-48182293-1', 'auto', {'name':"C",'cookieDomain':"'fires.globalforestwatch.org']"});
+            ga('C.send', 'pageview');
+        
+    body.tundra.crl
+        div.root
+            include templates/header.jade
+            div.app-body#homeBody
+                div#backgroundImage
+                    div#slides
+                        div#imageOne
+                            label.slideLabel(for='carousel-item-1') This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI
+                        div#imageTwo
+                            label.slideLabel(for='carousel-item-2') This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI
+                        div#imageThree
+                            label.slideLabel(for='carousel-item-3') This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI
+                        div#imageFour
+                            label.slideLabel(for='carousel-item-4') This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI
+                        div#imageFive
+                            label.slideLabel(for='carousel-item-5') This image was taken with the consent and cooperation of the Yudja Indigenous people and the authorization of the Brazilian National Indian Foundation - FUNAI
+
+                div#homeText
+                    
+                    button#launch-map.launch-map-button Launch Interactive Map
+                    div#language-flags.f16 Language:
+                            li#spanishFlag.flag.flags.es
+                            li#frenchFlag.flag.flags.fr
+                            li#portugalFlag.flag.flags.pt
+                            li#indonesiaFlag.flag.flags.id
+                            li#britishFlag.flag.flags.gb
+                            
+                        //- #britishFlag.flags(alt='British')
+                        //- #germanFlag.flags(alt='German')
+                        //- #japanFlag.flags(alt='Japanese')
+                        //- #chinaFlag.flags(alt='Chinese')
+                        //- #frenchFlag.flags(alt='French')
+
+                    div(style='font-size:15px;')
+                        div#launch-dialog-content
+                            div
+                                p.launch-dialog-content
+                                    span.introTextTitle The Global Platform of Indigenous and Community Lands
+                                    |  is a dynamic, online mapping tool that provides critical information on collective land and natural resource rights around the world. The 
+                                    span.introTextSub Global Platform
+                                    |  supports local livelihoods and well-being by increasing the visibility of indigenous and community lands, and presenting crucial information on the state of land rights. It provides indigenous peoples and communities with a way to show the world the land and resources that they hold and use, and to be proactive in responding to the growing threats they face.
+                                  p
+                                    | The 
+                                    a(href='http://www.ibcperu.org/' target='_blank' class='introTextSub') Instituto del Bien Com&uacute;n
+                                    |  (IBC) and the 
+                                    a(href='http://www.wri.org' target='_blank' class='introTextSub') World Resources Institute
+                                    |  (WRI) have co-led the development of the
+                                    span.introTextSub  Global Platform
+                                    |  with guidance from a Steering Group that includes some of the world&rsquo;s leading land rights organizations (see 
+                                    a(href='about.html' class='introTextSub') About page
+                                    | ).  The 
+                                    span.introTextSub  Global Platform
+                                    |  presents national and local level information, providing both an overview of collective land rights within each country and detailed information on the location and legal status of specific indigenous and communities lands.
+                                  p
+                                    | We need your help to ensure that the 
+                                    span.introTextSub  Global Platform
+                                    |  is current and comprehensive. The status of collective land rights and the state of indigenous and community lands can change when national laws and regulations are reformed, when communities map and demarcate their lands, and when indigenous peoples register their lands for formal recognition.
+                                  p
+                                    | We call on individuals and organizations with first-hand knowledge of indigenous and community lands to help complete the 
+                                    span.introTextSub  Global Platform
+                                    | .  Many representatives of indigenous peoples and communities, civil society organizations, governments and researchers from around the world have contributed to the current database, but there remain many gaps. We encourage all users to explore the 
+                                    span.introTextSub  Global Platform
+                                    | , provide feedback on how to improve the tool, and, for those who hold data, work with us to add your information on indigenous and community lands (
+                                    a(href='contact.html' class='introTextSub') Contact Us
+                                    ).
+                        div#launch-dialog-content-french
+                            div
+                                p.launch-dialog-content
+                                    span.introTextTitle La Plateforme Globale des Terres Autochtones et Communautaires
+                                    |  est un outil cartographique dynamique en ligne offrant des informations cruciales sur les droits collectifs à la terre et aux ressources à travers le monde. La 
+                                    span.introTextSub Plateforme Globale
+                                    |  soutient les moyens de subsistance locaux et le bien être de ces populations en augmentant la visibilité des terres autochtones et communautaires, et présente des informations essentielles concernant l’état de leurs droits fonciers. Elle offre aux peuples autochtones et aux communautés une possibilité de montrer au monde les terres et ressources qu’ils détiennent et utilisent, et d’être proactifs dans la réponse aux menaces croissantes les concernant.
+                                  p
+                                    | L’ 
+                                    a(href='http://www.ibcperu.org/' target='_blank' class='introTextSub') Instituto del Bien Común
+                                    |  (IBC) et le 
+                                    a(href='http://www.wri.org' target='_blank' class='introTextSub') World Resources Institute
+                                    |  (WRI) ont codirigé le développement de la
+                                    span.introTextSub  Plateforme Globale
+                                    |   en consultation avec un Comité de Pilotage regroupant certaines des principales organisations mondiales relatives aux droits fonciers (voir 
+                                    a(href='about.html' class='introTextSub') A propos
+                                    | ).  La 
+                                    span.introTextSub  Plateforme Globale
+                                    |   présente des informations aux niveaux national et local, offrant à la fois une vue d’ensemble sur les droits fonciers collectifs au sein de chaque pays et des informations détaillées concernant l’emplacement et le statut légal de terres autochtones et communautaires spécifiques.
+                                  p
+                                    | Nous sollicitons votre aide afin de nous assurer de l’actualité et de la compréhensivité de la 
+                                    span.introTextSub  Plateforme Globale
+                                    | . Le statut des droits fonciers collectifs et l’état des terres autochtones et communautaires peuvent évoluer lors de réformes foncières nationales, lorsque les communautés cartographient et démarquent leurs terres, ou lorsque les peuples autochtones inscrivent leurs territoires dans un processus de reconnaissance formelle.
+                                  p
+                                    | Nous appelons les individus et organisations ayant des connaissances directes sur les terres autochtones et communautaires à aider à la complétion de la  
+                                    span.introTextSub  Plateforme Globale
+                                    | . Beaucoup de représentants autochtones et communautaires, d’organisations de la société civile, de gouvernements et de chercheurs du monde entier contribuent à construire cette base de données, mais de nombreux vides persistent. Nous encourageons tous les utilisateurs à explorer la 
+                                    span.introTextSub  Plateforme Globale
+                                    | , à nous conseiller sur les moyens d’améliorer cet outil, et, pour ceux disposant de données, à travailler avec nous pour ajouter vos informations concernant les terres communautaires et autochtones (
+                                    a(href='contact.html' class='introTextSub') nous contacter
+                                    ).
+                        div#launch-dialog-content-spanish
+                            div
+                                p.launch-dialog-content
+                                    span.introTextTitle La Plataforma Global de Tierras Indígenas y de la Comunidad
+                                    |  es una herramienta de mapeo dinámico en línea que proporciona información crítica sobre los derechos de la tierra y los recursos naturales de todo el mundo. La 
+                                    span.introTextSub Plataforma Global
+                                    |  apoya el desarrollo local  y la calidad de vida de las comunidades, mejorando su visibilidad  global y ofreciendo información clave  sobre sus derechos de tierra. . La Plataforma ofrece una tribuna global  en donde declarar sus tierras y recursos, y una herramienta estratégica para el manejo proactivo de potenciales factores que los amenacen.
+                                  p
+                                    | La 
+                                    span.introTextSub Plataforma Global 
+                                    | es el resultado del esfuerzo conjunto entre el 
+                                    a(href='http://www.ibcperu.org/' target='_blank' class='introTextSub') Instituto del Bien Común
+                                    |  (IBC) y el 
+                                    a(href='http://www.wri.org' target='_blank' class='introTextSub') Instituto de Recursos Mundiales
+                                    |  (WRI) con la orientación de su Grupo Directivo  que incluye a organizaciones líderes en el ámbito de los derecho de tierra (aquí la lista de 
+                                    a(href='about.html' class='introTextSub') organizaciones participantes
+                                    | ).  La 
+                                    span.introTextSub  Plataforma Global
+                                    |  ofrece información sobre derechos de tierra en forma agregada a nivel nacional y de manera detallada (ubicación y estatus legal) a nivel local.
+                                  p
+                                    | Necesitamos su ayuda para asegurarnos que la 
+                                    span.introTextSub  Plataforma Global
+                                    |  sea actualizada y completa. La condición de los derechos de tierra pueden cambiar cuando las leyes y reglamentos nacionales se modifican, o existan nuevas demarcaciones o registros formales por parte de las comunidades.
+                                  p
+                                    | Hacemos un llamado a las personas y organizaciones con conocimiento de primera mano acerca de las tierras indígenas y de la comunidad para ayudar a completar la 
+                                    span.introTextSub  Plataforma Global
+                                    | .  Muchos representantes  de las comunidades, organizaciones de la sociedad civil, gobiernos e investigadores de todo el mundo han contribuidocon la base de datos actual, pero sigue faltando información. Invitamos a todos los usuarios a visitar la 
+                                    span.introTextSub  Plataforma Global 
+                                    | ydar su opinión sobre cómo mejorar la herramienta. Para aquellos que puedan ofrecer información relevante, los invitamos a trabajar con nosotros  y mejorar los datos sobre los derechos de tierra (
+                                    a(href='contact.html' class='introTextSub') Contáctenos
+                                    ).
+                        div#launch-dialog-content-portuguese
+                            div
+                                p.launch-dialog-content
+                                    span.introTextTitle A Plataforma Global de Terras Indígenas de Comunidades Tradicionais
+                                    |  é uma ferramenta online de mapeamento dinâmico que fornece informações importantes sobre terras e direitos coletivos dos recursos naturais ao redor do mundo. A 
+                                    span.introTextSub Plataforma Global
+                                    |  apoia a subsistência e bem-estar local aumentando a visibilidade das terras indígenas e de comunidades tradicionais, e apresentando informações sobre o estado dos direitos à terra. Ela fornece uma maneira para povos e comunidades indígenas mostrarem ao mundo a terra e os recursos que detêm e usam, e serem pró-ativos sobre as ameaças que enfrentam.
+                                  p
+                                    | O 
+                                    a(href='http://www.ibcperu.org/' target='_blank' class='introTextSub') Instituto del Bien Común
+                                    |  (IBC) e do 
+                                    a(href='http://www.wri.org' target='_blank' class='introTextSub') World Resources Institute
+                                    |  (WRI) lideram o desenvolvimento da 
+                                    span.introTextSub  Plataforma Global
+                                    |  com a orientação de um grupo diretor que inclui algumas das principais organizações do mundo relacionadas aos direitos da terra (
+                                    a(href='about.html' class='introTextSub') Sobre
+                                    | ).  A 
+                                    span.introTextSub  Plataforma Global
+                                    |  apresenta informação nacional e local, e oferece uma visão geral dos direitos coletivos à terra dentro de cada país e informações detalhadas sobre a localização e a situação legal das terras indígenas e de comunidades tradicionais.
+                                  p
+                                    | Precisamos da sua ajuda para garantir que a 
+                                    span.introTextSub  Plataforma Global
+                                    |   continue atualizada e abrangente. A situação dos direitos coletivos à terra e o Estado em que se situam as terras indígenas e de comunidades tradicionais podem mudar quando as leis e regulamentos nacionais são reformados, quando as comunidades mapeam e demarcam suas terras, e quando os povos indígenas registram suas terras para o reconhecimento formal.
+                                  p
+                                    | Convocamos todos os indivíduos e organizações com conhecimento em primeira mão das terras indígenas e de comunidades tradicionais para ajudar a completar a 
+                                    span.introTextSub  Plataforma Global
+                                    | .  Representantes de povos indígenas e comunidades tradicionais, organizações da sociedade civil, governos e pesquisadores de todo o mundo têm contribuído para o banco de dados atual, mas ainda existem lacunas. Nós encorajamos todos os usuários a explorar a
+                                    span.introTextSub  Plataforma Global
+                                    | , fornecer feedback sobre como melhorar a ferramenta e, para aqueles que possuem dados, a trabalhar conosco para adicionar informações sobreterras indígenas e de comunidades tradicionais (
+                                    a(href='contact.html' class='introTextSub') Fale Conosco
+                                    ).
+                        div#launch-dialog-content-indonesia
+                            div
+                                p.launch-dialog-content
+                                    span.introTextTitle The Global Platform of Indigenous and Community Lands
+                                    |  (Platform Global untuk Lahan Adat dan Lahan Masyarakat) merupakan sebuah perangkat pemetaan online dan dinamis yang menyediakan informasi-informasi penting terkait hak tenurial dan sumber daya alam di seluruh dunia. Ini 
+                                    span.introTextSub Global Platform
+                                    |  mendukung kelangsungan mata pencaharian lokal dan kesejahteraan masyarakat dengan meningkatkan pengetahuan akan lahan adat dan lahan masyarakat, serta menyajikan informasi-informasi krusial dalam konteks hak tenurial. Platform ini memungkinkan masyarakat dan masyarakat adat untuk menunjukkan lahan dan sumber daya yang mereka miliki dan manfaatkan kepada dunia, serta untuk menjadi proaktif dalam menanggapi ancaman-ancaman yang mereka hadapi.
+                                  p
+                                    
+                                    a(href='http://www.ibcperu.org/' target='_blank' class='introTextSub') Instituto del Bien Común 
+                                    |  (IBC) bersama dengan 
+                                    a(href='http://www.wri.org' target='_blank' class='introTextSub') World Resources Institute
+                                    |  (WRI) memimpin pengembangan dari The 
+                                    span.introTextSub  Global Platform
+                                    |  melalui bimbingan sebuah Kelompok Pengarah yang terdiri atas beberapa organisasi terdepan dalam isu hak tenurial (lihat  
+                                    a(href='about.html' class='introTextSub') halaman Tentang
+                                    | ).  
+                                    span.introTextSub  Global Platform
+                                    |  ini menyajikan informasi pada level lokal dan nasional, menyediakan baik ikhtisar tentang hak-hak tenurial masyarakat di setiap negara maupun informasi detail terkait lokasi dan status legal dari lahan adat dan lahan masyarakat tertentu.
+                                  p
+                                    | Kami membutuhkan bantuan Anda untuk memastikan bahwa 
+                                    span.introTextSub  Global Platform
+                                    |  Global ini berjalan sesuai perkembangan dan informasi terkini secara komprehensif. Status dari hak tenurial serta kondisi lahan adat dan lahan masyarakat dapat berubah ketika hukum dan peraturan nasional direformasi, ketika masyarakat memetakan dan menentukan batas pada lahan mereka, dan ketika masyarakat adat mendaftarkan lahan mereka untuk mendapatkan pengakuan secara formal.
+                                  p
+                                    | Kami mengajak Anda dan organisasi-organisasi dengan informasi dan pengalaman langsung terkait lahan adat dan lahan masyarakat untuk membantu melengkapi 
+                                    span.introTextSub  Global Platform
+                                    | ini. Berbagai perwakilan dari masyarakat dan masyarakat adat, lembaga swadaya masyarakat, pemerintah, serta peneliti dari seluruh dunia telah berkontribusi dalam basis data terkini dalam platform ini, tetapi masih terdapat banyak kekurangan. Kami mengajak para pengguna untuk mengeksplorasi 
+                                    span.introTextSub  Global Platform
+                                    | ini, menyediakan kritik dan saran guna memperbaiki platform ini, dan, untuk bagi para wali data, silakan bekerja sama dengan kami untuk menambahkan informasi yang Anda miliki mengenai lahan adat dan lahan masyarakat (
+                                    a(href='contact.html' class='introTextSub') Hubungi Kami
+                                    ).
+
+                            
+
+        script(src='libs/jquery-2.1.3.min.js')
+        script(src='libs/foundation.min.js')
+        script(src='//cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js')
+
+        script.
+            var base = location.pathname.replace(/\/[^/]+$/, '');
+            window.require = {
+                baseUrl: base,
+                packages: [
+                    {name: 'libs', location: base + '/libs'},
+                    {name: 'home', location: base + '/js/home'},
+                    {name: 'main', location: base + '/js/home/main'}
+                ]
+
+            };
+
+        script(data-main='js/home/homeLoader.js?#{appVersion}', src='libs/require.js')
+
+        script.
+            $(document).foundation();
+            $("#home-page-link").addClass("exampleClass");
+            $('#launch-map').click(function() {
+                location.href = 'map.html';
+            });
+            // Thanks Foundation, Hack because the only foundation component
+            // does not work on mobile unless I do this, but it works on the map page
+            $('.toggle-topbar a').click(function(){});

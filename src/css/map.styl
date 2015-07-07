@@ -1,1 +1,1099 @@
 @import "config"
+@import "analysis"
+
+.launch-dialog-title
+	margin 0
+
+.launch-dialog-subtitle
+	font-style italic
+	font-size 14px
+	
+.launch-dialog-content
+	font-size 15px
+	
+.dijitDialog .dijitDialogCloseIcon
+	outline none !important
+	
+.dijitDialog a
+	color #2fa3d9
+	&:hover
+		text-decoration underline
+
+.brMap
+	background-color $mainBackground
+	/* For Mobile Menu When Open */
+	box-shadow -3px 0 2px #BBB
+	position absolute
+	bottom 0
+	right 0
+	left 0
+	top 0
+	
+body
+	font-family Arial
+	color #131313
+
+label
+	font-family Arial
+	color #131313
+	
+.map-component	
+	box-sizing initial
+	position absolute
+	z-index 30
+	
+.esriControlsBR
+	right 325px !important
+	
+.brMap .HomeButton .home
+	background url('images/map_tools_home.png') no-repeat center
+	border-bottom 1px solid black
+	background-color white
+	border-radius 0
+	cursor pointer
+	height 30px
+	width 30px
+	padding 0
+	
+.brMap .HomeButton .home:hover
+	background-color $esriHover
+	
+.tundra .dijitDialogTitleBar
+	background #055d7d !important
+	
+.tundra .dijitDialogCloseIcon
+	background url('images/close_x_symbol.png') no-repeat !important
+	top 8px !important
+	
+.tundra .dijitDialogTitle
+	color white
+	
+.legend-container
+	overflow hidden
+	width 283px
+	right 20px
+	z-index 50
+	bottom 5px
+	
+.legend-title-pane
+	padding-right 0
+	text-align left
+	height 32px
+	
+#legend-toggle
+	width 243px
+	color white
+	background-color #055d7d
+	font-family Arial
+	font-size 14px
+	line-height 32px
+	
+.legend-title
+	display inline-block
+	background white
+	line-height 37px
+	border-bottom 0
+	padding 0 12px
+	font-size 14px
+	height 32px
+	
+.legend-content
+	background-color white
+	border-bottom 12px
+	font-size 11px
+	font-weight normal
+	color #464646
+	border-top 0
+	
+	*
+		font-style normal !important
+		line-height: 1.1 !important
+	
+	.esriLegendLeft
+		font-size 11px
+	
+.esriLegendLayerLabel
+	padding-top 0 !important
+	
+#legend_indigenousLands_1 img, #legend_indigenousLands_2 img, #legend_indigenousLands_3 img
+	margin-right -1px !important
+
+// [id^="legend_indigenousLands_"] img
+//	margin-right 8px !important
+
+#legend_indigenousLands_0_group > table, #legend_nationalLevel_5 > table.esriLegendLayerLabel
+	font-size 14px
+	color #23426a
+	
+// #legend_indigenousLands_1 > table.esriLegendLayerLabel, #legend_indigenousLands_2 > table.esriLegendLayerLabel, #legend_indigenousLands_3 > table.esriLegendLayerLabel
+// font-style italic
+
+#legend_indigenousLands_0_group > table > tbody > tr > td,
+#legend_indigenousLands_10_group > table > tbody > tr > td,
+#legend_indigenousTransparency_17 > table:first-child > tbody > tr > td,
+#legend_indigenousLands_5_group > table > tbody > tr > td,
+#legend_nationalLevel_2 > table.esriLegendLayerLabel > tbody > tr > td,
+#legend_nationalLevel_0 > table.esriLegendLayerLabel > tbody > tr > td
+	font-size 11px
+	font-weight bold
+	color inherit
+	
+#legend_indigenousLands_0_group > table:first-child td
+	display block
+	font-size 11px
+	color #464646 !important
+	margin-bottom 5px
+
+#legend table
+	line-height 1.4
+	td[width="35"]
+		width 10px
+		img
+			margin-right 6px
+
+#infowindowContainer
+	position absolute
+	margin-left -325px
+	margin-top -260px
+	width 650px
+	height auto
+	max-height 542px
+	min-height 200px
+	z-index 150
+	left 50%
+	top 50%
+	// background-color white
+	overflow-y hidden
+	overflow-x hidden
+	
+.introTextTitle
+	color #055D7D
+	font-weight bold
+	
+#identifyNote
+	background-color #ececec
+	border-top solid 1px #E0E0E0
+	font-size 12px
+	padding 5px 5px 12px
+	
+.country
+	width 15%
+.name
+	width 22%
+.ident
+	width 21%
+.offic_rec
+	width 22%
+.rec_status
+	width 22%
+	border-right none !important
+
+.moreWidth
+	width 649px !important
+	
+#analysisTable
+	border-collapse collapse
+	margin-top 0
+	width 100%
+	font-size 12px
+	border none
+	overflow-x hidden
+
+.esriPopup .pointer.bottom
+	display none
+	
+#analysisTable > tbody > tr > td
+	border-right 1px solid #FBFBFB
+	padding 4px
+	padding-left 12px
+
+.esriLegendLeft
+	padding-left 0 !important
+	
+.esriLegendGroupLayer
+	padding-top 7px !important
+
+#legend .esriLegendService > div > table
+	padding-left 0
+
+.legend-content:not(.active)
+	overflow hidden
+	
+#legend
+	max-height 300px
+	overflow-y auto
+	padding-bottom 0
+	
+#legend #legend_msg 
+#legend .esriLegendServiceLabel
+	display none
+
+#legend .esriLegendService
+	padding 3px 14px 0
+
+#legend > div:nth-last-child(2)
+	padding-bottom 10px
+	
+.mobileLegendUpdate
+	border-top-right-radius 5px
+	border-bottom-right-radius 5px
+	-moz-border-radius-topright 5px
+	-moz-border-radius-bottomright 5px
+	-webkit-border-top-right-radius 5px
+	-webkit-border-bottom-right-radius 5px
+
+.button-widget
+	background-color white
+	border 1px solid black
+	border-radius(5px)
+	height 30px
+	width 30px
+	right 20px
+	
+.basemap-button
+.basemap-connector
+	top 120px
+	
+.locator-button
+	top 160px
+
+#share-widgets
+	padding 14px 15px 0
+
+#embedShare
+	display inline-block
+	cursor pointer
+	height 32px
+	width 32px
+	background url(images/embed_icon.png) no-repeat #fff
+	margin-left 2px
+	
+#mobile-legend-content
+	font-size: 11px
+	
+.addthis_sharing_toolbox
+	display inline-block
+	
+.share-button
+.share-connector	
+	top 200px
+	
+.print-button
+.print-connector	
+	top 240px
+	
+#indigenous-lands-help
+	position relative
+	display inline-block
+
+.basemap-icon
+	background url('images/map_tools_basemaps.png') no-repeat
+	height 16px
+	width 19px
+	margin-top 7px
+	margin-left 6px
+
+.basemap-button:hover, .LocateButton:hover, .share-icon:hover, .print-button:hover, .print-icon:hover
+	background-color #eee
+	
+.print-icon
+	background url('images/print-icon.png') 4px 8px no-repeat #fff
+	
+.share-icon
+	background url('images/map_tools_share.png') no-repeat
+	background-position 8px 8px
+	
+.share-icon, .print-icon
+	height 100%
+	width 100%
+
+#community-level-tree
+	padding-left 15px
+
+#national-layer-lists
+	padding 9px 0 0 15px
+	span
+		font-weight normal !important
+	.percent-indigenous-layer-list
+		padding-left 5px
+	
+#land-tenure-indigenous
+	margin-left -30px
+
+.tundra .dijitAccordionContainer
+	*
+		color #464646
+		font-size 13px
+	
+.tundra .dijitAccordionTitle
+	position relative
+	font-weight normal !important
+	margin-bottom: -9px !important
+	// background none !important
+	z-index 10
+	background url('images/ico-carat-right.png') 97% no-repeat	!important
+	+ .dijitAccordionChildWrapper
+		padding-top 10px
+
+.tundra .dijitAccordionTitle
+	padding 12px 8px !important
+
+.tundra .dijitAccordionTitleSelected
+	background url('images/ico-carat-down.png') 97% 95% no-repeat !important
+	
+.brMap .LocateButton .zoomLocateButton
+	background-color transparent
+	background-image url('images/map_tools_location.png')
+	padding 0
+
+.brMap .LocateButton .zoomLocateButton:hover
+	background-color transparent
+	background-image url('images/map_tools_location.png')
+	background-position 6px 6px
+	
+.brMap .LocateButton
+	background-position 6px 6px
+	
+.brMap .zoomLocateButton:hover
+	background-position -2px -36px
+	
+	
+#help-dialog-indigenous, #help-dialog-community, #help-dialog-completeness
+	width 300px
+
+.basemap-container
+	// border 1px solid black
+	background-color white
+	border-radius(5px)
+	overflow-y auto
+	height 400px
+	width 390px
+	right 60px
+	top 65px
+	
+.esriBasemapGalleryLabelContainer
+	font-size 13px
+	padding 5px 0
+	
+.esriBasemapGallery
+	margin 10px 5px
+	
+.share-container
+	// border 1px solid black
+	background-color white
+	border-radius(5px)
+	overflow-y auto
+	min-width 50px
+	height 60px
+	width auto
+	right 60px
+	top 185px
+
+.connector
+	// border-bottom 1px solid black
+	// border-top 1px solid black
+	background-color white
+	height 30px
+	right 48px
+	width 13px
+	
+.map-view-print .app-header
+	display none
+
+.map-view-print .app-body
+	top 0
+	height 100%
+	
+
+.map-view-print .map-component,
+.map-view-print #legend-container,
+.map-view-print #brMap_zoom_slider,
+.map-view-print #mobile-menu-toggle
+	display none !important
+	
+	
+.popup-header
+	font-weight normal
+	margin-bottom 0
+	padding-top 0
+	font-size 12px
+	color #055d7d
+
+
+.odd-row
+	background-color #f3f7fc
+	
+.even-row
+	background-color white
+	
+#column-header
+	background-color #ECECEC
+	//border-left 1px solid white
+	//border-right 1px solid white
+	border-bottom 1px solid white
+	position fixed
+	width 650px
+	
+#first-row
+	background-color blue
+
+.help-marker
+	position relative !important
+	display inline-block
+	background url('images/icon_question_mark.png') no-repeat
+	height 16px
+	width 16px
+	vertical-align middle
+	margin-top 0 !important
+	margin-left 5px
+	top 0 !important
+	cursor pointer
+		
+// .tundra .dijitAccordionContainer .help-marker
+// 	top 5px !important
+
+.esriPopup .esriPopupWrapper
+	box-shadow 0 10px 44px rgba(0, 0, 0, 0.22) !important;
+
+.esriPopup .titleButton.next,
+.esriPopup .titleButton.prev
+	top: 12px
+
+.popup-last
+	padding 12px 14px
+	font-size 12px
+	border-top 1px solid #c6c6c6
+	color #464646
+	margin-top 0
+	background #f7f7f7
+	
+	a
+		color #055D7D
+		text-decoration underline
+		float: right;
+		margin-left: 1em;
+
+#infowindowContainer
+	box-shadow 0 10px 44px rgba(0, 0, 0, 0.22) !important;
+
+#additionalInfo
+	position absolute
+	bottom 12px
+	right 4px
+	padding-right 10px
+	color #055D7D
+	text-decoration underline
+	font-weight normal
+	cursor pointer
+
+.esriSimpleSliderDecrementButton
+	border-top 1px solid #2fa3d9
+	background url(images/map_tools_minus.png) no-repeat #fff
+	background-position 7px 14px
+	
+.esriSimpleSliderIncrementButton
+	background url(images/map_tools_plus.png) no-repeat #fff
+	background-position 8px 7px
+
+.esriSimpleSlider
+	border-radius 0px !important
+	-webkit-border-radius 0px !important
+	color transparent !important
+
+.esriPopup
+	font-family Arial !important
+	font-size 14px !important
+
+.simpleGeocoder .esriGeocoder
+	border-radius 0px !important
+	-webkit-border-radius 0px !important
+	font-family Arial !important
+	
+.map-component
+	border-radius 0px !important
+	-webkit-border-radius 0px !important
+
+.analysis-buttons button
+	&:focus, &:active
+		outline 0 !important
+	
+#removeGraphic
+#exportAnalysis
+#draw-shape
+#upload-shapefile
+	padding 10px
+	margin 5px
+	display inline-block
+	width 47%
+	background-color #055D7D !important
+	left 9px
+		
+#removeGraphic
+#exportAnalysis
+#draw-shape
+#upload-shapefile
+#remove-graphics
+	&:hover
+		background-color #0A89B8 !important
+		
+#remove-graphics
+	margin-left 15px !important
+	margin-right -5px !important
+	
+#draw-shape
+	margin-left -13px !important
+	
+#draw-shape-icon
+	position absolute
+	margin-left -20px
+
+#upload-shapefile
+	position relative
+	text-indent 15px
+	&:before
+		display block
+		position absolute
+		content "\020"
+		width 30px
+		height 38px
+		background url(images/ico-upload.png) center no-repeat
+		background-size 17px
+		top 0
+		left 50%
+		margin-left -61px
+	
+#removeGraphic
+#remove-graphics
+	position relative
+	text-indent 15px
+	&:before
+		display block
+		position absolute
+		content "\020"
+		width 30px
+		height 38px
+		background url(images/ico-remove.png) center no-repeat
+		background-size 12px
+		top 0
+		left 50%
+		margin-left -50px
+		
+#remove-graphics
+	&:before
+		margin-left -59px
+
+#exportAnalysis
+	position relative
+	text-indent 15px
+	&:before
+		display block
+		position absolute
+		content "\020"
+		width 30px
+		height 38px
+		background url(images/ico-export.png) center no-repeat
+		background-size 17px
+		top 0
+		left 50%
+		margin-left -77px
+
+// #removeGraphic
+//	left 9px
+
+// .mobile-active
+// 	height auto !important
+
+#uploadComboNameWidget
+	height 0
+	
+#uploadNameSelectContainer
+	margin-top -10px
+	padding-bottom 10px
+	
+
+.dijitArrowButtonContainer > input
+	background-color white
+	border none
+	
+.tundra .dijitArrowButtonInner
+	background-color white !important
+	cursor pointer !important
+	
+.tundra .dijitButtonNode
+	background white !important
+	
+#remove-graphics
+	padding 10px
+	margin 5px
+	//display inline-block
+	width 30%
+	background-color #055D7D !important
+	
+.display-three
+	width 30% !important
+
+.tundra .dijitDialog
+	font-size 14px
+	
+.tundra .dijitDialogPaneContent
+	padding-top 0 !important
+	padding-bottom 0 !important
+	
+.tundra .dijitDialogTitle
+	font-weight normal !important
+
+.esriPopup .titleButton.close, 
+	// background none
+	// top 10px
+	// right 15px !important
+	// font-size 22px
+	// height 13px !important
+	// width 13px !important
+	
+	margin-right 10px !important
+	font-size 22px
+	height 13px !important
+	width 13px !important
+	margin-top 11px !important
+	float right
+	
+.titleButton.close
+	background none
+	margin-top -17px
+	margin-right 15px !important
+	font-size 22px
+	height 13px !important
+	width 13px !important
+	float right
+	cursor pointer
+		
+#title_title
+	float left
+	padding-right 10px
+
+#titleResults
+	font-size 12px
+	margin-left 20px
+	background none
+	color rgb(228, 219, 219)
+	font-style italic
+	display inline-block
+	margin-top 2px
+		
+.sizer.content
+	font-size 14px
+	overflow auto
+	
+.noPositioning
+	top 0px !important
+	bottom 0px !important
+	left 0px !important
+	right 0px !important
+	
+.esriPopup .titleButton.maximize, .titleButton.maximize
+	display none
+
+.esriPopup .titlePane, .titlePane
+	padding 10px 10px 10px 14px !important
+	-webkit-border-radius 0px 0px 0px 0px !important
+	border-bottom 1px solid black
+	font-size 16px
+	background-color #055d7d !important
+	font-family Arial !important
+	
+.titlePane
+	color white
+
+#aoiIntersect
+	background-color #2FA3D9
+	
+#analysis-dialog
+	width 550px
+	
+#analysis-content
+	font-size 14px
+	
+#mobile-tools-content
+	font-size 13px
+	.analysis-buttons
+		margin-left -5px
+
+.analysis-location
+	position absolute !important
+	left 50% !important
+	margin-left -325px !important
+	top 50% !important
+	margin-top -175px !important
+	
+// .esriPopup .pointer, .esriPopup .outerPointer
+//	display none
+
+.esriPopup .contentPane, .contentPane
+	// max-height none !important
+	padding 0 0px 0px 0px !important
+
+.odd-row, .even-row
+	border-top solid 1px #eee
+	padding 3px 14px
+	margin-left 0
+	font-size: 12px
+	&:first-child
+		padding-top 6px
+		border-top none
+
+.actionsPane
+	display none
+
+.tree-widget-container
+	bottom 20px
+	left 20px
+	top 20px
+	
+.layer-accordion
+	height 100%
+	width 100%
+
+.esriPopup .titleButton.restore
+	display none !important
+	
+.tree-node-info
+	background url(images/info-icon.png) no-repeat #fff
+	float right
+	background-size 20px 20px
+	height 20px
+	width 20px
+	margin-top -2px
+	margin-left -48px
+	color grey
+	cursor pointer
+	
+.tree-widget-title-pane 
+	background-color white
+	box-sizing initial
+	line-height 32px
+	height 32px
+	
+.tree-width
+	width 360px
+	
+.mobile .tree-width
+	// width 310px
+	width: 100%;
+	
+.mobile .dijitAccordionContainer
+	width 282px
+	
+#tree-title
+	background-color #055D7D
+	
+.tree-title-text
+	display inline-block
+	color white
+	
+.tree-title-text span
+	padding 0 12px
+	font-size 14px
+	font-family Arial
+
+.tree-container-toggle
+	display inline-block
+	padding 0 12px
+	margin-left -33px
+	color white
+	background-color #2FA3D9
+	
+// #tree-container-toggle
+// 	margin-left 0
+
+.tree-content
+	background-color white
+	position absolute
+	overflow hidden
+	
+.tundra .dijitAccordionTitle:first-child
+	border-top none !important
+	padding-top 8px
+	
+.tundra .dijitAccordionInnerContainer
+	padding-top 3px
+
+.tundra .dijitAccordionTitleSelected, .dijitAccordionContainer
+	border none !important
+	border-top 1px solid $mainBorder !important
+	// background-image none !important
+	padding-bottom 0 !important
+	
+.mobile .tree-content
+	bottom 0
+	left 0
+	top 0
+	
+.radio-button-container label
+	font-size 13px
+	
+.mobile .radio-button-container label
+	margin 0
+
+.brMap .tree-content.active
+	border none !important
+	border-top 0
+
+.tree-content .tester
+	height 200px
+	
+.analysis-button
+	border-radius(5px)
+	background-color white
+	text-align center
+	line-height 32px
+	height 32px
+	right 370px
+	top 20px
+	
+.simpleGeocoder .esriGeocoder input
+	font-family Arial
+
+.data-completeness-label, .analysis-button-label
+	font-size 13px
+	font-family Arial
+	
+.analysis-button-label
+.data-completeness-label
+.data-completeness-toggle
+	padding 0 10px
+	
+
+.data-completeness-label
+	padding-right 30px
+	
+.data-completeness-container
+
+	border-radius(5px)
+	background-color white
+	text-align center
+	line-height 32px
+	height 32px
+	right 505px
+	top 20px
+	
+.data-completeness-toggle
+	background-color #2fa3d9
+	display inline-block
+	height 32px
+	margin-left -15px
+	
+.esriSimpleSliderVertical .esriSimpleSliderIncrementButton
+	border-bottom 1px solid #2fa3d9 !important
+	
+#analysisLogo
+	background url("images/icon_analysis.png") no-repeat 9px
+	background-color #2fa3d9
+	width 33px
+	height 32px
+	display block
+	margin-left -33px
+	position absolute
+	
+.simpleGeocoder .esriGeocoder, .esriSimpleSlider, .button-widget
+	border none !important
+	
+.simpleGeocoder .esriGeocoder .esriGeocoderSearch
+	background url("images/magnifying_glass_symbol.png") no-repeat 9px !important
+	background-color #2fa3d9 !important
+	width 33px
+	height 32px
+	position absolute
+	left -37px
+	top -6px
+	opacity 100
+	
+.simpleGeocoder .esriGeocoder .esriGeocoderSearch:hover
+	opacity 100 !important
+	
+
+#completeness-slider
+	width 220px
+	margin-top 5px
+	
+.data-complete-checkbox-class
+	background url('images/checkbox_unchecked.png') no-repeat
+
+.data-complete-checkbox-class-checked
+	background url('images/checkbox_checked.png') no-repeat
+
+#data-complete-checkbox
+	height: 11px
+	width: 11px
+	display inline-block
+	cursor pointer
+	
+.geocoder-container
+	right 80px
+	top 20px
+
+.tundra .dijitSliderLeftBumper, .tundra .dijitSliderRightBumper
+	display none
+	
+.tundra .dijitSliderProgressBarH
+	background #2fa3d9 !important
+	height 8px
+	
+.tundra .dijitSliderRemainingBarH
+	background rgb(130, 130, 130) !important
+	height 8px
+	
+	
+.tundra .dijitSliderImageHandleH
+	background #055D7D !important
+	border-radius 50%
+	margin-top 1px
+	
+.simpleGeocoder .esriGeocoder input
+	box-shadow none
+	height 20px
+	
+.analysis-popup-button
+	display inline-block
+	margin 5px
+	background-color white
+	color black
+	outline 1px solid gray
+	font-size 14px
+	float right
+	margin-bottom 15px
+	margin-top -50px
+	padding 20px
+	padding-top 12px
+	padding-bottom 12px
+	width 80px
+	
+#legend-toggle-icon
+	//-background url('images/close_minus_symbol.png')
+	//background url(images/legendToggle.png) no-repeat #fff
+	-webkit-font-smoothing antialiased
+	-moz-osx-font-smoothing grayscale
+	height 32px
+	width 32px
+	line-height 32px
+	position absolute
+	display block
+	top 0
+	right 0
+	left auto !important
+	text-align center
+	font-size 22px
+	background-color #2FA3D9
+	// font-size 24px
+	// cursor pointer
+	
+.titlePane.analysis-header
+	font-size 21px !important
+	color black !important
+	background-color #F7F7F7 !important
+	border-bottom none
+	
+.title
+	//margin-bottom -5px
+	
+.highcharts-container
+	margin-top -20px
+	
+#printAnalysis
+	margin-right 20px
+	
+.tree-data-section
+	margin 10px
+	padding 5px
+	border 1px solid black
+
+.tree-data-section > span
+	cursor pointer
+	margin 0
+	
+// .national-menu-controls
+//	text-align center
+//	margin-top 10px
+//	margin-bottom 3px
+	
+// .national-segmented-menu-button:first-of-type
+//	border-top-left-radius 5px
+//	border-bottom-left-radius 5px
+//	-moz-border-radius-topleft 5px
+//	-moz-border-radius-bottomleft 5px
+//	-webkit-border-top-left-radius 5px
+//	-webkit-border-bottom-left-radius 5px
+//	border-right 0
+	
+// .national-segmented-menu-button:last-of-type
+//	border-top-right-radius 5px
+//	border-bottom-right-radius 5px
+//	-moz-border-radius-topright 5px
+//	-moz-border-radius-bottomright 5px
+//	-webkit-border-top-right-radius 5px
+//	-webkit-border-bottom-right-radius 5px
+//	border-left 1px solid black
+	
+// .national-segmented-menu-button.active
+//	background-color #888
+//	color #fff
+	
+// .national-segmented-menu-button
+//	border 1px solid #000
+//	text-align center
+//	padding 5px 10px
+//	color #000
+	
+#national-level-toggle_button
+	margin-top 5px
+	border-top solid 1px #ccc !important
+	
+.national-active-indicator
+	border 1px solid black
+	// background-color green
+
+#community-level-toggle
+	overflow-x hidden
+	// margin-top -11px
+	
+.tree-data-section input[type='radio']
+	margin 0 0 0 5px	
+	
+@import "ReactTree"
+@import "nationalLayerList"
+	
+body:not(.mobile) .launch-map-button
+	margin-right 10px
+	float right
+	
+	
+@media (max-width: 800px)
+	.national-layer-selection-label
+		font-size 11px
+		padding-right 0
+	// #infowindowContainer
+	// 	width 100%
+	#column-header
+		width auto
+	.esriPopupWrapper.noPositioning
+		width auto
+		right initial !important
+	#identifyNote
+		width auto
+		right initial !important
+		
+@media (max-width: 650px)
+	#infowindowContainer
+		width 98%
+		margin-left 0
+		left 1%
+		overflow-x auto
+	#column-header
+		width 98% !important
+		position inherit
+	#fillerColumn
+		display none
+
+@media (max-width: 1050px)
+	.wri-header-attribution
+		display none
+

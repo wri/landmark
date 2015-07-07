@@ -1,0 +1,81 @@
+.checkbox-tree .collapsed ul
+	display none
+
+.checkbox-tree
+	padding-left 5px
+	font-size 12px
+	margin 0
+	
+.checkbox-tree ul	
+	// text-indent -30px
+	// margin-left 30px
+	// padding 0
+	
+.checkbox-tree .disabled .tree-node-label
+	cursor not-allowed
+	color #BBB
+
+.checkbox-tree
+.checkbox-tree ul
+	list-style-type none
+	padding 0
+	margin-top 0
+	li
+		position relative
+		line-height 1.4
+	&:not(:first-child)
+		padding-left 20px
+		position relative
+		&:not(:last-child):before
+			position absolute
+			display block
+			content "\020"
+			width 1px
+			height calc(100% + 23px)
+			background #c2c2c2
+			top -8px
+			left 11px
+		&:after
+			position absolute
+			display block
+			content "\020"
+			width 14px
+			height 1px
+			background #c2c2c2
+			top 15px
+			left 11px
+
+.tree-node-label
+	cursor pointer
+	padding 5px
+	
+.tree-node-label-disabled
+	//cursor not-allowed
+	padding 5px
+	text-decoration line-through
+	
+	
+.tree-node-label:active
+	text-shadow -1px -1px 1px #DDD
+	outline 1px solid $webkitBlue
+	
+/* Make sure this only targets .tree-content when in desktop view */
+body:not(.mobile) .tree-widget-container .tree-content
+	// overflow-y auto
+	// max-height 80%
+	bottom 0
+	top 32px
+	
+.checkbox-tree input[type='checkbox']
+	margin 0 5px
+	
+.checkbox-tree .tree-row-content
+	padding 5px 0
+	
+.checkbox-tree .tree-toggle-symbol
+	display none;
+	// font-size 16px
+	// cursor pointer
+	
+.mobile .checkbox-tree
+	font-size 14px

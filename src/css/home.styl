@@ -1,0 +1,174 @@
+@import "config"
+
+body
+	font-family Arial
+
+button:focus
+button:active
+	outline 0 !important
+	
+#backgroundImage
+	// background url(images/homeBackground.jpg)
+	height 100%
+	width 800px
+	float left
+	margin-right 35px
+	// background-position-x -450px
+	// background-position-y -50px
+	
+#imageOne, #imageTwo, #imageThree, #imageFour, .slick-list, .slick-track
+	height 100%
+	
+#slides
+	height 100%
+	
+.slideLabel
+	position absolute
+	width 760px
+	height 50px
+	background rgba(0,0,0,0.5)
+	bottom 0
+	color white
+	padding 20px
+	
+#imageOne
+	background url(images/6J7A0256.jpg)
+	background-position -800px center;
+	
+#imageTwo
+	background url(images/6J7A0277.jpg)
+	background-position -100px -80px;
+	
+#imageThree
+	background url(images/6J7A0319.jpg)
+	background-position -400px center;
+	
+#imageFour
+	background url(images/6J7A0494.jpg)
+	background-position -600px center;
+
+#imageFive
+	background url(images/6J7A0443.jpg)
+	background-position -350px center;
+	
+.slick-next:hover, .slick-prev:hover, .slick-next:focus, .slick-prev:focus
+	background-color gray
+	
+.slick-prev, .slick-next
+	position absolute !important
+	top 50% !important
+	background-color black
+	width 40px
+	height 40px
+	padding 25px
+	border 1px solid white
+
+.slick-next
+	right 0 !important
+	
+
+#homeBody
+	background-color white
+
+#homeText
+	padding 10px
+	padding-right 50px
+	padding-left 25px
+	background-color white
+	height 100%
+	overflow scroll
+	
+	a:hover
+		text-decoration underline
+	
+#launch-map
+	color #055D7D
+	padding-bottom 10px
+	padding-top 10px
+	padding-left 30px
+	padding-right 30px
+	border 2px solid lighten(#2FA3D9, 30%)
+	background-color white
+	border-radius 5px
+	-moz-border-radius 5px
+	-webkit-border-radius 5px
+	font-weight bold
+	margin-top 25px
+	
+	&:hover
+		border-color lighten(#2FA3D9, 5%)
+	
+#language-flags
+	display inline-block
+	float right
+	margin-top 25px
+	padding 10px
+	color gray
+	
+.flags
+	display inline-block
+	margin 4px
+	margin-top 2px
+	cursor pointer
+
+a.introTextSub
+	color #2FA3D9
+	cursor pointer
+
+.introTextTitle
+	color #055D7D
+	font-weight bold
+	font-size 17px
+	
+.slick-dots
+	position absolute
+	bottom 100px
+	display inline-flex
+	margin-left -125px
+	left 50%
+	text-decoration none
+	list-style none
+	
+// .slick-dots li button:before
+// 	content "" !important
+
+.slick-dots li button
+	border-radius 10px
+	background:rgba(255,255,255,0.5)
+	display inline
+	float left
+	padding 10px
+	margin 10px
+
+li.slick-active button 
+	background#FFF
+
+#launch-dialog-content-french, #launch-dialog-content-spanish, #launch-dialog-content-portuguese, #launch-dialog-content-indonesia
+	display none
+
+
+
+@media (max-width: 1200px)
+	#backgroundImage
+		width 60%
+	#homeText
+		margin-right 0px
+	.slideLabel
+		width 500px
+		
+@media (max-width: 1050px)
+	.top-bar .name h1 a
+		font-size 16px
+	.wri-header-attribution
+		display none
+		
+@media (max-width: 1000px)
+	.slideLabel
+		width 400px
+		
+@media (max-width: 850px)
+	#backgroundImage
+		display none
+	#homeText
+		position absolute
+//#homeText

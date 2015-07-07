@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Community Rights</title>
+    <title>LandMark: Global Platform of Indigenous and Community Lands</title>
     <meta name="author" content="BlueRaster, WRI">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
+    <link rel="shortcut icon" type="image/png" href="css/images/favicon.png">
     <style>html,body,.root{height:100%;width:100%;padding:0;margin:0;}</style>
     <link rel="stylesheet" href="libs/foundation.min.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/data.css"><!--[if lt IE 9]>
+    <link rel="stylesheet" href="css/base.css?1.0.0">
+    <link rel="stylesheet" href="css/data.css?1.0.0"><!--[if lt IE 9]>
     <script src="libs/es5-shim.min.js"></script>
     <script src="libs/es5-sham.min.js"></script>
     <script src="libs/html5shiv.js"></script><![endif]-->
@@ -17,31 +18,63 @@
   <body class="tundra crl">
     <div class="root">
       <header class="app-header">
-        <div class="wri-header-attribution">
-          <div class="inner">A Partnership covened by the Instituto del Bien Comun and the World Resources Institute in collaboration with numerous other organizations.</div>
-        </div>
-        <nav role="navigation" data-topbar class="top-bar">
-          <ul class="title-area">
-            <li class="name">
-              <h1><a>Global Map of Indigenous and Community Lands</a></h1>
-            </li>
-            <li class="toggle-topbar menu-icon"><a><span></span></a></li>
-          </ul>
-          <section class="top-bar-section">
-            <ul class="right">
-              <li><a href="./">Home</a></li>
-              <li><a href="./">Map</a></li>
-              <li><a href="./data">Data</a></li>
-              <li><a href="./about">About</a></li>
-              <li><a href="./contact">Contact Us</a></li>
+        <div style="position: relative;">
+          <div class="wri-header-attribution">
+            <div class="inner">A partnership convened by the Instituto del Bien Comun and the World Resources Institute in collaboration with numerous other organizations.</div>
+          </div>
+          <nav role="navigation" data-topbar class="top-bar">
+            <ul class="title-area">
+              <li class="name">
+                <h1><a href="./index.html"><img alt="Global Platform of Indigenous and Community Lands" width="515" height="60" src="./css/images/logo.png"></a></h1>
+              </li>
+              <li class="toggle-topbar menu-icon"><a><span></span></a></li>
             </ul>
-          </section>
-        </nav>
+            <section class="top-bar-section">
+              <ul class="right">
+                <li><a id="home-page-link" href="./index.html">Home</a></li>
+                <li><a id="map-page-link" href="./map.html">Map</a></li>
+                <li><a id="data-page-link" href="./data.html">Data</a></li>
+                <li><a id="about-page-link" href="./about.html">About</a></li>
+                <li><a id="institutions-page-link" href="./institutions.html">Institutions</a></li>
+                <li><a id="contact-page-link" href="./contact.html">Contact Us</a></li>
+              </ul>
+            </section>
+          </nav>
+        </div>
       </header>
-      <div class="app-body"></div>
+      <div class="app-body">
+        <div id="dataTitle">
+          <h1>Data</h1>
+        </div>
+        <div id="dataAccordion"></div>
+      </div>
     </div>
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="libs/jquery-2.1.3.min.js"></script>
     <script src="libs/foundation.min.js"></script>
-    <script>$(document).foundation();</script>
+    <script>
+      var base = location.pathname.replace(/\/[^/]+$/, '');
+      window.require = {
+      	baseUrl: base,
+      	packages: [
+      		{name: 'libs', location: base + '/libs'},
+      		{name: 'data', location: base + '/js/data'},
+      		{name: 'components', location: base + '/js/components'}
+      	],
+      	map: {
+      		'*': {
+      			'react': 'http://fb.me/react-0.12.2.min.js'
+      		}
+      	}
+      };
+      
+    </script>
+    <script data-main="js/data/dataLoader.js?1.0.0" src="libs/require.js"></script>
+    <script>
+      $(document).foundation();
+      $("#data-page-link").addClass("exampleClass");
+      // Thanks Foundation, Hack because the only foundation component
+      // does not work on mobile unless I do this, but it works on the map page
+      $('.toggle-topbar a').click(function(){});
+    </script>
   </body>
 </html>

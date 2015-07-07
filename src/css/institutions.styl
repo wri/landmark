@@ -1,0 +1,218 @@
+@import "config"
+
+body
+	font-family Arial
+
+#institutionsTitle
+	max-width 1120px
+	margin-left 0
+	text-align center
+	*
+		font-style normal
+	@media (min-width: 1501px)
+		margin-left 250px
+
+.accordion-Controls
+	float left
+	width 300px
+	margin-left 250px
+	position relative
+	z-index 5
+	
+// u, a
+// 	text-decoration underline !important //because this screws up the top bar
+// 	cursor pointer
+
+table
+
+	innerBorderColor = lighten(#ccc, 35%)
+
+	border solid #ccc !important
+	border-width 0 1px 1px 0 !important
+	margin 1.5em 0
+
+	td
+		border-left solid 1px innerBorderColor !important
+		padding 0.35em 0.5em
+		
+		:first-child
+			margin-top 0
+		:last-child
+			margin-bottom 0
+		
+	tr:nth-child(even)
+		background #F3F7FC !important
+	
+	tr:not(:first-child), td
+		border-top solid 1px innerBorderColor !important
+
+table#institutions-developers
+table#institutions-steering-group
+
+	td
+		padding 0.8em 1em
+		
+		&:first-child
+			text-align center
+			a 
+				color transparent // For IE, removes border from images
+			
+	tr:nth-child(even)
+		background transparent !important
+
+
+
+u
+	text-decoration underline
+	color #2FA3D9
+	cursor pointer
+
+img
+	cursor pointer
+
+table, th, td
+	border-spacing 0
+	
+.developers-website
+	text-align center
+	color transparent
+	
+.levelTitle
+	color black !important
+	cursor auto
+
+.accordion-Title
+	border-top 1px solid #ccc
+	border-bottom 1px solid #ccc
+	height 55px
+	padding-left 50px
+	background #f2f2f3
+	
+.caret-down
+	display inline-block
+	height 10px
+	width 8px
+	background url(images/static-icons.png) 0 -222px no-repeat
+	
+.panel-Title
+	display block
+	line-height 56px
+	padding-left 46px
+	border-bottom 1px solid #ccc
+	cursor pointer
+	font-size 14px
+	//font-family fira_sans_otmedium
+	color #464052
+	background rgba(242, 242, 243, 0.49) !important
+	border-right 1px solid #ccc
+
+// .institutions-Accordion-Title
+// 	text-align center
+
+.institutionsImageLeft
+	cursor pointer
+	margin-top 400px
+	
+#wriLink
+	margin-top 0
+	
+	
+#waipt, #rri, #fpp, #ilc, #rfuk, #fes, #pafid, #aman, #ibc, #wriDiv
+	width 475px
+	float right
+	margin-top 0
+	mergin-left 5px
+
+#wriDiv
+	margin-top -15px
+	
+#ibc
+	margin-top -85px
+	
+#waipt
+	margin-top -100px
+	
+#rri
+	margin-top -240px
+	
+#fpp
+	margin-top -120px
+
+#ilc
+	margin-top -80px
+	
+#rfuk
+	margin-top -100px
+	
+#fes
+	margin-top -70px
+
+#pafid
+	margin-top -65px
+	
+#aman
+	margin-top -190px
+
+
+#injectPartners > p
+	width 475px
+	float right
+	margin-top 0
+	mergin-left 5px
+	
+#rainForestUKLogo
+	background url('images/rainUKLogo.png')
+	height 80px
+	width 300px
+	
+.institutions-Accordion
+	float left
+	width 800px
+	border-left 1px solid #ccc
+	padding 10px 20px
+	margin-left -1px
+	
+	a
+		color #2FA3D9
+		text-decoration none
+		&:hover
+			text-decoration underline
+	
+.institutionsSteeringText li
+	list-style none
+	padding-top 10px
+
+.active
+	background white !important
+	border-bottom 4px solid #055d7d
+	border-right none
+	
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)
+	.developers-website
+		color transparent
+	
+@media (max-width: 1500px)
+	.accordion-Controls
+		margin-left 0px
+		
+@media (max-width: 1050px)
+	.top-bar .name h1 a
+		font-size 16px
+	.wri-header-attribution
+		display none
+		
+@media (max-width: 1000px)
+	.institutions-Accordion
+		width auto
+	.institutionsImageLeft
+		display block
+		margin-top 400px !important
+	#wriDiv, #ibc, #waipt, #rri, #fpp, #ilc, #rfuk, #fes, #pafid, #aman, #injectPartners > p
+		margin-top 0
+		float left
+	#wriLink
+		margin-top 0 !important
+	#pafidMedia, #fesMedia
+		margin-top 475px !important
+	#rightsMedia
+		margin-top 450px !important
