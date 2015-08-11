@@ -37,13 +37,13 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             //     visible: true
             // },
 
-            'indigenousTransparency': {
-                url: indigenousLandsUrl,
-                type: 'dynamic',
-                // Not all the layers are present in the tree, when they are, include 0 - 9
-                defaultLayers: [17], //[0,1,2,3,4,5,6,7,8,9]
-                visible: true
-            },
+            // 'indigenousTransparency': {
+            //     url: indigenousLandsUrl,
+            //     type: 'dynamic',
+            //     // Not all the layers are present in the tree, when they are, include 0 - 9
+            //     defaultLayers: [17], //[0,1,2,3,4,5,6,7,8,9]
+            //     visible: true
+            // },
             'nationalLevel': {
                 url: nationalLevelUrl,
                 type: 'dynamic',

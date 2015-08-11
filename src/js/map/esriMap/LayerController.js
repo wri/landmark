@@ -21,7 +21,7 @@ define([
             brApp.debug('LayerController >>> updateVisibleLayers');
             var visibleLayers = [],
                 dynamicLayer, 
-                dynamicLayer2,
+                // dynamicLayer2,
                 self = this;
 
 
@@ -56,7 +56,7 @@ define([
 
             } else {
                 dynamicLayer = brApp.map.getLayer('indigenousLands');
-                dynamicLayer2 = brApp.map.getLayer('indigenousTransparency');
+                // dynamicLayer2 = brApp.map.getLayer('indigenousTransparency');
 
                 if (keys.length === 0) {
                     visibleLayers.push(-1);
@@ -66,15 +66,15 @@ define([
                     });
                 }
 
-                if (document.getElementById('data-complete-checkbox').getAttribute("data-checked") == "true" && keys.length > 0) {
-                    dynamicLayer2.show();
-                } else {
-                    dynamicLayer2.hide();
-                }
+                // if (document.getElementById('data-complete-checkbox').getAttribute("data-checked") == "true" && keys.length > 0) {
+                //     dynamicLayer2.show();
+                // } else {
+                //     dynamicLayer2.hide();
+                // }
 
                 if (visibleLayers[0] === -1) {
 
-                    $("#data-completeness-container").hide();
+                    // $("#data-completeness-container").hide();
                     $("#analysis-button").hide();
 
                     $("#legendMenuButton").addClass("mobileLegendUpdate");
@@ -89,7 +89,7 @@ define([
                     $("#toolsMenuButton").show();
 
                     //if its already showing, dont show it
-                    $("#data-completeness-container").show();
+                    // $("#data-completeness-container").show();
                     $("#analysis-button").show();
 
                 }                
@@ -118,16 +118,16 @@ define([
             // }
 
             var oppositeLayer = brApp.map.getLayer('indigenousLands');
-            var oppositeLayer2 = brApp.map.getLayer('indigenousTransparency');
+            // var oppositeLayer2 = brApp.map.getLayer('indigenousTransparency');
 
             oppositeLayer.setVisibleLayers([-1]);
-            oppositeLayer2.hide();
+            // oppositeLayer2.hide();
 
             // Turn off all the checkboxes in the Community Level Tree
             // This will call MapController.resetCommunityLevelTree
             topic.publish('reset-community-tree');
             // Hide these buttons
-            $("#data-completeness-container").hide();
+            // $("#data-completeness-container").hide();
             $("#analysis-button").hide();
         },
 

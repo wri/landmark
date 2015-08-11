@@ -78,7 +78,7 @@ define([
             });
 
             on(document.getElementById('upload-shapefile'), 'click', WidgetsController.toggleUploadForm);
-            on(document.getElementById('data-complete-checkbox'), 'click', self.showDataComplete);
+            // on(document.getElementById('data-complete-checkbox'), 'click', self.showDataComplete);
             on(document.getElementById('draw-shape'), 'click', DrawTool.activate);
             on(document.getElementById('remove-graphics'), 'click', self.removeAllGraphics);
 
@@ -120,7 +120,7 @@ define([
                 locateButton,
                 layerAccordion,
                 homeWidget,
-                transparencySlider,
+                // transparencySlider,
                 geocoder,
                 legend,
                 node;
@@ -173,22 +173,22 @@ define([
                 title: 'National Level Data'
             }, 'national-level-toggle'));
 
-            transparencySlider = new HorizontalSlider({
-                //value: 80,
-                minimum: 0,
-                maximum: 100,
-                title: 'Set layer transparency',
-                discreteValues: 100,
-                showButtons: false,
-                intermediateChanges: false,
-                onChange: function(value) {
-                    self.changeOpacity(value);
-                }
-            }, "completeness-slider");
+            // transparencySlider = new HorizontalSlider({
+            //     //value: 80,
+            //     minimum: 0,
+            //     maximum: 100,
+            //     title: 'Set layer transparency',
+            //     discreteValues: 100,
+            //     showButtons: false,
+            //     intermediateChanges: false,
+            //     onChange: function(value) {
+            //         self.changeOpacity(value);
+            //     }
+            // }, "completeness-slider");
 
-            transparencySlider.startup();
+            // transparencySlider.startup();
 
-            transparencySlider.setValue(50);
+            // transparencySlider.setValue(50);
 
             communityTree = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
             nationalLayerList = new NationalLayerList('national-layer-lists');
@@ -209,7 +209,7 @@ define([
             DrawTool.init();
             on(document.getElementById('indigenous-lands-help'), 'click', WidgetsController.showHelp);
             //on(document.getElementById('community-lands-help'), 'click', WidgetsController.showHelp);
-            on(document.getElementById('analysis-help'), 'click', WidgetsController.showHelp);
+            // on(document.getElementById('analysis-help'), 'click', WidgetsController.showHelp);
 
             //brApp.map.infoWindow.on("selection-change", function() {
 
@@ -1022,12 +1022,12 @@ define([
             $('#upload-shapefile').removeClass('display-three');
         },
 
-        changeOpacity: function(op) {
-            brApp.debug('MapController >>> changeOpacity');
-            var dataCompleteness = brApp.map.getLayer("indigenousTransparency");
-            dataCompleteness.setOpacity(op / 100);
+        // changeOpacity: function(op) {
+        //     brApp.debug('MapController >>> changeOpacity');
+        //     var dataCompleteness = brApp.map.getLayer("indigenousTransparency");
+        //     dataCompleteness.setOpacity(op / 100);
 
-        },
+        // },
 
         queryEmptyLayers: function() {
             brApp.debug('MapController >>> queryEmptyLayers');
@@ -1068,34 +1068,34 @@ define([
         },
 
 
-        showDataComplete: function() {
-            brApp.debug('MapController >>> showDataComplete');
+        // showDataComplete: function() {
+        //     brApp.debug('MapController >>> showDataComplete');
 
-            var complete = brApp.map.getLayer('indigenousTransparency');
+        //     var complete = brApp.map.getLayer('indigenousTransparency');
 
-            var imageUrlChecked = "url('css/images/checkbox_checked.png')";
-            var imageUrlUnchecked = "css/images/checkbox_unchecked.png";
+        //     var imageUrlChecked = "url('css/images/checkbox_checked.png')";
+        //     var imageUrlUnchecked = "css/images/checkbox_unchecked.png";
 
-            if (this.getAttribute("data-checked") === 'false') {
+        //     if (this.getAttribute("data-checked") === 'false') {
 
-                $('#data-complete-checkbox').removeClass('data-complete-checkbox-class').addClass('data-complete-checkbox-class-checked');
-                complete.visibleLayers.push(17);
-                this.setAttribute("data-checked", "true")
-                $("#completeness-slider").show();
-            } else {
-                $('#data-complete-checkbox').removeClass('data-complete-checkbox-class-checked').addClass('data-complete-checkbox-class');
-                var index = complete.visibleLayers.indexOf(17);
-                complete.visibleLayers.splice(index, 1);
-                this.setAttribute("data-checked", "false")
-                $("#completeness-slider").hide();
-            }
-            topic.publish('refresh-legend');
-            if (complete.visibleLayers.indexOf(17) > -1) {
-                complete.show();
-            }
-            complete.setVisibleLayers(complete.visibleLayers);
+        //         $('#data-complete-checkbox').removeClass('data-complete-checkbox-class').addClass('data-complete-checkbox-class-checked');
+        //         complete.visibleLayers.push(17);
+        //         this.setAttribute("data-checked", "true")
+        //         $("#completeness-slider").show();
+        //     } else {
+        //         $('#data-complete-checkbox').removeClass('data-complete-checkbox-class-checked').addClass('data-complete-checkbox-class');
+        //         var index = complete.visibleLayers.indexOf(17);
+        //         complete.visibleLayers.splice(index, 1);
+        //         this.setAttribute("data-checked", "false")
+        //         $("#completeness-slider").hide();
+        //     }
+        //     topic.publish('refresh-legend');
+        //     if (complete.visibleLayers.indexOf(17) > -1) {
+        //         complete.show();
+        //     }
+        //     complete.setVisibleLayers(complete.visibleLayers);
 
-        },
+        // },
 
         handleNationalToggle: function(evt) {
             brApp.debug('MapController >>> handleNationalToggle');
