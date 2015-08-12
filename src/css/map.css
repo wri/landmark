@@ -7,7 +7,7 @@
 
 /* line 1 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/config.styl */
 
-/* line 1098 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/config.styl */
+/* line 9 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/config.styl */
 
 /* line 1098 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/analysis.styl */
 
@@ -428,13 +428,13 @@ label {
 /* line 277 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .share-button,
 .share-connector {
-  top: 200px;
+  top: 160px;
 }
 
 /* line 281 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
 .print-button,
 .print-connector {
-  top: 240px;
+  top: 200px;
 }
 
 /* line 285 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
@@ -602,7 +602,7 @@ label {
   height: 60px;
   width: auto;
   right: 60px;
-  top: 185px;
+  top: 145px;
 }
 
 /* line 392 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/map.styl */
@@ -1224,7 +1224,7 @@ label {
   text-align: center;
   line-height: 32px;
   height: 32px;
-  right: 370px;
+  right: 70px;
   top: 20px;
 }
 
@@ -1464,7 +1464,7 @@ label {
   margin: 0 0 0 5px;
 }
 
-/* line 9 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/analysis.styl */
+/* line 81 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/analysis.styl */
 
 /* line 9 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/ReactTree.styl */
 
@@ -1580,7 +1580,7 @@ body:not(.mobile) .tree-widget-container .tree-content {
   font-size: 14px;
 }
 
-/* line 81 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/ReactTree.styl */
+/* line 76 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/ReactTree.styl */
 
 /* line 1 : /Users/lucascotner/Documents/Projects/2278-wri-global-map-of-indigenous-and-community-lands/src/css/nationalLayerList.styl */
 

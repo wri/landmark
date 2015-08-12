@@ -22,10 +22,11 @@ define([
     'dijit/layout/ContentPane',
     'dijit/layout/AccordionContainer',
     'esri/dijit/Legend',
-    'esri/dijit/Geocoder',
+    // 'esri/dijit/Geocoder',
     'esri/dijit/HomeButton',
-    'esri/dijit/LocateButton',
+    // 'esri/dijit/LocateButton',
     'esri/dijit/BasemapGallery',
+    'esri/dijit/Scalebar',
     "esri/request",
     "esri/geometry/Polygon",
     "esri/tasks/IdentifyTask",
@@ -37,7 +38,7 @@ define([
     "dijit/form/HorizontalRuleLabels",
     "esri/layers/LayerDrawingOptions"
 
-], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, NationalLayerList, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, Geocoder, HomeButton, LocateButton, BasemapGallery, esriRequest, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
+], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, NationalLayerList, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, HomeButton, BasemapGallery, Scalebar, esriRequest, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
 
     'use strict';
 
@@ -98,7 +99,6 @@ define([
             on(brApp.map, 'layers-add-result', function(layersAdded) {
 
                 var layerInfos = layersAdded.layers.map(function(layer) {
-                    console.log(layer.layer)
                     var li = {
                       layer: layer.layer,
                     }; 
@@ -144,22 +144,23 @@ define([
             brApp.debug('MapController >>> renderComponents');
             var basemapGallery,
                 self = this,
-                locateButton,
+                // locateButton,
                 layerAccordion,
                 homeWidget,
                 // transparencySlider,
-                geocoder,
+                // geocoder,
+                scalebar,
                 // legend,
                 node;
 
             // Build/Insert DOM nodes as Needed
-            geocoder = new Geocoder({
-                map: brApp.map,
-                autoComplete: true,
-                arcgisGeocoder: {
-                    placeholder: "Enter address"
-                }
-            }, "geocoder");
+            // geocoder = new Geocoder({
+            //     map: brApp.map,
+            //     autoComplete: true,
+            //     arcgisGeocoder: {
+            //         placeholder: "Enter address"
+            //     }
+            // }, "geocoder");
 
             node = dojoQuery('.esriSimpleSliderIncrementButton')[0];
             domConstruct.create('div', {
@@ -181,10 +182,16 @@ define([
             //     autoUpdate: true
             // }, "legend");
 
-            locateButton = new LocateButton({
+            scalebar = new Scalebar({
                 map: brApp.map,
-                highlightLocation: false
-            }, 'location-widget');
+                attachTo: "bottom-center",
+                scalebarUnit: "metric"
+            });
+
+            // locateButton = new LocateButton({
+            //     map: brApp.map,
+            //     highlightLocation: false
+            // }, 'location-widget');
 
             layerAccordion = new Accordion({
                 id: 'layer-accordion'
@@ -222,9 +229,9 @@ define([
 
             // Start all widgets that still need to be started
             basemapGallery.startup();
-            locateButton.startup();
+            // locateButton.startup();
             homeWidget.startup();
-            geocoder.startup();
+            // geocoder.startup();
             // legend.startup();
 
             //self.queryEmptyLayers();
