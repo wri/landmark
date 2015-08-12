@@ -95,6 +95,33 @@ define([
                 }
             });
 
+            on(brApp.map, 'layers-add-result', function(layersAdded) {
+
+                var layerInfos = layersAdded.layers.map(function(layer) {
+                    console.log(layer.layer)
+                    var li = {
+                      layer: layer.layer,
+                    }; 
+                    if (layer.layer.id === "indigenousLands") {
+                        li.hideLayers = [1,2,3,4];
+                    }
+                    return li;  
+                });
+                
+                var legend = new Legend({
+                    map: brApp.map,
+                    layerInfos: layerInfos,
+                    autoUpdate: true
+                }, "legend");
+                legend.startup();
+
+                requestAnimationFrame(function() {
+                    console.log("Done")
+                    legend.refresh(layerInfos)
+                })
+                
+            });
+
             //TODO: Check the presence of the analysis and data completeness buttons on smaller screens AFTER a layer is toggled on (if all layers were off)
             // --> In layerController's updateVisibleLayers function. 
 
@@ -122,7 +149,7 @@ define([
                 homeWidget,
                 // transparencySlider,
                 geocoder,
-                legend,
+                // legend,
                 node;
 
             // Build/Insert DOM nodes as Needed
@@ -148,11 +175,11 @@ define([
                 showArcGISBasemaps: true
             }, 'basemap-gallery');
 
-            legend = new Legend({
-                map: brApp.map,
-                layerInfos: [],
-                autoUpdate: true
-            }, "legend");
+            // legend = new Legend({
+            //     map: brApp.map,
+            //     layerInfos: [],
+            //     autoUpdate: true
+            // }, "legend");
 
             locateButton = new LocateButton({
                 map: brApp.map,
@@ -198,7 +225,7 @@ define([
             locateButton.startup();
             homeWidget.startup();
             geocoder.startup();
-            legend.startup();
+            // legend.startup();
 
             //self.queryEmptyLayers();
 
@@ -1194,6 +1221,29 @@ define([
 
         refreshLegend: function() {
             brApp.debug('MapController >>> refreshLegend');
+
+            // var layerInfos = layersAdded.layers.map(function(layer) {
+            //         console.log(layer.layer)
+            //         var li = {
+            //           layer: layer.layer,
+            //         }; 
+            //         if (layer.layer.id === "indigenousLands") {
+            //             li.hideLayers = [1,2,3,4];
+            //         }
+            //         return li;  
+            //     });
+                
+            //     var legend = new Legend({
+            //         map: brApp.map,
+            //         layerInfos: layerInfos,
+            //         autoUpdate: false
+            //     }, "legend");
+            //     legend.startup();
+
+            //     requestAnimationFrame(function() {
+            //         console.log("Done")
+            //         legend.refresh(layerInfos)
+            //     })
             registry.byId('legend').refresh();
 
         }

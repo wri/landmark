@@ -40,10 +40,7 @@ define([
 			var active = (this.state.active === item.id);
 
 			return (
-				<div className={'national-layer-list-item ' + (active ? 'active' : '')} 
-					key={item.id}
-					onClick={this.setActiveLayer.bind(this, item.id, item.layer)}
-				>
+				<div className={'national-layer-list-item ' + (active ? 'active' : '')} key={item.id} onClick={this.setActiveLayer.bind(this, item.id, item.layer)}>
 					<div className='national-layer-list-item-label'>{item.label}</div>
 					{
 						item.question ?
@@ -55,7 +52,6 @@ define([
 		},
 		/* jshint ignore:end */
 		setActiveLayer: function (key, layer) {
-			
 			this.setState({
 				'active': key
 			});
@@ -171,20 +167,7 @@ define([
     /* jshint ignore:start */
     render: function () {
     	return (
-    		<div className='national-level-layer-lists'>
-
-    			<div className='radio-button-container'>
-    				<label>
-    					<input 
-                            id='nationalLevelNone' 
-                            name='national-layer-selection' 
-                            type='radio' defaultChecked={true} 
-                            value='none'
-                            checked={this.state.active === 'none'}
-                            onChange={this.handleRadioChange} />
-    					<span className='national-layer-selection-label'>None</span>
-    				</label>
-    			</div>
+    		<div className='national-level-layer-lists'>	
 
                 <div className='radio-button-container'>
                     <label>
@@ -240,6 +223,19 @@ define([
     					 </div>
 
     			</div>
+
+                <div className='radio-button-container'>
+                    <label>
+                        <input 
+                            id='nationalLevelNone' 
+                            name='national-layer-selection' 
+                            type='radio' defaultChecked={true} 
+                            value='none'
+                            checked={this.state.active === 'none'}
+                            onChange={this.handleRadioChange} />
+                        <span className='national-layer-selection-label'>None</span>
+                    </label>
+                </div>
 
     			
 

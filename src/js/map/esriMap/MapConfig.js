@@ -291,7 +291,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
         }, {
             label: 'Resource Rights: Trees and forests',
             id: 'treesForestsRights',
-            question: false,
+            question: "Are trees and forests within indigenous lands under indigenous jurisdiction?",
             layer: 1
         }, {
             label: 'Resource Rights: Waters',

@@ -40,10 +40,7 @@ define([
 			var active = (this.state.active === item.id);
 
 			return (
-				React.createElement("div", {className: 'national-layer-list-item ' + (active ? 'active' : ''), 
-					key: item.id, 
-					onClick: this.setActiveLayer.bind(this, item.id, item.layer)
-				}, 
+				React.createElement("div", {className: 'national-layer-list-item ' + (active ? 'active' : ''), key: item.id, onClick: this.setActiveLayer.bind(this, item.id, item.layer)}, 
 					React.createElement("div", {className: "national-layer-list-item-label"}, item.label), 
 					
 						item.question ?
@@ -55,7 +52,6 @@ define([
 		},
 		/* jshint ignore:end */
 		setActiveLayer: function (key, layer) {
-			
 			this.setState({
 				'active': key
 			});
@@ -171,20 +167,7 @@ define([
     /* jshint ignore:start */
     render: function () {
     	return (
-    		React.createElement("div", {className: "national-level-layer-lists"}, 
-
-    			React.createElement("div", {className: "radio-button-container"}, 
-    				React.createElement("label", null, 
-    					React.createElement("input", {
-                            id: "nationalLevelNone", 
-                            name: "national-layer-selection", 
-                            type: "radio", defaultChecked: true, 
-                            value: "none", 
-                            checked: this.state.active === 'none', 
-                            onChange: this.handleRadioChange}), 
-    					React.createElement("span", {className: "national-layer-selection-label"}, "None")
-    				)
-    			), 
+    		React.createElement("div", {className: "national-level-layer-lists"}, 	
 
                 React.createElement("div", {className: "radio-button-container"}, 
                     React.createElement("label", null, 
@@ -239,7 +222,20 @@ define([
     					   React.createElement(LayerList, {data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer})
     					 )
 
-    			)
+    			), 
+
+                React.createElement("div", {className: "radio-button-container"}, 
+                    React.createElement("label", null, 
+                        React.createElement("input", {
+                            id: "nationalLevelNone", 
+                            name: "national-layer-selection", 
+                            type: "radio", defaultChecked: true, 
+                            value: "none", 
+                            checked: this.state.active === 'none', 
+                            onChange: this.handleRadioChange}), 
+                        React.createElement("span", {className: "national-layer-selection-label"}, "None")
+                    )
+                )
 
     			
 

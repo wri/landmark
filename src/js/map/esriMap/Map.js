@@ -58,7 +58,7 @@ define([
                 self.map.graphics.clear();
                 self.map.resize();
                 self.addLayers();
-                registry.byId("legend").refresh();
+                // registry.byId("legend").refresh();
             });
 
             self.map.on("extent-change", function(e) {
