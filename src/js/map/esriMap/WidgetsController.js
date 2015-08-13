@@ -462,6 +462,7 @@ define([
 
         showHelp: function(click) {
             brApp.debug('WidgetsController >>> showHelp');
+            click.stopPropagation();
 
             var id = click.target.id;
             var dialog;
@@ -485,7 +486,7 @@ define([
 
                     break;
                 case "analysis-help":
-
+                    var left = (click.pageX - 300) + "px";
                     dialog = registry.byId('help-dialog-completeness');
                     dialog.show();
                     $('#help-dialog-completeness').css("top", top);

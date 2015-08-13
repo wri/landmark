@@ -86,7 +86,9 @@
           <div id="geocoder-container" class="map-component geocoder-container hideOnLoad">
             <div id="geocoder"></div>
           </div>
-          <div id="analysis-button" class="map-component analysis-button hideOnLoad pointer"><span id="analysisLogo"></span><span class="analysis-button-label">Analysis</span></div>
+          <div id="analysis-button" class="map-component analysis-button hideOnLoad pointer">
+            <div id="analysis-button-tt" class="hidden">The Analysis Tool only applies to Community Lands data</div><span id="analysisLogo"></span><span class="analysis-button-label">Analyze an area</span><span id="analysis-help" class="help-marker"></span>
+          </div>
           <div id="basemap-button" title="Basemaps" class="map-component button-widget basemap-button pointer hideOnLoad">
             <div class="basemap-icon"></div>
           </div>
@@ -161,8 +163,8 @@
       <div id="help-dialog-community" title="Layer Info" data-dojo-type="dijit/Dialog">
         <p>Community lands are the collectively-held or governed lands and the associated natural resources used by communities.</p>
       </div>
-      <div id="help-dialog-completeness" title="Layer Info" data-dojo-type="dijit/Dialog">
-        <p>The Data Completeness layer shows the estimated level of completeness of the community-level data displayed on LandMark for a particular country. It is based on a comparison between the estimated total percentage of land held and used by indigenous peoples and communities at the national level and the total amount of data displayed on the platform for that country.</p>
+      <div id="help-dialog-completeness" title="Analysis Tool" data-dojo-type="dijit/Dialog">
+        <p>This tool allows you to upload or draw a custom area to analyze indigenous and community lands. </p>
       </div>
     </div>
     <script src="libs/jquery-2.1.3.min.js"></script>

@@ -162,9 +162,9 @@ label
 	z-index 150
 	left 50%
 	top 50%
-	// background-color white
 	overflow-y hidden
 	overflow-x hidden
+	box-shadow 0 10px 44px rgba(0, 0, 0, 0.22) !important
 	
 .introTextTitle
 	color #055D7D
@@ -198,6 +198,25 @@ label
 	font-size 12px
 	border none
 	overflow-x hidden
+	
+#indigenousTable, #nationalTable, #landTenureTable
+	width 100%
+	
+#indigenousTable td, #nationalTable td, #landTenureTable td
+	padding 3px
+		
+#tableWrapper
+	height 350px
+	overflow-y auto
+		
+.tenureField
+	width 30%
+	
+.nationalField
+	width 50%
+	
+.indentTD
+	padding-left 20px
 
 .esriPopup .pointer.bottom
 	display none
@@ -445,7 +464,6 @@ label
 	width 16px
 	vertical-align middle
 	margin-top 0 !important
-	margin-left 5px
 	top 0 !important
 	cursor pointer
 		
@@ -453,7 +471,10 @@ label
 // 	top 5px !important
 
 .esriPopup .esriPopupWrapper
-	box-shadow 0 10px 44px rgba(0, 0, 0, 0.22) !important;
+	box-shadow 0 10px 44px rgba(0, 0, 0, 0.22) !important
+	
+
+
 
 .esriPopup .titleButton.next,
 .esriPopup .titleButton.prev
@@ -473,8 +494,7 @@ label
 		float: right;
 		margin-left: 1em;
 
-#infowindowContainer
-	box-shadow 0 10px 44px rgba(0, 0, 0, 0.22) !important;
+
 
 #additionalInfo
 	position absolute
@@ -697,7 +717,7 @@ label
 	padding 10px 10px 10px 14px !important
 	-webkit-border-radius 0px 0px 0px 0px !important
 	border-bottom 1px solid black
-	font-size 16px
+	font-size 12px
 	background-color #055d7d !important
 	font-family Arial !important
 	
@@ -881,6 +901,32 @@ label
 	display inline-block
 	height 32px
 	margin-left -15px
+	
+#analysis-button-tt
+	height 50px
+	width 200px
+	position fixed
+	background-color #2fa3d9
+	font-size 12px
+	margin-left -150px
+	margin-top 30px
+	line-height 1.5
+	padding 10px
+	
+#analysis-help
+	left -5px
+	
+.grayOut
+	-webkit-filter grayscale(100%)
+	-moz-filter grayscale(100%)
+	-o-filter grayscale(100%)
+	-ms-filter grayscale(100%)
+	filter grayscale(100%)
+	// pointer-events none
+	text-decoration line-through
+	
+.grayOut:hover
+	cursor help
 	
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton
 	border-bottom 1px solid #2fa3d9 !important

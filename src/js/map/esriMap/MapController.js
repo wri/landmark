@@ -28,6 +28,7 @@ define([
     'esri/dijit/BasemapGallery',
     'esri/dijit/Scalebar',
     "esri/request",
+    "esri/geometry/Point",
     "esri/geometry/Polygon",
     "esri/tasks/IdentifyTask",
     "esri/tasks/IdentifyParameters",
@@ -38,7 +39,7 @@ define([
     "dijit/form/HorizontalRuleLabels",
     "esri/layers/LayerDrawingOptions"
 
-], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, NationalLayerList, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, HomeButton, BasemapGallery, Scalebar, esriRequest, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
+], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, NationalLayerList, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, HomeButton, BasemapGallery, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
 
     'use strict';
 
@@ -74,6 +75,9 @@ define([
             on(document.getElementById('tree-container-toggle'), 'click', WidgetsController.toggleTreeContainer);
 
             on(document.getElementById('analysis-button'), 'click', function() {
+                if (this.classList.contains("grayOut")) {
+                    return;
+                }
                 var customGraphics = brApp.map.getLayer("CustomFeatures");
                 WidgetsController.showAnalysisDialog(customGraphics);
             });
@@ -243,7 +247,7 @@ define([
             DrawTool.init();
             on(document.getElementById('indigenous-lands-help'), 'click', WidgetsController.showHelp);
             //on(document.getElementById('community-lands-help'), 'click', WidgetsController.showHelp);
-            // on(document.getElementById('analysis-help'), 'click', WidgetsController.showHelp);
+            on(document.getElementById('analysis-help'), 'click', WidgetsController.showHelp);
 
             //brApp.map.infoWindow.on("selection-change", function() {
 
@@ -357,44 +361,25 @@ define([
                     $("#identifyNote").remove();
 
 
-
-                    // if (Helper.isMobile()) {
-
-                    //     // var w = window.innerWidth;
-                    //     // var h = window.innerHeight;
-                    //     // brApp.map.infoWindow.resize(w, h);
-                    //     brApp.map.infoWindow.maximize();
-                    // }
-
-                    //brApp.map.infoWindow.anchor = "ANCHOR_UPPERLEFT";
-
-                    // if (mapPoint.clientY < 715) {
-                    //     // debugger;
-                    //     // mapPoint.clientY += 400;
-                    //     brApp.map.infoWindow.show();
-                    //     $("div.esriPopupWrapper > div.pointer").hide();
-
-
-                    // } else {
                     brApp.map.infoWindow.show(mapPoint);
+
+
+                    // var centerPoint = new Point(brApp.map.extent.getCenter());
+                    // var centerPointScreen = brApp.map.toScreen(centerPoint);
+                    // if (centerPointScreen.y > 300) {
+                    //     centerPointScreen.y -= 100;
+                    // }
+                    
+                    // centerPoint = brApp.map.toMap(centerPointScreen); 
+
+                    // brApp.map.centerAt(centerPoint); 
+
+
                     if (window.innerWidth < 1000) {
                         brApp.map.infoWindow.maximize();
                         $(".esriPopup .contentPane").css("height", "inherit");
 
                     }
-
-                    //     $("div.esriPopupWrapper > div.pointer").show();
-                    // }
-
-
-                    //     $("div.esriPopupWrapper > div.pointer").show();
-                    // }
-
-
-                    // if (window.innerWidth < 600 || mapPoint.clientY < 400) {
-                    //     debugger;
-                    //     //brApp.map.infoWindow.reposition(); //TODO: Center in screen? Remove arrow to point to feature?
-                    // }
 
                     // if (window.innerWidth < 600 || mapPoint.clientY < 400) {
                     //     debugger;
@@ -406,7 +391,7 @@ define([
                         brApp.map.infoWindow.resize(450, 600);
 
                     });
-                    //$(".esriPopup .titleButton.close").html("&#10005;");
+
                 }
             });
 
@@ -493,6 +478,7 @@ define([
 
             var template,
                 features = [],
+                statDate
                 self = this;
 
             arrayUtils.forEach(featureObjects, function(item) {
@@ -520,6 +506,10 @@ define([
                 var population = item.feature.attributes.Populatn == "Null" ? null : item.feature.attributes.Populatn;
                 var popSource = item.feature.attributes.Pop_Source == "Null" ? null : item.feature.attributes.Pop_Source;
                 var popYear = item.feature.attributes.Pop_Year == "Null" ? null : item.feature.attributes.Pop_Year;
+
+                
+
+                 
 
                 // //var population = "Null" ? null : item.feature.attributes.Populatn;
 
@@ -556,25 +546,53 @@ define([
                     }
                 }
 
+                if (item.feature.attributes.Stat_Date !== "Unknown") {
+                    statDate = " (" + item.feature.attributes.Stat_Date + ")";
+                } else {
+                    statDate = '';
+                }
 
 
                 template = new InfoTemplate(item.value,
-                    // "<div class='even-row'><div class='popup-header'>Layer Name</div>" + item.layerName + " - " + item.layerId + '</div>' +
-                    "<div class='even-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
-                    "<div class='odd-row'><div class='popup-header'>Identity</div>" + item.feature.attributes.Identity + '</div>' +
-                    "<div class='even-row'><div class='popup-header'>Official recognition status</div>" + item.feature.attributes.Ofcl_Rec + ', ' + item.feature.attributes.Rec_Status + ', ' + item.feature.attributes.Stat_Date + '</div>' +
-                    "<div class='odd-row'><div class='popup-header'>Land category</div>" + item.feature.attributes.Category + '</div>' +
-                    "<div class='even-row'><div class='popup-header'>Ethnic groups</div>" + ethnStr + '</div>' +
-                    "<div class='odd-row'><div class='popup-header'>Population</div>" + popStr + '</div>' +
+                    "<div id='tableWrapper'><table id='indigenousTable'>" +
+                    "<tr class='even-row'><td class='popup-header'>Country</td><td>" + item.feature.attributes.Country + '</td></tr>' +
 
-                    "<div class='even-row'><div class='popup-header'>Land Area</div>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + "</div>" +
+                    "<tr class='odd-row'><td class='popup-header'>Identity</td><td>" + item.feature.attributes.Identity + '</td></tr>' +
 
-                    "<div class='odd-row'><div class='popup-header'>Acquisition scale</div>" + item.feature.attributes.Scale + '</div>' +
-                    "<div class='even-row'><div class='popup-header'>Acquisition method</div>" + item.feature.attributes.Method + '</div>' +
-                    //"<div class='even-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
-                    "<div class='odd-row'><div class='popup-header'>Data source</div>" + item.feature.attributes.Data_Src + " " + item.feature.attributes.Data_Date + '</div>' +
-                    "<div class='even-row'><div class='popup-header'>Data Contributor</div>" + item.feature.attributes.Data_Ctrb + '</div>' +
+
+                    // "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Ofcl_Rec + ', ' + item.feature.attributes.Rec_Status + ', ' + item.feature.attributes.Stat_Date + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Form_Rec + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Documentation status (Date)</td><td>" + item.feature.attributes.Ofcl_Rec + statDate + '</td></tr>' +
+
+
+                    "<tr class='even-row'><td class='popup-header'>Land category</td><td>" + item.feature.attributes.Category + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + item.feature.attributes.ethnStr + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Population</td><td>" + item.feature.attributes.popStr + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Land Area</td><td>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Acquisition scale</td><td>" + item.feature.attributes.Scale + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Acquisition method</td><td>" + item.feature.attributes.Method + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Data source</td><td>" + item.feature.attributes.Data_Src + " (" + item.feature.attributes.Data_Date + ')</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Data Contributor</td><td>" + item.feature.attributes.Data_Ctrb + '</td></tr></table></div>' +
+
                     "<div class='popup-last'>Date uploaded: " + item.feature.attributes.Upl_Date);
+
+
+                    // // "<div class='even-row'><div class='popup-header'>Layer Name</div>" + item.layerName + " - " + item.layerId + '</div>' +
+                    // "<div class='even-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
+                    // "<div class='odd-row'><div class='popup-header'>Identity</div>" + item.feature.attributes.Identity + '</div>' +
+                    // "<div class='even-row'><div class='popup-header'>Official recognition status</div>" + item.feature.attributes.Ofcl_Rec + ', ' + item.feature.attributes.Rec_Status + ', ' + item.feature.attributes.Stat_Date + '</div>' +
+                    // "<div class='odd-row'><div class='popup-header'>Land category</div>" + item.feature.attributes.Category + '</div>' +
+                    // "<div class='even-row'><div class='popup-header'>Ethnic groups</div>" + ethnStr + '</div>' +
+                    // "<div class='odd-row'><div class='popup-header'>Population</div>" + popStr + '</div>' +
+
+                    // "<div class='even-row'><div class='popup-header'>Land Area</div>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + "</div>" +
+
+                    // "<div class='odd-row'><div class='popup-header'>Acquisition scale</div>" + item.feature.attributes.Scale + '</div>' +
+                    // "<div class='even-row'><div class='popup-header'>Acquisition method</div>" + item.feature.attributes.Method + '</div>' +
+                    // //"<div class='even-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
+                    // "<div class='odd-row'><div class='popup-header'>Data source</div>" + item.feature.attributes.Data_Src + " " + item.feature.attributes.Data_Date + '</div>' +
+                    // "<div class='even-row'><div class='popup-header'>Data Contributor</div>" + item.feature.attributes.Data_Ctrb + '</div>' +
+                    // "<div class='popup-last'>Date uploaded: " + item.feature.attributes.Upl_Date);
 
                 if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '' || item.feature.attributes.More_info == 'Unknown') {
                     template.content += '</div>';
@@ -630,45 +648,79 @@ define([
 
                     template = new InfoTemplate(item.value, '');
 
-                    if (item.feature.attributes['IPC_Pct'] != "Null") {
-                        template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>" + item.feature.attributes['IPC_Pct'] + "% (" + item.feature.attributes['IPC_Src'] + ")";
-
-                        if (item.feature.attributes['IPC_Notes'] == "Null") {
-                            template.content += '</div>';
-                        } else {
-                            template.content += "<div>" + item.feature.attributes['IPC_Notes'] + "</div></div>";
+                    for (var attr in item.feature.attributes) {
+                        if (item.feature.attributes[attr] == "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
+                            if (attr.indexOf('Notes') == -1) {
+                                item.feature.attributes[attr] = "Unknown";
+                            } else {
+                                item.feature.attributes[attr] = "None";
+                            }
+                            console.log(item.feature.attributes[attr])
+                            
                         }
-                    } else {
-                        template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>Unknown</div></div>";
                     }
 
+                    template.content = "<div id='tableWrapper'><table id='nationalTable'>" +
+                    "<tr class='even-row'><td class='popup-header nationalField'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</td><td><div>Total: " + item.feature.attributes.IPC_Pct + '%</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.IPC_Pct + '%</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.IPC_Pct + '%</div></td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header nationalField'>Source (Date)</td><td>" + item.feature.attributes.IPC_Src + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IPC_Notes + '</td></tr>' +
 
-                    if (item.feature.attributes['Ind_Pct'] != "Null") {
-                        template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>" + item.feature.attributes['Ind_Pct'] + "% (" + item.feature.attributes['Ind_Src'] + ")";
-                        if (item.feature.attributes['Ind_Notes'] == "Null") {
-                            template.content += '</div>';
-                        } else {
-                            template.content += "<div>" + item.feature.attributes['Ind_Notes'] + "</div></div>";
-                        }
-                    } else {
-                        template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>Unknown</div></div>";
-                    }
+                    "<tr class='odd-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous Peoples only</td><td><div>Total: " + item.feature.attributes.Ind_Pct + '%</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.Ind_Pct + '%</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.Ind_Pct + '%</div></td></tr>' +
+                    "<tr class='even-row'><td class='popup-header nationalField'>Source (Date)</td><td>" + item.feature.attributes.Ind_Src + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.Ind_Notes + '</td></tr>' +
 
-                    if (item.feature.attributes['Com_Pct'] != "Null") {
+                    "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div>Total: " + item.feature.attributes.Com_Pct + '%</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.Com_Pct + '%</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.Com_Pct + '%</div></td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header nationalField'>Source (Date)</td><td>" + item.feature.attributes.Com_Src + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.Com_Notes + '</td></tr><table></div>' +
 
-                        template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>" + item.feature.attributes['Com_Pct'] + "% (" + item.feature.attributes['Com_Src'] + ")";
-                        if (item.feature.attributes['Com_Notes'] == "Null") {
-                            template.content += '</div>';
-                        } else {
-                            template.content += "<div>" + item.feature.attributes['Com_Notes'] + "</div></div>";
-                        }
+                    "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "</div>";
 
-                    } else {
-                        template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>Unknown</div></div>";
-                    }
 
-                    template.content += "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'];
-                    template.content += '</div>';
+
+
+                    
+    
+                    // debugger
+
+                    // if (item.feature.attributes['IPC_Pct'] != "Null") {
+                    //     template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>" + item.feature.attributes['IPC_Pct'] + "% (" + item.feature.attributes['IPC_Src'] + ")";
+
+                    //     if (item.feature.attributes['IPC_Notes'] == "Null") {
+                    //         template.content += '</div>';
+                    //     } else {
+                    //         template.content += "<div>" + item.feature.attributes['IPC_Notes'] + "</div></div>";
+                    //     }
+                    // } else {
+                    //     template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>Unknown</div></div>";
+                    // }
+
+
+                    // if (item.feature.attributes['Ind_Pct'] != "Null") {
+                    //     template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>" + item.feature.attributes['Ind_Pct'] + "% (" + item.feature.attributes['Ind_Src'] + ")";
+                    //     if (item.feature.attributes['Ind_Notes'] == "Null") {
+                    //         template.content += '</div>';
+                    //     } else {
+                    //         template.content += "<div>" + item.feature.attributes['Ind_Notes'] + "</div></div>";
+                    //     }
+                    // } else {
+                    //     template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>Unknown</div></div>";
+                    // }
+
+                    // if (item.feature.attributes['Com_Pct'] != "Null") {
+
+                    //     template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>" + item.feature.attributes['Com_Pct'] + "% (" + item.feature.attributes['Com_Src'] + ")";
+                    //     if (item.feature.attributes['Com_Notes'] == "Null") {
+                    //         template.content += '</div>';
+                    //     } else {
+                    //         template.content += "<div>" + item.feature.attributes['Com_Notes'] + "</div></div>";
+                    //     }
+
+                    // } else {
+                    //     template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>Unknown</div></div>";
+                    // }
+
+                    // template.content += "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "</div>";
+                    // template.content += '</div>';
 
                     // if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '') {
                     //     template.content += '</div>';
@@ -765,14 +817,24 @@ define([
                 // "<div class='odd-row'><div class='popup-header'>" + brApp.currentLayer + "</div>" +
                 // Content needs to be wrapped in a single parent div, otherwise on touch ArcGIS JavaScript API
                 // will apply transform to first child and popup will not function and look like garbage, thanks esri/dojo
-                "<div>" + 
-                "<div class='odd-row'><div class='popup-header'>Groups targeted by the legal framework</div>" + framework + "</div>" +
-                "<div class='even-row'><div class='popup-header'>Indicator score</div>" + indScore + "</div>" +
-                "<div class='odd-row'><div class='popup-header'>Comments</div>" + comments + "</div>" +
-                "<div class='even-row'><div class='popup-header'>Laws and provisions reviewed</div>" + laws + "</div>" +
-                "<div class='odd-row'><div class='popup-header'>Review source and date</div>" + reviewSource + " (" + reviewDate + ")</div>" +
-                "<div class='popup-last'>Last Updated: " + uploadDate +
-                "</div>"
+                // "<div>" + 
+                // "<div class='odd-row'><div class='popup-header'>Groups targeted by the legal framework</div>" + framework + "</div>" +
+                // "<div class='even-row'><div class='popup-header'>Indicator score</div>" + indScore + "</div>" +
+                // "<div class='odd-row'><div class='popup-header'>Comments</div>" + comments + "</div>" +
+                // "<div class='even-row'><div class='popup-header'>Laws and provisions reviewed</div>" + laws + "</div>" +
+                // "<div class='odd-row'><div class='popup-header'>Review source and date</div>" + reviewSource + " (" + reviewDate + ")</div>" +
+                // "<div class='popup-last'>Last Updated: " + uploadDate +
+                // "</div>"
+
+                "<div id='tableWrapper'><table id='landTenureTable'>" +
+                "<tr class='odd-row'><td class='popup-header tenureField'>Groups targeted by the legal framework</td><td>" + framework + '</td></tr>' +
+                "<tr class='even-row'><td class='popup-header tenureField'>Indicator score</td><td>" + indScore + '</td></tr>' +
+                "<tr class='odd-row'><td class='popup-header tenureField'>Comments</td><td>" + comments + '</td></tr>' +
+                "<tr class='even-row'><td class='popup-header tenureField'>Laws and provisions reviewed</td><td>" + laws + '</td></tr>' +
+                "<tr class='odd-row'><td class='popup-header tenureField'>Review source and date</td><td>" + comments + '</td></tr></table></div>' +
+                "<div class='popup-last'>Last Updated: " + uploadDate + "</div>"
+
+
             );
 
             return nationalLevelInfoTemplatePercent;

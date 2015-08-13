@@ -75,7 +75,19 @@ define([
                 if (visibleLayers[0] === -1) {
 
                     // $("#data-completeness-container").hide();
-                    $("#analysis-button").hide();
+
+
+                    // $("#analysis-button").hide();
+                    $("#analysis-button").addClass("grayOut");
+
+                    $('#analysis-button').mouseenter(function() {
+                        $("#analysis-button-tt").show();
+                    });
+                    $('#analysis-button').mouseleave(function() {
+                        $("#analysis-button-tt").hide();
+                    });
+
+                    
 
                     $("#legendMenuButton").addClass("mobileLegendUpdate");
                     $("#toolsMenuButton").hide();
@@ -88,9 +100,10 @@ define([
                     $("#legendMenuButton").removeClass("mobileLegendUpdate");
                     $("#toolsMenuButton").show();
 
-                    //if its already showing, dont show it
                     // $("#data-completeness-container").show();
-                    $("#analysis-button").show();
+                    // $("#analysis-button").show();
+                    $("#analysis-button").removeClass("grayOut");
+                    $('#analysis-button').unbind('mouseenter mouseleave');
 
                 }                
                 
@@ -128,7 +141,16 @@ define([
             topic.publish('reset-community-tree');
             // Hide these buttons
             // $("#data-completeness-container").hide();
-            $("#analysis-button").hide();
+            // $("#analysis-button").hide();
+
+            $("#analysis-button").addClass("grayOut");
+
+            $('#analysis-button').mouseenter(function() {
+                $("#analysis-button-tt").show();
+            });
+            $('#analysis-button').mouseleave(function() {
+                $("#analysis-button-tt").hide();
+            });
         },
 
         /**
