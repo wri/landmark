@@ -671,86 +671,18 @@ define([
 
                     "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div>Total: " + item.feature.attributes.Com_Pct + '%</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.Com_Pct + '%</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.Com_Pct + '%</div></td></tr>' +
                     "<tr class='odd-row'><td class='popup-header nationalField'>Source (Date)</td><td>" + item.feature.attributes.Com_Src + '</td></tr>' +
-                    "<tr class='even-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.Com_Notes + '</td></tr><table></div>' +
+                    "<tr class='even-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.Com_Notes + '</td></tr></table></div>' +
 
                     "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "</div>";
 
-
-
-
-                    
-    
-                    // debugger
-
-                    // if (item.feature.attributes['IPC_Pct'] != "Null") {
-                    //     template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>" + item.feature.attributes['IPC_Pct'] + "% (" + item.feature.attributes['IPC_Src'] + ")";
-
-                    //     if (item.feature.attributes['IPC_Notes'] == "Null") {
-                    //         template.content += '</div>';
-                    //     } else {
-                    //         template.content += "<div>" + item.feature.attributes['IPC_Notes'] + "</div></div>";
-                    //     }
-                    // } else {
-                    //     template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>Unknown</div></div>";
-                    // }
-
-
-                    // if (item.feature.attributes['Ind_Pct'] != "Null") {
-                    //     template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>" + item.feature.attributes['Ind_Pct'] + "% (" + item.feature.attributes['Ind_Src'] + ")";
-                    //     if (item.feature.attributes['Ind_Notes'] == "Null") {
-                    //         template.content += '</div>';
-                    //     } else {
-                    //         template.content += "<div>" + item.feature.attributes['Ind_Notes'] + "</div></div>";
-                    //     }
-                    // } else {
-                    //     template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>Unknown</div></div>";
-                    // }
-
-                    // if (item.feature.attributes['Com_Pct'] != "Null") {
-
-                    //     template.content += "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>" + item.feature.attributes['Com_Pct'] + "% (" + item.feature.attributes['Com_Src'] + ")";
-                    //     if (item.feature.attributes['Com_Notes'] == "Null") {
-                    //         template.content += '</div>';
-                    //     } else {
-                    //         template.content += "<div>" + item.feature.attributes['Com_Notes'] + "</div></div>";
-                    //     }
-
-                    // } else {
-                    //     template.content += "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>Unknown</div></div>";
-                    // }
-
-                    // template.content += "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "</div>";
-                    // template.content += '</div>';
-
-                    // if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '') {
-                    //     template.content += '</div>';
-                    // } else {
-                    //     template.content += '<a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">Additional Info</a></div>';
-                    // }
-
-
-
-
-                    // if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '') {
-                    //     template.content += '</div>';
-                    // } else {
-                    //     template.content += '<a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">Additional Info</a></div>';
-                    // }
                     
                     // Content needs to be wrapped in a single parent div, otherwise on touch ArcGIS JavaScript API
                     // will apply transform to first child and popup will not function and look like garbage, thanks esri/dojo
-                    template.content = '<div>' + template.content + '</div>';
+                    // template.content = '<div>' + template.content + '</div>';
 
                     item.feature.setInfoTemplate(template);
                 } else { //layers 0 and 1
-                    // template = new InfoTemplate(item.value,
-                    //     "<div class='odd-row'><div class='popup-header'>Groups targeted by the legal framework</div>" + item.feature.attributes['Framework'] + "</div>" +
-                    //     "<div class='even-row'><div class='popup-header'>Indicator score</div>" + item.feature.attributes.I10_Scr + "</div>" +
-                    //     "<div class='odd-row'><div class='popup-header'>Comments</div>" + item.feature.attributes.I10_Com + "</div>" +
-                    //     "<div class='odd-row'><div class='popup-header'>Laws and provisions reviewed</div>" + item.feature.attributes.I10_Lap + "</div>" +
-                    //     "<div class='odd-row'><div class='popup-header'>Laws and provisions reviewed</div>" + item.feature.attributes.I10_Rev + " (" + item.feature.attributes.I10_Year + ")</div>" +
-                    //     "<div class='popup-last'>Last Updated: " + item.feature.attributes.Last_Updt + '<span id="additionalInfo"> Additional Info</span></div>'
-                    // );
+
                     item.feature.setInfoTemplate(self.setCustomNationalTemplate(item.feature));
                 }
 
