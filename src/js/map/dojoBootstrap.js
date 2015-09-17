@@ -2,6 +2,7 @@
     'use strict';
 
     var base = location.pathname.replace(/\/[^/]+$/, ''),
+        base = base.replace('map', 'map-app'),
         appVersion = '1.0',
         esriVersion = '3.13',
         js = [
@@ -41,7 +42,7 @@
                 "dojo/domReady!"
             ],
             callback: function() {
-                loadScript('js/map/loader.js');
+                loadScript('/map-app/js/map/loader.js');
             }
         };
 
