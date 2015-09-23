@@ -7,9 +7,9 @@
 
 /* line 1 : /Users/Robert/Projects/github_work/landmark/src/css/config.styl */
 
-/* line 1145 : /Users/Robert/Projects/github_work/landmark/src/css/config.styl */
+/* line 1148 : /Users/Robert/Projects/github_work/landmark/src/css/config.styl */
 
-/* line 1145 : /Users/Robert/Projects/github_work/landmark/src/css/analysis.styl */
+/* line 1148 : /Users/Robert/Projects/github_work/landmark/src/css/analysis.styl */
 
 /* line 1 : /Users/Robert/Projects/github_work/landmark/src/css/analysis.styl */
 .upload-instructions li {
@@ -1808,5 +1808,192 @@ body:not(.mobile) .launch-map-button {
 /* line 1144 : /Users/Robert/Projects/github_work/landmark/src/css/map.styl */
   .wri-header-attribution {
     display: none;
+  }
+}
+
+/* line 1147 : /Users/Robert/Projects/github_work/landmark/src/css/map.styl */
+/** MOBILE CSS **/
+
+/* line 76 : /Users/Robert/Projects/github_work/landmark/src/css/nationalLayerList.styl */
+
+/* line 136 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+
+/* line 40 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+
+/* line 1 : /Users/Robert/Projects/github_work/landmark/src/css/config.styl */
+
+/* line 3 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile-menu {
+  background-color: #fff;
+  position: absolute;
+  width: 295px;
+  bottom: 0;
+  left: 0;
+  top: 0;
+}
+
+/* line 11 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile-menu-toggle-button {
+  background: url("images/ico-gear.png") no-repeat center #fff;
+  background-size: 19px;
+  text-align: center;
+  height: 30px;
+  width: 30px;
+  left: 20px;
+  top: 20px;
+}
+
+/* line 23 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile-menu-close-button {
+  background: url("images/ico-close.png") no-repeat center;
+  background-size: 18px;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  right: 17px;
+  top: 16px;
+}
+
+/* line 32 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile-menu-content {
+  position: absolute;
+  overflow-y: auto;
+  padding: 0 10px;
+  bottom: 5px;
+  top: 50px;
+  right: 0;
+  left: 0;
+}
+
+/* line 41 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile-menu:not(.open) {
+  display: none;
+}
+
+/* line 44 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile-menu .segmented-menu-button {
+  border: 1px solid #2fa3d9;
+  text-align: center;
+  padding: 5px 10px;
+  color: #2fa3d9;
+}
+
+/* line 50 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile-menu .segmented-menu-button.active {
+  background-color: #2fa3d9;
+  color: #fff;
+}
+
+/* line 54 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile-menu-content:not(.active) {
+  display: none;
+}
+
+/* line 57 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile-menu .menu-controls {
+  text-align: center;
+  margin-top: 14px;
+  margin-left: -12px;
+}
+
+/* line 62 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile-menu .segmented-menu-button:first-of-type {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  border-right: 0;
+}
+
+/* line 66 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile-menu .segmented-menu-button:last-of-type {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  border-left: 0;
+}
+
+/* line 70 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+body:not(.mobile) .mobile-menu,
+body:not(.mobile) .mobile-menu-toggle-button {
+  display: none;
+}
+
+/* line 75 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile .launch-map-button {
+  display: block;
+  margin: 0 auto;
+}
+
+/* line 79 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile .basemap-container {
+  height: 250px;
+  width: 150px;
+}
+
+/* line 83 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile .esriBasemapGallery {
+  margin: 10px;
+}
+
+/* line 86 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile .basemap-container {
+  top: 20px;
+}
+
+/* line 89 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile .esriControlsBR {
+  right: 5px;
+}
+
+/* line 92 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile #legend {
+  max-height: inherit;
+}
+
+/* line 95 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+.mobile .data-completeness-container,
+.mobile .tree-widget-container,
+.mobile .geocoder-container,
+.mobile .legend-container,
+.mobile .analysis-button,
+.mobile .title-area .name h1,
+.mobile .esriAttribution,
+.mobile #upload-shapefile {
+  display: none;
+}
+@media (max-width: 800px) {
+
+/* line 120 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+  #mobile-menu-toggle {
+    display: block !important;
+  }
+
+/* line 122 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+  #data-completeness-container,
+  #analysis-button {
+    display: none !important;
+  }
+}
+@media (max-width: 500px) {
+
+/* line 128 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+  #legendMenuButton {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+  }
+
+/* line 135 : /Users/Robert/Projects/github_work/landmark/src/css/mobile.styl */
+  #toolsMenuButton {
+    display: none !important;
   }
 }
