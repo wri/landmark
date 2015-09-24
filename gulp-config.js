@@ -33,8 +33,8 @@ module.exports = {
         out: 'src/js'
     },
     uglify: {
-        src: 'src/js/map/dojoBootstrap.js',
-        dest: 'build/js/map'
+        src: 'src/js/dojoBootstrap.js',
+        dest: 'build/js'
     },
     optimizer: {
         map: {
@@ -48,13 +48,13 @@ module.exports = {
                     'react': 'empty:',
                     'js': 'js',
                     'libs': 'libs',
-                    'main': 'js/map/main',
-                    'map': 'js/map/esriMap',
-                    'utils': 'js/map/utils',
+                    'main': 'js/main',
+                    'map': 'js/map',
+                    'utils': 'js/utils',
                     'components': 'js/components'
                 },
-                name: 'js/map/loader',
-                out: 'build/js/map/loader.js'
+                name: 'js/loader',
+                out: 'build/js/loader.js'
             }
         }
     }
