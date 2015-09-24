@@ -75,30 +75,10 @@ gulp.task('copy-access', function() {
         .pipe(gulp.dest(config.copy.access.out));
 });
 
-gulp.task('optimize', ['optimize-map-page', 'optimize-about-page', 'optimize-home-page', 'optimize-institutions-page', 'optimize-contact-page', 'optimize-data-page']);
+gulp.task('optimize', ['optimize-map-page']);
 
 gulp.task('optimize-map-page', function() {
     requirejs.optimize(config.optimizer.map.options, function(res) {});
-});
-
-gulp.task('optimize-about-page', function() {
-    requirejs.optimize(config.optimizer.about.options);
-});
-
-gulp.task('optimize-institutions-page', function() {
-    requirejs.optimize(config.optimizer.institutions.options);
-});
-
-gulp.task('optimize-home-page', function() {
-    requirejs.optimize(config.optimizer.home.options);
-});
-
-gulp.task('optimize-contact-page', function() {
-    requirejs.optimize(config.optimizer.contact.options);
-});
-
-gulp.task('optimize-data-page', function() {
-    requirejs.optimize(config.optimizer.data.options);
 });
 
 gulp.task('minify', ['minify-js', 'minify-images']);

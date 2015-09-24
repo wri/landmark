@@ -2,7 +2,8 @@
     'use strict';
 
     var base = location.pathname.replace(/\/[^/]+$/, ''),
-        base = base.replace('map', 'map-app'),
+        isWordpress = location.hostname.search('landmark.blueraster.io') > -1,
+        base = isWordpress ? base.replace('map', 'map-app') : base,
         appVersion = '1.0',
         esriVersion = '3.13',
         js = [
@@ -42,7 +43,11 @@
                 "dojo/domReady!"
             ],
             callback: function() {
+              if (isWordpress) {
                 loadScript('/map-app/js/map/loader.js');
+              } else {
+                loadScript('js/map/loader.js');
+              }
             }
         };
 
