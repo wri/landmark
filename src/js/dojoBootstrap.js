@@ -89,7 +89,7 @@
 
     if (win.requestAnimationFrame) {
         win.requestAnimationFrame(launch);
-    } else if (doc.readyState === "loaded") {
+    } else if (doc.readyState === "complete") {
         launch();
     } else {
         win.onload = launch;
