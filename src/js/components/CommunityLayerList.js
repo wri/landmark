@@ -33,15 +33,20 @@ define([
     },
 
     layerMapper: function (group) {
+      var self = this;
       return function (item) {
         return item.group !== group ? null :
         (
           item.isCategory ? React.createElement("div", {className: "layer-category"}, item.label) :
-          React.createElement("div", {className: "layer-node"}, 
+          React.createElement("div", {className: "layer-node", onClick: self.layerClicked, "data-id": item.id}, 
             item.label
           )
         )
       }
+    },
+
+    layerClicked: function (evt) {
+      console.log(evt.target.getAttribute('data-id'));
     }
 
   });
