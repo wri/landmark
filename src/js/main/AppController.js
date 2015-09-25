@@ -35,8 +35,7 @@ define([
         overrideEvents: function() {
             brApp.debug('AppController >>> overrideEvents');
             //on(document.getElementById('home-page-link'), 'click', this.overrideNav);
-            on(document.getElementById('map-page-link'), 'click', this.overrideNav);
-            //TODO: Add event handler here to add underline to active page!
+            // on(document.getElementById('map-page-link'), 'click', this.overrideNav);
 
         },
 
