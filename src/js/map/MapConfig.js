@@ -1,25 +1,11 @@
 define(["esri/InfoTemplate"], function(InfoTemplate) {
 
-    var indigenousLandsUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer'; //new
-    //var indigenousLandsUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer';
-
-    var nationalLevelUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer'; //new
-    //var nationalLevelUrl = 'http://gis-stage.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer';
-
-
-
-    var indigenousLandsInfo = "Placeholder so this layer's info icon appears in the tree";
-    var landTenureSecurityInfo = "Placeholder so this layer's info icon appears in the tree";
+    var indigenousLandsUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer';
+    var nationalLevelUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer';
+    // var indigenousLandsInfo = "Placeholder so this layer's info icon appears in the tree";
+    // var landTenureSecurityInfo = "Placeholder so this layer's info icon appears in the tree";
 
     var MapConfig = {
-
-        // nationalLevelInfoTemplatePercent: new InfoTemplate(item.value,
-        //     "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>" + item.feature.attributes['Percent Indigenous and Community Land'] + "% (" + item.feature.attributes['Contributor of % Community Lands Data'] + ", " + item.feature.attributes['Year of Pct Indigenous & Community Lands Data'] + ")</div>" +
-        //     "<div class='even-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples</div>" + item.feature.attributes['Percent of Indigenous Lands'] + "% (" + item.feature.attributes['Contributor of Percent Indigenous Lands Data'] + ", " + item.feature.attributes['Year of Pct Indigenous Lands Data'] + ")</div>" +
-        //     "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Communities (Non-Indigenous)</div>" + item.feature.attributes['Percent Community Lands'] + "% (" + item.feature.attributes['Contributor of % Community Lands Data'] + ", " + item.feature.attributes['Year of % Community Lands Data'] + ")</div>" +
-        //     "<div class='popup-last'>Last Updated: " + item.feature.attributes['Date of Last Update'] + '<span id="additionalInfo"> Additional Info</span></div>'
-
-        // ),
 
         options: {
             sliderPosition: 'top-right',
@@ -30,28 +16,10 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
         },
 
         layers: {
-            // 'communityLands': {
-            //     url: indigenousLandsUrl,
-            //     type: 'dynamic',
-            //     defaultLayers: [5, 6, 7, 8, 9], //[0,1,2,3,4,5,6,7,8,9]
-            //     visible: true
-            // },
-
-            // 'indigenousTransparency': {
-            //     url: indigenousLandsUrl,
-            //     type: 'dynamic',
-            //     // Not all the layers are present in the tree, when they are, include 0 - 9
-            //     defaultLayers: [17], //[0,1,2,3,4,5,6,7,8,9]
-            //     visible: true
-            // },
             'nationalLevel': {
                 url: nationalLevelUrl,
                 type: 'dynamic',
                 defaultLayers: [-1], //[1,2,3,4]
-                // infoTemplate: {
-                //     title: "${Country}",
-                //     content: "<div class='odd-row'><div class='popup-header'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</div>${Country}</div>"
-                // }
                 visible: true
             },
 
@@ -79,77 +47,158 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
         // children: array of children objects
         // checked: true/false, default checked of the checkbox, default is false
         // collapsed: true/false, default state of the node containing children, default is false
-        // disabled: true/false, should the node be disabled or not, default is false	
-        // noCheckbox: true/false, should there be a checkbox on this tree node	
+        // disabled: true/false, should the node be disabled or not, default is false
+        // noCheckbox: true/false, should there be a checkbox on this tree node
 
-        communityLevelTreeData: [{
-            label: 'Indigenous Lands (self recognized)',
-            id: 'indigenousLands',
+        communityLevelLayers: [{
+            label: 'Officially recognized (by law or decree)',
+            isCategory: true,
+            group: 'indigenousLands'
+          },
+          {
+            label: 'Formal document/title',
+            id: 'indigenousOfficial',
             checked: true,
-            noCheckbox: false,
-            info: indigenousLandsInfo,
-            children: [{
-                label: 'Officially recognized (by law or decree)',
-                id: 'indigenousOfficial',
-                checked: true,
-                children: [{
-                    label: 'Formal Document/Title',
-                    id: 'indigenousFormalTitle',
-                    checked: true
-                }, {
-                    label: 'In process of titling',
-                    id: 'indigenousInProcess',
-                    checked: true
-                }]
-            }, {
-                label: 'Not officially recognized',
-                id: 'indigenousUnofficial',
-                checked: true,
-                children: [{
-                    label: 'Formal land claim',
-                    id: 'indigenousLandClaim',
-                    checked: true
-                }, {
-                    label: 'Occupied/used without formal land claim',
-                    id: 'indigenousNoLandClaim',
-                    checked: true
-                }]
-            }]
-        }, {
-            label: 'Community Lands',
-            id: 'communityLands',
-            collapsed: false,
-            info: landTenureSecurityInfo,
+            group: 'indigenousLands'
+          },
+          {
+            label: 'In process of titling',
+            id: 'indigenousInProcess',
             checked: true,
-            //disabled: true,
-            children: [{
-                label: 'Officially recognized (by law or decree)',
-                id: 'communityOfficial',
-                checked: true,
-                children: [{
-                    label: 'Formal Document/Title',
-                    id: 'communityFormalTitle',
-                    checked: true
-                }, {
-                    label: 'In process of titling',
-                    id: 'communityInProcess',
-                    checked: true
-                }]
-            }, {
-                label: 'Not officially recognized',
-                id: 'communityUnofficial',
-                checked: true,
-                children: [{
-                    label: 'Formal land claim',
-                    id: 'communityLandClaim',
-                    checked: true
-                }, {
-                    label: 'Occupied/used without formal land claim',
-                    id: 'communityNoLandClaim',
-                    checked: true
-                }]
-            }]
+            group: 'indigenousLands'
+          },
+          {
+            label: 'No documentation',
+            id: 'indigenousDocumentation',
+            checked: true,
+            group: 'indigenousLands'
+          },
+          {
+            label: 'Not officially recognized',
+            isCategory: true,
+            group: 'indigenousLands'
+          },
+          {
+            label: 'Formal land claim',
+            id: 'indigenousLandClaim',
+            checked: true,
+            group: 'indigenousLands'
+          },
+          {
+            label: 'Occupied/used without formal land claim',
+            id: 'indigenousNoLandClaim',
+            checked: true,
+            group: 'indigenousLands'
+          },
+          {
+            label: 'Officially recognized (by law or decree)',
+            isCategory: true,
+            group: 'communityLands'
+          },
+          {
+            label: 'Formal document/title',
+            id: 'communityFormalTitle',
+            checked: true,
+            group: 'communityLands'
+          },
+          {
+            label: 'In process of titling',
+            id: 'communityInProcess',
+            checked: true,
+            group: 'communityLands'
+          },
+          {
+            label: 'No documentation',
+            id: 'communityDocumentation',
+            checked: true,
+            group: 'communityLands'
+          },
+          {
+            label: 'Not officially recognized',
+            isCategory: true,
+            group: 'communityLands'
+          },
+          {
+            label: 'Formal land claim',
+            id: 'communityLandClaim',
+            checked: true,
+            group: 'communityLands'
+          },
+          {
+            label: 'Occupied/used without formal land claim',
+            id: 'communityNoLandClaim',
+            checked: true,
+            group: 'communityLands'
         }],
+
+        // communityLevelTreeData: [{
+        //     label: 'Indigenous Lands (self recognized)',
+        //     id: 'indigenousLands',
+        //     checked: true,
+        //     noCheckbox: false,
+        //     info: indigenousLandsInfo,
+        //     children: [{
+        //         label: 'Officially recognized (by law or decree)',
+        //         id: 'indigenousOfficial',
+        //         checked: true,
+        //         children: [{
+        //             label: 'Formal Document/Title',
+        //             id: 'indigenousFormalTitle',
+        //             checked: true
+        //         }, {
+        //             label: 'In process of titling',
+        //             id: 'indigenousInProcess',
+        //             checked: true
+        //         }]
+        //     }, {
+        //         label: 'Not officially recognized',
+        //         id: 'indigenousUnofficial',
+        //         checked: true,
+        //         children: [{
+        //             label: 'Formal land claim',
+        //             id: 'indigenousLandClaim',
+        //             checked: true
+        //         }, {
+        //             label: 'Occupied/used without formal land claim',
+        //             id: 'indigenousNoLandClaim',
+        //             checked: true
+        //         }]
+        //     }]
+        // }, {
+        //     label: 'Community Lands',
+        //     id: 'communityLands',
+        //     collapsed: false,
+        //     info: landTenureSecurityInfo,
+        //     checked: true,
+        //     //disabled: true,
+        //     children: [{
+        //         label: 'Officially recognized (by law or decree)',
+        //         id: 'communityOfficial',
+        //         checked: true,
+        //         children: [{
+        //             label: 'Formal Document/Title',
+        //             id: 'communityFormalTitle',
+        //             checked: true
+        //         }, {
+        //             label: 'In process of titling',
+        //             id: 'communityInProcess',
+        //             checked: true
+        //         }]
+        //     }, {
+        //         label: 'Not officially recognized',
+        //         id: 'communityUnofficial',
+        //         checked: true,
+        //         children: [{
+        //             label: 'Formal land claim',
+        //             id: 'communityLandClaim',
+        //             checked: true
+        //         }, {
+        //             label: 'Occupied/used without formal land claim',
+        //             id: 'communityNoLandClaim',
+        //             checked: true
+        //         }]
+        //     }]
+        // }],
 
 
         landTenureCommunityLayers: [{

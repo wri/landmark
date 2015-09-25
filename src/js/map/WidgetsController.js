@@ -142,52 +142,57 @@ define([
          */
         toggleTreeContainer: function() {
             brApp.debug('WidgetsController >>> toggleTreeContainer');
+            // var labelNode = document.getElementById('tree-container-toggle'),
+                // container = document.getElementById('tree-widget-container'),
+                // layerAccordion = registry.byId('layer-accordion'),
+                // topBar = document.getElementById('tree-title'),
             var labelNode = document.getElementById('tree-container-toggle'),
-                container = document.getElementById('tree-widget-container'),
-                layerAccordion = registry.byId('layer-accordion'),
-                topBar = document.getElementById('tree-title'),
-                node = document.getElementById('tree-content'),
+                node = document.getElementById('layer-content'),
                 active = domClass.contains(node, 'active'),
                 height, width;
 
             labelNode.innerHTML = active ? '&plus;' : '&minus;';
+
             if (!active) {
                 // If not active. add class now, else, add when animation done
                 domClass.toggle(node, 'active');
-                domStyle.set(container, 'bottom', '20px');
+                domClass.toggle(node, 'hidden');
+                // domStyle.set(container, 'bottom', '20px');
             } else {
-                domStyle.set(container, 'bottom', 'auto');
+              domClass.toggle(node, 'active');
+              domClass.toggle(node, 'hidden');
+              // domStyle.set(container, 'bottom', 'auto');
             }
 
             // Set the height
-            height = active ? 0 : (container.offsetHeight - 34);
-            width = active ? 285 : 360;
-
-            Fx.animateProperty({
-                node: node,
-                properties: {
-                    height: height,
-                    width: width
-                },
-                duration: DURATION,
-                onEnd: function() {
-                    if (!active) {
-                        if (layerAccordion) {
-                            layerAccordion.resize();
-                        }
-                    } else {
-                        domClass.toggle(node, 'active');
-                    }
-                }
-            }).play();
-
-            Fx.animateProperty({
-                node: topBar,
-                properties: {
-                    width: width
-                },
-                duration: DURATION
-            }).play();
+            // height = active ? 0 : (container.offsetHeight - 34);
+            // width = active ? 285 : 360;
+            //
+            // Fx.animateProperty({
+            //     node: node,
+            //     properties: {
+            //         height: height,
+            //         width: width
+            //     },
+            //     duration: DURATION,
+            //     onEnd: function() {
+            //         if (!active) {
+            //             // if (layerAccordion) {
+            //             //     layerAccordion.resize();
+            //             // }
+            //         } else {
+            //             domClass.toggle(node, 'active');
+            //         }
+            //     }
+            // }).play();
+            //
+            // Fx.animateProperty({
+            //     node: topBar,
+            //     properties: {
+            //         width: width
+            //     },
+            //     duration: DURATION
+            // }).play();
 
         },
 
@@ -197,15 +202,15 @@ define([
         toggleMobileMenu: function() {
             brApp.debug('WidgetsController >>> toggleMobileMenu');
             var mapNode = document.getElementById('brMap'),
-                accordion = registry.byId('layer-accordion'),
+                // accordion = registry.byId('layer-accordion'),
 
                 menuNodeId = 'mobileMenu',
                 menuButton = 'mobile-menu-toggle',
                 isClosing = domClass.contains(menuNodeId, 'open'),
                 left = isClosing ? 0 : 290;
 
-            if ($('#tree-content').css("height") === "0px") {
-                $('#tree-content').css("height", "auto");
+            if ($('#layer-content').css("height") === "0px") {
+                $('#layer-content').css("height", "auto");
             }
 
 
@@ -236,9 +241,9 @@ define([
                     }
 
                     $("#community-level-toggle_button").show();
-                    setTimeout(function() {
-                        accordion.resize();
-                    }, 0);
+                    // setTimeout(function() {
+                    //     accordion.resize();
+                    // }, 0);
 
                 }
             }).play();
@@ -295,9 +300,9 @@ define([
             domClass.add(target, 'active');
             domClass.add(id, 'active');
 
-            if (id === "mobile-layers-content") {
-                registry.byId("layer-accordion").resize();
-            }
+            // if (id === "mobile-layers-content") {
+            //     registry.byId("layer-accordion").resize();
+            // }
 
         },
 
@@ -426,7 +431,7 @@ define([
             //debugger;
             // o.map.resize();
             on.once(brApp.map, 'resize', function() {
-                // Allow Layers to redraw themselves, wind layer takes 1500ms 
+                // Allow Layers to redraw themselves, wind layer takes 1500ms
                 setTimeout(function() {
                     window.print();
 

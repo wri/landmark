@@ -84,11 +84,11 @@ define([
 
             // Move Nodes to their new containers
             // Layers Tab
-            var treeContent = document.getElementById('tree-content');
-            domConstruct.place(treeContent, layersTabContainer, 'last');
+            var layerList = document.getElementById('layer-content');
+            domConstruct.place(layerList, layersTabContainer, 'last');
 
-            if ($('#tree-content').css("height") === "0px") {
-                $('#tree-content').css("height", "auto");
+            if ($('#layer-content').css("height") === "0px") {
+                $('#layer-content').css("height", "auto");
             }
 
             // Legend Tab
@@ -100,10 +100,10 @@ define([
 
             // Resize the accordion since it needs to be resized every time css changes when its hidden
             // just do it to be safe until we remove the accordion and build our own
-            var layerAccordion = registry.byId('layer-accordion');
-            if (layerAccordion) {
-                layerAccordion.resize();
-            }
+            // var layerAccordion = registry.byId('layer-accordion');
+            // if (layerAccordion) {
+            //     layerAccordion.resize();
+            // }
         },
 
         /**
@@ -114,8 +114,8 @@ define([
             var legendContainer = document.getElementById('legend-content'),
                 treeContainer = document.getElementById('tree-widget-container');
             // Layers Tab
-            var treeContent = document.getElementById('tree-content');
-            domConstruct.place(treeContent, treeContainer, 'last');
+            var layerList = document.getElementById('layer-content');
+            domConstruct.place(layerList, treeContainer, 'last');
 
             //$('#tree-content').removeClass("mobile-active");
             // Legend Content
@@ -131,10 +131,10 @@ define([
 
             // Resize the accordion since it needs to be resized every time css changes when its hidden
             // just do it to be safe until we remove the accordion and build our own
-            var layerAccordion = registry.byId('layer-accordion');
-            if (layerAccordion) {
-                layerAccordion.resize();
-            }
+            // var layerAccordion = registry.byId('layer-accordion');
+            // if (layerAccordion) {
+            //     layerAccordion.resize();
+            // }
         }
 
     };

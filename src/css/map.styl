@@ -755,11 +755,6 @@ label
 .actionsPane
 	display none
 
-.tree-widget-container
-	bottom 20px
-	left 20px
-	top 20px
-
 .layer-accordion
 	height 100%
 	width 100%
@@ -777,19 +772,6 @@ label
 	margin-left -48px
 	color grey
 	cursor pointer
-
-.tree-widget-title-pane
-	background-color white
-	box-sizing initial
-	line-height 32px
-	height 32px
-
-.tree-width
-	width 360px
-
-.mobile .tree-width
-	// width 310px
-	width: 100%;
 
 .mobile .dijitAccordionContainer
 	width 282px
@@ -809,17 +791,12 @@ label
 .tree-container-toggle
 	display inline-block
 	padding 0 12px
-	margin-left -33px
+	margin-left -32px
 	color white
 	background-color #2FA3D9
 
 // #tree-container-toggle
 // 	margin-left 0
-
-.tree-content
-	background-color white
-	position absolute
-	overflow hidden
 
 .tundra .dijitAccordionTitle:first-child
 	border-top none !important
@@ -1095,8 +1072,7 @@ label
 .tree-data-section input[type='radio']
 	margin 0 0 0 5px
 
-@import "ReactTree"
-@import "nationalLayerList"
+@import "layerTabContainer"
 
 body:not(.mobile) .launch-map-button
 	margin-right 10px

@@ -14,7 +14,7 @@ define([
 
 	// Small Sub Class to render the lists, needs to keep track of active list item
 	// Shows Question onClick
-	/** Requirements: 
+	/** Requirements:
 		data: array of data
 		each item in the array must have id, label properties, with an optional question property
 	*/
@@ -69,7 +69,7 @@ define([
 
 	var NationalLayerList = React.createClass({
 
-		// If changing defaults, changing landTenureCategory to LandTenureCom requires 
+		// If changing defaults, changing landTenureCategory to LandTenureCom requires
 		// you to change the layer as well, see below:
 		// LandTenureCom needs LandTenureLayer = 0
 		// LandTenureInd needs LandTenureLayer = 1
@@ -93,8 +93,8 @@ define([
     	// parts of the app to use, such as currentLayer
 
     	brApp.currentLayer = (
-    		this.state.landTenureCategory === LandTenureInd ? 
-    			this.state.activeIndigenousKey : 
+    		this.state.landTenureCategory === LandTenureInd ?
+    			this.state.activeIndigenousKey :
     			this.state.activeCommunityKey
     	);
     },
@@ -124,7 +124,7 @@ define([
 
     	// Update the currentLayer in brApp, Our popup needs to know the selection so it can format the content correctly
     	brApp.currentLayer = (state.landTenureCategory === LandTenureInd ? state.activeIndigenousKey : state.activeCommunityKey);
-        
+
     	// The true signifies that this is the national layer being updated
     	LayerController.updateVisibleLayers(visibleLayers, true);
 
@@ -167,13 +167,13 @@ define([
     /* jshint ignore:start */
     render: function () {
     	return (
-    		<div className='national-level-layer-lists'>	
+    		<div className='national-level-layer-lists'>
 
                 <div className='radio-button-container'>
                     <label>
-                        <input 
-                            name='national-layer-selection' 
-                            type='radio' 
+                        <input
+                            name='national-layer-selection'
+                            type='radio'
                             value={PercentIndigenous}
                             checked={this.state.active === PercentIndigenous}
                             onChange={this.handleRadioChange} />
@@ -181,29 +181,29 @@ define([
                     </label>
                 </div>
 
-                <div className='percent-indigenous-layer-list' 
+                <div className='percent-indigenous-layer-list'
                          style={{'display': (this.state.active === PercentIndigenous ? 'block' : 'none')}}>
                          <LayerList data={MapConfig.percentIndigenousLayers} change={this.changePercentIndigenousLayer} />
                 </div>
 
     			<div className='radio-button-container'>
     				<label>
-    					<input 
-                            name='national-layer-selection' 
-                            type='radio' 
+    					<input
+                            name='national-layer-selection'
+                            type='radio'
                             value={LandTenure}
                             checked={this.state.active === LandTenure}
                             onChange={this.handleRadioChange} />
     					<span className='national-layer-selection-label'>Land Tenure Security Indicators, as stated by law</span>
-                        
+
     				</label>
     			</div>
 
-    			
 
-    			<div className='land-tenure-layer-list' 
+
+    			<div className='land-tenure-layer-list'
     					 style={{'display': (this.state.active === LandTenure ? 'block' : 'none')}}>
-    					 
+
     					 <div className='land-tenure-menu-controls'>
     					   <span id={LandTenureInd} onClick={this.changeLandTenureCategory}
     					   			 className={'land-tenure-menu-button ' + (this.state.landTenureCategory === LandTenureInd ? 'active' : '')}
@@ -226,10 +226,10 @@ define([
 
                 <div className='radio-button-container'>
                     <label>
-                        <input 
-                            id='nationalLevelNone' 
-                            name='national-layer-selection' 
-                            type='radio' defaultChecked={true} 
+                        <input
+                            id='nationalLevelNone'
+                            name='national-layer-selection'
+                            type='radio' defaultChecked={true}
                             value='none'
                             checked={this.state.active === 'none'}
                             onChange={this.handleRadioChange} />
@@ -237,7 +237,7 @@ define([
                     </label>
                 </div>
 
-    			
+
 
     		</div>
     	);
@@ -246,10 +246,6 @@ define([
 
 	});
 
-	/* jshint ignore:start */
-	return function (node) {
-    return React.render(<NationalLayerList />, document.getElementById(node));
-  }
-  /* jshint ignore:end */
+	return NationalLayerList;
 
 });

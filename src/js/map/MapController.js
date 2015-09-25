@@ -4,8 +4,10 @@ define([
     'map/DrawTool',
     'map/MapConfig',
     'map/MapAssets',
-    'components/Tree',
-    'components/NationalLayerList',
+    'components/LayerTabContainer',
+    // 'components/Tree',
+    // 'components/CommunityLayerList',
+    // 'components/NationalLayerList',
     'map/WidgetsController',
     'utils/Helper',
     'dojo/on',
@@ -20,7 +22,7 @@ define([
     'dojo/fx/Toggler',
     'dijit/registry',
     'dijit/layout/ContentPane',
-    'dijit/layout/AccordionContainer',
+    // 'dijit/layout/AccordionContainer',
     'esri/dijit/Legend',
     // 'esri/dijit/Geocoder',
     'esri/dijit/HomeButton',
@@ -39,13 +41,13 @@ define([
     "dijit/form/HorizontalRuleLabels",
     "esri/layers/LayerDrawingOptions"
 
-], function(Map, Uploader, DrawTool, MapConfig, MapAssets, ReactTree, NationalLayerList, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Accordion, Legend, HomeButton, BasemapGallery, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
+], function(Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
 
     'use strict';
 
     // Some Widgets That will need to be accessed outside the renderComponents method
     var nationalLayerList,
-        communityTree;
+        communityLayerList;
 
     var MapController = {
 
@@ -63,7 +65,7 @@ define([
             // Bind Events now, Map Events then UI Events
             mapObject.on('map-ready', function() {
                 self.renderComponents();
-                registry.byId('layer-accordion').resize();
+                // registry.byId('layer-accordion').resize();
                 //$("#national-level-toggle_button").click();
             });
 
@@ -105,13 +107,13 @@ define([
                 var layerInfos = layersAdded.layers.map(function(layer) {
                     var li = {
                       layer: layer.layer,
-                    }; 
+                    };
                     if (layer.layer.id === "indigenousLands") {
                         li.hideLayers = [1,2,3,4];
                     }
-                    return li;  
+                    return li;
                 });
-                
+
                 var legend = new Legend({
                     map: brApp.map,
                     layerInfos: layerInfos,
@@ -123,11 +125,11 @@ define([
                     console.log("Done")
                     legend.refresh(layerInfos)
                 })
-                
+
             });
 
             //TODO: Check the presence of the analysis and data completeness buttons on smaller screens AFTER a layer is toggled on (if all layers were off)
-            // --> In layerController's updateVisibleLayers function. 
+            // --> In layerController's updateVisibleLayers function.
 
             // Mobile Specific Events
             // If we are ok with the app not responding to mobile, only loading in mobile or loading in Desktop
@@ -149,7 +151,8 @@ define([
             var basemapGallery,
                 self = this,
                 // locateButton,
-                layerAccordion,
+                // layerAccordion,
+                tabContainer,
                 homeWidget,
                 // transparencySlider,
                 // geocoder,
@@ -197,19 +200,19 @@ define([
             //     highlightLocation: false
             // }, 'location-widget');
 
-            layerAccordion = new Accordion({
-                id: 'layer-accordion'
-            }, 'layer-accordion');
+            // layerAccordion = new Accordion({
+            //     id: 'layer-accordion'
+            // }, 'layer-accordion');
 
-            layerAccordion.startup();
-
-            layerAccordion.addChild(new ContentPane({
-                title: 'Community Level Data'
-            }, 'community-level-toggle'));
-
-            layerAccordion.addChild(new ContentPane({
-                title: 'National Level Data'
-            }, 'national-level-toggle'));
+            // layerAccordion.startup();
+            //
+            // layerAccordion.addChild(new ContentPane({
+            //     title: 'Community Level Data'
+            // }, 'community-level-toggle'));
+            //
+            // layerAccordion.addChild(new ContentPane({
+            //     title: 'National Level Data'
+            // }, 'national-level-toggle'));
 
             // transparencySlider = new HorizontalSlider({
             //     //value: 80,
@@ -228,8 +231,12 @@ define([
 
             // transparencySlider.setValue(50);
 
-            communityTree = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
-            nationalLayerList = new NationalLayerList('national-layer-lists');
+            // communityTree = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
+
+            tabContainer = new LayerTabContainer('layer-content');
+
+            // communityLayerList = new CommunityLayerList(MapConfig.communityLevelLayers, 'community-level-tree');
+            // nationalLayerList = new NationalLayerList('national-layer-lists');
 
             // Start all widgets that still need to be started
             basemapGallery.startup();
@@ -245,8 +252,9 @@ define([
 
             // Initialize the draw tools
             DrawTool.init();
-            on(document.getElementById('indigenous-lands-help'), 'click', WidgetsController.showHelp);
-            //on(document.getElementById('community-lands-help'), 'click', WidgetsController.showHelp);
+            // TODO: Recomment Back In
+            // on(document.getElementById('indigenous-lands-help'), 'click', WidgetsController.showHelp);
+            // on(document.getElementById('community-lands-help'), 'click', WidgetsController.showHelp);
             on(document.getElementById('analysis-help'), 'click', WidgetsController.showHelp);
 
             //brApp.map.infoWindow.on("selection-change", function() {
@@ -280,8 +288,8 @@ define([
         },
 
         resetCommunityLevelTree: function () {
-            if (communityTree) {
-                communityTree.toggleOff();
+            if (communityLayerList) {
+                communityLayerList.toggleOff();
             }
         },
 
@@ -369,10 +377,10 @@ define([
                     // if (centerPointScreen.y > 300) {
                     //     centerPointScreen.y -= 100;
                     // }
-                    
-                    // centerPoint = brApp.map.toMap(centerPointScreen); 
 
-                    // brApp.map.centerAt(centerPoint); 
+                    // centerPoint = brApp.map.toMap(centerPointScreen);
+
+                    // brApp.map.centerAt(centerPoint);
 
 
                     if (window.innerWidth < 1000) {
@@ -507,9 +515,9 @@ define([
                 var popSource = item.feature.attributes.Pop_Source == "Null" ? null : item.feature.attributes.Pop_Source;
                 var popYear = item.feature.attributes.Pop_Year == "Null" ? null : item.feature.attributes.Pop_Year;
 
-                
 
-                 
+
+
 
                 // //var population = "Null" ? null : item.feature.attributes.Populatn;
 
@@ -656,7 +664,7 @@ define([
                                 item.feature.attributes[attr] = "None";
                             }
                             console.log(item.feature.attributes[attr])
-                            
+
                         }
                     }
 
@@ -675,7 +683,7 @@ define([
 
                     "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "</div>";
 
-                    
+
                     // Content needs to be wrapped in a single parent div, otherwise on touch ArcGIS JavaScript API
                     // will apply transform to first child and popup will not function and look like garbage, thanks esri/dojo
                     // template.content = '<div>' + template.content + '</div>';
@@ -749,7 +757,7 @@ define([
                 // "<div class='odd-row'><div class='popup-header'>" + brApp.currentLayer + "</div>" +
                 // Content needs to be wrapped in a single parent div, otherwise on touch ArcGIS JavaScript API
                 // will apply transform to first child and popup will not function and look like garbage, thanks esri/dojo
-                // "<div>" + 
+                // "<div>" +
                 // "<div class='odd-row'><div class='popup-header'>Groups targeted by the legal framework</div>" + framework + "</div>" +
                 // "<div class='even-row'><div class='popup-header'>Indicator score</div>" + indScore + "</div>" +
                 // "<div class='odd-row'><div class='popup-header'>Comments</div>" + comments + "</div>" +
@@ -1227,13 +1235,13 @@ define([
             //         console.log(layer.layer)
             //         var li = {
             //           layer: layer.layer,
-            //         }; 
+            //         };
             //         if (layer.layer.id === "indigenousLands") {
             //             li.hideLayers = [1,2,3,4];
             //         }
-            //         return li;  
+            //         return li;
             //     });
-                
+
             //     var legend = new Legend({
             //         map: brApp.map,
             //         layerInfos: layerInfos,

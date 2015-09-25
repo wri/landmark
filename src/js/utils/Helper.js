@@ -29,7 +29,7 @@ define([
             }
         }
 
-        // Dont broadcast every time the window changes size, 
+        // Dont broadcast every time the window changes size,
         // only when switching to phone or desktop
         if (prevWidth < threshold && width > threshold) {
             topic.publish("changedLayout", false);
