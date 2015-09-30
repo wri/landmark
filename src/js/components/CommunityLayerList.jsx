@@ -39,6 +39,7 @@ define([
         (
           item.isCategory ? <div className='layer-category'>{item.label}</div> :
           <div className='layer-node' onClick={self.layerClicked} data-id={item.id}>
+            <span className='layer-checkbox'></span>
             {item.label}
           </div>
         )
