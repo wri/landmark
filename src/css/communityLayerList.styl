@@ -13,20 +13,30 @@
   font-size 12px
   margin 10px 0
 
-.layer-checked-true
-  background url('images/checked.png')
+.layer-checked-true, .parent-layer-checked-true
+  background url('images/check.svg')
   background-repeat no-repeat
   height 16px
   width 20px
   display inline-block
-  vertical-align bottom
+  vertical-align sub
   cursor pointer
 
-.layer-checked-false
-  background url('images/unChecked.png')
+.layer-checked-false, .parent-layer-checked-false
+  background url('images/uncheck.svg')
   background-repeat no-repeat
   height 16px
   width 20px
   display inline-block
-  vertical-align bottom
+  vertical-align sub
   cursor pointer
+
+// .parent-layer-checked-true
+//   background url('images/uncheck.svg')
+//   background-repeat no-repeat
+//   height 24px
+//   width 28px
+//   display inline-block
+//   vertical-align bottom
+//   cursor pointer
+//   fill blue

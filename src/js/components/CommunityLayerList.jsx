@@ -13,7 +13,12 @@ define([
       };
     },
 
-    toggleOff: function () {
+    toggleOff: function (layer, off) {
+
+      if (off) {
+        LayerController.updateVisibleLayers([layer], maybe)
+      }
+      // LayerController.updateVisibleLayers(keys, isNationalLevelData)
 
     },
 
@@ -21,11 +26,11 @@ define([
       return (
         <div className='community-layer-list'>
           <div className='community-layer-type'>
-            <div className='community-layer-type-label'>Indigenous Lands</div>
+            <div className='community-layer-type-label'><span className='parent-layer-checked-true'></span>Indigenous Lands</div>
             {this.state.data.map(this.layerMapper('indigenousLands'), this)}
           </div>
           <div className='community-layer-type'>
-            <div className='community-layer-type-label'>Community Lands</div>
+            <div className='community-layer-type-label'><span className='parent-layer-checked-false'></span>Community Lands</div>
             {this.state.data.map(this.layerMapper('communityLands'), this)}
           </div>
         </div>
@@ -38,7 +43,7 @@ define([
         return item.group !== group ? null :
         (
           item.isCategory ? <div className='layer-category'>{item.label}</div> :
-          <div className='layer-node' onClick={self.layerClicked} data-id={item.id}>
+          <div className='layer-node' onClick={self.layerClicked} data-id={item.id} data-clicked={item.checked}>
             <span className={'layer-checked-' + item.checked}></span>
             {item.label}
           </div>
@@ -47,8 +52,27 @@ define([
     },
 
     layerClicked: function (evt) {
-      debugger
-      console.log(evt.target.getAttribute('data-id'));
+      if (evt.target.classList.length === 0 || evt.target.parentElement.getAttribute('data-id') === null) {
+        return;
+      }
+
+      var layer = evt.target.parentElement.getAttribute('data-id');
+      var turnOff = evt.target.parentElement.getAttribute('data-clicked');
+
+      if (turnOff == "true") {
+        evt.target.classList.remove('layer-checked-true')
+        evt.target.classList.add('layer-checked-false')
+
+        evt.target.parentElement.setAttribute('data-clicked',false);
+      } else {
+
+        evt.target.classList.add('layer-checked-true')
+        evt.target.classList.remove('layer-checked-false')
+        evt.target.parentElement.setAttribute('data-clicked',true);
+      }
+
+      this.toggleOff(layer, turnOff);
+
     }
 
   });
