@@ -39,7 +39,7 @@ define([
         (
           item.isCategory ? <div className='layer-category'>{item.label}</div> :
           <div className='layer-node' onClick={self.layerClicked} data-id={item.id}>
-            <span className='layer-checkbox'></span>
+            <span className={'layer-checked-' + item.checked}></span>
             {item.label}
           </div>
         )
@@ -47,6 +47,7 @@ define([
     },
 
     layerClicked: function (evt) {
+      debugger
       console.log(evt.target.getAttribute('data-id'));
     }
 

@@ -39,7 +39,7 @@ define([
         (
           item.isCategory ? React.createElement("div", {className: "layer-category"}, item.label) :
           React.createElement("div", {className: "layer-node", onClick: self.layerClicked, "data-id": item.id}, 
-            React.createElement("span", {className: "layer-checkbox"}), 
+            React.createElement("span", {className: 'layer-checked-' + item.checked}), 
             item.label
           )
         )
@@ -47,6 +47,7 @@ define([
     },
 
     layerClicked: function (evt) {
+      debugger
       console.log(evt.target.getAttribute('data-id'));
     }
 
