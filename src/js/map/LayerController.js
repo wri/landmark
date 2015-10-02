@@ -17,10 +17,10 @@ define([
          * 										- in the MapConfig.layerMapping (may add layer id's to config if needed).
          * @param {boolean} isNationalLevelData - tells us whether were updating community level or national level layers
          */
-        updateVisibleLayers: function(keys, isNationalLevelData) {
+        updateVisibleLayers: function(keys, isNationalLevelData, off) {
             brApp.debug('LayerController >>> updateVisibleLayers');
             var visibleLayers = [],
-                dynamicLayer, 
+                dynamicLayer,
                 // dynamicLayer2,
                 self = this;
 
@@ -55,6 +55,12 @@ define([
                 topic.publish('refresh-legend');
 
             } else {
+
+              if (keys.length === 1) {
+                layer = brApp.map.getLayer(keys[0]);
+              }
+
+
                 dynamicLayer = brApp.map.getLayer('indigenousLands');
                 // dynamicLayer2 = brApp.map.getLayer('indigenousTransparency');
 
@@ -66,18 +72,8 @@ define([
                     });
                 }
 
-                // if (document.getElementById('data-complete-checkbox').getAttribute("data-checked") == "true" && keys.length > 0) {
-                //     dynamicLayer2.show();
-                // } else {
-                //     dynamicLayer2.hide();
-                // }
-
                 if (visibleLayers[0] === -1) {
 
-                    // $("#data-completeness-container").hide();
-
-
-                    // $("#analysis-button").hide();
                     $("#analysis-button").addClass("grayOut");
 
                     $('#analysis-button').mouseenter(function() {
@@ -86,8 +82,6 @@ define([
                     $('#analysis-button').mouseleave(function() {
                         $("#analysis-button-tt").hide();
                     });
-
-                    
 
                     $("#legendMenuButton").addClass("mobileLegendUpdate");
                     $("#toolsMenuButton").hide();
@@ -100,13 +94,11 @@ define([
                     $("#legendMenuButton").removeClass("mobileLegendUpdate");
                     $("#toolsMenuButton").show();
 
-                    // $("#data-completeness-container").show();
-                    // $("#analysis-button").show();
                     $("#analysis-button").removeClass("grayOut");
                     $('#analysis-button').unbind('mouseenter mouseleave');
 
-                }                
-                
+                }
+
                 dynamicLayer.setVisibleLayers(visibleLayers);
                 topic.publish('refresh-legend');
 
@@ -116,7 +108,7 @@ define([
         /**
          * Turn Off all Community Level data, deselect all checkboxes in the tree, hide the buttons specific
          * to this data set
-         * This is Mutually Exclusive with National Level Data so this is a helper to toggle all 
+         * This is Mutually Exclusive with National Level Data so this is a helper to toggle all
          * Community Level Data related things off
          */
         turnOffCommunityLevelData: function () {
@@ -155,7 +147,7 @@ define([
 
         /**
          * Turn Off all National Level data, set list to None
-         * This is Mutually Exclusive with Community Level Data so this is a helper to toggle all 
+         * This is Mutually Exclusive with Community Level Data so this is a helper to toggle all
          * National Level Data related things off
          */
         turnOffNationalLevelData: function () {
