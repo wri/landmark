@@ -39,62 +39,62 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'indigenousOfficial': {
                 url: community_indigenous_FormalClaim,
                 type: 'dynamic',
-                defaultLayers: [1,2], //[1,2,3,4]
-                visible: true
-            },
-            'indigenousInProcess': {
-                url: community_indigenous_FormalDoc,
-                type: 'dynamic',
-                defaultLayers: [1,2], //[1,2,3,4]
+                defaultLayers: [1,2,3,4,5,6,7,8,9],
                 visible: true
             },
             'indigenousDocumentation': {
                 url: community_indigenous_InProcess,
                 type: 'dynamic',
-                defaultLayers: [1,2], //[1,2,3,4]
+                defaultLayers: [1,2,3,4,5,6,7,8,9],
+                visible: true
+            },
+            'indigenousInProcess': {
+                url: community_indigenous_FormalDoc,
+                type: 'dynamic',
+                defaultLayers: [1,2,3,4,5,6,7,8,9],
                 visible: true
             },
             'indigenousLandClaim': {
                 url: community_indigenous_NoDoc,
                 type: 'dynamic',
-                defaultLayers: [1,2], //[1,2,3,4]
+                defaultLayers: [0,1],
                 visible: true
             },
             'indigenousNoLandClaim': {
                 url: community_indigenous_Occupied,
                 type: 'dynamic',
-                defaultLayers: [1,2], //[1,2,3,4]
+                defaultLayers: [1,2,3,4,5,6,7,8,9],
                 visible: true
             },
 
             'communityFormalTitle': {
                 url: community_community_FormalClaim,
                 type: 'dynamic',
-                defaultLayers: [1,2,3,4,5,6,7,8,9],
+                defaultLayers: [0,1],
                 visible: true
             },
             'communityInProcess': {
                 url: community_community_FormalDoc,
                 type: 'dynamic',
-                defaultLayers: [1,2,3,4,5,6,7,8,9],
+                defaultLayers: [0,1],
                 visible: true
             },
             'communityDocumentation': {
                 url: community_community_InProcess,
                 type: 'dynamic',
-                defaultLayers: [1,2,3,4,5,6,7,8,9],
+                defaultLayers: [0,1],
                 visible: true
             },
             'communityLandClaim': {
                 url: community_community_NoDoc,
                 type: 'dynamic',
-                defaultLayers: [1,2],
+                defaultLayers: [0,1],
                 visible: true
             },
             'communityNoLandClaim': {
                 url: community_community_Occupied,
                 type: 'dynamic',
-                defaultLayers: [1,2,3,4,5,6,7,8,9],
+                defaultLayers: [0,1],
                 visible: true
             },
 

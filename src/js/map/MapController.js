@@ -109,8 +109,41 @@ define([
                     var li = {
                       layer: layer.layer,
                     };
-                    // debugger
-                    // var ll = layer.layer.getDynamicLayerInfos();
+                    switch (layer.layer.id) {
+                        case "indigenousOfficial":
+                            li.hideLayers = [0,2,4,6,8];
+                            break;
+                        case "indigenousDocumentation":
+                            li.hideLayers = [0,2,4,6,8];
+                            break;
+                        case "indigenousInProcess":
+                            li.hideLayers = [0,2,4,6,8];
+                            break;
+                        case "indigenousLandClaim":
+                            li.hideLayers = [0];
+                            break;
+                        case "indigenousNoLandClaim":
+                            li.hideLayers = [0,2,4,6,8];
+                            break;
+
+                        case "communityFormalTitle":
+                            li.hideLayers = [0];
+                            break;
+                        case "communityInProcess":
+                            li.hideLayers = [0];
+                            break;
+                        case "communityDocumentation":
+                            li.hideLayers = [0];
+                            break;
+                        case "communityLandClaim":
+                            li.hideLayers = [0];
+                            break;
+                        case "communityNoLandClaim":
+                            li.hideLayers = [0];
+                            break;
+                        default: // Do Nothing
+                            break;
+                    }
 
 
                     console.log(layer.layer.id)
@@ -129,7 +162,7 @@ define([
 
                 requestAnimationFrame(function() {
                     console.log("Done")
-                    
+
                     legend.refresh(layerInfos)
                 })
 
@@ -1237,7 +1270,7 @@ define([
 
         refreshLegend: function() {
             brApp.debug('MapController >>> refreshLegend');
-            debugger
+            
             // var layerInfos = layersAdded.layers.map(function(layer) {
             //         console.log(layer.layer)
             //         var li = {

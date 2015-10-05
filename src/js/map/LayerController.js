@@ -21,6 +21,7 @@ define([
             brApp.debug('LayerController >>> updateVisibleLayers');
             var visibleLayers = [],
                 dynamicLayer,
+                layer,
                 // dynamicLayer2,
                 self = this;
 
@@ -56,50 +57,64 @@ define([
 
             } else {
 
-              if (keys.length === 1) {
-                layer = brApp.map.getLayer(keys[0]);
-              }
+              // if (keys.length === 1) {
+              //   layer = brApp.map.getLayer(keys[0]);
+              // }
 
-
-                dynamicLayer = brApp.map.getLayer('indigenousLands');
+                // dynamicLayer = brApp.map.getLayer('indigenousLands');
                 // dynamicLayer2 = brApp.map.getLayer('indigenousTransparency');
 
-                if (keys.length === 0) {
-                    visibleLayers.push(-1);
-                } else {
-                    arrayUtils.forEach(keys, function(key) {
-                        visibleLayers = visibleLayers.concat(MapConfig.layerMapping[key]);
-                    });
+                for (var i = 0; i < keys.length; i++) {
+                  layer = brApp.map.getLayer(keys[i]);
+                  if (off === true) {
+                    layer.hide();
+                  } else {
+                    layer.show();
+                  }
                 }
+                //
+                // if (keys.length === 0) {
+                //     visibleLayers.push(-1);
+                //
+                //     if (off === true) {
+                //       layer.hide();
+                //     } else {
+                //       layer.show();
+                //     }
+                // } else if (keys.length > 1) {
+                //     debugger
+                //
+                // }
 
-                if (visibleLayers[0] === -1) {
 
-                    $("#analysis-button").addClass("grayOut");
+                // if (visibleLayers[0] === -1) {
+                //
+                //     $("#analysis-button").addClass("grayOut");
+                //
+                //     $('#analysis-button').mouseenter(function() {
+                //         $("#analysis-button-tt").show();
+                //     });
+                //     $('#analysis-button').mouseleave(function() {
+                //         $("#analysis-button-tt").hide();
+                //     });
+                //
+                //     $("#legendMenuButton").addClass("mobileLegendUpdate");
+                //     $("#toolsMenuButton").hide();
+                //
+                // } else {
+                //
+                //     // Turn Off National Layer, User has selected some community level layers
+                //     self.turnOffNationalLevelData();
+                //
+                //     $("#legendMenuButton").removeClass("mobileLegendUpdate");
+                //     $("#toolsMenuButton").show();
+                //
+                //     $("#analysis-button").removeClass("grayOut");
+                //     $('#analysis-button').unbind('mouseenter mouseleave');
+                //
+                // }
 
-                    $('#analysis-button').mouseenter(function() {
-                        $("#analysis-button-tt").show();
-                    });
-                    $('#analysis-button').mouseleave(function() {
-                        $("#analysis-button-tt").hide();
-                    });
-
-                    $("#legendMenuButton").addClass("mobileLegendUpdate");
-                    $("#toolsMenuButton").hide();
-
-                } else {
-
-                    // Turn Off National Layer, User has selected some community level layers
-                    self.turnOffNationalLevelData();
-
-                    $("#legendMenuButton").removeClass("mobileLegendUpdate");
-                    $("#toolsMenuButton").show();
-
-                    $("#analysis-button").removeClass("grayOut");
-                    $('#analysis-button').unbind('mouseenter mouseleave');
-
-                }
-
-                dynamicLayer.setVisibleLayers(visibleLayers);
+                // dynamicLayer.setVisibleLayers(visibleLayers);
                 topic.publish('refresh-legend');
 
             }

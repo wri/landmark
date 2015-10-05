@@ -16,7 +16,7 @@ define([
     toggleOff: function (layers, off) {
       console.log(layers,off)
 
-      // LayerController.updateVisibleLayers(layers, false, off);
+      LayerController.updateVisibleLayers(layers, false, off);
       // LayerController.updateVisibleLayers(keys, isNationalLevelData)
 
     },
