@@ -14,6 +14,7 @@ module.exports = {
         src: 'src/**/*.{png,jpg,gif}',
         dest: 'build'
     },
+    browserSyncSrc: ['src/**/*.html', 'src/**/*.js', 'src/**/*.css'],
     stylus: {
         base: 'src/css',
         watch: 'src/css/**/*.styl',

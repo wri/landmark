@@ -6,7 +6,23 @@ var config = require('./gulp-config.js'),
     watch = require('gulp-watch'),
     react = require('gulp-react'),
     jade = require('gulp-jade'),
+    browserSync = require('browser-sync'),
     gulp = require('gulp');
+
+gulp.task('browser-sync', function () {
+  browserSync({
+    server: {
+      baseDir: "src"
+    },
+    port: process.env.PORT || 3000,
+    files: config.browserSyncSrc,
+    logFileChanges: false,
+    ghostMode: false,
+    reloadOnRestart: false,
+    open: false,
+    ui: false
+  })
+})
 
 gulp.task('stylus-watch', function() {
     gulp.watch(config.stylus.watch, ['stylus-dev']);
@@ -114,5 +130,6 @@ gulp.task('react-jsx', function() {
         .pipe(gulp.dest(config.react.out));
 });
 
-gulp.task('watch', ['stylus-dev', 'stylus-watch', 'jade-dev', 'jade-watch', 'react-jsx', 'react-watch']);
+gulp.task('watch', ['stylus-dev', 'stylus-watch', 'jade-dev', 'jade-watch', 'react-jsx', 'react-watch', 'browser-sync']);
+
 gulp.task('build', ['copy', 'minify', 'stylus-build', 'jade-build', 'optimize']);
