@@ -132,13 +132,13 @@ define([
                             li.hideLayers = [0];
                             break;
                         case "community_InProcess":
-                            li.hideLayers = [2];
+                            li.hideLayers = [0];
                             break;
                         case "community_NoDoc":
                             li.hideLayers = [0];
                             break;
                         case "community_Occupied":
-                            li.hideLayers = [8];
+                            li.hideLayers = [0];
                             break;
                         default: // Do Nothing
                             break;

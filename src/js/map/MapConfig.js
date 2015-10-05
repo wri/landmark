@@ -82,7 +82,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'community_InProcess': {
                 url: community_community_InProcess,
                 type: 'dynamic',
-                defaultLayers: [2,3],
+                defaultLayers: [0,1],
                 visible: true
             },
             'community_NoDoc': {
@@ -94,7 +94,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'community_Occupied': {
                 url: community_community_Occupied,
                 type: 'dynamic',
-                defaultLayers: [8,9],
+                defaultLayers: [0,1],
                 visible: true
             },
 
@@ -174,19 +174,19 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'communityLands'
           },
           {
-            label: 'Formal document/title',
+            label: 'Formal land claim',
             id: 'community_FormalClaim',
             checked: true,
             group: 'communityLands'
           },
           {
-            label: 'In process of titling',
+            label: 'Formal document/title',
             id: 'community_FormalDoc',
             checked: true,
             group: 'communityLands'
           },
           {
-            label: 'No documentation',
+            label: 'In process of titling',
             id: 'community_InProcess',
             checked: true,
             group: 'communityLands'
@@ -197,7 +197,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'communityLands'
           },
           {
-            label: 'Formal land claim',
+            label: 'No documentation',
             id: 'community_NoDoc',
             checked: true,
             group: 'communityLands'
