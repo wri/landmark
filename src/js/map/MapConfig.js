@@ -5,6 +5,18 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
     // var indigenousLandsInfo = "Placeholder so this layer's info icon appears in the tree";
     // var landTenureSecurityInfo = "Placeholder so this layer's info icon appears in the tree";
 
+    var community_indigenous_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer';
+    var community_indigenous_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalDoc/MapServer';
+    var community_indigenous_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_InProcess/MapServer';
+    var community_indigenous_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_NoDoc/MapServer';
+    var community_indigenous_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Occupied/MapServer';
+
+    var community_community_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalClaim/MapServer';
+    var community_community_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer';
+    var community_community_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_InProcess/MapServer';
+    var community_community_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NoDoc/MapServer';
+    var community_community_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Occupied/MapServer';
+
     var MapConfig = {
 
         options: {
@@ -23,13 +35,79 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 visible: true
             },
 
-            'indigenousLands': {
-                url: indigenousLandsUrl,
+            // CommunityLevel
+            'indigenousOfficial': {
+                url: community_indigenous_FormalClaim,
                 type: 'dynamic',
-                // Not all the layers are present in the tree, when they are, include 0 - 9
-                defaultLayers: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14], //[0,1,2,3,4,5,6,7,8,9]
+                defaultLayers: [1,2], //[1,2,3,4]
                 visible: true
             },
+            'indigenousInProcess': {
+                url: community_indigenous_FormalDoc,
+                type: 'dynamic',
+                defaultLayers: [1,2], //[1,2,3,4]
+                visible: true
+            },
+            'indigenousDocumentation': {
+                url: community_indigenous_InProcess,
+                type: 'dynamic',
+                defaultLayers: [1,2], //[1,2,3,4]
+                visible: true
+            },
+            'indigenousLandClaim': {
+                url: community_indigenous_NoDoc,
+                type: 'dynamic',
+                defaultLayers: [1,2], //[1,2,3,4]
+                visible: true
+            },
+            'indigenousNoLandClaim': {
+                url: community_indigenous_Occupied,
+                type: 'dynamic',
+                defaultLayers: [1,2], //[1,2,3,4]
+                visible: true
+            },
+
+            'communityFormalTitle': {
+                url: community_community_FormalClaim,
+                type: 'dynamic',
+                defaultLayers: [1,2,3,4,5,6,7,8,9],
+                visible: true
+            },
+            'communityInProcess': {
+                url: community_community_FormalDoc,
+                type: 'dynamic',
+                defaultLayers: [1,2,3,4,5,6,7,8,9],
+                visible: true
+            },
+            'communityDocumentation': {
+                url: community_community_InProcess,
+                type: 'dynamic',
+                defaultLayers: [1,2,3,4,5,6,7,8,9],
+                visible: true
+            },
+            'communityLandClaim': {
+                url: community_community_NoDoc,
+                type: 'dynamic',
+                defaultLayers: [1,2],
+                visible: true
+            },
+            'communityNoLandClaim': {
+                url: community_community_Occupied,
+                type: 'dynamic',
+                defaultLayers: [1,2,3,4,5,6,7,8,9],
+                visible: true
+            },
+
+
+
+
+            // 'indigenousLands': {
+            //     url: indigenousLandsUrl,
+            //     type: 'dynamic',
+            //     // Not all the layers are present in the tree, when they are, include 0 - 9
+            //     defaultLayers: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14], //[0,1,2,3,4,5,6,7,8,9]
+            //     visible: true
+            // },
 
             'CustomFeatures': {
                 type: 'graphic',

@@ -104,10 +104,16 @@ define([
 
             on(brApp.map, 'layers-add-result', function(layersAdded) {
 
+
                 var layerInfos = layersAdded.layers.map(function(layer) {
                     var li = {
                       layer: layer.layer,
                     };
+                    // debugger
+                    // var ll = layer.layer.getDynamicLayerInfos();
+
+
+                    console.log(layer.layer.id)
                     if (layer.layer.id === "indigenousLands") {
                         li.hideLayers = [1,2,3,4];
                     }
@@ -123,6 +129,7 @@ define([
 
                 requestAnimationFrame(function() {
                     console.log("Done")
+                    
                     legend.refresh(layerInfos)
                 })
 
@@ -1230,7 +1237,7 @@ define([
 
         refreshLegend: function() {
             brApp.debug('MapController >>> refreshLegend');
-
+            debugger
             // var layerInfos = layersAdded.layers.map(function(layer) {
             //         console.log(layer.layer)
             //         var li = {
