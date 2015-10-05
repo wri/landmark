@@ -36,65 +36,65 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             },
 
             // CommunityLevel
-            'indigenousOfficial': {
+            'indigenous_FormalClaim': {
                 url: community_indigenous_FormalClaim,
                 type: 'dynamic',
-                defaultLayers: [1,2,3,4,5,6,7,8,9],
+                defaultLayers: [6,7],
                 visible: true
             },
-            'indigenousDocumentation': {
-                url: community_indigenous_InProcess,
-                type: 'dynamic',
-                defaultLayers: [1,2,3,4,5,6,7,8,9],
-                visible: true
-            },
-            'indigenousInProcess': {
+            'indigenous_FormalDoc': {
                 url: community_indigenous_FormalDoc,
                 type: 'dynamic',
-                defaultLayers: [1,2,3,4,5,6,7,8,9],
+                defaultLayers: [0,1],
                 visible: true
             },
-            'indigenousLandClaim': {
+            'indigenous_InProcess': {
+                url: community_indigenous_InProcess,
+                type: 'dynamic',
+                defaultLayers: [2,3],
+                visible: true
+            },
+            'indigenous_NoDoc': {
                 url: community_indigenous_NoDoc,
                 type: 'dynamic',
                 defaultLayers: [0,1],
                 visible: true
             },
-            'indigenousNoLandClaim': {
+            'indigenous_Occupied': {
                 url: community_indigenous_Occupied,
                 type: 'dynamic',
-                defaultLayers: [1,2,3,4,5,6,7,8,9],
+                defaultLayers: [8,9],
                 visible: true
             },
 
-            'communityFormalTitle': {
+            'community_FormalClaim': {
                 url: community_community_FormalClaim,
                 type: 'dynamic',
                 defaultLayers: [0,1],
                 visible: true
             },
-            'communityInProcess': {
+            'community_FormalDoc': {
                 url: community_community_FormalDoc,
                 type: 'dynamic',
                 defaultLayers: [0,1],
                 visible: true
             },
-            'communityDocumentation': {
+            'community_InProcess': {
                 url: community_community_InProcess,
                 type: 'dynamic',
-                defaultLayers: [0,1],
+                defaultLayers: [2,3],
                 visible: true
             },
-            'communityLandClaim': {
+            'community_NoDoc': {
                 url: community_community_NoDoc,
                 type: 'dynamic',
                 defaultLayers: [0,1],
                 visible: true
             },
-            'communityNoLandClaim': {
+            'community_Occupied': {
                 url: community_community_Occupied,
                 type: 'dynamic',
-                defaultLayers: [0,1],
+                defaultLayers: [8,9],
                 visible: true
             },
 
@@ -134,20 +134,20 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'indigenousLands'
           },
           {
+            label: 'Formal land claim',
+            id: 'indigenous_FormalClaim',
+            checked: true,
+            group: 'indigenousLands'
+          },
+          {
             label: 'Formal document/title',
-            id: 'indigenousOfficial',
+            id: 'indigenous_FormalDoc',
             checked: true,
             group: 'indigenousLands'
           },
           {
             label: 'In process of titling',
-            id: 'indigenousInProcess',
-            checked: true,
-            group: 'indigenousLands'
-          },
-          {
-            label: 'No documentation',
-            id: 'indigenousDocumentation',
+            id: 'indigenous_InProcess',
             checked: true,
             group: 'indigenousLands'
           },
@@ -157,14 +157,14 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'indigenousLands'
           },
           {
-            label: 'Formal land claim',
-            id: 'indigenousLandClaim',
+            label: 'No documentation',
+            id: 'indigenous_NoDoc',
             checked: true,
             group: 'indigenousLands'
           },
           {
             label: 'Occupied/used without formal land claim',
-            id: 'indigenousNoLandClaim',
+            id: 'indigenous_Occupied',
             checked: true,
             group: 'indigenousLands'
           },
@@ -175,19 +175,19 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
           },
           {
             label: 'Formal document/title',
-            id: 'communityFormalTitle',
+            id: 'community_FormalClaim',
             checked: true,
             group: 'communityLands'
           },
           {
             label: 'In process of titling',
-            id: 'communityInProcess',
+            id: 'community_FormalDoc',
             checked: true,
             group: 'communityLands'
           },
           {
             label: 'No documentation',
-            id: 'communityDocumentation',
+            id: 'community_InProcess',
             checked: true,
             group: 'communityLands'
           },
@@ -198,13 +198,13 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
           },
           {
             label: 'Formal land claim',
-            id: 'communityLandClaim',
+            id: 'community_NoDoc',
             checked: true,
             group: 'communityLands'
           },
           {
             label: 'Occupied/used without formal land claim',
-            id: 'communityNoLandClaim',
+            id: 'community_Occupied',
             checked: true,
             group: 'communityLands'
         }],

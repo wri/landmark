@@ -104,52 +104,48 @@ define([
 
             on(brApp.map, 'layers-add-result', function(layersAdded) {
 
-
                 var layerInfos = layersAdded.layers.map(function(layer) {
                     var li = {
                       layer: layer.layer,
                     };
                     switch (layer.layer.id) {
-                        case "indigenousOfficial":
-                            li.hideLayers = [0,2,4,6,8];
+                        case "indigenous_FormalClaim":
+                            li.hideLayers = [6];
                             break;
-                        case "indigenousDocumentation":
-                            li.hideLayers = [0,2,4,6,8];
-                            break;
-                        case "indigenousInProcess":
-                            li.hideLayers = [0,2,4,6,8];
-                            break;
-                        case "indigenousLandClaim":
+                        case "indigenous_FormalDoc":
                             li.hideLayers = [0];
                             break;
-                        case "indigenousNoLandClaim":
-                            li.hideLayers = [0,2,4,6,8];
+                        case "indigenous_InProcess":
+                            li.hideLayers = [2];
+                            break;
+                        case "indigenous_NoDoc":
+                            li.hideLayers = [0];
+                            break;
+                        case "indigenous_Occupied":
+                            li.hideLayers = [8];
                             break;
 
-                        case "communityFormalTitle":
+                        case "community_FormalClaim":
                             li.hideLayers = [0];
                             break;
-                        case "communityInProcess":
+                        case "community_FormalDoc":
                             li.hideLayers = [0];
                             break;
-                        case "communityDocumentation":
+                        case "community_InProcess":
+                            li.hideLayers = [2];
+                            break;
+                        case "community_NoDoc":
                             li.hideLayers = [0];
                             break;
-                        case "communityLandClaim":
-                            li.hideLayers = [0];
-                            break;
-                        case "communityNoLandClaim":
-                            li.hideLayers = [0];
+                        case "community_Occupied":
+                            li.hideLayers = [8];
                             break;
                         default: // Do Nothing
                             break;
                     }
 
-
                     console.log(layer.layer.id)
-                    if (layer.layer.id === "indigenousLands") {
-                        li.hideLayers = [1,2,3,4];
-                    }
+
                     return li;
                 });
 
@@ -1270,7 +1266,7 @@ define([
 
         refreshLegend: function() {
             brApp.debug('MapController >>> refreshLegend');
-            
+
             // var layerInfos = layersAdded.layers.map(function(layer) {
             //         console.log(layer.layer)
             //         var li = {
