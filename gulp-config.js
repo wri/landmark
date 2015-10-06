@@ -11,7 +11,7 @@ module.exports = {
         }
     },
     imagemin: {
-        src: 'src/**/*.{png,jpg,gif}',
+        src: 'src/**/*.{png,jpg,gif,svg}',
         dest: 'build'
     },
     browserSyncSrc: ['src/**/*.html', 'src/**/*.js', 'src/**/*.css'],
