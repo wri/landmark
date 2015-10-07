@@ -35,11 +35,19 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 visible: true
             },
 
+            //Analysis Layer
+            'analysisLayer': {
+                url: "http://gis.wri.org/arcgis/rest/services/LandMark/comm_analysis/MapServer",
+                type: 'dynamic',
+                defaultLayers: [0,1], //[1,2,3,4]
+                visible: false
+            },
+
             // CommunityLevel
             'indigenous_FormalClaim': {
                 url: community_indigenous_FormalClaim,
                 type: 'dynamic',
-                defaultLayers: [6,7],
+                defaultLayers: [0,1],
                 visible: true
             },
             'indigenous_FormalDoc': {
@@ -51,7 +59,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'indigenous_InProcess': {
                 url: community_indigenous_InProcess,
                 type: 'dynamic',
-                defaultLayers: [2,3],
+                defaultLayers: [0,1],
                 visible: true
             },
             'indigenous_NoDoc': {
@@ -63,7 +71,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'indigenous_Occupied': {
                 url: community_indigenous_Occupied,
                 type: 'dynamic',
-                defaultLayers: [8,9],
+                defaultLayers: [0,1],
                 visible: true
             },
 

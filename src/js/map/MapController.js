@@ -110,19 +110,19 @@ define([
                     };
                     switch (layer.layer.id) {
                         case "indigenous_FormalClaim":
-                            li.hideLayers = [6];
+                            li.hideLayers = [0];
                             break;
                         case "indigenous_FormalDoc":
                             li.hideLayers = [0];
                             break;
                         case "indigenous_InProcess":
-                            li.hideLayers = [2];
+                            li.hideLayers = [0];
                             break;
                         case "indigenous_NoDoc":
                             li.hideLayers = [0];
                             break;
                         case "indigenous_Occupied":
-                            li.hideLayers = [8];
+                            li.hideLayers = [0];
                             break;
 
                         case "community_FormalClaim":
@@ -140,6 +140,9 @@ define([
                         case "community_Occupied":
                             li.hideLayers = [0];
                             break;
+                        // case "analysisLayer":
+                        //     li.hideLayers = [1];
+                        //     break;
                         default: // Do Nothing
                             break;
                     }
@@ -342,7 +345,17 @@ define([
                 deferreds = [],
                 features = [],
                 self = this,
-                indigenousLayer,
+                // indigenousLayer,
+                indigenous_FormalClaim,
+                indigenous_FormalDoc,
+                indigenous_InProcess,
+                indigenous_NoDoc,
+                indigenous_Occupied,
+                community_FormalClaim,
+                community_FormalDoc,
+                community_InProcess,
+                community_NoDoc,
+                community_Occupied,
                 nationalLayer,
                 userGraphics,
                 layer;
@@ -361,18 +374,73 @@ define([
             }
 
 
-            indigenousLayer = brApp.map.getLayer('indigenousLands');
+            indigenous_FormalClaim = brApp.map.getLayer('indigenous_FormalClaim');
+            indigenous_FormalDoc = brApp.map.getLayer('indigenous_FormalDoc');
+            indigenous_InProcess = brApp.map.getLayer('indigenous_InProcess');
+            indigenous_NoDoc = brApp.map.getLayer('indigenous_NoDoc');
+            indigenous_Occupied = brApp.map.getLayer('indigenous_Occupied');
 
-            if (indigenousLayer) {
-                if (indigenousLayer.visible) {
-                    deferreds.push(self.identifyIndigenous(mapPoint));
+            community_FormalClaim = brApp.map.getLayer('community_FormalClaim');
+            community_FormalDoc = brApp.map.getLayer('community_FormalDoc');
+            community_InProcess = brApp.map.getLayer('community_InProcess');
+            community_NoDoc = brApp.map.getLayer('community_NoDoc');
+            community_Occupied = brApp.map.getLayer('community_Occupied');
+
+            if (indigenous_FormalClaim) {
+                if (indigenous_FormalClaim.visible) {
+                    deferreds.push(self.identifyIndigenous_FormalClaims(mapPoint));
+                }
+            }
+            if (indigenous_FormalDoc) {
+                if (indigenous_FormalDoc.visible) {
+                    deferreds.push(self.identifyIndigenous_FormalDoc(mapPoint));
+                }
+            }
+            if (indigenous_InProcess) {
+                if (indigenous_InProcess.visible) {
+                    deferreds.push(self.identifyIndigenous_InProcess(mapPoint));
+                }
+            }
+            if (indigenous_NoDoc) {
+                if (indigenous_NoDoc.visible) {
+                    deferreds.push(self.identifyIndigenous_NoDoc(mapPoint));
+                }
+            }
+            if (indigenous_Occupied) {
+                if (indigenous_Occupied.visible) {
+                    deferreds.push(self.identifyIndigenous_Occupied(mapPoint));
+                }
+            }
+
+            if (community_FormalClaim) {
+                if (community_FormalClaim.visible) {
+                    deferreds.push(self.identifyCommunity_FormalClaim(mapPoint));
+                }
+            }
+            if (community_FormalDoc) {
+                if (community_FormalDoc.visible) {
+                    deferreds.push(self.identifyCommunity_FormalDoc(mapPoint));
+                }
+            }
+            if (community_InProcess) {
+                if (community_InProcess.visible) {
+                    deferreds.push(self.identifyCommunity_InProcess(mapPoint));
+                }
+            }
+            if (community_NoDoc) {
+                if (community_NoDoc.visible) {
+                    deferreds.push(self.identifyCommunity_NoDoc(mapPoint));
+                }
+            }
+            if (community_Occupied) {
+                if (community_Occupied.visible) {
+                    deferreds.push(self.identifyCommunity_Occupied(mapPoint));
                 }
             }
 
             nationalLayer = brApp.map.getLayer('nationalLevel');
 
             if (nationalLayer) {
-
                 if (nationalLayer.visible) {
                     deferreds.push(self.identifyNational(mapPoint));
                 }
@@ -384,10 +452,46 @@ define([
 
             all(deferreds).then(function(featureSets) {
                 arrayUtils.forEach(featureSets, function(item) {
+                  console.log(item.layer)
                     switch (item.layer) {
-                        case "indigenousLands":
+                      // community_FormalClaim = brApp.map.getLayer('community_FormalClaim');
+                      // community_FormalDoc = brApp.map.getLayer('community_FormalDoc');
+                      // community_InProcess = brApp.map.getLayer('community_InProcess');
+                      // community_NoDoc = brApp.map.getLayer('community_NoDoc');
+                      // community_Occupied = brApp.map.getLayer('community_Occupied');
+                        case "indigenous_FormalClaim":
                             features = features.concat(self.setIndigenousTemplates(item.features));
                             break;
+                        case "indigenous_FormalDoc":
+                            features = features.concat(self.setIndigenousTemplates(item.features));
+                            break;
+                        case "indigenous_InProcess":
+                            features = features.concat(self.setIndigenousTemplates(item.features));
+                            break;
+                        case "indigenous_NoDoc":
+                            features = features.concat(self.setIndigenousTemplates(item.features));
+                            break;
+                        case "indigenous_Occupied":
+                            features = features.concat(self.setIndigenousTemplates(item.features));
+                            break;
+
+                        case "community_FormalClaim":
+                            features = features.concat(self.setCommunityTemplates(item.features));
+                            break;
+                        case "community_FormalDoc":
+                            features = features.concat(self.setCommunityTemplates(item.features));
+                            break;
+                        case "community_InProcess":
+                            features = features.concat(self.setCommunityTemplates(item.features));
+                            break;
+                        case "community_NoDoc":
+                            features = features.concat(self.setCommunityTemplates(item.features));
+                            break;
+                        case "community_Occupied":
+                            features = features.concat(self.setCommunityTemplates(item.features));
+                            break;
+
+
                         case "nationalLevel":
                             features = features.concat(self.setNationalTemplates(item.features));
                             break;
@@ -404,9 +508,7 @@ define([
                     $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
                     $("#identifyNote").remove();
 
-
                     brApp.map.infoWindow.show(mapPoint);
-
 
                     // var centerPoint = new Point(brApp.map.extent.getCenter());
                     // var centerPointScreen = brApp.map.toScreen(centerPoint);
@@ -417,7 +519,6 @@ define([
                     // centerPoint = brApp.map.toMap(centerPointScreen);
 
                     // brApp.map.centerAt(centerPoint);
-
 
                     if (window.innerWidth < 1000) {
                         brApp.map.infoWindow.maximize();
@@ -441,33 +542,69 @@ define([
 
         },
 
-        identifyIndigenous: function(mapPoint) {
-            brApp.debug('MapController >>> identifyIndigenous');
+        // identifyIndigenous: function(mapPoint) {
+        //     brApp.debug('MapController >>> identifyIndigenous');
+        //
+        //     var deferred = new Deferred(),
+        //         identifyTask = new IdentifyTask(MapConfig.layers.indigenousLands.url),
+        //         params = new IdentifyParameters(),
+        //         mapLayer = brApp.map.getLayer('indigenousLands');
+        //
+        //     params.tolerance = 3;
+        //     params.returnGeometry = true;
+        //     params.width = brApp.map.width;
+        //     params.height = brApp.map.height;
+        //     params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
+        //     params.geometry = mapPoint;
+        //     params.mapExtent = brApp.map.extent;
+        //     params.layerIds = mapLayer.visibleLayers;
+        //     if (params.layerIds.indexOf(17) > -1) {
+        //         params.layerIds.splice(params.layerIds.indexOf(17), 1);
+        //     }
+        //
+        //     params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+        //
+        //     identifyTask.execute(params, function(features) {
+        //         if (features.length > 0) {
+        //             console.log(features);
+        //             deferred.resolve({
+        //                 layer: "indigenousLands",
+        //                 features: features
+        //             });
+        //         } else {
+        //             deferred.resolve(false);
+        //         }
+        //     }, function(error) {
+        //         deferred.resolve(false);
+        //     });
+        //
+        //     return deferred.promise;
+        //
+        // },
+
+        identifyIndigenous_FormalClaims: function(mapPoint) {
+            brApp.debug('MapController >>> identifyIndigenous_FormalClaims');
 
             var deferred = new Deferred(),
-                identifyTask = new IdentifyTask(MapConfig.layers.indigenousLands.url),
+                identifyTask = new IdentifyTask(MapConfig.layers.indigenous_FormalClaim.url),
                 params = new IdentifyParameters(),
-                mapLayer = brApp.map.getLayer('indigenousLands');
+                mapLayer = brApp.map.getLayer('indigenous_FormalClaim');
 
             params.tolerance = 3;
             params.returnGeometry = true;
+            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
             params.width = brApp.map.width;
             params.height = brApp.map.height;
-            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
             params.geometry = mapPoint;
             params.mapExtent = brApp.map.extent;
             params.layerIds = mapLayer.visibleLayers;
-            if (params.layerIds.indexOf(17) > -1) {
-                params.layerIds.splice(params.layerIds.indexOf(17), 1);
-            }
 
             params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
 
             identifyTask.execute(params, function(features) {
                 if (features.length > 0) {
-                    console.log(features);
                     deferred.resolve({
-                        layer: "indigenousLands",
+                        layer: "indigenous_FormalClaim",
                         features: features
                     });
                 } else {
@@ -480,6 +617,330 @@ define([
             return deferred.promise;
 
         },
+        identifyIndigenous_FormalDoc: function(mapPoint) {
+            brApp.debug('MapController >>> identifyIndigenous_FormalDoc');
+
+            var deferred = new Deferred(),
+                identifyTask = new IdentifyTask(MapConfig.layers.indigenous_FormalDoc.url),
+                params = new IdentifyParameters(),
+                mapLayer = brApp.map.getLayer('indigenous_FormalDoc');
+
+            params.tolerance = 3;
+            params.returnGeometry = true;
+            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
+            params.width = brApp.map.width;
+            params.height = brApp.map.height;
+            params.geometry = mapPoint;
+            params.mapExtent = brApp.map.extent;
+            params.layerIds = mapLayer.visibleLayers;
+
+            params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+
+            identifyTask.execute(params, function(features) {
+                if (features.length > 0) {
+                    deferred.resolve({
+                        layer: "indigenous_FormalDoc",
+                        features: features
+                    });
+                } else {
+                    deferred.resolve(false);
+                }
+            }, function(error) {
+                deferred.resolve(false);
+            });
+
+            return deferred.promise;
+
+        },
+        identifyIndigenous_InProcess: function(mapPoint) {
+            brApp.debug('MapController >>> identifyIndigenous_InProcess');
+
+            var deferred = new Deferred(),
+                identifyTask = new IdentifyTask(MapConfig.layers.indigenous_InProcess.url),
+                params = new IdentifyParameters(),
+                mapLayer = brApp.map.getLayer('indigenous_InProcess');
+
+            params.tolerance = 3;
+            params.returnGeometry = true;
+            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
+            params.width = brApp.map.width;
+            params.height = brApp.map.height;
+            params.geometry = mapPoint;
+            params.mapExtent = brApp.map.extent;
+            params.layerIds = mapLayer.visibleLayers;
+
+            params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+
+            identifyTask.execute(params, function(features) {
+                if (features.length > 0) {
+                    deferred.resolve({
+                        layer: "indigenous_InProcess",
+                        features: features
+                    });
+                } else {
+                    deferred.resolve(false);
+                }
+            }, function(error) {
+                deferred.resolve(false);
+            });
+
+            return deferred.promise;
+
+        },
+        identifyIndigenous_NoDoc: function(mapPoint) {
+            brApp.debug('MapController >>> identifyIndigenous_NoDoc');
+
+            var deferred = new Deferred(),
+                identifyTask = new IdentifyTask(MapConfig.layers.indigenous_NoDoc.url),
+                params = new IdentifyParameters(),
+                mapLayer = brApp.map.getLayer('indigenous_NoDoc');
+
+            params.tolerance = 3;
+            params.returnGeometry = true;
+            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
+            params.width = brApp.map.width;
+            params.height = brApp.map.height;
+            params.geometry = mapPoint;
+            params.mapExtent = brApp.map.extent;
+            params.layerIds = mapLayer.visibleLayers;
+
+            params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+
+            identifyTask.execute(params, function(features) {
+                if (features.length > 0) {
+                    deferred.resolve({
+                        layer: "indigenous_NoDoc",
+                        features: features
+                    });
+                } else {
+                    deferred.resolve(false);
+                }
+            }, function(error) {
+                deferred.resolve(false);
+            });
+
+            return deferred.promise;
+
+        },
+        identifyIndigenous_Occupied: function(mapPoint) {
+            brApp.debug('MapController >>> identifyIndigenous_Occupied');
+
+            var deferred = new Deferred(),
+                identifyTask = new IdentifyTask(MapConfig.layers.indigenous_Occupied.url),
+                params = new IdentifyParameters(),
+                mapLayer = brApp.map.getLayer('indigenous_Occupied');
+
+            params.tolerance = 3;
+            params.returnGeometry = true;
+            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
+            params.width = brApp.map.width;
+            params.height = brApp.map.height;
+            params.geometry = mapPoint;
+            params.mapExtent = brApp.map.extent;
+            params.layerIds = mapLayer.visibleLayers;
+
+            params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+
+            identifyTask.execute(params, function(features) {
+                if (features.length > 0) {
+                    deferred.resolve({
+                        layer: "indigenous_Occupied",
+                        features: features
+                    });
+                } else {
+                    deferred.resolve(false);
+                }
+            }, function(error) {
+                deferred.resolve(false);
+            });
+
+            return deferred.promise;
+
+        },
+
+
+
+
+
+
+
+        identifyCommunity_FormalClaim: function(mapPoint) {
+            brApp.debug('MapController >>> identifyCommunity_FormalClaim');
+
+            var deferred = new Deferred(),
+                identifyTask = new IdentifyTask(MapConfig.layers.community_FormalClaim.url),
+                params = new IdentifyParameters(),
+                mapLayer = brApp.map.getLayer('community_FormalClaim');
+
+            params.tolerance = 3;
+            params.returnGeometry = true;
+            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
+            params.width = brApp.map.width;
+            params.height = brApp.map.height;
+            params.geometry = mapPoint;
+            params.mapExtent = brApp.map.extent;
+            params.layerIds = mapLayer.visibleLayers;
+
+            params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+
+            identifyTask.execute(params, function(features) {
+                if (features.length > 0) {
+                    deferred.resolve({
+                        layer: "community_FormalClaim",
+                        features: features
+                    });
+                } else {
+                    deferred.resolve(false);
+                }
+            }, function(error) {
+                deferred.resolve(false);
+            });
+
+            return deferred.promise;
+
+        },
+        identifyCommunity_FormalDoc: function(mapPoint) {
+            brApp.debug('MapController >>> identifyCommunity_FormalDoc');
+
+            var deferred = new Deferred(),
+                identifyTask = new IdentifyTask(MapConfig.layers.community_FormalDoc.url),
+                params = new IdentifyParameters(),
+                mapLayer = brApp.map.getLayer('community_FormalDoc');
+
+            params.tolerance = 3;
+            params.returnGeometry = true;
+            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
+            params.width = brApp.map.width;
+            params.height = brApp.map.height;
+            params.geometry = mapPoint;
+            params.mapExtent = brApp.map.extent;
+            params.layerIds = mapLayer.visibleLayers;
+
+            params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+
+            identifyTask.execute(params, function(features) {
+                if (features.length > 0) {
+                    deferred.resolve({
+                        layer: "community_FormalDoc",
+                        features: features
+                    });
+                } else {
+                    deferred.resolve(false);
+                }
+            }, function(error) {
+                deferred.resolve(false);
+            });
+
+            return deferred.promise;
+
+        },
+        identifyCommunity_InProcess: function(mapPoint) {
+            brApp.debug('MapController >>> identifyCommunity_InProcess');
+
+            var deferred = new Deferred(),
+                identifyTask = new IdentifyTask(MapConfig.layers.community_InProcess.url),
+                params = new IdentifyParameters(),
+                mapLayer = brApp.map.getLayer('community_InProcess');
+
+            params.tolerance = 3;
+            params.returnGeometry = true;
+            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
+            params.width = brApp.map.width;
+            params.height = brApp.map.height;
+            params.geometry = mapPoint;
+            params.mapExtent = brApp.map.extent;
+            params.layerIds = mapLayer.visibleLayers;
+
+            params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+
+            identifyTask.execute(params, function(features) {
+                if (features.length > 0) {
+                    deferred.resolve({
+                        layer: "community_InProcess",
+                        features: features
+                    });
+                } else {
+                    deferred.resolve(false);
+                }
+            }, function(error) {
+                deferred.resolve(false);
+            });
+
+            return deferred.promise;
+
+        },
+        identifyCommunity_NoDoc: function(mapPoint) {
+            brApp.debug('MapController >>> identifyCommunity_NoDoc');
+
+            var deferred = new Deferred(),
+                identifyTask = new IdentifyTask(MapConfig.layers.community_NoDoc.url),
+                params = new IdentifyParameters(),
+                mapLayer = brApp.map.getLayer('community_NoDoc');
+
+            params.tolerance = 3;
+            params.returnGeometry = true;
+            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
+            params.width = brApp.map.width;
+            params.height = brApp.map.height;
+            params.geometry = mapPoint;
+            params.mapExtent = brApp.map.extent;
+            params.layerIds = mapLayer.visibleLayers;
+
+            params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+
+            identifyTask.execute(params, function(features) {
+                if (features.length > 0) {
+                    deferred.resolve({
+                        layer: "community_NoDoc",
+                        features: features
+                    });
+                } else {
+                    deferred.resolve(false);
+                }
+            }, function(error) {
+                deferred.resolve(false);
+            });
+
+            return deferred.promise;
+
+        },
+        identifyCommunity_Occupied: function(mapPoint) {
+            brApp.debug('MapController >>> identifyCommunity_Occupied');
+
+            var deferred = new Deferred(),
+                identifyTask = new IdentifyTask(MapConfig.layers.community_Occupied.url),
+                params = new IdentifyParameters(),
+                mapLayer = brApp.map.getLayer('community_Occupied');
+
+            params.tolerance = 3;
+            params.returnGeometry = true;
+            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
+            params.width = brApp.map.width;
+            params.height = brApp.map.height;
+            params.geometry = mapPoint;
+            params.mapExtent = brApp.map.extent;
+            params.layerIds = mapLayer.visibleLayers;
+
+            params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+
+            identifyTask.execute(params, function(features) {
+                if (features.length > 0) {
+                    deferred.resolve({
+                        layer: "community_Occupied",
+                        features: features
+                    });
+                } else {
+                    deferred.resolve(false);
+                }
+            }, function(error) {
+                deferred.resolve(false);
+            });
+
+            return deferred.promise;
+
+        },
+
+
 
         identifyNational: function(mapPoint) {
             brApp.debug('MapController >>> identifyNational');
@@ -516,9 +977,8 @@ define([
             return deferred.promise;
 
         },
-
-        setIndigenousTemplates: function(featureObjects) {
-            brApp.debug('MapController >>> setIndigenousTemplates');
+        setCommunityTemplates: function(featureObjects) {
+            brApp.debug('MapController >>> setCommunityTemplates');
 
             var template,
                 features = [],
@@ -526,10 +986,6 @@ define([
                 self = this;
 
             arrayUtils.forEach(featureObjects, function(item) {
-                // if (item.layerId === 4 || item.layerId === 9) {
-                //     return;
-                // }
-
                 var ethnStr;
                 var ethn1 = item.feature.attributes.Ethncity_1;
                 var ethn2 = item.feature.attributes.Ethncity_2;
@@ -552,23 +1008,6 @@ define([
                 var popYear = item.feature.attributes.Pop_Year == "Null" ? null : item.feature.attributes.Pop_Year;
 
 
-
-
-
-                // //var population = "Null" ? null : item.feature.attributes.Populatn;
-
-                // var popSource = item.feature.attributes.Pop_Source;
-                // var popYear = item.feature.attributes.Pop_Year;
-                // if (population == "Null") {
-                //     population = null;
-                // }
-                // if (popSource == "Null") {
-                //     popSource = null;
-                // }
-                // if (popYear == "Null") {
-                //     popYear = null;
-                // }
-                //debugger;
                 if (!population || population == 0) {
                     popStr = 'Unknown';
                 } else if (population && !popSource) {
@@ -578,11 +1017,6 @@ define([
                 } else {
                     popStr = population + " - " + popSource + ", " + popYear;
                 }
-
-                // if (item.feature.attributes.More_info.startsWith("<")) {
-                //     item.feature.attributes.More_info = ''; //TODO: Get them to fix their data
-                // }
-
 
                 for (var attr in item.feature.attributes) {
                     if (item.feature.attributes[attr] == "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
@@ -596,18 +1030,15 @@ define([
                     statDate = '';
                 }
 
-
                 template = new InfoTemplate(item.value,
                     "<div id='tableWrapper'><table id='indigenousTable'>" +
                     "<tr class='even-row'><td class='popup-header'>Country</td><td>" + item.feature.attributes.Country + '</td></tr>' +
 
                     "<tr class='odd-row'><td class='popup-header'>Identity</td><td>" + item.feature.attributes.Identity + '</td></tr>' +
 
-
                     // "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Ofcl_Rec + ', ' + item.feature.attributes.Rec_Status + ', ' + item.feature.attributes.Stat_Date + '</td></tr>' +
-                    "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Form_Rec + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Ofcl_Rec + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Documentation status (Date)</td><td>" + item.feature.attributes.Ofcl_Rec + statDate + '</td></tr>' +
-
 
                     "<tr class='even-row'><td class='popup-header'>Land category</td><td>" + item.feature.attributes.Category + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + item.feature.attributes.ethnStr + '</td></tr>' +
@@ -620,23 +1051,119 @@ define([
 
                     "<div class='popup-last'>Date uploaded: " + item.feature.attributes.Upl_Date);
 
+                if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '' || item.feature.attributes.More_info == 'Unknown') {
+                    template.content += '</div>';
+                } else {
+                    template.content += '<div><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></div></div>';
+                }
 
-                    // // "<div class='even-row'><div class='popup-header'>Layer Name</div>" + item.layerName + " - " + item.layerId + '</div>' +
-                    // "<div class='even-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
-                    // "<div class='odd-row'><div class='popup-header'>Identity</div>" + item.feature.attributes.Identity + '</div>' +
-                    // "<div class='even-row'><div class='popup-header'>Official recognition status</div>" + item.feature.attributes.Ofcl_Rec + ', ' + item.feature.attributes.Rec_Status + ', ' + item.feature.attributes.Stat_Date + '</div>' +
-                    // "<div class='odd-row'><div class='popup-header'>Land category</div>" + item.feature.attributes.Category + '</div>' +
-                    // "<div class='even-row'><div class='popup-header'>Ethnic groups</div>" + ethnStr + '</div>' +
-                    // "<div class='odd-row'><div class='popup-header'>Population</div>" + popStr + '</div>' +
+                // if (item.layerId === 1) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/1/images/cb367806430a4eff5023972e9dc7ed51'>" + template.title;
+                // } else if (item.layerId === 2) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/2/images/6cd8315cd0efb924913ce4d7ce657e68'>" + template.title;
+                // } else if (item.layerId === 3) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/3/images/bb41d12d06bcb77d2fb2ef6c2105135e'>" + template.title;
+                // } else if (item.layerId === 4) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/4/images/0121e9c1b348c6d36126cefe0710db83'>" + template.title;
+                // } else if (item.layerId === 6) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/6/images/b72ac329a5a45aa83a95f1f39d72a603'>" + template.title;
+                // } else if (item.layerId === 7) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/7/images/2103e270d242ef28a32d531e4c0a4998'>" + template.title;
+                // } else if (item.layerId === 8) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/8/images/2fe6dcfe429decc73538da5456f11013'>" + template.title;
+                // } else if (item.layerId === 11) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/11/images/52aae8e63b7324665f6486cc687d9c26'>" + template.title;
+                // } else if (item.layerId === 12) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/12/images/17a2ba5e9b800c58f8857ec221f28311'>" + template.title;
+                // } else if (item.layerId === 13) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/13/images/b5ed0fdf7028b42276c6ce8d68806509'>" + template.title;
+                // } else if (item.layerId === 14) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/14/images/ee3198dd6bc5cc50c8ffa8074329856e'>" + template.title;
+                // }
 
-                    // "<div class='even-row'><div class='popup-header'>Land Area</div>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + "</div>" +
+                // Content needs to be wrapped in a single parent div, otherwise on touch ArcGIS JavaScript API
+                // will apply transform to first child and popup will not function and look like garbage, thanks esri/dojo
+                template.content = '<div>' + template.content + '</div>';
 
-                    // "<div class='odd-row'><div class='popup-header'>Acquisition scale</div>" + item.feature.attributes.Scale + '</div>' +
-                    // "<div class='even-row'><div class='popup-header'>Acquisition method</div>" + item.feature.attributes.Method + '</div>' +
-                    // //"<div class='even-row'><div class='popup-header'>Country</div>" + item.feature.attributes.Country + '</div>' +
-                    // "<div class='odd-row'><div class='popup-header'>Data source</div>" + item.feature.attributes.Data_Src + " " + item.feature.attributes.Data_Date + '</div>' +
-                    // "<div class='even-row'><div class='popup-header'>Data Contributor</div>" + item.feature.attributes.Data_Ctrb + '</div>' +
-                    // "<div class='popup-last'>Date uploaded: " + item.feature.attributes.Upl_Date);
+                item.feature.setInfoTemplate(template);
+                features.push(item.feature);
+            });
+            return features;
+        },
+
+        setIndigenousTemplates: function(featureObjects) {
+            brApp.debug('MapController >>> setIndigenousTemplates');
+
+            var template,
+                features = [],
+                statDate
+                self = this;
+
+            arrayUtils.forEach(featureObjects, function(item) {
+                var ethnStr;
+                var ethn1 = item.feature.attributes.Ethncity_1;
+                var ethn2 = item.feature.attributes.Ethncity_2;
+                var ethn3 = item.feature.attributes.Ethncity_3;
+
+                if (!ethn1) {
+                    ethnStr = 'Unknown';
+                } else if (ethn1 && !ethn2) {
+                    ethnStr = ethn1;
+                } else if (ethn1 && ethn2 && !ethn3) {
+                    ethnStr = ethn1 + ", " + ethn2;
+                } else {
+                    ethnStr = ethn1 + ", " + ethn2 + ", " + ethn3;
+                }
+
+                var popStr;
+
+                var population = item.feature.attributes.Populatn == "Null" ? null : item.feature.attributes.Populatn;
+                var popSource = item.feature.attributes.Pop_Source == "Null" ? null : item.feature.attributes.Pop_Source;
+                var popYear = item.feature.attributes.Pop_Year == "Null" ? null : item.feature.attributes.Pop_Year;
+
+
+                if (!population || population == 0) {
+                    popStr = 'Unknown';
+                } else if (population && !popSource) {
+                    popStr = population;
+                } else if (population && popSource && (!popYear || popYear == 0)) {
+                    popStr = population + " - " + popSource;
+                } else {
+                    popStr = population + " - " + popSource + ", " + popYear;
+                }
+
+                for (var attr in item.feature.attributes) {
+                    if (item.feature.attributes[attr] == "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
+                        item.feature.attributes[attr] = "Unknown";
+                    }
+                }
+
+                if (item.feature.attributes.Stat_Date !== "Unknown") {
+                    statDate = " (" + item.feature.attributes.Stat_Date + ")";
+                } else {
+                    statDate = '';
+                }
+
+                template = new InfoTemplate(item.value,
+                    "<div id='tableWrapper'><table id='indigenousTable'>" +
+                    "<tr class='even-row'><td class='popup-header'>Country</td><td>" + item.feature.attributes.Country + '</td></tr>' +
+
+                    "<tr class='odd-row'><td class='popup-header'>Identity</td><td>" + item.feature.attributes.Identity + '</td></tr>' +
+
+                    // "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Ofcl_Rec + ', ' + item.feature.attributes.Rec_Status + ', ' + item.feature.attributes.Stat_Date + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Ofcl_Rec + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Documentation status (Date)</td><td>" + item.feature.attributes.Ofcl_Rec + statDate + '</td></tr>' +
+
+                    "<tr class='even-row'><td class='popup-header'>Land category</td><td>" + item.feature.attributes.Category + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + item.feature.attributes.ethnStr + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Population</td><td>" + item.feature.attributes.popStr + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Land Area</td><td>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Acquisition scale</td><td>" + item.feature.attributes.Scale + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Acquisition method</td><td>" + item.feature.attributes.Method + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Data source</td><td>" + item.feature.attributes.Data_Src + " (" + item.feature.attributes.Data_Date + ')</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Data Contributor</td><td>" + item.feature.attributes.Data_Ctrb + '</td></tr></table></div>' +
+
+                    "<div class='popup-last'>Date uploaded: " + item.feature.attributes.Upl_Date);
 
                 if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '' || item.feature.attributes.More_info == 'Unknown') {
                     template.content += '</div>';
@@ -644,29 +1171,29 @@ define([
                     template.content += '<div><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></div></div>';
                 }
 
-                if (item.layerId === 1) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/1/images/cb367806430a4eff5023972e9dc7ed51'>" + template.title;
-                } else if (item.layerId === 2) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/2/images/6cd8315cd0efb924913ce4d7ce657e68'>" + template.title;
-                } else if (item.layerId === 3) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/3/images/bb41d12d06bcb77d2fb2ef6c2105135e'>" + template.title;
-                } else if (item.layerId === 4) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/4/images/0121e9c1b348c6d36126cefe0710db83'>" + template.title;
-                } else if (item.layerId === 6) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/6/images/b72ac329a5a45aa83a95f1f39d72a603'>" + template.title;
-                } else if (item.layerId === 7) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/7/images/2103e270d242ef28a32d531e4c0a4998'>" + template.title;
-                } else if (item.layerId === 8) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/8/images/2fe6dcfe429decc73538da5456f11013'>" + template.title;
-                } else if (item.layerId === 11) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/11/images/52aae8e63b7324665f6486cc687d9c26'>" + template.title;
-                } else if (item.layerId === 12) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/12/images/17a2ba5e9b800c58f8857ec221f28311'>" + template.title;
-                } else if (item.layerId === 13) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/13/images/b5ed0fdf7028b42276c6ce8d68806509'>" + template.title;
-                } else if (item.layerId === 14) {
-                    template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/14/images/ee3198dd6bc5cc50c8ffa8074329856e'>" + template.title;
-                }
+                // if (item.layerId === 1) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/1/images/cb367806430a4eff5023972e9dc7ed51'>" + template.title;
+                // } else if (item.layerId === 2) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/2/images/6cd8315cd0efb924913ce4d7ce657e68'>" + template.title;
+                // } else if (item.layerId === 3) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/3/images/bb41d12d06bcb77d2fb2ef6c2105135e'>" + template.title;
+                // } else if (item.layerId === 4) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/4/images/0121e9c1b348c6d36126cefe0710db83'>" + template.title;
+                // } else if (item.layerId === 6) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/6/images/b72ac329a5a45aa83a95f1f39d72a603'>" + template.title;
+                // } else if (item.layerId === 7) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/7/images/2103e270d242ef28a32d531e4c0a4998'>" + template.title;
+                // } else if (item.layerId === 8) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/8/images/2fe6dcfe429decc73538da5456f11013'>" + template.title;
+                // } else if (item.layerId === 11) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/11/images/52aae8e63b7324665f6486cc687d9c26'>" + template.title;
+                // } else if (item.layerId === 12) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/12/images/17a2ba5e9b800c58f8857ec221f28311'>" + template.title;
+                // } else if (item.layerId === 13) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/13/images/b5ed0fdf7028b42276c6ce8d68806509'>" + template.title;
+                // } else if (item.layerId === 14) {
+                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/14/images/ee3198dd6bc5cc50c8ffa8074329856e'>" + template.title;
+                // }
 
                 // Content needs to be wrapped in a single parent div, otherwise on touch ArcGIS JavaScript API
                 // will apply transform to first child and popup will not function and look like garbage, thanks esri/dojo
@@ -824,7 +1351,7 @@ define([
 
             var graphic = mapPoint.graphic,
                 graphicsLayer = brApp.map.getLayer("CustomFeatures"),
-                dataLayer = brApp.map.getLayer("indigenousLands"),
+                dataLayer = brApp.map.getLayer("analysisLayer"),
 
                 self = this,
                 polys = [],
