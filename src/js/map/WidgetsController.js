@@ -145,54 +145,69 @@ define([
             // var labelNode = document.getElementById('tree-container-toggle'),
                 // container = document.getElementById('tree-widget-container'),
                 // layerAccordion = registry.byId('layer-accordion'),
-                // topBar = document.getElementById('tree-title'),
-            var labelNode = document.getElementById('tree-container-toggle'),
-                node = document.getElementById('layer-content'),
-                active = domClass.contains(node, 'active'),
-                height, width;
+            var topBar = document.getElementById('tree-widget-container'),
+              labelNode = document.getElementById('tree-container-toggle'),
+              treeTitle = document.getElementById('tree-title'),
+              node = document.getElementById('layer-content'),
+              innerNode = document.querySelector('.layer-tab-container'),
+              active = domClass.contains(node, 'active'),
+              height, width;
+
 
             labelNode.innerHTML = active ? '&plus;' : '&minus;';
+            domClass.toggle(labelNode, 'padding-right');
+            domClass.toggle(innerNode, 'hidden');
 
-            if (!active) {
-                // If not active. add class now, else, add when animation done
-                domClass.toggle(node, 'active');
-                domClass.toggle(node, 'hidden');
-                // domStyle.set(container, 'bottom', '20px');
-            } else {
-              domClass.toggle(node, 'active');
-              domClass.toggle(node, 'hidden');
+            // if (!active) {
+            //     // If not active. add class now, else, add when animation done
+            //     domClass.toggle(node, 'active');
+            //     domClass.toggle(node, 'hidden');
+            //     // domStyle.set(container, 'bottom', '20px');
+            // } else {
+              // domClass.toggle(node, 'active');
+              // domClass.toggle(node, 'hidden');
               // domStyle.set(container, 'bottom', 'auto');
-            }
-
+            // }
+            console.log(active)
             // Set the height
-            // height = active ? 0 : (container.offsetHeight - 34);
-            // width = active ? 285 : 360;
-            //
-            // Fx.animateProperty({
-            //     node: node,
-            //     properties: {
-            //         height: height,
-            //         width: width
-            //     },
-            //     duration: DURATION,
-            //     onEnd: function() {
-            //         if (!active) {
-            //             // if (layerAccordion) {
-            //             //     layerAccordion.resize();
-            //             // }
-            //         } else {
-            //             domClass.toggle(node, 'active');
-            //         }
-            //     }
-            // }).play();
-            //
-            // Fx.animateProperty({
-            //     node: topBar,
-            //     properties: {
-            //         width: width
-            //     },
-            //     duration: DURATION
-            // }).play();
+            height = active ? 0 : (topBar.offsetHeight - 34);
+            width = active ? 250 : 360;
+            console.log(width)
+
+            Fx.animateProperty({
+                node: node,
+                properties: {
+                    height: height//,
+                    //width: width
+                },
+                duration: DURATION,
+                onEnd: function() {
+                  domClass.toggle(node, 'active');
+                }
+            }).play();
+
+            Fx.animateProperty({
+                node: node,
+                properties: {
+                    width: width
+                },
+                duration: DURATION
+            }).play();
+            Fx.animateProperty({
+                node: innerNode,
+                properties: {
+                    height: height
+                },
+                duration: DURATION
+            }).play();
+
+            Fx.animateProperty({
+                node: treeTitle,
+                properties: {
+                    width: width
+                },
+                duration: DURATION
+            }).play();
 
         },
 

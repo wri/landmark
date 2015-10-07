@@ -15,8 +15,9 @@ define([
     "esri/geometry/webMercatorUtils",
     'esri/layers/ImageParameters',
     'esri/layers/ArcGISDynamicMapServiceLayer',
+    'esri/layers/ArcGISTiledMapServiceLayer',
     "esri/layers/GraphicsLayer",
-], function(Evented, declare, number, MapConfig, on, registry, HashController, Map, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, GraphicsLayer) {
+], function(Evented, declare, number, MapConfig, on, registry, HashController, Map, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, GraphicsLayer) {
     'use strict';
 
     var _map = declare([Evented], {
@@ -94,6 +95,7 @@ define([
         addLayers: function() {
             var layerConfig = MapConfig.layers,
                 self = this,
+                zoomArray,
                 layers = [],
                 key;
 
@@ -101,11 +103,17 @@ define([
             for (key in layerConfig) {
                 switch (layerConfig[key].type) {
                     case 'dynamic':
-                        layers.push(self.addDynamicLayer(key, layerConfig[key]));
+                        if (layerConfig[key].minZoom) {
+                          layers.push(self.addDynamicLayer(key, layerConfig[key], layerConfig[key].minZoom));
+                        } else {
+                          layers.push(self.addDynamicLayer(key, layerConfig[key]));
+                        }
                         break;
                     case 'graphic':
-
                         layers.push(self.addGraphicLayer(key, layerConfig[key]));
+                        break;
+                    case 'tiled':
+                        layers.push(self.addTiledLayer(key, layerConfig[key], layerConfig[key]));
                         break;
                     default:
                         break;
@@ -125,12 +133,6 @@ define([
             });
 
             this.map.addLayers(layers);
-            // var completeness = this.map.getLayer("indigenousTransparency");
-            // setTimeout(function() {
-            //     debugger;
-            //     //self.map.reorderLayer(completeness, 4);
-            // }, 3000);
-
 
             // Initialize Add This
             addthis.init();
@@ -141,18 +143,45 @@ define([
          * @param {object} layerConfig - See map/config.js in the layers object for an example
          * @return {object} newly created dynamic layer
          */
-        addDynamicLayer: function(key, layerConfig) {
+        addDynamicLayer: function(key, layerConfig, minZoom) {
             var params = new ImageParameters(),
                 layer;
 
             params.layerOption = ImageParameters.LAYER_OPTION_SHOW;
             params.layerIds = layerConfig.defaultLayers;
             params.format = 'png32';
+            if (minZoom) {
+              console.log(minZoom)
+              layer = new ArcGISDynamicMapServiceLayer(layerConfig.url, {
+                  visible: layerConfig.visible || false,
+                  imageParameters: params,
+                  id: key,
+                  minScale: minZoom
+              });
+            }
+            else {
+              layer = new ArcGISDynamicMapServiceLayer(layerConfig.url, {
+                  visible: layerConfig.visible || false,
+                  imageParameters: params,
+                  id: key
+              });
+            }
 
-            layer = new ArcGISDynamicMapServiceLayer(layerConfig.url, {
-                visible: layerConfig.visible || false,
-                imageParameters: params,
-                id: key
+
+            layer.on('error', this.addLayerError.bind(this));
+            return layer;
+        },
+
+        /**
+         * @param {string} key - Layer ID
+         * @param {object} layerConfig - See map/config.js in the layers object for an example
+         * @return {object} newly created dynamic layer
+         */
+        addTiledLayer: function(key, layerConfig) {
+
+            var layer = new ArcGISTiledMapServiceLayer(layerConfig.url, {
+              displayLevels:[0,1,2,3,4,5,6,7],
+              id: key
             });
 
             layer.on('error', this.addLayerError.bind(this));

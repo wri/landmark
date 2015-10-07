@@ -47,30 +47,66 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'indigenous_FormalClaim': {
                 url: community_indigenous_FormalClaim,
                 type: 'dynamic',
+                minZoom: 2315000,
                 defaultLayers: [0,1],
                 visible: true
             },
             'indigenous_FormalDoc': {
                 url: community_indigenous_FormalDoc,
                 type: 'dynamic',
+                minZoom: 2315000,
                 defaultLayers: [0,1],
                 visible: true
             },
             'indigenous_InProcess': {
                 url: community_indigenous_InProcess,
                 type: 'dynamic',
+                minZoom: 2315000,
                 defaultLayers: [0,1],
                 visible: true
             },
             'indigenous_NoDoc': {
                 url: community_indigenous_NoDoc,
                 type: 'dynamic',
+                minZoom: 2315000,
                 defaultLayers: [0,1],
                 visible: true
             },
             'indigenous_Occupied': {
                 url: community_indigenous_Occupied,
                 type: 'dynamic',
+                minZoom: 2315000,
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'indigenous_FormalClaim_Tiled': {
+                url: community_indigenous_FormalClaim,
+                type: 'tiled',
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'indigenous_FormalDoc_Tiled': {
+                url: community_indigenous_FormalDoc,
+                type: 'tiled',
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'indigenous_InProcess_Tiled': {
+                url: community_indigenous_InProcess,
+                type: 'tiled',
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'indigenous_NoDoc_Tiled': {
+                url: community_indigenous_NoDoc,
+                type: 'tiled',
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'indigenous_Occupied_Tiled': {
+                url: community_indigenous_Occupied,
+                type: 'tiled',
+                maxZoom: 2311162,
                 defaultLayers: [0,1],
                 visible: true
             },
@@ -78,34 +114,69 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'community_FormalClaim': {
                 url: community_community_FormalClaim,
                 type: 'dynamic',
+                minZoom: 2315000,
                 defaultLayers: [0,1],
                 visible: true
             },
             'community_FormalDoc': {
                 url: community_community_FormalDoc,
                 type: 'dynamic',
+                minZoom: 2315000,
                 defaultLayers: [0,1],
                 visible: true
             },
             'community_InProcess': {
                 url: community_community_InProcess,
                 type: 'dynamic',
+                minZoom: 2315000,
                 defaultLayers: [0,1],
                 visible: true
             },
             'community_NoDoc': {
                 url: community_community_NoDoc,
                 type: 'dynamic',
+                minZoom: 2315000,
                 defaultLayers: [0,1],
                 visible: true
             },
             'community_Occupied': {
                 url: community_community_Occupied,
                 type: 'dynamic',
+                minZoom: 2315000,
                 defaultLayers: [0,1],
                 visible: true
             },
-
+            'community_FormalClaim_Tiled': {
+                url: community_community_FormalClaim,
+                type: 'tiled',
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'community_FormalDoc_Tiled': {
+                url: community_community_FormalDoc,
+                type: 'tiled',
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'community_InProcess_Tiled': {
+                url: community_community_InProcess,
+                type: 'tiled',
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'community_NoDoc_Tiled': {
+                url: community_community_NoDoc,
+                type: 'tiled',
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'community_Occupied_Tiled': {
+                url: community_community_Occupied,
+                type: 'tiled',
+                maxZoom: 2311162,
+                defaultLayers: [0,1],
+                visible: true
+            },
 
 
 
@@ -142,19 +213,19 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'indigenousLands'
           },
           {
-            label: 'Formal land claim',
+            label: 'Formal land petition',
             id: 'indigenous_FormalClaim',
             checked: true,
             group: 'indigenousLands'
           },
           {
-            label: 'Formal document/title',
+            label: 'Formal documentation',
             id: 'indigenous_FormalDoc',
             checked: true,
             group: 'indigenousLands'
           },
           {
-            label: 'In process of titling',
+            label: 'In process of documentation',
             id: 'indigenous_InProcess',
             checked: true,
             group: 'indigenousLands'
@@ -171,36 +242,36 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'indigenousLands'
           },
           {
-            label: 'Occupied/used without formal land claim',
+            label: 'Occupied or used without formal land claim',
             id: 'indigenous_Occupied',
             checked: true,
             group: 'indigenousLands'
           },
           {
-            label: 'Officially recognized (by law or decree)',
+            label: 'Formally recognized',
             isCategory: true,
             group: 'communityLands'
           },
           {
-            label: 'Formal land claim',
+            label: 'Formal land petition',
             id: 'community_FormalClaim',
             checked: true,
             group: 'communityLands'
           },
           {
-            label: 'Formal document/title',
+            label: 'Formal documentation',
             id: 'community_FormalDoc',
             checked: true,
             group: 'communityLands'
           },
           {
-            label: 'In process of titling',
+            label: 'In process of documentation',
             id: 'community_InProcess',
             checked: true,
             group: 'communityLands'
           },
           {
-            label: 'Not officially recognized',
+            label: 'Not formally recognized',
             isCategory: true,
             group: 'communityLands'
           },
@@ -211,7 +282,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'communityLands'
           },
           {
-            label: 'Occupied/used without formal land claim',
+            label: 'Occupied or used without formal land claim',
             id: 'community_Occupied',
             checked: true,
             group: 'communityLands'

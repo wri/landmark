@@ -102,6 +102,72 @@ define([
                 }
             });
 
+            on(brApp.map, 'extent-change', function(evt) {
+              if (evt.levelChange !== true) {
+                return;
+              }
+
+              
+
+              // console.log(evt.lod.level)
+              // var layers = [];
+              // for (var layer in MapConfig.layers) {
+              //   if (MapConfig.layers[layer].type === 'tiled') {
+              //     var layer = brApp.map.getLayer(layer);
+              //     layer.setVisibility(layer.visibleAtMapScale);
+              //     layers.push(layer);
+              //   }
+              // }
+
+              // if (zoom.level < 8) {
+              //
+              //   for (var i = 0; i < layers.length; i++) {
+              //     layers[i].show();
+              //   }
+              // } else {
+              //   for (var i = 0; i < layers.length; i++) {
+              //     layers[i].hide();
+              //   }
+              // }
+              console.log(evt.lod.level)
+              var tiled1 = document.getElementById('legend_community_Occupied_Tiled');
+              var tiled2 = document.getElementById('legend_community_NoDoc_Tiled');
+              var tiled3 = document.getElementById('legend_community_InProcess_Tiled');
+              var tiled4 = document.getElementById('legend_community_FormalDoc_Tiled');
+              var tiled5 = document.getElementById('legend_community_FormalClaim_Tiled');
+
+
+              var tiled6 = document.getElementById('legend_indigenous_FormalDoc_Tiled');
+              var tiled7 = document.getElementById('legend_indigenous_Occupied_Tiled');
+              var tiled8 = document.getElementById('legend_indigenous_NoDoc_Tiled');
+              var tiled9 = document.getElementById('legend_indigenous_InProcess_Tiled');
+              var tiled10 = document.getElementById('legend_indigenous_FormalClaim_Tiled');
+
+              if (evt.lod.level > 7) {
+                tiled1.classList.add('hideLegend');
+                tiled2.classList.add('hideLegend');
+                tiled3.classList.add('hideLegend');
+                tiled4.classList.add('hideLegend');
+                tiled5.classList.add('hideLegend');
+                tiled6.classList.add('hideLegend');
+                tiled7.classList.add('hideLegend');
+                tiled8.classList.add('hideLegend');
+                tiled9.classList.add('hideLegend');
+                tiled10.classList.add('hideLegend');
+              } else {
+                tiled1.classList.remove('hideLegend');
+                tiled2.classList.remove('hideLegend');
+                tiled3.classList.remove('hideLegend');
+                tiled4.classList.remove('hideLegend');
+                tiled5.classList.remove('hideLegend');
+                tiled6.classList.remove('hideLegend');
+                tiled7.classList.remove('hideLegend');
+                tiled8.classList.remove('hideLegend');
+                tiled9.classList.remove('hideLegend');
+                tiled10.classList.remove('hideLegend');
+              }
+
+            });
             on(brApp.map, 'layers-add-result', function(layersAdded) {
 
                 var layerInfos = layersAdded.layers.map(function(layer) {
@@ -109,45 +175,50 @@ define([
                       layer: layer.layer,
                     };
                     switch (layer.layer.id) {
-                        case "indigenous_FormalClaim":
-                            li.hideLayers = [0];
-                            break;
-                        case "indigenous_FormalDoc":
-                            li.hideLayers = [0];
-                            break;
-                        case "indigenous_InProcess":
-                            li.hideLayers = [0];
-                            break;
-                        case "indigenous_NoDoc":
-                            li.hideLayers = [0];
-                            break;
-                        case "indigenous_Occupied":
-                            li.hideLayers = [0];
-                            break;
-
-                        case "community_FormalClaim":
-                            li.hideLayers = [0];
-                            break;
-                        case "community_FormalDoc":
-                            li.hideLayers = [0];
-                            break;
-                        case "community_InProcess":
-                            li.hideLayers = [0];
-                            break;
-                        case "community_NoDoc":
-                            li.hideLayers = [0];
-                            break;
-                        case "community_Occupied":
-                            li.hideLayers = [0];
-                            break;
+                        // case "indigenous_FormalClaim":
+                        //     li.hideLayers = [0];
+                        //     break;
+                        // case "indigenous_FormalDoc":
+                        //     li.hideLayers = [0];
+                        //     break;
+                        // case "indigenous_InProcess":
+                        //     li.hideLayers = [0];
+                        //     break;
+                        // case "indigenous_NoDoc":
+                        //     li.hideLayers = [0];
+                        //     break;
+                        // case "indigenous_Occupied":
+                        //     li.hideLayers = [0];
+                        //     break;
+                        //
+                        // case "community_FormalClaim":
+                        //     li.hideLayers = [0];
+                        //     break;
+                        // case "community_FormalDoc":
+                        //     li.hideLayers = [0];
+                        //     break;
+                        // case "community_InProcess":
+                        //     li.hideLayers = [0];
+                        //     break;
+                        // case "community_NoDoc":
+                        //     li.hideLayers = [0];
+                        //     break;
+                        // case "community_Occupied":
+                        //     li.hideLayers = [0];
+                        //     break;
                         // case "analysisLayer":
                         //     li.hideLayers = [1];
                         //     break;
-                        default: // Do Nothing
+                        case "nationalLevel":
+                            li.hideLayers = [];
+                            break;
+                        default:
+                            console.log(layer.layer.id)
+                            li.hideLayers = [0];
                             break;
                     }
 
-                    console.log(layer.layer.id)
+
 
                     return li;
                 });
