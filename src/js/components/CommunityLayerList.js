@@ -52,6 +52,7 @@ define([
     },
 
     layerClicked: function (evt) {
+      evt.stopPropagation()
       if (evt.target.classList.length === 0 || evt.target.parentElement.getAttribute('data-id') === null) {
         return;
       }
@@ -77,16 +78,16 @@ define([
         }
       }
 
-      this.setState({
-        data: this.state.data
-      });
+      // this.setState({
+      //   data: this.state.data
+      // });
 
       this.toggleOff([layer], !val);
 
     },
 
     parentClicked: function (evt) {
-
+      evt.stopPropagation()
       var allOff, layers = [];
 
       if (evt.target.classList.contains("parent-layer-checked-true")) {
@@ -102,6 +103,7 @@ define([
 
       for (var i = 0; i < this.state.data.length; i++) {
         if (this.state.data[i].group === evt.target.parentElement.id && this.state.data[i].isCategory !== true) {
+          console.log(i)
           this.state.data[i].checked = allOff;
 
           var layerItem = document.querySelectorAll("[data-id='" + this.state.data[i].id + "']")[0]
@@ -121,9 +123,9 @@ define([
         }
       }
 
-      this.setState({ //todo: this is somehow not allowing our checkboxes to come back on as one, but if we remove it, the next individual checkbix toggle, toggles them all..
-        data: this.state.data
-      });
+      // this.setState({
+      //   data: this.state.data
+      // });
 
       this.toggleOff(layers, allOff);
 
