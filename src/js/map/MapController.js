@@ -129,40 +129,7 @@ define([
                       layer: layer.layer,
                     };
                     switch (layer.layer.id) {
-                        // case "indigenous_FormalClaim":
-                        //     li.hideLayers = [0];
-                        //     break;
-                        // case "indigenous_FormalDoc":
-                        //     li.hideLayers = [0];
-                        //     break;
-                        // case "indigenous_InProcess":
-                        //     li.hideLayers = [0];
-                        //     break;
-                        // case "indigenous_NoDoc":
-                        //     li.hideLayers = [0];
-                        //     break;
-                        // case "indigenous_Occupied":
-                        //     li.hideLayers = [0];
-                        //     break;
-                        //
-                        // case "community_FormalClaim":
-                        //     li.hideLayers = [0];
-                        //     break;
-                        // case "community_FormalDoc":
-                        //     li.hideLayers = [0];
-                        //     break;
-                        // case "community_InProcess":
-                        //     li.hideLayers = [0];
-                        //     break;
-                        // case "community_NoDoc":
-                        //     li.hideLayers = [0];
-                        //     break;
-                        // case "community_Occupied":
-                        //     li.hideLayers = [0];
-                        //     break;
-                        // case "analysisLayer":
-                        //     li.hideLayers = [1];
-                        //     break;
+
                         case "nationalLevel":
                             li.hideLayers = [];
                             break;
@@ -556,7 +523,6 @@ define([
                     }
 
                     // if (window.innerWidth < 600 || mapPoint.clientY < 400) {
-                    //     debugger;
                     //     //brApp.map.infoWindow.reposition(); //TODO: Center in screen? Remove arrow to point to feature?
                     // }
 

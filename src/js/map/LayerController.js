@@ -57,30 +57,12 @@ define([
 
                   if (off === true) {
 
-
-                    // on.once(tiledLayer, "visibility-change", function() {
-                    //   setTimeout(function () {
-                    //     debugger
-                    //     var tiled = document.getElementById('legend_' + this.id);
-                    //     tiled.classList.add('hideLegend');
-                    //   }.bind(this), 100);
-                    // });
-
                     layer.hide();
                     tiledLayer.hide();
                   } else {
 
-                    // on.once(tiledLayer, "visibility-change", function() {
-                    //   setTimeout(function () {
-                    //     var tiled = document.getElementById('legend_' + this.id);
-                    //     console.log(tiled)
-                    //     tiled.classList.remove('hideLegend');
-                    //   }.bind(this), 0);
-                    // });
-
                     layer.show();
-                    tiledLayer.show(); //I think this shouldnt show because if it does it will get added to the legend. ORR: lets just take the legend-finnicking
-                    // code, put it in a function that we call on zoom-end, then Also call it here to take this tiledLayer that we showing out of the legend on checjbox enable
+                    tiledLayer.show();
                   }
                   requestAnimationFrame(function() {
 
@@ -95,23 +77,8 @@ define([
                       }
                     }
                   });
-                  // for (var i = 0; i < legend.layerInfos.length; i++) {
-                  //
-                  //   if (legend.layerInfos[i].layer.id.indexOf('Tiled') > -1) {
-                  //     if (legend.layerInfos[i].layer.visibleAtMapScale === true) {
-                  //       legend.layerInfos[i].hideLayers = [0];
-                  //     } else {
-                  //       legend.layerInfos[i].hideLayers = [0,1];
-                  //     }
-                  //     // if (zoom < 8) {
-                  //     //   legend.layerInfos[i].hideLayers = [0];
-                  //     // } else {
-                  //     //   legend.layerInfos[i].hideLayers = [0,1];
-                  //     // }
-                  //   }
-                  // }
                 }
-                // debugger
+
 
                 // if (visibleLayers[0] === -1) {
                 //
