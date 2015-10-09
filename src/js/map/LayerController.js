@@ -1,10 +1,12 @@
 define([
     'dojo/topic',
+    'dojo/on',
+    'dijit/registry',
     'map/MapConfig',
     'map/MapAssets',
     'dojo/_base/array',
     'esri/layers/LayerDrawingOptions'
-], function(topic, MapConfig, MapAssets, arrayUtils, LayerDrawingOptions) {
+], function(topic, on, registry, MapConfig, MapAssets, arrayUtils, LayerDrawingOptions) {
     'use strict';
 
 
@@ -22,25 +24,12 @@ define([
             var visibleLayers = [],
                 dynamicLayer,
                 layer,
-                // dynamicLayer2,
                 self = this;
-
 
             if (isNationalLevelData) {
                 visibleLayers = keys;
                 dynamicLayer = brApp.map.getLayer('nationalLevel');
 
-                //debugger; //call this again w/ proper keys! (aka none) and no layer: oppo for below
-                // if (document.getElementById('data-complete-checkbox').getAttribute("data-checked") == "true" && keys.length > 0) {
-                //     dynamicLayer2.show();
-                // } else {
-                //     dynamicLayer2.hide();
-                // }
-
-                // document.getElementById('data-complete-checkbox').setAttribute("data-checked", "false")
-
-                // User has selected some National Level Data and they did not select 'none'
-                // Turn off community level data
                 if (visibleLayers.length === 1 && visibleLayers[0] !== -1) {
                     self.turnOffCommunityLevelData();
                 }
@@ -55,37 +44,74 @@ define([
                 dynamicLayer.setVisibleLayers(visibleLayers);
                 topic.publish('refresh-legend');
 
-            } else {
-
-              // if (keys.length === 1) {
-              //   layer = brApp.map.getLayer(keys[0]);
-              // }
-
-                // dynamicLayer = brApp.map.getLayer('indigenousLands');
-                // dynamicLayer2 = brApp.map.getLayer('indigenousTransparency');
+            } else { // Community Level
 
                 for (var i = 0; i < keys.length; i++) {
                   layer = brApp.map.getLayer(keys[i]);
-                  if (off === true) {
-                    layer.hide();
-                  } else {
-                    layer.show();
-                  }
-                }
-                //
-                // if (keys.length === 0) {
-                //     visibleLayers.push(-1);
-                //
-                //     if (off === true) {
-                //       layer.hide();
-                //     } else {
-                //       layer.show();
-                //     }
-                // } else if (keys.length > 1) {
-                //     debugger
-                //
-                // }
+                  console.log(layer.id)
+                  var tiledLayer = brApp.map.getLayer(keys[i] + "_Tiled");
+                  var tiled = document.getElementById('legend_' + tiledLayer.id);
+                  var zoom = brApp.map.getZoom();
 
+                  var legend = registry.byId('legend');
+
+                  if (off === true) {
+
+
+                    // on.once(tiledLayer, "visibility-change", function() {
+                    //   setTimeout(function () {
+                    //     debugger
+                    //     var tiled = document.getElementById('legend_' + this.id);
+                    //     tiled.classList.add('hideLegend');
+                    //   }.bind(this), 100);
+                    // });
+
+                    layer.hide();
+                    tiledLayer.hide();
+                  } else {
+
+                    // on.once(tiledLayer, "visibility-change", function() {
+                    //   setTimeout(function () {
+                    //     var tiled = document.getElementById('legend_' + this.id);
+                    //     console.log(tiled)
+                    //     tiled.classList.remove('hideLegend');
+                    //   }.bind(this), 0);
+                    // });
+
+                    layer.show();
+                    tiledLayer.show(); //I think this shouldnt show because if it does it will get added to the legend. ORR: lets just take the legend-finnicking
+                    // code, put it in a function that we call on zoom-end, then Also call it here to take this tiledLayer that we showing out of the legend on checjbox enable
+                  }
+                  requestAnimationFrame(function() {
+
+                    for (var layer in MapConfig.layers) {
+                      if (MapConfig.layers[layer].type === 'tiled') {
+
+                        var tiled = document.getElementById('legend_' + layer);
+                        if (brApp.map.getZoom() > 7 && tiled) {
+
+                          tiled.classList.add('hideLegend');
+                        }
+                      }
+                    }
+                  });
+                  // for (var i = 0; i < legend.layerInfos.length; i++) {
+                  //
+                  //   if (legend.layerInfos[i].layer.id.indexOf('Tiled') > -1) {
+                  //     if (legend.layerInfos[i].layer.visibleAtMapScale === true) {
+                  //       legend.layerInfos[i].hideLayers = [0];
+                  //     } else {
+                  //       legend.layerInfos[i].hideLayers = [0,1];
+                  //     }
+                  //     // if (zoom < 8) {
+                  //     //   legend.layerInfos[i].hideLayers = [0];
+                  //     // } else {
+                  //     //   legend.layerInfos[i].hideLayers = [0,1];
+                  //     // }
+                  //   }
+                  // }
+                }
+                // debugger
 
                 // if (visibleLayers[0] === -1) {
                 //

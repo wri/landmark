@@ -106,7 +106,6 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'indigenous_Occupied_Tiled': {
                 url: community_indigenous_Occupied,
                 type: 'tiled',
-                maxZoom: 2311162,
                 defaultLayers: [0,1],
                 visible: true
             },
@@ -173,7 +172,6 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'community_Occupied_Tiled': {
                 url: community_community_Occupied,
                 type: 'tiled',
-                maxZoom: 2311162,
                 defaultLayers: [0,1],
                 visible: true
             },

@@ -103,14 +103,13 @@ define([
 
       for (var i = 0; i < this.state.data.length; i++) {
         if (this.state.data[i].group === evt.target.parentElement.id && this.state.data[i].isCategory !== true) {
-          console.log(i)
           this.state.data[i].checked = allOff;
 
           var layerItem = document.querySelectorAll("[data-id='" + this.state.data[i].id + "']")[0]
           layers.push(this.state.data[i].id)
           if (allOff) {
 
-            layerItem.firstChild.classList.remove('layer-checked-true');
+            layerItem.firstChild.classList.remove('layer-checked-true'); //todo: ALL OF THESE SHOULD BE DONE IN REACT COMPUTATIONS ON RENDER!
             layerItem.firstChild.classList.add('layer-checked-false');
             layerItem.setAttribute('data-clicked',false);
           } else {

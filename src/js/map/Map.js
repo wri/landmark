@@ -151,7 +151,6 @@ define([
             params.layerIds = layerConfig.defaultLayers;
             params.format = 'png32';
             if (minZoom) {
-              console.log(minZoom)
               layer = new ArcGISDynamicMapServiceLayer(layerConfig.url, {
                   visible: layerConfig.visible || false,
                   imageParameters: params,
@@ -166,7 +165,6 @@ define([
                   id: key
               });
             }
-
 
             layer.on('error', this.addLayerError.bind(this));
             return layer;

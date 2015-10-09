@@ -107,65 +107,19 @@ define([
                 return;
               }
 
-              
+              for (var layer in MapConfig.layers) {
+                if (MapConfig.layers[layer].type === 'tiled') {
+                  var tiled = document.getElementById('legend_' + layer);
+                  if (evt.lod.level > 7 && tiled) {
 
-              // console.log(evt.lod.level)
-              // var layers = [];
-              // for (var layer in MapConfig.layers) {
-              //   if (MapConfig.layers[layer].type === 'tiled') {
-              //     var layer = brApp.map.getLayer(layer);
-              //     layer.setVisibility(layer.visibleAtMapScale);
-              //     layers.push(layer);
-              //   }
-              // }
-
-              // if (zoom.level < 8) {
-              //
-              //   for (var i = 0; i < layers.length; i++) {
-              //     layers[i].show();
-              //   }
-              // } else {
-              //   for (var i = 0; i < layers.length; i++) {
-              //     layers[i].hide();
-              //   }
-              // }
-              console.log(evt.lod.level)
-              var tiled1 = document.getElementById('legend_community_Occupied_Tiled');
-              var tiled2 = document.getElementById('legend_community_NoDoc_Tiled');
-              var tiled3 = document.getElementById('legend_community_InProcess_Tiled');
-              var tiled4 = document.getElementById('legend_community_FormalDoc_Tiled');
-              var tiled5 = document.getElementById('legend_community_FormalClaim_Tiled');
-
-
-              var tiled6 = document.getElementById('legend_indigenous_FormalDoc_Tiled');
-              var tiled7 = document.getElementById('legend_indigenous_Occupied_Tiled');
-              var tiled8 = document.getElementById('legend_indigenous_NoDoc_Tiled');
-              var tiled9 = document.getElementById('legend_indigenous_InProcess_Tiled');
-              var tiled10 = document.getElementById('legend_indigenous_FormalClaim_Tiled');
-
-              if (evt.lod.level > 7) {
-                tiled1.classList.add('hideLegend');
-                tiled2.classList.add('hideLegend');
-                tiled3.classList.add('hideLegend');
-                tiled4.classList.add('hideLegend');
-                tiled5.classList.add('hideLegend');
-                tiled6.classList.add('hideLegend');
-                tiled7.classList.add('hideLegend');
-                tiled8.classList.add('hideLegend');
-                tiled9.classList.add('hideLegend');
-                tiled10.classList.add('hideLegend');
-              } else {
-                tiled1.classList.remove('hideLegend');
-                tiled2.classList.remove('hideLegend');
-                tiled3.classList.remove('hideLegend');
-                tiled4.classList.remove('hideLegend');
-                tiled5.classList.remove('hideLegend');
-                tiled6.classList.remove('hideLegend');
-                tiled7.classList.remove('hideLegend');
-                tiled8.classList.remove('hideLegend');
-                tiled9.classList.remove('hideLegend');
-                tiled10.classList.remove('hideLegend');
+                    tiled.classList.add('hideLegend');
+                  } else if (evt.lod.level <= 7 && tiled) {
+                    tiled.classList.remove('hideLegend');
+                  }
+                }
               }
+
+              console.log(evt.lod.level);
 
             });
             on(brApp.map, 'layers-add-result', function(layersAdded) {
@@ -213,13 +167,9 @@ define([
                             li.hideLayers = [];
                             break;
                         default:
-                            console.log(layer.layer.id)
                             li.hideLayers = [0];
                             break;
                     }
-
-
-
                     return li;
                 });
 
@@ -231,10 +181,18 @@ define([
                 legend.startup();
 
                 requestAnimationFrame(function() {
-                    console.log("Done")
+                    legend.refresh(layerInfos);
+                    for (var layer in MapConfig.layers) {
+                      if (MapConfig.layers[layer].type === 'tiled') {
 
-                    legend.refresh(layerInfos)
-                })
+                        var tiled = document.getElementById('legend_' + layer);
+                        if (brApp.map.getZoom() > 7 && tiled) {
+
+                          tiled.classList.add('hideLegend');
+                        }
+                      }
+                    }
+                });
 
             });
 
