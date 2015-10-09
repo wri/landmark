@@ -138,63 +138,63 @@ define([
         getNationalLevelIndicatorCode: function() {
             var nationalIndicatorCode;
             switch (brApp.currentLayer) {
-                case "legalForceTenure":
+                case "legalStatusTenure":
                     nationalIndicatorCode = "1";
                     break;
-                case "perpetuityTenure":
+                case "landRightsTenure":
                     nationalIndicatorCode = "2";
                     break;
-                case "commonPropertyTenure":
+                case "formalDocTenure":
                     nationalIndicatorCode = "3";
                     break;
-                case "unregisteredTenureFarms":
+                case "legalPersonTenure":
                     nationalIndicatorCode = "4a";
                     break;
-                case "unregisteredTenureForests":
+                case "legalAuthorityTenure":
                     nationalIndicatorCode = "4b";
                     break;
-                case "registrationTenure":
+                case "perpetuityTenure":
                     nationalIndicatorCode = "5";
                     break;
-                case "selfGovernanceTenure":
+                case "rightToConsentTenure":
                     nationalIndicatorCode = "6";
                     break;
-                case "treesForestsRights":
+                case "rightToTreesTenure":
                     nationalIndicatorCode = "7a";
                     break;
-                case "watersRights":
+                case "rightToWaterTenure":
                     nationalIndicatorCode = "7b";
                     break;
-                case "wildlifeRights":
+                case "landRightsProtectedAreasTenure":
                     nationalIndicatorCode = "7c";
                     break;
-                case "subsurfaceMinerals":
-                    nationalIndicatorCode = "7d";
-                    break;
-                case "oilAndGasTenure":
-                    nationalIndicatorCode = "7e";
-                    break;
-                case "rightToConsent":
-                    nationalIndicatorCode = "8";
-                    break;
-                case "landAcquisition":
-                    nationalIndicatorCode = "9";
-                    break;
-                case "cadasterObligation":
-                    nationalIndicatorCode = "10";
-                    break;
-                case "disputeMechanism":
-                    nationalIndicatorCode = "11";
-                    break;
-                case "womenEqualLand":
-                    nationalIndicatorCode = "12a";
-                    break;
-                case "newMembersEqualLand":
-                    nationalIndicatorCode = "12b";
-                    break;
-                case "minoritiesEqualLand":
-                    nationalIndicatorCode = "12c";
-                    break;
+                // case "subsurfaceMinerals":
+                //     nationalIndicatorCode = "7d";
+                //     break;
+                // case "oilAndGasTenure":
+                //     nationalIndicatorCode = "7e";
+                //     break;
+                // case "rightToConsent":
+                //     nationalIndicatorCode = "8";
+                //     break;
+                // case "landAcquisition":
+                //     nationalIndicatorCode = "9";
+                //     break;
+                // case "cadasterObligation":
+                //     nationalIndicatorCode = "10";
+                //     break;
+                // case "disputeMechanism":
+                //     nationalIndicatorCode = "11";
+                //     break;
+                // case "womenEqualLand":
+                //     nationalIndicatorCode = "12a";
+                //     break;
+                // case "newMembersEqualLand":
+                //     nationalIndicatorCode = "12b";
+                //     break;
+                // case "minoritiesEqualLand":
+                //     nationalIndicatorCode = "12c";
+                //     break;
             }
 
             return nationalIndicatorCode;

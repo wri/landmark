@@ -30,9 +30,9 @@ define([
                 visibleLayers = keys;
                 dynamicLayer = brApp.map.getLayer('nationalLevel');
 
-                if (visibleLayers.length === 1 && visibleLayers[0] !== -1) {
-                    self.turnOffCommunityLevelData();
-                }
+                // if (visibleLayers.length === 1 && visibleLayers[0] !== -1) {
+                //     self.turnOffCommunityLevelData();
+                // }
 
                 if (keys[0] === 0 || keys[0] === 1) {
                     this.setNationalLevelRenderer(visibleLayers);

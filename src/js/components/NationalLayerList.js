@@ -72,7 +72,7 @@ define([
 		// If changing defaults, changing landTenureCategory to LandTenureCom requires
 		// you to change the layer as well, see below:
 		// LandTenureCom needs LandTenureLayer = 0
-		// LandTenureInd needs LandTenureLayer = 1
+		// LandTenureInd needs LandTenureLayer = 2
 		// By Default, the first item in every list is the active
 		// So activePercentIndigenousLayer = 2 represents first item, if default is changed
 		// activePercentIndigenousLayer must change, 2 for first item, 3 for second, 4 for third
@@ -81,7 +81,7 @@ define([
       return {
         active: "none",
         landTenureCategory: LandTenureInd,
-        landTenureLayer: 1,
+        landTenureLayer: 2,
         activePercentIndigenousLayer: 2,
         activeCommunityKey: MapConfig.landTenureCommunityLayers[0].id,
         activeIndigenousKey: MapConfig.landTenureIndigenousLayers[0].id
@@ -114,8 +114,8 @@ define([
     			visibleLayers = [-1];
     		break;
     		case LandTenure:
-    			// If Current Category is Land Tenure Indigenous, visible layers is [0], else, its [1]
-    			visibleLayers = (this.state.landTenureCategory === LandTenureInd ? [0] : [1]);
+    			// If Current Category is Land Tenure Indigenous, visible layers is [0], else, its [2]
+    			visibleLayers = (this.state.landTenureCategory === LandTenureInd ? [0] : [2]);
     		break;
     		case PercentIndigenous:
     			visibleLayers = [state.activePercentIndigenousLayer];

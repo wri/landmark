@@ -1529,7 +1529,7 @@ define([
 
                 // brApp.map.infoWindow.maximize();
                 // brApp.map.infoWindow.show();
-                // brApp.map.infoWindow.resize(650, 350);
+                // brApp.map.infoWindow.resize(650, 250);
 
 
                 var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
