@@ -353,6 +353,7 @@ define([
                 community_NoDoc,
                 community_Occupied,
                 nationalLayer,
+                landTenure,
                 userGraphics,
                 layer;
 
@@ -442,6 +443,14 @@ define([
                 }
             }
 
+            landTenure = brApp.map.getLayer('landTenure');
+
+            if (landTenure) {
+                if (landTenure.visible) {
+                    deferreds.push(self.identifyLandTenure(mapPoint));
+                }
+            }
+
             if (deferreds.length === 0) {
                 return;
             }
@@ -487,7 +496,9 @@ define([
                             features = features.concat(self.setCommunityTemplates(item.features));
                             break;
 
-
+                        case "landTenure":
+                            features = features.concat(self.setLandTenureTemplates(item.features));
+                            break;
                         case "nationalLevel":
                             features = features.concat(self.setNationalTemplates(item.features));
                             break;
@@ -935,8 +946,6 @@ define([
 
         },
 
-
-
         identifyNational: function(mapPoint) {
             brApp.debug('MapController >>> identifyNational');
 
@@ -972,6 +981,45 @@ define([
             return deferred.promise;
 
         },
+
+        identifyLandTenure: function(mapPoint) {
+            brApp.debug('MapController >>> identifyLandTenure');
+
+            var deferred = new Deferred(),
+                identifyTask = new IdentifyTask(MapConfig.layers.landTenure.url),
+                params = new IdentifyParameters(),
+                mapLayer = brApp.map.getLayer('landTenure');
+
+
+            params.tolerance = 3;
+            params.returnGeometry = true;
+            params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
+            params.width = brApp.map.width;
+            params.height = brApp.map.height;
+            params.geometry = mapPoint;
+            params.mapExtent = brApp.map.extent;
+            params.layerIds = mapLayer.visibleLayers;
+            console.log(params.layerIds)
+
+            params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+
+            identifyTask.execute(params, function(features) {
+                if (features.length > 0) {
+                    deferred.resolve({
+                        layer: "landTenure",
+                        features: features
+                    });
+                } else {
+                    deferred.resolve(false);
+                }
+            }, function(error) {
+                deferred.resolve(false);
+            });
+
+            return deferred.promise;
+
+        },
+
         setCommunityTemplates: function(featureObjects) {
             brApp.debug('MapController >>> setCommunityTemplates');
 
@@ -1269,14 +1317,78 @@ define([
             return features;
         },
 
+        setLandTenureTemplates: function(featureObjects) {
+            brApp.debug('MapController >>> setLandTenureTemplates');
+
+            var template,
+                features = [],
+                indNumber = MapAssets.getNationalLevelIndicatorCode(),
+                self = this;
+
+            arrayUtils.forEach(featureObjects, function(item) {
+
+                template = new InfoTemplate(item.value, '');
+
+                for (var attr in item.feature.attributes) {
+                    if (item.feature.attributes[attr] == "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
+                      console.log(item.feature.attributes[attr]);
+                      item.feature.attributes[attr] = "Unknown";
+                    }
+                }
+                console.log('item.layerId',item.layerId)
+
+                if (item.layerId === 0 ||item.layerId === 2) { // Average Score
+                  template.content = "<div id='tableWrapper'><table id='landTenureTable'>" +
+                  "<tr class='even-row'><td class='popup-header nationalField'>Groups targeted by the legal framework</td><td>" + item.feature.attributes.Framework + '</td></tr>' +
+                  "<tr class='odd-row'><td class='popup-header nationalField'>Language of the law review</td><td>" + item.feature.attributes.Language + '</td></tr>' +
+                  "<tr class='even-row'><td class='popup-header nationalField'>Average Indicator Score</td><td>" + item.feature.attributes.Avg_Scr + '</td></tr>' +
+                  "<tr class='full-row'><td colspan='2' class='popup-header'>Scores per Indicator</td></tr>" +
+
+                  "<tr class='even-row'><td class='popup-header nationalField'>Q1: Legal Status</td><td>" + item.feature.attributes.I1_Scr + '</td></tr>' +
+                  "<tr class='odd-row'><td class='popup-header nationalField'>Q2: Land Rights and Common Property</td><td>" + item.feature.attributes.I2_Scr + '</td></tr>' +
+                  "<tr class='even-row'><td class='popup-header nationalField'>Q3: Formal Documentation</td><td>" + item.feature.attributes.I3_Scr + '</td></tr>' +
+                  "<tr class='odd-row'><td class='popup-header nationalField'>Q4: Legal Person</td><td>" + item.feature.attributes.I4_Scr + '</td></tr>' +
+                  "<tr class='even-row'><td class='popup-header nationalField'>Q5: Legal Authority</td><td>" + item.feature.attributes.I5_Scr + '</td></tr>' +
+                  "<tr class='odd-row'><td class='popup-header nationalField'>Q6: Perpetuity</td><td>" + item.feature.attributes.I6_Scr + '</td></tr>' +
+                  "<tr class='even-row'><td class='popup-header nationalField'>Q7: Right to Consent Before Land Acquisition</td><td>" + item.feature.attributes.I7_Scr + '</td></tr>' +
+                  "<tr class='odd-row'><td class='popup-header nationalField'>Q8: Rights to Trees</td><td>" + item.feature.attributes.I8_Scr + '</td></tr>' +
+                  "<tr class='even-row'><td class='popup-header nationalField'>Q9: Rights to Water</td><td>" + item.feature.attributes.I9_Scr + '</td></tr>' +
+                  "<tr class='odd-row'><td class='popup-header nationalField'>Q10: Land Rights in Protected Areas</td><td>" + item.feature.attributes.I10_Scr + '</td></tr></table></div>' +
+
+                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.blueraster.com' target='_blank' class='popup-last-right'>More Info</a></div>";
+
+                } else { //1 & 3
+                  template.content = "<div id='tableWrapper'><table id='landTenureTable'>" +
+                  "<tr class='even-row'><td class='popup-header nationalField'>Groups targeted by the legal framework</td><td>" + item.feature.attributes.Framework + '</td></tr>' +
+                  "<tr class='odd-row'><td class='popup-header nationalField'>Language of the law review</td><td>" + item.feature.attributes.Language + '</td></tr>' +
+                  "<tr class='even-row'><td class='popup-header nationalField'>Indicator score</td><td>" + item.feature.attributes['I' + indNumber + '_Scr'] + '</td></tr>' +
+                  "<tr class='odd-row'><td class='popup-header nationalField'>Justification of score</td><td>" + item.feature.attributes['I' + indNumber + '_Com'] + '</td></tr>' +
+                  "<tr class='even-row'><td class='popup-header nationalField'>Laws and provisions reviewed</td><td>" + item.feature.attributes['I' + indNumber + '_Lap'] + '</td></tr>' +
+                  "<tr class='odd-row'><td class='popup-header nationalField'>Additional comments</td><td>" + item.feature.attributes['I' + indNumber + '_Addinfo'] + '</td></tr>' +
+                  "<tr class='even-row'><td class='popup-header nationalField'>Review source (Year)</td><td>" + item.feature.attributes['I' + indNumber + '_Rev'] + '(' + item.feature.attributes['I' + indNumber + '_Year'] + ')</td></tr></table></div>' +
+
+                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.blueraster.com' target='_blank' class='popup-last-right'>More Info</a></div>";
+                }
+
+                item.feature.setInfoTemplate(template);
+
+                features.push(item.feature);
+            });
+            console.log(features);
+            return features;
+        },
+
         setCustomNationalTemplate: function(feature) {
             brApp.debug('MapController >>> setCustomNationalTemplate');
             var indScore, framework, comments, laws, reviewSource, reviewDate, uploadDate;
             var nationalIndicatorCode = MapAssets.getNationalLevelIndicatorCode();
             var stringified = "I" + nationalIndicatorCode + "_Scr";
+            if (nationalIndicatorCode === "Avg_Scr") {
+              stringified = nationalIndicatorCode;
+            }
 
             var indicator = feature.attributes[stringified];
-
+            console.log(indicator)
             switch (indicator) {
                 case "0":
                     indScore = 'No review yet done';

@@ -14,13 +14,11 @@ define([
     },
 
     toggleOff: function (layers, off) {
-      console.log(layers,off)
 
       LayerController.updateVisibleLayers(layers, false, off);
       // LayerController.updateVisibleLayers(keys, isNationalLevelData)
-
     },
-
+ //todo: switch Indigenous and Community buttons somehow!
     render: function () {
       return (
         <div className='community-layer-list'>
@@ -99,7 +97,6 @@ define([
         evt.target.classList.remove('parent-layer-checked-false');
         allOff = false;
       }
-      console.log(allOff)
 
       for (var i = 0; i < this.state.data.length; i++) {
         if (this.state.data[i].group === evt.target.parentElement.id && this.state.data[i].isCategory !== true) {

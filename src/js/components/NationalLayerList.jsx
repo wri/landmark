@@ -78,6 +78,7 @@ define([
 		// activePercentIndigenousLayer must change, 2 for first item, 3 for second, 4 for third
 
 	getInitialState: function () {
+
       return {
         active: "none",
         landTenureCategory: LandTenureInd,
@@ -97,6 +98,7 @@ define([
     			this.state.activeIndigenousKey :
     			this.state.activeCommunityKey
     	);
+
     },
 
     setToNone: function () {
@@ -110,17 +112,37 @@ define([
     	var visibleLayers,
     			state = this.state;
 
+			console.log(state.active)
+
     	switch (state.active) {
     		case 'none':
     			visibleLayers = [-1];
-    		break;
+    			break;
     		case LandTenure:
-    			// If Current Category is Land Tenure Indigenous, visible layers is [0], else, its [2]
-    			visibleLayers = (this.state.landTenureCategory === LandTenureInd ? [0] : [2]);
-    		break;
+
+					if (this.state.landTenureCategory === LandTenureInd) {
+						console.log('activeIndigenousKey',this.state.activeIndigenousKey)
+						if (this.state.activeIndigenousKey === "averageScoreTenure") {
+							visibleLayers = [2];
+						} else {
+							visibleLayers = [3];
+						}
+					} else {
+						console.log('activeCommunityKey',this.state.activeCommunityKey)
+						if (this.state.activeCommunityKey === "averageScoreTenure") {
+							visibleLayers = [0];
+						} else {
+							visibleLayers = [1];
+						}
+
+					}
+					console.log(visibleLayers)
+    			// // If Current Category is Land Tenure Indigenous, visible layers is [0], else, its [2]
+    			// visibleLayers = (this.state.landTenureCategory === LandTenureInd ? [0] : [2]);
+    			break;
     		case PercentIndigenous:
     			visibleLayers = [state.activePercentIndigenousLayer];
-    		break;
+    			break;
     	}
 
     	// Update the currentLayer in brApp, Our popup needs to know the selection so it can format the content correctly
@@ -144,18 +166,16 @@ define([
     },
 
     changeLandTenureLayer: function (key, layer) {
-    	var newState = {
-    		landTenureLayer: layer
-    	};
-
     	// If layer === 0, update Active Community Key, else, update Active Indigenous Key
-    	if (layer === 0) {
-    		newState.activeCommunityKey = key;
+    	if (layer === 0 || layer === 1) {
+				this.setState({
+	    		activeCommunityKey: key
+	    	});
     	} else {
-    		newState.activeIndigenousKey = key;
+				this.setState({
+	    		activeIndigenousKey: key
+	    	});
     	}
-
-    	this.setState(newState);
 
     },
 

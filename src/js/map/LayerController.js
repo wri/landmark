@@ -27,28 +27,31 @@ define([
                 self = this;
 
             if (isNationalLevelData) {
-                visibleLayers = keys;
-                dynamicLayer = brApp.map.getLayer('nationalLevel');
+              // self.turnOffCommunityLevelData(); todo: fix this and add it back in
 
-                // if (visibleLayers.length === 1 && visibleLayers[0] !== -1) {
-                //     self.turnOffCommunityLevelData();
+              //todo: find a new way to differentiate betweem Land Tenure radio button and percent Indigenous & community
+                visibleLayers = keys;
+
+
+                dynamicLayer = brApp.map.getLayer('landTenure'); //or get pct_comm_lands layer
+
+
+                // if (keys[0] === 0 || keys[0] === 1) {
+                this.setLandTenureRenderer(visibleLayers);
+                // Update Dynamic Layers but dont refresh
+                dynamicLayer.setVisibleLayers(visibleLayers, true);
+                console.log(visibleLayers)
+                // return;
                 // }
 
-                if (keys[0] === 0 || keys[0] === 1) {
-                    this.setNationalLevelRenderer(visibleLayers);
-                    // Update Dynamic Layers but dont refresh
-                    dynamicLayer.setVisibleLayers(visibleLayers, true);
-                    return;
-                }
-
-                dynamicLayer.setVisibleLayers(visibleLayers);
+                // dynamicLayer.setVisibleLayers(visibleLayers);
                 topic.publish('refresh-legend');
 
             } else { // Community Level
 
                 for (var i = 0; i < keys.length; i++) {
                   layer = brApp.map.getLayer(keys[i]);
-                  console.log(layer.id)
+
                   var tiledLayer = brApp.map.getLayer(keys[i] + "_Tiled");
                   var tiled = document.getElementById('legend_' + tiledLayer.id);
                   var zoom = brApp.map.getZoom();
@@ -165,22 +168,32 @@ define([
         /**
          * @param {array} visibleLayers - Array of layers to be set to visible
          */
-        setNationalLevelRenderer: function(visibleLayers) {
+        setLandTenureRenderer: function(visibleLayers) {
 
 
             var layerDrawingOptionsArray = [],
                 layerDrawingOption,
                 nationalIndicator,
-                nationalLayer,
+                landTenure,
                 fieldName,
                 renderer;
 
             nationalIndicator = MapAssets.getNationalLevelIndicatorCode();
             fieldName = ["I", nationalIndicator, "_Scr"].join('');
+            if (nationalIndicator === "Avg_Scr") {
+              // fieldName = nationalIndicator;
+              landTenure = brApp.map.getLayer('landTenure');
+              landTenure.setVisibleLayers(visibleLayers, true);
+
+              topic.publish('refresh-legend');
+              brApp.map.setExtent(brApp.map.extent);
+              return;
+            }
+            console.log(fieldName)
             layerDrawingOption = new LayerDrawingOptions();
 
-            nationalLayer = brApp.map.getLayer('nationalLevel');
-            renderer = MapAssets.getUniqueValueRendererForNationalDataWithField(fieldName, nationalLayer);
+            landTenure = brApp.map.getLayer('landTenure');
+            renderer = MapAssets.getUniqueValueRendererForNationalDataWithField(fieldName, landTenure);
             layerDrawingOption.renderer = renderer;
 
             arrayUtils.forEach(visibleLayers, function(layer) {
@@ -188,8 +201,7 @@ define([
             });
 
 
-
-            nationalLayer.setLayerDrawingOptions(layerDrawingOptionsArray);
+            landTenure.setLayerDrawingOptions(layerDrawingOptionsArray);
             topic.publish('refresh-legend');
             brApp.map.setExtent(brApp.map.extent);
         }

@@ -50,8 +50,6 @@ define([
             notApplicableSymbol = brApp.landTenureRenderer.uniqueValueInfos[5].symbol;
             renderer = new UniqueValueRenderer(notApplicableSymbol, fieldName);
 
-
-
             renderer.addValue({
                 value: brApp.landTenureRenderer.uniqueValueInfos[0].value,
                 symbol: brApp.landTenureRenderer.uniqueValueInfos[0].symbol,
@@ -132,12 +130,15 @@ define([
 
             //return response.drawingInfo.renderer;
 
-
         },
 
         getNationalLevelIndicatorCode: function() {
             var nationalIndicatorCode;
+            console.log(brApp.currentLayer)
             switch (brApp.currentLayer) {
+                case "averageScoreTenure":
+                    nationalIndicatorCode = "Avg_Scr";
+                    break;
                 case "legalStatusTenure":
                     nationalIndicatorCode = "1";
                     break;
@@ -148,25 +149,25 @@ define([
                     nationalIndicatorCode = "3";
                     break;
                 case "legalPersonTenure":
-                    nationalIndicatorCode = "4a";
+                    nationalIndicatorCode = "4";
                     break;
                 case "legalAuthorityTenure":
-                    nationalIndicatorCode = "4b";
-                    break;
-                case "perpetuityTenure":
                     nationalIndicatorCode = "5";
                     break;
-                case "rightToConsentTenure":
+                case "perpetuityTenure":
                     nationalIndicatorCode = "6";
                     break;
+                case "rightToConsentTenure":
+                    nationalIndicatorCode = "7";
+                    break;
                 case "rightToTreesTenure":
-                    nationalIndicatorCode = "7a";
+                    nationalIndicatorCode = "8";
                     break;
                 case "rightToWaterTenure":
-                    nationalIndicatorCode = "7b";
+                    nationalIndicatorCode = "9";
                     break;
                 case "landRightsProtectedAreasTenure":
-                    nationalIndicatorCode = "7c";
+                    nationalIndicatorCode = "10";
                     break;
                 // case "subsurfaceMinerals":
                 //     nationalIndicatorCode = "7d";
