@@ -21,9 +21,20 @@ define([
 	var LayerList = React.createClass({
 
 		getInitialState: function () {
-			return {
-				active: this.props.data[0].id
-			};
+
+
+
+			if (this.props.class === 'percent-indigenous-tree') {
+				return {
+					active: this.props.data[1].id
+				};
+			} else {
+				return {
+					active: this.props.data[0].id
+				};
+			}
+
+
 		},
 
 		/* jshint ignore:start */
@@ -38,9 +49,12 @@ define([
 		dataMapper: function (item, index) {
 
 			var active = (this.state.active === item.id);
+			var subTitle = item.subTitle;
+			var subLayer = item.subLayer;
+
 
 			return (
-				<div className={'national-layer-list-item ' + (active ? 'active' : '')} key={item.id} onClick={this.setActiveLayer.bind(this, item.id, item.layer)}>
+				<div className={'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '')} key={item.id} onClick={this.setActiveLayer.bind(this, item.id, item.layer)}>
 					<div className='national-layer-list-item-label'>{item.label}</div>
 					{
 						item.question ?
@@ -74,7 +88,7 @@ define([
 		// LandTenureCom needs LandTenureLayer = 0
 		// LandTenureInd needs LandTenureLayer = 2
 		// By Default, the first item in every list is the active
-		// So activePercentIndigenousLayer = 2 represents first item, if default is changed
+		// So activePercentIndigenousLayer = 1 represents first item, if default is changed
 		// activePercentIndigenousLayer must change, 2 for first item, 3 for second, 4 for third
 
 	getInitialState: function () {
@@ -83,7 +97,7 @@ define([
         active: "none",
         landTenureCategory: LandTenureInd,
         landTenureLayer: 2,
-        activePercentIndigenousLayer: 2,
+        activePercentIndigenousLayer: 1,
         activeCommunityKey: MapConfig.landTenureCommunityLayers[0].id,
         activeIndigenousKey: MapConfig.landTenureIndigenousLayers[0].id
       };
@@ -136,17 +150,20 @@ define([
 						}
 
 					}
-					console.log(visibleLayers)
+					brApp.currentLayer = (state.landTenureCategory === LandTenureInd ? state.activeIndigenousKey : state.activeCommunityKey);
     			// // If Current Category is Land Tenure Indigenous, visible layers is [0], else, its [2]
     			// visibleLayers = (this.state.landTenureCategory === LandTenureInd ? [0] : [2]);
     			break;
     		case PercentIndigenous:
     			visibleLayers = [state.activePercentIndigenousLayer];
+					brApp.currentLayer = 'percentIndigenousLayers';
     			break;
     	}
 
+			console.log(visibleLayers)
+
     	// Update the currentLayer in brApp, Our popup needs to know the selection so it can format the content correctly
-    	brApp.currentLayer = (state.landTenureCategory === LandTenureInd ? state.activeIndigenousKey : state.activeCommunityKey);
+
 
     	// The true signifies that this is the national layer being updated
     	LayerController.updateVisibleLayers(visibleLayers, true);
@@ -188,6 +205,8 @@ define([
 
     /* jshint ignore:start */
     render: function () {
+			//<LayerList data={MapConfig.percentIndigenousLayers} change={this.changePercentIndigenousLayer} />
+			console.log(this.state.active)
     	return (
     		<div className='national-level-layer-lists'>
 
@@ -207,7 +226,10 @@ define([
 
                 <div className='percent-indigenous-layer-list'
                          style={{'display': (this.state.active === PercentIndigenous ? 'block' : 'none')}}>
-                         <LayerList data={MapConfig.percentIndigenousLayers} change={this.changePercentIndigenousLayer} />
+
+                         <LayerList class='percent-indigenous-tree' data={MapConfig.percentIndigenousLayersCombined} change={this.changePercentIndigenousLayer} />
+
+
                 </div>
 
     			<div className='radio-button-container'>

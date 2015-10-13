@@ -5,6 +5,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
     // var indigenousLandsInfo = "Placeholder so this layer's info icon appears in the tree";
     // var landTenureSecurityInfo = "Placeholder so this layer's info icon appears in the tree";
     var landTenureURL = 'http://gis.wri.org/arcgis/rest/services/LandMark/land_tenure/MapServer';
+    var percentLandsUrl = 'http://gis.wri.org/arcgis/rest/services/LandMark/pct_comm_lands/MapServer';
 
     var community_indigenous_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer';
     var community_indigenous_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalDoc/MapServer';
@@ -29,12 +30,20 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
         },
 
         layers: {
-            'nationalLevel': {
-                url: nationalLevelUrl,
-                type: 'dynamic',
-                defaultLayers: [-1], //[1,2,3,4]
-                visible: true
-            },
+          // 'nationalLevel': {
+          //     url: nationalLevelUrl,
+          //     type: 'dynamic',
+          //     defaultLayers: [-1], //[1,2,3,4]
+          //     visible: true
+          // },
+
+          //Percent of Indigenous and Community Lands layer
+          'percentLands': {
+              url: percentLandsUrl,
+              type: 'dynamic',
+              defaultLayers: [-1], //[1,2,3,4]
+              visible: true
+          },
 
             //Analysis Layer
             'analysisLayer': {
@@ -523,25 +532,131 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             layer: 3
         }],
 
-        percentIndigenousLayers: [{
-            label: 'Indigenous Peoples and Communities',
-            id: 'percentIndigAndCommunity',
-            question: true,
-            layer: 0
-        }, {
-            label: 'Indigenous Peoples only',
-            id: 'percentIndigNational',
-            question: false,
-            layer: 4
-        }, {
-            label: 'Communities (Non-indigenous) only',
-            id: 'percentNonIndigenous',
-            question: false,
-            layer: 8
+        // percentIndigenousLayers: [{
+        //     label: 'Indigenous Peoples and Communities',
+        //     id: 'percentIndigAndCommunity',
+        //     question: true,
+        //     // layer: 0,
+        //     children: [{
+        //         label: 'Total',
+        //         id: 'combinedTotal',
+        //         checked: true
+        //     }, {
+        //         label: 'Formally recognized',
+        //         id: 'combinedFormal',
+        //         checked: true
+        //     }, {
+        //         label: 'Not formally recognized',
+        //         id: 'combinedInformal',
+        //         checked: true
+        //     }]
+        //
+        // }, {
+        //     label: 'Indigenous Peoples only',
+        //     id: 'percentIndigNational',
+        //     question: false,
+        //     // layer: 4
+        //     children: [{
+        //         label: 'Total',
+        //         id: 'indigTotal',
+        //         checked: true
+        //     }, {
+        //         label: 'Formally recognized',
+        //         id: 'indigFormal',
+        //         checked: true
+        //     }, {
+        //         label: 'Not formally recognized',
+        //         id: 'indigInformal',
+        //         checked: true
+        //     }]
+        // }, {
+        //     label: 'Communities (Non-indigenous) only',
+        //     id: 'percentNonIndigenous',
+        //     question: false,
+        //     // layer: 8
+        //     children: [{
+        //         label: 'Total',
+        //         id: 'commTotal',
+        //         checked: true
+        //     }, {
+        //         label: 'Formally recognized',
+        //         id: 'commFormal',
+        //         checked: true
+        //     }, {
+        //         label: 'Not formally recognized',
+        //         id: 'commInformal',
+        //         checked: true
+        //     }]
+        //
+        // }],
 
+        percentIndigenousLayersCombined: [{
+          label: 'Indigenous and Community Lands (combined)',
+          id: 'percentIndigAndCommunity',
+          subTitle: true
+        }, {
+          label: 'Total',
+          id: 'combinedTotal',
+          question: false,
+          layer: 1,
+          subLayer: true
+        }, {
+          label: 'Formally recognized',
+          id: 'combinedFormal',
+          question: false,
+          layer: 2,
+          subLayer: true
+        }, {
+          label: 'Not formally recognized',
+          id: 'combinedInformal',
+          question: false,
+          layer: 3,
+          subLayer: true
+        }, {
+          label: 'Indigenous Lands (only)',
+          id: 'percentIndigNational',
+          subTitle: true
+        }, {
+          label: 'Total',
+          id: 'indigTotal',
+          question: false,
+          layer: 5,
+          subLayer: true
+        }, {
+          label: 'Formally recognized',
+          id: 'indigFormal',
+          question: false,
+          layer: 6,
+          subLayer: true
+        }, {
+          label: 'Not formally recognized',
+          id: 'indigInformal',
+          question: false,
+          layer: 7,
+          subLayer: true
+        }, {
+          label: 'Community Lands (only)',
+          id: 'percentNonIndigenous',
+          subTitle: true
+        }, {
+          label: 'Total',
+          id: 'commTotal',
+          question: false,
+          layer: 9,
+          subLayer: true
+        }, {
+          label: 'Formally recognized',
+          id: 'commFormal',
+          question: false,
+          layer: 10,
+          subLayer: true
+        }, {
+          label: 'Not formally recognized',
+          id: 'commInformal',
+          question: false,
+          layer: 11,
+          subLayer: true
         }],
-
-
         // Only leafs in the tree should control any layers, use blank arrays for any branch or root nodes
         layerMapping: {
             'indigenousLands': [],

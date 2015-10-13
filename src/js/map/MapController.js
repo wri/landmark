@@ -435,18 +435,18 @@ define([
                 }
             }
 
-            nationalLayer = brApp.map.getLayer('nationalLevel');
-
-            if (nationalLayer) {
-                if (nationalLayer.visible) {
-                    deferreds.push(self.identifyNational(mapPoint));
-                }
-            }
+            // nationalLayer = brApp.map.getLayer('nationalLevel');
+            //
+            // if (nationalLayer) {
+            //     if (nationalLayer.visible) {
+            //         deferreds.push(self.identifyNational(mapPoint));
+            //     }
+            // }
 
             landTenure = brApp.map.getLayer('landTenure');
 
             if (landTenure) {
-                if (landTenure.visible) {
+                if (landTenure.visible && landTenure.visibleLayers.indexOf(-1) !== 0) {
                     deferreds.push(self.identifyLandTenure(mapPoint));
                 }
             }
@@ -999,7 +999,7 @@ define([
             params.geometry = mapPoint;
             params.mapExtent = brApp.map.extent;
             params.layerIds = mapLayer.visibleLayers;
-            console.log(params.layerIds)
+
 
             params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
 
@@ -1363,8 +1363,8 @@ define([
                   "<tr class='odd-row'><td class='popup-header nationalField'>Language of the law review</td><td>" + item.feature.attributes.Language + '</td></tr>' +
                   "<tr class='even-row'><td class='popup-header nationalField'>Indicator score</td><td>" + item.feature.attributes['I' + indNumber + '_Scr'] + '</td></tr>' +
                   "<tr class='odd-row'><td class='popup-header nationalField'>Justification of score</td><td>" + item.feature.attributes['I' + indNumber + '_Com'] + '</td></tr>' +
-                  "<tr class='even-row'><td class='popup-header nationalField'>Laws and provisions reviewed</td><td>" + item.feature.attributes['I' + indNumber + '_Lap'] + '</td></tr>' +
-                  "<tr class='odd-row'><td class='popup-header nationalField'>Additional comments</td><td>" + item.feature.attributes['I' + indNumber + '_Addinfo'] + '</td></tr>' +
+                  "<tr class='even-row'><td class='popup-header nationalField'>Laws and provisions reviewed</td><td>" + item.feature.attributes['I' + indNumber + '_LaP'] + '</td></tr>' +
+                  "<tr class='odd-row'><td class='popup-header nationalField'>Additional comments</td><td>" + item.feature.attributes['I' + indNumber + '_AddInfo'] + '</td></tr>' +
                   "<tr class='even-row'><td class='popup-header nationalField'>Review source (Year)</td><td>" + item.feature.attributes['I' + indNumber + '_Rev'] + '(' + item.feature.attributes['I' + indNumber + '_Year'] + ')</td></tr></table></div>' +
 
                   "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.blueraster.com' target='_blank' class='popup-last-right'>More Info</a></div>";

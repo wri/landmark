@@ -23,29 +23,32 @@ define([
             brApp.debug('LayerController >>> updateVisibleLayers');
             var visibleLayers = [],
                 dynamicLayer,
+                otherDynamic,
                 layer,
                 self = this;
 
             if (isNationalLevelData) {
+              visibleLayers = keys;
+
               // self.turnOffCommunityLevelData(); todo: fix this and add it back in
+              if (brApp.currentLayer === "percentIndigenousLayers") {
+                otherDynamic = brApp.map.getLayer('landTenure');
+                otherDynamic.setVisibleLayers([-1]);
 
-              //todo: find a new way to differentiate betweem Land Tenure radio button and percent Indigenous & community
-                visibleLayers = keys;
-
-
+                dynamicLayer = brApp.map.getLayer('percentLands');
+                dynamicLayer.setVisibleLayers(visibleLayers);
+              } else {
+                otherDynamic = brApp.map.getLayer('percentLands');
+                otherDynamic.setVisibleLayers([-1]);
                 dynamicLayer = brApp.map.getLayer('landTenure'); //or get pct_comm_lands layer
-
-
-                // if (keys[0] === 0 || keys[0] === 1) {
                 this.setLandTenureRenderer(visibleLayers);
                 // Update Dynamic Layers but dont refresh
                 dynamicLayer.setVisibleLayers(visibleLayers, true);
-                console.log(visibleLayers)
-                // return;
-                // }
+                console.log(visibleLayers);
+              }
+              //todo: find a new way to differentiate betweem Land Tenure radio button and percent Indigenous & community
 
-                // dynamicLayer.setVisibleLayers(visibleLayers);
-                topic.publish('refresh-legend');
+              topic.publish('refresh-legend');
 
             } else { // Community Level
 
