@@ -205,8 +205,7 @@ define([
 
     /* jshint ignore:start */
     render: function () {
-			//<LayerList data={MapConfig.percentIndigenousLayers} change={this.changePercentIndigenousLayer} />
-			console.log(this.state.active)
+
     	return (
     		<div className='national-level-layer-lists'>
 
@@ -226,10 +225,7 @@ define([
 
                 <div className='percent-indigenous-layer-list'
                          style={{'display': (this.state.active === PercentIndigenous ? 'block' : 'none')}}>
-
-                         <LayerList class='percent-indigenous-tree' data={MapConfig.percentIndigenousLayersCombined} change={this.changePercentIndigenousLayer} />
-
-
+                    <LayerList class='percent-indigenous-tree' data={MapConfig.percentIndigenousLayersCombined} change={this.changePercentIndigenousLayer} />
                 </div>
 
     			<div className='radio-button-container'>

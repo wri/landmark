@@ -37,6 +37,7 @@ define([
 
                 dynamicLayer = brApp.map.getLayer('percentLands');
                 dynamicLayer.setVisibleLayers(visibleLayers);
+                console.log(visibleLayers);
               } else {
                 otherDynamic = brApp.map.getLayer('percentLands');
                 otherDynamic.setVisibleLayers([-1]);

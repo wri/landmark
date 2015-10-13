@@ -205,8 +205,7 @@ define([
 
     /* jshint ignore:start */
     render: function () {
-			//<LayerList data={MapConfig.percentIndigenousLayers} change={this.changePercentIndigenousLayer} />
-			console.log(this.state.active)
+
     	return (
     		React.createElement("div", {className: "national-level-layer-lists"}, 
 
@@ -226,10 +225,7 @@ define([
 
                 React.createElement("div", {className: "percent-indigenous-layer-list", 
                          style: {'display': (this.state.active === PercentIndigenous ? 'block' : 'none')}}, 
-
-                         React.createElement(LayerList, {class: "percent-indigenous-tree", data: MapConfig.percentIndigenousLayersCombined, change: this.changePercentIndigenousLayer})
-
-
+                    React.createElement(LayerList, {class: "percent-indigenous-tree", data: MapConfig.percentIndigenousLayersCombined, change: this.changePercentIndigenousLayer})
                 ), 
 
     			React.createElement("div", {className: "radio-button-container"}, 

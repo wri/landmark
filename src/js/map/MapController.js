@@ -352,7 +352,7 @@ define([
                 community_InProcess,
                 community_NoDoc,
                 community_Occupied,
-                nationalLayer,
+                percentLayer,
                 landTenure,
                 userGraphics,
                 layer;
@@ -435,13 +435,13 @@ define([
                 }
             }
 
-            // nationalLayer = brApp.map.getLayer('nationalLevel');
-            //
-            // if (nationalLayer) {
-            //     if (nationalLayer.visible) {
-            //         deferreds.push(self.identifyNational(mapPoint));
-            //     }
-            // }
+            percentLayer = brApp.map.getLayer('percentLands');
+
+            if (percentLayer) {
+                if (percentLayer.visible) {
+                    deferreds.push(self.identifyPercentLayer(mapPoint));
+                }
+            }
 
             landTenure = brApp.map.getLayer('landTenure');
 
@@ -499,8 +499,8 @@ define([
                         case "landTenure":
                             features = features.concat(self.setLandTenureTemplates(item.features));
                             break;
-                        case "nationalLevel":
-                            features = features.concat(self.setNationalTemplates(item.features));
+                        case "percentLands":
+                            features = features.concat(self.setPercentLandsTemplates(item.features));
                             break;
                         default: // Do Nothing
                             break;
@@ -764,12 +764,6 @@ define([
 
         },
 
-
-
-
-
-
-
         identifyCommunity_FormalClaim: function(mapPoint) {
             brApp.debug('MapController >>> identifyCommunity_FormalClaim');
 
@@ -946,13 +940,13 @@ define([
 
         },
 
-        identifyNational: function(mapPoint) {
-            brApp.debug('MapController >>> identifyNational');
+        identifyPercentLayer: function(mapPoint) {
+            brApp.debug('MapController >>> identifyPercentLayer');
 
             var deferred = new Deferred(),
-                identifyTask = new IdentifyTask(MapConfig.layers.nationalLevel.url),
+                identifyTask = new IdentifyTask(MapConfig.layers.percentLands.url),
                 params = new IdentifyParameters(),
-                mapLayer = brApp.map.getLayer('nationalLevel');
+                mapLayer = brApp.map.getLayer('percentLands');
 
             params.tolerance = 3;
             params.returnGeometry = true;
@@ -968,7 +962,7 @@ define([
             identifyTask.execute(params, function(features) {
                 if (features.length > 0) {
                     deferred.resolve({
-                        layer: "nationalLevel",
+                        layer: "percentLands",
                         features: features
                     });
                 } else {
@@ -1248,8 +1242,8 @@ define([
             return features;
         },
 
-        setNationalTemplates: function(featureObjects) {
-            brApp.debug('MapController >>> setNationalTemplates');
+        setPercentLandsTemplates: function(featureObjects) {
+            brApp.debug('MapController >>> setPercentLandsTemplates');
 
             var template,
                 features = [],
@@ -1257,49 +1251,37 @@ define([
 
             arrayUtils.forEach(featureObjects, function(item) {
 
+              template = new InfoTemplate(item.feature.attributes.Country, '');
 
-                if (item.layerId === 2 || item.layerId === 3 || item.layerId === 4) {
+              for (var attr in item.feature.attributes) {
+                  if (!item.feature.attributes[attr] || item.feature.attributes[attr] === 'undefined' || item.feature.attributes[attr] == "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
+                      if (attr.indexOf('Notes') == -1) {
+                          item.feature.attributes[attr] = "Unknown";
+                      } else {
+                          item.feature.attributes[attr] = "None";
+                      }
 
-                    template = new InfoTemplate(item.value, '');
+                  }
+              }
 
-                    for (var attr in item.feature.attributes) {
-                        if (item.feature.attributes[attr] == "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
-                            if (attr.indexOf('Notes') == -1) {
-                                item.feature.attributes[attr] = "Unknown";
-                            } else {
-                                item.feature.attributes[attr] = "None";
-                            }
-                            console.log(item.feature.attributes[attr])
+              var source1 = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IC_Notes + '</td></tr>' : '';
+              var source2 = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.I_Notes + '</td></tr>' : '';
+              var source3 = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.C_Notes + '</td></tr>' : '';
 
-                        }
-                    }
+              template.content = "<div id='tableWrapper'><table id='nationalTable'>" +
+              "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div>Total: " + item.feature.attributes.IC_T + '% (' + item.feature.attributes.IC_T_Src + ')</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.IC_F + '% (' + item.feature.attributes.IC_F_Src + ')</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.IC_NF + '% (' + item.feature.attributes.IC_NF_Src + ')</div></td></tr>' +
+              // "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IC_Notes + '</td></tr>' +
+              source1 +
+              "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples only</td><td><div>Total: " + item.feature.attributes.I_T + '% (' + item.feature.attributes.I_T_Src + ')</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.I_F + '% (' + item.feature.attributes.I_F_Src + ')</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.I_NF + '% (' + item.feature.attributes.I_NF_Src + ')</div></td></tr>' +
+              // "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.I_Notes + '</td></tr>' +
+              source2 +
+              "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div>Total: " + item.feature.attributes.C_T + '% (' + item.feature.attributes.C_T_Src + ')</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.C_F + '% (' + item.feature.attributes.C_F_Src + ')</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.C_NF + '% (' + item.feature.attributes.C_NF_Src + ')</div></td></tr>' +
+              // "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.C_Notes + '</td></tr></table></div>' +
+              source3 +
+              '</table></div>' +
+              "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.blueraster.com' target='_blank' class='popup-last-right'>More Info</a></div>";
 
-                    template.content = "<div id='tableWrapper'><table id='nationalTable'>" +
-                    "<tr class='even-row'><td class='popup-header nationalField'>Percent of Country Area Held or Used by Indigenous Peoples and Communities</td><td><div>Total: " + item.feature.attributes.IPC_Pct + '%</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.IPC_Pct + '%</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.IPC_Pct + '%</div></td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header nationalField'>Source (Date)</td><td>" + item.feature.attributes.IPC_Src + '</td></tr>' +
-                    "<tr class='even-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IPC_Notes + '</td></tr>' +
-
-                    "<tr class='odd-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous Peoples only</td><td><div>Total: " + item.feature.attributes.Ind_Pct + '%</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.Ind_Pct + '%</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.Ind_Pct + '%</div></td></tr>' +
-                    "<tr class='even-row'><td class='popup-header nationalField'>Source (Date)</td><td>" + item.feature.attributes.Ind_Src + '</td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.Ind_Notes + '</td></tr>' +
-
-                    "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div>Total: " + item.feature.attributes.Com_Pct + '%</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.Com_Pct + '%</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.Com_Pct + '%</div></td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header nationalField'>Source (Date)</td><td>" + item.feature.attributes.Com_Src + '</td></tr>' +
-                    "<tr class='even-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.Com_Notes + '</td></tr></table></div>' +
-
-                    "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "</div>";
-
-
-                    // Content needs to be wrapped in a single parent div, otherwise on touch ArcGIS JavaScript API
-                    // will apply transform to first child and popup will not function and look like garbage, thanks esri/dojo
-                    // template.content = '<div>' + template.content + '</div>';
-
-                    item.feature.setInfoTemplate(template);
-                } else { //layers 0 and 1
-
-                    item.feature.setInfoTemplate(self.setCustomNationalTemplate(item.feature));
-                }
-
+              item.feature.setInfoTemplate(template);
 
                 // if (item.layerId === 1) {
                 //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalDocIcon.png'> " + template.title;
