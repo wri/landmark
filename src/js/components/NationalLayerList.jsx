@@ -100,6 +100,7 @@ define([
     },
 
     setToNone: function () {
+
         if (this.state.active !== 'none') {
             this.setState({ active: 'none' });
         }
@@ -159,8 +160,9 @@ define([
     },
 
     handleRadioChange: function (evt) {
+			var value = evt.target.getAttribute('value');
     	this.setState({
-    		active: evt.target.value
+    		active: value
     	});
     },
 
@@ -171,12 +173,14 @@ define([
 
                 <div className='radio-button-container'>
                     <label>
-                        <input
+                        <span
+														id='nationalLevelPercent'
                             name='national-layer-selection'
                             type='radio'
                             value={PercentIndigenous}
+														className={this.state.active === PercentIndigenous ? 'checked' : 'unchecked'}
                             checked={this.state.active === PercentIndigenous}
-                            onChange={this.handleRadioChange} />
+                            onClick={this.handleRadioChange} />
                         <span className='national-layer-selection-label'>Percent of Indigenous and Community Lands</span>
                     </label>
                 </div>
@@ -188,18 +192,18 @@ define([
 
     			<div className='radio-button-container'>
     				<label>
-    					<input
-                            name='national-layer-selection'
-                            type='radio'
-                            value={LandTenure}
-                            checked={this.state.active === LandTenure}
-                            onChange={this.handleRadioChange} />
+    					<span
+									id='nationalLevelIndicators'
+                  name='national-layer-selection'
+                  type='radio'
+                  value={LandTenure}
+									className={this.state.active === LandTenure ? 'checked' : 'unchecked'}
+                  checked={this.state.active === LandTenure}
+                  onClick={this.handleRadioChange} />
     					<span className='national-layer-selection-label'>Land Tenure Security Indicators, as stated by law</span>
 
     				</label>
     			</div>
-
-
 
     			<div className='land-tenure-layer-list'
     					 style={{'display': (this.state.active === LandTenure ? 'block' : 'none')}}>
@@ -226,13 +230,14 @@ define([
 
                 <div className='radio-button-container'>
                     <label>
-                        <input
+                        <span
                             id='nationalLevelNone'
                             name='national-layer-selection'
                             type='radio' defaultChecked={true}
                             value='none'
+														className={this.state.active === 'none' ? 'checked' : 'unchecked'}
                             checked={this.state.active === 'none'}
-                            onChange={this.handleRadioChange} />
+                            onClick={this.handleRadioChange} />
                         <span className='national-layer-selection-label'>None</span>
                     </label>
                 </div>
