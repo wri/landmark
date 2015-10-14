@@ -532,63 +532,6 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             layer: 3
         }],
 
-        // percentIndigenousLayers: [{
-        //     label: 'Indigenous Peoples and Communities',
-        //     id: 'percentIndigAndCommunity',
-        //     question: true,
-        //     // layer: 0,
-        //     children: [{
-        //         label: 'Total',
-        //         id: 'combinedTotal',
-        //         checked: true
-        //     }, {
-        //         label: 'Formally recognized',
-        //         id: 'combinedFormal',
-        //         checked: true
-        //     }, {
-        //         label: 'Not formally recognized',
-        //         id: 'combinedInformal',
-        //         checked: true
-        //     }]
-        //
-        // }, {
-        //     label: 'Indigenous Peoples only',
-        //     id: 'percentIndigNational',
-        //     question: false,
-        //     // layer: 4
-        //     children: [{
-        //         label: 'Total',
-        //         id: 'indigTotal',
-        //         checked: true
-        //     }, {
-        //         label: 'Formally recognized',
-        //         id: 'indigFormal',
-        //         checked: true
-        //     }, {
-        //         label: 'Not formally recognized',
-        //         id: 'indigInformal',
-        //         checked: true
-        //     }]
-        // }, {
-        //     label: 'Communities (Non-indigenous) only',
-        //     id: 'percentNonIndigenous',
-        //     question: false,
-        //     // layer: 8
-        //     children: [{
-        //         label: 'Total',
-        //         id: 'commTotal',
-        //         checked: true
-        //     }, {
-        //         label: 'Formally recognized',
-        //         id: 'commFormal',
-        //         checked: true
-        //     }, {
-        //         label: 'Not formally recognized',
-        //         id: 'commInformal',
-        //         checked: true
-        //     }]
-        //
-        // }],
 
         percentIndigenousLayersCombined: [{
           label: 'Indigenous and Community Lands (combined)',

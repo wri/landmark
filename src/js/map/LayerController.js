@@ -80,7 +80,7 @@ define([
                       if (MapConfig.layers[layer].type === 'tiled') {
 
                         var tiled = document.getElementById('legend_' + layer);
-                        if (brApp.map.getZoom() > 7 && tiled) { //todo: is this now hiding too many things? where else are we hiding things from the legend?
+                        if (brApp.map.getZoom() > 7 && tiled) {
 
                           tiled.classList.add('hideLegend');
                         }

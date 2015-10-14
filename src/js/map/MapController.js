@@ -130,7 +130,10 @@ define([
                     };
                     switch (layer.layer.id) {
 
-                        case "nationalLevel":
+                        case "percentLands":
+                            li.hideLayers = [];
+                            break;
+                        case "landTenure":
                             li.hideLayers = [];
                             break;
                         default:
@@ -1868,7 +1871,7 @@ define([
             //         legend.refresh(layerInfos)
             //     })
             registry.byId('legend').refresh();
-
+            window.ll = registry.byId('legend')
         }
 
     };
