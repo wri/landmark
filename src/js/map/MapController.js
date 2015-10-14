@@ -1279,8 +1279,8 @@ define([
               // "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.C_Notes + '</td></tr></table></div>' +
               source3 +
               '</table></div>' +
-              "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.blueraster.com' target='_blank' class='popup-last-right'>More Info</a></div>";
-
+              "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/' target='_blank' class='popup-last-right'>More Info</a></div>";
+              //todo: look at relative path to data page on live site
               item.feature.setInfoTemplate(template);
 
                 // if (item.layerId === 1) {

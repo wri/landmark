@@ -1,8 +1,9 @@
 /** @jsx React.DOM */
 define([
   'react',
-  'map/LayerController'
-], function (React, LayerController) {
+  'map/LayerController',
+  'map/WidgetsController'
+], function (React, LayerController, WidgetsController) {
   'use strict';
 
   var CommunityLayerList = React.createClass({
@@ -23,11 +24,11 @@ define([
       return (
         <div className='community-layer-list'>
           <div className='community-layer-type'>
-            <div className='community-layer-type-label' id='indigenousLands'><span className='parent-layer-checked-true' onClick={this.parentClicked}></span>Indigenous Lands</div>
+            <div className='community-layer-type-label' id='indigenousLands'><span className='parent-layer-checked-true' onClick={this.parentClicked}></span>Indigenous Lands<span id='indigenous-lands-help' className='parent-layer-help' onClick={this.showHelp}></span></div>
             {this.state.data.map(this.layerMapper('indigenousLands'), this)}
           </div>
           <div className='community-layer-type'>
-            <div className='community-layer-type-label' id='communityLands'><span className='parent-layer-checked-true' onClick={this.parentClicked}></span>Community Lands</div>
+            <div className='community-layer-type-label' id='communityLands'><span className='parent-layer-checked-true' onClick={this.parentClicked}></span>Community Lands<span id='community-lands-help' className='parent-layer-help' onClick={this.showHelp}></span></div>
             {this.state.data.map(this.layerMapper('communityLands'), this)}
           </div>
         </div>
@@ -84,8 +85,13 @@ define([
 
     },
 
+    showHelp: function (evt) {
+      console.log("ss")
+      WidgetsController.showHelp(evt);
+    },
+
     parentClicked: function (evt) {
-      evt.stopPropagation()
+      evt.stopPropagation();
       var allOff, layers = [];
 
       if (evt.target.classList.contains("parent-layer-checked-true")) {

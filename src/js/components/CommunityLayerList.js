@@ -1,8 +1,9 @@
 /** @jsx React.DOM */
 define([
   'react',
-  'map/LayerController'
-], function (React, LayerController) {
+  'map/LayerController',
+  'map/WidgetsController'
+], function (React, LayerController, WidgetsController) {
   'use strict';
 
   var CommunityLayerList = React.createClass({displayName: "CommunityLayerList",
@@ -23,11 +24,11 @@ define([
       return (
         React.createElement("div", {className: "community-layer-list"}, 
           React.createElement("div", {className: "community-layer-type"}, 
-            React.createElement("div", {className: "community-layer-type-label", id: "indigenousLands"}, React.createElement("span", {className: "parent-layer-checked-true", onClick: this.parentClicked}), "Indigenous Lands"), 
+            React.createElement("div", {className: "community-layer-type-label", id: "indigenousLands"}, React.createElement("span", {className: "parent-layer-checked-true", onClick: this.parentClicked}), "Indigenous Lands", React.createElement("span", {id: "indigenous-lands-help", className: "parent-layer-help", onClick: this.showHelp})), 
             this.state.data.map(this.layerMapper('indigenousLands'), this)
           ), 
           React.createElement("div", {className: "community-layer-type"}, 
-            React.createElement("div", {className: "community-layer-type-label", id: "communityLands"}, React.createElement("span", {className: "parent-layer-checked-true", onClick: this.parentClicked}), "Community Lands"), 
+            React.createElement("div", {className: "community-layer-type-label", id: "communityLands"}, React.createElement("span", {className: "parent-layer-checked-true", onClick: this.parentClicked}), "Community Lands", React.createElement("span", {id: "community-lands-help", className: "parent-layer-help", onClick: this.showHelp})), 
             this.state.data.map(this.layerMapper('communityLands'), this)
           )
         )
@@ -84,8 +85,13 @@ define([
 
     },
 
+    showHelp: function (evt) {
+      console.log("ss")
+      WidgetsController.showHelp(evt);
+    },
+
     parentClicked: function (evt) {
-      evt.stopPropagation()
+      evt.stopPropagation();
       var allOff, layers = [];
 
       if (evt.target.classList.contains("parent-layer-checked-true")) {

@@ -45,7 +45,7 @@ define([
             // // Create the renderer with a default value
             // renderer = new UniqueValueRenderer(notApplicableSymbol, fieldName);
 
-
+            //todo: opacity 20% for Avg_Scr
 
             notApplicableSymbol = brApp.landTenureRenderer.uniqueValueInfos[5].symbol;
             renderer = new UniqueValueRenderer(notApplicableSymbol, fieldName);
