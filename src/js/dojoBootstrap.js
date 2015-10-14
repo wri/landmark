@@ -37,7 +37,7 @@
                 location: base + '/js/components'
             }],
             aliases: [
-                ['react', 'http://fb.me/react-0.12.2.min.js']
+                ['react', 'https://fb.me/react-0.13.0.min.js']
             ],
             deps: [
                 "dojo/domReady!"
