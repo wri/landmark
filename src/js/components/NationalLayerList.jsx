@@ -54,7 +54,7 @@ define([
 
 
 			return (
-				<div className={'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '')} key={item.id} onClick={this.setActiveLayer.bind(this, item.id, item.layer)}>
+				<div className={'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '')} key={item.id} onClick={subLayer ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>
 					<div className='national-layer-list-item-label'>{item.label}</div>
 					{
 						item.question ?
@@ -178,7 +178,6 @@ define([
 
     changePercentIndigenousLayer: function (key, layer) {
 			if (!layer) {
-				console.log('rr')
 				return;
 			}
     	this.setState({
@@ -209,6 +208,8 @@ define([
 
     /* jshint ignore:start */
     render: function () {
+//<LayerList class='percent-indigenous-tree' data={MapConfig.percentIndigenousLayersCombined} change={this.changePercentIndigenousLayer} />
+//<LayerList class='percent-indigenous-tree' data={MapConfig.percentIndigenousLayersCombined} change={this.layer ? this.changePercentIndigenousLayer : ''} />
 
     	return (
     		<div className='national-level-layer-lists'>
@@ -229,7 +230,9 @@ define([
 
                 <div className='percent-indigenous-layer-list'
                          style={{'display': (this.state.active === PercentIndigenous ? 'block' : 'none')}}>
-                    <LayerList class='percent-indigenous-tree' data={MapConfig.percentIndigenousLayersCombined} change={this.changePercentIndigenousLayer} />
+
+												 <LayerList class='percent-indigenous-tree' data={MapConfig.percentIndigenousLayersCombined} change={this.changePercentIndigenousLayer} />
+
                 </div>
 
     			<div className='radio-button-container'>
