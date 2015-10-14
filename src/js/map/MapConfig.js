@@ -223,14 +223,8 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
         // noCheckbox: true/false, should there be a checkbox on this tree node
 
         communityLevelLayers: [{
-            label: 'Officially recognized (by law or decree)',
+            label: 'Formally recognized',
             isCategory: true,
-            group: 'indigenousLands'
-          },
-          {
-            label: 'Formal land petition',
-            id: 'indigenous_FormalClaim',
-            checked: true,
             group: 'indigenousLands'
           },
           {
@@ -246,13 +240,19 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'indigenousLands'
           },
           {
-            label: 'Not officially recognized',
+            label: 'No documentation',
+            id: 'indigenous_NoDoc',
+            checked: true,
+            group: 'indigenousLands'
+          },
+          {
+            label: 'Not formally recognized',
             isCategory: true,
             group: 'indigenousLands'
           },
           {
-            label: 'No documentation',
-            id: 'indigenous_NoDoc',
+            label: 'Formal land petition',
+            id: 'indigenous_FormalClaim',
             checked: true,
             group: 'indigenousLands'
           },
@@ -268,12 +268,6 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'communityLands'
           },
           {
-            label: 'Formal land petition',
-            id: 'community_FormalClaim',
-            checked: true,
-            group: 'communityLands'
-          },
-          {
             label: 'Formal documentation',
             id: 'community_FormalDoc',
             checked: true,
@@ -286,13 +280,19 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'communityLands'
           },
           {
+            label: 'No documentation',
+            id: 'community_NoDoc',
+            checked: true,
+            group: 'communityLands'
+          },
+          {
             label: 'Not formally recognized',
             isCategory: true,
             group: 'communityLands'
           },
           {
-            label: 'No documentation',
-            id: 'community_NoDoc',
+            label: 'Formal land petition',
+            id: 'community_FormalClaim',
             checked: true,
             group: 'communityLands'
           },

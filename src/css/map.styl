@@ -867,15 +867,49 @@ label
 	margin-left -15px
 
 #analysis-button-tt
-	height 50px
+	height 60px
 	width 200px
-	position fixed
-	background-color #2fa3d9
+	position absolute
+	background-color white
+	color #055d7d
 	font-size 12px
-	margin-left -150px
-	margin-top 30px
+	top 75px
 	line-height 1.5
-	padding 10px
+	// padding 10px
+
+	right 70px
+	z-index 60
+
+#analysisToolIcon
+	background url("images/icon_alert.svg") no-repeat 50%
+	background-color #055d7d
+	width 35px
+	display inline-block
+	height 100%
+	padding-left 10px
+	padding-right 10px
+	// float left
+	// padding 10px
+	// margin -10px
+
+#analysisToolText
+	width 135px
+	display inline-block
+	text-align center
+	vertical-align super
+	// font-size 11px
+	height 100%
+
+
+#triangle-up
+	position absolute
+	width 0
+	height 0
+	border-left 10px solid transparent
+	border-right 10px solid transparent
+	border-bottom 15px solid white
+	right 30px
+	top -15px
 
 #analysis-help
 	left -5px
@@ -894,6 +928,10 @@ label
 
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton
 	border-bottom 1px solid #2fa3d9 !important
+	border-radius 0px !important
+
+.esriSimpleSliderVertical .esriSimpleSliderDecrementButton
+	border-radius 0px !important
 
 #analysisLogo
 	background url("images/icon_analysis.png") no-repeat 9px

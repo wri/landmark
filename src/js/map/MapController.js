@@ -1019,11 +1019,12 @@ define([
 
             arrayUtils.forEach(featureObjects, function(item) {
                 var ethnStr;
-                var ethn1 = item.feature.attributes.Ethncity_1;
-                var ethn2 = item.feature.attributes.Ethncity_2;
-                var ethn3 = item.feature.attributes.Ethncity_3;
+                var ethn1 = item.feature.attributes.Ethncty_1;
+                var ethn2 = item.feature.attributes.Ethncty_2;
+                var ethn3 = item.feature.attributes.Ethncty_3;
 
-                if (!ethn1) {
+
+                if (!ethn1 || ethn1 == ' ') {
                     ethnStr = 'Unknown';
                 } else if (ethn1 && !ethn2) {
                     ethnStr = ethn1;
@@ -1040,7 +1041,7 @@ define([
                 var popYear = item.feature.attributes.Pop_Year == "Null" ? null : item.feature.attributes.Pop_Year;
 
 
-                if (!population || population == 0) {
+                if (!population || population == '0') {
                     popStr = 'Unknown';
                 } else if (population && !popSource) {
                     popStr = population;
@@ -1133,11 +1134,11 @@ define([
 
             arrayUtils.forEach(featureObjects, function(item) {
                 var ethnStr;
-                var ethn1 = item.feature.attributes.Ethncity_1;
-                var ethn2 = item.feature.attributes.Ethncity_2;
-                var ethn3 = item.feature.attributes.Ethncity_3;
+                var ethn1 = item.feature.attributes.Ethncty_1;
+                var ethn2 = item.feature.attributes.Ethncty_2;
+                var ethn3 = item.feature.attributes.Ethncty_3;
 
-                if (!ethn1) {
+                if (!ethn1 || ethn1 == ' ') {
                     ethnStr = 'Unknown';
                 } else if (ethn1 && !ethn2) {
                     ethnStr = ethn1;
@@ -1154,7 +1155,7 @@ define([
                 var popYear = item.feature.attributes.Pop_Year == "Null" ? null : item.feature.attributes.Pop_Year;
 
 
-                if (!population || population == 0) {
+                if (!population || population == '0') {
                     popStr = 'Unknown';
                 } else if (population && !popSource) {
                     popStr = population;
@@ -1532,7 +1533,7 @@ define([
                     if (graphic.feature.attributes.Form_Rec === "Officially recognized (by law or decree)") {
                         graphic.feature.attributes.Form_Rec = "Officially recognized";
                     }
-
+                    
                     var str;
                     if (even === "even") {
 
