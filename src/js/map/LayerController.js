@@ -172,7 +172,8 @@ define([
          */
         turnOffNationalLevelData: function () {
             // topic.publish('reset-national-layer-list');
-
+            $("#analysis-button").removeClass("grayOut");
+            $('#analysis-button').unbind('mouseenter mouseleave');
             $('#nationalLevelNone').click();
         },
 

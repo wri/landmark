@@ -1265,13 +1265,13 @@ define([
               var source3 = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.C_Notes + '</td></tr>' : '';
 
               template.content = "<div id='tableWrapper'><table id='nationalTable'>" +
-              "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div>Total: " + item.feature.attributes.IC_T + '% (' + item.feature.attributes.IC_T_Src + ')</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.IC_F + '% (' + item.feature.attributes.IC_F_Src + ')</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.IC_NF + '% (' + item.feature.attributes.IC_NF_Src + ')</div></td></tr>' +
+              "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div>Total: " + item.feature.attributes.IC_T + '% ' + item.feature.attributes.IC_T_Src + '</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.IC_F + '% ' + item.feature.attributes.IC_F_Src + '</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.IC_NF + '% ' + item.feature.attributes.IC_NF_Src + '</div></td></tr>' +
               // "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IC_Notes + '</td></tr>' +
               source1 +
-              "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples only</td><td><div>Total: " + item.feature.attributes.I_T + '% (' + item.feature.attributes.I_T_Src + ')</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.I_F + '% (' + item.feature.attributes.I_F_Src + ')</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.I_NF + '% (' + item.feature.attributes.I_NF_Src + ')</div></td></tr>' +
+              "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples only</td><td><div>Total: " + item.feature.attributes.I_T + '% ' + item.feature.attributes.I_T_Src + '</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.I_F + '% ' + item.feature.attributes.I_F_Src + '</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.I_NF + '% ' + item.feature.attributes.I_NF_Src + '</div></td></tr>' +
               // "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.I_Notes + '</td></tr>' +
               source2 +
-              "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div>Total: " + item.feature.attributes.C_T + '% (' + item.feature.attributes.C_T_Src + ')</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.C_F + '% (' + item.feature.attributes.C_F_Src + ')</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.C_NF + '% (' + item.feature.attributes.C_NF_Src + ')</div></td></tr>' +
+              "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div>Total: " + item.feature.attributes.C_T + '% ' + item.feature.attributes.C_T_Src + '</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.C_F + '% ' + item.feature.attributes.C_F_Src + '</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.C_NF + '% ' + item.feature.attributes.C_NF_Src + '</div></td></tr>' +
               // "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.C_Notes + '</td></tr></table></div>' +
               source3 +
               '</table></div>' +
@@ -1533,7 +1533,7 @@ define([
                     if (graphic.feature.attributes.Form_Rec === "Officially recognized (by law or decree)") {
                         graphic.feature.attributes.Form_Rec = "Officially recognized";
                     }
-                    
+
                     var str;
                     if (even === "even") {
 
@@ -1583,7 +1583,7 @@ define([
 
                 $("#identifyNote").remove();
 
-                var extraContent = "<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:5px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</div></div>";
+                var extraContent = "<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:15px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</div></div>";
 
 
                 $('.esriPopupWrapper').append(extraContent);
