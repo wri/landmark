@@ -177,6 +177,10 @@ define([
     },
 
     changePercentIndigenousLayer: function (key, layer) {
+			if (!layer) {
+				console.log('rr')
+				return;
+			}
     	this.setState({
     		activePercentIndigenousLayer: layer
     	});

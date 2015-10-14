@@ -19,7 +19,7 @@ define([
       LayerController.updateVisibleLayers(layers, false, off);
       // LayerController.updateVisibleLayers(keys, isNationalLevelData)
     },
- //todo: switch Indigenous and Community buttons somehow!
+
     render: function () {
       return (
         <div className='community-layer-list'>
@@ -113,7 +113,7 @@ define([
           if (allOff) {
 
             layerItem.firstChild.classList.remove('layer-checked-true'); //todo: ALL OF THESE SHOULD BE DONE IN REACT COMPUTATIONS ON RENDER!
-            layerItem.firstChild.classList.add('layer-checked-false');
+            layerItem.firstChild.classList.add('layer-checked-false'); // this isn't working b/c I don't think these classes on these elements rely on state in the render function- make them
             layerItem.setAttribute('data-clicked',false);
           } else {
 

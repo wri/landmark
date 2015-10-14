@@ -29,8 +29,11 @@ define([
 
             if (isNationalLevelData) {
               visibleLayers = keys;
+              console.log(visibleLayers)
+              if (visibleLayers.indexOf(-1) !== 0) {
+                self.turnOffCommunityLevelData();//  only fire this is we are turning data ON: Not if we are going over to 'None'
+              }
 
-              // self.turnOffCommunityLevelData(); todo: fix this and add it back in
               if (brApp.currentLayer === "percentIndigenousLayers") {
                 otherDynamic = brApp.map.getLayer('landTenure');
                 otherDynamic.setVisibleLayers([-1]);
@@ -63,21 +66,21 @@ define([
                   var legend = registry.byId('legend');
 
                   if (off === true) {
-
                     layer.hide();
                     tiledLayer.hide();
                   } else {
-
+                    self.turnOffNationalLevelData();
                     layer.show();
                     tiledLayer.show();
                   }
+
                   requestAnimationFrame(function() {
 
                     for (var layer in MapConfig.layers) {
                       if (MapConfig.layers[layer].type === 'tiled') {
 
                         var tiled = document.getElementById('legend_' + layer);
-                        if (brApp.map.getZoom() > 7 && tiled) {
+                        if (brApp.map.getZoom() > 7 && tiled) { //todo: is this now hiding too many things? where else are we hiding things from the legend?
 
                           tiled.classList.add('hideLegend');
                         }
@@ -121,34 +124,36 @@ define([
         },
 
         /**
-         * Turn Off all Community Level data, deselect all checkboxes in the tree, hide the buttons specific
+         * Turn Off all Community Level data, deselect all checkboxes in the tree, change the buttons specific
          * to this data set
          * This is Mutually Exclusive with National Level Data so this is a helper to toggle all
          * Community Level Data related things off
          */
         turnOffCommunityLevelData: function () {
             // Dont turn of dom nodes controlled by React, will result in unexpected behavior
-            // var checkboxes = new Array();
-            // checkboxes = document.getElementsByTagName('input');
 
-            // for (var i = 0; i < checkboxes.length; i++) {
-            //     if (checkboxes[i].type == 'checkbox') {
-            //         checkboxes[i].checked = false;
-            //     }
-            // }
+            var indigButton = $('#indigenousLands')[0].firstChild;
 
-            var oppositeLayer = brApp.map.getLayer('indigenousLands');
-            // var oppositeLayer2 = brApp.map.getLayer('indigenousTransparency');
+            var commButton = $('#communityLands')[0].firstChild;
 
-            oppositeLayer.setVisibleLayers([-1]);
-            // oppositeLayer2.hide();
+            if (indigButton.classList.contains("parent-layer-checked-true") && commButton.classList.contains("parent-layer-checked-true")) {
+              indigButton.click();
+              commButton.click();
+            } else if (indigButton.classList.contains("parent-layer-checked-true")) {
+              indigButton.click();
+            } else if (commButton.classList.contains("parent-layer-checked-true")) {
+              commButton.click();
+            } else {
+              var checkboxes = document.querySelectorAll('.layer-node');
+              for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].getAttribute('data-clicked') == 'true') {
+                  checkboxes[i].firstChild.click();
+                }
+              }
+            }
 
-            // Turn off all the checkboxes in the Community Level Tree
             // This will call MapController.resetCommunityLevelTree
-            topic.publish('reset-community-tree');
-            // Hide these buttons
-            // $("#data-completeness-container").hide();
-            // $("#analysis-button").hide();
+            // topic.publish('reset-community-tree');
 
             $("#analysis-button").addClass("grayOut");
 
@@ -166,7 +171,9 @@ define([
          * National Level Data related things off
          */
         turnOffNationalLevelData: function () {
-            topic.publish('reset-national-layer-list');
+            // topic.publish('reset-national-layer-list');
+
+            $('#nationalLevelNone').click();
         },
 
         /**

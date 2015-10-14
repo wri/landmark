@@ -192,7 +192,6 @@ define([
                 // transparencySlider,
                 // geocoder,
                 scalebar,
-                // legend,
                 node;
 
             // Build/Insert DOM nodes as Needed
@@ -217,12 +216,6 @@ define([
                 map: brApp.map,
                 showArcGISBasemaps: true
             }, 'basemap-gallery');
-
-            // legend = new Legend({
-            //     map: brApp.map,
-            //     layerInfos: [],
-            //     autoUpdate: true
-            // }, "legend");
 
             scalebar = new Scalebar({
                 map: brApp.map,
@@ -278,7 +271,6 @@ define([
             // locateButton.startup();
             homeWidget.startup();
             // geocoder.startup();
-            // legend.startup();
 
             //self.queryEmptyLayers();
 
@@ -1073,9 +1065,9 @@ define([
 
                     "<tr class='odd-row'><td class='popup-header'>Identity</td><td>" + item.feature.attributes.Identity + '</td></tr>' +
 
-                    // "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Ofcl_Rec + ', ' + item.feature.attributes.Rec_Status + ', ' + item.feature.attributes.Stat_Date + '</td></tr>' +
-                    "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Ofcl_Rec + '</td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header'>Documentation status (Date)</td><td>" + item.feature.attributes.Ofcl_Rec + statDate + '</td></tr>' +
+                    // "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Form_Rec + ', ' + item.feature.attributes.Doc_Status + ', ' + item.feature.attributes.Stat_Date + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Form_Rec + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Documentation status (Date)</td><td>" + item.feature.attributes.Doc_Status + statDate + '</td></tr>' +
 
                     "<tr class='even-row'><td class='popup-header'>Land category</td><td>" + item.feature.attributes.Category + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + item.feature.attributes.ethnStr + '</td></tr>' +
@@ -1187,9 +1179,9 @@ define([
 
                     "<tr class='odd-row'><td class='popup-header'>Identity</td><td>" + item.feature.attributes.Identity + '</td></tr>' +
 
-                    // "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Ofcl_Rec + ', ' + item.feature.attributes.Rec_Status + ', ' + item.feature.attributes.Stat_Date + '</td></tr>' +
-                    "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Ofcl_Rec + '</td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header'>Documentation status (Date)</td><td>" + item.feature.attributes.Ofcl_Rec + statDate + '</td></tr>' +
+                    // "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Form_Rec + ', ' + item.feature.attributes.Doc_Status + ', ' + item.feature.attributes.Stat_Date + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Recognition status</td><td>" + item.feature.attributes.Form_Rec + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Documentation status (Date)</td><td>" + item.feature.attributes.Doc_Status + statDate + '</td></tr>' +
 
                     "<tr class='even-row'><td class='popup-header'>Land category</td><td>" + item.feature.attributes.Category + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + item.feature.attributes.ethnStr + '</td></tr>' +
@@ -1534,8 +1526,8 @@ define([
                     if (graphic.feature.attributes.Identity === "Non-indigenous (self-identified)") {
                         graphic.feature.attributes.Identity = "Community";
                     }
-                    if (graphic.feature.attributes.Ofcl_Rec === "Officially recognized (by law or decree)") {
-                        graphic.feature.attributes.Ofcl_Rec = "Officially recognized";
+                    if (graphic.feature.attributes.Form_Rec === "Officially recognized (by law or decree)") {
+                        graphic.feature.attributes.Form_Rec = "Officially recognized";
                     }
 
                     var str;
@@ -1544,18 +1536,18 @@ define([
                         str = "<tr class='even-row'><td class='country'>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
                             graphic.feature.attributes.Name + "</td><td class='ident'>" +
                             graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
-                            graphic.feature.attributes.Ofcl_Rec + "</td><td class='rec_status'>" +
-                            graphic.feature.attributes.Rec_Status + "</td></tr>";
-                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Ofcl_Rec, graphic.feature.attributes.Rec_Status];
+                            graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
+                            graphic.feature.attributes.Doc_Status + "</td></tr>";
+                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec];
                         brApp.csv += fieldValues.join(",") + '\n';
 
                     } else {
                         str = "<tr class='odd-row'><td>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
                             graphic.feature.attributes.Name + "</td><td class='ident'>" +
                             graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
-                            graphic.feature.attributes.Ofcl_Rec + "</td><td class='rec_status'>" +
-                            graphic.feature.attributes.Rec_Status + "</td></tr>";
-                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Ofcl_Rec, graphic.feature.attributes.Rec_Status];
+                            graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
+                            graphic.feature.attributes.Doc_Status + "</td></tr>";
+                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec];
                         brApp.csv += fieldValues.join(",") + '\n';
                     }
 
@@ -1754,36 +1746,6 @@ define([
 
             });
         },
-
-
-        // showDataComplete: function() {
-        //     brApp.debug('MapController >>> showDataComplete');
-
-        //     var complete = brApp.map.getLayer('indigenousTransparency');
-
-        //     var imageUrlChecked = "url('css/images/checkbox_checked.png')";
-        //     var imageUrlUnchecked = "css/images/checkbox_unchecked.png";
-
-        //     if (this.getAttribute("data-checked") === 'false') {
-
-        //         $('#data-complete-checkbox').removeClass('data-complete-checkbox-class').addClass('data-complete-checkbox-class-checked');
-        //         complete.visibleLayers.push(17);
-        //         this.setAttribute("data-checked", "true")
-        //         $("#completeness-slider").show();
-        //     } else {
-        //         $('#data-complete-checkbox').removeClass('data-complete-checkbox-class-checked').addClass('data-complete-checkbox-class');
-        //         var index = complete.visibleLayers.indexOf(17);
-        //         complete.visibleLayers.splice(index, 1);
-        //         this.setAttribute("data-checked", "false")
-        //         $("#completeness-slider").hide();
-        //     }
-        //     topic.publish('refresh-legend');
-        //     if (complete.visibleLayers.indexOf(17) > -1) {
-        //         complete.show();
-        //     }
-        //     complete.setVisibleLayers(complete.visibleLayers);
-
-        // },
 
         handleNationalToggle: function(evt) {
             brApp.debug('MapController >>> handleNationalToggle');
