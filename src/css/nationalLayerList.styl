@@ -17,19 +17,20 @@ $darkFont = #464646
 
 .land-tenure-menu-controls
 	text-align center
-	margin 4px 0 15px
+	margin 10px 0 20px
 
 .land-tenure-menu-button
-	border 1px solid $mildBlue
-	color $mildBlue
-	padding 5px 10px
+	// border 1px solid $mildBlue
+	color gray
+	padding 8px 30px
 	font-weight bold
 	font-size 13px
 	cursor pointer
+	background-color #E4E4E4
 
 .land-tenure-menu-button.active
-	background $mildBlue
 	color white
+	background url(images/icon_toggle_checkmark.svg) no-repeat $mildBlue 10% 50%
 
 .land-tenure-menu-button:first-of-type
 	border-top-left-radius 5px
@@ -48,6 +49,10 @@ $darkFont = #464646
 	-webkit-border-top-right-radius 5px
 	-webkit-border-bottom-right-radius 5px
 	border-left 1px solid $mildBlue
+
+.radio-button-container
+	padding-top 5px
+	padding-bottom 5px
 
 .national-layer-list-item
 	padding 5px 5px
