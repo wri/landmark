@@ -132,6 +132,7 @@ define([
 
                         case "percentLands":
                             li.hideLayers = [];
+
                             break;
                         case "landTenure":
                             li.hideLayers = [];
@@ -151,6 +152,7 @@ define([
                 legend.startup();
 
                 requestAnimationFrame(function() {
+
                     legend.refresh(layerInfos);
                     for (var layer in MapConfig.layers) {
                       if (MapConfig.layers[layer].type === 'tiled') {
@@ -162,7 +164,10 @@ define([
                         }
                       }
                     }
+                    self.reformatLegend();
                 });
+
+
 
             });
 
@@ -1706,13 +1711,6 @@ define([
             $('#upload-shapefile').removeClass('display-three');
         },
 
-        // changeOpacity: function(op) {
-        //     brApp.debug('MapController >>> changeOpacity');
-        //     var dataCompleteness = brApp.map.getLayer("indigenousTransparency");
-        //     dataCompleteness.setOpacity(op / 100);
-
-        // },
-
         queryEmptyLayers: function() {
             brApp.debug('MapController >>> queryEmptyLayers');
 
@@ -1731,6 +1729,30 @@ define([
             });
 
         },
+
+        reformatLegend: function() {
+          var legend = registry.byId('legend');
+
+          setTimeout(function () {
+            var legendElement = document.getElementById('legend');
+            var children = legendElement.childNodes;
+            for (var i = 0; i < children.length; i++) {
+              if (children[i].id.indexOf('community') > -1 || children[i].id.indexOf('indigenous') > -1) {
+                var parent = children[i];
+                var child = parent.firstChild.nextSibling;
+                var type = parent.id.split('legend_')[1];
+                if (type == "community_Occupied" || type == "indigenous_Occupied") {
+                  $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Not formally recognized';
+                } else {
+                  $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Formally recognized';
+                }
+
+              }
+            }
+          }, 1000);
+
+        },
+
         getLandTenureRenderer: function() {
             brApp.debug('MapController >>> getLandTenureRenderer');
             var requestHandle = esriRequest({
@@ -1872,7 +1894,26 @@ define([
             //         legend.refresh(layerInfos)
             //     })
             registry.byId('legend').refresh();
-            window.ll = registry.byId('legend')
+            setTimeout(function () {
+              var legendElement = document.getElementById('legend');
+              var children = legendElement.childNodes;
+              for (var i = 0; i < children.length; i++) {
+                if (children[i].id.indexOf('community') > -1 || children[i].id.indexOf('indigenous') > -1) {
+                  var parent = children[i];
+                  var child = parent.firstChild.nextSibling;
+                  var type = parent.id.split('legend_')[1];
+                  console.log(type)
+                  if (type == "community_Occupied" || type == "indigenous_Occupied" || type == "community_FormalClaim" || type == "indigenous_FormalClaim") {
+                    $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Not formally recognized';
+                  } else {
+                    $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Formally recognized';
+                  }
+
+                }
+              }
+            }, 1000);
+            //todo: format legend here
+
         }
 
     };

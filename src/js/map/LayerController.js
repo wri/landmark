@@ -31,7 +31,7 @@ define([
               visibleLayers = keys;
               console.log(visibleLayers)
               if (visibleLayers.indexOf(-1) !== 0) {
-                self.turnOffCommunityLevelData();//  only fire this is we are turning data ON: Not if we are going over to 'None'
+                self.turnOffCommunityLevelData();
               }
 
               if (brApp.currentLayer === "percentIndigenousLayers") {
@@ -44,7 +44,7 @@ define([
               } else {
                 otherDynamic = brApp.map.getLayer('percentLands');
                 otherDynamic.setVisibleLayers([-1]);
-                dynamicLayer = brApp.map.getLayer('landTenure'); //or get pct_comm_lands layer
+                dynamicLayer = brApp.map.getLayer('landTenure');
                 this.setLandTenureRenderer(visibleLayers);
                 // Update Dynamic Layers but dont refresh
                 dynamicLayer.setVisibleLayers(visibleLayers, true);
