@@ -22,8 +22,6 @@ define([
 
 		getInitialState: function () {
 
-
-
 			if (this.props.class === 'percent-indigenous-tree') {
 				return {
 					active: this.props.data[1].id

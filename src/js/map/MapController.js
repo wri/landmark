@@ -8,6 +8,7 @@ define([
     // 'components/Tree',
     // 'components/CommunityLayerList',
     // 'components/NationalLayerList',
+    'components/LegendComponent',
     'map/WidgetsController',
     'utils/Helper',
     'dojo/on',
@@ -41,7 +42,7 @@ define([
     "dijit/form/HorizontalRuleLabels",
     "esri/layers/LayerDrawingOptions"
 
-], function(Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
+], function(Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, LegendComponent, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
 
     'use strict';
 
@@ -128,6 +129,8 @@ define([
                     var li = {
                       layer: layer.layer,
                     };
+
+
                     switch (layer.layer.id) {
 
                         case "percentLands":
@@ -143,6 +146,38 @@ define([
                     }
                     return li;
                 });
+
+                var deferreds = layersAdded.layers.filter(function(layer) {
+                  var url = layer.layer.url;
+                  return url; //truthy
+                }).map(function(layer) {
+                  var url = layer.layer.url;
+                  if (url) {
+                    var legend_url = [url,'legend'].join('/');
+                  }
+                  var deferred = new Deferred();
+                  self.esriRequestCall(legend_url, {f:'json'}).then(function(response){
+                      deferred.resolve({layerId:layer.layer.id,data:response});
+                  });
+                  return deferred;
+
+                });
+
+                all(deferreds).then(function(layers){
+
+                  brApp.layerInfos = layers;
+
+                  var legendComponent = new LegendComponent('legend-component');
+                  // for (var i = 0; i < layers.length; i++) {
+                  //   for (var j = 0; j < layers[i].layers.length; j++) {
+                  //     // var imgInfo = layers[i].layers[j].legend[0];
+                  //
+                  //     console.log(layers[i].layers[j].legend)
+                  //   }
+                  // }
+                });
+
+
 
                 var legend = new Legend({
                     map: brApp.map,
@@ -196,6 +231,7 @@ define([
                 // locateButton,
                 // layerAccordion,
                 tabContainer,
+                legendComponent,
                 homeWidget,
                 // transparencySlider,
                 // geocoder,
@@ -321,6 +357,28 @@ define([
             });
 
         },
+
+        esriRequestCall: function(url,content){
+          //Wrapper around esri.request call
+          //sends POST request to url with content as JSON
+          var deferred = new Deferred();
+          var layersRequest = esri.request({
+            url: url,
+            content: content,
+            handleAs: "json"
+          },{usePost:true});
+          layersRequest.then(
+            function(response) {
+              deferred.resolve(response);
+          }, function(error) {
+              console.log("Error: ", error.message);
+              deferred.resolve(error);
+
+          });
+
+          return deferred;
+        },
+
 
         resetCommunityLevelTree: function () {
             if (communityLayerList) {
@@ -459,11 +517,6 @@ define([
                 arrayUtils.forEach(featureSets, function(item) {
                   console.log(item.layer)
                     switch (item.layer) {
-                      // community_FormalClaim = brApp.map.getLayer('community_FormalClaim');
-                      // community_FormalDoc = brApp.map.getLayer('community_FormalDoc');
-                      // community_InProcess = brApp.map.getLayer('community_InProcess');
-                      // community_NoDoc = brApp.map.getLayer('community_NoDoc');
-                      // community_Occupied = brApp.map.getLayer('community_Occupied');
                         case "indigenous_FormalClaim":
                             features = features.concat(self.setIndigenousTemplates(item.features));
                             break;
@@ -1881,18 +1934,8 @@ define([
             //         }
             //         return li;
             //     });
+            console.log("LEEEEEGENDDD")
 
-            //     var legend = new Legend({
-            //         map: brApp.map,
-            //         layerInfos: layerInfos,
-            //         autoUpdate: false
-            //     }, "legend");
-            //     legend.startup();
-
-            //     requestAnimationFrame(function() {
-            //         console.log("Done")
-            //         legend.refresh(layerInfos)
-            //     })
             registry.byId('legend').refresh();
             setTimeout(function () {
               var legendElement = document.getElementById('legend');
