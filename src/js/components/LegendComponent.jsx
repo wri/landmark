@@ -11,7 +11,6 @@ define([
     getInitialState: function () {
       var visLayersInfo = this.dataGrabber();
 
-
       return {
         layerInfos: brApp.layerInfos,
         visibleLayersInfo: visLayersInfo,
@@ -21,9 +20,7 @@ define([
 
     },
     componentDidMount: function() {
-
       topic.subscribe('refresh-legend', this.handleMapUpdate);
-
     },
 
     handleMapUpdate: function() {
@@ -34,7 +31,6 @@ define([
 			});
 
     },
-
 
     render: function () {
 
@@ -50,29 +46,26 @@ define([
 
       var layersToRender = [];
 
-
       for (var k = 0; k < item.visibleLayers.length; k++) {
         if (item.visibleLayers.indexOf(item.layers[k].layerId) > -1 && item.layers[k].legend) {
 
-          var luke = {};
+          var legendItem = {};
 
+          legendItem.group = item.group;
+          legendItem.layerName = item.layers[k].layerName;
+          legendItem.layerId = item.layers[k].layerId;
+          legendItem.legend = item.layers[k].legend[0];
 
-          luke.group = item.group;
-          luke.layerName = item.layers[k].layerName;
-          luke.layerId = item.layers[k].layerId;
-          luke.legend = item.layers[k].legend[0];
-
-          if ((luke.group === "Formally recognized" || luke.group === "Not formally recognized") && luke.layerId === 0) {
+          if ((legendItem.group === "Formally recognized" || legendItem.group === "Not formally recognized") && legendItem.layerId === 0) {
             //do nothing
           } else {
-            layersToRender.push(luke);
+            layersToRender.push(legendItem);
           }
 
           // item.layers[k].group = item.group
           // layersToRender.push(item.layers[k]);
         }
       }
-
 
 			return (
 				<div className='layer-group'>
@@ -89,7 +82,7 @@ define([
 			);
 		},
 
-    dataGrabber: function() { //todo: filter out tiled layers at certain scales again
+    dataGrabber: function() {
       var visLayersInfo = [];
 
       for (var i = 0; i < brApp.layerInfos.length; i++) {
@@ -146,20 +139,10 @@ define([
             }
           }
 
-
         }
       }
       return visLayersInfo;
     },
-
-    /* jshint ignore:end */
-		setActiveLayers: function (key, layer) {
-			this.setState({
-				'active': key
-			});
-			// Notify Parent and let parent dispatch updates
-			this.props.change(key, layer);
-		}
 
   });
 
