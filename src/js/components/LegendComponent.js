@@ -26,6 +26,8 @@ define([
     handleMapUpdate: function() {
       var visLayersInfo = this.dataGrabber();
 
+
+
       this.setState({
 				'visibleLayersInfo': visLayersInfo
 			});
@@ -56,16 +58,44 @@ define([
           legendItem.layerId = item.layers[k].layerId;
           legendItem.legend = item.layers[k].legend[0];
 
+          if (item.layer.indexOf('indigenous') > -1) {
+            legendItem.family = ('Indigenous Lands');
+          } else if (item.layer.indexOf('community') > -1) {
+            legendItem.family = ('Community Lands');
+          } else if (item.layer === 'percentLands') {
+            //if (legendItem.layerId < 4) { //this is for percentLands group!
+            legendItem.family = ('Percent of Indigenous & Community Lands');
+            //}
+          } else if (item.layer === 'landTenure') {
+            //todo: how to differentiate landTenure group: indig vs comm?
+            legendItem.family = ('Indicators of Land Tenure Security');
+          }
+
+
           if ((legendItem.group === "Formally recognized" || legendItem.group === "Not formally recognized") && legendItem.layerId === 0) {
             //do nothing
           } else {
             layersToRender.push(legendItem);
           }
 
-          // item.layers[k].group = item.group
-          // layersToRender.push(item.layers[k]);
         }
       }
+
+
+      for (var m = 0; m < layersToRender.length; m++) {
+        if (layersToRender[m].family === brApp.previousFamily) {
+          console.log(brApp.previousFamily)
+          layersToRender[m].family = '';
+        } else {
+          console.log(brApp.previousFamily)
+          brApp.previousFamily = layersToRender[m].family;
+
+        }
+      }
+
+      layersToRender.sort(function(a, b) {
+        return localeCompare(a.group) - localeCompare(b.group);
+      });
 
 			return (
 				React.createElement("div", {className: "layer-group"}, 
@@ -73,6 +103,11 @@ define([
 
             return (
               React.createElement("div", null, 
+                
+                  layer.family ?
+                  React.createElement("div", {className: "legend-item-family"}, layer.family) :
+                  null, 
+                
                 React.createElement("div", {className: "legend-item-group"}, layer.group), 
                 React.createElement("div", {className: "legend-item-name"}, React.createElement("img", {className: "legend-item-img", src: 'data:image/png;base64,'+layer.legend.imageData}), layer.layerName)
               )
