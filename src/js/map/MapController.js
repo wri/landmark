@@ -1937,24 +1937,24 @@ define([
             console.log("LEEEEEGENDDD")
 
             registry.byId('legend').refresh();
-            setTimeout(function () {
-              var legendElement = document.getElementById('legend');
-              var children = legendElement.childNodes;
-              for (var i = 0; i < children.length; i++) {
-                if (children[i].id.indexOf('community') > -1 || children[i].id.indexOf('indigenous') > -1) {
-                  var parent = children[i];
-                  var child = parent.firstChild.nextSibling;
-                  var type = parent.id.split('legend_')[1];
-                  console.log(type)
-                  if (type == "community_Occupied" || type == "indigenous_Occupied" || type == "community_FormalClaim" || type == "indigenous_FormalClaim") {
-                    $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Not formally recognized';
-                  } else {
-                    $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Formally recognized';
-                  }
-
-                }
-              }
-            }, 1000);
+            // setTimeout(function () {
+            //   var legendElement = document.getElementById('legend');
+            //   var children = legendElement.childNodes;
+            //   for (var i = 0; i < children.length; i++) {
+            //     if (children[i].id.indexOf('community') > -1 || children[i].id.indexOf('indigenous') > -1) {
+            //       var parent = children[i];
+            //       var child = parent.firstChild.nextSibling;
+            //       var type = parent.id.split('legend_')[1];
+            //       console.log(type)
+            //       if (type == "community_Occupied" || type == "indigenous_Occupied" || type == "community_FormalClaim" || type == "indigenous_FormalClaim") {
+            //         $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Not formally recognized';
+            //       } else {
+            //         $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Formally recognized';
+            //       }
+            //
+            //     }
+            //   }
+            // }, 1000);
             //todo: format legend here
 
         }
