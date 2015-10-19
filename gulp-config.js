@@ -1,5 +1,5 @@
 module.exports = {
-    appVersion: '1.0.0',
+    appVersion: '1.0.1',
     copy: {
         libs: {
             src: 'src/libs/**/*',

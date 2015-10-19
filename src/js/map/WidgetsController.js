@@ -7,8 +7,11 @@ define([
     'dojo/dom-class',
     "dojo/cookie",
     'dojo/dom-style',
-    'dijit/registry'
-], function(AppConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry) {
+    'dijit/registry',
+    'esri/tasks/PrintTask',
+    'esri/tasks/PrintTemplate',
+    'esri/tasks/PrintParameters'
+], function(AppConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters) {
     'use strict';
 
     var DURATION = 300;
@@ -436,25 +439,34 @@ define([
         },
 
         printMap: function() {
-            brApp.debug('WidgetsController >>> printMap');
-            var body = document.getElementsByTagName("body")[0];
+          brApp.debug('WidgetsController >>> printMap');
+          var printTask = new PrintTask(AppConfig.printUrl);
+          var printParameters = new PrintParameters();
+          var template = new PrintTemplate();
 
-            domClass.add(body, "map-view-print");
-            $(".app-header").resize();
-            $("#brMap").resize();
-            brApp.map.resize()
-            //debugger;
-            // o.map.resize();
-            on.once(brApp.map, 'resize', function() {
-                // Allow Layers to redraw themselves, wind layer takes 1500ms
-                setTimeout(function() {
-                    window.print();
+          template.format = "PDF";
+          template.layout = "landmark";
+          template.preserveScale = false;
+          //- Custom Text Elements to be used in the layout,
+          //- This is the way to add custom labels to the layout
+          template.layoutOptions = {
+            customTextElements: [
+              {'Legend': 'Testing'}
+            ]
+          };
 
-                    domClass.remove(body, "map-view-print");
-                    //registry.byId("stackContainer").resize();
-                    brApp.map.resize();
-                }, 2000);
-            });
+          printParameters.map = brApp.map;
+          printParameters.template = template;
+          //- Used to pass variables to the GP Service for Custom Server Side Logic
+          // printParameters.extraParameters = {
+          //   Legend: 'Hello There'
+          // };
+
+          printTask.execute(printParameters, function (response) {
+            console.log(response.url);
+          }, function (failure) {
+            console.log(failure);
+          });
 
         },
 
