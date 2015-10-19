@@ -130,9 +130,7 @@ define([
                       layer: layer.layer,
                     };
 
-
                     switch (layer.layer.id) {
-
                         case "percentLands":
                             li.hideLayers = [];
 
@@ -160,7 +158,6 @@ define([
                       deferred.resolve({layerId:layer.layer.id,data:response});
                   });
                   return deferred;
-
                 });
 
                 all(deferreds).then(function(layers){
@@ -168,13 +165,7 @@ define([
                   brApp.layerInfos = layers;
 
                   var legendComponent = new LegendComponent('legend-component');
-                  // for (var i = 0; i < layers.length; i++) {
-                  //   for (var j = 0; j < layers[i].layers.length; j++) {
-                  //     // var imgInfo = layers[i].layers[j].legend[0];
-                  //
-                  //     console.log(layers[i].layers[j].legend)
-                  //   }
-                  // }
+
                 });
 
 
@@ -1923,40 +1914,7 @@ define([
 
         refreshLegend: function() {
             brApp.debug('MapController >>> refreshLegend');
-
-            // var layerInfos = layersAdded.layers.map(function(layer) {
-            //         console.log(layer.layer)
-            //         var li = {
-            //           layer: layer.layer,
-            //         };
-            //         if (layer.layer.id === "indigenousLands") {
-            //             li.hideLayers = [1,2,3,4];
-            //         }
-            //         return li;
-            //     });
-            console.log("LEEEEEGENDDD")
-
             registry.byId('legend').refresh();
-            // setTimeout(function () {
-            //   var legendElement = document.getElementById('legend');
-            //   var children = legendElement.childNodes;
-            //   for (var i = 0; i < children.length; i++) {
-            //     if (children[i].id.indexOf('community') > -1 || children[i].id.indexOf('indigenous') > -1) {
-            //       var parent = children[i];
-            //       var child = parent.firstChild.nextSibling;
-            //       var type = parent.id.split('legend_')[1];
-            //       console.log(type)
-            //       if (type == "community_Occupied" || type == "indigenous_Occupied" || type == "community_FormalClaim" || type == "indigenous_FormalClaim") {
-            //         $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Not formally recognized';
-            //       } else {
-            //         $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Formally recognized';
-            //       }
-            //
-            //     }
-            //   }
-            // }, 1000);
-            //todo: format legend here
-
         }
 
     };
