@@ -24,9 +24,8 @@ define([
     },
 
     handleMapUpdate: function() {
+
       var visLayersInfo = this.dataGrabber();
-
-
 
       this.setState({
 				'visibleLayersInfo': visLayersInfo
@@ -46,56 +45,63 @@ define([
 
     dataMapper: function (item, index) {
 
+      //todo: I need a way to sort theese layers by group, so all of the officiallyRecognized
+      // layers go together, but do this in a way where sorting by Family takes precedence;
+      // so sort by family, and then intra-family by group
       var layersToRender = [];
 
-      for (var k = 0; k < item.visibleLayers.length; k++) {
-        if (item.visibleLayers.indexOf(item.layers[k].layerId) > -1 && item.layers[k].legend) {
+      for (var k = 0; k < item.layers.length; k++) {
+        if (item.visibleLayers.indexOf(item.layers[k].layerId) > -1) {
+          //todo: the above if statement doesnt work with landTenure (& prolly & either!)
+          //item.layers[k].layerId doesnt match with the visibleLayer in there!
 
           var legendItem = {};
 
           legendItem.group = item.group;
           legendItem.layerName = item.layers[k].layerName;
           legendItem.layerId = item.layers[k].layerId;
-          legendItem.legend = item.layers[k].legend[0];
+          legendItem.legend = item.layers[k].legend;
 
           if (item.layer.indexOf('indigenous') > -1) {
-            legendItem.family = ('Indigenous Lands');
+            legendItem.family = 'Indigenous Lands';
           } else if (item.layer.indexOf('community') > -1) {
-            legendItem.family = ('Community Lands');
+            legendItem.family = 'Community Lands';
           } else if (item.layer === 'percentLands') {
             //if (legendItem.layerId < 4) { //this is for percentLands group!
-            legendItem.family = ('Percent of Indigenous & Community Lands');
+            legendItem.family = 'Percent of Indigenous & Community Lands';
             //}
           } else if (item.layer === 'landTenure') {
+            // debugger
             //todo: how to differentiate landTenure group: indig vs comm?
-            legendItem.family = ('Indicators of Land Tenure Security');
+            legendItem.family = 'Indicators of Land Tenure Security';
+          } else {
+            debugger
           }
 
+          // if (legendItem.family == 'Indicators of Land Tenure Security') {
+          //   debugger
+          // }
 
           if ((legendItem.group === "Formally recognized" || legendItem.group === "Not formally recognized") && legendItem.layerId === 0) {
             //do nothing
           } else {
             layersToRender.push(legendItem);
           }
-
         }
       }
-
 
       for (var m = 0; m < layersToRender.length; m++) {
-        if (layersToRender[m].family === brApp.previousFamily) {
-          console.log(brApp.previousFamily)
+
+        if (layersToRender[m].family === brApp.previousFamily && (layersToRender[m].family === 'Indigenous Lands' || layersToRender[m].family === 'Community Lands')) {
           layersToRender[m].family = '';
         } else {
-          console.log(brApp.previousFamily)
           brApp.previousFamily = layersToRender[m].family;
-
         }
-      }
+      } //todo: this logic isn't working if its just One layer on
 
-      layersToRender.sort(function(a, b) {
-        return localeCompare(a.group) - localeCompare(b.group);
-      });
+      // layersToRender.sort(function(a, b) {
+      //   return localeCompare(a.group) - localeCompare(b.group);
+      // });
 
 			return (
 				<div className='layer-group'>
@@ -109,7 +115,11 @@ define([
                   null
                 }
                 <div className='legend-item-group'>{layer.group}</div>
-                <div className='legend-item-name'><img className='legend-item-img' src={'data:image/png;base64,'+layer.legend.imageData}></img>{layer.layerName}</div>
+                  {layer.legend.map(function(legendObject, i){
+
+                    return <div className='legend-item-name'><img className='legend-item-img' src={'data:image/png;base64,'+legendObject.imageData}></img>{legendObject.label}</div>
+                  })}
+
               </div>
             )
           })}
@@ -147,13 +157,51 @@ define([
               visibleLayers = mapLayer.visibleLayers;
             }
           } else if (mapLayer.id === 'percentLands') {
-            group = 'Indigenous and Community Lands';
+
             layer = mapLayer.id;
             visibleLayers = mapLayer.visibleLayers;
+
+            switch (visibleLayers[0]) {
+              case 1:
+                  group = 'Indigenous and Community Lands - Total';
+                  break;
+              case 2:
+                  group = 'Indigenous and Community Lands - Formally recognized';
+                  break;
+              case 3:
+                  group = 'Indigenous and Community Lands - Not formally recognized';
+                  break;
+              case 5:
+                  group = 'Indigenous Lands (only) - Total';
+                  break;
+              case 6:
+                  group = 'Indigenous Lands (only) - Formally recognized';
+                  break;
+              case 7:
+                  group = 'Indigenous Lands (only) - Not formally recognized';
+                  break;
+              case 9:
+                  group = 'Community Lands (only) - Total';
+                  break;
+              case 10:
+                  group = 'Community Lands (only) - Formally recognized';
+                  break;
+              case 11:
+                  group = 'Community Lands (only) - Not formally recognized';
+                  break;
+            }
           } else if (mapLayer.id === 'landTenure') {
-            group = 'Indicators of the Legal Security of Lands';
+            
+
+            //todo: the community tab of LandTenure's average score does nothing!!!!
+
             layer = mapLayer.id;
             visibleLayers = mapLayer.visibleLayers;
+            if (visibleLayers[0] === 0 || visibleLayers[0] === 1) {
+              group = 'Indicators of the Legal Security of Lands - Community';
+            } else {
+              group = 'Indicators of the Legal Security of Lands - Indigenous';
+            }
 
           }
           brApp.layerInfos[i].data.group = group;
@@ -172,6 +220,8 @@ define([
             } else {
               visLayersInfo.push(brApp.layerInfos[i].data);
             }
+          } else {
+            visLayersInfo.push(brApp.layerInfos[i].data);
           }
 
         }
