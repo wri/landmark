@@ -28,7 +28,52 @@ define([
 
     componentDidUpdate: function() {
       brApp.previousFamily = '';
+      brApp.previousGroup = '';
     },
+
+    objSort: function() {
+      var args = arguments,
+          array = args[0],
+          case_sensitive, keys_length, key, desc, a, b, i;
+
+      if (typeof arguments[arguments.length - 1] === 'boolean') {
+          case_sensitive = arguments[arguments.length - 1];
+          keys_length = arguments.length - 1;
+      } else {
+          case_sensitive = false;
+          keys_length = arguments.length;
+      }
+
+      return array.sort(function (obj1, obj2) {
+          for (i = 1; i < keys_length; i++) {
+              key = args[i];
+              if (typeof key !== 'string') {
+                  desc = key[1];
+                  key = key[0];
+                  a = obj1[args[i][0]];
+                  b = obj2[args[i][0]];
+              } else {
+                  desc = false;
+                  a = obj1[args[i]];
+                  b = obj2[args[i]];
+              }
+
+              if (case_sensitive === false && typeof a === 'string') {
+                  a = a.toLowerCase();
+                  b = b.toLowerCase();
+              }
+
+              if (! desc) {
+                  if (a < b) return -1;
+                  if (a > b) return 1;
+              } else {
+                  if (a > b) return -1;
+                  if (a < b) return 1;
+              }
+          }
+          return 0;
+      });
+  }, //end of objSort() function
 
     handleMapUpdate: function() {
 
@@ -40,9 +85,20 @@ define([
         $(".legend-component-content").removeClass('collapsed');
       }
 
+      visLayersInfo.forEach(function(layer) {
+        if (layer.layer.indexOf('indigenous') > -1) {
+          layer.fakeLayer = ('indigenous')
+        } else if (layer.layer.indexOf('community') > -1) {
+          layer.fakeLayer = ('community')
+        }
+      });
+
+      this.objSort(visLayersInfo, ['fakeLayer', true], 'group')
+
       this.setState({
 				'visibleLayersInfo': visLayersInfo
 			});
+
 
     },
 
@@ -62,6 +118,7 @@ define([
       // layers go together, but do this in a way where sorting by Family takes precedence;
       // so sort by family, and then intra-family by group
       var layersToRender = [];
+
 
       for (var k = 0; k < item.layers.length; k++) {
         if (item.visibleLayers.indexOf(item.layers[k].layerId) > -1) {
@@ -97,6 +154,11 @@ define([
           layersToRender[m].family = '';
         } else {
           brApp.previousFamily = layersToRender[m].family;
+        }
+        if (layersToRender[m].group === brApp.previousGroup && (layersToRender[m].group === 'Formally recognized' || layersToRender[m].group === 'Not formally recognized')) {
+          layersToRender[m].group = '';
+        } else {
+          brApp.previousGroup = layersToRender[m].group;
         }
       }
 
@@ -195,37 +257,30 @@ define([
                   break;
             }
           } else if (mapLayer.id === 'landTenure') {
-
             layer = mapLayer.id;
             visibleLayers = mapLayer.visibleLayers;
             if (visibleLayers[0] === 0 || visibleLayers[0] === 1) {
-
               group = 'Indicators of the Legal Security of Lands - Community';
             } else {
               group = 'Indicators of the Legal Security of Lands - Indigenous';
             }
-
           }
+
           brApp.layerInfos[i].data.group = group;
           brApp.layerInfos[i].data.layer = layer;
           brApp.layerInfos[i].data.visibleLayers = visibleLayers;
 
           if (mapLayer.id.indexOf("Tiled") > -1) {
-            if (brApp.map.getZoom() > 7) {
-              //do nothing
-            } else {
+            if (brApp.map.getZoom() <= 7) {
               visLayersInfo.push(brApp.layerInfos[i].data);
             }
           } else if (mapLayer.id.indexOf('community') > -1 || mapLayer.id.indexOf('indigenous') > -1) {
-            if (brApp.map.getZoom() <= 7) {
-              //do nothing
-            } else {
+            if (brApp.map.getZoom() > 7) {
               visLayersInfo.push(brApp.layerInfos[i].data);
             }
           } else {
             visLayersInfo.push(brApp.layerInfos[i].data);
           }
-
         }
       }
 
@@ -235,12 +290,8 @@ define([
   });
 
   var Legend = React.createClass({
-
     getInitialState: function () {
       return {
-        layerInfos: [],
-        visibleLayers: [],
-        map: brApp.map,
         collapsed: false
        };
     },
@@ -273,7 +324,7 @@ define([
         <div className={'legend-component-container' + (this.state.collapsed ? ' collapsed': '')}>
           <div className='legend-component-controls'>
             <div className='legend-controls'>
-              Legend Component
+              Legend
               <span id='toggleLegend' onClick={this.toggleActive}>-</span>
             </div>
 
