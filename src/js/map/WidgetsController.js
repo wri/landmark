@@ -444,15 +444,13 @@ define([
           var printParameters = new PrintParameters();
           var template = new PrintTemplate();
 
-          template.format = "PDF";
+          template.format = "pdf";
           template.layout = "landmark";
           template.preserveScale = false;
           //- Custom Text Elements to be used in the layout,
           //- This is the way to add custom labels to the layout
           template.layoutOptions = {
-            customTextElements: [
-              {'Legend': 'Testing'}
-            ]
+            customTextElements: []
           };
 
           printParameters.map = brApp.map;
@@ -462,10 +460,15 @@ define([
           //   Legend: 'Hello There'
           // };
 
+          //- Add a loading class to the print button and remove it when loading is complete
+          domClass.add('print-widget', 'loading');
+
           printTask.execute(printParameters, function (response) {
-            console.log(response.url);
+            domClass.remove('print-widget', 'loading');
+            window.open(response.url);
           }, function (failure) {
             console.log(failure);
+            domClass.remove('print-widget', 'loading');
           });
 
         },

@@ -1,4 +1,5 @@
 define([
+    'main/config',
     'map/Map',
     'map/Uploader',
     'map/DrawTool',
@@ -42,7 +43,7 @@ define([
     "dijit/form/HorizontalRuleLabels",
     "esri/layers/LayerDrawingOptions"
 
-], function(Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, LegendComponent, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
+], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, LegendComponent, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
 
     'use strict';
 
@@ -209,6 +210,41 @@ define([
             on(document.getElementById('legendMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
             on(document.getElementById('toolsMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
             on(document.getElementById('embedShare'), 'click', WidgetsController.showEmbedCode);
+
+            // Hack for the print service, tiled layers need to be added to operational layers
+            // when the zoom level is less then 9 to force legends to show in the printout, due to the way we are
+            // showing tiled layers up to 9 and then dynamic from there on out
+            esriRequest.setRequestPreCallback(function (ioArgs) {
+              if (ioArgs.url !== AppConfig.printUrl + '/execute') {
+                return ioArgs;
+              }
+
+              // Print Request, bail if zoom level is greater then 8, the below is only necessary for zoom levels 0 - 8
+              if (brApp.map.getZoom() > 8) {
+                return ioArgs;
+              }
+
+              // Get print JSON that needs to be modified
+              var webmapJson = JSON.parse(ioArgs.content.Web_Map_as_JSON);
+              var operationalLayers = webmapJson.layoutOptions.legendOptions.operationalLayers;
+              // Get an array of tiled layer names
+              var tiledLayers = brApp.map.layerIds.filter(function (name) { return name.search('Tiled') > -1; });
+              // If the layer is visible, add it to the list
+              tiledLayers.forEach(function (layerId) {
+                var layer = brApp.map.getLayer(layerId);
+                if (layer && layer.visible && layer.visibleAtMapScale) {
+                  operationalLayers.push({
+                    "id": layer.id,
+                    "subLayerIds": layer.visibleLayers
+                  });
+                }
+              });
+
+              webmapJson.layoutOptions.legendOptions.operationalLayers = operationalLayers;
+              ioArgs.content.Web_Map_as_JSON = JSON.stringify(webmapJson);
+              // Must return ioArgs
+              return ioArgs;
+            });
 
         },
 
