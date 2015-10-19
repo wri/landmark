@@ -6,6 +6,9 @@ define([
 ], function (React, topic, MapConfig) {
   'use strict';
 
+  // CONSTANTS
+	var LandTenureInd = 'land-tenure-indigenous';
+
   var LayerGroup = React.createClass({displayName: "LayerGroup",
 
     getInitialState: function () {
@@ -23,9 +26,19 @@ define([
       topic.subscribe('refresh-legend', this.handleMapUpdate);
     },
 
+    componentDidUpdate: function() {
+      brApp.previousFamily = '';
+    },
+
     handleMapUpdate: function() {
 
       var visLayersInfo = this.dataGrabber();
+
+      if (visLayersInfo.length === 0) {
+        $(".legend-component-content").addClass('collapsed');
+      } else {
+        $(".legend-component-content").removeClass('collapsed');
+      }
 
       this.setState({
 				'visibleLayersInfo': visLayersInfo
@@ -52,8 +65,6 @@ define([
 
       for (var k = 0; k < item.layers.length; k++) {
         if (item.visibleLayers.indexOf(item.layers[k].layerId) > -1) {
-          //todo: the above if statement doesnt work with landTenure (& prolly & either!)
-          //item.layers[k].layerId doesnt match with the visibleLayer in there!
 
           var legendItem = {};
 
@@ -67,20 +78,10 @@ define([
           } else if (item.layer.indexOf('community') > -1) {
             legendItem.family = 'Community Lands';
           } else if (item.layer === 'percentLands') {
-            //if (legendItem.layerId < 4) { //this is for percentLands group!
             legendItem.family = 'Percent of Indigenous & Community Lands';
-            //}
           } else if (item.layer === 'landTenure') {
-            // debugger
-            //todo: how to differentiate landTenure group: indig vs comm?
             legendItem.family = 'Indicators of Land Tenure Security';
-          } else {
-            debugger
           }
-
-          // if (legendItem.family == 'Indicators of Land Tenure Security') {
-          //   debugger
-          // }
 
           if ((legendItem.group === "Formally recognized" || legendItem.group === "Not formally recognized") && legendItem.layerId === 0) {
             //do nothing
@@ -97,7 +98,7 @@ define([
         } else {
           brApp.previousFamily = layersToRender[m].family;
         }
-      } //todo: this logic isn't working if its just One layer on
+      }
 
       // layersToRender.sort(function(a, b) {
       //   return localeCompare(a.group) - localeCompare(b.group);
@@ -124,14 +125,17 @@ define([
             )
           })
 				)
+
 			);
 		},
 
     dataGrabber: function() {
       var visLayersInfo = [];
 
+
       for (var i = 0; i < brApp.layerInfos.length; i++) {
         var mapLayer = brApp.map.getLayer(brApp.layerInfos[i].layerId);
+
         if (mapLayer.visible === true && mapLayer.visibleLayers.length > 0 && mapLayer.visibleLayers[0] !== -1) {
 
           var group, layer, visibleLayers;
@@ -191,13 +195,11 @@ define([
                   break;
             }
           } else if (mapLayer.id === 'landTenure') {
-            
-
-            //todo: the community tab of LandTenure's average score does nothing!!!!
 
             layer = mapLayer.id;
             visibleLayers = mapLayer.visibleLayers;
             if (visibleLayers[0] === 0 || visibleLayers[0] === 1) {
+
               group = 'Indicators of the Legal Security of Lands - Community';
             } else {
               group = 'Indicators of the Legal Security of Lands - Indigenous';
@@ -214,7 +216,7 @@ define([
             } else {
               visLayersInfo.push(brApp.layerInfos[i].data);
             }
-          } else if (mapLayer.id.indexOf('community') > -1 || mapLayer.id.indexOf('indigenous')) {
+          } else if (mapLayer.id.indexOf('community') > -1 || mapLayer.id.indexOf('indigenous') > -1) {
             if (brApp.map.getZoom() <= 7) {
               //do nothing
             } else {
@@ -226,6 +228,7 @@ define([
 
         }
       }
+
       return visLayersInfo;
     },
 

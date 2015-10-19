@@ -70,7 +70,7 @@ define([
                 //$("#national-level-toggle_button").click();
             });
 
-            on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
+            // on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
             on(document.getElementById('basemap-button'), 'click', WidgetsController.toggleBasemapGallery.bind(WidgetsController));
             on(document.getElementById('share-button'), 'click', WidgetsController.toggleShareContainer.bind(WidgetsController));
             on(document.getElementById('print-button'), 'click', WidgetsController.printMap);
@@ -170,28 +170,28 @@ define([
 
 
 
-                var legend = new Legend({
-                    map: brApp.map,
-                    layerInfos: layerInfos,
-                    autoUpdate: true
-                }, "legend");
-                legend.startup();
+                // var legend = new Legend({
+                //     map: brApp.map,
+                //     layerInfos: layerInfos,
+                //     autoUpdate: true
+                // }, "legend");
+                // legend.startup();
 
-                requestAnimationFrame(function() {
-
-                    legend.refresh(layerInfos);
-                    for (var layer in MapConfig.layers) {
-                      if (MapConfig.layers[layer].type === 'tiled') {
-
-                        var tiled = document.getElementById('legend_' + layer);
-                        if (brApp.map.getZoom() > 7 && tiled) {
-
-                          tiled.classList.add('hideLegend');
-                        }
-                      }
-                    }
-                    self.reformatLegend();
-                });
+                // requestAnimationFrame(function() {
+                //
+                //     legend.refresh(layerInfos);
+                //     for (var layer in MapConfig.layers) {
+                //       if (MapConfig.layers[layer].type === 'tiled') {
+                //
+                //         var tiled = document.getElementById('legend_' + layer);
+                //         if (brApp.map.getZoom() > 7 && tiled) {
+                //
+                //           tiled.classList.add('hideLegend');
+                //         }
+                //       }
+                //     }
+                //     self.reformatLegend();
+                // });
 
 
 
@@ -206,7 +206,7 @@ define([
             on(document.getElementById('mobile-menu-toggle'), 'click', WidgetsController.toggleMobileMenu);
             on(document.getElementById('mobile-menu-close'), 'click', WidgetsController.toggleMobileMenu);
             on(document.getElementById('layersMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
-            on(document.getElementById('legendMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
+            // on(document.getElementById('legendMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
             on(document.getElementById('toolsMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
             on(document.getElementById('embedShare'), 'click', WidgetsController.showEmbedCode);
 
@@ -1774,28 +1774,28 @@ define([
 
         },
 
-        reformatLegend: function() {
-          var legend = registry.byId('legend');
-
-          setTimeout(function () {
-            var legendElement = document.getElementById('legend');
-            var children = legendElement.childNodes;
-            for (var i = 0; i < children.length; i++) {
-              if (children[i].id.indexOf('community') > -1 || children[i].id.indexOf('indigenous') > -1) {
-                var parent = children[i];
-                var child = parent.firstChild.nextSibling;
-                var type = parent.id.split('legend_')[1];
-                if (type == "community_Occupied" || type == "indigenous_Occupied") {
-                  $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Not formally recognized';
-                } else {
-                  $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Formally recognized';
-                }
-
-              }
-            }
-          }, 1000);
-
-        },
+        // reformatLegend: function() {
+        //   var legend = registry.byId('legend');
+        //
+        //   setTimeout(function () {
+        //     var legendElement = document.getElementById('legend');
+        //     var children = legendElement.childNodes;
+        //     for (var i = 0; i < children.length; i++) {
+        //       if (children[i].id.indexOf('community') > -1 || children[i].id.indexOf('indigenous') > -1) {
+        //         var parent = children[i];
+        //         var child = parent.firstChild.nextSibling;
+        //         var type = parent.id.split('legend_')[1];
+        //         if (type == "community_Occupied" || type == "indigenous_Occupied") {
+        //           $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Not formally recognized';
+        //         } else {
+        //           $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Formally recognized';
+        //         }
+        //
+        //       }
+        //     }
+        //   }, 1000);
+        //
+        // },
 
         getLandTenureRenderer: function() {
             brApp.debug('MapController >>> getLandTenureRenderer');
@@ -1912,10 +1912,10 @@ define([
 
         },
 
-        refreshLegend: function() {
-            brApp.debug('MapController >>> refreshLegend');
-            registry.byId('legend').refresh();
-        }
+        // refreshLegend: function() {
+        //     brApp.debug('MapController >>> refreshLegend');
+        //     registry.byId('legend').refresh();
+        // }
 
     };
 

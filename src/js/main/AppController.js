@@ -92,7 +92,7 @@ define([
             }
 
             // Legend Tab
-            var legend = document.getElementById('legend');
+            var legend = document.getElementById('legend-component'); //todo: resize proper things properly
             domConstruct.place(legend, legendTabContainer, 'last');
             // Tools Tab
             var analyzeTools = document.getElementById('analysis-content');
@@ -119,7 +119,7 @@ define([
 
             //$('#tree-content').removeClass("mobile-active");
             // Legend Content
-            var legend = document.getElementById('legend');
+            var legend = document.getElementById('legend-component');
             domConstruct.place(legend, legendContainer, 'last');
             // Tools Tab
             var analyzeTools = document.getElementById('analysis-content');

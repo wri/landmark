@@ -51,9 +51,14 @@ define([
 			var subLayer = item.subLayer;
 			var layer = item.layer;
 
+			if (!layer) {
+				console.log(item.id)
+
+			}
+
 
 			return (
-				React.createElement("div", {className: 'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : ''), key: item.id, onClick: layer ? this.setActiveLayer.bind(this, item.id, item.layer) : null}, 
+				React.createElement("div", {className: 'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : ''), key: item.id, onClick: layer != undefined ? this.setActiveLayer.bind(this, item.id, item.layer) : null}, 
 					React.createElement("div", {className: "national-layer-list-item-label"}, item.label), 
 					
 						item.question ?
@@ -65,6 +70,7 @@ define([
 		},
 		/* jshint ignore:end */
 		setActiveLayer: function (key, layer) {
+			debugger
 			this.setState({
 				'active': key
 			});
