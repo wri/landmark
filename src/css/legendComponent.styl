@@ -2,7 +2,8 @@
 .legend-component-container
   position absolute
   background white
-  height 325px
+  // height 325px
+  max-height 325px
   width 320px
   z-index 55
   bottom 10px
@@ -34,8 +35,9 @@
 .legend-component-content
   padding 10px
   font-size 12px
-  height 275px
-  overflow-y scroll
+  // height 275px
+  max-height 275px
+  overflow-y auto
 
 .legend-component-content.collapsed
   display none !important
@@ -46,9 +48,6 @@
   padding 10px
   margin-left -10px
   font-weight bold
-
-.legend-container
-  // overflow-y scroll
 
 .legend-item-img
   vertical-align middle
