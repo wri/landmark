@@ -14,6 +14,16 @@ define([
     getInitialState: function () {
       var visLayersInfo = this.dataGrabber();
 
+      visLayersInfo.forEach(function(layer) {
+        if (layer.layer.indexOf('indigenous') > -1) {
+          layer.fakeLayer = ('indigenous')
+        } else if (layer.layer.indexOf('community') > -1) {
+          layer.fakeLayer = ('community')
+        }
+      });
+
+      this.objSort(visLayersInfo, ['fakeLayer', true], 'group');
+
       return {
         layerInfos: brApp.layerInfos,
         visibleLayersInfo: visLayersInfo,
@@ -93,7 +103,7 @@ define([
         }
       });
 
-      this.objSort(visLayersInfo, ['fakeLayer', true], 'group')
+      this.objSort(visLayersInfo, ['fakeLayer', true], 'group');
 
       this.setState({
 				'visibleLayersInfo': visLayersInfo
