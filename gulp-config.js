@@ -1,5 +1,5 @@
 module.exports = {
-    appVersion: '1.0.2', //todo: match this version with the appVersion in dojoBootstrap.js before build
+    appVersion: '1.0.3', //todo: match this version with the appVersion in dojoBootstrap.js before build
     copy: {
         libs: {
             src: 'src/libs/**/*',
