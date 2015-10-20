@@ -6,9 +6,6 @@ define([
     'map/MapConfig',
     'map/MapAssets',
     'components/LayerTabContainer',
-    // 'components/Tree',
-    // 'components/CommunityLayerList',
-    // 'components/NationalLayerList',
     'components/LegendComponent',
     'map/WidgetsController',
     'utils/Helper',
@@ -24,11 +21,8 @@ define([
     'dojo/fx/Toggler',
     'dijit/registry',
     'dijit/layout/ContentPane',
-    // 'dijit/layout/AccordionContainer',
     'esri/dijit/Legend',
-    // 'esri/dijit/Geocoder',
     'esri/dijit/HomeButton',
-    // 'esri/dijit/LocateButton',
     'esri/dijit/BasemapGallery',
     'esri/dijit/Scalebar',
     "esri/request",
@@ -67,8 +61,6 @@ define([
             // Bind Events now, Map Events then UI Events
             mapObject.on('map-ready', function() {
                 self.renderComponents();
-                // registry.byId('layer-accordion').resize();
-                //$("#national-level-toggle_button").click();
             });
 
             // on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
@@ -87,7 +79,6 @@ define([
             });
 
             on(document.getElementById('upload-shapefile'), 'click', WidgetsController.toggleUploadForm);
-            // on(document.getElementById('data-complete-checkbox'), 'click', self.showDataComplete);
             on(document.getElementById('draw-shape'), 'click', DrawTool.activate);
             on(document.getElementById('remove-graphics'), 'click', self.removeAllGraphics);
 
@@ -169,33 +160,6 @@ define([
 
                 });
 
-
-
-                // var legend = new Legend({
-                //     map: brApp.map,
-                //     layerInfos: layerInfos,
-                //     autoUpdate: true
-                // }, "legend");
-                // legend.startup();
-
-                // requestAnimationFrame(function() {
-                //
-                //     legend.refresh(layerInfos);
-                //     for (var layer in MapConfig.layers) {
-                //       if (MapConfig.layers[layer].type === 'tiled') {
-                //
-                //         var tiled = document.getElementById('legend_' + layer);
-                //         if (brApp.map.getZoom() > 7 && tiled) {
-                //
-                //           tiled.classList.add('hideLegend');
-                //         }
-                //       }
-                //     }
-                //     self.reformatLegend();
-                // });
-
-
-
             });
 
             //TODO: Check the presence of the analysis and data completeness buttons on smaller screens AFTER a layer is toggled on (if all layers were off)
@@ -255,24 +219,13 @@ define([
             brApp.debug('MapController >>> renderComponents');
             var basemapGallery,
                 self = this,
-                // locateButton,
-                // layerAccordion,
                 tabContainer,
                 legendComponent,
                 homeWidget,
-                // transparencySlider,
-                // geocoder,
                 scalebar,
                 node;
 
             // Build/Insert DOM nodes as Needed
-            // geocoder = new Geocoder({
-            //     map: brApp.map,
-            //     autoComplete: true,
-            //     arcgisGeocoder: {
-            //         placeholder: "Enter address"
-            //     }
-            // }, "geocoder");
 
             node = dojoQuery('.esriSimpleSliderIncrementButton')[0];
             domConstruct.create('div', {
@@ -294,65 +247,18 @@ define([
                 scalebarUnit: "metric"
             });
 
-            // locateButton = new LocateButton({
-            //     map: brApp.map,
-            //     highlightLocation: false
-            // }, 'location-widget');
-
-            // layerAccordion = new Accordion({
-            //     id: 'layer-accordion'
-            // }, 'layer-accordion');
-
-            // layerAccordion.startup();
-            //
-            // layerAccordion.addChild(new ContentPane({
-            //     title: 'Community Level Data'
-            // }, 'community-level-toggle'));
-            //
-            // layerAccordion.addChild(new ContentPane({
-            //     title: 'National Level Data'
-            // }, 'national-level-toggle'));
-
-            // transparencySlider = new HorizontalSlider({
-            //     //value: 80,
-            //     minimum: 0,
-            //     maximum: 100,
-            //     title: 'Set layer transparency',
-            //     discreteValues: 100,
-            //     showButtons: false,
-            //     intermediateChanges: false,
-            //     onChange: function(value) {
-            //         self.changeOpacity(value);
-            //     }
-            // }, "completeness-slider");
-
-            // transparencySlider.startup();
-
-            // transparencySlider.setValue(50);
-
-            // communityTree = new ReactTree(MapConfig.communityLevelTreeData, 'community-level-tree');
-
             tabContainer = new LayerTabContainer('layer-content');
-
-            // communityLayerList = new CommunityLayerList(MapConfig.communityLevelLayers, 'community-level-tree');
-            // nationalLayerList = new NationalLayerList('national-layer-lists');
 
             // Start all widgets that still need to be started
             basemapGallery.startup();
-            // locateButton.startup();
             homeWidget.startup();
-            // geocoder.startup();
-
-            //self.queryEmptyLayers();
 
 
             self.getLandTenureRenderer();
 
             // Initialize the draw tools
             DrawTool.init();
-            // TODO: Recomment Back In
-            // on(document.getElementById('indigenous-lands-help'), 'click', WidgetsController.showHelp);
-            // on(document.getElementById('community-lands-help'), 'click', WidgetsController.showHelp);
+
             on(document.getElementById('analysis-help'), 'click', WidgetsController.showHelp);
 
             //brApp.map.infoWindow.on("selection-change", function() {
@@ -1487,17 +1393,6 @@ define([
             uploadDate = feature.attributes["Upl_Date"];
 
             var nationalLevelInfoTemplatePercent = new InfoTemplate("${Country}",
-                // "<div class='odd-row'><div class='popup-header'>" + brApp.currentLayer + "</div>" +
-                // Content needs to be wrapped in a single parent div, otherwise on touch ArcGIS JavaScript API
-                // will apply transform to first child and popup will not function and look like garbage, thanks esri/dojo
-                // "<div>" +
-                // "<div class='odd-row'><div class='popup-header'>Groups targeted by the legal framework</div>" + framework + "</div>" +
-                // "<div class='even-row'><div class='popup-header'>Indicator score</div>" + indScore + "</div>" +
-                // "<div class='odd-row'><div class='popup-header'>Comments</div>" + comments + "</div>" +
-                // "<div class='even-row'><div class='popup-header'>Laws and provisions reviewed</div>" + laws + "</div>" +
-                // "<div class='odd-row'><div class='popup-header'>Review source and date</div>" + reviewSource + " (" + reviewDate + ")</div>" +
-                // "<div class='popup-last'>Last Updated: " + uploadDate +
-                // "</div>"
 
                 "<div id='tableWrapper'><table id='landTenureTable'>" +
                 "<tr class='odd-row'><td class='popup-header tenureField'>Groups targeted by the legal framework</td><td>" + framework + '</td></tr>' +
@@ -1506,7 +1401,6 @@ define([
                 "<tr class='even-row'><td class='popup-header tenureField'>Laws and provisions reviewed</td><td>" + laws + '</td></tr>' +
                 "<tr class='odd-row'><td class='popup-header tenureField'>Review source and date</td><td>" + comments + '</td></tr></table></div>' +
                 "<div class='popup-last'>Last Updated: " + uploadDate + "</div>"
-
 
             );
 
@@ -1559,7 +1453,6 @@ define([
             identifyTask.execute(params, function(features) {
 
                 if (features.length > 0) {
-                    console.log(features);
                     deferred.resolve({
                         layer: "indigenousLands",
                         features: features
@@ -1691,21 +1584,15 @@ define([
                     }
                 });
 
-                var newHeight = (value.features.length * 44) + 210; //TODO: we gotta adjust these!
+                var newHeight = (value.features.length * 44) + 210;
                 newHeight += "px";
                 $("#infowindowContainer").css("height", newHeight);
 
                 $("#infowindowContainer").show();
 
-                //brApp.map.infoWindow.show(mapPoint.mapPoint);
-
-
-                // brApp.map.infoWindow.move(screenPoint);
-
                 // brApp.map.infoWindow.maximize();
                 // brApp.map.infoWindow.show();
                 // brApp.map.infoWindow.resize(650, 250);
-
 
                 var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
 
@@ -1731,24 +1618,6 @@ define([
                 var parent = $("#analysisTable").parent()[0];
                 var table = $("#analysisTable")[0];
 
-                // if (table.scrollHeight > parent.clientHeight) {
-                //     $("#analysisTable").removeClass("moreWidth");
-                //     $("#column-header").removeClass("moreWidth");
-                // } else {
-                //     $("#analysisTable").addClass("moreWidth");
-                //     $("#column-header").addClass("moreWidth");
-                // }
-                // if (value.features.length > 7) { //todo is 7 the correct # of feats??
-
-                //     //el.scrollHeight > el.clientHeight // this should tell us if there is a vertical scrollbar (and thus to add the extra width). By what is el here?
-
-                //     $("#analysisTable").removeClass("moreWidth");
-                //     $("#column-header").removeClass("moreWidth");
-                // } else {
-
-                //     $("#analysisTable").addClass("moreWidth");
-                //     $("#column-header").addClass("moreWidth");
-                // }
                 on.once(document.getElementById('exportAnalysis'), 'click', function() {
 
                     self.exportAnalysisResult(brApp.csv);
@@ -1757,7 +1626,6 @@ define([
                 //$(".esriPopup .titleButton.close").html("&#10005;");
 
             });
-
 
         },
 
@@ -1789,48 +1657,6 @@ define([
             $('#draw-shape').removeClass('display-three');
             $('#upload-shapefile').removeClass('display-three');
         },
-
-        queryEmptyLayers: function() {
-            brApp.debug('MapController >>> queryEmptyLayers');
-
-            var notRecognizedQT = new QueryTask("http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/4");
-
-            var recognizeQuery = new Query();
-            recognizeQuery.spatialReference = brApp.map.spatialReference;
-            recognizeQuery.returnGeometry = false;
-            recognizeQuery.outFields = ["OBJECTID"];
-            recognizeQuery.where = "1=1";
-
-            notRecognizedQT.execute(recognizeQuery, function(result) {
-                if (result.features.length > 0) {
-                    $(".layerToShow").show(); //show the two checkboxes
-                }
-            });
-
-        },
-
-        // reformatLegend: function() {
-        //   var legend = registry.byId('legend');
-        //
-        //   setTimeout(function () {
-        //     var legendElement = document.getElementById('legend');
-        //     var children = legendElement.childNodes;
-        //     for (var i = 0; i < children.length; i++) {
-        //       if (children[i].id.indexOf('community') > -1 || children[i].id.indexOf('indigenous') > -1) {
-        //         var parent = children[i];
-        //         var child = parent.firstChild.nextSibling;
-        //         var type = parent.id.split('legend_')[1];
-        //         if (type == "community_Occupied" || type == "indigenous_Occupied") {
-        //           $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Not formally recognized';
-        //         } else {
-        //           $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Formally recognized';
-        //         }
-        //
-        //       }
-        //     }
-        //   }, 1000);
-        //
-        // },
 
         getLandTenureRenderer: function() {
             brApp.debug('MapController >>> getLandTenureRenderer');
@@ -1947,10 +1773,6 @@ define([
 
         },
 
-        // refreshLegend: function() {
-        //     brApp.debug('MapController >>> refreshLegend');
-        //     registry.byId('legend').refresh();
-        // }
 
     };
 
