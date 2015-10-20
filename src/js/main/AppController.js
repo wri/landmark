@@ -7,8 +7,9 @@ define([
     'dojo/dom-construct',
     'dojo/cookie',
     'utils/Helper',
-    'map/WidgetsController'
-], function(on, topic, registry, domStyle, domClass, domConstruct, cookie, Helper, WidgetsController) {
+    'map/WidgetsController',
+    'components/LegendComponent',
+], function(on, topic, registry, domStyle, domClass, domConstruct, cookie, Helper, WidgetsController, LegendComponent) {
     'use strict';
 
     var AppController = {
@@ -22,9 +23,13 @@ define([
             this.bindEvents();
 
             // If we are loading on a mobile device, move the content into the correct panel
-            if (Helper.isMobile()) {
-                this.layoutChangedToMobile();
-            }
+            // if (Helper.isMobile()) {
+            //   var that = this;
+            //   setTimeout(function () {
+            //     that.layoutChangedToMobile();
+            //   }, 500).bind(this);
+            //
+            // }
             // brApp.hideDialog = false;
 
         },
@@ -54,6 +59,13 @@ define([
                 }
             });
 
+            topic.subscribe('legend-loaded', function() {
+                if (Helper.isMobile()) {
+
+                  this.layoutChangedToMobile();
+                }
+            }.bind(this));
+
         },
 
         /**
@@ -82,6 +94,7 @@ define([
                 layersTabContainer = document.getElementById('mobile-layers-content'),
                 toolsTabContainer = document.getElementById('mobile-tools-content');
 
+
             // Move Nodes to their new containers
             // Layers Tab
             var layerList = document.getElementById('layer-content');
@@ -92,18 +105,21 @@ define([
             }
 
             // Legend Tab
-            var legend = document.getElementById('legend-component'); //todo: resize proper things properly
-            domConstruct.place(legend, legendTabContainer, 'last');
+            var legend = document.getElementById('legend-component');
+
+            var legendComponent = new LegendComponent('legend-component2');
+
+
             // Tools Tab
             var analyzeTools = document.getElementById('analysis-content');
             domConstruct.place(analyzeTools, toolsTabContainer, 'first');
 
             // Resize the accordion since it needs to be resized every time css changes when its hidden
             // just do it to be safe until we remove the accordion and build our own
-            // var layerAccordion = registry.byId('layer-accordion');
-            // if (layerAccordion) {
-            //     layerAccordion.resize();
-            // }
+            var layerAccordion = registry.byId('layer-accordion');
+            if (layerAccordion) {
+                layerAccordion.resize();
+            }
         },
 
         /**
@@ -111,16 +127,14 @@ define([
          */
         layoutChangedToDesktop: function() {
             brApp.debug('AppController >>> layoutChangedToDesktop');
-            var legendContainer = document.getElementById('legend-content'),
+            var legendContainer = document.getElementById('brMap'),
                 treeContainer = document.getElementById('tree-widget-container');
             // Layers Tab
             var layerList = document.getElementById('layer-content');
             domConstruct.place(layerList, treeContainer, 'last');
 
             //$('#tree-content').removeClass("mobile-active");
-            // Legend Content
-            var legend = document.getElementById('legend-component');
-            domConstruct.place(legend, legendContainer, 'last');
+
             // Tools Tab
             var analyzeTools = document.getElementById('analysis-content');
             registry.byId('analysis-dialog').setContent(analyzeTools);

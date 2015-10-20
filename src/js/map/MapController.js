@@ -157,6 +157,10 @@ define([
                   brApp.layerInfos = layers;
 
                   var legendComponent = new LegendComponent('legend-component');
+                  topic.publish('legend-loaded');
+                  on(document.getElementById('layersMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
+                  on(document.getElementById('legendMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
+                  on(document.getElementById('toolsMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
 
                 });
 
@@ -170,9 +174,7 @@ define([
             // We could conditionally add handles for the above and below events by using Helper.isMobile()
             on(document.getElementById('mobile-menu-toggle'), 'click', WidgetsController.toggleMobileMenu);
             on(document.getElementById('mobile-menu-close'), 'click', WidgetsController.toggleMobileMenu);
-            on(document.getElementById('layersMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
-            // on(document.getElementById('legendMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
-            on(document.getElementById('toolsMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
+
             on(document.getElementById('embedShare'), 'click', WidgetsController.showEmbedCode);
 
             // Hack for the print service, tiled layers need to be added to operational layers

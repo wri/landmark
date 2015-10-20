@@ -50,6 +50,8 @@ define([
             graphicsLayer.add(graphic);
             console.log(graphic);
 
+            $('#remove-graphics').removeClass('hidden');
+
         },
 
         /**

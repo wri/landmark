@@ -8,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
     <link rel="shortcut icon" type="image/png" href="css/images/favicon.png">
     <style>html,body{height:100%;width:100%;padding:0;margin:0;overflow:hidden}	</style>
-    <link rel="stylesheet" href="css/base.css?1.0.2">
-    <link rel="stylesheet" href="css/map.css?1.0.2">
+    <link rel="stylesheet" href="css/base.css?1.0.4">
+    <link rel="stylesheet" href="css/map.css?1.0.4">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway:400,600,700"><!--[if lt IE 9]>
     <script src="libs/es5-shim.min.js"></script>
     <script src="libs/es5-sham.min.js"></script>
@@ -21,7 +21,9 @@
         <div id="mobile-menu-close" class="mobile-menu-close-button pointer"></div>
         <div id="menuControls" class="menu-controls"><span id="layersMenuButton" class="segmented-menu-button active pointer">Layers</span><span id="legendMenuButton" class="segmented-menu-button pointer">Legend</span><span id="toolsMenuButton" class="segmented-menu-button pointer">Tools</span></div>
         <div id="mobile-layers-content" class="mobile-menu-content mobile-layers-content active"></div>
-        <div id="mobile-legend-content" class="mobile-menu-content mobile-legend-content"></div>
+        <div id="mobile-legend-content" class="mobile-menu-content mobile-legend-content">
+          <div id="legend-component2" class="brMap"></div>
+        </div>
         <div id="mobile-tools-content" class="mobile-menu-content mobile-tools-content"></div>
       </div>
       <div id="brMap" class="brMap">
@@ -113,7 +115,7 @@
     </div>
     <script src="libs/jquery-2.1.3.min.js"></script>
     <script async src="libs/FileSaver.js"></script>
-    <script async src="js/dojoBootstrap.js?1.0.2"></script>
+    <script async src="js/dojoBootstrap.js?1.0.4"></script>
     <script type="text/javascript">
       var addthis_share = {
       	url_transforms: {

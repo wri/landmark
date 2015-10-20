@@ -14,6 +14,7 @@ define([
     getInitialState: function () {
       var visLayersInfo = this.dataGrabber();
 
+
       visLayersInfo.forEach(function(layer) {
         if (layer.layer.indexOf('indigenous') > -1) {
           layer.fakeLayer = ('indigenous')
@@ -68,7 +69,7 @@ define([
                   b = obj2[args[i]];
               }
 
-              if (case_sensitive === false && typeof a === 'string') {
+              if (case_sensitive === false && typeof a === 'string' && a && b) {
                   a = a.toLowerCase();
                   b = b.toLowerCase();
               }
@@ -109,13 +110,12 @@ define([
 				'visibleLayersInfo': visLayersInfo
 			});
 
-
     },
 
     render: function () {
 
       return (
-				React.createElement("div", {className: "legend-container"}, 
+				React.createElement("div", {id: "legend-container", className: "legend-container"}, 
           this.state.visibleLayersInfo.map(this.dataMapper, this)
 				)
 			);
@@ -124,36 +124,34 @@ define([
 
     dataMapper: function (item, index) {
 
-      //todo: I need a way to sort theese layers by group, so all of the officiallyRecognized
-      // layers go together, but do this in a way where sorting by Family takes precedence;
-      // so sort by family, and then intra-family by group
       var layersToRender = [];
-
+      if (item.layer) {
 
       for (var k = 0; k < item.layers.length; k++) {
-        if (item.visibleLayers.indexOf(item.layers[k].layerId) > -1) {
 
-          var legendItem = {};
+          if (item.visibleLayers.indexOf(item.layers[k].layerId) > -1) {
+            var legendItem = {};
 
-          legendItem.group = item.group;
-          legendItem.layerName = item.layers[k].layerName;
-          legendItem.layerId = item.layers[k].layerId;
-          legendItem.legend = item.layers[k].legend;
+            legendItem.group = item.group;
+            legendItem.layerName = item.layers[k].layerName;
+            legendItem.layerId = item.layers[k].layerId;
+            legendItem.legend = item.layers[k].legend;
 
-          if (item.layer.indexOf('indigenous') > -1) {
-            legendItem.family = 'Indigenous Lands';
-          } else if (item.layer.indexOf('community') > -1) {
-            legendItem.family = 'Community Lands';
-          } else if (item.layer === 'percentLands') {
-            legendItem.family = 'Percent of Indigenous & Community Lands';
-          } else if (item.layer === 'landTenure') {
-            legendItem.family = 'Indicators of Land Tenure Security';
-          }
+            if (item.layer.indexOf('indigenous') > -1) {
+              legendItem.family = 'Indigenous Lands';
+            } else if (item.layer.indexOf('community') > -1) {
+              legendItem.family = 'Community Lands';
+            } else if (item.layer === 'percentLands') {
+              legendItem.family = 'Percent of Indigenous & Community Lands';
+            } else if (item.layer === 'landTenure') {
+              legendItem.family = 'Indicators of Land Tenure Security';
+            }
 
-          if ((legendItem.group === "Formally recognized" || legendItem.group === "Not formally recognized") && legendItem.layerId === 0) {
-            //do nothing
-          } else {
-            layersToRender.push(legendItem);
+            if ((legendItem.group === "Formally recognized" || legendItem.group === "Not formally recognized") && legendItem.layerId === 0) {
+              //do nothing
+            } else {
+              layersToRender.push(legendItem);
+            }
           }
         }
       }
@@ -211,7 +209,6 @@ define([
         if (mapLayer.visible === true && mapLayer.visibleLayers.length > 0 && mapLayer.visibleLayers[0] !== -1) {
 
           var group, layer, visibleLayers;
-
           if (mapLayer.id.indexOf('indigenous') > -1) {
             if (mapLayer.id.indexOf('Occupied') > -1 || mapLayer.id.indexOf('FormalClaim') > -1) {
               group = 'Not formally recognized';
@@ -293,7 +290,6 @@ define([
           }
         }
       }
-
       return visLayersInfo;
     },
 
@@ -339,7 +335,7 @@ define([
             )
 
           ), 
-          React.createElement("div", {className: 'legend-component-content' + (this.state.collapsed ? ' collapsed': '')}, 
+          React.createElement("div", {id: "legend-component-content", className: 'legend-component-content' + (this.state.collapsed ? ' collapsed': '')}, 
               React.createElement(LayerGroup, null)
           )
         )
