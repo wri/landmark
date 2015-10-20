@@ -6,10 +6,23 @@ define([
 ], function (React, topic, MapConfig) {
   'use strict';
 
+  // CONSTANTS
+	var LandTenureInd = 'land-tenure-indigenous';
+
   var LayerGroup = React.createClass({displayName: "LayerGroup",
 
     getInitialState: function () {
       var visLayersInfo = this.dataGrabber();
+
+      visLayersInfo.forEach(function(layer) {
+        if (layer.layer.indexOf('indigenous') > -1) {
+          layer.fakeLayer = ('indigenous')
+        } else if (layer.layer.indexOf('community') > -1) {
+          layer.fakeLayer = ('community')
+        }
+      });
+
+      this.objSort(visLayersInfo, ['fakeLayer', true], 'group');
 
       return {
         layerInfos: brApp.layerInfos,
@@ -23,13 +36,79 @@ define([
       topic.subscribe('refresh-legend', this.handleMapUpdate);
     },
 
+    componentDidUpdate: function() {
+      brApp.previousFamily = '';
+      brApp.previousGroup = '';
+    },
+
+    objSort: function() {
+      var args = arguments,
+          array = args[0],
+          case_sensitive, keys_length, key, desc, a, b, i;
+
+      if (typeof arguments[arguments.length - 1] === 'boolean') {
+          case_sensitive = arguments[arguments.length - 1];
+          keys_length = arguments.length - 1;
+      } else {
+          case_sensitive = false;
+          keys_length = arguments.length;
+      }
+
+      return array.sort(function (obj1, obj2) {
+          for (i = 1; i < keys_length; i++) {
+              key = args[i];
+              if (typeof key !== 'string') {
+                  desc = key[1];
+                  key = key[0];
+                  a = obj1[args[i][0]];
+                  b = obj2[args[i][0]];
+              } else {
+                  desc = false;
+                  a = obj1[args[i]];
+                  b = obj2[args[i]];
+              }
+
+              if (case_sensitive === false && typeof a === 'string') {
+                  a = a.toLowerCase();
+                  b = b.toLowerCase();
+              }
+
+              if (! desc) {
+                  if (a < b) return -1;
+                  if (a > b) return 1;
+              } else {
+                  if (a > b) return -1;
+                  if (a < b) return 1;
+              }
+          }
+          return 0;
+      });
+  }, //end of objSort() function
+
     handleMapUpdate: function() {
 
       var visLayersInfo = this.dataGrabber();
 
+      if (visLayersInfo.length === 0) {
+        $(".legend-component-content").addClass('collapsed');
+      } else {
+        $(".legend-component-content").removeClass('collapsed');
+      }
+
+      visLayersInfo.forEach(function(layer) {
+        if (layer.layer.indexOf('indigenous') > -1) {
+          layer.fakeLayer = ('indigenous')
+        } else if (layer.layer.indexOf('community') > -1) {
+          layer.fakeLayer = ('community')
+        }
+      });
+
+      this.objSort(visLayersInfo, ['fakeLayer', true], 'group');
+
       this.setState({
 				'visibleLayersInfo': visLayersInfo
 			});
+
 
     },
 
@@ -50,10 +129,9 @@ define([
       // so sort by family, and then intra-family by group
       var layersToRender = [];
 
+
       for (var k = 0; k < item.layers.length; k++) {
         if (item.visibleLayers.indexOf(item.layers[k].layerId) > -1) {
-          //todo: the above if statement doesnt work with landTenure (& prolly & either!)
-          //item.layers[k].layerId doesnt match with the visibleLayer in there!
 
           var legendItem = {};
 
@@ -67,20 +145,10 @@ define([
           } else if (item.layer.indexOf('community') > -1) {
             legendItem.family = 'Community Lands';
           } else if (item.layer === 'percentLands') {
-            //if (legendItem.layerId < 4) { //this is for percentLands group!
             legendItem.family = 'Percent of Indigenous & Community Lands';
-            //}
           } else if (item.layer === 'landTenure') {
-            // debugger
-            //todo: how to differentiate landTenure group: indig vs comm?
             legendItem.family = 'Indicators of Land Tenure Security';
-          } else {
-            debugger
           }
-
-          // if (legendItem.family == 'Indicators of Land Tenure Security') {
-          //   debugger
-          // }
 
           if ((legendItem.group === "Formally recognized" || legendItem.group === "Not formally recognized") && legendItem.layerId === 0) {
             //do nothing
@@ -97,7 +165,12 @@ define([
         } else {
           brApp.previousFamily = layersToRender[m].family;
         }
-      } //todo: this logic isn't working if its just One layer on
+        if (layersToRender[m].group === brApp.previousGroup && (layersToRender[m].group === 'Formally recognized' || layersToRender[m].group === 'Not formally recognized')) {
+          layersToRender[m].group = '';
+        } else {
+          brApp.previousGroup = layersToRender[m].group;
+        }
+      }
 
       // layersToRender.sort(function(a, b) {
       //   return localeCompare(a.group) - localeCompare(b.group);
@@ -124,14 +197,17 @@ define([
             )
           })
 				)
+
 			);
 		},
 
     dataGrabber: function() {
       var visLayersInfo = [];
 
+
       for (var i = 0; i < brApp.layerInfos.length; i++) {
         var mapLayer = brApp.map.getLayer(brApp.layerInfos[i].layerId);
+
         if (mapLayer.visible === true && mapLayer.visibleLayers.length > 0 && mapLayer.visibleLayers[0] !== -1) {
 
           var group, layer, visibleLayers;
@@ -191,10 +267,6 @@ define([
                   break;
             }
           } else if (mapLayer.id === 'landTenure') {
-            
-
-            //todo: the community tab of LandTenure's average score does nothing!!!!
-
             layer = mapLayer.id;
             visibleLayers = mapLayer.visibleLayers;
             if (visibleLayers[0] === 0 || visibleLayers[0] === 1) {
@@ -202,42 +274,34 @@ define([
             } else {
               group = 'Indicators of the Legal Security of Lands - Indigenous';
             }
-
           }
+
           brApp.layerInfos[i].data.group = group;
           brApp.layerInfos[i].data.layer = layer;
           brApp.layerInfos[i].data.visibleLayers = visibleLayers;
 
           if (mapLayer.id.indexOf("Tiled") > -1) {
-            if (brApp.map.getZoom() > 7) {
-              //do nothing
-            } else {
+            if (brApp.map.getZoom() <= 7) {
               visLayersInfo.push(brApp.layerInfos[i].data);
             }
-          } else if (mapLayer.id.indexOf('community') > -1 || mapLayer.id.indexOf('indigenous')) {
-            if (brApp.map.getZoom() <= 7) {
-              //do nothing
-            } else {
+          } else if (mapLayer.id.indexOf('community') > -1 || mapLayer.id.indexOf('indigenous') > -1) {
+            if (brApp.map.getZoom() > 7) {
               visLayersInfo.push(brApp.layerInfos[i].data);
             }
           } else {
             visLayersInfo.push(brApp.layerInfos[i].data);
           }
-
         }
       }
+
       return visLayersInfo;
     },
 
   });
 
   var Legend = React.createClass({displayName: "Legend",
-
     getInitialState: function () {
       return {
-        layerInfos: [],
-        visibleLayers: [],
-        map: brApp.map,
         collapsed: false
        };
     },
@@ -270,7 +334,7 @@ define([
         React.createElement("div", {className: 'legend-component-container' + (this.state.collapsed ? ' collapsed': '')}, 
           React.createElement("div", {className: "legend-component-controls"}, 
             React.createElement("div", {className: "legend-controls"}, 
-              "Legend Component", 
+              "Legend", 
               React.createElement("span", {id: "toggleLegend", onClick: this.toggleActive}, "-")
             )
 

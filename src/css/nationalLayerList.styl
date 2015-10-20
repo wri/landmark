@@ -12,12 +12,17 @@ $darkFont = #464646
 
 .national-layer-selection-label
 	font-weight bold
-	font-size 15px
+	font-size 14px
 	color $darkFont
+	// padding-left 22px
+	// text-indent -33px
+	width calc(100% - 20px)
+	display inline-block
 
 .land-tenure-menu-controls
 	text-align center
 	margin 10px 0 20px
+	margin-left 20px
 
 .land-tenure-menu-button
 	// border 1px solid $mildBlue
@@ -26,7 +31,14 @@ $darkFont = #464646
 	font-weight bold
 	font-size 13px
 	cursor pointer
-	background-color #E4E4E4
+	background-color #e3e4e5
+
+
+.land-tenure-menu-explanation
+	padding-left 20px
+	font-weight 600
+	font-size 11px
+	color #b8b9b9
 
 .land-tenure-menu-button.active
 	color white
@@ -57,10 +69,13 @@ $darkFont = #464646
 .national-layer-list-item
 	padding 5px 5px
 	cursor pointer
+	font-size 12px
+	color #005e7a
+	margin-left 20px
 
 .national-layer-list-item.subTitle
 	font-weight 600
-	font-size 14px
+	font-size 13px
 	color #787878
 
 .national-layer-list-item.subLayer
@@ -71,25 +86,33 @@ $darkFont = #464646
 .national-layer-list-item-question
 	display none
 
-.national-layer-list-item.active
-	border-left 5px solid $lightBlue
-	margin 5px 0 5px -5px
+.land-tenure-layer-list .national-layer-list-item-label
+	background url(images/uncheck_gray.svg) no-repeat #fff
+	padding-left 20px
+	color #b8b9b9
+
+.national-layer-list-item.active .national-layer-list-item-label
+	background url(images/check.svg) no-repeat #fff
+	padding-left 20px
 
 .national-layer-list-item.active .national-layer-list-item-question
 	display block
+	margin-left 20px
+	margin-top 5px
 
 .national-layer-list-item.active .national-layer-list-item-label
 	font-weight bold
 	color #2FA3D9
 
 .percent-indigenous-layer-list .subTitle
-	margin-left 25px
+	margin-left 15px
 	cursor auto
+	margin-bottom 5px
 
 .percent-indigenous-layer-list .subLayer
-	background url(images/radio_unchecked.svg) no-repeat #fff
+	background url(images/uncheck.svg) no-repeat #fff
 	padding-left 20px
-	margin-left 50px
+	margin-left 40px
 
 .subLayer .national-layer-list-item-label, .activesubLayer .national-layer-list-item-label
 	position relative
@@ -98,7 +121,7 @@ $darkFont = #464646
 .percent-indigenous-layer-list .activesubLayer
 	background url(images/radio_checked.svg) no-repeat #fff
 	padding-left 20px
-	margin-left 50px
+	margin-left 40px
 
 #national-layer-sublabel
 	padding-left 20px
@@ -110,10 +133,15 @@ $darkFont = #464646
 	height 16px
 	width 20px
 	z-index 10
-	vertical-align middle
+
+#nationalLevelIndicators, #nationalLevelPercent
+	vertical-align super
+
+#nationalLevelNone
+	vertical-align sub
 
 .checked
-	background url(images/radio_checked.svg) no-repeat #fff
+	background url(images/radio_checked.svg) no-repeat #fff 0 70%
 
 .unchecked
-	background url(images/radio_unchecked.svg) no-repeat #fff
+	background url(images/uncheck.svg) no-repeat #fff 0 70%

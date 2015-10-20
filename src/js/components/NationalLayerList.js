@@ -51,9 +51,8 @@ define([
 			var subLayer = item.subLayer;
 			var layer = item.layer;
 
-
 			return (
-				React.createElement("div", {className: 'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : ''), key: item.id, onClick: layer ? this.setActiveLayer.bind(this, item.id, item.layer) : null}, 
+				React.createElement("div", {className: 'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : ''), key: item.id, onClick: layer != undefined ? this.setActiveLayer.bind(this, item.id, item.layer) : null}, 
 					React.createElement("div", {className: "national-layer-list-item-label"}, item.label), 
 					
 						item.question ?
@@ -244,14 +243,14 @@ define([
 									className: this.state.active === LandTenure ? 'checked' : 'unchecked', 
                   checked: this.state.active === LandTenure, 
                   onClick: this.handleRadioChange}), 
-    					React.createElement("span", {className: "national-layer-selection-label"}, "Land Tenure Security Indicators, as stated by law")
+    					React.createElement("span", {className: "national-layer-selection-label"}, "Indicators of the Legal Security of Indigenous and Community Lands")
 
     				)
     			), 
 
     			React.createElement("div", {className: "land-tenure-layer-list", 
     					 style: {'display': (this.state.active === LandTenure ? 'block' : 'none')}}, 
-
+							 React.createElement("div", {className: "land-tenure-menu-explanation"}, "Choose Indicators for Indigenous or Community land:"), 
     					 React.createElement("div", {className: "land-tenure-menu-controls"}, 
     					   React.createElement("span", {id: LandTenureInd, onClick: this.changeLandTenureCategory, 
     					   			 className: 'land-tenure-menu-button ' + (this.state.landTenureCategory === LandTenureInd ? 'active' : '')

@@ -71,7 +71,7 @@ define([
                 //$("#national-level-toggle_button").click();
             });
 
-            on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
+            // on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
             on(document.getElementById('basemap-button'), 'click', WidgetsController.toggleBasemapGallery.bind(WidgetsController));
             on(document.getElementById('share-button'), 'click', WidgetsController.toggleShareContainer.bind(WidgetsController));
             on(document.getElementById('print-button'), 'click', WidgetsController.printMap);
@@ -171,28 +171,28 @@ define([
 
 
 
-                var legend = new Legend({
-                    map: brApp.map,
-                    layerInfos: layerInfos,
-                    autoUpdate: true
-                }, "legend");
-                legend.startup();
+                // var legend = new Legend({
+                //     map: brApp.map,
+                //     layerInfos: layerInfos,
+                //     autoUpdate: true
+                // }, "legend");
+                // legend.startup();
 
-                requestAnimationFrame(function() {
-
-                    legend.refresh(layerInfos);
-                    for (var layer in MapConfig.layers) {
-                      if (MapConfig.layers[layer].type === 'tiled') {
-
-                        var tiled = document.getElementById('legend_' + layer);
-                        if (brApp.map.getZoom() > 7 && tiled) {
-
-                          tiled.classList.add('hideLegend');
-                        }
-                      }
-                    }
-                    self.reformatLegend();
-                });
+                // requestAnimationFrame(function() {
+                //
+                //     legend.refresh(layerInfos);
+                //     for (var layer in MapConfig.layers) {
+                //       if (MapConfig.layers[layer].type === 'tiled') {
+                //
+                //         var tiled = document.getElementById('legend_' + layer);
+                //         if (brApp.map.getZoom() > 7 && tiled) {
+                //
+                //           tiled.classList.add('hideLegend');
+                //         }
+                //       }
+                //     }
+                //     self.reformatLegend();
+                // });
 
 
 
@@ -207,7 +207,7 @@ define([
             on(document.getElementById('mobile-menu-toggle'), 'click', WidgetsController.toggleMobileMenu);
             on(document.getElementById('mobile-menu-close'), 'click', WidgetsController.toggleMobileMenu);
             on(document.getElementById('layersMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
-            on(document.getElementById('legendMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
+            // on(document.getElementById('legendMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
             on(document.getElementById('toolsMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
             on(document.getElementById('embedShare'), 'click', WidgetsController.showEmbedCode);
 
@@ -1601,7 +1601,7 @@ define([
                 var template = new InfoTemplate();
 
 
-                template.setContent("<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Formal Recognition</b></td><td class='rec_status'><b>Documentation Status</b></td></tr><tr id='fillerColumn' style='height: 26px;'><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td></tr>");
+                template.setContent("<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Formal Recognition</b></td><td class='rec_status'><b>Documentation Status</b></td></tr><tr id='fillerColumn' style='height: 36px;'><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td></tr>");
 
                 var fields = ["Country", "Name", "Identity", "Formal Recognition", "Documentation Status"];
 
@@ -1731,14 +1731,13 @@ define([
                 var parent = $("#analysisTable").parent()[0];
                 var table = $("#analysisTable")[0];
 
-                if (table.scrollHeight > parent.clientHeight) {
-
-                    $("#analysisTable").removeClass("moreWidth");
-                    $("#column-header").removeClass("moreWidth");
-                } else {
-                    $("#analysisTable").addClass("moreWidth");
-                    $("#column-header").addClass("moreWidth");
-                }
+                // if (table.scrollHeight > parent.clientHeight) {
+                //     $("#analysisTable").removeClass("moreWidth");
+                //     $("#column-header").removeClass("moreWidth");
+                // } else {
+                //     $("#analysisTable").addClass("moreWidth");
+                //     $("#column-header").addClass("moreWidth");
+                // }
                 // if (value.features.length > 7) { //todo is 7 the correct # of feats??
 
                 //     //el.scrollHeight > el.clientHeight // this should tell us if there is a vertical scrollbar (and thus to add the extra width). By what is el here?
@@ -1810,28 +1809,28 @@ define([
 
         },
 
-        reformatLegend: function() {
-          var legend = registry.byId('legend');
-
-          setTimeout(function () {
-            var legendElement = document.getElementById('legend');
-            var children = legendElement.childNodes;
-            for (var i = 0; i < children.length; i++) {
-              if (children[i].id.indexOf('community') > -1 || children[i].id.indexOf('indigenous') > -1) {
-                var parent = children[i];
-                var child = parent.firstChild.nextSibling;
-                var type = parent.id.split('legend_')[1];
-                if (type == "community_Occupied" || type == "indigenous_Occupied") {
-                  $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Not formally recognized';
-                } else {
-                  $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Formally recognized';
-                }
-
-              }
-            }
-          }, 1000);
-
-        },
+        // reformatLegend: function() {
+        //   var legend = registry.byId('legend');
+        //
+        //   setTimeout(function () {
+        //     var legendElement = document.getElementById('legend');
+        //     var children = legendElement.childNodes;
+        //     for (var i = 0; i < children.length; i++) {
+        //       if (children[i].id.indexOf('community') > -1 || children[i].id.indexOf('indigenous') > -1) {
+        //         var parent = children[i];
+        //         var child = parent.firstChild.nextSibling;
+        //         var type = parent.id.split('legend_')[1];
+        //         if (type == "community_Occupied" || type == "indigenous_Occupied") {
+        //           $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Not formally recognized';
+        //         } else {
+        //           $("#" + child.id + " > table.esriLegendLayerLabel > tbody > tr > td")[0].innerHTML = 'Formally recognized';
+        //         }
+        //
+        //       }
+        //     }
+        //   }, 1000);
+        //
+        // },
 
         getLandTenureRenderer: function() {
             brApp.debug('MapController >>> getLandTenureRenderer');
@@ -1948,10 +1947,10 @@ define([
 
         },
 
-        refreshLegend: function() {
-            brApp.debug('MapController >>> refreshLegend');
-            registry.byId('legend').refresh();
-        }
+        // refreshLegend: function() {
+        //     brApp.debug('MapController >>> refreshLegend');
+        //     registry.byId('legend').refresh();
+        // }
 
     };
 

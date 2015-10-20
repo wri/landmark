@@ -51,9 +51,8 @@ define([
 			var subLayer = item.subLayer;
 			var layer = item.layer;
 
-
 			return (
-				<div className={'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '')} key={item.id} onClick={layer ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>
+				<div className={'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '')} key={item.id} onClick={layer != undefined ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>
 					<div className='national-layer-list-item-label'>{item.label}</div>
 					{
 						item.question ?
@@ -244,14 +243,14 @@ define([
 									className={this.state.active === LandTenure ? 'checked' : 'unchecked'}
                   checked={this.state.active === LandTenure}
                   onClick={this.handleRadioChange} />
-    					<span className='national-layer-selection-label'>Land Tenure Security Indicators, as stated by law</span>
+    					<span className='national-layer-selection-label'>Indicators of the Legal Security of Indigenous and Community Lands</span>
 
     				</label>
     			</div>
 
     			<div className='land-tenure-layer-list'
     					 style={{'display': (this.state.active === LandTenure ? 'block' : 'none')}}>
-
+							 <div className='land-tenure-menu-explanation'>Choose Indicators for Indigenous or Community land:</div>
     					 <div className='land-tenure-menu-controls'>
     					   <span id={LandTenureInd} onClick={this.changeLandTenureCategory}
     					   			 className={'land-tenure-menu-button ' + (this.state.landTenureCategory === LandTenureInd ? 'active' : '')}

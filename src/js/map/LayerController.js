@@ -156,6 +156,9 @@ define([
             // topic.publish('reset-community-tree');
 
             $("#analysis-button").addClass("grayOut");
+            $("#analysisLogo").addClass("grayOutButton");
+            $("#analysis-help").addClass("grayOutIcon");
+
 
             $('#analysis-button').mouseenter(function() {
                 $("#analysis-button-tt").show();
@@ -173,6 +176,8 @@ define([
         turnOffNationalLevelData: function () {
             // topic.publish('reset-national-layer-list');
             $("#analysis-button").removeClass("grayOut");
+            $("#analysisLogo").removeClass("grayOutButton");
+            $("#analysis-help").removeClass("grayOutIcon");
             $('#analysis-button').unbind('mouseenter mouseleave');
             $('#nationalLevelNone').click();
         },
