@@ -1695,14 +1695,13 @@ define([
                 var parent = $("#analysisTable").parent()[0];
                 var table = $("#analysisTable")[0];
 
-                if (table.scrollHeight > parent.clientHeight) {
-
-                    $("#analysisTable").removeClass("moreWidth");
-                    $("#column-header").removeClass("moreWidth");
-                } else {
-                    $("#analysisTable").addClass("moreWidth");
-                    $("#column-header").addClass("moreWidth");
-                }
+                // if (table.scrollHeight > parent.clientHeight) {
+                //     $("#analysisTable").removeClass("moreWidth");
+                //     $("#column-header").removeClass("moreWidth");
+                // } else {
+                //     $("#analysisTable").addClass("moreWidth");
+                //     $("#column-header").addClass("moreWidth");
+                // }
                 // if (value.features.length > 7) { //todo is 7 the correct # of feats??
 
                 //     //el.scrollHeight > el.clientHeight // this should tell us if there is a vertical scrollbar (and thus to add the extra width). By what is el here?
