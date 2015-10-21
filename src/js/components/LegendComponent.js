@@ -163,16 +163,12 @@ define([
         } else {
           brApp.previousFamily = layersToRender[m].family;
         }
-        if (layersToRender[m].group === brApp.previousGroup && (layersToRender[m].group === 'Formally recognized' || layersToRender[m].group === 'Not formally recognized')) {
+        if (layersToRender[m].group === brApp.previousGroup && (layersToRender[m].group === 'Formally recognized' || layersToRender[m].group === 'Not formally recognized') && !layersToRender[m].family) {
           layersToRender[m].group = '';
         } else {
           brApp.previousGroup = layersToRender[m].group;
         }
       }
-
-      // layersToRender.sort(function(a, b) {
-      //   return localeCompare(a.group) - localeCompare(b.group);
-      // });
 
 			return (
 				React.createElement("div", {className: "layer-group"}, 
