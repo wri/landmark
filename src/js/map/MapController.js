@@ -450,7 +450,6 @@ define([
 
             all(deferreds).then(function(featureSets) {
                 arrayUtils.forEach(featureSets, function(item) {
-                  console.log(item.layer)
                     switch (item.layer) {
                         case "indigenous_FormalClaim":
                             features = features.concat(self.setIndigenousTemplates(item.features));

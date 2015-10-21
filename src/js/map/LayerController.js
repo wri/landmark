@@ -12,7 +12,6 @@ define([
 
     var LayerController = {
 
-
         /**
          * Update the visible layers on a dynamic layer based on keys from the Checkbox Tree
          * @param {array} keys - Array of keys from the checkbox tree, these are mapped to layer numbers
@@ -155,6 +154,9 @@ define([
             // This will call MapController.resetCommunityLevelTree
             // topic.publish('reset-community-tree');
 
+            $("#toolsMenuButton").addClass("minimizedHide");
+            $("#legendMenuButton").addClass("minimizedAdjust");
+
             $("#analysis-button").addClass("grayOut");
             $("#analysisLogo").addClass("grayOutButton");
             $("#analysis-help").addClass("grayOutIcon");
@@ -175,6 +177,9 @@ define([
          */
         turnOffNationalLevelData: function () {
             // topic.publish('reset-national-layer-list');
+            $("#toolsMenuButton").removeClass("minimizedHide");
+            $("#legendMenuButton").removeClass("minimizedAdjust");
+
             $("#analysis-button").removeClass("grayOut");
             $("#analysisLogo").removeClass("grayOutButton");
             $("#analysis-help").removeClass("grayOutIcon");
