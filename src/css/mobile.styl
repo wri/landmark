@@ -43,13 +43,18 @@
 
 .mobile-menu .segmented-menu-button
 	text-align center
-	padding 5px 10px
-	color white
+	padding 5px 15px
+	padding-left 20px
+	color #808080
 	background-color #e4e4e4
+	font-size 13px
+	font-weight bold
 
 .mobile-menu .segmented-menu-button.active
 	background-color #2FA3D9
 	color white
+	background url("images/icon_toggle_checkmark.svg") no-repeat #2fa3d9 10% 50%
+
 
 .mobile-menu-content:not(.active)
 	display none
@@ -167,10 +172,13 @@ body:not(.mobile) .mobile-menu-toggle-button
 		width 100%
 
 	.community-tab
-		border 1px solid #2fa3d9
 		text-align center
 		padding 5px 10px
-		color #2fa3d9
+		padding-left 15px
+		color #808080
+		font-size 13px
+		font-weight bold
+		background-color #e4e4e4
 
 	.layer-tab-controls
 		background-color white
@@ -178,6 +186,7 @@ body:not(.mobile) .mobile-menu-toggle-button
 	.community-tab.active
 		background-color #2fa3d9
 		color #fff
+		background url("images/icon_toggle_checkmark.svg") no-repeat #2fa3d9 2% 50%
 
 	.community-tab:first-of-type
 		border-radius-left(5px)
