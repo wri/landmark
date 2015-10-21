@@ -185,8 +185,18 @@ define([
                 return ioArgs;
               }
 
-              // Print Request, bail if zoom level is greater then 8, the below is only necessary for zoom levels 0 - 8
+              // Print Request
+              // If zoom level is greater then 8, remove layer 0, after this is only necessary for zoom levels 0 - 8
               if (brApp.map.getZoom() > 8) {
+                var webmapJson = JSON.parse(ioArgs.content.Web_Map_as_JSON);
+                var operationalLayers = webmapJson.layoutOptions.legendOptions.operationalLayers;
+                operationalLayers.forEach(function (layer) {
+                  if (layer.subLayerIds && layer.subLayerIds.length === 2) {
+                    layer.subLayerIds = layer.subLayerIds.slice(1);
+                  }
+                })
+                webmapJson.layoutOptions.legendOptions.operationalLayers = operationalLayers;
+                ioArgs.content.Web_Map_as_JSON = JSON.stringify(webmapJson);
                 return ioArgs;
               }
 
@@ -201,7 +211,8 @@ define([
                 if (layer && layer.visible && layer.visibleAtMapScale) {
                   operationalLayers.push({
                     "id": layer.id,
-                    "subLayerIds": layer.visibleLayers
+                    // We only want Layer 1 at the moment, as layer 0 is a points layer we dont want to show
+                    "subLayerIds": layer.visibleLayers.slice(1)
                   });
                 }
               });
