@@ -52,6 +52,7 @@ define([
          */
         init: function() {
             brApp.debug('MapController >>> init');
+            esri.config.defaults.io.corsEnabledServers.push("http://gis.wri.org");
             var self = this;
             // mapObject is not esri/map, it is a wrapper for creating the map and layers
             var mapObject = new Map(MapConfig.options);

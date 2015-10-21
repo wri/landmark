@@ -1,7 +1,7 @@
 define(["esri/InfoTemplate"], function(InfoTemplate) {
 
-    var indigenousLandsUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer';
-    var nationalLevelUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer';
+    // var indigenousLandsUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer';
+    // var nationalLevelUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer';
     // var indigenousLandsInfo = "Placeholder so this layer's info icon appears in the tree";
     // var landTenureSecurityInfo = "Placeholder so this layer's info icon appears in the tree";
     var landTenureURL = 'http://gis.wri.org/arcgis/rest/services/LandMark/land_tenure/MapServer';
