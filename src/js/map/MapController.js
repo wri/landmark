@@ -1055,6 +1055,7 @@ define([
                     statDate = '';
                 }
 
+
                 template = new InfoTemplate(item.value,
                     "<div id='tableWrapper'><table id='indigenousTable'>" +
                     "<tr class='even-row'><td class='popup-header'>Country</td><td>" + item.feature.attributes.Country + '</td></tr>' +
@@ -1066,8 +1067,8 @@ define([
                     "<tr class='odd-row'><td class='popup-header'>Documentation status (Date)</td><td>" + item.feature.attributes.Doc_Status + statDate + '</td></tr>' +
 
                     "<tr class='even-row'><td class='popup-header'>Land category</td><td>" + item.feature.attributes.Category + '</td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + item.feature.attributes.ethnStr + '</td></tr>' +
-                    "<tr class='even-row'><td class='popup-header'>Population</td><td>" + item.feature.attributes.popStr + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + ethnStr + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Population</td><td>" + popStr + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Land Area</td><td>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Acquisition scale</td><td>" + item.feature.attributes.Scale + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Acquisition method</td><td>" + item.feature.attributes.Method + '</td></tr>' +
@@ -1180,8 +1181,8 @@ define([
                     "<tr class='odd-row'><td class='popup-header'>Documentation status (Date)</td><td>" + item.feature.attributes.Doc_Status + statDate + '</td></tr>' +
 
                     "<tr class='even-row'><td class='popup-header'>Land category</td><td>" + item.feature.attributes.Category + '</td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + item.feature.attributes.ethnStr + '</td></tr>' +
-                    "<tr class='even-row'><td class='popup-header'>Population</td><td>" + item.feature.attributes.popStr + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + ethnStr + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Population</td><td>" + popStr + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Land Area</td><td>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Acquisition scale</td><td>" + item.feature.attributes.Scale + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Acquisition method</td><td>" + item.feature.attributes.Method + '</td></tr>' +
