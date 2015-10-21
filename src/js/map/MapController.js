@@ -511,7 +511,7 @@ define([
                     brApp.map.infoWindow.resize(450, 600);
 
                     // $(".esriPopup").removeClass("analysis-location");
-                    $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
+                    // $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
                     $("#identifyNote").remove();
 
                     brApp.map.infoWindow.show(mapPoint);
@@ -1480,7 +1480,7 @@ define([
                     brApp.map.infoWindow.setContent(template.content);
                     brApp.map.infoWindow.setTitle("Analysis Results");
                     //$(".esriPopup").addClass("analysis-location");
-                    $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
+                    // $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
                     $("#identifyNote").remove();
                     brApp.map.infoWindow.show(mapPoint);
 
@@ -1582,7 +1582,7 @@ define([
                 $('.esriPopupWrapper').addClass("noPositioning");
 
                 //$(".esriPopup").addClass("analysis-location");
-                $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
+                // $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
 
                 // if (Helper.isMobile()) {
                 //     brApp.map.infoWindow.maximize();
