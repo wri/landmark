@@ -206,29 +206,30 @@ define([
                 webmapJson.layoutOptions.legendOptions.operationalLayers = operationalLayers;
                 ioArgs.content.Web_Map_as_JSON = JSON.stringify(webmapJson);
                 return ioArgs;
+              } else {
+                // Get print JSON that needs to be modified
+                var webmapJson = JSON.parse(ioArgs.content.Web_Map_as_JSON);
+                var operationalLayers = webmapJson.layoutOptions.legendOptions.operationalLayers;
+                // Get an array of tiled layer names
+                var tiledLayers = brApp.map.layerIds.filter(function (name) { return name.search('Tiled') > -1; });
+                // If the layer is visible, add it to the list
+                tiledLayers.forEach(function (layerId) {
+                  var layer = brApp.map.getLayer(layerId);
+                  if (layer && layer.visible && layer.visibleAtMapScale) {
+                    operationalLayers.push({
+                      "id": layer.id,
+                      // We only want Layer 1 at the moment, as layer 0 is a points layer we dont want to show
+                      "subLayerIds": layer.visibleLayers.slice(1)
+                    });
+                  }
+                });
+
+                webmapJson.layoutOptions.legendOptions.operationalLayers = operationalLayers;
+                ioArgs.content.Web_Map_as_JSON = JSON.stringify(webmapJson);
+                // Must return ioArgs
+                return ioArgs;
               }
 
-              // Get print JSON that needs to be modified
-              var webmapJson = JSON.parse(ioArgs.content.Web_Map_as_JSON);
-              var operationalLayers = webmapJson.layoutOptions.legendOptions.operationalLayers;
-              // Get an array of tiled layer names
-              var tiledLayers = brApp.map.layerIds.filter(function (name) { return name.search('Tiled') > -1; });
-              // If the layer is visible, add it to the list
-              tiledLayers.forEach(function (layerId) {
-                var layer = brApp.map.getLayer(layerId);
-                if (layer && layer.visible && layer.visibleAtMapScale) {
-                  operationalLayers.push({
-                    "id": layer.id,
-                    // We only want Layer 1 at the moment, as layer 0 is a points layer we dont want to show
-                    "subLayerIds": layer.visibleLayers.slice(1)
-                  });
-                }
-              });
-
-              webmapJson.layoutOptions.legendOptions.operationalLayers = operationalLayers;
-              ioArgs.content.Web_Map_as_JSON = JSON.stringify(webmapJson);
-              // Must return ioArgs
-              return ioArgs;
             });
 
         },

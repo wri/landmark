@@ -35,18 +35,23 @@ define([
 
               if (brApp.currentLayer === "percentIndigenousLayers") {
                 otherDynamic = brApp.map.getLayer('landTenure');
-                otherDynamic.setVisibleLayers([-1]);
+                // otherDynamic.setVisibleLayers([-1]);
+                otherDynamic.hide();
 
                 dynamicLayer = brApp.map.getLayer('percentLands');
                 dynamicLayer.setVisibleLayers(visibleLayers);
+                dynamicLayer.show();
                 console.log(visibleLayers);
               } else {
                 otherDynamic = brApp.map.getLayer('percentLands');
-                otherDynamic.setVisibleLayers([-1]);
+                // otherDynamic.setVisibleLayers([-1]);
+                otherDynamic.hide();
+
                 dynamicLayer = brApp.map.getLayer('landTenure');
                 this.setLandTenureRenderer(visibleLayers);
                 // Update Dynamic Layers but dont refresh
                 dynamicLayer.setVisibleLayers(visibleLayers, true);
+                dynamicLayer.show();
                 console.log(visibleLayers);
               }
               //todo: find a new way to differentiate betweem Land Tenure radio button and percent Indigenous & community
