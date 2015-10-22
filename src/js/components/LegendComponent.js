@@ -92,8 +92,10 @@ define([
 
       if (visLayersInfo.length === 0) {
         $(".legend-component-content").addClass('collapsed');
+        $(".legend-component-container").addClass('collapsed');
       } else {
         $(".legend-component-content").removeClass('collapsed');
+        $(".legend-component-container").removeClass('collapsed');
       }
 
       visLayersInfo.forEach(function(layer) {
@@ -324,10 +326,10 @@ define([
       return (
 
         React.createElement("div", {className: 'legend-component-container' + (this.state.collapsed ? ' collapsed': '')}, 
-          React.createElement("div", {className: "legend-component-controls"}, 
+          React.createElement("div", {className: "legend-component-controls", onClick: this.toggleActive}, 
             React.createElement("div", {className: "legend-controls"}, 
               "Legend", 
-              React.createElement("span", {id: "toggleLegend", onClick: this.toggleActive}, "-")
+              React.createElement("span", {id: "toggleLegend"}, "-")
             )
 
           ), 
