@@ -1103,29 +1103,34 @@ define([
                     template.content += '<div><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></div></div>';
                 }
 
-                // if (item.layerId === 1) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/1/images/cb367806430a4eff5023972e9dc7ed51'>" + template.title;
-                // } else if (item.layerId === 2) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/2/images/6cd8315cd0efb924913ce4d7ce657e68'>" + template.title;
-                // } else if (item.layerId === 3) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/3/images/bb41d12d06bcb77d2fb2ef6c2105135e'>" + template.title;
-                // } else if (item.layerId === 4) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/4/images/0121e9c1b348c6d36126cefe0710db83'>" + template.title;
-                // } else if (item.layerId === 6) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/6/images/b72ac329a5a45aa83a95f1f39d72a603'>" + template.title;
-                // } else if (item.layerId === 7) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/7/images/2103e270d242ef28a32d531e4c0a4998'>" + template.title;
-                // } else if (item.layerId === 8) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/8/images/2fe6dcfe429decc73538da5456f11013'>" + template.title;
-                // } else if (item.layerId === 11) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/11/images/52aae8e63b7324665f6486cc687d9c26'>" + template.title;
-                // } else if (item.layerId === 12) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/12/images/17a2ba5e9b800c58f8857ec221f28311'>" + template.title;
-                // } else if (item.layerId === 13) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/13/images/b5ed0fdf7028b42276c6ce8d68806509'>" + template.title;
-                // } else if (item.layerId === 14) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/14/images/ee3198dd6bc5cc50c8ffa8074329856e'>" + template.title;
-                // }
+                var newLayerID;
+
+                switch (item.layerName) {
+                  case "Formal documentation":
+                    newLayerID = 'community_FormalDoc';
+                      break;
+                  case "In process of documentation":
+                    newLayerID = 'community_InProcess';
+                    break;
+                  case "No documentation":
+                    newLayerID = 'community_NoDoc';
+                    break;
+                  case "Formal land petition":
+                    newLayerID = 'community_FormalClaim';
+                    break;
+                  case "Occupied or used without formal land petition":
+                    newLayerID = 'community_Occupied';
+                    break;
+                  default:
+                    newLayerID = 'none';
+                    break;
+                }
+
+                for (var j = 0; j < brApp.layerInfos.length; j++) {
+                  if (newLayerID === brApp.layerInfos[j].data.layer) {
+                    template.title = '<img class="legend-item-img" src="data:image/png;base64,' + brApp.layerInfos[j].data.layers[1].legend[0].imageData + '">' + template.title;
+                  }
+                }
 
                 // Content needs to be wrapped in a single parent div, otherwise on touch ArcGIS JavaScript API
                 // will apply transform to first child and popup will not function and look like garbage, thanks esri/dojo
@@ -1217,29 +1222,39 @@ define([
                     template.content += '<div><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></div></div>';
                 }
 
-                // if (item.layerId === 1) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/1/images/cb367806430a4eff5023972e9dc7ed51'>" + template.title;
-                // } else if (item.layerId === 2) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/2/images/6cd8315cd0efb924913ce4d7ce657e68'>" + template.title;
-                // } else if (item.layerId === 3) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/3/images/bb41d12d06bcb77d2fb2ef6c2105135e'>" + template.title;
-                // } else if (item.layerId === 4) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/4/images/0121e9c1b348c6d36126cefe0710db83'>" + template.title;
-                // } else if (item.layerId === 6) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/6/images/b72ac329a5a45aa83a95f1f39d72a603'>" + template.title;
-                // } else if (item.layerId === 7) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/7/images/2103e270d242ef28a32d531e4c0a4998'>" + template.title;
-                // } else if (item.layerId === 8) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/8/images/2fe6dcfe429decc73538da5456f11013'>" + template.title;
-                // } else if (item.layerId === 11) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/11/images/52aae8e63b7324665f6486cc687d9c26'>" + template.title;
-                // } else if (item.layerId === 12) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/12/images/17a2ba5e9b800c58f8857ec221f28311'>" + template.title;
-                // } else if (item.layerId === 13) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/13/images/b5ed0fdf7028b42276c6ce8d68806509'>" + template.title;
-                // } else if (item.layerId === 14) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer/14/images/ee3198dd6bc5cc50c8ffa8074329856e'>" + template.title;
-                // }
+                var newLayerID;
+                switch (item.layerName) {
+                  case "Formal documentation":
+                    newLayerID = 'indigenous_FormalDoc';
+                      break;
+                  case "In process of documentation":
+                    newLayerID = 'indigenous_InProcess';
+                    break;
+                  case "No documentation":
+                    newLayerID = 'indigenous_NoDoc';
+                    break;
+                  case "Formal land petition":
+                    newLayerID = 'indigenous_FormalClaim';
+                    break;
+                  case "Occupied or used without formal land petition":
+                    newLayerID = 'indigenous_Occupied';
+                    break;
+                  default:
+                    newLayerID = 'none';
+                    break;
+                }
+
+                // community_FormalClaim = brApp.map.getLayer('community_FormalClaim');
+                // community_FormalDoc = brApp.map.getLayer('community_FormalDoc');
+                // community_InProcess = brApp.map.getLayer('community_InProcess');
+                // community_NoDoc = brApp.map.getLayer('community_NoDoc');
+                // community_Occupied = brApp.map.getLayer('community_Occupied');
+
+                for (var j = 0; j < brApp.layerInfos.length; j++) {
+                  if (newLayerID === brApp.layerInfos[j].data.layer) {
+                    template.title = '<img class="legend-item-img" src="data:image/png;base64,' + brApp.layerInfos[j].data.layers[1].legend[0].imageData + '">' + template.title;
+                  }
+                }
 
                 // Content needs to be wrapped in a single parent div, otherwise on touch ArcGIS JavaScript API
                 // will apply transform to first child and popup will not function and look like garbage, thanks esri/dojo
@@ -1288,9 +1303,13 @@ define([
               // "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.C_Notes + '</td></tr></table></div>' +
               source3 +
               '</table></div>' +
-              "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/' target='_blank' class='popup-last-right'>More Info</a></div>";
-              //todo: look at relative path to data page on live site
+              "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
               item.feature.setInfoTemplate(template);
+
+
+              //item.layerName === brApp.layerInfos[i].data.group
+                //item.layerId === brApp.layerInfos[i].data.layers[j].layerId
+                  // is our src //todo: [0]??? or of what??<img class="legend-item-img" src="data:image/png;base64," + brApp.layerInfos[i].data.layers[j].legend[0].imageData>
 
                 // if (item.layerId === 1) {
                 //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalDocIcon.png'> " + template.title;
