@@ -23,10 +23,10 @@ define([
       return (
         <div className='layer-tab-container'>
           <div className='layer-tab-controls'>
-            <div onClick={this.toggleTab} className={'community-tab' + (this.state.activeTab === 'community' ? ' active': '')}>
+            <div id='community-level-tab' onClick={this.toggleTab} className={'community-tab' + (this.state.activeTab === 'community' ? ' active': '')}>
               Community Level
             </div>
-            <div onClick={this.toggleTab} className={'community-tab' + (this.state.activeTab === 'national' ? ' active': '')}>
+            <div id='national-level-tab' onClick={this.toggleTab} className={'community-tab' + (this.state.activeTab === 'national' ? ' active': '')}>
               National Level
             </div>
           </div>
