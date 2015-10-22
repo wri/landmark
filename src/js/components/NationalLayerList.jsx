@@ -261,11 +261,11 @@ define([
     					 </div>
 
 
-    					 <div className={(this.state.landTenureCategory === LandTenureInd ? '' : 'hidden')}>
+    					 <div className={'indigenous-national-list' + (this.state.landTenureCategory === LandTenureInd ? '' : ' hidden')}>
     					   <LayerList data={MapConfig.landTenureIndigenousLayers} change={this.changeLandTenureLayer} />
     					 </div>
 
-    					 <div className={(this.state.landTenureCategory === LandTenureCom ? '' : 'hidden')}>
+    					 <div className={'community-national-list' + (this.state.landTenureCategory === LandTenureCom ? '' : ' hidden')}>
     					   <LayerList data={MapConfig.landTenureCommunityLayers} change={this.changeLandTenureLayer} />
     					 </div>
 
