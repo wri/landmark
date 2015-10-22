@@ -178,6 +178,13 @@ define([
 
             on(document.getElementById('embedShare'), 'click', WidgetsController.showEmbedCode);
 
+            $('#print-button').mouseenter(function() {
+                $("#print-button-tt").show();
+            });
+            $('#print-button').mouseleave(function() {
+                $("#print-button-tt").hide();
+            });
+
             // Hack for the print service, tiled layers need to be added to operational layers
             // when the zoom level is less then 9 to force legends to show in the printout, due to the way we are
             // showing tiled layers up to 9 and then dynamic from there on out

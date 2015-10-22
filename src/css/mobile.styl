@@ -138,7 +138,8 @@ body:not(.mobile) .mobile-menu-toggle-button
 	// .title-area .name h1
 	// 	display none
 	#mobile-menu-toggle
-		display block !important //This 'important' tag is making it so the mobile menu never disappears after a toggle, hide, resize operation, but it also forces us to always show the menu icon (even when the menu is open)
+		display block !important
+		visibility visible !important
 	#data-completeness-container, #analysis-button
 		display none !important
 

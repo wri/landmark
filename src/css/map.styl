@@ -870,21 +870,25 @@ label
 	height 32px
 	margin-left -15px
 
-#analysis-button-tt
+#analysis-button-tt, #print-button-tt
 	height 60px
 	width 250px
 	position absolute
 	background-color white
 	color #055d7d
 	font-size 12px
-	top 75px
 	line-height 1.5
-	// padding 10px
-
-	right 70px
 	z-index 60
 
-#analysisToolIcon
+#analysis-button-tt
+	top 75px
+	right 70px
+
+#print-button-tt
+	top 255px
+	right 10px
+
+#analysisToolIcon, #printToolIcon
 	background url("images/icon_alert.svg") no-repeat 50%
 	background-color #055d7d
 	width 35px
@@ -893,20 +897,20 @@ label
 	padding-left 10px
 	padding-right 10px
 
-#analysisToolText
+#analysisToolText, #printToolText
 	width 190px
 	display inline-block
 	text-align center
 	vertical-align super
 	height 100%
-	top 15px
+	top 11px
 	position absolute
 	color #005e7a
 	font-family Raleway
 	font-size 13px
 
 
-#triangle-up
+#analysis-triangle-up
 	position absolute
 	width 0
 	height 0
@@ -915,6 +919,17 @@ label
 	border-bottom 15px solid white
 	right 55px
 	top -15px
+
+#print-triangle-up
+	position absolute
+	width 0
+	height 0
+	border-left 13px solid transparent
+	border-right 13px solid transparent
+	border-bottom 15px solid white
+	right 22px
+	top -15px
+
 
 #analysis-help
 	left -5px
