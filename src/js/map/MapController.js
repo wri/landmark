@@ -69,7 +69,7 @@ define([
             on(document.getElementById('share-button'), 'click', WidgetsController.toggleShareContainer.bind(WidgetsController));
             on(document.getElementById('print-button'), 'click', WidgetsController.printMap);
 
-            on(document.getElementById('tree-container-toggle'), 'click', WidgetsController.toggleTreeContainer);
+            on(document.getElementById('tree-title-pane'), 'click', WidgetsController.toggleTreeContainer);
 
             on(document.getElementById('analysis-button'), 'click', function() {
                 if (this.classList.contains("grayOut")) {
@@ -1344,8 +1344,7 @@ define([
                   "<tr class='odd-row'><td class='popup-header nationalField'>Q8: Rights to Trees</td><td>" + item.feature.attributes.I8_Scr + '</td></tr>' +
                   "<tr class='even-row'><td class='popup-header nationalField'>Q9: Rights to Water</td><td>" + item.feature.attributes.I9_Scr + '</td></tr>' +
                   "<tr class='odd-row'><td class='popup-header nationalField'>Q10: Land Rights in Protected Areas</td><td>" + item.feature.attributes.I10_Scr + '</td></tr></table></div>' +
-
-                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.blueraster.com' target='_blank' class='popup-last-right'>More Info</a></div>";
+                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
 
                 } else { //1 & 3
                   template.content = "<div id='tableWrapper'><table id='landTenureTable'>" +
@@ -1357,7 +1356,7 @@ define([
                   "<tr class='odd-row'><td class='popup-header nationalField'>Additional comments</td><td>" + item.feature.attributes['I' + indNumber + '_AddInfo'] + '</td></tr>' +
                   "<tr class='even-row'><td class='popup-header nationalField'>Review source (Year)</td><td>" + item.feature.attributes['I' + indNumber + '_Rev'] + '(' + item.feature.attributes['I' + indNumber + '_Year'] + ')</td></tr></table></div>' +
 
-                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.blueraster.com' target='_blank' class='popup-last-right'>More Info</a></div>";
+                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
                 }
 
                 item.feature.setInfoTemplate(template);
@@ -1582,7 +1581,7 @@ define([
 
                 $("#identifyNote").remove();
 
-                var extraContent = "<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:15px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</div></div>";
+                var extraContent = "<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:10px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</div></div>";
 
 
                 $('.esriPopupWrapper').append(extraContent);

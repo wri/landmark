@@ -145,17 +145,27 @@ define([
          */
         toggleTreeContainer: function() {
             brApp.debug('WidgetsController >>> toggleTreeContainer');
-            // var labelNode = document.getElementById('tree-container-toggle'),
-                // container = document.getElementById('tree-widget-container'),
-                // layerAccordion = registry.byId('layer-accordion'),
+
+            var commTab = $('.community-layers-tab');
+
+            var node = document.getElementById('layer-content');
+            var active = domClass.contains(node, 'active');
+            if (!active) {
+              if (commTab.hasClass('hidden')) {
+                $(".tree-widget-container").css('height', '200px');
+              } else {
+                  $(".tree-widget-container").css('height', '500px');
+              }
+            } else {
+              $('.tree-widget-container').css('height', 'auto');
+            }
+
             var topBar = document.getElementById('tree-widget-container'),
               labelNode = document.getElementById('tree-container-toggle'),
               treeTitle = document.getElementById('tree-title'),
-              node = document.getElementById('layer-content'),
               innerNode = document.querySelector('.layer-tab-container'),
-              active = domClass.contains(node, 'active'),
               height, width;
-
+              
 
             labelNode.innerHTML = active ? '&plus;' : '&minus;';
             domClass.toggle(labelNode, 'padding-right');
@@ -174,8 +184,8 @@ define([
             console.log(active)
             // Set the height
             height = active ? 0 : (topBar.offsetHeight - 34);
-            width = active ? 250 : 360;
-            console.log(width)
+            width = active ? 180 : 360;
+            console.log(height)
 
             Fx.animateProperty({
                 node: node,
