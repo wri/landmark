@@ -444,8 +444,16 @@ define([
           var printParameters = new PrintParameters();
           var template = new PrintTemplate();
           var communityTab = document.getElementById('community-level-tab');
-          // If the community tab is active, use its template, else, use the national template
-          var layout = communityTab.className.search('active') > -1 ? 'landmark_comm' : 'landmark_nat';
+          var question = '';
+          var layout = '';
+          // If the community tab is active, use its template, else, use the
+          // national template and add a question if applicable
+          if (communityTab.className.search('active') > -1) {
+            layout = 'landmark_comm';
+          } else {
+            layout = 'landmark_nat';
+            // Get the current question if the right layer is active (indigenous/community)
+          }
 
           template.format = "pdf";
           template.layout = layout;
@@ -453,7 +461,9 @@ define([
           //- Custom Text Elements to be used in the layout,
           //- This is the way to add custom labels to the layout
           template.layoutOptions = {
-            customTextElements: []
+            customTextElements: [
+              {'question': question }
+            ]
           };
 
           printParameters.map = brApp.map;
