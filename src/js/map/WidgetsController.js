@@ -448,9 +448,12 @@ define([
           var printTask = new PrintTask(AppConfig.printUrl);
           var printParameters = new PrintParameters();
           var template = new PrintTemplate();
+          var communityTab = document.getElementById('community-level-tab');
+          // If the community tab is active, use its template, else, use the national template
+          var layout = communityTab.className.search('active') > -1 ? 'landmark_comm' : 'landmark_nat';
 
           template.format = "pdf";
-          template.layout = "landmark";
+          template.layout = layout;
           template.preserveScale = false;
           //- Custom Text Elements to be used in the layout,
           //- This is the way to add custom labels to the layout
@@ -460,11 +463,6 @@ define([
 
           printParameters.map = brApp.map;
           printParameters.template = template;
-          //- Used to pass variables to the GP Service for Custom Server Side Logic
-          // printParameters.extraParameters = {
-          //   Legend: 'Hello There'
-          // };
-
           //- Add a loading class to the print button and remove it when loading is complete
           domClass.add('print-widget', 'loading');
 

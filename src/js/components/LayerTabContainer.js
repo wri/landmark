@@ -23,10 +23,10 @@ define([
       return (
         React.createElement("div", {className: "layer-tab-container"}, 
           React.createElement("div", {className: "layer-tab-controls"}, 
-            React.createElement("div", {onClick: this.toggleTab, className: 'community-tab' + (this.state.activeTab === 'community' ? ' active': '')}, 
+            React.createElement("div", {id: "community-level-tab", onClick: this.toggleTab, className: 'community-tab' + (this.state.activeTab === 'community' ? ' active': '')}, 
               "Community Level"
             ), 
-            React.createElement("div", {onClick: this.toggleTab, className: 'community-tab' + (this.state.activeTab === 'national' ? ' active': '')}, 
+            React.createElement("div", {id: "national-level-tab", onClick: this.toggleTab, className: 'community-tab' + (this.state.activeTab === 'national' ? ' active': '')}, 
               "National Level"
             )
           ), 
