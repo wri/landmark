@@ -449,6 +449,7 @@ define([
           var printParameters = new PrintParameters();
           var template = new PrintTemplate();
           var communityTab = document.getElementById('community-level-tab');
+          var nationalIndicators = document.getElementById('nationalLevelIndicators');
           var question = '';
           var layout = '';
           // If the community tab is active, use its template, else, use the
@@ -458,6 +459,23 @@ define([
           } else {
             layout = 'landmark_nat';
             // Get the current question if the right layer is active (indigenous/community)
+            // Need to find a better way to do this, we need a data model of flux implemented
+            // as querying the dom is not the way to go
+            if (nationalIndicators.className.search('checked') >  -1) {
+              var indigenousTab = document.getElementById('land-tenure-indigenous');
+              var querySelector = '.national-layer-list-item.active .national-layer-list-item-question';
+              var questionNode;
+              if (indigenousTab.className.search('active') > -1) {
+                questionNode = document.querySelector('.indigenous-national-list ' + querySelector);
+                question = questionNode && questionNode.innerHTML;
+              } else {
+                questionNode = document.querySelector('.community-national-list ' + querySelector);
+                question = questionNode && questionNode.innerHTML;
+              }
+            }
+
+            console.log(questionNode);
+            console.log(question);
           }
 
           template.format = "pdf";

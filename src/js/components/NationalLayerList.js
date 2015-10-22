@@ -261,11 +261,11 @@ define([
     					 ), 
 
 
-    					 React.createElement("div", {className: (this.state.landTenureCategory === LandTenureInd ? '' : 'hidden')}, 
+    					 React.createElement("div", {className: 'indigenous-national-list' + (this.state.landTenureCategory === LandTenureInd ? '' : ' hidden')}, 
     					   React.createElement(LayerList, {data: MapConfig.landTenureIndigenousLayers, change: this.changeLandTenureLayer})
     					 ), 
 
-    					 React.createElement("div", {className: (this.state.landTenureCategory === LandTenureCom ? '' : 'hidden')}, 
+    					 React.createElement("div", {className: 'community-national-list' + (this.state.landTenureCategory === LandTenureCom ? '' : ' hidden')}, 
     					   React.createElement(LayerList, {data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer})
     					 )
 
