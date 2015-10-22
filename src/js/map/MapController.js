@@ -1379,6 +1379,31 @@ define([
                   "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
                 }
 
+                //might have to be for 0 & 2 only
+
+
+                for (var j = 0; j < brApp.layerInfos.length; j++) {
+                  if (brApp.layerInfos[j].data.layer === 'landTenure') {
+                    brApp.layerInfos[j].data.layers.forEach(function(layer) {
+                      if (layer.layerId === item.layerId) {
+                        for (var k = 0; k < layer.legend.length; k++) {
+                          if (item.layerId === 0 ||item.layerId === 2) {
+                            for (var m = 0; m < layer.legend[k].values.length; m++) {
+                              if (item.feature.attributes.Avg_Scr === layer.legend[k].values[m]) {
+                                template.title = '<img class="legend-item-img" src="data:image/png;base64,' + layer.legend[k].imageData + '">' + template.title;
+                              }
+                            }
+                          } else {
+                            if (item.feature.attributes['I' + indNumber + '_Scr'] === layer.legend[k].values[0]) {
+                              template.title = '<img class="legend-item-img" src="data:image/png;base64,' + layer.legend[k].imageData + '">' + template.title;
+                            }
+                          }
+                        }
+                      }
+                    })
+                  }
+                }
+
                 item.feature.setInfoTemplate(template);
 
                 features.push(item.feature);
