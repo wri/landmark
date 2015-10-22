@@ -1552,8 +1552,6 @@ define([
                         var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec];
                         brApp.csv += fieldValues.join(",") + '\n';
                     }
-
-
                     return str;
                 }
 
@@ -1567,7 +1565,6 @@ define([
                     }
 
                 }
-
 
                 template.content += "</table>";
                 var theTitle = "<div id='title_title'>Analysis Results</div>";
@@ -1609,6 +1606,10 @@ define([
                 $("#infowindowContainer").css("height", newHeight);
 
                 $("#infowindowContainer").show();
+
+                if (value.features.length > 8) {
+                  $('#column-header').addClass('lessColumnWidth');
+                }
 
                 // brApp.map.infoWindow.maximize();
                 // brApp.map.infoWindow.show();

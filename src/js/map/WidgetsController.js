@@ -165,7 +165,7 @@ define([
               treeTitle = document.getElementById('tree-title'),
               innerNode = document.querySelector('.layer-tab-container'),
               height, width;
-              
+
 
             labelNode.innerHTML = active ? '&plus;' : '&minus;';
             domClass.toggle(labelNode, 'padding-right');
@@ -196,6 +196,8 @@ define([
                 duration: DURATION,
                 onEnd: function() {
                   domClass.toggle(node, 'active');
+                  $('#layer-content').css('height', 'auto');
+                  $('#tree-widget-container').css('height', 'auto');
                 }
             }).play();
 
@@ -203,13 +205,6 @@ define([
                 node: node,
                 properties: {
                     width: width
-                },
-                duration: DURATION
-            }).play();
-            Fx.animateProperty({
-                node: innerNode,
-                properties: {
-                    height: height
                 },
                 duration: DURATION
             }).play();
