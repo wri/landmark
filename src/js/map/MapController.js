@@ -167,8 +167,6 @@ define([
 
             });
 
-            //TODO: Check the presence of the analysis and data completeness buttons on smaller screens AFTER a layer is toggled on (if all layers were off)
-            // --> In layerController's updateVisibleLayers function.
 
             // Mobile Specific Events
             // If we are ok with the app not responding to mobile, only loading in mobile or loading in Desktop
@@ -291,10 +289,7 @@ define([
             //     //     showDuration: 50,
             //     //     hideDuration: 50
             //     // });
-            //     // toggler.hide();
-            //     // setTimeout(function() { //TODO: Do this synchronously...but after the hide operation has completed
-            //     //     toggler.show();
-            //     // }, 50);
+
 
             //     $(brApp.map.infoWindow.domNode).fadeToggle(50);
             //     $(brApp.map.infoWindow.domNode).fadeToggle(50);
@@ -516,7 +511,7 @@ define([
 
                 if (features.length > 0) {
                     brApp.map.infoWindow.setFeatures(features);
-                    brApp.map.infoWindow.resize(450, 600);
+                    brApp.map.infoWindow.resize(375, 600);
 
                     // $(".esriPopup").removeClass("analysis-location");
                     // $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
@@ -540,13 +535,10 @@ define([
 
                     }
 
-                    // if (window.innerWidth < 600 || mapPoint.clientY < 400) {
-                    //     //brApp.map.infoWindow.reposition(); //TODO: Center in screen? Remove arrow to point to feature?
-                    // }
 
                     on.once(brApp.map.infoWindow, "hide", function() {
 
-                        brApp.map.infoWindow.resize(450, 600);
+                        brApp.map.infoWindow.resize(375, 600);
 
                     });
 
@@ -1036,7 +1028,7 @@ define([
                 var ethn3 = item.feature.attributes.Ethncty_3;
 
 
-                if (!ethn1 || ethn1 == ' ') {
+                if (!ethn1 || ethn1 == ' ' || ethn1 == 'Null') {
                     ethnStr = 'Unknown';
                 } else if (ethn1 && !ethn2) {
                     ethnStr = ethn1;
@@ -1053,14 +1045,14 @@ define([
                 var popYear = item.feature.attributes.Pop_Year == "Null" ? null : item.feature.attributes.Pop_Year;
 
 
-                if (!population || population == '0') {
+                if (!population || population == '0' || population == 'Null') {
                     popStr = 'Unknown';
                 } else if (population && !popSource) {
                     popStr = population;
                 } else if (population && popSource && (!popYear || popYear == 0)) {
-                    popStr = population + " - " + popSource;
+                    popStr = population + " (" + popSource + ")";
                 } else {
-                    popStr = population + " - " + popSource + ", " + popYear;
+                    popStr = population + " (" + popSource + ", " + popYear + ")";
                 }
 
                 for (var attr in item.feature.attributes) {
@@ -1088,8 +1080,8 @@ define([
 
                     "<tr class='even-row'><td class='popup-header'>Land category</td><td>" + item.feature.attributes.Category + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + ethnStr + '</td></tr>' +
-                    "<tr class='even-row'><td class='popup-header'>Population</td><td>" + popStr + '</td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header'>Land Area</td><td>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Population (Source, Date)</td><td>" + popStr + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Land Area, offical and GIS</td><td>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Acquisition scale</td><td>" + item.feature.attributes.Scale + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Acquisition method</td><td>" + item.feature.attributes.Method + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Data source</td><td>" + item.feature.attributes.Data_Src + " (" + item.feature.attributes.Data_Date + ')</td></tr>' +
@@ -1156,7 +1148,7 @@ define([
                 var ethn2 = item.feature.attributes.Ethncty_2;
                 var ethn3 = item.feature.attributes.Ethncty_3;
 
-                if (!ethn1 || ethn1 == ' ') {
+                if (!ethn1 || ethn1 == ' ' || ethn1 == 'Null') {
                     ethnStr = 'Unknown';
                 } else if (ethn1 && !ethn2) {
                     ethnStr = ethn1;
@@ -1173,14 +1165,14 @@ define([
                 var popYear = item.feature.attributes.Pop_Year == "Null" ? null : item.feature.attributes.Pop_Year;
 
 
-                if (!population || population == '0') {
+                if (!population || population == '0' || population == 'Null') {
                     popStr = 'Unknown';
                 } else if (population && !popSource) {
                     popStr = population;
                 } else if (population && popSource && (!popYear || popYear == 0)) {
-                    popStr = population + " - " + popSource;
+                    popStr = population + " (" + popSource + ")";
                 } else {
-                    popStr = population + " - " + popSource + ", " + popYear;
+                    popStr = population + " (" + popSource + ", " + popYear + ")";
                 }
 
                 for (var attr in item.feature.attributes) {
@@ -1195,6 +1187,13 @@ define([
                     statDate = '';
                 }
 
+                //todo (and in the other setTemplates thing that mirror this):
+                  //first, if we have an Unknown for the three big ones: Ethnic Groups, Population, Land area..
+                    //then, have a ternary that says only add this tr and this data if our var !== to 'Unknown'
+                      //to execture JS in this template, wrap JS in parenthesis
+
+
+
                 template = new InfoTemplate(item.value,
                     "<div id='tableWrapper'><table id='indigenousTable'>" +
                     "<tr class='even-row'><td class='popup-header'>Country</td><td>" + item.feature.attributes.Country + '</td></tr>' +
@@ -1207,8 +1206,8 @@ define([
 
                     "<tr class='even-row'><td class='popup-header'>Land category</td><td>" + item.feature.attributes.Category + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + ethnStr + '</td></tr>' +
-                    "<tr class='even-row'><td class='popup-header'>Population</td><td>" + popStr + '</td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header'>Land Area</td><td>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + '</td></tr>' +
+                    "<tr class='even-row'><td class='popup-header'>Population (Source, Date)</td><td>" + popStr + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Land Area, offical and GIS</td><td>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Acquisition scale</td><td>" + item.feature.attributes.Scale + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Acquisition method</td><td>" + item.feature.attributes.Method + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Data source</td><td>" + item.feature.attributes.Data_Src + " (" + item.feature.attributes.Data_Date + ')</td></tr>' +
@@ -1244,12 +1243,6 @@ define([
                     break;
                 }
 
-                // community_FormalClaim = brApp.map.getLayer('community_FormalClaim');
-                // community_FormalDoc = brApp.map.getLayer('community_FormalDoc');
-                // community_InProcess = brApp.map.getLayer('community_InProcess');
-                // community_NoDoc = brApp.map.getLayer('community_NoDoc');
-                // community_Occupied = brApp.map.getLayer('community_Occupied');
-
                 for (var j = 0; j < brApp.layerInfos.length; j++) {
                   if (newLayerID === brApp.layerInfos[j].data.layer) {
                     template.title = '<img class="legend-item-img" src="data:image/png;base64,' + brApp.layerInfos[j].data.layers[1].legend[0].imageData + '">' + template.title;
@@ -1278,48 +1271,92 @@ define([
               template = new InfoTemplate(item.feature.attributes.Country, '');
 
               for (var attr in item.feature.attributes) {
-                  if (!item.feature.attributes[attr] || item.feature.attributes[attr] === 'undefined' || item.feature.attributes[attr] == "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
-                      if (attr.indexOf('Notes') == -1) {
+                  if (!item.feature.attributes[attr] || item.feature.attributes[attr] === 'undefined' || item.feature.attributes[attr] === "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
+                      if (attr.indexOf('Notes') !== -1) {
+                        
                           item.feature.attributes[attr] = "Unknown";
                       } else {
-                          item.feature.attributes[attr] = "None";
+                          item.feature.attributes[attr] = '';
                       }
-
                   }
               }
 
+              var data1 = item.feature.attributes.IC_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.IC_T + " " + item.feature.attributes.IC_T_Src + "</div><div class='indentTD'><span class='inlineBold'>Formally recognized</span>: " + item.feature.attributes.IC_F + " " + item.feature.attributes.IC_F_Src + "</div><div class='indentTD'><span class='inlineBold'>Not formally recognized</span>: " + item.feature.attributes.IC_NF + " " + item.feature.attributes.IC_NF_Src + "</div></td></tr>" : "";
+              var data2 = item.feature.attributes.I_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples only</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.I_T + ' ' + item.feature.attributes.I_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.I_F + ' ' + item.feature.attributes.I_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.I_NF + ' ' + item.feature.attributes.I_NF_Src + '</div></td></tr>' : "";
+              var data3 = item.feature.attributes.C_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.C_T + ' ' + item.feature.attributes.C_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.C_F + ' ' + item.feature.attributes.C_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.C_NF + ' ' + item.feature.attributes.C_NF_Src + '</div></td></tr>' : "";
+
+
               var source1 = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IC_Notes + '</td></tr>' : '';
-              var source2 = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.I_Notes + '</td></tr>' : '';
-              var source3 = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.C_Notes + '</td></tr>' : '';
+              var source2 = item.feature.attributes.I_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.I_Notes + '</td></tr>' : '';
+              var source3 = item.feature.attributes.C_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.C_Notes + '</td></tr>' : '';
+
+              //todo: ternary operation to hide any data field: if null dont show them
 
               template.content = "<div id='tableWrapper'><table id='nationalTable'>" +
-              "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div>Total: " + item.feature.attributes.IC_T + '% ' + item.feature.attributes.IC_T_Src + '</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.IC_F + '% ' + item.feature.attributes.IC_F_Src + '</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.IC_NF + '% ' + item.feature.attributes.IC_NF_Src + '</div></td></tr>' +
-              // "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IC_Notes + '</td></tr>' +
+              // "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.IC_T + ' ' + item.feature.attributes.IC_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.IC_F + ' ' + item.feature.attributes.IC_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.IC_NF + ' ' + item.feature.attributes.IC_NF_Src + '</div></td></tr>' +
+              data1 +
               source1 +
-              "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples only</td><td><div>Total: " + item.feature.attributes.I_T + '% ' + item.feature.attributes.I_T_Src + '</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.I_F + '% ' + item.feature.attributes.I_F_Src + '</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.I_NF + '% ' + item.feature.attributes.I_NF_Src + '</div></td></tr>' +
-              // "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.I_Notes + '</td></tr>' +
+              data2 +
+              // "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples only</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.I_T + ' ' + item.feature.attributes.I_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.I_F + ' ' + item.feature.attributes.I_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.I_NF + ' ' + item.feature.attributes.I_NF_Src + '</div></td></tr>' +
               source2 +
-              "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div>Total: " + item.feature.attributes.C_T + '% ' + item.feature.attributes.C_T_Src + '</div><div class="indentTD">Formally recognized: ' + item.feature.attributes.C_F + '% ' + item.feature.attributes.C_F_Src + '</div><div class="indentTD">Not formally recognized: ' + item.feature.attributes.C_NF + '% ' + item.feature.attributes.C_NF_Src + '</div></td></tr>' +
-              // "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.C_Notes + '</td></tr></table></div>' +
+              data3 +
+              // "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.C_T + ' ' + item.feature.attributes.C_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.C_F + ' ' + item.feature.attributes.C_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.C_NF + ' ' + item.feature.attributes.C_NF_Src + '</div></td></tr>' +
               source3 +
               '</table></div>' +
               "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
-              item.feature.setInfoTemplate(template);
 
 
-              //item.layerName === brApp.layerInfos[i].data.group
-                //item.layerId === brApp.layerInfos[i].data.layers[j].layerId
-                  // is our src //todo: [0]??? or of what??<img class="legend-item-img" src="data:image/png;base64," + brApp.layerInfos[i].data.layers[j].legend[0].imageData>
+                for (var j = 0; j < brApp.layerInfos.length; j++) {
+                  if (brApp.layerInfos[j].data.layer === 'percentLands') {
+                    brApp.layerInfos[j].data.layers.forEach(function(layer) {
+                      if (layer.layerId === item.layerId) {
+                        for (var k = 0; k < layer.legend.length; k++) {
 
-                // if (item.layerId === 1) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalDocIcon.png'> " + template.title;
-                // } else if (item.layerId === 2) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/tiltingIcon.png'> " + template.title;
-                // } else if (item.layerId === 3) {
-                //     template.title = "<img style='margin-bottom: 3px; margin-right: 3px;' src='css/images/formalLandIcon.png'> " + template.title;
-                // }
 
-                //item.feature.setInfoTemplate(template);
+                          if (item.layerId === 1) {
+                            if (layer.legend[k].label === item.feature.attributes['IC_T_Cat']) {
+                              template.title = '<img class="legend-item-img" src="data:image/png;base64,' + layer.legend[k].imageData + '">' + template.title;
+                            }
+                          } else if (item.layerId === 2) {
+                            if (layer.legend[k].label === item.feature.attributes['IC_F_Cat']) {
+                              template.title = '<img class="legend-item-img" src="data:image/png;base64,' + layer.legend[k].imageData + '">' + template.title;
+                            }
+                          } else if (item.layerId === 3) {
+                            if (layer.legend[k].label === item.feature.attributes['IC_NF_Cat']) {
+                              template.title = '<img class="legend-item-img" src="data:image/png;base64,' + layer.legend[k].imageData + '">' + template.title;
+                            }
+                          } else if (item.layerId === 5) {
+                            if (layer.legend[k].label === item.feature.attributes['I_T_Cat']) {
+                              template.title = '<img class="legend-item-img" src="data:image/png;base64,' + layer.legend[k].imageData + '">' + template.title;
+                            }
+                          } else if (item.layerId === 6) {
+                            if (layer.legend[k].label === item.feature.attributes['I_F_Cat']) {
+                              template.title = '<img class="legend-item-img" src="data:image/png;base64,' + layer.legend[k].imageData + '">' + template.title;
+                            }
+                          } else if (item.layerId === 7) {
+                            if (layer.legend[k].label === item.feature.attributes['I_NF_Cat']) {
+                              template.title = '<img class="legend-item-img" src="data:image/png;base64,' + layer.legend[k].imageData + '">' + template.title;
+                            }
+                          } else if (item.layerId === 9) {
+                            if (layer.legend[k].label === item.feature.attributes['C_T_Cat']) {
+                              template.title = '<img class="legend-item-img" src="data:image/png;base64,' + layer.legend[k].imageData + '">' + template.title;
+                            }
+                          } else if (item.layerId === 10) {
+                            if (layer.legend[k].label === item.feature.attributes['C_F_Cat']) {
+                              template.title = '<img class="legend-item-img" src="data:image/png;base64,' + layer.legend[k].imageData + '">' + template.title;
+                            }
+                          } else if (item.layerId === 11) {
+                            if (layer.legend[k].label === item.feature.attributes['C_NF_Cat']) {
+                              template.title = '<img class="legend-item-img" src="data:image/png;base64,' + layer.legend[k].imageData + '">' + template.title;
+                            }
+                          }
+                        }
+                      }
+                    })
+                  }
+                }
+
+                item.feature.setInfoTemplate(template);
 
                 features.push(item.feature);
             });
@@ -1349,9 +1386,9 @@ define([
 
                 if (item.layerId === 0 ||item.layerId === 2) { // Average Score
                   template.content = "<div id='tableWrapper'><table id='landTenureTable'>" +
-                  "<tr class='even-row'><td class='popup-header nationalField'>Groups targeted by the legal framework</td><td>" + item.feature.attributes.Framework + '</td></tr>' +
-                  "<tr class='odd-row'><td class='popup-header nationalField'>Language of the law review</td><td>" + item.feature.attributes.Language + '</td></tr>' +
-                  "<tr class='even-row'><td class='popup-header nationalField'>Average Indicator Score</td><td>" + item.feature.attributes.Avg_Scr + '</td></tr>' +
+                  "<tr class='even-row'><td class='popup-header'>Groups targeted by the legal framework</td><td>" + item.feature.attributes.Framework + '</td></tr>' +
+                  "<tr class='odd-row'><td class='popup-header'>Language of the law review</td><td>" + item.feature.attributes.Language + '</td></tr>' +
+                  "<tr class='even-row'><td class='popup-header'>Average Indicator Score</td><td>" + item.feature.attributes.Avg_Scr + '</td></tr>' +
                   "<tr class='full-row'><td colspan='2' class='popup-header'>Scores per Indicator</td></tr>" +
 
                   "<tr class='even-row'><td class='popup-header nationalField'>Q1: Legal Status</td><td>" + item.feature.attributes.I1_Scr + '</td></tr>' +
@@ -1629,14 +1666,6 @@ define([
                 $('.esriPopupWrapper').append(extraContent);
                 $('.esriPopupWrapper').addClass("noPositioning");
 
-                //$(".esriPopup").addClass("analysis-location");
-                // $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
-
-                // if (Helper.isMobile()) {
-                //     brApp.map.infoWindow.maximize();
-                // }
-                //$(".pointer").hide();
-
 
                 arrayUtils.forEach(brApp.map.infoWindow.domNode.children, function(node) {
                     if (node) {
@@ -1761,14 +1790,9 @@ define([
 
             if (menuNode) {
                 domClass.remove(menuNode, 'active');
-                //TODO?
-                // domClass.add(menuNode, 'hidden');
+
             }
 
-            // if (containerNode) {
-            //     domClass.remove(containerNode, 'active');
-            // }
-            //TODO: Why does the whole list shift to the left and hide the tree-toggle-symbol and its span label And its span 'tree-node-lablal'??? -->Its a React thing: the whole 'checkbox-tree' class (which is a parent of all of these) is replaced by a new one which doesn't have that  --> Also this is not where this happens; its probably within the React tree logic itself
 
             // Now add the active class to the target and to the container
             switch (target.id) {

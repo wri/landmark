@@ -35,26 +35,39 @@ define([
 
               if (brApp.currentLayer === "percentIndigenousLayers") {
                 otherDynamic = brApp.map.getLayer('landTenure');
-                // otherDynamic.setVisibleLayers([-1]);
                 otherDynamic.hide();
+
+
 
                 dynamicLayer = brApp.map.getLayer('percentLands');
+
+                on.once(dynamicLayer, 'update-start', function() {
+                    $('#map-loading-icon').show();
+                });
+                on.once(dynamicLayer, 'update-end', function() {
+                    $('#map-loading-icon').hide();
+                });
+
                 dynamicLayer.setVisibleLayers(visibleLayers);
                 dynamicLayer.show();
-                console.log(visibleLayers);
+
+
               } else {
                 otherDynamic = brApp.map.getLayer('percentLands');
-                // otherDynamic.setVisibleLayers([-1]);
                 otherDynamic.hide();
 
-                dynamicLayer = brApp.map.getLayer('landTenure');
                 this.setLandTenureRenderer(visibleLayers);
-                // Update Dynamic Layers but dont refresh
+                dynamicLayer = brApp.map.getLayer('landTenure');
+                on.once(dynamicLayer, 'update-start', function() {
+                    $('#map-loading-icon').show();
+                });
+                on(dynamicLayer, 'update-end', function() {
+                    $('#map-loading-icon').hide();
+                });
                 dynamicLayer.setVisibleLayers(visibleLayers, true);
                 dynamicLayer.show();
-                console.log(visibleLayers);
+
               }
-              //todo: find a new way to differentiate betweem Land Tenure radio button and percent Indigenous & community
 
               topic.publish('refresh-legend');
 
@@ -68,6 +81,12 @@ define([
                   var zoom = brApp.map.getZoom();
 
                   var legend = registry.byId('legend');
+                  on.once(layer, 'update-start', function() {
+                      $('#map-loading-icon').show();
+                  });
+                  on(layer, 'update-end', function() {
+                      $('#map-loading-icon').hide();
+                  });
 
                   if (off === true) {
                     layer.hide();
@@ -78,48 +97,7 @@ define([
                     tiledLayer.show();
                   }
 
-                  requestAnimationFrame(function() {
-
-                    for (var layer in MapConfig.layers) {
-                      if (MapConfig.layers[layer].type === 'tiled') {
-
-                        var tiled = document.getElementById('legend_' + layer);
-                        if (brApp.map.getZoom() > 7 && tiled) {
-
-                          tiled.classList.add('hideLegend');
-                        }
-                      }
-                    }
-                  });
                 }
-
-
-                // if (visibleLayers[0] === -1) {
-                //
-                //     $("#analysis-button").addClass("grayOut");
-                //
-                //     $('#analysis-button').mouseenter(function() {
-                //         $("#analysis-button-tt").show();
-                //     });
-                //     $('#analysis-button').mouseleave(function() {
-                //         $("#analysis-button-tt").hide();
-                //     });
-                //
-                //     $("#legendMenuButton").addClass("mobileLegendUpdate");
-                //     $("#toolsMenuButton").hide();
-                //
-                // } else {
-                //
-                //     // Turn Off National Layer, User has selected some community level layers
-                //     self.turnOffNationalLevelData();
-                //
-                //     $("#legendMenuButton").removeClass("mobileLegendUpdate");
-                //     $("#toolsMenuButton").show();
-                //
-                //     $("#analysis-button").removeClass("grayOut");
-                //     $('#analysis-button').unbind('mouseenter mouseleave');
-                //
-                // }
 
                 // dynamicLayer.setVisibleLayers(visibleLayers);
                 topic.publish('refresh-legend');
