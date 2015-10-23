@@ -1726,8 +1726,10 @@ define([
 
         getLandTenureRenderer: function() {
             brApp.debug('MapController >>> getLandTenureRenderer');
+
             var requestHandle = esriRequest({
-                "url": "http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer/0", //change to layer url
+
+                "url": "http://gis.wri.org/arcgis/rest/services/LandMark/land_tenure/MapServer/1",
                 "content": {
                     "f": "json"
                 },

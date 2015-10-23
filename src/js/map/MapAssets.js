@@ -86,6 +86,12 @@ define([
                 label: brApp.landTenureRenderer.uniqueValueInfos[5].label
             });
 
+            renderer.addValue({
+                value: brApp.landTenureRenderer.uniqueValueInfos[6].value,
+                symbol: brApp.landTenureRenderer.uniqueValueInfos[6].symbol,
+                label: brApp.landTenureRenderer.uniqueValueInfos[6].label
+            });
+
             renderer.attributeField = fieldName;
 
             // Add Values to the Unique Value Renderer attached with label for the legend and the correct symbol

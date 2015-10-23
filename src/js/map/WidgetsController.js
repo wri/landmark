@@ -171,51 +171,47 @@ define([
             domClass.toggle(labelNode, 'padding-right');
             domClass.toggle(innerNode, 'hidden');
 
-            // if (!active) {
-            //     // If not active. add class now, else, add when animation done
-            //     domClass.toggle(node, 'active');
-            //     domClass.toggle(node, 'hidden');
-            //     // domStyle.set(container, 'bottom', '20px');
-            // } else {
-              // domClass.toggle(node, 'active');
-              // domClass.toggle(node, 'hidden');
-              // domStyle.set(container, 'bottom', 'auto');
-            // }
-            console.log(active)
             // Set the height
             height = active ? 0 : (topBar.offsetHeight - 34);
             width = active ? 180 : 360;
-            console.log(height)
 
-            Fx.animateProperty({
-                node: node,
-                properties: {
-                    height: height//,
-                    //width: width
-                },
-                duration: DURATION,
-                onEnd: function() {
-                  domClass.toggle(node, 'active');
-                  $('#layer-content').css('height', 'auto');
-                  $('#tree-widget-container').css('height', 'auto');
-                }
-            }).play();
 
-            Fx.animateProperty({
-                node: node,
-                properties: {
-                    width: width
-                },
-                duration: DURATION
-            }).play();
+            // Fx.animateProperty({
+            //     node: node,
+            //     properties: {
+            //         height: height
+            //     },
+            //     duration: DURATION,
+            //     onEnd: function() {
+            //       domClass.toggle(node, 'active');
+            //       $('#tree-widget-container').css('height', '95%');
+            //       $('#layer-content').css('height', '100%');
+            //     }
+            // }).play();
+            domClass.toggle(node, 'active');
+            $(node).css('height', height);
+            $(node).css('width', width);
+            $('#tree-title').css('width', width);
+            $(node).css('treeTitle', treeTitle);
 
-            Fx.animateProperty({
-                node: treeTitle,
-                properties: {
-                    width: width
-                },
-                duration: DURATION
-            }).play();
+            $('#tree-widget-container').css('height', '95%');
+            $('#layer-content').css('height', '100%');
+
+            // Fx.animateProperty({
+            //     node: node,
+            //     properties: {
+            //         width: width
+            //     },
+            //     duration: DURATION
+            // }).play();
+            //
+            // Fx.animateProperty({
+            //     node: treeTitle,
+            //     properties: {
+            //         width: width
+            //     },
+            //     duration: DURATION
+            // }).play();
 
         },
 

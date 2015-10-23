@@ -1,9 +1,5 @@
 define(["esri/InfoTemplate"], function(InfoTemplate) {
 
-    // var indigenousLandsUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/CommunityLevel/MapServer';
-    // var nationalLevelUrl = 'http://gis.wri.org/arcgis/rest/services/IndigenousCommunityLands/NationalLevel/MapServer';
-    // var indigenousLandsInfo = "Placeholder so this layer's info icon appears in the tree";
-    // var landTenureSecurityInfo = "Placeholder so this layer's info icon appears in the tree";
     var landTenureURL = 'http://gis.wri.org/arcgis/rest/services/LandMark/land_tenure/MapServer';
     var percentLandsUrl = 'http://gis.wri.org/arcgis/rest/services/LandMark/pct_comm_lands/MapServer';
 
@@ -30,12 +26,6 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
         },
 
         layers: {
-          // 'nationalLevel': {
-          //     url: nationalLevelUrl,
-          //     type: 'dynamic',
-          //     defaultLayers: [-1], //[1,2,3,4]
-          //     visible: true
-          // },
 
           //Percent of Indigenous and Community Lands layer
           'percentLands': {
