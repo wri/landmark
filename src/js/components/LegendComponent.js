@@ -144,6 +144,7 @@ define([
             } else if (item.layer.indexOf('community') > -1) {
               legendItem.family = 'Community Lands';
             } else if (item.layer === 'percentLands') {
+              legendItem.label = true;
               legendItem.family = 'Percent of Indigenous & Community Lands';
             } else if (item.layer === 'landTenure') {
               if (item.visibleLayers[0] === 0 || item.visibleLayers[0] === 2) {
@@ -191,7 +192,7 @@ define([
                 
                 React.createElement("div", {className: "legend-item-group"}, layer.group), 
                   layer.legend.map(function(legendObject, i){
-                    return React.createElement("div", {className: 'legend-item-name ' + (label === 'AVERAGE SCORE' ? 'average' : '')}, React.createElement("img", {className: "legend-item-img", src: 'data:image/png;base64,'+legendObject.imageData}), legendObject.label)
+                    return React.createElement("div", {className: 'legend-item-name ' + (label ? 'average' : '')}, React.createElement("img", {className: "legend-item-img", src: 'data:image/png;base64,'+legendObject.imageData}), legendObject.label)
                   })
 
               )

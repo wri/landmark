@@ -1273,7 +1273,6 @@ define([
               for (var attr in item.feature.attributes) {
                   if (!item.feature.attributes[attr] || item.feature.attributes[attr] === 'undefined' || item.feature.attributes[attr] === "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
                       if (attr.indexOf('Notes') !== -1) {
-                        
                           item.feature.attributes[attr] = "Unknown";
                       } else {
                           item.feature.attributes[attr] = '';
