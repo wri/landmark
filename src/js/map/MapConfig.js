@@ -546,49 +546,57 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
           layer: 3,
           subLayer: true
         }, {
-          label: 'Indigenous Lands (only)',
+          label: 'Indigenous Lands (only) - Coming soon',
           id: 'percentIndigNational',
-          subTitle: true
+          subTitle: true,
+          comingSoon: true
         }, {
           label: 'Total',
           id: 'indigTotal',
           question: false,
           layer: 5,
-          subLayer: true
+          subLayer: true,
+          comingSoon: true
         }, {
           label: 'Formally recognized',
           id: 'indigFormal',
           question: false,
           layer: 6,
-          subLayer: true
+          subLayer: true,
+          comingSoon: true
         }, {
           label: 'Not formally recognized',
           id: 'indigInformal',
           question: false,
           layer: 7,
-          subLayer: true
+          subLayer: true,
+          comingSoon: true
         }, {
-          label: 'Community Lands (only)',
+          label: 'Community Lands (only) - Coming soon',
           id: 'percentNonIndigenous',
-          subTitle: true
+          subTitle: true,
+          comingSoon: true
         }, {
           label: 'Total',
           id: 'commTotal',
           question: false,
           layer: 9,
-          subLayer: true
+          subLayer: true,
+          comingSoon: true
         }, {
           label: 'Formally recognized',
           id: 'commFormal',
           question: false,
           layer: 10,
-          subLayer: true
+          subLayer: true,
+          comingSoon: true
         }, {
           label: 'Not formally recognized',
           id: 'commInformal',
           question: false,
           layer: 11,
-          subLayer: true
+          subLayer: true,
+          comingSoon: true
         }],
         // Only leafs in the tree should control any layers, use blank arrays for any branch or root nodes
         layerMapping: {

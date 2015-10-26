@@ -50,9 +50,11 @@ define([
 			var subTitle = item.subTitle;
 			var subLayer = item.subLayer;
 			var layer = item.layer;
+			var comingSoon = item.comingSoon;
+
 
 			return (
-				<div className={'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '')} key={item.id} onClick={layer != undefined ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>
+				<div className={'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '') + (comingSoon ? ' comingSoon' : '')} key={item.id} onClick={layer != undefined && !comingSoon ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>
 					<div className='national-layer-list-item-label'>{item.label}</div>
 					{
 						item.question ?

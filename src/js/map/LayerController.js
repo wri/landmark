@@ -204,7 +204,7 @@ define([
             arrayUtils.forEach(visibleLayers, function(layer) {
                 layerDrawingOptionsArray[layer] = layerDrawingOption;
             });
-
+            
 
             landTenure.setLayerDrawingOptions(layerDrawingOptionsArray);
             topic.publish('refresh-legend');

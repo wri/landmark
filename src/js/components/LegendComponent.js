@@ -24,6 +24,7 @@ define([
       });
 
       this.objSort(visLayersInfo, ['fakeLayer', true], 'group');
+      //todo: sort within formally recognized and not formally recognized
 
       return {
         layerInfos: brApp.layerInfos,

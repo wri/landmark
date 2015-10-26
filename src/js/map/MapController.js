@@ -1273,7 +1273,7 @@ define([
               for (var attr in item.feature.attributes) {
                   if (!item.feature.attributes[attr] || item.feature.attributes[attr] === 'undefined' || item.feature.attributes[attr] === "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
                       if (attr.indexOf('Notes') !== -1) {
-                          item.feature.attributes[attr] = "Unknown";
+                          item.feature.attributes[attr] = "None";
                       } else {
                           item.feature.attributes[attr] = '';
                       }
@@ -1659,7 +1659,7 @@ define([
 
                 $("#identifyNote").remove();
 
-                var extraContent = "<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:10px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended. The Data Completeness layer provides a broad assesment of the completeness of the indigenous and community lands data layer for a reference.</div></div>";
+                var extraContent = "<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:10px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended.</div></div>";
 
 
                 $('.esriPopupWrapper').append(extraContent);
@@ -1764,6 +1764,7 @@ define([
                 "callbackParamName": "callback"
             });
             requestHandle.then(function(response) {
+
                 var noReviewSymbol, lawSilentSymbol, legalAddressesSymbol,
                     legalMeetsSymbol, legalFullyMeetsSymbol, notApplicableSymbol,
                     renderer;

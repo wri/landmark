@@ -29,7 +29,7 @@ define([
          * @return {UniqueValueRenderer - object} The Created Unique Value Renderer Ready to Use on a Dynamic Layer
          */
         getUniqueValueRendererForNationalDataWithField: function(fieldName, layer) {
-
+          
             var noReviewSymbol, lawSilentSymbol, legalAddressesSymbol,
                 legalMeetsSymbol, legalFullyMeetsSymbol, notApplicableSymbol,
                 renderer;
@@ -86,11 +86,11 @@ define([
                 label: brApp.landTenureRenderer.uniqueValueInfos[5].label
             });
 
-            renderer.addValue({
-                value: brApp.landTenureRenderer.uniqueValueInfos[6].value,
-                symbol: brApp.landTenureRenderer.uniqueValueInfos[6].symbol,
-                label: brApp.landTenureRenderer.uniqueValueInfos[6].label
-            });
+            // renderer.addValue({
+            //     value: brApp.landTenureRenderer.uniqueValueInfos[6].value,
+            //     symbol: brApp.landTenureRenderer.uniqueValueInfos[6].symbol,
+            //     label: brApp.landTenureRenderer.uniqueValueInfos[6].label
+            // });
 
             renderer.attributeField = fieldName;
 
