@@ -23,8 +23,7 @@ define([
         }
       });
 
-      this.objSort(visLayersInfo, ['fakeLayer', true], 'group');
-      //todo: sort within formally recognized and not formally recognized
+      this.objSort(visLayersInfo, ['fakeLayer', true], 'group', 'layer');
 
       return {
         layerInfos: brApp.layerInfos,
@@ -107,7 +106,7 @@ define([
         }
       });
 
-      this.objSort(visLayersInfo, ['fakeLayer', true], 'group');
+      this.objSort(visLayersInfo, ['fakeLayer', true], 'group', 'layer');
 
       this.setState({
 				'visibleLayersInfo': visLayersInfo
