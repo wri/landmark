@@ -4,7 +4,7 @@
     var base = location.pathname.replace(/\/[^/]+$/, ''),
         isWordpress = location.hostname.search('landmark.blueraster.io') > -1,
         base = isWordpress ? base.replace('map', 'map-app') : base,
-        appVersion = '1.1.0',
+        appVersion = '1.1.1',
         esriVersion = '3.13',
         js = [
             '//js.arcgis.com/' + esriVersion + '/init.js'
