@@ -1288,7 +1288,7 @@ define([
               var source1 = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IC_Notes + '</td></tr>' : '';
               var source2 = item.feature.attributes.I_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.I_Notes + '</td></tr>' : '';
               var source3 = item.feature.attributes.C_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.C_Notes + '</td></tr>' : '';
-
+              debugger
               //todo: ternary operation to hide any data field: if null dont show them
 
               template.content = "<div id='tableWrapper'><table id='nationalTable'>" +
@@ -1764,7 +1764,6 @@ define([
                 "callbackParamName": "callback"
             });
             requestHandle.then(function(response) {
-
                 var noReviewSymbol, lawSilentSymbol, legalAddressesSymbol,
                     legalMeetsSymbol, legalFullyMeetsSymbol, notApplicableSymbol,
                     renderer;
