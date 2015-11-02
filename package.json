@@ -2,7 +2,6 @@
   "name": "Community-Rights",
   "version": "0.1.0",
   "description": "Global Map of Indigenous and Community Lands",
-
   "scripts": {
     "start": "PORT=8080 gulp watch",
     "build": "rm -rf build && gulp build"
@@ -34,6 +33,7 @@
     "requirejs": "^2.1.15"
   },
   "devDependencies": {
-    "browser-sync": "^2.9.8"
+    "browser-sync": "^2.9.8",
+    "intern": "^3.0.6"
   }
 }
