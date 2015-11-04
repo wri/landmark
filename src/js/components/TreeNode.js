@@ -16,7 +16,7 @@ define([
 	  * Update the state of the component to hide or show the children
 	  */
 	  handleClick: function (evt) {
-	  	
+
 	  	if (this.props.node.disabled) {
 	  		return;
 	  	}
@@ -35,7 +35,7 @@ define([
 			var reactid = evt.target.getAttribute("data-reactid");
 		  	if (reactid.indexOf("community") > 0) {
 		  		evt.target.id = "community-lands-help";
-		  	}		
+		  	}
 		}
 
 	  	WidgetsController.showHelp(evt);
@@ -43,7 +43,6 @@ define([
 
 	  // handleInfo: function (evt) {
 	  // 	<span visible={this.props.node.info || false} className='tree-node-info' onClick={this.handleInfo}>{node.info}</span>
-	  // 	debugger;
 	  // },
 
 	  render: function() {
@@ -53,7 +52,7 @@ define([
 	    var childNodes;
 
 	    containerClass += (disabled ? 'layerToShow' : '');
-	    
+
 	    if (node.children) {
 	      childNodes = node.children.map(function (child, index) {
 	      	child.disabled = child.disabled || disabled;
@@ -65,7 +64,7 @@ define([
 	              handleChange: this.props.handleChange}
 	            )
 	          )
-	        );       
+	        );
 	      }, this);
 	    }
 
@@ -75,13 +74,13 @@ define([
 
 	      	React.createElement("section", {className: "tree-row-content"}, 
 		        React.createElement("span", {className: "tree-toggle-symbol", onClick: this.handleClick}, 
-		           node.children === undefined ? 
+		           node.children === undefined ?
 		            '' :
 		            (this.state.collapsed ? String.fromCharCode(43) : String.fromCharCode(8722))
 		          
 		        ), 
 		        
-		        	node.noCheckbox ? null : 
+		        	node.noCheckbox ? null :
 		        	React.createElement("input", {
 			          type: "checkbox", 
 			          checked: node.checked || false, 
@@ -90,16 +89,16 @@ define([
 		         	), 
 		        
 		         React.createElement("span", {className: node.disabled ? 'tree-node-label-disabled' : 'tree-node-label', onClick: this.handleClick}, node.label), 
-					 node.info ? 
+					 node.info ?
 						React.createElement("span", {id: "indigenous-lands-help", onClick: this.showHelp, className: "help-marker"}): null
-							        
-		        
+					
+
 		      ), 
 	        childNodes
 	      )
 	    );
 
-	    
+
 	  }
 		/* jshint ignore:end */
 	});

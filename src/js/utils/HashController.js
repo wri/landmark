@@ -19,7 +19,7 @@ define(["dojo/hash", "dojo/topic", "dojo/_base/lang", "dojo/io-query", "dojo/_ba
             var _initialState;
             var url = window.location.href;
             var hasHash = (url.split("#").length == 2 && url.split("#")[1].length > 1);
-            //debugger;
+
             if (hasHash) {
                 _initialState = ioQuery.queryToObject(url.split("#")[1]);
             } else {
@@ -65,14 +65,12 @@ define(["dojo/hash", "dojo/topic", "dojo/_base/lang", "dojo/io-query", "dojo/_ba
 
             var that = this;
 
-            //convert to object
-            //var updateState = ioQuery.queryToObject(newHash);
 
             //merge with current hash (newState)
             var _currentState = lang.clone(currentState);
 
             lang.mixin(_currentState, updateState);
-            //debugger;
+
 
             var newHashStr = ioQuery.objectToQuery(_currentState);
 

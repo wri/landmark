@@ -6,8 +6,8 @@ define([], function() {
         corsEnabledServers: ["utility.arcgisonline.com"],
 
         defaultState: {
-            x: -19,
-            y: 19,
+            x: 102.46,
+            y: 13.47,
             l: 3 //,
             //lyrs: 'Active_Fires'
         },

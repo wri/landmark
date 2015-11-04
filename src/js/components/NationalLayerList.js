@@ -133,7 +133,6 @@ define([
     			visibleLayers = [-1];
     			break;
     		case LandTenure:
-					// debugger
 					if (this.state.landTenureCategory === LandTenureInd) {
 						console.log('activeIndigenousKey',this.state.activeIndigenousKey)
 						if (this.state.activeIndigenousKey === "averageScoreTenure") {

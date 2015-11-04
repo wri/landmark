@@ -41,9 +41,9 @@ define([
             var self = this;
 
             var wholeHash = HashController.getHash();
-            console.log(wholeHash.x)
+            //console.log(wholeHash.x)
             console.log(self.centerX)
-            console.log(wholeHash.y)
+            //console.log(wholeHash.y)
             console.log(self.centerY)
 
             var hashX = self.centerX;
@@ -61,32 +61,33 @@ define([
                 self.emit('map-ready', {});
                 // Clear out Phantom Graphics thanks to esri's graphics layer
                 self.map.graphics.clear();
-                self.map.resize();
+                // self.map.resize();
                 self.addLayers();
-            });
+                self.map.on("extent-change", function(e) {
 
-            self.map.on("extent-change", function(e) {
+                    var delta = e.delta;
+                    var extent = webMercatorUtils.webMercatorToGeographic(e.extent);
+                    var levelChange = e.levelChange;
+                    var lod = e.lod;
+                    var map = e.target;
 
-                var delta = e.delta;
-                var extent = webMercatorUtils.webMercatorToGeographic(e.extent);
-                var levelChange = e.levelChange;
-                var lod = e.lod;
-                var map = e.target;
+                    var x = number.round(extent.getCenter().x, 2);
+                    var y = number.round(extent.getCenter().y, 2);
+                    //console.log(x + ' ' + y + ' ' + lod.level);
+                    HashController.updateHash({
+                        x: x,
+                        y: y,
+                        l: lod.level
+                    });
 
-                var x = number.round(extent.getCenter().x, 2);
-                var y = number.round(extent.getCenter().y, 2);
-                //console.log(x + ' ' + y + ' ' + lod.level);
-                HashController.updateHash({
-                    x: x,
-                    y: y,
-                    l: lod.level
+                    if (brApp.map.infoWindow.isShowing) {
+                        brApp.map.infoWindow.reposition(); //TODO: What is this function actually doing??
+                    }
+
                 });
-
-                // if (brApp.map.infoWindow.isShowing) {
-                //     brApp.map.infoWindow.reposition(); //TODO: What is this function actually doing??
-                // }
-
             });
+
+
 
         },
 

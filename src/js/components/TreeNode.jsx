@@ -16,7 +16,7 @@ define([
 	  * Update the state of the component to hide or show the children
 	  */
 	  handleClick: function (evt) {
-	  	
+
 	  	if (this.props.node.disabled) {
 	  		return;
 	  	}
@@ -35,7 +35,7 @@ define([
 			var reactid = evt.target.getAttribute("data-reactid");
 		  	if (reactid.indexOf("community") > 0) {
 		  		evt.target.id = "community-lands-help";
-		  	}		
+		  	}
 		}
 
 	  	WidgetsController.showHelp(evt);
@@ -43,7 +43,6 @@ define([
 
 	  // handleInfo: function (evt) {
 	  // 	<span visible={this.props.node.info || false} className='tree-node-info' onClick={this.handleInfo}>{node.info}</span>
-	  // 	debugger;
 	  // },
 
 	  render: function() {
@@ -53,7 +52,7 @@ define([
 	    var childNodes;
 
 	    containerClass += (disabled ? 'layerToShow' : '');
-	    
+
 	    if (node.children) {
 	      childNodes = node.children.map(function (child, index) {
 	      	child.disabled = child.disabled || disabled;
@@ -65,7 +64,7 @@ define([
 	              handleChange={this.props.handleChange}
 	            />
 	          </ul>
-	        );       
+	        );
 	      }, this);
 	    }
 
@@ -75,31 +74,31 @@ define([
 
 	      	<section className='tree-row-content'>
 		        <span className='tree-toggle-symbol' onClick={this.handleClick} >
-		          { node.children === undefined ? 
+		          { node.children === undefined ?
 		            '' :
 		            (this.state.collapsed ? String.fromCharCode(43) : String.fromCharCode(8722))
 		          }
 		        </span>
 		        {
-		        	node.noCheckbox ? null : 
-		        	<input 
-			          type='checkbox' 
+		        	node.noCheckbox ? null :
+		        	<input
+			          type='checkbox'
 			          checked={node.checked || false}
 			          onChange={this.props.handleChange}
 			          data-key={node.id}
 		         	/>
 		        }
 		         <span className={node.disabled ? 'tree-node-label-disabled' : 'tree-node-label'} onClick={this.handleClick}>{node.label}</span>
-					{ node.info ? 
+					{ node.info ?
 						<span id='indigenous-lands-help' onClick={this.showHelp} className='help-marker'></span>: null
-					}		        
-		        
+					}
+
 		      </section>
 	        {childNodes}
 	      </li>
 	    );
 
-	    
+
 	  }
 		/* jshint ignore:end */
 	});
