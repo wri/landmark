@@ -1018,7 +1018,7 @@ define([
 
             var template,
                 features = [],
-                statDate
+                statDate,
                 self = this;
 
             arrayUtils.forEach(featureObjects, function(item) {
