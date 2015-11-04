@@ -20,8 +20,8 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
         options: {
             sliderPosition: 'top-right',
             basemap: 'osm',
-            centerX: -19,
-            centerY: 19,
+            centerX: 102.46,
+            centerY: 13.47,
             zoom: 3
         },
 
@@ -247,7 +247,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'indigenousLands'
           },
           {
-            label: 'Occupied or used without formal land claim',
+            label: 'Occupied or used without formal land petition',
             id: 'indigenous_Occupied',
             checked: true,
             group: 'indigenousLands'
@@ -287,7 +287,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'communityLands'
           },
           {
-            label: 'Occupied or used without formal land claim',
+            label: 'Occupied or used without formal land petition',
             id: 'community_Occupied',
             checked: true,
             group: 'communityLands'

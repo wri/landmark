@@ -41,6 +41,10 @@ define([
             var self = this;
 
             var wholeHash = HashController.getHash();
+            console.log(wholeHash.x)
+            console.log(self.centerX)
+            console.log(wholeHash.y)
+            console.log(self.centerY)
 
             var hashX = self.centerX;
             var hashY = self.centerY;
@@ -48,7 +52,7 @@ define([
 
             self.map = new Map(this.element, {
                 basemap: this.basemap,
-                center: [wholeHash.x, wholeHash.y],
+                center: [self.centerX, self.centerY],
                 sliderPosition: this.sliderPosition,
                 zoom: wholeHash.l
             });
@@ -59,7 +63,6 @@ define([
                 self.map.graphics.clear();
                 self.map.resize();
                 self.addLayers();
-                // registry.byId("legend").refresh();
             });
 
             self.map.on("extent-change", function(e) {

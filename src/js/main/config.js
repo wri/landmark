@@ -28,7 +28,7 @@ define([], function() {
         //     " Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet," +
         //     " felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu.</p>"
 
-        welcomeDialogContent: "<div style='font-size:14px;'><p class='launch-dialog-content'><span class='introTextTitle'>Landmark</span> is designed to help indigenous peoples and communities protect their lands. To achieve this goal, the platform must be current and comprehensive. Please help us by sharing your impressions and your information on collective lands (<a class='introTextTitle' href='contact.html'>Contact Us</a>).</p></div>"
+        welcomeDialogContent: "<div style='font-size:14px;'><p class='launch-dialog-content'>LandMark is a work in progress. New maps and information are continuously added to the platform, but many gaps remain. <span class='introTextStrong'>Note that the absence of data does not indicate the absence of indigenous or community land.</span> Please help us to improve the completeness of the platform by sharing your information on indigenous and community lands (<a class='introTextTitle' href='./contact-us/' target='_blank'>Contact Us</a>).</p></div>"
     };
 
     return config;
