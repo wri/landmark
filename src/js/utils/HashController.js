@@ -52,10 +52,6 @@ define(["dojo/hash", "dojo/topic", "dojo/_base/lang", "dojo/io-query", "dojo/_ba
             var mapView = newState.v == "map";
             var centerChange = ((oldState.x != newState.x) || (oldState.y != newState.y) || (oldState.y != newState.y));
 
-            if (mapView && centerChange) {
-                EventsController.centerChange(newState);
-            }
-
             currentState = newState; //important
 
         };
