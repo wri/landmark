@@ -1092,7 +1092,7 @@ define([
                 if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '' || item.feature.attributes.More_info == 'Unknown') {
                     template.content += '</div>';
                 } else {
-                    template.content += '<div><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></div></div>';
+                    template.content += '<span><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></span></div>';
                 }
 
                 var newLayerID;
@@ -1218,7 +1218,7 @@ define([
                 if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '' || item.feature.attributes.More_info == 'Unknown') {
                     template.content += '</div>';
                 } else {
-                    template.content += '<div><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></div></div>';
+                    template.content += '<span><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></span></div>';
                 }
 
                 var newLayerID;
