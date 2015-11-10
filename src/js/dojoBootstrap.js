@@ -2,9 +2,9 @@
     'use strict';
 
     var base = location.pathname.replace(/\/[^/]+$/, ''),
-        isWordpress = location.hostname.search('landmark.blueraster.io') > -1,
+        isWordpress = location.hostname.search('wordpress-2412-6878-68172.cloudwaysapps.com') > -1,
         base = isWordpress ? base.replace('map', 'map-app') : base,
-        appVersion = '1.1.2',
+        appVersion = '1.1.3',
         esriVersion = '3.13',
         js = [
             '//js.arcgis.com/' + esriVersion + '/init.js'
