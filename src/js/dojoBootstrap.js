@@ -2,7 +2,7 @@
     'use strict';
 
     var base = location.pathname.replace(/\/[^/]+$/, ''),
-        isWordpress = location.hostname.search('wordpress-2412-6878-68172.cloudwaysapps.com') > -1,
+        isWordpress = location.hostname.search('landmarkmap.org') > -1,
         base = isWordpress ? base.replace('map', 'map-app') : base,
         appVersion = '1.1.3',
         esriVersion = '3.13',
