@@ -1030,7 +1030,7 @@ define([
 
                 if (!ethn1 || ethn1 == ' ' || ethn1 == 'Null') {
                     ethnStr = 'Unknown';
-                } else if (ethn1 && !ethn2) {
+                } else if (ethn1 && !ethn2 || ethn1 && ethn2 == 'Null') {
                     ethnStr = ethn1;
                 } else if (ethn1 && ethn2 && !ethn3) {
                     ethnStr = ethn1 + ", " + ethn2;
@@ -1150,13 +1150,14 @@ define([
 
                 if (!ethn1 || ethn1 == ' ' || ethn1 == 'Null') {
                     ethnStr = 'Unknown';
-                } else if (ethn1 && !ethn2) {
+                } else if (ethn1 && !ethn2 || ethn1 && ethn2 == 'Null') {
                     ethnStr = ethn1;
                 } else if (ethn1 && ethn2 && !ethn3) {
                     ethnStr = ethn1 + ", " + ethn2;
                 } else {
                     ethnStr = ethn1 + ", " + ethn2 + ", " + ethn3;
                 }
+                
 
                 var popStr;
 
@@ -1302,7 +1303,7 @@ define([
               // "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.C_T + ' ' + item.feature.attributes.C_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.C_F + ' ' + item.feature.attributes.C_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.C_NF + ' ' + item.feature.attributes.C_NF_Src + '</div></td></tr>' +
               source3 +
               '</table></div>' +
-              "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
+              "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
 
 
                 for (var j = 0; j < brApp.layerInfos.length; j++) {
@@ -1400,7 +1401,7 @@ define([
                   "<tr class='odd-row'><td class='popup-header nationalField'>Q8: Rights to Trees</td><td>" + item.feature.attributes.I8_Scr + '</td></tr>' +
                   "<tr class='even-row'><td class='popup-header nationalField'>Q9: Rights to Water</td><td>" + item.feature.attributes.I9_Scr + '</td></tr>' +
                   "<tr class='odd-row'><td class='popup-header nationalField'>Q10: Land Rights in Protected Areas</td><td>" + item.feature.attributes.I10_Scr + '</td></tr></table></div>' +
-                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
+                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
 
                 } else { //1 & 3
                   template.content = "<div id='tableWrapper'><table id='landTenureTable'>" +
@@ -1412,7 +1413,7 @@ define([
                   "<tr class='odd-row'><td class='popup-header nationalField'>Additional comments</td><td>" + item.feature.attributes['I' + indNumber + '_AddInfo'] + '</td></tr>' +
                   "<tr class='even-row'><td class='popup-header nationalField'>Review source (Year)</td><td>" + item.feature.attributes['I' + indNumber + '_Rev'] + '(' + item.feature.attributes['I' + indNumber + '_Year'] + ')</td></tr></table></div>' +
 
-                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
+                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
                 }
 
                 //might have to be for 0 & 2 only
@@ -1597,7 +1598,7 @@ define([
 
                 template.setContent("<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Formal Recognition</b></td><td class='rec_status'><b>Documentation Status</b></td></tr><tr id='fillerColumn' style='height: 36px;'><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td></tr>");
 
-                var fields = ["Country", "Name", "Identity", "Formal Recognition", "Documentation Status"];
+                var fields = ["Country", "Name", "Identity", "Recognition Status", "Documentation Status"];
 
                 brApp.csv = fields.join(",") + '\n';
 
@@ -1621,7 +1622,7 @@ define([
                             graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
                             graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
                             graphic.feature.attributes.Doc_Status + "</td></tr>";
-                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec];
+                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status];
                         brApp.csv += fieldValues.join(",") + '\n';
 
                     } else {
@@ -1630,7 +1631,7 @@ define([
                             graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
                             graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
                             graphic.feature.attributes.Doc_Status + "</td></tr>";
-                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec];
+                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status];
                         brApp.csv += fieldValues.join(",") + '\n';
                     }
                     return str;
