@@ -218,7 +218,7 @@ body:not(.mobile) .mobile-menu-toggle-button
 		margin 0px !important
 
 
-@media (max-width: 500px)
+@media (max-width 500px)
 	#legendMenuButton
 		border-top-right-radius 5px
 		border-bottom-right-radius 5px
@@ -228,3 +228,16 @@ body:not(.mobile) .mobile-menu-toggle-button
 		-webkit-border-bottom-right-radius 5px
 	#toolsMenuButton
 		display none !important
+
+@media (max-width 800px)
+	.popup-last
+		position absolute
+		left 0
+		right 0
+		bottom 0
+	#tableWrapper
+		height inherit
+		margin-bottom 60px
+	// .contentPane > div
+	// 	transition-property none !important
+	// 	transform none !important
