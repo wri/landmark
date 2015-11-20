@@ -1218,8 +1218,8 @@ define([
                 if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '' || item.feature.attributes.More_info == 'Unknown') {
                     // template.content += '</div>';
                     template.content += '</div><div class="popup-last">Date uploaded: ' + item.feature.attributes.Upl_Date + '</div>';
-                } else {
-                  template.content += '<span><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></span></div><div class="popup-last">Date uploaded: ' + item.feature.attributes.Upl_Date + '</div>';
+                } else {//should this More_info be INSIDE of the next div??
+                  template.content += '</div><div class="popup-last">Date uploaded: ' + item.feature.attributes.Upl_Date + '<span><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></span></div>';
               }
 
                 var newLayerID;
