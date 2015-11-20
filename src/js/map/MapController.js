@@ -1216,7 +1216,8 @@ define([
                     // "<div class='popup-last'>Date uploaded: " + item.feature.attributes.Upl_Date);
 
                 if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '' || item.feature.attributes.More_info == 'Unknown') {
-                    template.content += '</div>';
+                    // template.content += '</div>';
+                    template.content += '</div><div class="popup-last">Date uploaded: ' + item.feature.attributes.Upl_Date + '</div>';
                 } else {
                   template.content += '<span><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></span></div><div class="popup-last">Date uploaded: ' + item.feature.attributes.Upl_Date + '</div>';
               }
@@ -1399,8 +1400,8 @@ define([
                   "<tr class='even-row'><td class='popup-header nationalField'>Q7: Right to Consent Before Land Acquisition</td><td>" + item.feature.attributes.I7_Scr + '</td></tr>' +
                   "<tr class='odd-row'><td class='popup-header nationalField'>Q8: Rights to Trees</td><td>" + item.feature.attributes.I8_Scr + '</td></tr>' +
                   "<tr class='even-row'><td class='popup-header nationalField'>Q9: Rights to Water</td><td>" + item.feature.attributes.I9_Scr + '</td></tr>' +
-                  "<tr class='odd-row'><td class='popup-header nationalField'>Q10: Land Rights in Protected Areas</td><td>" + item.feature.attributes.I10_Scr + '</td></tr></table></div>' +
-                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
+                  "<tr class='odd-row'><td class='popup-header nationalField'>Q10: Land Rights in Protected Areas</td><td>" + item.feature.attributes.I10_Scr + '</td></tr></table></div>';
+
 
                 } else { //1 & 3
                   template.content = "<div id='tableWrapper'><table id='landTenureTable'>" +
@@ -1410,11 +1411,11 @@ define([
                   "<tr class='odd-row'><td class='popup-header nationalField'>Justification of score</td><td>" + item.feature.attributes['I' + indNumber + '_Com'] + '</td></tr>' +
                   "<tr class='even-row'><td class='popup-header nationalField'>Laws and provisions reviewed</td><td>" + item.feature.attributes['I' + indNumber + '_LaP'] + '</td></tr>' +
                   "<tr class='odd-row'><td class='popup-header nationalField'>Additional comments</td><td>" + item.feature.attributes['I' + indNumber + '_AddInfo'] + '</td></tr>' +
-                  "<tr class='even-row'><td class='popup-header nationalField'>Review source (Year)</td><td>" + item.feature.attributes['I' + indNumber + '_Rev'] + '(' + item.feature.attributes['I' + indNumber + '_Year'] + ')</td></tr></table></div>' +
+                  "<tr class='even-row'><td class='popup-header nationalField'>Review source (Year)</td><td>" + item.feature.attributes['I' + indNumber + '_Rev'] + '(' + item.feature.attributes['I' + indNumber + '_Year'] + ')</td></tr></table></div>';
 
-                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
+                  // "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
                 }
-
+                template.content += "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
                 //might have to be for 0 & 2 only
 
 
