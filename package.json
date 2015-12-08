@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.9.8",
+    "esrislurp": "^1.2.3",
     "intern": "^3.0.6"
   }
 }

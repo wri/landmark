@@ -5,17 +5,18 @@
         isWordpress = location.hostname.search('landmarkmap.org') > -1,
         base = isWordpress ? base.replace('map', 'map-app') : base,
         appVersion = '1.1.11',
-        esriVersion = '3.13',
+        // esriVersion = '3.13',
         js = [
-            '//js.arcgis.com/' + esriVersion + '/init.js'
+            '/libs/esri_api/init.js'
         ],
         css = [
-            '//js.arcgis.com/' + esriVersion + '/esri/css/esri.css',
-            '//js.arcgis.com/' + esriVersion + '/dijit/themes/tundra/tundra.css'
+            '/libs/esri_api/esri/css/esri.css',
+            '/libs/esri_api/dijit/themes/tundra/tundra.css'
         ],
         config = {
             parseOnLoad: true,
             async: true,
+            baseUrl: base,
             cacheBust: "v=" + appVersion,
             packages: [{
                 name: 'js',
@@ -24,6 +25,30 @@
                 name: 'libs',
                 location: base + '/libs'
             }, {
+                name: 'esri',
+                location: base + '/libs/esri_api/esri'
+              }, {
+                name: 'dojox',
+                location: base + '/libs/esri_api/dojox'
+              }, {
+                name: 'dojo',
+                location: base + '/libs/esri_api/dojo'
+              }, {
+                name: 'dgrid',
+                location: base + '/libs/esri_api/dgrid'
+              }, {
+                name: 'dstore',
+                location: base + '/libs/esri_api/dstore'
+              }, {
+                name: 'put-selector',
+                location: base + '/libs/esri_api/put-selector'
+              }, {
+                name: 'xstyle',
+                location: base + '/libs/esri_api/xstyle'
+          }, {
+            name: 'dijit',
+            location: base + '/libs/esri_api/dijit'
+        }, {
                 name: 'main',
                 location: base + '/js/main'
             }, {
@@ -37,7 +62,7 @@
                 location: base + '/js/components'
             }],
             aliases: [
-                ['react', 'https://fb.me/react-0.13.0.min.js']
+                ['react', 'libs/react/dist/react.min.js']
             ],
             deps: [
                 "dojo/domReady!"
