@@ -278,7 +278,8 @@ define([
 
             searchWidget = new Search({
               map: brApp.map,
-              showArcGISBasemaps: true
+              showArcGISBasemaps: true,
+              showInfoWindowOnSelect: false
             }, 'esri-search-holder');
 
             var sources = searchWidget.get("sources");
@@ -286,21 +287,43 @@ define([
             sources.push({
               featureLayer: new FeatureLayer(
                 // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer/1', {
-                  outFields: ['Name'],}
-                ),
-                searchFields: ['Name'],
-                displayField: 'Name',
-                exactMatch: false,
-                outFields: ['Name', 'Form_Rec', 'Country'],
-                name: 'CommFormDoc',
-                placeholder: 'Search',
-                enableSuggestions: true
-              })
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer/1',
+                 {outFields: ['Name']}
+              ),
+              searchFields: ['Name'],
+              displayField: 'Name',
+              exactMatch: false,
+              outFields: ['*'],
+              name: 'CommFormDoc',
+              placeholder: 'Search',
+              enableSuggestions: true
+            });
 
-              searchWidget.set("sources", sources);
+            searchWidget.set("sources", sources);
 
             searchWidget.startup();
+
+            searchWidget.on('select-result', function(results) {
+              console.log(results.result);
+              var features = self.setCommunityTemplates([results.result]);
+
+              if (features.length > 0) {
+                console.log(features);
+                brApp.map.infoWindow.setFeatures(features);
+                brApp.map.infoWindow.resize(375, 600);
+                $("#identifyNote").remove();
+
+                brApp.map.infoWindow.show(brApp.map.extent.getCenter());
+
+                if (window.innerWidth < 1000) {
+                  brApp.map.infoWindow.maximize();
+                  $(".esriPopup .contentPane").css("height", "inherit");
+                }
+                on.once(brApp.map.infoWindow, "hide", function() {
+                  brApp.map.infoWindow.resize(375, 600);
+                });
+              }
+            })
 
 
             self.getLandTenureRenderer();
