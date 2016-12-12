@@ -24,6 +24,7 @@ define([
     'esri/dijit/Legend',
     'esri/dijit/HomeButton',
     'esri/dijit/BasemapGallery',
+    'esri/dijit/Search',
     'esri/dijit/Scalebar',
     "esri/request",
     "esri/geometry/Point",
@@ -35,9 +36,10 @@ define([
     "esri/tasks/QueryTask",
     "dijit/form/HorizontalSlider",
     "dijit/form/HorizontalRuleLabels",
-    "esri/layers/LayerDrawingOptions"
+    "esri/layers/LayerDrawingOptions",
+    'esri/layers/FeatureLayer'
 
-], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, LegendComponent, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
+], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, LegendComponent, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
 
     'use strict';
 
@@ -242,6 +244,7 @@ define([
                 tabContainer,
                 legendComponent,
                 homeWidget,
+                searchWidget,
                 scalebar,
                 node;
 
@@ -272,6 +275,27 @@ define([
             // Start all widgets that still need to be started
             basemapGallery.startup();
             homeWidget.startup();
+
+            searchWidget = new Search({
+                map: brApp.map,
+                showArcGISBasemaps: true,
+                sources: [{
+                  featureLayer: new FeatureLayer(
+                    // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                    'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer/1', {
+                      outFields: ['Name'],}
+                    ),
+                  searchFields: ['Name'],
+                  displayField: 'Name',
+                  exactMatch: false,
+                  outFields: ['Name', 'Form_Rec', 'Country'],
+                  name: 'CommFormDoc',
+                  placeholder: 'Search',
+                  enableSuggestions: true
+                }]
+            }, 'esri-search-holder');
+
+            searchWidget.startup();
 
 
             self.getLandTenureRenderer();
