@@ -277,23 +277,28 @@ define([
             homeWidget.startup();
 
             searchWidget = new Search({
-                map: brApp.map,
-                showArcGISBasemaps: true,
-                sources: [{
-                  featureLayer: new FeatureLayer(
-                    // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-                    'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer/1', {
-                      outFields: ['Name'],}
-                    ),
-                  searchFields: ['Name'],
-                  displayField: 'Name',
-                  exactMatch: false,
-                  outFields: ['Name', 'Form_Rec', 'Country'],
-                  name: 'CommFormDoc',
-                  placeholder: 'Search',
-                  enableSuggestions: true
-                }]
+              map: brApp.map,
+              showArcGISBasemaps: true
             }, 'esri-search-holder');
+
+            var sources = searchWidget.get("sources");
+
+            sources.push({
+              featureLayer: new FeatureLayer(
+                // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer/1', {
+                  outFields: ['Name'],}
+                ),
+                searchFields: ['Name'],
+                displayField: 'Name',
+                exactMatch: false,
+                outFields: ['Name', 'Form_Rec', 'Country'],
+                name: 'CommFormDoc',
+                placeholder: 'Search',
+                enableSuggestions: true
+              })
+
+              searchWidget.set("sources", sources);
 
             searchWidget.startup();
 
