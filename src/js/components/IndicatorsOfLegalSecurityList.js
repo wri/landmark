@@ -18,7 +18,7 @@ define([
 		data: array of data
 		each item in the array must have id, label properties, with an optional question property
 	*/
-	var LayerList = React.createClass({
+	var LayerList = React.createClass({displayName: "LayerList",
 
 		getInitialState: function () {
 
@@ -38,9 +38,9 @@ define([
 		/* jshint ignore:start */
 		render: function () {
 			return (
-				<div className={this.props.class || 'national-level-layer-list'}>
-					{this.props.data.map(this.dataMapper, this)}
-				</div>
+				React.createElement("div", {className: this.props.class || 'national-level-layer-list'}, 
+					this.props.data.map(this.dataMapper, this)
+				)
 			);
 		},
 
@@ -54,14 +54,14 @@ define([
 
 
 			return (
-				<div className={'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '') + (comingSoon ? ' comingSoon' : '')} key={item.id} onClick={layer != undefined && !comingSoon ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>
-					<div className='national-layer-list-item-label'>{item.label}</div>
-					{
+				React.createElement("div", {className: 'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '') + (comingSoon ? ' comingSoon' : ''), key: item.id, onClick: layer != undefined && !comingSoon ? this.setActiveLayer.bind(this, item.id, item.layer) : null}, 
+					React.createElement("div", {className: "national-layer-list-item-label"}, item.label), 
+					
 						item.question ?
-						<div className='national-layer-list-item-question'>{item.question}</div> :
+						React.createElement("div", {className: "national-layer-list-item-question"}, item.question) :
 						null
-					}
-				</div>
+					
+				)
 			);
 		},
 		/* jshint ignore:end */
@@ -81,7 +81,7 @@ define([
 	* Main Controlling List
 	*/
 
-	var NationalLayerList = React.createClass({
+	var IndicatorsOfLegalSecurityList = React.createClass({displayName: "IndicatorsOfLegalSecurityList",
 
 		// If changing defaults, changing landTenureCategory to LandTenureCom requires
 		// you to change the layer as well, see below:
@@ -175,15 +175,6 @@ define([
     	});
     },
 
-    changePercentIndigenousLayer: function (key, layer) {
-			if (!layer) {
-				return;
-			}
-    	this.setState({
-    		activePercentIndigenousLayer: layer
-    	});
-    },
-
     changeLandTenureLayer: function (key, layer) {
     	// If layer === 0, update Active Community Key, else, update Active Indigenous Key
     	if (layer === 0 || layer === 1) {
@@ -198,86 +189,39 @@ define([
 
     },
 
-    handleRadioChange: function (evt) {
-			var value = evt.target.getAttribute('value');
-    	this.setState({
-    		active: value
-    	});
-    },
-
     /* jshint ignore:start */
     render: function () {
-//<LayerList class='percent-indigenous-tree' data={MapConfig.percentIndigenousLayersCombined} change={this.changePercentIndigenousLayer} />
-//<LayerList class='percent-indigenous-tree' data={MapConfig.percentIndigenousLayersCombined} change={this.layer ? this.changePercentIndigenousLayer : ''} />
 
     	return (
-    		<div className='national-level-layer-lists'>
-
-                <div className='radio-button-container'>
-                    <label>
-                        <span
-														id='nationalLevelPercent'
-                            name='national-layer-selection'
-                            type='radio'
-                            value={PercentIndigenous}
-														className={this.state.active === PercentIndigenous ? 'checked' : 'unchecked'}
-                            checked={this.state.active === PercentIndigenous}
-                            onClick={this.handleRadioChange} />
-                        <span className='national-layer-selection-label'>Percent of Indigenous and Community Lands</span>
-                    </label>
-                </div>
-
-                <div className='percent-indigenous-layer-list'
-                         style={{'display': (this.state.active === PercentIndigenous ? 'block' : 'none')}}>
-
-												 <LayerList class='percent-indigenous-tree' data={MapConfig.percentIndigenousLayersCombined} change={this.changePercentIndigenousLayer} />
-
-                </div>
-
-    			<div className='radio-button-container'>
-    				<label>
-    					<span
-									id='nationalLevelIndicators'
-                  name='national-layer-selection'
-                  type='radio'
-                  value={LandTenure}
-									className={this.state.active === LandTenure ? 'checked' : 'unchecked'}
-                  checked={this.state.active === LandTenure}
-                  onClick={this.handleRadioChange} />
-    					<span className='national-layer-selection-label'>Indicators of the Legal Security of Indigenous and Community Lands</span>
-
-    				</label>
-    			</div>
-
-    			<div className='land-tenure-layer-list'
-    					 style={{'display': (this.state.active === LandTenure ? 'block' : 'none')}}>
-							 <div className='land-tenure-menu-explanation'>Choose Indicators for Indigenous or Community land:</div>
-    					 <div className='land-tenure-menu-controls'>
-    					   <span id={LandTenureInd} onClick={this.changeLandTenureCategory}
-    					   			 className={'land-tenure-menu-button ' + (this.state.landTenureCategory === LandTenureInd ? 'active' : '')}
-    					   >Indigenous</span>
-    					   <span id={LandTenureCom} onClick={this.changeLandTenureCategory}
-    					   			 className={'land-tenure-menu-button ' + (this.state.landTenureCategory === LandTenureCom ? 'active' : '')}
-    					   >Community</span>
-    					 </div>
+    		React.createElement("div", {className: "national-level-layer-lists"}, 
+    			React.createElement("div", {className: "land-tenure-layer-list"}, 
+							 React.createElement("div", {className: "land-tenure-menu-explanation"}, "Choose Indicators for Indigenous or Community land:"), 
+    					 React.createElement("div", {className: "land-tenure-menu-controls"}, 
+    					   React.createElement("span", {id: LandTenureInd, onClick: this.changeLandTenureCategory, 
+    					   			 className: 'land-tenure-menu-button ' + (this.state.landTenureCategory === LandTenureInd ? 'active' : '')
+    					   }, "Indigenous"), 
+    					   React.createElement("span", {id: LandTenureCom, onClick: this.changeLandTenureCategory, 
+    					   			 className: 'land-tenure-menu-button ' + (this.state.landTenureCategory === LandTenureCom ? 'active' : '')
+    					   }, "Community")
+    					 ), 
 
 
-    					 <div className={'indigenous-national-list' + (this.state.landTenureCategory === LandTenureInd ? '' : ' hidden')}>
-    					   <LayerList data={MapConfig.landTenureIndigenousLayers} change={this.changeLandTenureLayer} />
-    					 </div>
+    					 React.createElement("div", {className: 'indigenous-national-list' + (this.state.landTenureCategory === LandTenureInd ? '' : ' hidden')}, 
+    					   React.createElement(LayerList, {data: MapConfig.landTenureIndigenousLayers, change: this.changeLandTenureLayer})
+    					 ), 
 
-    					 <div className={'community-national-list' + (this.state.landTenureCategory === LandTenureCom ? '' : ' hidden')}>
-    					   <LayerList data={MapConfig.landTenureCommunityLayers} change={this.changeLandTenureLayer} />
-    					 </div>
+    					 React.createElement("div", {className: 'community-national-list' + (this.state.landTenureCategory === LandTenureCom ? '' : ' hidden')}, 
+    					   React.createElement(LayerList, {data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer})
+    					 )
 
-    			</div>
-    		</div>
+    			)
+    		)
     	);
     }
     /* jshint ignore:end */
 
 	});
 
-	return NationalLayerList;
+	return IndicatorsOfLegalSecurityList;
 
 });

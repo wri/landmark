@@ -270,24 +270,7 @@ define([
     					   React.createElement(LayerList, {data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer})
     					 )
 
-    			), 
-
-                React.createElement("div", {className: "radio-button-container"}, 
-                    React.createElement("label", null, 
-                        React.createElement("span", {
-                            id: "nationalLevelNone", 
-                            name: "national-layer-selection", 
-                            type: "radio", defaultChecked: true, 
-                            value: "none", 
-														className: this.state.active === 'none' ? 'checked' : 'unchecked', 
-                            checked: this.state.active === 'none', 
-                            onClick: this.handleRadioChange}), 
-                        React.createElement("span", {className: "national-layer-selection-label"}, "None")
-                    )
-                )
-
-
-
+    			)
     		)
     	);
     }
