@@ -32,9 +32,9 @@ define([
         React.createElement("div", {className: "layer-tab-container"}, 
           React.createElement("div", {className: "layer-tab-content"}, 
             React.createElement("div", {className: 'community-layers-tab tab-panel' + (this.state.activeTab === 'community' ? '': ' hidden')}, 
-              React.createElement(LayerSelectionDropdown, {layerData: MapConfig.communityLevelLayers, title: this.getTitle(0), selection: 'community-lands', openTab: false}), 
-              React.createElement(LayerSelectionDropdown, {title: this.getTitle(1), selection: 'percent-indigenous', openTab: false}), 
-              React.createElement(LayerSelectionDropdown, {title: this.getTitle(2), selection: 'land-tenure', openTab: false})
+              React.createElement(LayerSelectionDropdown, {layerData: MapConfig.communityLevelLayers, title: this.getTitle(0), selection: 'community-lands'}), 
+              React.createElement(LayerSelectionDropdown, {title: this.getTitle(1), selection: 'percent-indigenous'}), 
+              React.createElement(LayerSelectionDropdown, {title: this.getTitle(2), selection: 'land-tenure'})
             )
           )
         )

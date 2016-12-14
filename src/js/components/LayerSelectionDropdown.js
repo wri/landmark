@@ -4,9 +4,10 @@ define([
   'map/MapConfig',
   'map/LayerController',
   'components/PercentOfCountryList',
+  'components/IndigAndCommLandMap',
   'components/CommunityLayerList',
   'components/IndicatorsOfLegalSecurityList'
-], function (React, MapConfig, LayerController, PercentOfCountryList, CommunityLayerList, IndicatorsOfLegalSecurityList) {
+], function (React, MapConfig, LayerController, PercentOfCountryList, IndigAndCommLandMaps, CommunityLayerList, IndicatorsOfLegalSecurityList) {
   'use strict';
 
   var SelectionDropdown = React.createClass({displayName: "SelectionDropdown",
@@ -17,8 +18,11 @@ define([
         selection: this.props.selection,
         data: this.props.layerData,
         change: this.props.change,
-        openTab: this.props.openTab,
-        title: this.props.title
+        openTab: false,
+        title: this.props.title,
+        activePercentIndigenousLayer: 1,
+        activeCommunityKey: MapConfig.landTenureCommunityLayers[0].id,
+        activeIndigenousKey: MapConfig.landTenureIndigenousLayers[0].id
       };
     },
 
@@ -29,6 +33,9 @@ define([
       });
       if (this.state.openTab) {
         this.setState({openTab: false});
+        this.setState({
+          activeSelection: ''
+        });
       } else {
         this.setState({openTab: true});
       }
@@ -129,12 +136,29 @@ define([
           }
         }
       }
-
-      // this.setState({
-      //   data: this.state.data
-      // });
-
       this.toggleOff(layers, allOff);
+    },
+
+    changePercentIndigenousLayer: function (key, layer) {
+			if (!layer) {
+				return;
+			}
+    	this.setState({
+    		activePercentIndigenousLayer: layer
+    	});
+    },
+
+    changeLandTenureLayer: function (key, layer) {
+    	// If layer === 0, update Active Community Key, else, update Active Indigenous Key
+    	if (layer === 0 || layer === 1) {
+				this.setState({
+	    		activeCommunityKey: key
+	    	});
+    	} else {
+				this.setState({
+	    		activeIndigenousKey: key
+	    	});
+    	}
 
     },
 
@@ -142,25 +166,23 @@ define([
       console.log(this.state);
       return (
         React.createElement("div", {className: "layer-selection-drop-container"}, 
-          React.createElement("span", {className: 'panel-drop-header' + (this.state.openTab ? ' checked' : ' unchecked')}), React.createElement("span", {className: "layer-selection-drop-text", onClick: this.clickDropdown}, this.state.title), 
-          this.state.data ?
-          React.createElement("div", {className: 'national-layer-selection-label' + (this.state.activeSelection === 'community-lands' && this.state.openTab ? '': ' hidden')}, 
-            React.createElement("div", {className: "community-layer-type"}, 
-              React.createElement("div", {className: "community-layer-type-label", id: "indigenousLands"}, React.createElement("span", {className: "parent-layer-checked-true", onClick: this.parentClicked}), "Indigenous Lands", React.createElement("span", {id: "indigenous-lands-help", className: "parent-layer-help", onClick: this.showHelp})), 
-              this.state.data.map(this.layerMapper('indigenousLands'), this)
-            ), 
-            React.createElement("div", {className: "national-layer-selection-label"}, 
-              React.createElement("div", {className: "community-layer-type-label", id: "communityLands"}, React.createElement("span", {className: "parent-layer-checked-true", onClick: this.parentClicked}), "Community Lands", React.createElement("span", {id: "community-lands-help", className: "parent-layer-help", onClick: this.showHelp})), 
-              this.state.data.map(this.layerMapper('communityLands'), this)
-            )
-          )
-        : null, 
-          React.createElement("div", {className: (this.state.activeSelection === 'percent-indigenous' && this.state.openTab ? '': 'hidden') + ' national-layer-selection-label'}, 
-            React.createElement(PercentOfCountryList, {data: MapConfig.percentIndigenousLayersCombined, change: this.state.changePercentIndigenousLayer})
+          React.createElement("div", {className: "left-panel-headers"}, 
+            React.createElement("div", {className: 'panel-drop-header' + (this.state.openTab ? ' checked' : ' unchecked')}), 
+            React.createElement("div", {className: "layer-selection-drop-text", onClick: this.clickDropdown}, this.state.title)
           ), 
-          React.createElement("div", {className: (this.state.activeSelection === 'land-tenure' && this.state.openTab ? '': 'hidden') + ' national-layer-selection-label'}, 
-            React.createElement(IndicatorsOfLegalSecurityList, {data: MapConfig.landTenureCommunityLayers, change: this.state.changeLandTenureLayer})
+          this.state.activeSelection === 'community-lands' ?
+          React.createElement(IndigAndCommLandMaps, {openTab: this.state.openTab, data: this.state.data, layerMapper: this.layerMapper, parentClicked: this.parentClicked, showHelp: this.showHelp})
+          : null, 
+        this.state.activeSelection === 'percent-indigenous' ?
+          React.createElement("div", {className: 'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}, 
+            React.createElement(PercentOfCountryList, {data: MapConfig.percentIndigenousLayersCombined, change: this.changePercentIndigenousLayer})
           )
+          : null, 
+          this.state.activeSelection === 'land-tenure' ?
+          React.createElement("div", {className: 'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}, 
+            React.createElement(IndicatorsOfLegalSecurityList, {data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer})
+          )
+          : null
         )
       );
     }

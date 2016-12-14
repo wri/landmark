@@ -112,7 +112,7 @@ define([
     			this.state.activeIndigenousKey :
     			this.state.activeCommunityKey
     	);
-
+      this.setState({active: LandTenure});
     },
 
     setToNone: function () {
@@ -170,12 +170,14 @@ define([
     },
 
     changeLandTenureCategory: function (evt) {
+      console.log('firing');
     	this.setState({
     		landTenureCategory: evt.target.id
     	});
     },
 
     changeLandTenureLayer: function (key, layer) {
+      console.log('firing');
     	// If layer === 0, update Active Community Key, else, update Active Indigenous Key
     	if (layer === 0 || layer === 1) {
 				this.setState({

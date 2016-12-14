@@ -32,9 +32,9 @@ define([
         <div className='layer-tab-container'>
           <div className='layer-tab-content'>
             <div className={'community-layers-tab tab-panel' + (this.state.activeTab === 'community' ? '': ' hidden')}>
-              <LayerSelectionDropdown layerData={MapConfig.communityLevelLayers} title={this.getTitle(0)} selection={'community-lands'} openTab={false}/>
-              <LayerSelectionDropdown title={this.getTitle(1)} selection={'percent-indigenous'} openTab={false}/>
-              <LayerSelectionDropdown title={this.getTitle(2)} selection={'land-tenure'} openTab={false}/>
+              <LayerSelectionDropdown layerData={MapConfig.communityLevelLayers} title={this.getTitle(0)} selection={'community-lands'} />
+              <LayerSelectionDropdown title={this.getTitle(1)} selection={'percent-indigenous'} />
+              <LayerSelectionDropdown title={this.getTitle(2)} selection={'land-tenure'} />
             </div>
           </div>
         </div>

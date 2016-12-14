@@ -287,7 +287,7 @@ define([
             sources.push({
               featureLayer: new FeatureLayer(
                 // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer/1',
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer/0',
                  {outFields: ['Name']}
               ),
               searchFields: ['Name'],

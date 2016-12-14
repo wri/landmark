@@ -29,9 +29,12 @@ define([
             if (isNationalLevelData) {
               visibleLayers = keys;
               console.log(visibleLayers)
-              if (visibleLayers.indexOf(-1) !== 0) {
-                self.turnOffCommunityLevelData();
-              }
+              //TODO: Do we ever want to turn off cummity data?
+              // probably not when we turn on other data at this point
+              // what is this doing below?
+              // if (visibleLayers.indexOf(-1) !== 0) {
+              //   self.turnOffCommunityLevelData();
+              // }
 
               if (brApp.currentLayer === "percentIndigenousLayers") {
                 otherDynamic = brApp.map.getLayer('landTenure');
@@ -204,7 +207,7 @@ define([
             arrayUtils.forEach(visibleLayers, function(layer) {
                 layerDrawingOptionsArray[layer] = layerDrawingOption;
             });
-            
+
 
             landTenure.setLayerDrawingOptions(layerDrawingOptionsArray);
             topic.publish('refresh-legend');

@@ -125,10 +125,6 @@ define([
         }
       }
 
-      // this.setState({
-      //   data: this.state.data
-      // });
-
       this.toggleOff(layers, allOff);
 
     }
