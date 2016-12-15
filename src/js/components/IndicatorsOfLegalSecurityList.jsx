@@ -3,8 +3,8 @@ define([
 	'react',
 	'map/MapConfig',
 	'map/LayerController',
-  'components/LegendComponent'
-], function (React, MapConfig, LayerController, Legend) {
+  'components/IndicatorsLegend',
+], function (React, MapConfig, LayerController, IndicatorsLegend) {
 	'use strict';
 
 	// CONSTANTS
@@ -127,8 +127,6 @@ define([
     	var visibleLayers,
     			state = this.state;
 
-			console.log(state.active)
-
     	switch (state.active) {
     		case 'none':
     			visibleLayers = [-1];
@@ -195,6 +193,11 @@ define([
     /* jshint ignore:start */
     render: function () {
 
+      var legendObject = {
+        name: 'landTenure',
+        layerIdValue: 0
+      }
+
     	return (
     		<div className='national-level-layer-lists'>
     			<div className='land-tenure-layer-list'>
@@ -208,6 +211,8 @@ define([
     					   			 className={'land-tenure-menu-button ' + (this.state.landTenureCategory === LandTenureCom ? 'active' : '')}
     					   >Community</span>
     					 </div>
+
+               <IndicatorsLegend openTab={this.props.openTab} legendObject={legendObject} />
 
     					 <div className={'indigenous-national-list' + (this.state.landTenureCategory === LandTenureInd ? '' : ' hidden')}>
     					   <LayerList data={MapConfig.landTenureIndigenousLayers} change={this.changeLandTenureLayer} />

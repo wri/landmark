@@ -1,13 +1,14 @@
 
 .legend-component-container
-  position absolute
+  // position absolute
   background white
   // height 325px
   max-height 300px
   width 270px
   z-index 55
   bottom 0px
-  right 30px
+  // right 30px
+  margin-left 1em
 
 .legend-component-container.collapsed
   height 32px
@@ -48,7 +49,7 @@
   padding 10px
   font-size 12px
   max-height 275px
-  overflow-y auto
+  // overflow-y auto
 
 
 .legend-component-content.collapsed
@@ -78,3 +79,27 @@
   width 30px
   float right
   text-align center
+
+.indicator-legend
+  display inline-block
+  width 12%
+
+.legend-item-text-container
+  transform rotate(-45deg)
+  height 30px
+  width 50px
+  margin-top 5px
+  margin-left -15px
+
+.percent-legend-text-container
+  transform rotate(-45deg)
+  height 30px
+  width 75px
+  margin-top 5px
+  margin-left -27px
+
+.not-app-label
+  text-align center
+
+.percent-legend-component-container
+  padding-bottom 10px

@@ -3,8 +3,8 @@ define([
 	'react',
 	'map/MapConfig',
 	'map/LayerController',
-  'components/LegendComponent'
-], function (React, MapConfig, LayerController, Legend) {
+  'components/PercentLegend'
+], function (React, MapConfig, LayerController, PercentLegend) {
 	'use strict';
 
 	// CONSTANTS
@@ -182,11 +182,15 @@ define([
     /* jshint ignore:start */
     render: function () {
 
+			var legendObject = {
+        name: 'percentLands',
+        layerIdValue: 1
+      }
+
     	return (
 				React.createElement("div", {className: "percent-indigenous-layer-list"}, 
-
-								 React.createElement(LayerList, {class: "percent-indigenous-tree", data: MapConfig.percentIndigenousLayersCombined, change: this.changePercentIndigenousLayer})
-
+					React.createElement(LayerList, {class: "percent-indigenous-tree", data: MapConfig.percentIndigenousLayersCombined, change: this.changePercentIndigenousLayer}), 
+					React.createElement(PercentLegend, {openTab: this.props.openTab, legendObject: legendObject})
 				)
     	);
     }

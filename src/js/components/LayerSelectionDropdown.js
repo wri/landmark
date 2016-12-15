@@ -164,7 +164,6 @@ define([
     },
 
     render: function () {
-      console.log(this.state);
       return (
         React.createElement("div", {className: "layer-selection-drop-container"}, 
           React.createElement("div", {className: "left-panel-headers"}, 
@@ -172,16 +171,18 @@ define([
             React.createElement("div", {className: "layer-selection-drop-text", onClick: this.clickDropdown}, this.state.title)
           ), 
           this.state.activeSelection === 'community-lands' ?
-          React.createElement(IndigAndCommLandMaps, {openTab: this.state.openTab, data: this.state.data, layerMapper: this.layerMapper, parentClicked: this.parentClicked, showHelp: this.showHelp})
+          React.createElement("div", {className: 'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}, 
+            React.createElement(IndigAndCommLandMaps, {openTab: this.state.openTab, data: this.state.data, layerMapper: this.layerMapper, parentClicked: this.parentClicked, showHelp: this.showHelp})
+          )
           : null, 
         this.state.activeSelection === 'percent-indigenous' ?
           React.createElement("div", {className: 'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}, 
-            React.createElement(PercentOfCountryList, {data: MapConfig.percentIndigenousLayersCombined, change: this.changePercentIndigenousLayer})
+            React.createElement(PercentOfCountryList, {data: MapConfig.percentIndigenousLayersCombined, change: this.changePercentIndigenousLayer, openTab: this.state.openTab})
           )
           : null, 
           this.state.activeSelection === 'land-tenure' ?
           React.createElement("div", {className: 'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}, 
-            React.createElement(IndicatorsOfLegalSecurityList, {data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer})
+            React.createElement(IndicatorsOfLegalSecurityList, {data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer, openTab: this.state.openTab})
           )
           : null
         )

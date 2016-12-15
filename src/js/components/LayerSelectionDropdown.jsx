@@ -164,7 +164,6 @@ define([
     },
 
     render: function () {
-      console.log(this.state);
       return (
         <div className='layer-selection-drop-container'>
           <div className='left-panel-headers'>
@@ -172,16 +171,18 @@ define([
             <div className='layer-selection-drop-text' onClick={this.clickDropdown}>{this.state.title}</div>
           </div>
           {this.state.activeSelection === 'community-lands' ?
-          <IndigAndCommLandMaps openTab={this.state.openTab} data={this.state.data} layerMapper={this.layerMapper} parentClicked={this.parentClicked} showHelp={this.showHelp} />
+          <div className={'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}>
+            <IndigAndCommLandMaps openTab={this.state.openTab} data={this.state.data} layerMapper={this.layerMapper} parentClicked={this.parentClicked} showHelp={this.showHelp} />
+          </div>
           : null }
         {this.state.activeSelection === 'percent-indigenous' ?
           <div className={'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}>
-            <PercentOfCountryList data={MapConfig.percentIndigenousLayersCombined} change={this.changePercentIndigenousLayer}/>
+            <PercentOfCountryList data={MapConfig.percentIndigenousLayersCombined} change={this.changePercentIndigenousLayer} openTab={this.state.openTab} />
           </div>
           : null }
           {this.state.activeSelection === 'land-tenure' ?
           <div className={'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}>
-            <IndicatorsOfLegalSecurityList data={MapConfig.landTenureCommunityLayers} change={this.changeLandTenureLayer}/>
+            <IndicatorsOfLegalSecurityList data={MapConfig.landTenureCommunityLayers} change={this.changeLandTenureLayer} openTab={this.state.openTab} />
           </div>
           : null }
         </div>

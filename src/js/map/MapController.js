@@ -287,14 +287,89 @@ define([
             sources.push({
               featureLayer: new FeatureLayer(
                 // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer/0',
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1',
                  {outFields: ['Name']}
               ),
               searchFields: ['Name'],
               displayField: 'Name',
               exactMatch: false,
               outFields: ['*'],
-              name: 'CommFormDoc',
+              name: 'Community Formal Claim',
+              placeholder: 'Search',
+              enableSuggestions: true
+            });
+
+            sources.push({
+              featureLayer: new FeatureLayer(
+                // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer/1',
+                 {outFields: ['Name']}
+              ),
+              searchFields: ['Name'],
+              displayField: 'Name',
+              exactMatch: false,
+              outFields: ['*'],
+              name: 'Community Formal Doc',
+              placeholder: 'Search',
+              enableSuggestions: true
+            });
+
+            sources.push({
+              featureLayer: new FeatureLayer(
+                // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Occupied/MapServer/1',
+                 {outFields: ['Name']}
+              ),
+              searchFields: ['Name'],
+              displayField: 'Name',
+              exactMatch: false,
+              outFields: ['*'],
+              name: 'Community No Formal',
+              placeholder: 'Search',
+              enableSuggestions: true
+            });
+
+            sources.push({
+              featureLayer: new FeatureLayer(
+                // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1',
+                 {outFields: ['Name']}
+              ),
+              searchFields: ['Name'],
+              displayField: 'Name',
+              exactMatch: false,
+              outFields: ['*'],
+              name: 'Indigenous Formal Claim',
+              placeholder: 'Search',
+              enableSuggestions: true
+            });
+
+            sources.push({
+              featureLayer: new FeatureLayer(
+                // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalDoc/MapServer/1',
+                 {outFields: ['Name']}
+              ),
+              searchFields: ['Name'],
+              displayField: 'Name',
+              exactMatch: false,
+              outFields: ['*'],
+              name: 'Indigenous Formal Doc',
+              placeholder: 'Search',
+              enableSuggestions: true
+            });
+
+            sources.push({
+              featureLayer: new FeatureLayer(
+                // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Occupied/MapServer/1',
+                 {outFields: ['Name']}
+              ),
+              searchFields: ['Name'],
+              displayField: 'Name',
+              exactMatch: false,
+              outFields: ['*'],
+              name: 'Community No Formal',
               placeholder: 'Search',
               enableSuggestions: true
             });
