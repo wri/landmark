@@ -2,8 +2,9 @@
 define([
 	'react',
 	'map/MapConfig',
-	'map/LayerController'
-], function (React, MapConfig, LayerController) {
+	'map/LayerController',
+  'components/LegendComponent'
+], function (React, MapConfig, LayerController, Legend) {
 	'use strict';
 
 	// CONSTANTS
@@ -198,6 +199,7 @@ define([
     		<div className='national-level-layer-lists'>
     			<div className='land-tenure-layer-list'>
 							 <div className='land-tenure-menu-explanation'>Choose Indicators for Indigenous or Community land:</div>
+
     					 <div className='land-tenure-menu-controls'>
     					   <span id={LandTenureInd} onClick={this.changeLandTenureCategory}
     					   			 className={'land-tenure-menu-button ' + (this.state.landTenureCategory === LandTenureInd ? 'active' : '')}
@@ -206,7 +208,6 @@ define([
     					   			 className={'land-tenure-menu-button ' + (this.state.landTenureCategory === LandTenureCom ? 'active' : '')}
     					   >Community</span>
     					 </div>
-
 
     					 <div className={'indigenous-national-list' + (this.state.landTenureCategory === LandTenureInd ? '' : ' hidden')}>
     					   <LayerList data={MapConfig.landTenureIndigenousLayers} change={this.changeLandTenureLayer} />

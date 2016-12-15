@@ -2,8 +2,9 @@
 define([
 	'react',
 	'map/MapConfig',
-	'map/LayerController'
-], function (React, MapConfig, LayerController) {
+	'map/LayerController',
+  'components/LegendComponent'
+], function (React, MapConfig, LayerController, Legend) {
 	'use strict';
 
 	// CONSTANTS
@@ -198,6 +199,7 @@ define([
     		React.createElement("div", {className: "national-level-layer-lists"}, 
     			React.createElement("div", {className: "land-tenure-layer-list"}, 
 							 React.createElement("div", {className: "land-tenure-menu-explanation"}, "Choose Indicators for Indigenous or Community land:"), 
+
     					 React.createElement("div", {className: "land-tenure-menu-controls"}, 
     					   React.createElement("span", {id: LandTenureInd, onClick: this.changeLandTenureCategory, 
     					   			 className: 'land-tenure-menu-button ' + (this.state.landTenureCategory === LandTenureInd ? 'active' : '')
@@ -206,7 +208,6 @@ define([
     					   			 className: 'land-tenure-menu-button ' + (this.state.landTenureCategory === LandTenureCom ? 'active' : '')
     					   }, "Community")
     					 ), 
-
 
     					 React.createElement("div", {className: 'indigenous-national-list' + (this.state.landTenureCategory === LandTenureInd ? '' : ' hidden')}, 
     					   React.createElement(LayerList, {data: MapConfig.landTenureIndigenousLayers, change: this.changeLandTenureLayer})

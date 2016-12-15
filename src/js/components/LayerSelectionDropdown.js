@@ -140,6 +140,7 @@ define([
     },
 
     changePercentIndigenousLayer: function (key, layer) {
+      console.log(layer, key);
 			if (!layer) {
 				return;
 			}
