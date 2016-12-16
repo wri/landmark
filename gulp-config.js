@@ -18,14 +18,14 @@ module.exports = {
     stylus: {
         base: 'src/css',
         watch: 'src/css/**/*.styl',
-        src: ['src/css/base.styl', 'src/css/map.styl'],
+        src: ['src/css/base.styl', 'src/css/map.styl', 'src/css/report.styl'],
         devOut: 'src/css',
         buildOut: 'build/css'
     },
     jade: {
         base: 'src',
         watch: 'src/**/*.jade',
-        src: ['src/map.jade'],
+        src: ['src/map.jade', 'src/report.jade'],
         devOut: 'src',
         buildOut: 'build'
     },
