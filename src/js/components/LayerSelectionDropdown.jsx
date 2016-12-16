@@ -174,7 +174,7 @@ define([
           </div>
           {this.state.activeSelection === 'community-lands' ?
           <div className={'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}>
-            <IndigAndCommLandMaps openTab={this.state.openTab} data={this.state.data} layerMapper={this.layerMapper} parentClicked={this.parentClicked} showHelp={this.showHelp} />
+            <IndigAndCommLandMaps openTab={this.state.openTab} data={MapConfig.communityLevelLayers} layerMapper={this.layerMapper} parentClicked={this.parentClicked} showHelp={this.showHelp} />
           </div>
           : null }
         {this.state.activeSelection === 'percent-indigenous' ?

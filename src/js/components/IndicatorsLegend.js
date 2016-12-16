@@ -18,9 +18,7 @@ define([
     componentDidMount: function () {
       var self = this;
       var mapLayer;
-      console.log(self.props);
       function isLandTenure(element, index, array) {
-        console.log(element);
         if (element.layerId === self.props.legendObject.name) {
           mapLayer = element.data;
           return element;
@@ -67,6 +65,12 @@ define([
         React.createElement("div", {className: 'legend-component-container' + (this.props.openTab ? '' : ' hidden')}, 
           this.state.legendInfos.length === 0 ? null :
             React.createElement("div", {id: "legend-component-content", className: "legend-component-content"}, 
+              React.createElement("span", {className: "best-text-indicator"}, 
+                "BEST"
+              ), 
+              React.createElement("span", {className: "worst-text-indicator"}, 
+                "WORST"
+              ), 
               React.createElement("div", {className: "legend-container"}, 
                 this.state.legendInfos.map(this.dataMapper, this)
               )

@@ -174,7 +174,7 @@ define([
           ), 
           this.state.activeSelection === 'community-lands' ?
           React.createElement("div", {className: 'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}, 
-            React.createElement(IndigAndCommLandMaps, {openTab: this.state.openTab, data: this.state.data, layerMapper: this.layerMapper, parentClicked: this.parentClicked, showHelp: this.showHelp})
+            React.createElement(IndigAndCommLandMaps, {openTab: this.state.openTab, data: MapConfig.communityLevelLayers, layerMapper: this.layerMapper, parentClicked: this.parentClicked, showHelp: this.showHelp})
           )
           : null, 
         this.state.activeSelection === 'percent-indigenous' ?

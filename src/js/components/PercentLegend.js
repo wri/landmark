@@ -62,6 +62,12 @@ define([
 
     render: function () {
       console.log(this.state);
+      // <span className='best-text'>
+      //   BEST
+      // </span>
+      // <span className='worst-text'>
+      //   WORST
+      // </span>
       return (
 
         React.createElement("div", {className: 'legend-component-container percent-legend-component-container' + (this.props.openTab ? '' : ' hidden')}, 
