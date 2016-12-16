@@ -245,6 +245,7 @@ define([
                 legendComponent,
                 homeWidget,
                 searchWidget,
+                reportWidget,
                 scalebar,
                 node;
 
@@ -430,17 +431,42 @@ define([
                     brApp.map.infoWindow.resize(375, 600);
                   });
                 });
-
-                // if (window.innerWidth < 1000) {
-                //   brApp.map.infoWindow.maximize();
-                //   $(".esriPopup .contentPane").css("height", "inherit");
-                // }
-                // on.once(brApp.map.infoWindow, "hide", function() {
-                //   brApp.map.infoWindow.resize(375, 600);
-                // });
               }
-            })
+            });
 
+            reportWidget = new Search({
+              map: brApp.map,
+              showInfoWindowOnSelect: false
+            }, 'esri-report-holder');
+
+            var reportSources = [];
+
+            reportSources.push({
+              featureLayer: new FeatureLayer(
+                // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                'http://gis.wri.org/arcgis/rest/services/LandMark/Country_Snapshots/MapServer/0',
+                 {outFields: ['Country', 'ISO_Code']}
+              ),
+              searchFields: ['Country'],
+              displayField: 'Country',
+              exactMatch: false,
+              outFields: ['*'],
+              name: 'Country Profiles',
+              placeholder: 'Country Profiles',
+              enableSuggestions: true
+            });
+
+            reportWidget.set("sources", reportSources);
+
+            reportWidget.startup();
+
+            reportWidget.on('select-result', function(results) {
+              console.log(results.result.feature);
+              if (results.result.feature && results.result.feature.attributes.Country) {
+                console.log('report.html?country=' + results.result.feature.attributes.Country);
+                window.open('report.html?country=' + results.result.feature.attributes.Country);
+              }
+            });
 
             self.getLandTenureRenderer();
 
