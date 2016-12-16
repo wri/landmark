@@ -20,34 +20,99 @@
       <div id="mobileMenu" class="mobile-menu">
         <div id="mobile-menu-close" class="mobile-menu-close-button pointer"></div>
       </div>
-      <div id="reportMap" class="reportMap">
-        <div id="share-button" title="Share" class="map-component button-widget share-button pointer hideOnLoad">
-          <div class="share-icon"></div>
+      <div id="report-map-header">
+        <div id="country-name" class="country-name"></div>
+        <div id="country-land-area" class="country-land-area"></div>
+        <div id="country-hectares" class="country-area"></div>
+      </div>
+      <div id="reportMap" class="reportMap"></div>
+      <div class="report-component">
+        <h3>Indigenous Peoples and Community Lands</h3>
+        <div class="total-lands">First chart goes here
+          <div id="pct-ack-gov"></div>
+          <div id="pct-no-ack-gov"></div>
+          <div id="pct-total-ack"></div>
         </div>
-        <div class="map-component share-container hidden">
-          <div id="share-widgets">
-            <div class="sharing_toolbox">
-              <div data-title="Global Platform of Indigenous and Community Lands" class="addthis_sharing_toolbox"></div>
-              <div id="embedShare"></div>
-              <div id="twitterShare"></div>
-              <div id="facebookShare"></div>
-              <div id="moreShare"></div>
-              <div id="emailShare"></div>
-              <div id="googleShare"></div>
-            </div>
+        <div class="comm-indig-lands">Land Mapped on Landmark
+          <div id="comm-ack-gov"></div>
+          <div id="comm-no-ack-gov"></div>
+          <div id="comm-total-ack"></div>
+          <div id="indig-ack-gov"></div>
+          <div id="indig-no-ack-gov"></div>
+          <div id="indig-total-ack"></div>
+        </div>
+      </div>
+      <div class="report-component">
+        <h3>Indicators of Legal Security</h3>
+        <div class="indicator-table-container">
+          <table>
+            <tr class="header-row">
+              <td id="average-score-comm"></td>
+              <td class="middle-column">AVERAGE SCORE</td>
+              <td id="average-score-indig"></td>
+            </tr>
+            <tr>
+              <td id="legal-status-comm"> </td>
+              <td class="middle-column">Legal Status</td>
+              <td id="legal-status-indig"></td>
+            </tr>
+            <tr>
+              <td id="land-rights-comm"></td>
+              <td class="middle-column">Land Rights and Common Property</td>
+              <td id="land-rights-indig"></td>
+            </tr>
+            <tr>
+              <td id="formal-doc-comm"></td>
+              <td class="middle-column">Formal Documentation</td>
+              <td id="formal-doc-indig"></td>
+            </tr>
+            <tr>
+              <td id="legal-person-comm"></td>
+              <td class="middle-column">Legal Person</td>
+              <td id="legal-person-indig"></td>
+            </tr>
+            <tr>
+              <td id="legal-authority-comm"></td>
+              <td class="middle-column">Legal Authority</td>
+              <td id="legal-authority-indig"></td>
+            </tr>
+            <tr>
+              <td id="right-consent-comm"></td>
+              <td class="middle-column">Rights to Consent</td>
+              <td id="right-consent-indig"></td>
+            </tr>
+            <tr>
+              <td id="right-trees-comm"></td>
+              <td class="middle-column">Rights to Trees</td>
+              <td id="right-trees-indig"></td>
+            </tr>
+            <tr>
+              <td id="right-water-comm"></td>
+              <td class="middle-column">Rights to Water</td>
+              <td id="right-water-indig"></td>
+            </tr>
+            <tr>
+              <td id="land-rights-protected-comm"></td>
+              <td class="middle-column">Land Rights and Protected Areas</td>
+              <td id="land-rights-protected-indig"></td>
+            </tr>
+          </table>
+        </div>
+        <div class="indicator-footer-container">
+          <h3 class="footer-header">Indicators Scoring</h3>
+          <div class="footer-child">
+            <div class="low">1</div>
+          </div>
+          <div class="footer-child">
+            <div class="medium">2</div>
+          </div>
+          <div class="footer-child">
+            <div class="high">3</div>
+          </div>
+          <div class="footer-child">
+            <div class="highest">4</div>
           </div>
         </div>
-        <div class="map-component share-connector connector hidden"></div>
-        <div id="print-button" title="Print" class="map-component button-widget print-button pointer hideOnLoad">
-          <div id="print-widget" class="print-icon"></div>
-        </div>
-        <div id="print-button-tt" class="hideInMap"> 
-          <div id="printToolIcon"></div>
-          <div id="print-triangle-up"></div>
-          <div id="printToolText">Please disable pop-up blockers before using this tool</div>
-        </div>
-        <div class="map-component print-connector connector hidden"></div>
-        <div id="map-loading-icon" class="hideInMap"></div>
       </div>
     </div>
     <div class="hidden"></div>
