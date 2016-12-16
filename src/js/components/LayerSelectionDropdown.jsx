@@ -166,7 +166,7 @@ define([
       return (
         <div className='layer-selection-drop-container'>
           <div className='left-panel-headers'>
-            <div className={'panel-drop-header' + (this.state.openTab ? ' checked' : ' unchecked')}></div>
+            <div className={'panel-drop-header' + (this.state.openTab ? ' checked' : ' unchecked')} onClick={this.clickDropdown}></div>
             <div className='layer-selection-drop-text' onClick={this.clickDropdown}>{this.state.title}</div>
           </div>
           {this.state.activeSelection === 'community-lands' ?

@@ -166,7 +166,7 @@ define([
       return (
         React.createElement("div", {className: "layer-selection-drop-container"}, 
           React.createElement("div", {className: "left-panel-headers"}, 
-            React.createElement("div", {className: 'panel-drop-header' + (this.state.openTab ? ' checked' : ' unchecked')}), 
+            React.createElement("div", {className: 'panel-drop-header' + (this.state.openTab ? ' checked' : ' unchecked'), onClick: this.clickDropdown}), 
             React.createElement("div", {className: "layer-selection-drop-text", onClick: this.clickDropdown}, this.state.title)
           ), 
           this.state.activeSelection === 'community-lands' ?
