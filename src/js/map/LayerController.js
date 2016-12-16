@@ -29,43 +29,52 @@ define([
             if (isNationalLevelData) {
               visibleLayers = keys;
               console.log(visibleLayers)
-              if (visibleLayers.indexOf(-1) !== 0) {
-                self.turnOffCommunityLevelData();
-              }
+              //TODO: Do we ever want to turn off cummity data?
+              // probably not when we turn on other data at this point
+              // what is this doing below?
+              // if (visibleLayers.indexOf(-1) !== 0) {
+              //   self.turnOffCommunityLevelData();
+              // }
 
               if (brApp.currentLayer === "percentIndigenousLayers") {
                 otherDynamic = brApp.map.getLayer('landTenure');
-                otherDynamic.hide();
-
-
+                if (otherDynamic) {
+                  otherDynamic.hide();
+                }
 
                 dynamicLayer = brApp.map.getLayer('percentLands');
-
-                on.once(dynamicLayer, 'update-start', function() {
+                if (dynamicLayer) {
+                  on.once(dynamicLayer, 'update-start', function() {
                     $('#map-loading-icon').show();
-                });
-                on.once(dynamicLayer, 'update-end', function() {
+                  });
+                  on.once(dynamicLayer, 'update-end', function() {
                     $('#map-loading-icon').hide();
-                });
+                  });
 
-                dynamicLayer.setVisibleLayers(visibleLayers);
-                dynamicLayer.show();
+                  dynamicLayer.setVisibleLayers(visibleLayers);
+                  dynamicLayer.show();
+                }
 
 
               } else {
                 otherDynamic = brApp.map.getLayer('percentLands');
-                otherDynamic.hide();
+                if (otherDynamic) {
+                  otherDynamic.hide();
+                }
 
+                //TODO: figure out what this is - especially on load
                 this.setLandTenureRenderer(visibleLayers);
                 dynamicLayer = brApp.map.getLayer('landTenure');
-                on.once(dynamicLayer, 'update-start', function() {
+                if (dynamicLayer) {
+                  on.once(dynamicLayer, 'update-start', function() {
                     $('#map-loading-icon').show();
-                });
-                on(dynamicLayer, 'update-end', function() {
+                  });
+                  on(dynamicLayer, 'update-end', function() {
                     $('#map-loading-icon').hide();
-                });
-                dynamicLayer.setVisibleLayers(visibleLayers, true);
-                dynamicLayer.show();
+                  });
+                  dynamicLayer.setVisibleLayers(visibleLayers, true);
+                  dynamicLayer.show();
+                }
 
               }
 
@@ -188,9 +197,11 @@ define([
             if (nationalIndicator === "Avg_Scr") {
               // fieldName = nationalIndicator;
               landTenure = brApp.map.getLayer('landTenure');
-              landTenure.setVisibleLayers(visibleLayers, true);
+              if (landTenure) {
+                landTenure.setVisibleLayers(visibleLayers, true);
+                topic.publish('refresh-legend');
+              }
 
-              topic.publish('refresh-legend');
               brApp.map.setExtent(brApp.map.extent);
               return;
             }
@@ -204,7 +215,7 @@ define([
             arrayUtils.forEach(visibleLayers, function(layer) {
                 layerDrawingOptionsArray[layer] = layerDrawingOption;
             });
-            
+
 
             landTenure.setLayerDrawingOptions(layerDrawingOptionsArray);
             topic.publish('refresh-legend');

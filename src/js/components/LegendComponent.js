@@ -206,7 +206,6 @@ define([
     dataGrabber: function() {
       var visLayersInfo = [];
 
-
       for (var i = 0; i < brApp.layerInfos.length; i++) {
         var mapLayer = brApp.map.getLayer(brApp.layerInfos[i].layerId);
 
@@ -267,7 +266,9 @@ define([
                   group = 'Community Lands (only) - Not formally recognized';
                   break;
             }
-          } else if (mapLayer.id === 'landTenure') {
+          } else if (mapLayer.id === 'landTenure' && mapLayer.id === this.props.category) {
+            console.log(this.props.category);
+            console.log(mapLayer.id);
             layer = mapLayer.id;
             visibleLayers = mapLayer.visibleLayers;
             if (visibleLayers[0] === 0 || visibleLayers[0] === 1) {
@@ -305,22 +306,22 @@ define([
         collapsed: false
        };
     },
-    toggleActive: function () {
-      var newCollapsed;
-
-      if (this.state.collapsed === true) {
-        newCollapsed = false;
-        $("#toggleLegend").html('-');
-      } else {
-        newCollapsed = true;
-        $("#toggleLegend").html('+');
-      }
-
-      this.setState({
-        // collapsed: this.state.collapsed ? false: true
-        collapsed: newCollapsed
-      });
-    },
+    // toggleActive: function () {
+    //   var newCollapsed;
+    //
+    //   if (this.state.collapsed === true) {
+    //     newCollapsed = false;
+    //     $("#toggleLegend").html('-');
+    //   } else {
+    //     newCollapsed = true;
+    //     $("#toggleLegend").html('+');
+    //   }
+    //
+    //   this.setState({
+    //     // collapsed: this.state.collapsed ? false: true
+    //     collapsed: newCollapsed
+    //   });
+    // },
 
     toggleLayer: function () {
       this.setState({
@@ -332,15 +333,8 @@ define([
       return (
 
         React.createElement("div", {className: 'legend-component-container' + (this.state.collapsed ? ' collapsed': '')}, 
-          React.createElement("div", {className: "legend-component-controls", onClick: this.toggleActive}, 
-            React.createElement("div", {className: "legend-controls"}, 
-              "Legend", 
-              React.createElement("span", {id: "toggleLegend"}, "-")
-            )
-
-          ), 
           React.createElement("div", {id: "legend-component-content", className: 'legend-component-content' + (this.state.collapsed ? ' collapsed': '')}, 
-              React.createElement(LayerGroup, null)
+              React.createElement(LayerGroup, {category: this.props.category})
           )
         )
       );
@@ -348,8 +342,6 @@ define([
 
   });
 
-  return function (node) {
-    return React.render(React.createElement(Legend, null), document.getElementById(node));
-  };
+  return Legend;
 
 });

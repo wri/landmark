@@ -287,6 +287,21 @@ define([
             sources.push({
               featureLayer: new FeatureLayer(
                 // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1',
+                 {outFields: ['Name']}
+              ),
+              searchFields: ['Name'],
+              displayField: 'Name',
+              exactMatch: false,
+              outFields: ['*'],
+              name: 'Community Formal Claim',
+              placeholder: 'Search',
+              enableSuggestions: true
+            });
+
+            sources.push({
+              featureLayer: new FeatureLayer(
+                // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
                 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer/1',
                  {outFields: ['Name']}
               ),
@@ -294,7 +309,67 @@ define([
               displayField: 'Name',
               exactMatch: false,
               outFields: ['*'],
-              name: 'CommFormDoc',
+              name: 'Community Formal Doc',
+              placeholder: 'Search',
+              enableSuggestions: true
+            });
+
+            sources.push({
+              featureLayer: new FeatureLayer(
+                // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Occupied/MapServer/1',
+                 {outFields: ['Name']}
+              ),
+              searchFields: ['Name'],
+              displayField: 'Name',
+              exactMatch: false,
+              outFields: ['*'],
+              name: 'Community No Formal',
+              placeholder: 'Search',
+              enableSuggestions: true
+            });
+
+            sources.push({
+              featureLayer: new FeatureLayer(
+                // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1',
+                 {outFields: ['Name']}
+              ),
+              searchFields: ['Name'],
+              displayField: 'Name',
+              exactMatch: false,
+              outFields: ['*'],
+              name: 'Indigenous Formal Claim',
+              placeholder: 'Search',
+              enableSuggestions: true
+            });
+
+            sources.push({
+              featureLayer: new FeatureLayer(
+                // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalDoc/MapServer/1',
+                 {outFields: ['Name']}
+              ),
+              searchFields: ['Name'],
+              displayField: 'Name',
+              exactMatch: false,
+              outFields: ['*'],
+              name: 'Indigenous Formal Doc',
+              placeholder: 'Search',
+              enableSuggestions: true
+            });
+
+            sources.push({
+              featureLayer: new FeatureLayer(
+                // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Occupied/MapServer/1',
+                 {outFields: ['Name']}
+              ),
+              searchFields: ['Name'],
+              displayField: 'Name',
+              exactMatch: false,
+              outFields: ['*'],
+              name: 'Indigenous Occupied',
               placeholder: 'Search',
               enableSuggestions: true
             });
@@ -304,8 +379,40 @@ define([
             searchWidget.startup();
 
             searchWidget.on('select-result', function(results) {
+              console.log(results);
               console.log(results.result);
               var features = self.setCommunityTemplates([results.result]);
+
+              switch (results.source.name) {
+                  case 'Indigenous Formal Claim':
+                      features = features.concat(self.setIndigenousTemplates([results.result]));
+                      break;
+                  case 'Indigenous Formal Doc':
+                      features = features.concat(self.setIndigenousTemplates([results.result]));
+                      break;
+                  case 'Indigenous Occupied':
+                      features = features.concat(self.setIndigenousTemplates([results.result]));
+                      break;
+
+                  case 'Community Formal Claim':
+                      features = features.concat(self.setCommunityTemplates([results.result]));
+                      break;
+                  case 'Community No Formal':
+                      features = features.concat(self.setCommunityTemplates([results.result]));
+                      break;
+                  case 'Community Formal Doc':
+                      features = features.concat(self.setCommunityTemplates([results.result]));
+                      break;
+
+                  case "landTenure":
+                      features = features.concat(self.setLandTenureTemplates([results.result]));
+                      break;
+                  case "percentLands":
+                      features = features.concat(self.setPercentLandsTemplates([results.result]));
+                      break;
+                  default: // Do Nothing
+                      break;
+              }
 
               if (features.length > 0) {
                 console.log(features);
@@ -313,15 +420,24 @@ define([
                 brApp.map.infoWindow.resize(375, 600);
                 $("#identifyNote").remove();
 
-                brApp.map.infoWindow.show(brApp.map.extent.getCenter());
-
-                if (window.innerWidth < 1000) {
-                  brApp.map.infoWindow.maximize();
-                  $(".esriPopup .contentPane").css("height", "inherit");
-                }
-                on.once(brApp.map.infoWindow, "hide", function() {
-                  brApp.map.infoWindow.resize(375, 600);
+                on.once(brApp.map, "extent-change", function() {
+                  brApp.map.infoWindow.show(brApp.map.extent.getCenter());
+                  if (window.innerWidth < 1000) {
+                    brApp.map.infoWindow.maximize();
+                    $(".esriPopup .contentPane").css("height", "inherit");
+                  }
+                  on.once(brApp.map.infoWindow, "hide", function() {
+                    brApp.map.infoWindow.resize(375, 600);
+                  });
                 });
+
+                // if (window.innerWidth < 1000) {
+                //   brApp.map.infoWindow.maximize();
+                //   $(".esriPopup .contentPane").css("height", "inherit");
+                // }
+                // on.once(brApp.map.infoWindow, "hide", function() {
+                //   brApp.map.infoWindow.resize(375, 600);
+                // });
               }
             })
 
@@ -1066,6 +1182,7 @@ define([
         },
 
         setCommunityTemplates: function(featureObjects) {
+          console.log('setCommunity');
             brApp.debug('MapController >>> setCommunityTemplates');
 
             var template,
@@ -1119,6 +1236,9 @@ define([
                     statDate = '';
                 }
 
+                console.log(item);
+                var area_Ofcl = item.feature.attributes.Area_Ofcl ? item.feature.attributes.Area_Ofcl : 0;
+                var area_GIS = item.feature.attributes.Area_GIS ? item.feature.attributes.Area_GIS : 0;
 
                 template = new InfoTemplate(item.value,
                     "<div id='tableWrapper'><table id='indigenousTable'>" +
@@ -1133,7 +1253,7 @@ define([
                     "<tr class='even-row'><td class='popup-header'>Land category</td><td>" + item.feature.attributes.Category + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + ethnStr + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Population (Source, Date)</td><td>" + popStr + '</td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header'>Land Area, offical and GIS</td><td>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Land Area, offical and GIS</td><td>Official area (ha): " + self.numberWithCommas(area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(area_GIS) + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Acquisition scale</td><td>" + item.feature.attributes.Scale + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Acquisition method</td><td>" + item.feature.attributes.Method + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Data source</td><td>" + item.feature.attributes.Data_Src + " (" + item.feature.attributes.Data_Date + ')</td></tr>' +
@@ -1188,6 +1308,7 @@ define([
 
         setIndigenousTemplates: function(featureObjects) {
             brApp.debug('MapController >>> setIndigenousTemplates');
+            console.log('setIndigenousTemplates');
 
             var template,
                 features = [],
@@ -1245,7 +1366,8 @@ define([
                       //to execture JS in this template, wrap JS in parenthesis
 
 
-
+                var area_Ofcl = item.feature.attributes.Area_Ofcl ? item.feature.attributes.Area_Ofcl : 0;
+                var area_GIS = item.feature.attributes.Area_GIS ? item.feature.attributes.Area_GIS : 0;
                 template = new InfoTemplate(item.value,
                     "<div id='tableWrapper'><table id='indigenousTable'>" +
                     "<tr class='even-row'><td class='popup-header'>Country</td><td>" + item.feature.attributes.Country + '</td></tr>' +
@@ -1259,7 +1381,7 @@ define([
                     "<tr class='even-row'><td class='popup-header'>Land category</td><td>" + item.feature.attributes.Category + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + ethnStr + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Population (Source, Date)</td><td>" + popStr + '</td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header'>Land Area, offical and GIS</td><td>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Land Area, offical and GIS</td><td>Official area (ha): " + self.numberWithCommas(area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(area_GIS) + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Acquisition scale</td><td>" + item.feature.attributes.Scale + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Acquisition method</td><td>" + item.feature.attributes.Method + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Data source</td><td>" + item.feature.attributes.Data_Src + " (" + item.feature.attributes.Data_Date + ')</td></tr>' +

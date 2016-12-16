@@ -1,13 +1,14 @@
 
 .legend-component-container
-  position absolute
+  // position absolute
   background white
   // height 325px
   max-height 300px
   width 270px
   z-index 55
   bottom 0px
-  right 30px
+  // right 30px
+  margin-left 1em
 
 .legend-component-container.collapsed
   height 32px
@@ -40,7 +41,7 @@
   color #fff
   font-family Raleway
   font-size 16px
-  line-height 32px
+  line-height 30px
   padding-left 15px
   cursor pointer
 
@@ -48,7 +49,7 @@
   padding 10px
   font-size 12px
   max-height 275px
-  overflow-y auto
+  // overflow-y auto
 
 
 .legend-component-content.collapsed
@@ -74,7 +75,48 @@
   background-color #2fa3d9
   font-family Raleway
   font-size 14px
-  line-height 32px
-  width 32px
+  line-height 30px
+  width 30px
   float right
   text-align center
+
+.indicator-legend
+  display inline-block
+  width 12%
+
+.legend-item-text-container
+  transform rotate(-45deg)
+  height 30px
+  width 50px
+  margin-top 5px
+  margin-left -15px
+
+.percent-legend-text-container
+  transform rotate(-45deg)
+  height 30px
+  width 75px
+  margin-top 5px
+  margin-left -27px
+
+.not-app-label
+  text-align center
+
+.percent-legend-component-container
+  padding-bottom 10px
+
+
+.best-text
+	position absolute
+	left 10px
+
+.worst-text
+	position absolute
+	right 50px
+
+.best-text-indicator
+	position absolute
+	left 20px
+
+.worst-text-indicator
+	position absolute
+	right 25px

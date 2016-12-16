@@ -72,7 +72,8 @@ label
 	color white
 
 .legend-container
-	right 20px
+	//right 20px
+	margin-left 10px
 	z-index 50
 	bottom 5px
 
@@ -859,7 +860,7 @@ button
 	top 20px
 
 .search-button
-	right 250px
+	right 300px
 
 .simpleGeocoder .esriGeocoder input
 	font-family Raleway
@@ -990,6 +991,27 @@ button
 	margin-left -33px
 	position absolute
 
+.searchBtn.searchSubmit
+	float inherit
+	display inline-block
+	position absolute
+	left -44px
+	background #2fa3d9 !important
+	-webkit-border-radius inherit !important
+  border-radius inherit
+
+.searchIcon.esriIconZoom
+	color white !important
+
+.arcgisSearch .showSources .sourcesMenu
+	width 100% !important
+
+#esri-search-holder_menu_button
+	position absolute
+	right -44px
+	-webkit-border-radius inherit
+  border-radius inherit
+
 .simpleGeocoder .esriGeocoder, .esriSimpleSlider, .button-widget
 	border none !important
 
@@ -1047,6 +1069,17 @@ button
 .simpleGeocoder .esriGeocoder input
 	box-shadow none
 	height 20px
+
+.arcgisSearch .searchBtn
+	border none !important
+
+.arcgisSearch .searchGroup .searchInput
+	border none !important
+	border-left 1px solid grey !important
+	border-right 1px solid grey !important
+
+.arcgisSearch .searchClear
+	right 1px !important
 
 .analysis-popup-button
 	display inline-block
