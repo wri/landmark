@@ -410,6 +410,10 @@ define([
                   case "percentLands":
                       features = features.concat(self.setPercentLandsTemplates([results.result]));
                       break;
+
+                  case "Esri World Geocoder":
+                      features = [];
+                      break;
                   default: // Do Nothing
                       break;
               }
