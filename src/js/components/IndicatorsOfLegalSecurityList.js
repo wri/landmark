@@ -158,7 +158,6 @@ define([
     			break;
     	}
 
-			console.log(visibleLayers)
 
     	// Update the currentLayer in brApp, Our popup needs to know the selection so it can format the content correctly
 
@@ -169,14 +168,12 @@ define([
     },
 
     changeLandTenureCategory: function (evt) {
-      console.log('firing');
     	this.setState({
     		landTenureCategory: evt.target.id
     	});
     },
 
     changeLandTenureLayer: function (key, layer) {
-      console.log('firing');
     	// If layer === 0, update Active Community Key, else, update Active Indigenous Key
     	if (layer === 0 || layer === 1) {
 				this.setState({

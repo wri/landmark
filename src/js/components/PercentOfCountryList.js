@@ -127,7 +127,6 @@ define([
     	var visibleLayers,
     			state = this.state;
 
-			console.log(state.active)
 
     	switch (state.active) {
     		case 'none':
@@ -160,7 +159,6 @@ define([
     			break;
     	}
 
-			console.log(visibleLayers)
 
     	// Update the currentLayer in brApp, Our popup needs to know the selection so it can format the content correctly
 

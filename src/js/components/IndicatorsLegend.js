@@ -32,7 +32,6 @@ define([
       //   if (brApp.layerInfos[i].layerId === 'landTenure') {
       //     var mapLayer = brApp.layerInfos[i].data;
         if (brApp.layerInfos.some(isLandTenure)) {
-          console.log('mapLayer',mapLayer);
           for (var j = 0; j < mapLayer.layers.length; j++) {
             if (mapLayer.layers[j].layerId === self.props.legendObject.layerIdValue) {
               this.setState({legendInfos: mapLayer.layers[j].legend});
@@ -59,7 +58,6 @@ define([
     },
 
     render: function () {
-      console.log(this.state);
       return (
 
         React.createElement("div", {className: 'legend-component-container' + (this.props.openTab ? '' : ' hidden')}, 

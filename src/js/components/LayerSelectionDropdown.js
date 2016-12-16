@@ -27,7 +27,6 @@ define([
     },
 
     clickDropdown: function () {
-      console.log(this);
       this.setState({
         activeSelection: this.state.selection
       });
@@ -48,11 +47,9 @@ define([
     },
 
     layerMapper: function (group) {
-      console.log(group);
       var self = this;
 
       return function (item) {
-        console.log(item);
         return item.group !== group ? null :
         (
           item.isCategory ? React.createElement("div", {className: "layer-category"}, item.label) :
