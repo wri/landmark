@@ -24,11 +24,11 @@ define([
     			React.createElement("div", {className: "land-tenure-layer-list"}, 
             React.createElement("div", {className: 'national-layer-selection-label' + (this.props.openTab ? '': ' hidden')}, 
               React.createElement("div", {className: "community-layer-type"}, 
-                React.createElement("div", {className: "community-layer-type-label", id: "indigenousLands"}, React.createElement("span", {className: "parent-layer-checked-true", onClick: this.props.parentClicked}), "Indigenous Lands", React.createElement("span", {id: "indigenous-lands-help", className: "parent-layer-help", onClick: this.props.showHelp})), 
+                React.createElement("div", {className: "community-layer-type-label", id: "indigenousLands"}, React.createElement("span", {className: "parent-layer-checked-true indig-land-parent", onClick: this.props.parentClicked}), "Indigenous Lands", React.createElement("span", {id: "indigenous-lands-help", className: "parent-layer-help", onClick: this.props.showHelp})), 
                 this.props.data.map(this.props.layerMapper('indigenousLands'), this)
               ), 
               React.createElement("div", {className: "national-layer-selection-label"}, 
-                React.createElement("div", {className: "community-layer-type-label", id: "communityLands"}, React.createElement("span", {className: "parent-layer-checked-true", onClick: this.props.parentClicked}), "Community Lands", React.createElement("span", {id: "community-lands-help", className: "parent-layer-help", onClick: this.props.showHelp})), 
+                React.createElement("div", {className: "community-layer-type-label", id: "communityLands"}, React.createElement("span", {className: "parent-layer-checked-true comm-land-parent", onClick: this.props.parentClicked}), "Community Lands", React.createElement("span", {id: "community-lands-help", className: "parent-layer-help", onClick: this.props.showHelp})), 
                 this.props.data.map(this.props.layerMapper('communityLands'), this)
               )
             )

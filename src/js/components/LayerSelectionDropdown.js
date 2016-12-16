@@ -48,14 +48,16 @@ define([
     },
 
     layerMapper: function (group) {
+      console.log(group);
       var self = this;
 
       return function (item) {
+        console.log(item);
         return item.group !== group ? null :
         (
           item.isCategory ? React.createElement("div", {className: "layer-category"}, item.label) :
           React.createElement("div", {className: "layer-node", onClick: self.layerClicked, "data-id": item.id, "data-clicked": item.checked}, 
-            React.createElement("span", {className: 'layer-checked-' + item.checked}), 
+            React.createElement("span", {className: 'layer-checked-' + item.checked + ' ' + item.id}), 
             item.label
           )
         )

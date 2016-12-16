@@ -48,14 +48,16 @@ define([
     },
 
     layerMapper: function (group) {
+      console.log(group);
       var self = this;
 
       return function (item) {
+        console.log(item);
         return item.group !== group ? null :
         (
           item.isCategory ? <div className='layer-category'>{item.label}</div> :
           <div className='layer-node' onClick={self.layerClicked} data-id={item.id} data-clicked={item.checked}>
-            <span className={'layer-checked-' + item.checked}></span>
+            <span className={'layer-checked-' + item.checked + ' ' + item.id}></span>
             {item.label}
           </div>
         )
