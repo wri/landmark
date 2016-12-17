@@ -34,7 +34,7 @@ module.exports = {
         out: 'src/js'
     },
     uglify: {
-        src: 'src/js/dojoBootstrap.js',
+        src: ['src/js/dojoBootstrap.js', 'src/js/reportBootstrap.js'],
         dest: 'build/js'
     },
     optimizer: {
@@ -56,6 +56,26 @@ module.exports = {
                 },
                 name: 'js/loader',
                 out: 'build/js/loader.js'
+            }
+        },
+        report: {
+            options: {
+                baseUrl: 'src',
+                paths: {
+                    'dojo': 'empty:',
+                    'esri': 'empty:',
+                    'dijit': 'empty:',
+                    'dojox': 'empty:',
+                    'react': 'empty:',
+                    'js': 'js',
+                    'libs': 'libs',
+                    'main': 'js/main',
+                    'map': 'js/map',
+                    'utils': 'js/utils',
+                    'components': 'js/components'
+                },
+                name: 'js/reportLoader',
+                out: 'build/js/reportLoader.js'
             }
         }
     }
