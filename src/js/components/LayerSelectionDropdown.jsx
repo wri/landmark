@@ -168,6 +168,10 @@ define([
           <div className='left-panel-headers'>
             <div className={'panel-drop-header' + (this.state.openTab ? ' checked' : ' unchecked')} onClick={this.clickDropdown}></div>
             <div className='layer-selection-drop-text' onClick={this.clickDropdown}>{this.state.title}</div>
+            {this.state.activeSelection === 'community-lands' ?
+              <div className='disclaimer'>Note that the absence of data does not indicate the absence of indigenous or community land</div>
+              : null
+            }
           </div>
           {this.state.activeSelection === 'community-lands' ?
           <div className={'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}>

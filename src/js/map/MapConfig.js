@@ -213,81 +213,81 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
         // noCheckbox: true/false, should there be a checkbox on this tree node
 
         communityLevelLayers: [{
-            label: 'Formally recognized',
+            label: 'Acknowledged by government',
             isCategory: true,
             group: 'indigenousLands'
           },
           {
-            label: 'Formal documentation',
+            label: 'Titled',
             id: 'indigenous_FormalDoc',
             checked: true,
             group: 'indigenousLands'
           },
+          // {
+          //   label: 'In process of documentation',
+          //   id: 'indigenous_InProcess',
+          //   checked: true,
+          //   group: 'indigenousLands'
+          // },
           {
-            label: 'In process of documentation',
-            id: 'indigenous_InProcess',
-            checked: true,
-            group: 'indigenousLands'
-          },
-          {
-            label: 'No documentation',
+            label: 'Not titled',
             id: 'indigenous_NoDoc',
             checked: true,
             group: 'indigenousLands'
           },
           {
-            label: 'Not formally recognized',
+            label: 'Not acknowledged by government',
             isCategory: true,
             group: 'indigenousLands'
           },
           {
-            label: 'Formal land petition',
+            label: 'Held or used with formal land claim submitted',
             id: 'indigenous_FormalClaim',
             checked: true,
             group: 'indigenousLands'
           },
           {
-            label: 'Occupied or used without formal land petition',
+            label: 'Held or used under customary tenure',
             id: 'indigenous_Occupied',
             checked: true,
             group: 'indigenousLands'
           },
           {
-            label: 'Formally recognized',
+            label: 'Acknowledged by government',
             isCategory: true,
             group: 'communityLands'
           },
           {
-            label: 'Formal documentation',
+            label: 'Titled',
             id: 'community_FormalDoc',
             checked: true,
             group: 'communityLands'
           },
+          // {
+          //   label: 'In process of documentation',
+          //   id: 'community_InProcess',
+          //   checked: true,
+          //   group: 'communityLands'
+          // },
           {
-            label: 'In process of documentation',
-            id: 'community_InProcess',
-            checked: true,
-            group: 'communityLands'
-          },
-          {
-            label: 'No documentation',
+            label: 'Not titled',
             id: 'community_NoDoc',
             checked: true,
             group: 'communityLands'
           },
           {
-            label: 'Not formally recognized',
+            label: 'Not acknowledged by government',
             isCategory: true,
             group: 'communityLands'
           },
           {
-            label: 'Formal land petition',
+            label: 'Held or used with formal land claim submitted',
             id: 'community_FormalClaim',
             checked: true,
             group: 'communityLands'
           },
           {
-            label: 'Occupied or used without formal land petition',
+            label: 'Held or used under customary tenure',
             id: 'community_Occupied',
             checked: true,
             group: 'communityLands'
@@ -524,7 +524,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
 
 
         percentIndigenousLayersCombined: [{
-          label: 'Indigenous and Community Lands (combined)',
+          label: 'Traditional or Customary Rights',
           id: 'percentIndigAndCommunity',
           subTitle: true
         }, {
@@ -534,19 +534,19 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
           layer: 1,
           subLayer: true
         }, {
-          label: 'Formally recognized',
+          label: 'Acknowledged by government',
           id: 'combinedFormal',
           question: false,
           layer: 2,
           subLayer: true
         }, {
-          label: 'Not formally recognized',
+          label: 'Not acknowledged by government',
           id: 'combinedInformal',
           question: false,
           layer: 3,
           subLayer: true
         }
-        // , 
+        // ,
         // {
         //   label: 'Indigenous Lands (only) - Coming soon',
         //   id: 'percentIndigNational',
