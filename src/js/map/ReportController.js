@@ -119,10 +119,16 @@ define([
                   case 'N/A':
                     dom.byId(attribute.domId).innerHTML = '<div class="unavailable">No Data</div>'
                     break;
+                  case '':
+                    dom.byId(attribute.domId).innerHTML = '<div class="unavailable">No Data</div>'
+                    break;
+                  case null:
+                    dom.byId(attribute.domId).innerHTML = '<div class="unavailable">No Data</div>'
+                    break;
                   default:
 
                 }
-              })
+              });
 
 
               var countryLand = evt.graphic.attributes.Ctry_Land ? evt.graphic.attributes.Ctry_Land : 0;
