@@ -528,12 +528,6 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
           id: 'percentIndigAndCommunity',
           subTitle: true
         }, {
-          label: 'Total',
-          id: 'combinedTotal',
-          question: false,
-          layer: 1,
-          subLayer: true
-        }, {
           label: 'Acknowledged by government',
           id: 'combinedFormal',
           question: false,
@@ -544,6 +538,12 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
           id: 'combinedInformal',
           question: false,
           layer: 3,
+          subLayer: true
+        }, {
+          label: 'Total',
+          id: 'combinedTotal',
+          question: false,
+          layer: 1,
           subLayer: true
         }
         // ,

@@ -98,7 +98,7 @@ define([
         active: "none",
         landTenureCategory: LandTenureInd,
         landTenureLayer: 2,
-        activePercentIndigenousLayer: 1,
+        activePercentIndigenousLayer: 2,
         activeCommunityKey: MapConfig.landTenureCommunityLayers[0].id,
         activeIndigenousKey: MapConfig.landTenureIndigenousLayers[0].id
       };
