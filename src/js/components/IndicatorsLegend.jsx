@@ -58,17 +58,17 @@ define([
     },
 
     render: function () {
+      // <span className='best-text-indicator'>
+      //   BEST
+      // </span>
+      // <span className='worst-text-indicator'>
+      //   WORST
+      // </span>
       return (
 
         <div className={'legend-component-container' + (this.props.openTab ? '' : ' hidden')}>
           {this.state.legendInfos.length === 0 ? null :
             <div id='legend-component-content' className='legend-component-content'>
-              <span className='best-text-indicator'>
-                BEST
-              </span>
-              <span className='worst-text-indicator'>
-                WORST
-              </span>
               <div className='legend-container'>
                 {this.state.legendInfos.map(this.dataMapper, this)}
               </div>

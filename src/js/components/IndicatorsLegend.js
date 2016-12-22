@@ -58,17 +58,17 @@ define([
     },
 
     render: function () {
+      // <span className='best-text-indicator'>
+      //   BEST
+      // </span>
+      // <span className='worst-text-indicator'>
+      //   WORST
+      // </span>
       return (
 
         React.createElement("div", {className: 'legend-component-container' + (this.props.openTab ? '' : ' hidden')}, 
           this.state.legendInfos.length === 0 ? null :
             React.createElement("div", {id: "legend-component-content", className: "legend-component-content"}, 
-              React.createElement("span", {className: "best-text-indicator"}, 
-                "BEST"
-              ), 
-              React.createElement("span", {className: "worst-text-indicator"}, 
-                "WORST"
-              ), 
               React.createElement("div", {className: "legend-container"}, 
                 this.state.legendInfos.map(this.dataMapper, this)
               )
