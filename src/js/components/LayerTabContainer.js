@@ -18,7 +18,7 @@ define([
       if (value === 0) {
         return 'Indigenous & Community Land Maps'
       } else if (value === 1) {
-        return 'Percent of Country Held by Indigenous Peoples & Communities'
+        return 'Proportion of Country Held by Indigenous Peoples & Communities'
       } else if (value === 2) {
         return 'Indicators of the Legal Security of Indigenous and Community Lands'
       }

@@ -18,14 +18,14 @@ module.exports = {
     stylus: {
         base: 'src/css',
         watch: 'src/css/**/*.styl',
-        src: ['src/css/base.styl', 'src/css/map.styl'],
+        src: ['src/css/base.styl', 'src/css/map.styl', 'src/css/report.styl'],
         devOut: 'src/css',
         buildOut: 'build/css'
     },
     jade: {
         base: 'src',
         watch: 'src/**/*.jade',
-        src: ['src/map.jade'],
+        src: ['src/map.jade', 'src/report.jade'],
         devOut: 'src',
         buildOut: 'build'
     },
@@ -34,7 +34,7 @@ module.exports = {
         out: 'src/js'
     },
     uglify: {
-        src: 'src/js/dojoBootstrap.js',
+        src: ['src/js/dojoBootstrap.js', 'src/js/reportBootstrap.js'],
         dest: 'build/js'
     },
     optimizer: {
@@ -56,6 +56,26 @@ module.exports = {
                 },
                 name: 'js/loader',
                 out: 'build/js/loader.js'
+            }
+        },
+        report: {
+            options: {
+                baseUrl: 'src',
+                paths: {
+                    'dojo': 'empty:',
+                    'esri': 'empty:',
+                    'dijit': 'empty:',
+                    'dojox': 'empty:',
+                    'react': 'empty:',
+                    'js': 'js',
+                    'libs': 'libs',
+                    'main': 'js/main',
+                    'map': 'js/map',
+                    'utils': 'js/utils',
+                    'components': 'js/components'
+                },
+                name: 'js/reportLoader',
+                out: 'build/js/reportLoader.js'
             }
         }
     }

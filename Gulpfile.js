@@ -91,10 +91,14 @@ gulp.task('copy-access', function() {
         .pipe(gulp.dest(config.copy.access.out));
 });
 
-gulp.task('optimize', ['optimize-map-page']);
+gulp.task('optimize', ['optimize-map-page', 'optimize-report-page']);
 
 gulp.task('optimize-map-page', function() {
     requirejs.optimize(config.optimizer.map.options, function(res) {});
+});
+
+gulp.task('optimize-report-page', function() {
+    requirejs.optimize(config.optimizer.report.options, function(res) {});
 });
 
 gulp.task('minify', ['minify-js', 'minify-images']);

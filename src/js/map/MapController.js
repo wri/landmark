@@ -245,6 +245,7 @@ define([
                 legendComponent,
                 homeWidget,
                 searchWidget,
+                reportWidget,
                 scalebar,
                 node;
 
@@ -287,8 +288,7 @@ define([
             sources.push({
               featureLayer: new FeatureLayer(
                 // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1',
-                 {outFields: ['Name']}
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1'
               ),
               searchFields: ['Name'],
               displayField: 'Name',
@@ -296,14 +296,16 @@ define([
               outFields: ['*'],
               name: 'Community Formal Claim',
               placeholder: 'Search',
-              enableSuggestions: true
+              enableSuggestions: true,
+              searchQueryParams: {
+                returnGeom: false
+              }
             });
 
             sources.push({
               featureLayer: new FeatureLayer(
                 // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer/1',
-                 {outFields: ['Name']}
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer/1'
               ),
               searchFields: ['Name'],
               displayField: 'Name',
@@ -311,14 +313,16 @@ define([
               outFields: ['*'],
               name: 'Community Formal Doc',
               placeholder: 'Search',
-              enableSuggestions: true
+              enableSuggestions: true,
+              searchQueryParams: {
+                returnGeom: false
+              }
             });
 
             sources.push({
               featureLayer: new FeatureLayer(
                 // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Occupied/MapServer/1',
-                 {outFields: ['Name']}
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Occupied/MapServer/1'
               ),
               searchFields: ['Name'],
               displayField: 'Name',
@@ -326,14 +330,16 @@ define([
               outFields: ['*'],
               name: 'Community No Formal',
               placeholder: 'Search',
-              enableSuggestions: true
+              enableSuggestions: true,
+              searchQueryParams: {
+                returnGeom: false
+              }
             });
 
             sources.push({
               featureLayer: new FeatureLayer(
                 // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1',
-                 {outFields: ['Name']}
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1'
               ),
               searchFields: ['Name'],
               displayField: 'Name',
@@ -341,14 +347,16 @@ define([
               outFields: ['*'],
               name: 'Indigenous Formal Claim',
               placeholder: 'Search',
-              enableSuggestions: true
+              enableSuggestions: true,
+              searchQueryParams: {
+                returnGeom: false
+              }
             });
 
             sources.push({
               featureLayer: new FeatureLayer(
                 // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalDoc/MapServer/1',
-                 {outFields: ['Name']}
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalDoc/MapServer/1'
               ),
               searchFields: ['Name'],
               displayField: 'Name',
@@ -356,14 +364,16 @@ define([
               outFields: ['*'],
               name: 'Indigenous Formal Doc',
               placeholder: 'Search',
-              enableSuggestions: true
+              enableSuggestions: true,
+              searchQueryParams: {
+                returnGeom: false
+              }
             });
 
             sources.push({
               featureLayer: new FeatureLayer(
                 // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Occupied/MapServer/1',
-                 {outFields: ['Name']}
+                'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Occupied/MapServer/1'
               ),
               searchFields: ['Name'],
               displayField: 'Name',
@@ -371,7 +381,10 @@ define([
               outFields: ['*'],
               name: 'Indigenous Occupied',
               placeholder: 'Search',
-              enableSuggestions: true
+              enableSuggestions: true,
+              searchQueryParams: {
+                returnGeom: false
+              }
             });
 
             searchWidget.set("sources", sources);
@@ -443,7 +456,43 @@ define([
                 //   brApp.map.infoWindow.resize(375, 600);
                 // });
               }
-            })
+            });
+
+            reportWidget = new Search({
+              map: brApp.map,
+              autoNavigate: false,
+              enableHighlight: false,
+              showInfoWindowOnSelect: false
+            }, 'esri-report-holder');
+
+            var reportSources = [];
+
+            reportSources.push({
+              featureLayer: new FeatureLayer(
+                 // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                 'http://gis.wri.org/arcgis/rest/services/LandMark/Country_Snapshots/MapServer/0',
+                  {outFields: ['Country', 'ISO_Code']}
+               ),
+               searchFields: ['Country'],
+               displayField: 'Country',
+               exactMatch: false,
+               outFields: ['*'],
+               name: 'Country Profiles',
+               placeholder: 'Country Profiles',
+               enableSuggestions: true
+             });
+
+             reportWidget.set("sources", reportSources);
+
+             reportWidget.startup();
+
+             reportWidget.on('select-result', function(results) {
+               console.log(results.result.feature);
+               if (results.result.feature && results.result.feature.attributes.Country) {
+                 console.log('report.html?country=' + results.result.feature.attributes.Country);
+                 window.open('report.html?country=' + results.result.feature.attributes.Country);
+               }
+             });
 
 
             self.getLandTenureRenderer();

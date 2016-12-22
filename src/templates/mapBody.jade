@@ -14,7 +14,7 @@ div#brMap.brMap
     div.map-component.tree-widget-container.hideOnLoad#tree-widget-container
         div.tree-widget-title-pane#tree-title-pane
             span.tree-title-text.tree-width#tree-title
-                span Layer Selection
+                span Map Selection
             span.tree-container-toggle.pointer#tree-container-toggle &minus;
         div#layer-content.layer-content.active
     div#legend-component.legend-component.active
@@ -27,10 +27,15 @@ div#brMap.brMap
     //-     span.data-completeness-label Show Data Completeness
     //-         span#analysis-help.help-marker(style='margin-top: 9px;')
     //-     div#completeness-slider
-    div.map-component.search-button.hideOnLoad.pointer#search-button
+    div.map-component.report-button.hideOnLoad.pointer#report-button
+        span#analysisLogo
+        span.search-button-label#esri-report-holder
+        //- span.report-button-label
+        //- span.analysis-button-label Country Profiles
         
+    div.map-component.search-button.hideOnLoad.pointer#search-button
         span.search-button-label#esri-search-holder
-        //- span#search-help.help-marker
+
     div.map-component.analysis-button.hideOnLoad.pointer#analysis-button
         
         span#analysisLogo

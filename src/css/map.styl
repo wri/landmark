@@ -269,16 +269,17 @@ label
 #embedShare
 	display inline-block
 	cursor pointer
-	height 32px
-	width 32px
+	height 33px
+	width 33px
 	background url(images/embed_icon.png) no-repeat #fff
-	margin-left 2px
+	margin-left -4px
 
 #mobile-legend-content
 	font-size: 11px
 
 .addthis_sharing_toolbox
 	display inline-block
+	vertical-align bottom
 
 .share-button
 .share-connector
@@ -850,7 +851,7 @@ button
 .tree-content .tester
 	height 200px
 
-.analysis-button, .search-button
+.analysis-button, .search-button, .report-button
 	border-radius(5px)
 	background-color white
 	text-align center
@@ -861,6 +862,17 @@ button
 
 .search-button
 	right 300px
+	// width 200px
+
+.report-button
+	right 603px
+	// width 200px
+
+#report-button
+	.arcgisSearch .searchGroup .searchInput
+		border-right 0 !important
+		-webkit-border-radius 0
+		border-radius 0
 
 .simpleGeocoder .esriGeocoder input
 	font-family Raleway
@@ -921,7 +933,7 @@ button
 	padding-left 10px
 	padding-right 10px
 
-#analysisToolText, #printToolText
+#analysisToolText, #printToolText, #reportToolText
 	width 190px
 	display inline-block
 	text-align center
@@ -1075,7 +1087,6 @@ button
 
 .arcgisSearch .searchGroup .searchInput
 	border none !important
-	border-left 1px solid grey !important
 	border-right 1px solid grey !important
 
 .arcgisSearch .searchClear
