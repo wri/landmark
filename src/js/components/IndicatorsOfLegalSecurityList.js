@@ -150,11 +150,11 @@ define([
                React.createElement(IndicatorsLegend, {openTab: this.props.openTab, legendObject: legendObject}), 
 
     					 React.createElement("div", {className: 'indigenous-national-list' + (this.state.landTenureCategory === LandTenureInd ? '' : ' hidden')}, 
-    					   React.createElement(LayerList, {data: MapConfig.landTenureIndigenousLayers, change: this.changeLandTenureLayer, setToNone: this.setToNone})
+    					   React.createElement(LayerList, {data: MapConfig.landTenureIndigenousLayers, change: this.changeLandTenureLayer, setToNone: this.setToNone, layerActive: this.state.active})
     					 ), 
 
     					 React.createElement("div", {className: 'community-national-list' + (this.state.landTenureCategory === LandTenureCom ? '' : ' hidden')}, 
-    					   React.createElement(LayerList, {data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer, setToNone: this.setToNone})
+    					   React.createElement(LayerList, {data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer, setToNone: this.setToNone, layerActive: this.state.active})
     					 )
 
     			)

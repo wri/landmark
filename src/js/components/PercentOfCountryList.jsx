@@ -125,7 +125,7 @@ define([
 
     	return (
 				<div className='percent-indigenous-layer-list'>
-					<LayerList class='percent-indigenous-tree' data={MapConfig.percentIndigenousLayersCombined} change={this.changePercentIndigenousLayer} setToNone={this.setToNone} />
+					<LayerList class='percent-indigenous-tree' data={MapConfig.percentIndigenousLayersCombined} change={this.changePercentIndigenousLayer} setToNone={this.setToNone} layerActive={this.state.active} />
 					<PercentLegend openTab={this.props.openTab} legendObject={legendObject} />
 				</div>
     	);

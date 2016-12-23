@@ -150,11 +150,11 @@ define([
                <IndicatorsLegend openTab={this.props.openTab} legendObject={legendObject} />
 
     					 <div className={'indigenous-national-list' + (this.state.landTenureCategory === LandTenureInd ? '' : ' hidden')}>
-    					   <LayerList data={MapConfig.landTenureIndigenousLayers} change={this.changeLandTenureLayer} setToNone={this.setToNone} />
+    					   <LayerList data={MapConfig.landTenureIndigenousLayers} change={this.changeLandTenureLayer} setToNone={this.setToNone} layerActive={this.state.active} />
     					 </div>
 
     					 <div className={'community-national-list' + (this.state.landTenureCategory === LandTenureCom ? '' : ' hidden')}>
-    					   <LayerList data={MapConfig.landTenureCommunityLayers} change={this.changeLandTenureLayer} setToNone={this.setToNone} />
+    					   <LayerList data={MapConfig.landTenureCommunityLayers} change={this.changeLandTenureLayer} setToNone={this.setToNone} layerActive={this.state.active} />
     					 </div>
 
     			</div>

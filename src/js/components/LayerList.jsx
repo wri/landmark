@@ -57,7 +57,7 @@ define([
 				// <div className='national-layer-list-item-label' onClick={layer != undefined && !comingSoon ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>{item.label}</div>
   			return (
   				<div className={'national-layer-list-item ' + (comingSoon ? ' comingSoon' : '')} key={item.id} >
-  					<div className={'national-layer-list-item-label ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '') } onClick={layer != undefined && !comingSoon ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>{item.label}</div>
+  					<div className={'national-layer-list-item-label ' + (active && this.props.layerActive != 'none' ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '') } onClick={layer != undefined && !comingSoon ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>{item.label}</div>
 						<div onClick={this.props.setToNone} className={(active ? 'close-active-layer' : '')}></div>
   					{
   						item.question ?
