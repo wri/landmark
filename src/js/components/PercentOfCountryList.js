@@ -105,11 +105,13 @@ define([
     },
 
 		changePercentIndigenousLayer: function (key, layer) {
+			console.log(layer);
 			if (!layer) {
 				return;
 			}
     	this.setState({
-    		activePercentIndigenousLayer: layer
+    		activePercentIndigenousLayer: layer,
+				active: PercentIndigenous
     	});
     },
 
@@ -118,12 +120,12 @@ define([
 
 			var legendObject = {
         name: 'percentLands',
-        layerIdValue: 1
+        layerIdValue: this.state.activePercentIndigenousLayer
       }
 
     	return (
 				React.createElement("div", {className: "percent-indigenous-layer-list"}, 
-					React.createElement(LayerList, {class: "percent-indigenous-tree", data: MapConfig.percentIndigenousLayersCombined, change: this.changePercentIndigenousLayer}), 
+					React.createElement(LayerList, {class: "percent-indigenous-tree", data: MapConfig.percentIndigenousLayersCombined, change: this.changePercentIndigenousLayer, setToNone: this.setToNone}), 
 					React.createElement(PercentLegend, {openTab: this.props.openTab, legendObject: legendObject})
 				)
     	);

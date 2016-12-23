@@ -53,10 +53,12 @@ define([
   			var layer = item.layer;
   			var comingSoon = item.comingSoon;
 
-
+				// <div className={'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '') + (comingSoon ? ' comingSoon' : '')} key={item.id} onClick={layer != undefined && !comingSoon ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>
+				// <div className='national-layer-list-item-label' onClick={layer != undefined && !comingSoon ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>{item.label}</div>
   			return (
-  				React.createElement("div", {className: 'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '') + (comingSoon ? ' comingSoon' : ''), key: item.id, onClick: layer != undefined && !comingSoon ? this.setActiveLayer.bind(this, item.id, item.layer) : null}, 
-  					React.createElement("div", {className: "national-layer-list-item-label"}, item.label), 
+  				React.createElement("div", {className: 'national-layer-list-item ' + (comingSoon ? ' comingSoon' : ''), key: item.id}, 
+  					React.createElement("div", {className: 'national-layer-list-item-label ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : ''), onClick: layer != undefined && !comingSoon ? this.setActiveLayer.bind(this, item.id, item.layer) : null}, item.label), 
+						React.createElement("div", {onClick: this.props.setToNone, className: (active ? 'close-active-layer' : '')}), 
   					
   						item.question ?
   						React.createElement("div", {className: "national-layer-list-item-question"}, item.question) :
@@ -74,7 +76,11 @@ define([
   			// Notify Parent and let parent dispatch updates
   			this.props.change(key, layer);
 
-  		}
+  		},
+
+			removeLayer: function () {
+				console.log('removed');
+			}
 
   	});
 

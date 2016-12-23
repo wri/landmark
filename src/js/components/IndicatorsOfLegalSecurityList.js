@@ -113,11 +113,13 @@ define([
     	// If layer === 0, update Active Community Key, else, update Active Indigenous Key
     	if (layer === 0 || layer === 1) {
 				this.setState({
-	    		activeCommunityKey: key
+	    		activeCommunityKey: key,
+					active: LandTenure
 	    	});
     	} else {
 				this.setState({
-	    		activeIndigenousKey: key
+	    		activeIndigenousKey: key,
+					active: LandTenure
 	    	});
     	}
 
@@ -148,11 +150,11 @@ define([
                React.createElement(IndicatorsLegend, {openTab: this.props.openTab, legendObject: legendObject}), 
 
     					 React.createElement("div", {className: 'indigenous-national-list' + (this.state.landTenureCategory === LandTenureInd ? '' : ' hidden')}, 
-    					   React.createElement(LayerList, {data: MapConfig.landTenureIndigenousLayers, change: this.changeLandTenureLayer})
+    					   React.createElement(LayerList, {data: MapConfig.landTenureIndigenousLayers, change: this.changeLandTenureLayer, setToNone: this.setToNone})
     					 ), 
 
     					 React.createElement("div", {className: 'community-national-list' + (this.state.landTenureCategory === LandTenureCom ? '' : ' hidden')}, 
-    					   React.createElement(LayerList, {data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer})
+    					   React.createElement(LayerList, {data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer, setToNone: this.setToNone})
     					 )
 
     			)
