@@ -32,29 +32,27 @@ define([
           }
         }
     },
-    // 
-    // componentDidUpdate: function () {
-    //   // console.log(this);
-    //   // console.log(this.props);
-    //   // console.log(brApp.layerInfos);
-    //   var self = this;
-    //   var mapLayer;
-    //   var element = brApp.layerInfos;
-    //   console.log(element.length);
-    //   for (var i = 0; i < element.length; i++) {
-    //     if (element[i].layerId === self.props.legendObject.name) {
-    //       mapLayer = element[i].data;
-    //       for (var k = 0; k < mapLayer.layers.length; k++) {
-    //         if (mapLayer.layers[k].layerId === self.props.legendObject.layerIdValue) {
-    //           // console.log('yes');
-    //           // console.log(mapLayer.layers[k].legend);
-    //           // console.log(this.state);
-    //           self.setState({legendInfos: mapLayer.layers[k].legend});
-    //         }
-    //       }
-    //     }
-    //   }
-    // },
+
+    componentDidUpdate: function (prevProps, prevState) {
+
+      if (this.props.legendObject.layerIdValue === prevProps.legendObject.layerIdValue) {
+        return;
+      }
+      var self = this;
+      var mapLayer;
+      var element = brApp.layerInfos;
+      console.log(element.length);
+      for (var i = 0; i < element.length; i++) {
+        if (element[i].layerId === self.props.legendObject.name) {
+          mapLayer = element[i].data;
+          for (var k = 0; k < mapLayer.layers.length; k++) {
+            if (mapLayer.layers[k].layerId === self.props.legendObject.layerIdValue) {
+              self.setState({legendInfos: mapLayer.layers[k].legend});
+            }
+          }
+        }
+      }
+    },
 
     dataMapper: function(data) {
         if (data.label === 'Not applicable') {
