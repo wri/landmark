@@ -54,7 +54,7 @@ define([
           item.isCategory ? <div className='layer-category'>{item.label}</div> :
           <div className='layer-node' onClick={self.layerClicked} data-id={item.id} data-clicked={item.checked}>
             <span className={'layer-checked-' + item.checked + ' ' + item.id}></span>
-            {item.label}
+            <span className='layer-checkbox-text'>{item.label}</span>
           </div>
         )
       }
@@ -62,20 +62,33 @@ define([
 
     layerClicked: function (evt) {
       evt.stopPropagation()
+      console.log(evt);
       if (evt.target.classList.length === 0 || evt.target.parentElement.getAttribute('data-id') === null) {
         return;
       }
+
+      console.log(evt.target.parentElement);
 
       var layer = evt.target.parentElement.getAttribute('data-id');
       var turnOff = evt.target.parentElement.getAttribute('data-clicked');
 
       if (turnOff === "true") {
-        evt.target.classList.remove('layer-checked-true');
-        evt.target.classList.add('layer-checked-false');
+        if (evt.target.classList.contains('layer-checkbox-text')) {
+          evt.target.previousSibling.classList.remove('layer-checked-true');
+          evt.target.previousSibling.classList.add('layer-checked-false');
+        } else {
+          evt.target.classList.remove('layer-checked-true');
+          evt.target.classList.add('layer-checked-false');
+        }
         evt.target.parentElement.setAttribute('data-clicked',false);
       } else {
-        evt.target.classList.add('layer-checked-true');
-        evt.target.classList.remove('layer-checked-false');
+        if (evt.target.classList.contains('layer-checkbox-text')) {
+          evt.target.previousSibling.classList.add('layer-checked-true');
+          evt.target.previousSibling.classList.remove('layer-checked-false');
+        } else {
+          evt.target.classList.add('layer-checked-true');
+          evt.target.classList.remove('layer-checked-false');
+        }
         evt.target.parentElement.setAttribute('data-clicked',true);
       }
 
@@ -166,7 +179,7 @@ define([
         <div className='layer-selection-drop-container'>
           <div className='left-panel-headers'>
             <div className={'panel-drop-header' + (this.state.openTab ? ' checked' : ' unchecked')} onClick={this.clickDropdown}></div>
-            <div className='layer-selection-drop-text' onClick={this.clickDropdown}>{this.state.title}</div>
+            <div className={'layer-selection-drop-text' + (this.props.selection === 'community-lands' ? ' land-map-layer-selection' : '')} onClick={this.clickDropdown}>{this.state.title}</div>
             {this.state.activeSelection === 'community-lands' ?
               <div className='disclaimer'>Note that the absence of data does not indicate the absence of indigenous or community land</div>
               : null
