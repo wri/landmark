@@ -2,10 +2,8 @@
 define([
   'react',
   'map/MapConfig',
-  'components/LayerSelectionDropdown',
-  'components/NationalLayerList',
-  'components/CommunityLayerList'
-], function (React, MapConfig, LayerSelectionDropdown, NationalLayerList, CommunityLayerList) {
+  'components/LayerSelectionDropdown'
+], function (React, MapConfig, LayerSelectionDropdown) {
   'use strict';
 
   var TabContainer = React.createClass({
@@ -26,8 +24,6 @@ define([
 
     render: function () {
       console.log(MapConfig.communityLevelLayers);
-      // <CommunityLayerList data={MapConfig.communityLevelLayers} />
-      // <NationalLayerList />
       return (
         <div className='layer-tab-container'>
           <div className='layer-tab-content'>
