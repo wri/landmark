@@ -34,11 +34,8 @@ define([
     },
 
     componentDidUpdate: function (prevProps, prevState) {
-      console.log(prevProps);
-      console.log(prevState);
 
       if (this.props.legendObject.layerIdValue === prevProps.legendObject.layerIdValue) {
-        console.log('returning');
         return;
       }
       var self = this;
@@ -50,9 +47,6 @@ define([
           mapLayer = element[i].data;
           for (var k = 0; k < mapLayer.layers.length; k++) {
             if (mapLayer.layers[k].layerId === self.props.legendObject.layerIdValue) {
-              // console.log('yes');
-              // console.log(mapLayer.layers[k].legend);
-              // console.log(this.state);
               self.setState({legendInfos: mapLayer.layers[k].legend});
             }
           }

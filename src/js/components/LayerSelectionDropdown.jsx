@@ -62,12 +62,10 @@ define([
 
     layerClicked: function (evt) {
       evt.stopPropagation()
-      console.log(evt);
       if (evt.target.classList.length === 0 || evt.target.parentElement.getAttribute('data-id') === null) {
         return;
       }
 
-      console.log(evt.target.parentElement);
 
       var layer = evt.target.parentElement.getAttribute('data-id');
       var turnOff = evt.target.parentElement.getAttribute('data-clicked');

@@ -147,7 +147,6 @@ define([
             var params = new ImageParameters(),
                 layer;
 
-                console.log(layerConfig);
             params.layerOption = ImageParameters.LAYER_OPTION_SHOW;
             params.layerIds = layerConfig.defaultLayers;
             params.format = 'png32';
