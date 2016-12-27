@@ -70,7 +70,8 @@ $darkFont = #464646
 	cursor pointer
 	font-size 12px
 	color #005e7a
-	margin-left 20px
+	position relative
+	// margin-left 20px
 
 .national-layer-list-item.subTitle
 	font-weight 600
@@ -91,7 +92,7 @@ $darkFont = #464646
 	padding-left 20px
 	color #787878
 
-.national-layer-list-item.active .national-layer-list-item-label
+.national-layer-list-item .national-layer-list-item-label.active
 	background url(images/radio_checked.svg) no-repeat #fff
 	padding-left 20px
 
@@ -103,6 +104,7 @@ $darkFont = #464646
 .national-layer-list-item.active .national-layer-list-item-label
 	font-weight bold
 	color #2FA3D9
+	display inline-block
 
 .percent-indigenous-layer-list .subTitle
 	margin-left 15px
@@ -116,7 +118,8 @@ $darkFont = #464646
 
 .subLayer .national-layer-list-item-label, .activesubLayer .national-layer-list-item-label
 	position relative
-	top -5px
+	top -2px
+	display inline-block
 
 .percent-indigenous-layer-list .activesubLayer
 	background url(images/radio_checked.svg) no-repeat #fff
@@ -165,3 +168,17 @@ $darkFont = #464646
 .unchecked
 	background url(images/right-arrow.svg) no-repeat 0 70%
 	background-size contain
+
+.close-active-layer-prop, .close-active-layer-indicator
+	background url(images/deleteLrg.svg) no-repeat
+	height 12px
+	width 40px
+	// display inline-block
+	background-size cover
+	// margin-left 0.5em
+	position absolute
+	top 4px
+	right 20px
+
+.close-active-layer-indicator
+	right 0px

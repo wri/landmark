@@ -23,14 +23,7 @@ define([
           mapLayer = element.data;
           return element;
         }
-        // return element.layerId === 'landTenure';
       }
-      //
-      // var mapLayer = brApp.layerInfos.some(isLandTenure)
-      // console.log(mapLayer);
-      // for (var i = 0; i < brApp.layerInfos.length; i++) {
-      //   if (brApp.layerInfos[i].layerId === 'landTenure') {
-      //     var mapLayer = brApp.layerInfos[i].data;
         if (brApp.layerInfos.some(isLandTenure)) {
           for (var j = 0; j < mapLayer.layers.length; j++) {
             if (mapLayer.layers[j].layerId === self.props.legendObject.layerIdValue) {
@@ -38,10 +31,30 @@ define([
             }
           }
         }
-      //   }
-      // }
-
     },
+    // 
+    // componentDidUpdate: function () {
+    //   // console.log(this);
+    //   // console.log(this.props);
+    //   // console.log(brApp.layerInfos);
+    //   var self = this;
+    //   var mapLayer;
+    //   var element = brApp.layerInfos;
+    //   console.log(element.length);
+    //   for (var i = 0; i < element.length; i++) {
+    //     if (element[i].layerId === self.props.legendObject.name) {
+    //       mapLayer = element[i].data;
+    //       for (var k = 0; k < mapLayer.layers.length; k++) {
+    //         if (mapLayer.layers[k].layerId === self.props.legendObject.layerIdValue) {
+    //           // console.log('yes');
+    //           // console.log(mapLayer.layers[k].legend);
+    //           // console.log(this.state);
+    //           self.setState({legendInfos: mapLayer.layers[k].legend});
+    //         }
+    //       }
+    //     }
+    //   }
+    // },
 
     dataMapper: function(data) {
         if (data.label === 'Not applicable') {

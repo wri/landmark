@@ -5,9 +5,8 @@ define([
   'map/LayerController',
   'components/PercentOfCountryList',
   'components/IndigAndCommLandMap',
-  'components/CommunityLayerList',
   'components/IndicatorsOfLegalSecurityList'
-], function (React, MapConfig, LayerController, PercentOfCountryList, IndigAndCommLandMaps, CommunityLayerList, IndicatorsOfLegalSecurityList) {
+], function (React, MapConfig, LayerController, PercentOfCountryList, IndigAndCommLandMaps, IndicatorsOfLegalSecurityList) {
   'use strict';
 
   var SelectionDropdown = React.createClass({displayName: "SelectionDropdown",
