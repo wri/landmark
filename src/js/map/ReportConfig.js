@@ -65,15 +65,18 @@ define([], function() {
         }, {
           url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer',
           layerIds: [0, 1]
-        // }, {
-        //   url: '',
-        //   layerIds: []
-        // }, {
-        //   url: '',
-        //   layerIds: []
-        // }, {
-        //   url: '',
-        //   layerIds: []
+        }, {
+          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Occupied/MapServer',
+          layerIds: [0, 1]
+        }, {
+          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Occupied/MapServer',
+          layerIds: [0, 1]
+        }, {
+          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer',
+          layerIds: [0, 1]
+        }, {
+          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NoDoc/MapServer',
+          layerIds: [0, 1]
         }],
 
         countrySnapUrl: 'http://gis.wri.org/arcgis/rest/services/LandMark/Country_Snapshots/MapServer',
