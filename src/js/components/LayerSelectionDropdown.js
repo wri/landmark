@@ -54,7 +54,7 @@ define([
           item.isCategory ? React.createElement("div", {className: "layer-category"}, item.label) :
           React.createElement("div", {className: "layer-node", onClick: self.layerClicked, "data-id": item.id, "data-clicked": item.checked}, 
             React.createElement("span", {className: 'layer-checked-' + item.checked + ' ' + item.id}), 
-            item.label
+            React.createElement("span", {className: "layer-checkbox-text"}, item.label)
           )
         )
       }
@@ -66,16 +66,27 @@ define([
         return;
       }
 
+
       var layer = evt.target.parentElement.getAttribute('data-id');
       var turnOff = evt.target.parentElement.getAttribute('data-clicked');
 
       if (turnOff === "true") {
-        evt.target.classList.remove('layer-checked-true');
-        evt.target.classList.add('layer-checked-false');
+        if (evt.target.classList.contains('layer-checkbox-text')) {
+          evt.target.previousSibling.classList.remove('layer-checked-true');
+          evt.target.previousSibling.classList.add('layer-checked-false');
+        } else {
+          evt.target.classList.remove('layer-checked-true');
+          evt.target.classList.add('layer-checked-false');
+        }
         evt.target.parentElement.setAttribute('data-clicked',false);
       } else {
-        evt.target.classList.add('layer-checked-true');
-        evt.target.classList.remove('layer-checked-false');
+        if (evt.target.classList.contains('layer-checkbox-text')) {
+          evt.target.previousSibling.classList.add('layer-checked-true');
+          evt.target.previousSibling.classList.remove('layer-checked-false');
+        } else {
+          evt.target.classList.add('layer-checked-true');
+          evt.target.classList.remove('layer-checked-false');
+        }
         evt.target.parentElement.setAttribute('data-clicked',true);
       }
 
@@ -166,7 +177,7 @@ define([
         React.createElement("div", {className: "layer-selection-drop-container"}, 
           React.createElement("div", {className: "left-panel-headers"}, 
             React.createElement("div", {className: 'panel-drop-header' + (this.state.openTab ? ' checked' : ' unchecked'), onClick: this.clickDropdown}), 
-            React.createElement("div", {className: "layer-selection-drop-text", onClick: this.clickDropdown}, this.state.title), 
+            React.createElement("div", {className: 'layer-selection-drop-text' + (this.props.selection === 'community-lands' ? ' land-map-layer-selection' : ''), onClick: this.clickDropdown}, this.state.title), 
             this.state.activeSelection === 'community-lands' ?
               React.createElement("div", {className: "disclaimer"}, "Note that the absence of data does not indicate the absence of indigenous or community land")
               : null

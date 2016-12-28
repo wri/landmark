@@ -42,6 +42,13 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1], //[1,2,3,4]
                 visible: false
             },
+            'landTenure': {
+                url: landTenureURL,
+                type: 'dynamic',
+                // Not all the layers are present in the tree, when they are, include 0 - 9
+                defaultLayers: [-1], //[0,1,2,3,4,5,6,7,8,9]
+                visible: true
+            },
 
             // CommunityLevel
             'indigenous_FormalClaim': {
@@ -79,37 +86,6 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
-            'indigenous_FormalClaim_Tiled': {
-                url: community_indigenous_FormalClaim,
-                type: 'tiled',
-                defaultLayers: [0,1],
-                visible: true
-            },
-            'indigenous_FormalDoc_Tiled': {
-                url: community_indigenous_FormalDoc,
-                type: 'tiled',
-                defaultLayers: [0,1],
-                visible: true
-            },
-            'indigenous_InProcess_Tiled': {
-                url: community_indigenous_InProcess,
-                type: 'tiled',
-                defaultLayers: [0,1],
-                visible: true
-            },
-            'indigenous_NoDoc_Tiled': {
-                url: community_indigenous_NoDoc,
-                type: 'tiled',
-                defaultLayers: [0,1],
-                visible: true
-            },
-            'indigenous_Occupied_Tiled': {
-                url: community_indigenous_Occupied,
-                type: 'tiled',
-                defaultLayers: [0,1],
-                visible: true
-            },
-
             'community_FormalClaim': {
                 url: community_community_FormalClaim,
                 type: 'dynamic',
@@ -145,6 +121,36 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
+            'indigenous_FormalClaim_Tiled': {
+                url: community_indigenous_FormalClaim,
+                type: 'tiled',
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'indigenous_FormalDoc_Tiled': {
+                url: community_indigenous_FormalDoc,
+                type: 'tiled',
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'indigenous_InProcess_Tiled': {
+                url: community_indigenous_InProcess,
+                type: 'tiled',
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'indigenous_NoDoc_Tiled': {
+                url: community_indigenous_NoDoc,
+                type: 'tiled',
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'indigenous_Occupied_Tiled': {
+                url: community_indigenous_Occupied,
+                type: 'tiled',
+                defaultLayers: [0,1],
+                visible: true
+            },
             'community_FormalClaim_Tiled': {
                 url: community_community_FormalClaim,
                 type: 'tiled',
@@ -173,14 +179,6 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 url: community_community_Occupied,
                 type: 'tiled',
                 defaultLayers: [0,1],
-                visible: true
-            },
-
-            'landTenure': {
-                url: landTenureURL,
-                type: 'dynamic',
-                // Not all the layers are present in the tree, when they are, include 0 - 9
-                defaultLayers: [-1], //[0,1,2,3,4,5,6,7,8,9]
                 visible: true
             },
 
