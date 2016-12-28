@@ -1004,15 +1004,23 @@ button
 	position absolute
 
 #reportLogo
-	background url("images/globe.svg") no-repeat 9px
+	// background url("images/globe.svg") no-repeat 9px
 	background-color #2fa3d9
 	width 33px
 	height 32px
 	display block
 	margin-left -33px
 	position absolute
-	z-index 10
-	background-size cover
+	// z-index 10
+	// background-size cover
+
+#report-button
+	.searchIcon.esriIconZoom:before
+		content none !important
+
+	.searchIcon.esriIconZoom
+		background url("images/globe.svg") no-repeat
+		background-size cover
 
 .searchBtn.searchSubmit
 	float inherit
