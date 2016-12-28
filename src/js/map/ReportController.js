@@ -43,8 +43,11 @@ define([
             });
             this.map = map;
 
+            countries.on('click', function (evt) {
+              window.open('map.html#country=' + evt.graphic.attributes.Country);
+            });
+
             on.once(countries, 'graphic-draw', function (evt) {
-              console.log(evt.graphic.attributes);
 
               var attributes = [ {
                 attr: 'ind_C_1',
@@ -174,13 +177,9 @@ define([
               self.map.disableMapNavigation();
 
             });
-            countries.setDefinitionExpression("Country = '" + country + "'")
-            // console.log("Country = '" + country + "'");
-            // countries.setDefinitionExpression("Country = 'Canada'");
+            countries.setDefinitionExpression("Country = '" + country + "'");
 
             map.addLayer(countries);
-
-            console.log(countries);
         },
 
         exportAnalysisResult: function(text) {

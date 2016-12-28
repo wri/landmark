@@ -5,6 +5,7 @@ define([
     "dojo/number",
     // My Modules
     'map/MapConfig',
+    'main/config',
     // Dojo Modules
     'dojo/on',
     'dijit/registry',
@@ -17,7 +18,7 @@ define([
     'esri/layers/ArcGISDynamicMapServiceLayer',
     'esri/layers/ArcGISTiledMapServiceLayer',
     "esri/layers/GraphicsLayer",
-], function(Evented, declare, number, MapConfig, on, registry, HashController, Map, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, GraphicsLayer) {
+], function(Evented, declare, number, MapConfig, MainConfig, on, registry, HashController, Map, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, GraphicsLayer) {
     'use strict';
 
     var _map = declare([Evented], {
@@ -42,9 +43,12 @@ define([
 
             var wholeHash = HashController.getHash();
 
-            var hashX = self.centerX;
-            var hashY = self.centerY;
-            var hashL = self.zoom;
+            if (wholeHash.country) {
+              wholeHash.x = MainConfig.defaultState.x;
+              wholeHash.y = MainConfig.defaultState.y;
+              wholeHash.l = MainConfig.defaultState.l;
+            }
+            self.initialCountry = wholeHash.country;
 
             self.map = new Map(this.element, {
                 basemap: this.basemap,
@@ -54,7 +58,7 @@ define([
             });
 
             self.map.on('load', function() {
-                self.emit('map-ready', {});
+                self.emit('map-ready', self.initialCountry);
                 // Clear out Phantom Graphics thanks to esri's graphics layer
                 self.map.graphics.clear();
                 self.map.resize();
