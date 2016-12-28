@@ -62,7 +62,10 @@ define([
             brApp.map = mapObject.map;
 
             // Bind Events now, Map Events then UI Events
-            mapObject.on('map-ready', function() {
+            mapObject.on('map-ready', function(country) {
+                if (country) {
+                  self.zoomToCountry(country);
+                }
                 self.renderComponents();
             });
 
@@ -114,8 +117,6 @@ define([
                   }
                 }
               }
-
-              console.log(evt.lod.level);
 
             });
             on(brApp.map, 'layers-add-result', function(layersAdded) {
@@ -392,8 +393,6 @@ define([
             searchWidget.startup();
 
             searchWidget.on('select-result', function(results) {
-              console.log(results);
-              console.log(results.result);
               var features = self.setCommunityTemplates([results.result]);
 
               switch (results.source.name) {
@@ -487,9 +486,7 @@ define([
              reportWidget.startup();
 
              reportWidget.on('select-result', function(results) {
-               console.log(results.result.feature);
                if (results.result.feature && results.result.feature.attributes.Country) {
-                 console.log('report.html?country=' + results.result.feature.attributes.Country);
                  window.open('report.html?country=' + results.result.feature.attributes.Country);
                }
              });
@@ -526,6 +523,22 @@ define([
             dojoQuery('body .hideOnLoad').forEach(function(node) {
                 domClass.remove(node, 'hideOnLoad');
             });
+
+        },
+
+        zoomToCountry: function (country) {
+          var countryQT = new QueryTask('http://gis.wri.org/arcgis/rest/services/LandMark/Country_Snapshots/MapServer/0')
+          var countryQuery = new Query();
+          countryQuery.where = "Country = '" + country + "'";
+          countryQuery.returnGeometry = true;
+          countryQuery.outFields = [];
+
+          countryQT.execute(countryQuery, function (result) {
+            if (result.features && result.features[0]) {
+              brApp.map.setExtent(result.features[0].geometry.getExtent());
+            }
+            //TODO: Turn on community level data!
+          });
 
         },
 
@@ -1289,7 +1302,6 @@ define([
                     statDate = '';
                 }
 
-                console.log(item);
                 var area_Ofcl = item.feature.attributes.Area_Ofcl ? item.feature.attributes.Area_Ofcl : 0;
                 var area_GIS = item.feature.attributes.Area_GIS ? item.feature.attributes.Area_GIS : 0;
 
