@@ -98,6 +98,7 @@ define([
 
                 dom.byId('land-count').innerHTML = 'Number of Indigenous and Community Lands Mapped: ' + result.features[0].attributes.NB_Maps;
                 dom.byId('country-name').innerHTML = result.features[0].attributes.Country;
+                dom.byId('flag-icon').classList = 'flag-icon flag-icon-'+result.features[0].attributes.ISO_ALPHA2.toLowerCase();
                 dom.byId('country-land-area').innerHTML = 'COUNTRY LAND AREA:'
                 dom.byId('country-hectares').innerHTML = Math.round(countryLand) + ' Hectares';
                 dom.byId('average-score-comm').innerHTML = result.features[0].attributes.ind_C_A;
