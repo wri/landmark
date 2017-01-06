@@ -1519,27 +1519,12 @@ define([
                   }
               }
 
-              var data1 = item.feature.attributes.IC_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.IC_T + " " + item.feature.attributes.IC_T_Src + "</div><div class='indentTD'><span class='inlineBold'>Formally recognized</span>: " + item.feature.attributes.IC_F + " " + item.feature.attributes.IC_F_Src + "</div><div class='indentTD'><span class='inlineBold'>Not formally recognized</span>: " + item.feature.attributes.IC_NF + " " + item.feature.attributes.IC_NF_Src + "</div></td></tr>" : "";
-              var data2 = item.feature.attributes.I_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples only</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.I_T + ' ' + item.feature.attributes.I_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.I_F + ' ' + item.feature.attributes.I_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.I_NF + ' ' + item.feature.attributes.I_NF_Src + '</div></td></tr>' : "";
-              var data3 = item.feature.attributes.C_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.C_T + ' ' + item.feature.attributes.C_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.C_F + ' ' + item.feature.attributes.C_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.C_NF + ' ' + item.feature.attributes.C_NF_Src + '</div></td></tr>' : "";
-
-
-              var source1 = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IC_Notes + '</td></tr>' : '';
-              var source2 = item.feature.attributes.I_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.I_Notes + '</td></tr>' : '';
-              var source3 = item.feature.attributes.C_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.C_Notes + '</td></tr>' : '';
-
-              //todo: Talk to Christina about ticket #205!
+              var data = item.feature.attributes.IC_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.IC_T + " " + item.feature.attributes.IC_T_Src + "</div><div class='indentTD'><span class='inlineBold'>Formally recognized</span>: " + item.feature.attributes.IC_F + " " + item.feature.attributes.IC_F_Src + "</div><div class='indentTD'><span class='inlineBold'>Not formally recognized</span>: " + item.feature.attributes.IC_NF + " " + item.feature.attributes.IC_NF_Src + "</div></td></tr>" : "";
+              var source = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IC_Notes + '</td></tr>' : '';
 
               template.content = "<div id='tableWrapper'><table id='nationalTable'>" +
-              // "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.IC_T + ' ' + item.feature.attributes.IC_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.IC_F + ' ' + item.feature.attributes.IC_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.IC_NF + ' ' + item.feature.attributes.IC_NF_Src + '</div></td></tr>' +
-              data1 +
-              source1 +
-              data2 +
-              // "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples only</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.I_T + ' ' + item.feature.attributes.I_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.I_F + ' ' + item.feature.attributes.I_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.I_NF + ' ' + item.feature.attributes.I_NF_Src + '</div></td></tr>' +
-              source2 +
-              data3 +
-              // "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.C_T + ' ' + item.feature.attributes.C_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.C_F + ' ' + item.feature.attributes.C_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.C_NF + ' ' + item.feature.attributes.C_NF_Src + '</div></td></tr>' +
-              source3 +
+              data +
+              source +
               '</table></div>' +
               "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
 
