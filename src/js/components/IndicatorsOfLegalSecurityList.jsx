@@ -72,6 +72,8 @@ define([
 						console.log('activeIndigenousKey',this.state.activeIndigenousKey)
 						if (this.state.activeIndigenousKey === "averageScoreTenure") {
 							visibleLayers = [2];
+						} else if (this.state.activeIndigenousKey === 'none') {
+							visibleLayers = [-1];
 						} else {
 							visibleLayers = [3];
 						}
@@ -79,6 +81,8 @@ define([
 						console.log('activeCommunityKey',this.state.activeCommunityKey)
 						if (this.state.activeCommunityKey === "averageScoreTenure") {
 							visibleLayers = [0];
+						} else if (this.state.activeCommunityKey === 'none') {
+							visibleLayers = [-1];
 						} else {
 							visibleLayers = [1];
 						}
@@ -110,6 +114,8 @@ define([
     },
 
     changeLandTenureLayer: function (key, layer) {
+			console.log(key);
+			console.log(layer);
     	// If layer === 0, update Active Community Key, else, update Active Indigenous Key
     	if (layer === 0 || layer === 1) {
 				this.setState({
