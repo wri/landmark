@@ -1528,7 +1528,7 @@ define([
               var source2 = item.feature.attributes.I_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.I_Notes + '</td></tr>' : '';
               var source3 = item.feature.attributes.C_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.C_Notes + '</td></tr>' : '';
 
-              //todo: ternary operation to hide any data field: if null dont show them
+              //todo: Talk to Christina about ticket #205!
 
               template.content = "<div id='tableWrapper'><table id='nationalTable'>" +
               // "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.IC_T + ' ' + item.feature.attributes.IC_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.IC_F + ' ' + item.feature.attributes.IC_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.IC_NF + ' ' + item.feature.attributes.IC_NF_Src + '</div></td></tr>' +
@@ -1792,6 +1792,14 @@ define([
 
             identifyTask.execute(params, function(features) {
 
+                var payload = {
+                    features: features//,
+                    // title: self.state.analysisArea.map(function (feature) {return feature.attributes.WRI_label;}).join(',')
+                };
+
+                var win = window.open('analysis.html', '_blank');
+                win.payload = payload;
+
                 if (features.length > 0) {
                     deferred.resolve({
                         layer: "indigenousLands",
@@ -1836,12 +1844,13 @@ define([
 
                 template.setContent("<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Formal Recognition</b></td><td class='rec_status'><b>Documentation Status</b></td></tr><tr id='fillerColumn' style='height: 36px;'><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td></tr>");
 
-                var fields = ["Country", "Name", "Identity", "Formal Recognition", "Documentation Status"];
+                var fields = ["Country", "Name", "Identity", "Formal Recognition", "Documentation Status", "Area_GIS"];
 
                 brApp.csv = fields.join(",") + '\n';
 
 
                 function getTextContent(graphic, even) {
+                  console.log(graphic);
                     if (graphic.feature.attributes.Identity === "Indigenous (self-identified)") {
                         graphic.feature.attributes.Identity = "Indigenous";
                     }
@@ -1883,7 +1892,6 @@ define([
                     } else {
                         template.content = template.content + getTextContent(value.features[i], 'odd');
                     }
-
                 }
 
                 template.content += "</table>";
@@ -1895,21 +1903,17 @@ define([
 
                 brApp.map.infoWindow.resize(650, 350);
 
-
                 $("#identifyNote").remove();
 
                 var extraContent = "<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:10px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended.</div></div>";
 
-
                 $('.esriPopupWrapper').append(extraContent);
                 $('.esriPopupWrapper').addClass("noPositioning");
-
 
                 arrayUtils.forEach(brApp.map.infoWindow.domNode.children, function(node) {
                     if (node) {
                         var newNode = node.cloneNode(true);
                         $("#infowindowContainer").append(newNode);
-
                     }
                 });
 
@@ -1923,21 +1927,12 @@ define([
                   $('#column-header').addClass('lessColumnWidth');
                 }
 
-                // brApp.map.infoWindow.maximize();
-                // brApp.map.infoWindow.show();
-                // brApp.map.infoWindow.resize(650, 250);
-
                 var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
-
                     self.removeCustomGraphic(graphic.attributes.attributeID);
                     $("#infowindowContainer").html('');
-                    //brApp.map.infoWindow.hide();
-                    //$("#identifyNote").remove();
                     $("#infowindowContainer").hide();
                     $('.esriPopupWrapper').removeClass("noPositioning");
                 });
-
-
 
                 $("div.titleButton.close").click(function() {
                     $("#infowindowContainer").html('');
@@ -1947,16 +1942,12 @@ define([
                     $('.esriPopupWrapper').removeClass("noPositioning");
                 });
 
-
                 var parent = $("#analysisTable").parent()[0];
                 var table = $("#analysisTable")[0];
 
                 on.once(document.getElementById('exportAnalysis'), 'click', function() {
-
                     self.exportAnalysisResult(brApp.csv);
                 });
-
-                //$(".esriPopup .titleButton.close").html("&#10005;");
 
             });
 
