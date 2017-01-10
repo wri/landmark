@@ -138,6 +138,7 @@
         },
         plotOptions: {
           pie: {
+            size: 200,
             allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
@@ -176,6 +177,7 @@
         },
         plotOptions: {
           pie: {
+            size: 200,
             allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
@@ -214,6 +216,7 @@
         },
         plotOptions: {
           pie: {
+            size: 200,
             allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
@@ -228,19 +231,19 @@
         series: [{
           colorByPoint: true,
           data: [{
-            name: 'Formal documentation',
+            name: 'Formal doc',
             y: documentationData.formalDoc
           }, {
-            name: 'No documentation',
+            name: 'No doc',
             y: documentationData.noDoc
-            }, {
-            name: 'Occupied or used without formal land petition',
+          }, {
+            name: 'Occupied w/o formal petition',
             y: documentationData.occupied
-            }, {
-            name: 'Formal land petition',
+          }, {
+            name: 'Formal petition',
             y: documentationData.formalLand
-            }, {
-            name: 'In process of documentation',
+          }, {
+            name: 'Doc in process',
             y: documentationData.inProcess
           }]
         }]
