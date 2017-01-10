@@ -10,7 +10,9 @@
     <style>html,body{height:100%;width:100%;padding:0;margin:0;overflow:hidden}	</style>
     <link rel="stylesheet" href="css/base.css?1.1.2">
     <link rel="stylesheet" href="css/report.css?1.1.2">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway:400,600,700"><!--[if lt IE 9]>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway:400,600,700">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script><!--[if lt IE 9]>
     <script src="libs/es5-shim.min.js"></script>
     <script src="libs/es5-sham.min.js"></script>
     <script src="libs/html5shiv.js"></script><![endif]-->
@@ -33,6 +35,9 @@
           <div id="pct-ack-gov"></div>
           <div id="pct-no-ack-gov"></div>
           <div id="pct-total-ack"></div>
+          <div class="estimated-chart-container">
+            <div id="estimated-chart"></div>
+          </div>
         </div>
         <div class="comm-indig-lands">Land Mapped on Landmark
           <div id="comm-ack-gov"></div>
