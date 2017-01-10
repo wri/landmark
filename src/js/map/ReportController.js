@@ -102,15 +102,15 @@ define([
                 dom.byId('country-hectares').innerHTML = Math.round(countryLand) + ' Hectares';
                 dom.byId('average-score-comm').innerHTML = result.features[0].attributes.ind_C_A;
                 dom.byId('average-score-indig').innerHTML = result.features[0].attributes.ind_IP_A;
-                dom.byId('pct-ack-gov').innerHTML = 'Acknowledged: ' + result.features[0].attributes.Pct_F;
-                dom.byId('pct-no-ack-gov').innerHTML = 'Not acknowledged: ' + result.features[0].attributes.Pct_NF;
-                dom.byId('pct-total-ack').innerHTML = 'total: ' + result.features[0].attributes.Pct_tot;
-                dom.byId('comm-ack-gov').innerHTML = result.features[0].attributes.Map_C_F;
-                dom.byId('comm-no-ack-gov').innerHTML = result.features[0].attributes.Map_C_NF;
-                dom.byId('comm-total-ack').innerHTML = result.features[0].attributes.Map_C_T;
-                dom.byId('indig-ack-gov').innerHTML = result.features[0].attributes.Map_IP_F;
-                dom.byId('indig-no-ack-gov').innerHTML = result.features[0].attributes.Map_IP_NF;
-                dom.byId('indig-total-ack').innerHTML = result.features[0].attributes.Map_IP_T;
+                // dom.byId('pct-ack-gov').innerHTML = 'Acknowledged: ' + result.features[0].attributes.Pct_F;
+                // dom.byId('pct-no-ack-gov').innerHTML = 'Not acknowledged: ' + result.features[0].attributes.Pct_NF;
+                // dom.byId('pct-total-ack').innerHTML = 'total: ' + result.features[0].attributes.Pct_tot;
+                // dom.byId('comm-ack-gov').innerHTML = result.features[0].attributes.Map_C_F;
+                // dom.byId('comm-no-ack-gov').innerHTML = result.features[0].attributes.Map_C_NF;
+                // dom.byId('comm-total-ack').innerHTML = result.features[0].attributes.Map_C_T;
+                // dom.byId('indig-ack-gov').innerHTML = result.features[0].attributes.Map_IP_F;
+                // dom.byId('indig-no-ack-gov').innerHTML = result.features[0].attributes.Map_IP_NF;
+                // dom.byId('indig-total-ack').innerHTML = result.features[0].attributes.Map_IP_T;
 
                 self.map.setExtent(result.features[0].geometry.getExtent());
                 self.map.disablePan();
@@ -215,8 +215,8 @@ define([
               // name: 'Browser share',
               innerSize: '60%',
               data: [
-                ['Acknowledged by gov',   data.attributes.Pct_F],
-                ['Not acknowledged',       data.attributes.Pct_NF],
+                [data.attributes.Pct_F + '% Acknowledged by gov',   data.attributes.Pct_F],
+                [data.attributes.Pct_NF + '% Not acknowledged',       data.attributes.Pct_NF],
                 {
                   name: 'Proprietary or Undetectable',
                   y: 0.2,
@@ -227,6 +227,117 @@ define([
               ]
             }]
           });
+
+
+          Highcharts.chart('community-lands-chart', {
+            chart: {
+              height: 250,
+              width: 250,
+              plotBackgroundColor: null,
+              backgroundColor: 'gray',
+              plotBorderWidth: 0,
+              plotShadow: false
+            },
+            title: {
+              useHTML: true,
+              shape: 'circle',
+              // style: { "height": "100px", "color": "white", "background-color": "#055d7d", "padding": "20px", "border-radius": "50%", "fontSize": "18px" },
+              // text: '<p class="chart-center">Lands held:</p> <p class="chart-center chart-percent"> ' + data.attributes.Map_C_T.toFixed(2) + '%</p>',
+              align: 'center',
+              verticalAlign: 'middle',
+              y: 40
+            },
+            tooltip: {
+              pointFormat: '<b>{point.y}%</b>'
+            },
+            plotOptions: {
+              pie: {
+                dataLabels: {
+                  enabled: true,
+                  distance: -50,
+                  style: {
+                    fontWeight: 'bold',
+                    color: 'white'
+                  }
+                },
+                startAngle: -(data.attributes.Map_C_T / 100) * 180,
+                endAngle: (data.attributes.Map_C_T / 100) * 180,
+                center: ['50%', '75%']
+              }
+            },
+            series: [{
+              type: 'pie',
+              // name: 'Browser share',
+              innerSize: '60%',
+              data: [
+                [data.attributes.Map_C_F + '% Acknowledged by gov',   data.attributes.Map_C_F],
+                [data.attributes.Map_C_NF + '% Not acknowledged',       data.attributes.Map_C_NF],
+                {
+                  name: 'Proprietary or Undetectable',
+                  y: 0.2,
+                  dataLabels: {
+                    enabled: false
+                  }
+                }
+              ]
+            }]
+          });
+
+
+          Highcharts.chart('indigenous-lands-chart', {
+            chart: {
+              height: 250,
+              width: 250,
+              plotBackgroundColor: null,
+              backgroundColor: 'gray',
+              plotBorderWidth: 0,
+              plotShadow: false
+            },
+            title: {
+              useHTML: true,
+              shape: 'circle',
+              // style: { "height": "100px", "color": "white", "background-color": "#055d7d", "padding": "20px", "border-radius": "50%", "fontSize": "18px" },
+              // text: '<p class="chart-center">Lands held:</p> <p class="chart-center chart-percent"> ' + data.attributes.Map_IP_T.toFixed(2) + '%</p>',
+              align: 'center',
+              verticalAlign: 'middle',
+              y: 40
+            },
+            tooltip: {
+              pointFormat: '<b>{point.y}%</b>'
+            },
+            plotOptions: {
+              pie: {
+                dataLabels: {
+                  enabled: true,
+                  distance: -50,
+                  style: {
+                    fontWeight: 'bold',
+                    color: 'white'
+                  }
+                },
+                startAngle: -(data.attributes.Map_IP_T / 100) * 180,
+                endAngle: (data.attributes.Map_IP_T / 100) * 180,
+                center: ['50%', '75%']
+              }
+            },
+            series: [{
+              type: 'pie',
+              // name: 'Browser share',
+              innerSize: '60%',
+              data: [
+                [data.attributes.Map_IP_F.toFixed(2) + '% Acknowledged by gov',   data.attributes.Map_IP_F],
+                [data.attributes.Map_IP_NF.toFixed(2) + '% Not acknowledged',       data.attributes.Map_IP_NF],
+                {
+                  name: 'Proprietary or Undetectable',
+                  y: 0.2,
+                  dataLabels: {
+                    enabled: false
+                  }
+                }
+              ]
+            }]
+          });
+
         },
 
         exportAnalysisResult: function(text) {
