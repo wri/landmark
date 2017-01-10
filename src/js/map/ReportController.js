@@ -95,6 +95,16 @@ define([
                 });
 
                 var countryLand = result.features[0].attributes.Ctry_Land ? result.features[0].attributes.Ctry_Land : 0;
+                // var iso2Value = ReportConfig.countryCodeExceptions.includes(result.features[0].attributes.ISO_ALPHA) ?
+                var iso2Value;
+                var countryCodeExceptions = ReportConfig.countryCodeExceptions
+                for (var i = 0; i < countryCodeExceptions.length; i++) {
+                  if (result.features[0].attributes.ISO_Code === countryCodeExceptions[i].ISO) {
+                    dom.byId('flag-icon').classList = 'flag-icon flag-icon-'+countryCodeExceptions[i].ISO2.toLowerCase();
+                  } else {
+                    dom.byId('flag-icon').classList = 'flag-icon flag-icon-'+result.features[0].attributes.ISO_ALPHA2.toLowerCase();
+                  }
+                }
 
                 dom.byId('land-count').innerHTML = 'Number of Indigenous and Community Lands Mapped: ' + result.features[0].attributes.NB_Maps;
                 dom.byId('country-name').innerHTML = result.features[0].attributes.Country;
