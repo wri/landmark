@@ -2,9 +2,10 @@ define([
     'esri/Color',
     'esri/symbols/SimpleFillSymbol',
     'esri/symbols/SimpleLineSymbol',
-    'esri/renderers/UniqueValueRenderer'
+    'esri/renderers/UniqueValueRenderer',
+    'esri/symbols/SimpleMarkerSymbol'
 
-], function(Color, SimpleFillSymbol, SimpleLineSymbol, UniqueValueRenderer) {
+], function(Color, SimpleFillSymbol, SimpleLineSymbol, UniqueValueRenderer, SimpleMarkerSymbol) {
     'use strict';
 
     /**
@@ -24,12 +25,19 @@ define([
                 new Color([255, 255, 255, 0.5]));
         },
 
+        getDrawUploadSymbolPoint: function() {
+            return new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_SQUARE, 10,
+              new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+              new Color([255,0,0]), 1),
+              new Color([0,255,0,0.25]));
+        },
+
         /**
          *	@param {string} fieldName - Field Name to be used in the Unique Value Renderer
          * @return {UniqueValueRenderer - object} The Created Unique Value Renderer Ready to Use on a Dynamic Layer
          */
         getUniqueValueRendererForNationalDataWithField: function(fieldName, layer) {
-          
+
             var noReviewSymbol, lawSilentSymbol, legalAddressesSymbol,
                 legalMeetsSymbol, legalFullyMeetsSymbol, notApplicableSymbol,
                 renderer;

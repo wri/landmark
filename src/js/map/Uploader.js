@@ -10,8 +10,10 @@ define([
     "dojo/dom-construct",
     "dijit/form/ComboBox",
     "esri/geometry/Polygon",
-    "esri/geometry/scaleUtils"
-], function(AppConfig, MapAssets, sniff, Graphic, esriRequest, registry, arrayUtils, Memory, domConstruct, ComboBox, Polygon, scaleUtils) {
+    "esri/geometry/Point",
+    "esri/geometry/scaleUtils",
+    "esri/graphicsUtils"
+], function(AppConfig, MapAssets, sniff, Graphic, esriRequest, registry, arrayUtils, Memory, domConstruct, ComboBox, Polygon, Point, scaleUtils, graphicsUtils) {
     'use strict';
 
     var Uploader = {
@@ -60,7 +62,7 @@ define([
                 'enforceOutputJsonSizeLimit': true
             };
 
-            // Generalize Features 
+            // Generalize Features
             // based on https://developers.arcgis.com/javascript/jssamples/portal_addshapefile.html
             extent = scaleUtils.getExtentForScale(brApp.map, 40000);
             params.maxAllowableOffset = extent.getWidth() / brApp.map.width;
@@ -154,11 +156,13 @@ define([
             var symbol = MapAssets.getDrawUploadSymbol(),
                 graphicsLayer = brApp.map.getLayer('CustomFeatures'),
                 graphic,
+                graphics = [],
                 polygon,
+                point,
                 extent;
 
-
             arrayUtils.forEach(featureSet.features, function(feature) {
+              if (feature.geometry.rings) {
                 // Mixin attributes here if necessary
                 polygon = new Polygon(feature.geometry);
 
@@ -167,11 +171,20 @@ define([
                 var attributeID = graphicsLayer.graphics.length + 1;
                 feature.attributes.attributeID = attributeID;
 
-
                 graphic = new Graphic(polygon, symbol, feature.attributes);
                 extent = extent ? extent.union(polygon.getExtent()) : polygon.getExtent();
                 graphicsLayer.add(graphic);
+              } else if (feature.geometry.x) {
+                point = new Point(feature.geometry.x, feature.geometry.y, brApp.map.spatialReference);
+                graphic = new Graphic(point, MapAssets.getDrawUploadSymbolPoint(), feature.attributes);
+                graphics.push(graphic);
+                graphicsLayer.add(graphic);
+              }
             });
+
+            if (!extent) {
+              extent = graphicsUtils.graphicsExtent(graphics);
+            }
 
             brApp.map.setExtent(extent, true);
 
