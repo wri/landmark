@@ -31,7 +31,7 @@ define([
 	getInitialState: function () {
 
       return {
-        active: "none",
+        active: 'none',
         landTenureCategory: LandTenureInd,
         landTenureLayer: 2,
         activePercentIndigenousLayer: 2,
@@ -49,7 +49,8 @@ define([
     			this.state.activeIndigenousKey :
     			this.state.activeCommunityKey
     	);
-      this.setState({active: PercentIndigenous});
+      	this.setState({active: PercentIndigenous});
+				this.props.setActiveTab(this.props.activeSelection)
     },
 
     setToNone: function () {
@@ -90,6 +91,7 @@ define([
     			// visibleLayers = (this.state.landTenureCategory === LandTenureInd ? [0] : [2]);
     			break;
     		case PercentIndigenous:
+					// console.log(state.activePercentIndigenousLayer);
     			visibleLayers = [state.activePercentIndigenousLayer];
 					brApp.currentLayer = 'percentIndigenousLayers';
     			break;
@@ -105,9 +107,12 @@ define([
     },
 
 		changePercentIndigenousLayer: function (key, layer) {
-			console.log(layer);
+			// console.log(layer, key);
 			if (!layer) {
 				return;
+			}
+			if (layer !== -1) {
+				this.props.setActiveTab(this.props.activeSelection)
 			}
     	this.setState({
     		activePercentIndigenousLayer: layer,
@@ -125,8 +130,8 @@ define([
 
     	return (
 				React.createElement("div", {className: "percent-indigenous-layer-list"}, 
-					React.createElement(LayerList, {class: "percent-indigenous-tree", data: MapConfig.percentIndigenousLayersCombined, change: this.changePercentIndigenousLayer, setToNone: this.setToNone, layerActive: this.state.active}), 
-					React.createElement(PercentLegend, {openTab: this.props.openTab, legendObject: legendObject})
+					React.createElement(LayerList, {class: "percent-indigenous-tree", activeTab: this.props.activeTab, data: MapConfig.percentIndigenousLayersCombined, change: this.changePercentIndigenousLayer, layerActive: this.state.active}), 
+					React.createElement(PercentLegend, {legendObject: legendObject})
 				)
     	);
     }

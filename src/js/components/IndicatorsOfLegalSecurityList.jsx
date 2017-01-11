@@ -31,7 +31,7 @@ define([
 	getInitialState: function () {
 
       return {
-        active: "none",
+        active: 'none',
         landTenureCategory: LandTenureInd,
         landTenureLayer: 2,
         activePercentIndigenousLayer: 1,
@@ -50,6 +50,7 @@ define([
     			this.state.activeCommunityKey
     	);
       this.setState({active: LandTenure});
+			this.props.setActiveTab(this.props.activeSelection)
     },
 
     setToNone: function () {
@@ -114,8 +115,11 @@ define([
     },
 
     changeLandTenureLayer: function (key, layer) {
-			console.log(key);
-			console.log(layer);
+			// console.log(key);
+			// console.log(layer);
+			if (layer !== -1) {
+				this.props.setActiveTab(this.props.activeSelection)
+			}
     	// If layer === 0, update Active Community Key, else, update Active Indigenous Key
     	if (layer === 0 || layer === 1) {
 				this.setState({
@@ -139,6 +143,7 @@ define([
         layerIdValue: 0
       }
 
+
     	return (
     		<div className='national-level-layer-lists'>
     			<div className='land-tenure-layer-list'>
@@ -153,14 +158,14 @@ define([
     					   >Community</span>
     					 </div>
 
-               <IndicatorsLegend openTab={this.props.openTab} legendObject={legendObject} />
+               <IndicatorsLegend legendObject={legendObject} />
 
     					 <div className={'indigenous-national-list' + (this.state.landTenureCategory === LandTenureInd ? '' : ' hidden')}>
-    					   <LayerList data={MapConfig.landTenureIndigenousLayers} change={this.changeLandTenureLayer} setToNone={this.setToNone} layerActive={this.state.active} />
+    					   <LayerList activeTab={this.props.activeTab} setActiveTab={this.props.setActiveTab} data={MapConfig.landTenureIndigenousLayers} change={this.changeLandTenureLayer} layerActive={this.state.active} />
     					 </div>
 
     					 <div className={'community-national-list' + (this.state.landTenureCategory === LandTenureCom ? '' : ' hidden')}>
-    					   <LayerList data={MapConfig.landTenureCommunityLayers} change={this.changeLandTenureLayer} setToNone={this.setToNone} layerActive={this.state.active} />
+    					   <LayerList activeTab={this.props.activeTab} setActiveTab={this.props.setActiveTab} data={MapConfig.landTenureCommunityLayers} change={this.changeLandTenureLayer} layerActive={this.state.active} />
     					 </div>
 
     			</div>

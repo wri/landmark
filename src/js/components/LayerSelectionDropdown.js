@@ -148,31 +148,9 @@ define([
       this.toggleOff(layers, allOff);
     },
 
-    changePercentIndigenousLayer: function (key, layer) {
-      console.log(layer, key);
-			if (!layer) {
-				return;
-			}
-    	this.setState({
-    		activePercentIndigenousLayer: layer
-    	});
-    },
-
-    changeLandTenureLayer: function (key, layer) {
-    	// If layer === 0, update Active Community Key, else, update Active Indigenous Key
-    	if (layer === 0 || layer === 1) {
-				this.setState({
-	    		activeCommunityKey: key
-	    	});
-    	} else {
-				this.setState({
-	    		activeIndigenousKey: key
-	    	});
-    	}
-
-    },
 
     render: function () {
+      // console.log(this.state.activeSelection);
       return (
         React.createElement("div", {className: "layer-selection-drop-container"}, 
           React.createElement("div", {className: "left-panel-headers"}, 
@@ -185,17 +163,17 @@ define([
           ), 
           this.state.activeSelection === 'community-lands' ?
           React.createElement("div", {className: 'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}, 
-            React.createElement(IndigAndCommLandMaps, {openTab: this.state.openTab, data: MapConfig.communityLevelLayers, layerMapper: this.layerMapper, parentClicked: this.parentClicked, showHelp: this.showHelp})
+            React.createElement(IndigAndCommLandMaps, {data: MapConfig.communityLevelLayers, layerMapper: this.layerMapper, parentClicked: this.parentClicked, showHelp: this.showHelp})
           )
           : null, 
         this.state.activeSelection === 'percent-indigenous' ?
           React.createElement("div", {className: 'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}, 
-            React.createElement(PercentOfCountryList, {data: MapConfig.percentIndigenousLayersCombined, change: this.changePercentIndigenousLayer, openTab: this.state.openTab})
+            React.createElement(PercentOfCountryList, {activeTab: this.props.activeTab, setActiveTab: this.props.setActiveTab, activeSelection: this.state.activeSelection, data: MapConfig.percentIndigenousLayersCombined})
           )
           : null, 
           this.state.activeSelection === 'land-tenure' ?
           React.createElement("div", {className: 'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}, 
-            React.createElement(IndicatorsOfLegalSecurityList, {data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer, openTab: this.state.openTab})
+            React.createElement(IndicatorsOfLegalSecurityList, {activeTab: this.props.activeTab, setActiveTab: this.props.setActiveTab, activeSelection: this.state.activeSelection, data: MapConfig.landTenureCommunityLayers})
           )
           : null
         )

@@ -38,6 +38,7 @@ define([
 
   		/* jshint ignore:start */
   		render: function () {
+				// console.log(this.props.layerActive);
   			return (
   				<div className={this.props.class || 'national-level-layer-list'}>
   					{this.props.data.map(this.dataMapper, this)}
@@ -47,21 +48,24 @@ define([
 
   		dataMapper: function (item, index) {
 
+
   			var active = (this.state.active === item.id);
   			var subTitle = item.subTitle;
   			var subLayer = item.subLayer;
   			var layer = item.layer;
-  			var comingSoon = item.comingSoon;
-				// var removeClass = this.props.class === 'percent-indigenous-tree' ? 'close-active-layer-prop' : 'close-active-layer-indicator'
+				if (this.props.layerActive !== this.props.activeTab && layer === -1 ) {
+					active = true;
+				} else if (this.props.layerActive !== this.props.activeTab && active === true) {
+					active = false;
+				};
 
-				// <div className={'national-layer-list-item ' + (active ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '') + (comingSoon ? ' comingSoon' : '')} key={item.id} onClick={layer != undefined && !comingSoon ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>
-				// <div className='national-layer-list-item-label' onClick={layer != undefined && !comingSoon ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>{item.label}</div>
+
   			return (
-  				<div className={'national-layer-list-item ' + (comingSoon ? ' comingSoon' : '')} key={item.id} >
-  					<div className={'national-layer-list-item-label ' + (active && this.props.layerActive != 'none' ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '') } onClick={layer != undefined && !comingSoon ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>{item.label}</div>
+  				<div className={'national-layer-list-item '} key={item.id} >
+  					<div className={'national-layer-list-item-label ' + (active && this.props.layerActive !== 'none' ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : '') } onClick={layer != undefined ? this.setActiveLayer.bind(this, item.id, item.layer) : null}>{item.label}</div>
   					{
-  						item.question ?
-  						<div className={'national-layer-list-item-question' + (active && this.props.layerActive != 'none' ? 'question-visible' : '' )}>{item.question}</div> :
+  						item.question && this.props.layerActive === this.props.activeTab ?
+  						<div className={'national-layer-list-item-question' + (active && this.props.layerActive !== 'none' ? 'question-visible' : '' )}>{item.question}</div> :
   						null
   					}
   				</div>

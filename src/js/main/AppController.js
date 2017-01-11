@@ -8,8 +8,7 @@ define([
     'dojo/cookie',
     'utils/Helper',
     'map/WidgetsController',
-    'components/LegendComponent',
-], function(on, topic, registry, domStyle, domClass, domConstruct, cookie, Helper, WidgetsController, LegendComponent) {
+], function(on, topic, registry, domStyle, domClass, domConstruct, cookie, Helper, WidgetsController) {
     'use strict';
 
     var AppController = {
@@ -107,7 +106,7 @@ define([
             // Legend Tab
             var legend = document.getElementById('legend-component');
 
-            var legendComponent = new LegendComponent('legend-component2');
+            // var legendComponent = new LegendComponent('legend-component2');
 
 
             // Tools Tab
