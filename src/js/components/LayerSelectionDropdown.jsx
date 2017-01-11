@@ -26,6 +26,9 @@ define([
     },
 
     clickDropdown: function () {
+      if (!brApp.layerInfos) {
+        return;
+      }
       this.setState({
         activeSelection: this.state.selection
       });
