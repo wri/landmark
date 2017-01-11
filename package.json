@@ -23,6 +23,7 @@
   ],
   "author": "BlueRaster",
   "dependencies": {
+    "flag-icon-css": "^2.8.0",
     "gulp": "^3.8.10",
     "gulp-imagemin": "^2.0.0",
     "gulp-jade": "^0.10.0",

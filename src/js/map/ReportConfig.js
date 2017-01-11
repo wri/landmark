@@ -80,7 +80,18 @@ define([], function() {
         }],
 
         countrySnapUrl: 'http://gis.wri.org/arcgis/rest/services/LandMark/Country_Snapshots/MapServer',
-        countrySnapIndex: 0
+        countrySnapIndex: 0,
+
+        countryCodeExceptions: [
+          {ISO: "CL-", ISO2: "FR"},
+          {ISO: "KO-", ISO2: "KR"},
+          {ISO: "SMX", ISO2: "XX"},
+          {ISO: "SP-", ISO2: "CL"},
+          {ISO: "GBR1", ISO2: "GB"},
+          {ISO: "GBR2", ISO2: "GB"},
+          {ISO: "GBR3", ISO2: "GB"},
+          {ISO: "GBR4", ISO2: "GB"}
+        ]
     };
 
     return config;
