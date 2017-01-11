@@ -176,6 +176,20 @@ define([
 
         addCharts: function(data) {
           console.log('data!!', data);
+          var fixedTotal = data.attributes.Pct_tot;
+          if (fixedTotal) {
+            fixedTotal = fixedTotal.toFixed(2);
+          } else {
+            fixedTotal = data.attributes.Pct_F + data.attributes.Pct_NF;
+          }
+
+          var angle = (fixedTotal / 100) * 180;
+          console.log(angle);
+
+          if (angle === 0) {
+            angle = 180
+          }
+
           Highcharts.chart('estimated-chart', {
             chart: {
               plotBackgroundColor: null,
@@ -183,14 +197,15 @@ define([
               plotBorderWidth: 0,
               plotShadow: false
             },
+            colors: ['#f4e0d7', '#e5aa92'],
             title: {
               useHTML: true,
               shape: 'circle',
-              style: { "height": "100px", "color": "white", "background-color": "#055d7d", "padding": "20px", "border-radius": "50%", "fontSize": "18px" },
-              text: '<p class="chart-center">Lands held:</p> <p class="chart-center chart-percent"> ' + data.attributes.Pct_tot.toFixed(2) + '%</p>',
+              style: { "height": "100px", "color": "white", "background-color": "#152f3e", "padding": "25px", "padding-left": "30px", "padding-right": "30px", "border-radius": "50%", "fontSize": "18px" },
+              text: '<p class="chart-center chart-percent"> ' + fixedTotal + '%</p><p class="chart-center">Total</p> ',
               align: 'center',
               verticalAlign: 'middle',
-              y: 40
+              y: 20
             },
             tooltip: {
               pointFormat: '<b>{point.y}%</b>'
@@ -205,8 +220,8 @@ define([
                     color: 'white'
                   }
                 },
-                startAngle: -(data.attributes.Pct_tot / 100) * 180,
-                endAngle: (data.attributes.Pct_tot / 100) * 180,
+                startAngle: -(angle),
+                endAngle: angle,
                 center: ['50%', '75%']
               }
             },
@@ -229,114 +244,122 @@ define([
           });
 
 
-          Highcharts.chart('community-lands-chart', {
-            chart: {
-              height: 250,
-              width: 250,
-              plotBackgroundColor: null,
-              backgroundColor: 'gray',
-              plotBorderWidth: 0,
-              plotShadow: false
-            },
-            title: {
-              useHTML: true,
-              shape: 'circle',
-              // style: { "height": "100px", "color": "white", "background-color": "#055d7d", "padding": "20px", "border-radius": "50%", "fontSize": "18px" },
-              // text: '<p class="chart-center">Lands held:</p> <p class="chart-center chart-percent"> ' + data.attributes.Map_C_T.toFixed(2) + '%</p>',
-              align: 'center',
-              verticalAlign: 'middle',
-              y: 40
-            },
-            tooltip: {
-              pointFormat: '<b>{point.y}%</b>'
-            },
-            plotOptions: {
-              pie: {
-                dataLabels: {
-                  enabled: true,
-                  distance: -50,
-                  style: {
-                    fontWeight: 'bold',
-                    color: 'white'
-                  }
-                },
-                startAngle: -(data.attributes.Map_C_T / 100) * 180,
-                endAngle: (data.attributes.Map_C_T / 100) * 180,
-                center: ['50%', '75%']
-              }
-            },
-            series: [{
-              type: 'pie',
-              // name: 'Browser share',
-              innerSize: '60%',
-              data: [
-                [data.attributes.Map_C_F + '% Acknowledged by gov',   data.attributes.Map_C_F],
-                [data.attributes.Map_C_NF + '% Not acknowledged',       data.attributes.Map_C_NF],
-                {
-                  name: 'Proprietary or Undetectable',
-                  y: 0.2,
+          if (!data.attributes.Map_C_F && !data.attributes.Map_C_NF) {
+            dom.byId('community-lands-chart').innerHTML = '<h2>No Data!</h2>';
+          } else {
+            Highcharts.chart('community-lands-chart', {
+              chart: {
+                height: 250,
+                width: 250,
+                plotBackgroundColor: null,
+                backgroundColor: 'gray',
+                plotBorderWidth: 0,
+                plotShadow: false
+              },
+              title: {
+                useHTML: true,
+                shape: 'circle',
+                // style: { "height": "100px", "color": "white", "background-color": "#055d7d", "padding": "20px", "border-radius": "50%", "fontSize": "18px" },
+                // text: '<p class="chart-center">Lands held:</p> <p class="chart-center chart-percent"> ' + data.attributes.Map_C_T.toFixed(2) + '%</p>',
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 40
+              },
+              tooltip: {
+                pointFormat: '<b>{point.y}%</b>'
+              },
+              plotOptions: {
+                pie: {
                   dataLabels: {
-                    enabled: false
-                  }
+                    enabled: true,
+                    distance: -50,
+                    style: {
+                      fontWeight: 'bold',
+                      color: 'white'
+                    }
+                  },
+                  startAngle: -(data.attributes.Map_C_T / 100) * 180,
+                  endAngle: (data.attributes.Map_C_T / 100) * 180,
+                  center: ['50%', '75%']
                 }
-              ]
-            }]
-          });
+              },
+              series: [{
+                type: 'pie',
+                // name: 'Browser share',
+                innerSize: '60%',
+                data: [
+                  [data.attributes.Map_C_F + '% Acknowledged by gov',   data.attributes.Map_C_F],
+                  [data.attributes.Map_C_NF + '% Not acknowledged',       data.attributes.Map_C_NF],
+                  {
+                    name: 'Proprietary or Undetectable',
+                    y: 0.2,
+                    dataLabels: {
+                      enabled: false
+                    }
+                  }
+                ]
+              }]
+            });
+          }
 
 
-          Highcharts.chart('indigenous-lands-chart', {
-            chart: {
-              height: 250,
-              width: 250,
-              plotBackgroundColor: null,
-              backgroundColor: 'gray',
-              plotBorderWidth: 0,
-              plotShadow: false
-            },
-            title: {
-              useHTML: true,
-              shape: 'circle',
-              // style: { "height": "100px", "color": "white", "background-color": "#055d7d", "padding": "20px", "border-radius": "50%", "fontSize": "18px" },
-              // text: '<p class="chart-center">Lands held:</p> <p class="chart-center chart-percent"> ' + data.attributes.Map_IP_T.toFixed(2) + '%</p>',
-              align: 'center',
-              verticalAlign: 'middle',
-              y: 40
-            },
-            tooltip: {
-              pointFormat: '<b>{point.y}%</b>'
-            },
-            plotOptions: {
-              pie: {
-                dataLabels: {
-                  enabled: true,
-                  distance: -50,
-                  style: {
-                    fontWeight: 'bold',
-                    color: 'white'
-                  }
-                },
-                startAngle: -(data.attributes.Map_IP_T / 100) * 180,
-                endAngle: (data.attributes.Map_IP_T / 100) * 180,
-                center: ['50%', '75%']
-              }
-            },
-            series: [{
-              type: 'pie',
-              // name: 'Browser share',
-              innerSize: '60%',
-              data: [
-                [data.attributes.Map_IP_F.toFixed(2) + '% Acknowledged by gov',   data.attributes.Map_IP_F],
-                [data.attributes.Map_IP_NF.toFixed(2) + '% Not acknowledged',       data.attributes.Map_IP_NF],
-                {
-                  name: 'Proprietary or Undetectable',
-                  y: 0.2,
+          if (!data.attributes.Map_IP_F && !data.attributes.Map_IP_NF) {
+            dom.byId('indigenous-lands-chart').innerHTML = '<h2>No Data!</h2>';
+          } else {
+            Highcharts.chart('indigenous-lands-chart', {
+              chart: {
+                height: 250,
+                width: 250,
+                plotBackgroundColor: null,
+                backgroundColor: 'gray',
+                plotBorderWidth: 0,
+                plotShadow: false
+              },
+              title: {
+                useHTML: true,
+                shape: 'circle',
+                // style: { "height": "100px", "color": "white", "background-color": "#055d7d", "padding": "20px", "border-radius": "50%", "fontSize": "18px" },
+                // text: '<p class="chart-center">Lands held:</p> <p class="chart-center chart-percent"> ' + data.attributes.Map_IP_T.toFixed(2) + '%</p>',
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 40
+              },
+              tooltip: {
+                pointFormat: '<b>{point.y}%</b>'
+              },
+              plotOptions: {
+                pie: {
                   dataLabels: {
-                    enabled: false
-                  }
+                    enabled: true,
+                    distance: -50,
+                    style: {
+                      fontWeight: 'bold',
+                      color: 'white'
+                    }
+                  },
+                  startAngle: -(data.attributes.Map_IP_T / 100) * 180,
+                  endAngle: (data.attributes.Map_IP_T / 100) * 180,
+                  center: ['50%', '75%']
                 }
-              ]
-            }]
-          });
+              },
+              series: [{
+                type: 'pie',
+                // name: 'Browser share',
+                innerSize: '60%',
+                data: [
+                  [data.attributes.Map_IP_F.toFixed(2) + '% Acknowledged by gov',   data.attributes.Map_IP_F],
+                  [data.attributes.Map_IP_NF.toFixed(2) + '% Not acknowledged',       data.attributes.Map_IP_NF],
+                  {
+                    name: 'Proprietary or Undetectable',
+                    y: 0.2,
+                    dataLabels: {
+                      enabled: false
+                    }
+                  }
+                ]
+              }]
+            });
+          }
 
         },
 
