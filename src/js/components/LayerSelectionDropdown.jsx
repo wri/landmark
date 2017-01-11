@@ -148,31 +148,9 @@ define([
       this.toggleOff(layers, allOff);
     },
 
-    changePercentIndigenousLayer: function (key, layer) {
-      console.log(layer, key);
-			if (!layer) {
-				return;
-			}
-    	this.setState({
-    		activePercentIndigenousLayer: layer
-    	});
-    },
-
-    changeLandTenureLayer: function (key, layer) {
-    	// If layer === 0, update Active Community Key, else, update Active Indigenous Key
-    	if (layer === 0 || layer === 1) {
-				this.setState({
-	    		activeCommunityKey: key
-	    	});
-    	} else {
-				this.setState({
-	    		activeIndigenousKey: key
-	    	});
-    	}
-
-    },
 
     render: function () {
+      // console.log(this.state.activeSelection);
       return (
         <div className='layer-selection-drop-container'>
           <div className='left-panel-headers'>
@@ -185,17 +163,17 @@ define([
           </div>
           {this.state.activeSelection === 'community-lands' ?
           <div className={'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}>
-            <IndigAndCommLandMaps openTab={this.state.openTab} data={MapConfig.communityLevelLayers} layerMapper={this.layerMapper} parentClicked={this.parentClicked} showHelp={this.showHelp} />
+            <IndigAndCommLandMaps data={MapConfig.communityLevelLayers} layerMapper={this.layerMapper} parentClicked={this.parentClicked} showHelp={this.showHelp} />
           </div>
           : null }
         {this.state.activeSelection === 'percent-indigenous' ?
           <div className={'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}>
-            <PercentOfCountryList data={MapConfig.percentIndigenousLayersCombined} change={this.changePercentIndigenousLayer} openTab={this.state.openTab} />
+            <PercentOfCountryList activeTab={this.props.activeTab} setActiveTab={this.props.setActiveTab} activeSelection={this.state.activeSelection} data={MapConfig.percentIndigenousLayersCombined}/>
           </div>
           : null }
           {this.state.activeSelection === 'land-tenure' ?
           <div className={'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}>
-            <IndicatorsOfLegalSecurityList data={MapConfig.landTenureCommunityLayers} change={this.changeLandTenureLayer} openTab={this.state.openTab} />
+            <IndicatorsOfLegalSecurityList activeTab={this.props.activeTab} setActiveTab={this.props.setActiveTab} activeSelection={this.state.activeSelection} data={MapConfig.landTenureCommunityLayers}/>
           </div>
           : null }
         </div>

@@ -9,7 +9,9 @@ define([
   var TabContainer = React.createClass({
 
     getInitialState: function () {
-      return { activeTab: 'community' };
+      return {
+        activeTab: 'community'
+      };
     },
 
     getTitle: function (value) {
@@ -22,15 +24,19 @@ define([
       }
     },
 
+    setActiveTab: function(key) {
+      console.log(key);
+      this.setState({activeTab: key});
+    },
+
     render: function () {
-      console.log(MapConfig.communityLevelLayers);
       return (
         <div className='layer-tab-container'>
           <div className='layer-tab-content'>
-            <div className={'community-layers-tab tab-panel' + (this.state.activeTab === 'community' ? '': ' hidden')}>
-              <LayerSelectionDropdown layerData={MapConfig.communityLevelLayers} title={this.getTitle(0)} selection={'community-lands'} />
-              <LayerSelectionDropdown title={this.getTitle(1)} selection={'percent-indigenous'} />
-              <LayerSelectionDropdown title={this.getTitle(2)} selection={'land-tenure'} />
+            <div className={'community-layers-tab tab-panel'}>
+              <LayerSelectionDropdown layerData={MapConfig.communityLevelLayers} activeTab={this.state.activeTab} setActiveTab={this.setActiveTab} title={this.getTitle(0)} selection={'community-lands'} />
+              <LayerSelectionDropdown title={this.getTitle(1)} activeTab={this.state.activeTab} setActiveTab={this.setActiveTab} selection={'percent-indigenous'} />
+              <LayerSelectionDropdown title={this.getTitle(2)} activeTab={this.state.activeTab} setActiveTab={this.setActiveTab} selection={'land-tenure'} />
             </div>
           </div>
         </div>

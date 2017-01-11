@@ -66,7 +66,7 @@ define([
       // </span>
       return (
 
-        <div className={'legend-component-container' + (this.props.openTab ? '' : ' hidden')}>
+        <div className={'legend-component-container'}>
           {this.state.legendInfos.length === 0 ? null :
             <div id='legend-component-content' className='legend-component-content'>
               <div className='legend-container'>

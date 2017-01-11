@@ -6,7 +6,6 @@ define([
     'map/MapConfig',
     'map/MapAssets',
     'components/LayerTabContainer',
-    'components/LegendComponent',
     'map/WidgetsController',
     'utils/Helper',
     'dojo/on',
@@ -39,7 +38,7 @@ define([
     "esri/layers/LayerDrawingOptions",
     'esri/layers/FeatureLayer'
 
-], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, LegendComponent, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
+], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
 
     'use strict';
 
@@ -160,7 +159,7 @@ define([
 
                   brApp.layerInfos = layers;
 
-                  var legendComponent = new LegendComponent('legend-component');
+                  // var legendComponent = new LegendComponent('legend-component');
                   topic.publish('legend-loaded');
                   on(document.getElementById('layersMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
                   on(document.getElementById('legendMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);

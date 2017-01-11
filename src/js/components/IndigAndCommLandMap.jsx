@@ -22,7 +22,7 @@ define([
     	return (
     		<div className='national-level-layer-lists'>
     			<div className='land-tenure-layer-list'>
-            <div className={'national-layer-selection-label' + (this.props.openTab ? '': ' hidden')}>
+            <div className={'national-layer-selection-label'}>
               <div className='community-layer-type'>
                 <div className='community-layer-type-label' id='indigenousLands'><span className='parent-layer-checked-true indig-land-parent' onClick={this.props.parentClicked}></span>Indigenous Lands - traditional or customary rights<span id='indigenous-lands-help' className='parent-layer-help' onClick={this.props.showHelp}></span></div>
                 {this.props.data.map(this.props.layerMapper('indigenousLands'), this)}
