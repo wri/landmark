@@ -66,7 +66,7 @@ define([
       // </span>
       return (
 
-        React.createElement("div", {className: 'legend-component-container' + (this.props.openTab ? '' : ' hidden')}, 
+        React.createElement("div", {className: 'legend-component-container'}, 
           this.state.legendInfos.length === 0 ? null :
             React.createElement("div", {id: "legend-component-content", className: "legend-component-content"}, 
               React.createElement("div", {className: "legend-container"}, 

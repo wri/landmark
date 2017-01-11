@@ -28,7 +28,6 @@ define([
 
             if (isNationalLevelData) {
               visibleLayers = keys;
-              console.log(visibleLayers)
               //TODO: Do we ever want to turn off community data?
               // probably not when we turn on other data at this point
               // what is this doing below?

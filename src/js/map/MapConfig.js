@@ -416,6 +416,10 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             id: 'landRightsProtectedAreasTenure',
             question: "Does the law uphold community land rights in the ownership and governance of national parks and other protected areas?",
             layer: 1
+        }, {
+            label: 'NONE',
+            id: 'none',
+            layer: 0
         }], //, {
         //     label: 'Resource Rights: Sub-surface minerals',
         //     id: 'subsurfaceMinerals',
@@ -518,6 +522,10 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             id: 'landRightsProtectedAreasTenure',
             question: "Does the law uphold indigenous land rights in the ownership and governance of national parks and other protected areas?",
             layer: 3
+        }, {
+            label: 'NONE',
+            id: 'none',
+            layer: -1
         }],
 
 
@@ -542,6 +550,12 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
           id: 'combinedTotal',
           question: false,
           layer: 1,
+          subLayer: true
+        }, {
+          label: 'None',
+          id: 'none',
+          question: false,
+          layer: -1,
           subLayer: true
         }
         // ,

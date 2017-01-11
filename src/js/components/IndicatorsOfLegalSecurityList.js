@@ -31,7 +31,7 @@ define([
 	getInitialState: function () {
 
       return {
-        active: "none",
+        active: 'none',
         landTenureCategory: LandTenureInd,
         landTenureLayer: 2,
         activePercentIndigenousLayer: 1,
@@ -50,6 +50,7 @@ define([
     			this.state.activeCommunityKey
     	);
       this.setState({active: LandTenure});
+			this.props.setActiveTab(this.props.activeSelection)
     },
 
     setToNone: function () {
@@ -72,6 +73,8 @@ define([
 						console.log('activeIndigenousKey',this.state.activeIndigenousKey)
 						if (this.state.activeIndigenousKey === "averageScoreTenure") {
 							visibleLayers = [2];
+						} else if (this.state.activeIndigenousKey === 'none') {
+							visibleLayers = [-1];
 						} else {
 							visibleLayers = [3];
 						}
@@ -79,6 +82,8 @@ define([
 						console.log('activeCommunityKey',this.state.activeCommunityKey)
 						if (this.state.activeCommunityKey === "averageScoreTenure") {
 							visibleLayers = [0];
+						} else if (this.state.activeCommunityKey === 'none') {
+							visibleLayers = [-1];
 						} else {
 							visibleLayers = [1];
 						}
@@ -110,6 +115,11 @@ define([
     },
 
     changeLandTenureLayer: function (key, layer) {
+			// console.log(key);
+			// console.log(layer);
+			if (layer !== -1) {
+				this.props.setActiveTab(this.props.activeSelection)
+			}
     	// If layer === 0, update Active Community Key, else, update Active Indigenous Key
     	if (layer === 0 || layer === 1) {
 				this.setState({
@@ -133,6 +143,7 @@ define([
         layerIdValue: 0
       }
 
+
     	return (
     		React.createElement("div", {className: "national-level-layer-lists"}, 
     			React.createElement("div", {className: "land-tenure-layer-list"}, 
@@ -147,14 +158,14 @@ define([
     					   }, "Community")
     					 ), 
 
-               React.createElement(IndicatorsLegend, {openTab: this.props.openTab, legendObject: legendObject}), 
+               React.createElement(IndicatorsLegend, {legendObject: legendObject}), 
 
     					 React.createElement("div", {className: 'indigenous-national-list' + (this.state.landTenureCategory === LandTenureInd ? '' : ' hidden')}, 
-    					   React.createElement(LayerList, {data: MapConfig.landTenureIndigenousLayers, change: this.changeLandTenureLayer, setToNone: this.setToNone, layerActive: this.state.active})
+    					   React.createElement(LayerList, {activeTab: this.props.activeTab, setActiveTab: this.props.setActiveTab, data: MapConfig.landTenureIndigenousLayers, change: this.changeLandTenureLayer, layerActive: this.state.active})
     					 ), 
 
     					 React.createElement("div", {className: 'community-national-list' + (this.state.landTenureCategory === LandTenureCom ? '' : ' hidden')}, 
-    					   React.createElement(LayerList, {data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer, setToNone: this.setToNone, layerActive: this.state.active})
+    					   React.createElement(LayerList, {activeTab: this.props.activeTab, setActiveTab: this.props.setActiveTab, data: MapConfig.landTenureCommunityLayers, change: this.changeLandTenureLayer, layerActive: this.state.active})
     					 )
 
     			)
