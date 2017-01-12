@@ -1841,7 +1841,7 @@ define([
                 var template = new InfoTemplate();
 
 
-                template.setContent("<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Formal Recognition</b></td><td class='rec_status'><b>Documentation Status</b></td></tr><tr id='fillerColumn' style='height: 36px;'><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td></tr>");
+                template.setContent("<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Formal Recognition</b></td><td class='rec_status'><b>Documentation Status</b></td><td class='area_gis'><b>GIS Area</b></td></tr><tr id='fillerColumn' style='height: 36px;'><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td></tr>");
 
                 var fields = ["Country", "Name", "Identity", "Formal Recognition", "Documentation Status", "Area_GIS"];
 
@@ -1867,8 +1867,9 @@ define([
                             graphic.feature.attributes.Name + "</td><td class='ident'>" +
                             graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
                             graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
-                            graphic.feature.attributes.Doc_Status + "</td></tr>";
-                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec];
+                            graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
+                            graphic.feature.attributes.Area_GIS + "</td></tr>";
+                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status, graphic.feature.attributes.Area_GIS];
                         brApp.csv += fieldValues.join(",") + '\n';
 
                     } else {
@@ -1876,8 +1877,9 @@ define([
                             graphic.feature.attributes.Name + "</td><td class='ident'>" +
                             graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
                             graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
-                            graphic.feature.attributes.Doc_Status + "</td></tr>";
-                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec];
+                            graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
+                            graphic.feature.attributes.Area_GIS + "</td></tr>";
+                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status, graphic.feature.attributes.Area_GIS];
                         brApp.csv += fieldValues.join(",") + '\n';
                     }
                     return str;
