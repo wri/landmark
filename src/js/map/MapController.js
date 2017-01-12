@@ -1518,14 +1518,29 @@ define([
                   }
               }
 
-              var data = item.feature.attributes.IC_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.IC_T + " " + item.feature.attributes.IC_T_Src + "</div><div class='indentTD'><span class='inlineBold'>Formally recognized</span>: " + item.feature.attributes.IC_F + " " + item.feature.attributes.IC_F_Src + "</div><div class='indentTD'><span class='inlineBold'>Not formally recognized</span>: " + item.feature.attributes.IC_NF + " " + item.feature.attributes.IC_NF_Src + "</div></td></tr>" : "";
+              var ict = item.feature.attributes.IC_T;
+              if (ict === 'No data') {
+                ict = 'Unknown';
+              }
+
+              var icf = item.feature.attributes.IC_F;
+              if (icf === 'No data') {
+                icf = 'Unknown';
+              }
+
+              var icnf = item.feature.attributes.IC_NF;
+              if (icnf === 'No data') {
+                icnf = 'Unknown';
+              }
+
+              var data = item.feature.attributes.IC_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + ict + " " + item.feature.attributes.IC_T_Src + "</div><div class='indentTD'><span class='inlineBold'>Formally recognized</span>: " + icf + " " + item.feature.attributes.IC_F_Src + "</div><div class='indentTD'><span class='inlineBold'>Not formally recognized</span>: " + icnf + " " + item.feature.attributes.IC_NF_Src + "</div></td></tr>" : "";
               var source = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IC_Notes + '</td></tr>' : '';
 
               template.content = "<div id='tableWrapper'><table id='nationalTable'>" +
               data +
               source +
               '</table></div>' +
-              "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
+              "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.landmarkmap.org/data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
 
 
                 for (var j = 0; j < brApp.layerInfos.length; j++) {
@@ -1623,7 +1638,7 @@ define([
                   "<tr class='odd-row'><td class='popup-header nationalField'>Q8: Rights to Trees</td><td>" + item.feature.attributes.I8_Scr + '</td></tr>' +
                   "<tr class='even-row'><td class='popup-header nationalField'>Q9: Rights to Water</td><td>" + item.feature.attributes.I9_Scr + '</td></tr>' +
                   "<tr class='odd-row'><td class='popup-header nationalField'>Q10: Land Rights in Protected Areas</td><td>" + item.feature.attributes.I10_Scr + '</td></tr></table></div>' +
-                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
+                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.landmarkmap.org/data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
 
                 } else { //1 & 3
                   template.content = "<div id='tableWrapper'><table id='landTenureTable'>" +
@@ -1635,7 +1650,7 @@ define([
                   "<tr class='odd-row'><td class='popup-header nationalField'>Additional comments</td><td>" + item.feature.attributes['I' + indNumber + '_AddInfo'] + '</td></tr>' +
                   "<tr class='even-row'><td class='popup-header nationalField'>Review source (Year)</td><td>" + item.feature.attributes['I' + indNumber + '_Rev'] + '(' + item.feature.attributes['I' + indNumber + '_Year'] + ')</td></tr></table></div>' +
 
-                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
+                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.landmarkmap.org/data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
                 }
 
                 //might have to be for 0 & 2 only
