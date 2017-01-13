@@ -26,10 +26,10 @@ define([
         },
 
         getDrawUploadSymbolPoint: function() {
-            return new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_SQUARE, 10,
+            return new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 10,
               new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
               new Color([255,0,0]), 1),
-              new Color([0,255,0,0.25]));
+              new Color([0,255,0,0.95]));
         },
 
         /**
