@@ -169,7 +169,6 @@ define([
 
             });
 
-
             // Mobile Specific Events
             // If we are ok with the app not responding to mobile, only loading in mobile or loading in Desktop
             // We could conditionally add handles for the above and below events by using Helper.isMobile()
@@ -430,7 +429,6 @@ define([
               }
 
               if (features.length > 0) {
-                console.log(features);
                 brApp.map.infoWindow.setFeatures(features);
                 brApp.map.infoWindow.resize(375, 600);
                 $("#identifyNote").remove();
@@ -446,13 +444,6 @@ define([
                   });
                 });
 
-                // if (window.innerWidth < 1000) {
-                //   brApp.map.infoWindow.maximize();
-                //   $(".esriPopup .contentPane").css("height", "inherit");
-                // }
-                // on.once(brApp.map.infoWindow, "hide", function() {
-                //   brApp.map.infoWindow.resize(375, 600);
-                // });
               }
             });
 
@@ -497,26 +488,6 @@ define([
             DrawTool.init();
 
             on(document.getElementById('analysis-help'), 'click', WidgetsController.showHelp);
-
-            //brApp.map.infoWindow.on("selection-change", function() {
-
-            // if (brApp.map.infoWindow.isShowing) {
-            //     // var toggler = new Toggler({
-            //     //     node: brApp.map.infoWindow.domNode,
-            //     //     showDuration: 50,
-            //     //     hideDuration: 50
-            //     // });
-
-
-            //     $(brApp.map.infoWindow.domNode).fadeToggle(50);
-            //     $(brApp.map.infoWindow.domNode).fadeToggle(50);
-            //     //$(brApp.map.infoWindow.domNode).fadeToggle("fast");
-            //     //$(brApp.map.infoWindow.domNode).fadeToggle("fast");
-            // }
-
-
-
-            //});
 
             // remove hideOnLoad classes
             dojoQuery('body .hideOnLoad').forEach(function(node) {
@@ -1247,7 +1218,6 @@ define([
         },
 
         setCommunityTemplates: function(featureObjects) {
-          console.log('setCommunity');
             brApp.debug('MapController >>> setCommunityTemplates');
 
             var template,
@@ -1260,7 +1230,6 @@ define([
                 var ethn1 = item.feature.attributes.Ethncty_1;
                 var ethn2 = item.feature.attributes.Ethncty_2;
                 var ethn3 = item.feature.attributes.Ethncty_3;
-
 
                 if (!ethn1 || ethn1 == ' ' || ethn1 == 'Null') {
                     ethnStr = 'Unknown';
@@ -1277,7 +1246,6 @@ define([
                 var population = item.feature.attributes.Populatn == "Null" ? null : item.feature.attributes.Populatn;
                 var popSource = item.feature.attributes.Pop_Source == "Null" ? null : item.feature.attributes.Pop_Source;
                 var popYear = item.feature.attributes.Pop_Year == "Null" ? null : item.feature.attributes.Pop_Year;
-
 
                 if (!population || population == '0' || population == 'Null') {
                     popStr = 'Unknown';
@@ -1372,7 +1340,6 @@ define([
 
         setIndigenousTemplates: function(featureObjects) {
             brApp.debug('MapController >>> setIndigenousTemplates');
-            console.log('setIndigenousTemplates');
 
             var template,
                 features = [],
@@ -1401,7 +1368,6 @@ define([
                 var popSource = item.feature.attributes.Pop_Source == "Null" ? null : item.feature.attributes.Pop_Source;
                 var popYear = item.feature.attributes.Pop_Year == "Null" ? null : item.feature.attributes.Pop_Year;
 
-
                 if (!population || population == '0' || population == 'Null') {
                     popStr = 'Unknown';
                 } else if (population && !popSource) {
@@ -1423,12 +1389,6 @@ define([
                 } else {
                     statDate = '';
                 }
-
-                //todo (and in the other setTemplates thing that mirror this):
-                  //first, if we have an Unknown for the three big ones: Ethnic Groups, Population, Land area..
-                    //then, have a ternary that says only add this tr and this data if our var !== to 'Unknown'
-                      //to execture JS in this template, wrap JS in parenthesis
-
 
                 var area_Ofcl = item.feature.attributes.Area_Ofcl ? item.feature.attributes.Area_Ofcl : 0;
                 var area_GIS = item.feature.attributes.Area_GIS ? item.feature.attributes.Area_GIS : 0;
@@ -1542,7 +1502,6 @@ define([
               '</table></div>' +
               "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.landmarkmap.org/data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
 
-
                 for (var j = 0; j < brApp.layerInfos.length; j++) {
                   if (brApp.layerInfos[j].data.layer === 'percentLands') {
                     brApp.layerInfos[j].data.layers.forEach(function(layer) {
@@ -1597,7 +1556,6 @@ define([
 
                 features.push(item.feature);
             });
-            console.log(features);
             return features;
         },
 
@@ -1619,7 +1577,6 @@ define([
                       item.feature.attributes[attr] = "Unknown";
                     }
                 }
-                console.log('item.layerId',item.layerId)
 
                 if (item.layerId === 0 ||item.layerId === 2) { // Average Score
                   template.content = "<div id='tableWrapper'><table id='landTenureTable'>" +
@@ -1653,9 +1610,6 @@ define([
                   "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.landmarkmap.org/data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
                 }
 
-                //might have to be for 0 & 2 only
-
-
                 for (var j = 0; j < brApp.layerInfos.length; j++) {
                   if (brApp.layerInfos[j].data.layer === 'landTenure') {
                     brApp.layerInfos[j].data.layers.forEach(function(layer) {
@@ -1682,7 +1636,6 @@ define([
 
                 features.push(item.feature);
             });
-            console.log(features);
             return features;
         },
 
@@ -1764,10 +1717,9 @@ define([
 
             mapPoint.stopPropagation();
 
-            if (brApp.map.infoWindow.isShowing) {
-                brApp.map.infoWindow.hide();
-            }
-
+            brApp.map.infoWindow.hide();
+            $("#infowindowContainer").html('');
+            $("#infowindowContainer").hide();
 
             var failure = function(err) {
                 console.log(err);
@@ -1792,8 +1744,7 @@ define([
             identifyTask.execute(params, function(features) {
 
                 var payload = {
-                    features: features//,
-                    // title: self.state.analysisArea.map(function (feature) {return feature.attributes.WRI_label;}).join(',')
+                    features: features
                 };
 
                 var win = window.open('analysis.html', '_blank');
@@ -1804,27 +1755,23 @@ define([
                         layer: "indigenousLands",
                         features: features
                     });
-
                 } else {
-                    console.log("no feats returned");
-
                     var template = new InfoTemplate();
                     template.setContent("<p class='remove-only-text'>The area of interest intersects with <i>Zero</i> indigenous and/or community lands</p><button class='remove-only' id='removeGraphic'>Remove</button>");
                     brApp.map.infoWindow.setContent(template.content);
-                    brApp.map.infoWindow.setTitle("Analysis Results");
-                    //$(".esriPopup").addClass("analysis-location");
-                    // $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
+                    var theTitle = "<div id='title_title'>Analysis Results</div>";
+
+                    brApp.map.infoWindow.setTitle(theTitle);
+                    brApp.map.infoWindow.resize(375, 600);
                     $("#identifyNote").remove();
                     brApp.map.infoWindow.show(mapPoint);
 
                     var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
-                      console.log(graphic.attributes);
                         self.removeCustomGraphic(graphic.attributes.OBJECTID);
                         brApp.map.infoWindow.hide();
                     });
 
                     on.once(brApp.map.infoWindow, "hide", function() {
-                        //$(".esriPopup").removeClass("analysis-location");
                         handle.remove();
                     });
                     deferred.resolve(false);
@@ -1834,75 +1781,18 @@ define([
             });
             deferred.then(function(value) {
 
-
                 if (!value) {
                     return;
                 }
 
                 var template = new InfoTemplate();
 
+                template.content = "<p class='middle-column'>The area of interest intersects with " + value.features.length + " indigenous and/or community lands</p>";
 
-                template.setContent("<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Formal Recognition</b></td><td class='rec_status'><b>Documentation Status</b></td><td class='area_gis'><b>GIS Area</b></td></tr><tr id='fillerColumn' style='height: 36px;'><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td></tr>");
-
-                var fields = ["Country", "Name", "Identity", "Formal Recognition", "Documentation Status", "Area_GIS"];
-
-                brApp.csv = fields.join(",") + '\n';
-
-
-                function getTextContent(graphic, even) {
-                  console.log(graphic);
-                    if (graphic.feature.attributes.Identity === "Indigenous (self-identified)") {
-                        graphic.feature.attributes.Identity = "Indigenous";
-                    }
-                    if (graphic.feature.attributes.Identity === "Non-indigenous (self-identified)") {
-                        graphic.feature.attributes.Identity = "Community";
-                    }
-                    if (graphic.feature.attributes.Form_Rec === "Officially recognized (by law or decree)") {
-                        graphic.feature.attributes.Form_Rec = "Officially recognized";
-                    }
-
-                    var str;
-                    if (even === "even") {
-
-                        str = "<tr class='even-row'><td class='country'>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
-                            graphic.feature.attributes.Name + "</td><td class='ident'>" +
-                            graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
-                            graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
-                            graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
-                            graphic.feature.attributes.Area_GIS + "</td></tr>";
-                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status, graphic.feature.attributes.Area_GIS];
-                        brApp.csv += fieldValues.join(",") + '\n';
-
-                    } else {
-                        str = "<tr class='odd-row'><td>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
-                            graphic.feature.attributes.Name + "</td><td class='ident'>" +
-                            graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
-                            graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
-                            graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
-                            graphic.feature.attributes.Area_GIS + "</td></tr>";
-                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status, graphic.feature.attributes.Area_GIS];
-                        brApp.csv += fieldValues.join(",") + '\n';
-                    }
-                    return str;
-                }
-
-
-                for (var i = 0; i < value.features.length; i++) {
-                    //if i is odd use odd row else use even row class
-                    if (i % 2 == 0) {
-                        template.content = template.content + getTextContent(value.features[i], 'even');
-                    } else {
-                        template.content = template.content + getTextContent(value.features[i], 'odd');
-                    }
-                }
-
-                template.content += "</table>";
                 var theTitle = "<div id='title_title'>Analysis Results</div>";
-                var titleResults = "<div id='titleResults'><i>The area of interest intersects with " + value.features.length + " indigenous and/or community lands</i></div>";
-                brApp.map.infoWindow.setTitle(theTitle + titleResults);
-                //brApp.map.infoWindow.setTitle("temp");
-                brApp.map.infoWindow.setContent(template.content);
 
+                brApp.map.infoWindow.setTitle(theTitle);
+                brApp.map.infoWindow.setContent(template.content);
                 brApp.map.infoWindow.resize(650, 350);
 
                 $("#identifyNote").remove();
@@ -1938,7 +1828,6 @@ define([
 
                 $("div.titleButton.close").click(function() {
                     $("#infowindowContainer").html('');
-                    //$(".esriPopup").removeClass("analysis-location");
                     $("#infowindowContainer").hide();
                     handle.remove();
                     $('.esriPopupWrapper').removeClass("noPositioning");
@@ -1969,9 +1858,7 @@ define([
             });
 
             if (graphicToRemove) {
-
                 graphics.remove(graphicToRemove);
-
             }
         },
 
@@ -1996,13 +1883,7 @@ define([
                 "callbackParamName": "callback"
             });
             requestHandle.then(function(response) {
-                var noReviewSymbol, lawSilentSymbol, legalAddressesSymbol,
-                    legalMeetsSymbol, legalFullyMeetsSymbol, notApplicableSymbol,
-                    renderer;
-
-
                 brApp.landTenureRenderer = response.drawingInfo.renderer;
-
             });
         },
 
@@ -2021,9 +1902,7 @@ define([
 
             if (menuNode) {
                 domClass.remove(menuNode, 'active');
-
             }
-
 
             // Now add the active class to the target and to the container
             switch (target.id) {
@@ -2036,8 +1915,6 @@ define([
                     id = 'national-level-tree-indigenous';
                     domClass.remove('national-level-tree-indigenous', 'hidden');
                     domClass.add('national-level-tree-percentage', 'hidden');
-
-                    domClass.remove
                     break;
                 case "nationalPercentageMenuButton":
                     id = 'national-level-tree-percentage';
@@ -2058,7 +1935,6 @@ define([
                     domClass.add('national-level-data-container', 'hidden');
                     //domClass.remove('national-level-tree-percentage', 'hidden');
                 case "none-toggle":
-
                     //id = 'national-level-tree-percentage';
                     domClass.add('national-level-data-container', 'hidden');
                     domClass.add('national-level-tree-percentage', 'hidden');
@@ -2067,8 +1943,6 @@ define([
             }
 
             domClass.add(target, 'active');
-            // domClass.add(id, 'active');
-            // domClass.remove(id, 'hidden');
 
         },
 
@@ -2086,16 +1960,13 @@ define([
         numberWithCommas: function(x) {
             var parts = x.toString().split(".");
             parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            //return parts.join(".");
             return parts[0];
         },
 
         printAnalysis: function(config) {
             brApp.debug('MapController >>> printAnalysis');
             window.print();
-
         },
-
 
     };
 
