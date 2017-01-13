@@ -1,6 +1,7 @@
 define([
     "main/config",
     "map/MapAssets",
+    "utils/GeoHelper",
     "dojo/sniff",
     "esri/graphic",
     "esri/request",
@@ -9,11 +10,12 @@ define([
     "dojo/store/Memory",
     "dojo/dom-construct",
     "dijit/form/ComboBox",
+    "dojox/data/CsvStore",
     "esri/geometry/Polygon",
     "esri/geometry/Point",
     "esri/geometry/scaleUtils",
     "esri/graphicsUtils"
-], function(AppConfig, MapAssets, sniff, Graphic, esriRequest, registry, arrayUtils, Memory, domConstruct, ComboBox, Polygon, Point, scaleUtils, graphicsUtils) {
+], function(AppConfig, MapAssets, GeoHelper, sniff, Graphic, esriRequest, registry, arrayUtils, Memory, domConstruct, ComboBox, CsvStore, Polygon, Point, scaleUtils, graphicsUtils) {
     'use strict';
 
     var Uploader = {
@@ -39,8 +41,10 @@ define([
                 filename = temp[temp.length - 1];
             }
 
-            if (filename.indexOf('.zip') < 0) {
-                alert('Currently only shapefiles with a ".zip" extension are supported.');
+            if (filename.indexOf('.csv') > -1) {
+              this.uploadCSV(evt);
+            } else if (filename.indexOf('.zip') < 0) {
+                alert('Currently only shapefiles with a ".zip" extension and .csv files are supported.');
                 return;
             }
 
@@ -86,6 +90,111 @@ define([
         },
 
         /**
+         * Generate features from a csv
+         * @param {object} evt - Form Event from the change of the input in the form
+         */
+         uploadCSV: function(evt) {
+             var file = evt.target.files[0],
+                 reader = new FileReader(),
+                 attributeStore = [],
+                 self = this,
+                 fileLoaded,
+                 attributes,
+                 store;
+
+                 console.log('file', file);
+                 console.log(reader);
+
+             fileLoaded = function() {
+                 // Create a CSV Store and fetch all items from it afterwards
+                 store = new CsvStore({
+                     data: reader.result,
+                     separator: ','
+                 });
+
+                 store.fetch({
+                     onComplete: function(items) {
+
+                         if (items.length < 1) {
+                             throw new Error('No items found in CSV file.');
+                         }
+
+                         attributes = store.getAttributes(items[0]);
+
+                         attributes.forEach(function(attr) {
+                             attributeStore.push({
+                                 name: attr,
+                                 id: attr
+                             });
+                         });
+
+                         self.formatCSVDataForStore(store, items);
+
+                        //  self.generateDropdown(attributeStore, function(name) {
+                        //      if (name) {
+                        //          self.formatCSVDataForStore(store, items, name);
+                        //      }
+                        //  });
+
+                     },
+                     onError: self.uploadError
+                 });
+
+             };
+
+             // Read the CSV File
+             reader.onload = fileLoaded;
+             console.log(file);
+             reader.readAsText(file);
+         },
+
+         /**
+         * Prepare a csv data store to be pushed to the WizardStore, output format will be esri.Graphic
+         * @param {object} store - dojo's CSV Store
+         * @param {array} items - Array of items resulting from a fetch on the csv store
+         */
+        formatCSVDataForStore: function(store, items) {
+            var counter = 0, //TODO: makeUpSomething()
+                newFeatures = [],
+                nameField = 'Name',
+                attributes,
+                feature,
+                attrs,
+                value,
+                lat,
+                lon;
+
+            // Parse the Attribtues
+            items.forEach(function(item, index) {
+                attributes = {};
+                attrs = store.getAttributes(item);
+                attrs.forEach(function(attr) {
+                    value = store.getValue(item, attr);
+                    attributes[attr] = isNaN(value) ? value : parseFloat(value);
+                });
+
+                attributes['Label'] = 'ID - ' + (counter + index) + ': ' + attributes[nameField];
+                attributes.WRI_ID = (counter + index);
+                attributes.isRSPO = false;
+
+                // Try to get the Lat and Long from Latitude and Longitude but not case sensitive
+                lat = attributes.Latitude ? attributes.Latitude : attributes.latitude;
+                lon = attributes.Longitude ? attributes.Longitude : attributes.longitude;
+
+                feature = GeoHelper.generatePointGraphicFromGeometric(lon, lat, attributes);
+                newFeatures.push(feature);
+            });
+
+            var featureSet = {
+              features: newFeatures
+            }
+
+            this.resetForm();
+            this.addToMap(featureSet);
+
+        },
+
+        /**
          * Error handler for the request to generate features
          * @param {object} err - Error object
          */
@@ -98,53 +207,18 @@ define([
          * @param {object} res - Response of the request
          */
         uploadSuccess: function(res) {
-            var container = document.getElementById('uploadNameSelectContainer'),
-                featureCollection = res.featureCollection,
-                featureStore = [],
-                self = this,
-                dataStore;
+            this.resetForm();
+            this.addToMap(res.featureCollection.layers[0].featureSet);
+        },
 
-            // Create a store of data for Dropdown
-            arrayUtils.forEach(featureCollection.layers[0].layerDefinition.fields, function(field) {
-                featureStore.push({
-                    name: field.name,
-                    id: field.alias
-                });
-            });
-
-            function resetForm() {
-                if (registry.byId('uploadComboNameWidget')) {
-                    registry.byId('uploadComboNameWidget').destroy();
-                }
-                if (document.getElementById('dropdownContainerName')) {
-                    domConstruct.destroy('dropdownContainerName');
-                }
-                document.uploadForm.reset();
-            }
-
-            domConstruct.create("div", {
-                'id': "dropdownContainerName",
-                'innerHTML': "<div id='uploadComboNameWidget'></div>"
-            }, container, "first");
-
-            dataStore = new Memory({
-                data: featureStore
-            });
-
-            new ComboBox({
-                id: "uploadComboNameWidget",
-                value: "-- Choose name field --",
-                store: dataStore,
-                searchAttr: "name",
-                onChange: function(name) {
-                    if (name) {
-                        self.addToMap(name, featureCollection.layers[0].featureSet);
-                        registry.byId('analysis-dialog').hide();
-                        resetForm();
-                    }
-                }
-            }, "uploadComboNameWidget");
-
+        /**
+         * Reset the form to allow for more uploads, hide the dialog
+         */
+        resetForm: function() {
+            registry.byId('analysis-dialog').hide();
+            document.uploadForm.reset();
+            var upForm = document.getElementById('uploadForm');
+            upForm.reset();
         },
 
         /**
@@ -152,7 +226,7 @@ define([
          * @param {string} nameField - Name field the user chose from the drop down, will be used for popups
          * @param {object} featureSet - esri feature set that contains a features array
          */
-        addToMap: function(nameField, featureSet) {
+        addToMap: function(featureSet) {
             var symbol = MapAssets.getDrawUploadSymbol(),
                 graphicsLayer = brApp.map.getLayer('CustomFeatures'),
                 graphic,
