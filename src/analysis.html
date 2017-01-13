@@ -7,18 +7,21 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
     <link rel="shortcut icon" type="image/png" href="css/images/favicon.png">
-    <style>html,body{height:100%;width:100%;padding:0;margin:0;overflow:hidden}	</style>
+    <style>html,body{height:100%;width:100%;padding:0;margin:0;}	</style>
     <link rel="stylesheet" href="css/base.css?1.1.2">
     <link rel="stylesheet" href="css/analysis.css?1.1.2">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway:400,600,700">
     <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script><!--[if lt IE 9]>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script><!--[if lt IE 9]>
     <script src="libs/es5-shim.min.js"></script>
     <script src="libs/html5shiv.js"></script><![endif]-->
   </head>
   <body class="tundra crl">
     <div class="analysis-report">
-      <h2 id="analysis-title"></h2>
+      <h1 class="analysis-title">Analysis Results</h1>
+      <h4 id="analysis-title" class="analysis-title"></h4>
+      <p id="analysis-export">Export Data</p>
       <div class="analysis-table-container">
         <div id="analysis-table"></div>
       </div>
@@ -28,226 +31,6 @@
         <div class="chart-container"><span id="recognition-pie"></span></div>
       </div>
     </div>
-    <script type="text/javascript">
-      console.log(window.payload);
-      var identityData = { //Identity
-        indigenous: 0,
-        community: 0
-      }
-      var recognitionData = { //Form_Rec
-        informal: 0,
-        formal: 0
-      }
-      var documentationData = { //Doc_Status
-        formalDoc: 0,
-        noDoc: 0,
-        occupied: 0,
-        formalLand: 0,
-        inProcess: 0
-      }
-      
-      var tableBody = "<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Formal Recognition</b></td><td class='rec_status'><b>Documentation Status</b></td><td class='rec_status'><b>GIS Area</b></td></tr>";
-      //- var fields = ["Country", "Name", "Identity", "Formal Recognition", "Documentation Status", "Area_GIS"];
-      //brApp.csv = fields.join(",") + '\n';
-      
-      function getTextContent(graphic, even) {
-        console.log(graphic);
-          if (graphic.feature.attributes.Identity === "Indigenous (self-identified)") {
-              graphic.feature.attributes.Identity = "Indigenous";
-          }
-          if (graphic.feature.attributes.Identity === "Non-indigenous (self-identified)") {
-              graphic.feature.attributes.Identity = "Community";
-          }
-          if (graphic.feature.attributes.Form_Rec === "Officially recognized (by law or decree)") {
-              graphic.feature.attributes.Form_Rec = "Officially recognized";
-          }
-      
-          var str;
-          if (even === "even") {
-              str = "<tr class='even-row'><td class='country'>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
-                  graphic.feature.attributes.Name + "</td><td class='ident'>" +
-                  graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
-                  graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
-                  graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
-                  graphic.feature.attributes.Area_GIS + "</td></tr>";
-              var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Area_GIS];
-              //- brApp.csv += fieldValues.join(",") + '\n';
-          } else {
-              str = "<tr class='odd-row'><td>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
-                  graphic.feature.attributes.Name + "</td><td class='ident'>" +
-                  graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
-                  graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
-                  graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
-                  graphic.feature.attributes.Area_GIS + "</td></tr>";
-              var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Area_GIS];
-              //- brApp.csv += fieldValues.join(",") + '\n';
-          }
-          return str;
-      }
-      
-      for (var i = 0; i < window.payload.features.length; i++) {
-          //if i is odd use odd row else use even row class
-          if (i % 2 == 0) {
-              tableBody = tableBody + getTextContent(window.payload.features[i], 'even');
-          } else {
-              tableBody = tableBody + getTextContent(window.payload.features[i], 'odd');
-          }
-          
-          if (window.payload.features[i].feature.attributes.Identity === 'Indigenous') {
-            identityData.indigenous++;
-          } else if (window.payload.features[i].feature.attributes.Identity === 'Community') {
-            identityData.community++;
-          }
-          
-          if (window.payload.features[i].feature.attributes.Form_Rec === 'Not formally recognized') {
-            recognitionData.informal++;
-          } else if (window.payload.features[i].feature.attributes.Form_Rec === 'Formally recognized') {
-            recognitionData.formal++;
-          }
-          
-          if (window.payload.features[i].feature.attributes.Doc_Status === 'Formal documentation') {
-            documentationData.formalDoc++;
-          } else if (window.payload.features[i].feature.attributes.Doc_Status === 'No documentation') {
-            documentationData.noDoc++;
-          } else if (window.payload.features[i].feature.attributes.Doc_Status === 'Occupied or used without formal land petition') {
-            documentationData.occupied++;
-          } else if (window.payload.features[i].feature.attributes.Doc_Status === 'Formal land petition') {
-            documentationData.formalLand++;
-          } else if (window.payload.features[i].feature.attributes.Doc_Status === 'In process of documentation') {
-            documentationData.inProcess++;
-          }
-      }
-      
-      tableBody += "</table>";
-      
-      document.getElementById('analysis-title').innerHTML = 'The area of interest intersects with ' + window.payload.features.length + ' indigenous and/or community lands';
-      document.getElementById('analysis-table').innerHTML = tableBody;
-      
-      Highcharts.chart('identity-pie', {
-        chart: {
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
-          type: 'pie'
-        },
-        title: {
-          text: 'Indigenous and Community lands: Identity'
-        },
-        tooltip: {
-          pointFormat: '<b>{point.y} features</b>'
-        },
-        plotOptions: {
-          pie: {
-            size: 200,
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: true,
-              format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-              style: {
-                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-              }
-            }
-          }
-        },
-        series: [{
-          colorByPoint: true,
-          data: [{
-            name: 'Indigenous',
-            y: identityData.indigenous
-          }, {
-            name: 'Community',
-            y: identityData.community
-          }]
-        }]
-      });
-      
-      Highcharts.chart('recognition-pie', {
-        chart: {
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
-          type: 'pie'
-        },
-        title: {
-          text: 'Indigenous and Community lands: Recognition'
-        },
-        tooltip: {
-          pointFormat: '<b>{point.y} features</b>'
-        },
-        plotOptions: {
-          pie: {
-            size: 200,
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: true,
-              format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-              style: {
-                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-              }
-            }
-          }
-        },
-        series: [{
-          colorByPoint: true,
-          data: [{
-            name: 'Not formally recognized',
-            y: recognitionData.informal
-          }, {
-            name: 'Formally recognized',
-            y: recognitionData.formal
-          }]
-        }]
-      });
-      
-      Highcharts.chart('documentation-pie', {
-        chart: {
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
-          type: 'pie'
-        },
-        title: {
-          text: 'Indigenous and Community lands: Documentation'
-        },
-        tooltip: {
-          pointFormat: '<b>{point.y} features</b>'
-        },
-        plotOptions: {
-          pie: {
-            size: 200,
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: true,
-              format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-              style: {
-                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-              }
-            }
-          }
-        },
-        series: [{
-          colorByPoint: true,
-          data: [{
-            name: 'Formal doc',
-            y: documentationData.formalDoc
-          }, {
-            name: 'No doc',
-            y: documentationData.noDoc
-          }, {
-            name: 'Occupied w/o formal petition',
-            y: documentationData.occupied
-          }, {
-            name: 'Formal petition',
-            y: documentationData.formalLand
-          }, {
-            name: 'Doc in process',
-            y: documentationData.inProcess
-          }]
-        }]
-      });
-    </script>
+    <script async src="js/analysisBootstrap.js?1.1.2"></script>
   </body>
 </html>
