@@ -1785,6 +1785,32 @@ define([
                     return;
                 }
 
+                function getTextContent(graphic) {
+                    if (graphic.feature.attributes.Identity === "Indigenous (self-identified)") {
+                        graphic.feature.attributes.Identity = "Indigenous";
+                    }
+                    if (graphic.feature.attributes.Identity === "Non-indigenous (self-identified)") {
+                        graphic.feature.attributes.Identity = "Community";
+                    }
+                    if (graphic.feature.attributes.Form_Rec === "Officially recognized (by law or decree)") {
+                        graphic.feature.attributes.Form_Rec = "Officially recognized";
+                    }
+
+                    var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status, graphic.feature.attributes.Area_GIS];
+                    brApp.csv += fieldValues.join(",") + '\n';
+
+                }
+
+                console.log(brApp.csv);
+
+                var fields = ["Country", "Name", "Identity", "Recognition Status", "Documentation Status", "GIS Area"];
+
+                brApp.csv = fields.join(",") + '\n';
+
+                for (var i = 0; i < value.features.length; i++) {
+                    getTextContent(value.features[i]);
+                }
+
                 var template = new InfoTemplate();
 
                 template.content = "<p class='middle-column'>The area of interest intersects with " + value.features.length + " indigenous and/or community lands</p>";
