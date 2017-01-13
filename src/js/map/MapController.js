@@ -1743,13 +1743,6 @@ define([
 
             identifyTask.execute(params, function(features) {
 
-                var payload = {
-                    features: features
-                };
-
-                var win = window.open('analysis.html', '_blank');
-                win.payload = payload;
-
                 if (features.length > 0) {
                     deferred.resolve({
                         layer: "indigenousLands",
@@ -1801,7 +1794,6 @@ define([
 
                 }
 
-                console.log(brApp.csv);
 
                 var fields = ["Country", "Name", "Identity", "Recognition Status", "Documentation Status", "GIS Area"];
 
@@ -1810,6 +1802,15 @@ define([
                 for (var i = 0; i < value.features.length; i++) {
                     getTextContent(value.features[i]);
                 }
+
+                var payload = {
+                    features: value.features,
+                    csv: brApp.csv
+                };
+
+
+                var win = window.open('analysis.html', '_blank');
+                win.payload = payload;
 
                 var template = new InfoTemplate();
 
