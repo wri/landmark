@@ -1809,7 +1809,7 @@ define([
                     console.log("no feats returned");
 
                     var template = new InfoTemplate();
-                    template.setContent("<b>The area of interest intersects with <i>Zero</i> indigenous and/or community lands</b><button id='removeGraphic'>Remove</button>");
+                    template.setContent("<p class='remove-only-text'>The area of interest intersects with <i>Zero</i> indigenous and/or community lands</p><button class='remove-only' id='removeGraphic'>Remove</button>");
                     brApp.map.infoWindow.setContent(template.content);
                     brApp.map.infoWindow.setTitle("Analysis Results");
                     //$(".esriPopup").addClass("analysis-location");
@@ -1818,7 +1818,8 @@ define([
                     brApp.map.infoWindow.show(mapPoint);
 
                     var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
-                        self.removeCustomGraphic(graphic.attributes.attributeID);
+                      console.log(graphic.attributes);
+                        self.removeCustomGraphic(graphic.attributes.OBJECTID);
                         brApp.map.infoWindow.hide();
                     });
 
@@ -1929,7 +1930,7 @@ define([
                 }
 
                 var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
-                    self.removeCustomGraphic(graphic.attributes.attributeID);
+                    self.removeCustomGraphic(graphic.attributes.OBJECTID);
                     $("#infowindowContainer").html('');
                     $("#infowindowContainer").hide();
                     $('.esriPopupWrapper').removeClass("noPositioning");
@@ -1960,7 +1961,7 @@ define([
                 graphicToRemove;
 
             arrayUtils.some(graphics.graphics, function(graphic) {
-                if (graphic.attributes["attributeID"] === uniqueId) {
+                if (graphic.attributes["OBJECTID"] === uniqueId) {
                     graphicToRemove = graphic;
                     return true;
                 }
