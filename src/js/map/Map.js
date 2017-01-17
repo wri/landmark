@@ -14,13 +14,16 @@ define([
     'utils/HashController',
     // Esri Modules
     'esri/map',
+    "esri/symbols/SimpleFillSymbol",
+    "esri/Color",
+    "esri/renderers/SimpleRenderer",
     "esri/geometry/webMercatorUtils",
     'esri/layers/ImageParameters',
     'esri/layers/ArcGISDynamicMapServiceLayer',
     'esri/layers/ArcGISTiledMapServiceLayer',
     'esri/layers/FeatureLayer',
     "esri/layers/GraphicsLayer",
-], function(Evented, declare, number, MapConfig, MainConfig, MapAssets, on, registry, HashController, Map, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, GraphicsLayer) {
+], function(Evented, declare, number, MapConfig, MainConfig, MapAssets, on, registry, HashController, Map, SimpleFillSymbol, Color, SimpleRenderer, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, GraphicsLayer) {
     'use strict';
 
     var _map = declare([Evented], {
@@ -246,13 +249,22 @@ define([
         },
 
         addFeatureLayer: function(key, layerConfig) {
+
+          var symbol = new SimpleFillSymbol();
+          symbol.setColor(new Color([0,0,0,0]));
+          symbol.setOutline(null);
+
+          var renderer = new SimpleRenderer(symbol);
+
             var featureLayer = new FeatureLayer(layerConfig.url, {
                 id: key,
                 minScale: 4700000,
-                maxScale: 0
+                maxScale: 0,
+                visible: layerConfig.visible || false
                 // minScale: 1000000000,
                 // maxScale: 4700000
             });
+            featureLayer.setRenderer(renderer);
 
             featureLayer.on('error', this.addLayerError.bind(this));
             return featureLayer;

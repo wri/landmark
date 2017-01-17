@@ -28,12 +28,8 @@ define([
 
             if (isNationalLevelData) {
               visibleLayers = keys;
-              //TODO: Do we ever want to turn off community data?
-              // probably not when we turn on other data at this point
-              // what is this doing below?
-              // if (visibleLayers.indexOf(-1) !== 0) {
-              //   self.turnOffCommunityLevelData();
-              // }
+
+              var nationalLevelFeature = brApp.map.getLayer('percentLandsFeature');
 
               if (brApp.currentLayer === "percentIndigenousLayers") {
                 otherDynamic = brApp.map.getLayer('landTenure');
@@ -49,6 +45,12 @@ define([
                   on.once(dynamicLayer, 'update-end', function() {
                     $('#map-loading-icon').hide();
                   });
+
+                  if (visibleLayers[0] === -1) {
+                    nationalLevelFeature.hide();
+                  } else {
+                    nationalLevelFeature.show();
+                  }
 
                   dynamicLayer.setVisibleLayers(visibleLayers);
                   dynamicLayer.show();
@@ -75,6 +77,12 @@ define([
                   dynamicLayer.show();
                 }
 
+                if (brApp.currentLayer === "none") {
+                  nationalLevelFeature.hide();
+                } else {
+                  nationalLevelFeature.show();
+                }
+
               }
 
               topic.publish('refresh-legend');
@@ -85,7 +93,7 @@ define([
                   layer = brApp.map.getLayer(keys[i]);
 
                   var tiledLayer = brApp.map.getLayer(keys[i] + "_Tiled");
-                  var tiled = document.getElementById('legend_' + tiledLayer.id);
+                  var featureLayer = brApp.map.getLayer(keys[i] + 'Feature');
                   var zoom = brApp.map.getZoom();
 
                   var legend = registry.byId('legend');
@@ -99,10 +107,12 @@ define([
                   if (off === true) {
                     layer.hide();
                     tiledLayer.hide();
+                    featureLayer.hide();
                   } else {
                     self.turnOffNationalLevelData();
                     layer.show();
                     tiledLayer.show();
+                    featureLayer.show();
                   }
 
                 }
@@ -204,7 +214,7 @@ define([
               brApp.map.setExtent(brApp.map.extent);
               return;
             }
-            console.log(fieldName)
+
             layerDrawingOption = new LayerDrawingOptions();
 
             landTenure = brApp.map.getLayer('landTenure');
