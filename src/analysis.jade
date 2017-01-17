@@ -21,9 +21,9 @@ html
     <![endif]-->
   body.tundra.crl
     div.analysis-report
-      h1.analysis-title Analysis Results
+      h1.analysis-title Analysis Results 
+        span#analysis-export.analysis-export  Export Data
       h4#analysis-title.analysis-title
-      p#analysis-export Export Data
       div.analysis-table-container
         div#analysis-table
       div.chart-container-doc
@@ -36,5 +36,6 @@ html
         
     //- script(async, src='js/map/AnalysisController.js?#{appVersion}')
     script(async, src='js/analysisBootstrap.js?#{appVersion}')
+    script(async, src='libs/FileSaver.js')
       
     

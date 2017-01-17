@@ -1,5 +1,6 @@
 define([
     'map/ReportConfig',
+    'dojo/on',
     // 'esri/map',
     // 'dojo/on',
     // 'esri/geometry/Extent',
@@ -9,13 +10,24 @@ define([
     // 'esri/tasks/query',
     // 'esri/tasks/QueryTask',
 
-], function(ReportConfig) {
+], function(ReportConfig, on) {
     'use strict';
 
     var Main = {
       init: function() {
 
-        console.log(window.payload);
+        var self = this;
+        // console.log(document.getElementById('analysis-export'));
+
+        on(document.getElementById('analysis-export'), 'click', function() {
+            self.exportAnalysisResult(window.payload.csv);
+        });
+
+        // on.once(document.getElementById('exportAnalysis'), 'click', function() {
+        //     self.exportAnalysisResult(brApp.csv);
+        // });
+
+        // console.log(window.payload);
         var identityData = { //Identity
           indigenous: 0,
           community: 0
@@ -37,7 +49,7 @@ define([
         //brApp.csv = fields.join(",") + '\n';
 
         function getTextContent(graphic, even) {
-          console.log(graphic);
+          // console.log(graphic);
             if (graphic.feature.attributes.Identity === "Indigenous (self-identified)") {
                 graphic.feature.attributes.Identity = "Indigenous";
             }
@@ -253,7 +265,17 @@ define([
           }]
         });
 
-      }
+      },
+
+      exportAnalysisResult: function(text) {
+
+          var blob = new Blob([text], {
+              type: "text/csv;charset=utf-8;"
+          });
+
+          saveAs(blob, "LandMarkAnalysisResults.csv");
+
+      },
     };
 
     return Main;
