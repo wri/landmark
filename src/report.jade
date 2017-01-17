@@ -8,7 +8,7 @@ html
     meta(http-equiv='X-UA-Compatible', content='IE=7, IE=9, IE=10')
     link(rel='shortcut icon', type='image/png', href='css/images/favicon.png')
     style.
-      html,body{height:100%;width:100%;padding:0;margin:0;overflow:hidden}	
+      html,body{height:100%;width:100%;padding:0;margin:0;}	
     link(rel='stylesheet', href='css/base.css?#{appVersion}')
     link(rel='stylesheet', href='css/report.css?#{appVersion}')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css?#{appVersion}')
@@ -25,16 +25,17 @@ html
       include templates/reportBody.jade
     div.hidden
     script(async, src='js/reportBootstrap.js?#{appVersion}')
-    //- script(type='text/javascript').
-    //- 	var addthis_share = {
-    //- 		url_transforms: {
-    //- 			shorten: {
-    //- 				twitter: 'bitly',
-    //- 				facebook: 'bitly'
-    //- 			}
-    //- 		},
-    //- 		shorteners: {
-    //- 			bitly: {}
-    //- 		}
-    //- 	}; //end addThis_share
-    //- script(async, src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53ab205a21ddceee&async=1')
+    script(async, src='libs/FileSaver.js')
+    script(type='text/javascript').
+      var addthis_share = {
+        url_transforms: {
+          shorten: {
+            twitter: 'bitly',
+            facebook: 'bitly'
+          }
+        },
+        shorteners: {
+          bitly: {}
+        }
+      }; //end addThis_share
+    script(async, src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53ab205a21ddceee&async=1')

@@ -10,10 +10,26 @@ div#report-map-header
   div#land-count.land-count
   
 div#reportMap.reportMap
+
+div.map-component.button-widget.share-button.pointer.hideOnLoad#share-button(title="Share")
+    div.share-icon
+div.map-component.share-container.hidden
+    div#share-widgets
+        .sharing_toolbox
+            .addthis_sharing_toolbox(data-title='Global Platform of Indigenous and Community Lands')
+            div#embedShare
+            div#csvShare
+            div#twitterShare
+            div#facebookShare
+            div#moreShare
+            div#emailShare
+            div#googleShare
+            
+div.map-component.share-connector.connector.hidden
     
 div.report-component
   h3.report-header Indigenous Peoples and Community Lands
-  div.total-lands First chart goes here
+  div.total-lands
     div.estimated-chart-container
       div#estimated-chart
   div.comm-indig-lands Land Mapped on Landmark

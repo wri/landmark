@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
     <link rel="shortcut icon" type="image/png" href="css/images/favicon.png">
-    <style>html,body{height:100%;width:100%;padding:0;margin:0;overflow:hidden}	</style>
+    <style>html,body{height:100%;width:100%;padding:0;margin:0;}	</style>
     <link rel="stylesheet" href="css/base.css?1.1.2">
     <link rel="stylesheet" href="css/report.css?1.1.2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css?1.1.2">
@@ -29,9 +29,27 @@
         <div id="land-count" class="land-count"></div>
       </div>
       <div id="reportMap" class="reportMap"></div>
+      <div id="share-button" title="Share" class="map-component button-widget share-button pointer hideOnLoad">
+        <div class="share-icon"></div>
+      </div>
+      <div class="map-component share-container hidden">
+        <div id="share-widgets">
+          <div class="sharing_toolbox">
+            <div data-title="Global Platform of Indigenous and Community Lands" class="addthis_sharing_toolbox"></div>
+            <div id="embedShare"></div>
+            <div id="csvShare"></div>
+            <div id="twitterShare"></div>
+            <div id="facebookShare"></div>
+            <div id="moreShare"></div>
+            <div id="emailShare"></div>
+            <div id="googleShare"></div>
+          </div>
+        </div>
+      </div>
+      <div class="map-component share-connector connector hidden"></div>
       <div class="report-component">
         <h3 class="report-header">Indigenous Peoples and Community Lands</h3>
-        <div class="total-lands">First chart goes here
+        <div class="total-lands">
           <div class="estimated-chart-container">
             <div id="estimated-chart"></div>
           </div>
@@ -118,5 +136,20 @@
     </div>
     <div class="hidden"></div>
     <script async src="js/reportBootstrap.js?1.1.2"></script>
+    <script async src="libs/FileSaver.js"></script>
+    <script type="text/javascript">
+      var addthis_share = {
+        url_transforms: {
+          shorten: {
+            twitter: 'bitly',
+            facebook: 'bitly'
+          }
+        },
+        shorteners: {
+          bitly: {}
+        }
+      }; //end addThis_share
+    </script>
+    <script async src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53ab205a21ddceee&amp;async=1"></script>
   </body>
 </html>

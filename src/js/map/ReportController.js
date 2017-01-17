@@ -1,22 +1,30 @@
 define([
     'map/ReportConfig',
+    'map/WidgetsController',
     'esri/map',
     'dojo/on',
-    'esri/geometry/Extent',
     'dojo/dom',
+    'dojo/dom-class',
+    'esri/geometry/Extent',
     'esri/layers/ImageParameters',
     'esri/layers/ArcGISDynamicMapServiceLayer',
     'esri/tasks/query',
     'esri/tasks/QueryTask',
 
-], function(ReportConfig, Map, on, Extent, dom, ImageParameters, ArcGISDynamicMapServiceLayer, Query, QueryTask) {
+], function(ReportConfig, WidgetsController, Map, on, dom, domClass, Extent, ImageParameters, ArcGISDynamicMapServiceLayer, Query, QueryTask) {
     'use strict';
 
     var ReportController = {
 
         init: function(country) {
             esri.config.defaults.io.corsEnabledServers.push("http://gis.wri.org");
+
             var self = this;
+
+            on(document.getElementById('share-button'), 'click', self.toggleShareContainer);
+            on(document.getElementById('embedShare'), 'click', WidgetsController.showEmbedCode);
+            on(document.getElementById('csvShare'), 'click', self.downloadCSV);
+
             var bounds = new Extent({
               "xmin":-16045622,
               "ymin":-811556,
@@ -135,6 +143,30 @@ define([
 
             map.addLayer(countries);
             this.addLayers(country);
+        },
+
+        toggleShareContainer: function() {
+          console.log('toggleShareContainer');
+            var connector = document.querySelector('.share-container'),
+                container = document.querySelector('.share-connector');
+
+            if (connector && container) {
+                domClass.toggle(connector, 'hidden');
+                domClass.toggle(container, 'hidden');
+            }
+
+        },
+
+        downloadCSV: function() {
+          console.log('downloadCSV');
+          //TODO: Create a global CSV out of our queried data and process it, then access it here!
+
+          // var blob = new Blob([window.payload.csv], {
+          //     type: "text/csv;charset=utf-8;"
+          // });
+          //
+          // saveAs(blob, "LandMarkCountryResults.csv");
+
         },
 
         addLayers: function (country) {
