@@ -6,7 +6,7 @@
         base = isWordpress ? base.replace('map', 'map-app') : base,
 
         appVersion = '1.1.2',
-        esriVersion = '3.13',
+        esriVersion = '3.19',
         js = [
             '//js.arcgis.com/' + esriVersion + '/init.js'
         ],
