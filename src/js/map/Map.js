@@ -6,6 +6,7 @@ define([
     // My Modules
     'map/MapConfig',
     'main/config',
+    "map/MapAssets",
     // Dojo Modules
     'dojo/on',
     'dijit/registry',
@@ -17,8 +18,9 @@ define([
     'esri/layers/ImageParameters',
     'esri/layers/ArcGISDynamicMapServiceLayer',
     'esri/layers/ArcGISTiledMapServiceLayer',
+    'esri/layers/FeatureLayer',
     "esri/layers/GraphicsLayer",
-], function(Evented, declare, number, MapConfig, MainConfig, on, registry, HashController, Map, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, GraphicsLayer) {
+], function(Evented, declare, number, MapConfig, MainConfig, MapAssets, on, registry, HashController, Map, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, GraphicsLayer) {
     'use strict';
 
     var _map = declare([Evented], {
@@ -63,6 +65,8 @@ define([
                 self.map.graphics.clear();
                 self.map.resize();
                 self.addLayers();
+                console.log(self.map.graphicsLayerIds);
+                self.connectLayerEvents(self.map.graphicsLayerIds);
                 self.map.on("extent-change", function(e) {
 
                     var delta = e.delta;
@@ -119,6 +123,10 @@ define([
                     case 'tiled':
                         layers.push(self.addTiledLayer(key, layerConfig[key], layerConfig[key]));
                         break;
+                    case 'feature':
+                    console.log('feature layer!');
+                        layers.push(self.addFeatureLayer(key, layerConfig[key], layerConfig[key]));
+                        break;
                     default:
                         break;
                 }
@@ -140,6 +148,53 @@ define([
 
             // Initialize Add This
             addthis.init();
+        },
+
+        //Connect mouse-over graphics
+        connectLayerEvents: function (layers) {
+          var self = this;
+          layers.forEach(function(layer) {
+            if (layer !== 'CustomFeatures') {
+              var mapLayer = brApp.map.getLayer(layer);
+              if (mapLayer) {
+                mapLayer.on('mouse-over', self.HoverOn);
+                mapLayer.on('mouse-out', self.HoverOff);
+              }
+            }
+          });
+          // var percentLandsLayer = brApp.map.getLayer('percentLandsFeature');
+          // if (percentLandsLayer) {
+          //   percentLandsLayer.on('mouse-over', this.HoverOn);
+          //   percentLandsLayer.on('mouse-out', this.HoverOff);
+          // }
+          //
+          // var indigenous_FormalClaimLayer = brApp.map.getLayer('indigenous_FormalClaimFeature');
+          // if (indigenous_FormalClaimLayer) {
+          //   indigenous_FormalClaimLayer.on('mouse-over', this.HoverOn);
+          //   indigenous_FormalClaimLayer.on('mouse-out', this.HoverOff);
+          // }
+          //
+          // var indigenous_FormalDocLayer = brApp.map.getLayer('indigenous_FormalDocFeature');
+          // if (indigenous_FormalDocLayer) {
+          //   indigenous_FormalDocLayer.on('mouse-over', this.HoverOn);
+          //   indigenous_FormalDocLayer.on('mouse-out', this.HoverOff);
+          // }
+        },
+
+        //Connect mouse-over graphics
+        HoverOn: function (evt) {
+          var graphic = evt.graphic;
+          if (graphic) {
+            graphic.setSymbol(MapAssets.getHoverSymbol());
+          }
+        },
+
+        //Connect mouse-over graphics
+        HoverOff: function (evt) {
+          var graphic = evt.graphic;
+          if (graphic) {
+            graphic.setSymbol(null);
+          }
         },
 
         /**
@@ -188,6 +243,19 @@ define([
 
             layer.on('error', this.addLayerError.bind(this));
             return layer;
+        },
+
+        addFeatureLayer: function(key, layerConfig) {
+            var featureLayer = new FeatureLayer(layerConfig.url, {
+                id: key,
+                minScale: 4700000,
+                maxScale: 0
+                // minScale: 1000000000,
+                // maxScale: 4700000
+            });
+
+            featureLayer.on('error', this.addLayerError.bind(this));
+            return featureLayer;
         },
 
         addGraphicLayer: function(key, layerConfig) {
