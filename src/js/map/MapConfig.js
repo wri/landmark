@@ -27,6 +27,15 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
 
         layers: {
 
+          'percentLandsFeature': {
+              url: 'http://gis.wri.org/arcgis/rest/services/LandMark/pct_comm_lands/MapServer/1',
+              type: 'feature',
+              visible: true
+          }, //How should these work? No styles, then highlight onHover? YES!
+          //only visible when their parent layer is visible? YES!
+          //Should only polygon layers get the hover (what about dots?) BOTH!
+          //USE ONE NATIONAL LEVEL LAYER TO HIGHLIGHT ALLLL OF THE NAT LEVEL LAYERS!
+
           //Percent of Indigenous and Community Lands layer
           'percentLands': {
               url: percentLandsUrl,
@@ -58,11 +67,21 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
+            'indigenous_FormalClaimFeature': {
+                url: community_indigenous_FormalClaim + '/1',
+                type: 'feature',
+                visible: true
+            },
             'indigenous_FormalDoc': {
                 url: community_indigenous_FormalDoc,
                 type: 'dynamic',
                 minZoom: 2315000,
                 defaultLayers: [0,1],
+                visible: true
+            },
+            'indigenous_FormalDocFeature': {
+                url: community_indigenous_FormalDoc + '/1',
+                type: 'feature',
                 visible: true
             },
             'indigenous_InProcess': {
@@ -72,6 +91,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
+            // 'indigenous_InProcessFeature': {
+            //     url: community_indigenous_InProcess + '/1',
+            //     type: 'feature',
+            //     visible: true
+            // },
             'indigenous_NoDoc': {
                 url: community_indigenous_NoDoc,
                 type: 'dynamic',
@@ -79,6 +103,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
+            // 'indigenous_NoDocFeature': {
+            //     url: community_indigenous_NoDoc + '/1',
+            //     type: 'feature',
+            //     visible: true
+            // },
             'indigenous_Occupied': {
                 url: community_indigenous_Occupied,
                 type: 'dynamic',
@@ -86,6 +115,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
+            // 'indigenous_OccupiedFeature': {
+            //     url: community_indigenous_Occupied + '/1',
+            //     type: 'feature',
+            //     visible: true
+            // },
             'community_FormalClaim': {
                 url: community_community_FormalClaim,
                 type: 'dynamic',
