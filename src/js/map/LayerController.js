@@ -94,6 +94,7 @@ define([
 
                   var tiledLayer = brApp.map.getLayer(keys[i] + "_Tiled");
                   var featureLayer = brApp.map.getLayer(keys[i] + 'Feature');
+                  var featureLayerPoints = brApp.map.getLayer(keys[i] + 'FeaturePoint');
                   var zoom = brApp.map.getZoom();
 
                   var legend = registry.byId('legend');
@@ -108,11 +109,13 @@ define([
                     layer.hide();
                     tiledLayer.hide();
                     featureLayer.hide();
+                    featureLayerPoints.hide();
                   } else {
                     self.turnOffNationalLevelData();
                     layer.show();
                     tiledLayer.show();
                     featureLayer.show();
+                    featureLayerPoints.show();
                   }
 
                 }
