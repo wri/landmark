@@ -73,6 +73,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 type: 'feature',
                 visible: true
             },
+            'indigenous_FormalClaimFeaturePoint': {
+                url: community_indigenous_FormalClaim + '/0',
+                type: 'feature',
+                visible: true
+            },
             'indigenous_FormalDoc': {
                 url: community_indigenous_FormalDoc,
                 type: 'dynamic',
@@ -82,6 +87,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             },
             'indigenous_FormalDocFeature': {
                 url: community_indigenous_FormalDoc + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'indigenous_FormalDocFeaturePoint': {
+                url: community_indigenous_FormalDoc + '/0',
                 type: 'feature',
                 visible: true
             },
@@ -97,6 +107,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 type: 'feature',
                 visible: true
             },
+            'indigenous_InProcessFeaturePoint': {
+                url: community_indigenous_InProcess + '/0',
+                type: 'feature',
+                visible: true
+            },
             'indigenous_NoDoc': {
                 url: community_indigenous_NoDoc,
                 type: 'dynamic',
@@ -106,6 +121,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             },
             'indigenous_NoDocFeature': {
                 url: community_indigenous_NoDoc + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'indigenous_NoDocFeaturePoint': {
+                url: community_indigenous_NoDoc + '/0',
                 type: 'feature',
                 visible: true
             },
@@ -121,6 +141,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 type: 'feature',
                 visible: true
             },
+            'indigenous_OccupiedFeaturePoint': {
+                url: community_indigenous_Occupied + '/0',
+                type: 'feature',
+                visible: true
+            },
             'community_FormalClaim': {
                 url: community_community_FormalClaim,
                 type: 'dynamic',
@@ -130,6 +155,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             },
             'community_FormalClaimFeature': {
                 url: community_community_FormalClaim + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'community_FormalClaimFeaturePoint': {
+                url: community_community_FormalClaim + '/0',
                 type: 'feature',
                 visible: true
             },
@@ -145,6 +175,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 type: 'feature',
                 visible: true
             },
+            'community_FormalDocFeaturePoint': {
+                url: community_community_FormalDoc + '/0',
+                type: 'feature',
+                visible: true
+            },
             'community_InProcess': {
                 url: community_community_InProcess,
                 type: 'dynamic',
@@ -154,6 +189,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             },
             'community_InProcessFeature': {
                 url: community_community_InProcess + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'community_InProcessFeaturePoint': {
+                url: community_community_InProcess + '/0',
                 type: 'feature',
                 visible: true
             },
@@ -169,6 +209,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 type: 'feature',
                 visible: true
             },
+            'community_NoDocFeaturePoint': {
+                url: community_community_NoDoc + '/0',
+                type: 'feature',
+                visible: true
+            },
             'community_Occupied': {
                 url: community_community_Occupied,
                 type: 'dynamic',
@@ -178,6 +223,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             },
             'community_OccupiedFeature': {
                 url: community_community_Occupied + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'community_OccupiedFeaturePoint': {
+                url: community_community_Occupied + '/0',
                 type: 'feature',
                 visible: true
             },

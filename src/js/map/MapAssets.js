@@ -8,7 +8,7 @@ define([
 ], function(Color, SimpleFillSymbol, SimpleLineSymbol, UniqueValueRenderer, SimpleMarkerSymbol) {
     'use strict';
 
-    var hoverSymbol;
+    var hoverSymbol, pointHoverSymbol;
 
     /**
      * This Class is a good place to store popup templates and symbols that are used in more then one location
@@ -42,6 +42,15 @@ define([
             new Color([210, 210, 210, 0.0])
           );
           return hoverSymbol;
+        },
+
+        getPointHoverSymbol: () => {
+          if (pointHoverSymbol) { return pointHoverSymbol; }
+          pointHoverSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 8,
+            new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+            new Color('#4099CE'), 1),
+            new Color('#4099CE'));
+          return pointHoverSymbol;
         },
 
         /**

@@ -15,6 +15,8 @@ define([
     // Esri Modules
     'esri/map',
     "esri/symbols/SimpleFillSymbol",
+    "esri/symbols/SimpleMarkerSymbol",
+    "esri/symbols/SimpleLineSymbol",
     "esri/Color",
     "esri/renderers/SimpleRenderer",
     "esri/geometry/webMercatorUtils",
@@ -23,7 +25,7 @@ define([
     'esri/layers/ArcGISTiledMapServiceLayer',
     'esri/layers/FeatureLayer',
     "esri/layers/GraphicsLayer",
-], function(Evented, declare, number, MapConfig, MainConfig, MapAssets, on, registry, HashController, Map, SimpleFillSymbol, Color, SimpleRenderer, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, GraphicsLayer) {
+], function(Evented, declare, number, MapConfig, MainConfig, MapAssets, on, registry, HashController, Map, SimpleFillSymbol, SimpleMarkerSymbol, SimpleLineSymbol, Color, SimpleRenderer, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, GraphicsLayer) {
     'use strict';
 
     var _map = declare([Evented], {
@@ -68,7 +70,7 @@ define([
                 self.map.graphics.clear();
                 self.map.resize();
                 self.addLayers();
-                console.log(self.map.graphicsLayerIds);
+
                 self.connectLayerEvents(self.map.graphicsLayerIds);
                 self.map.on("extent-change", function(e) {
 
@@ -80,7 +82,7 @@ define([
 
                     var x = number.round(extent.getCenter().x, 2);
                     var y = number.round(extent.getCenter().y, 2);
-                    //console.log(x + ' ' + y + ' ' + lod.level);
+
                     HashController.updateHash({
                         x: x,
                         y: y,
@@ -127,7 +129,6 @@ define([
                         layers.push(self.addTiledLayer(key, layerConfig[key], layerConfig[key]));
                         break;
                     case 'feature':
-                    console.log('feature layer!');
                         layers.push(self.addFeatureLayer(key, layerConfig[key], layerConfig[key]));
                         break;
                     default:
@@ -188,7 +189,11 @@ define([
         HoverOn: function (evt) {
           var graphic = evt.graphic;
           if (graphic) {
-            graphic.setSymbol(MapAssets.getHoverSymbol());
+            if (graphic.geometry.type === 'polygon') {
+              graphic.setSymbol(MapAssets.getHoverSymbol());
+            } else if (graphic.geometry.type === 'point') {
+              graphic.setSymbol(MapAssets.getPointHoverSymbol());
+            }
           }
         },
 
@@ -250,9 +255,23 @@ define([
 
         addFeatureLayer: function(key, layerConfig) {
 
-          var symbol = new SimpleFillSymbol();
-          symbol.setColor(new Color([0,0,0,0]));
-          symbol.setOutline(null);
+          var symbol;
+
+          if (key.indexOf('Point') > -1) {
+            symbol = new SimpleMarkerSymbol();
+            symbol.setColor(new Color([0,0,0,0]));
+            symbol.setOutline(null);
+
+            new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 10,
+              new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+              new Color([255,0,0]), 1),
+              new Color([0,255,0,0.25]));
+          } else {
+            symbol = new SimpleFillSymbol();
+            symbol.setColor(new Color([0,0,0,0]));
+            symbol.setOutline(null);
+          }
+
 
           var renderer = new SimpleRenderer(symbol);
 
