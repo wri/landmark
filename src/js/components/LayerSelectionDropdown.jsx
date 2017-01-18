@@ -166,17 +166,17 @@ define([
             }
           </div>
           {this.state.activeSelection === 'community-lands' ?
-          <div className={'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}>
+          <div id='IndigAndCommLandMaps' className={'national-layer-selection-label' + (this.state.openTab ? ' active-panel': 'hidden')}>
             <IndigAndCommLandMaps data={MapConfig.communityLevelLayers} layerMapper={this.layerMapper} parentClicked={this.parentClicked} showHelp={this.showHelp} />
           </div>
           : null }
         {this.state.activeSelection === 'percent-indigenous' ?
-          <div className={'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}>
+          <div id='PercentOfCountryList' className={'national-layer-selection-label' + (this.state.openTab ? ' active-panel': 'hidden')}>
             <PercentOfCountryList activeTab={this.props.activeTab} setActiveTab={this.props.setActiveTab} activeSelection={this.state.activeSelection} data={MapConfig.percentIndigenousLayersCombined}/>
           </div>
           : null }
           {this.state.activeSelection === 'land-tenure' ?
-          <div className={'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}>
+          <div id='IndicatorsOfLegalSecurityList' className={'national-layer-selection-label' + (this.state.openTab ? ' active-panel': 'hidden')}>
             <IndicatorsOfLegalSecurityList activeTab={this.props.activeTab} setActiveTab={this.props.setActiveTab} activeSelection={this.state.activeSelection} data={MapConfig.landTenureCommunityLayers}/>
           </div>
           : null }

@@ -444,13 +444,13 @@ define([
           var printTask = new PrintTask(AppConfig.printUrl);
           var printParameters = new PrintParameters();
           var template = new PrintTemplate();
-          var communityTab = document.getElementById('community-level-tab');
+          var communityTab = document.getElementById('IndigAndCommLandMaps');
           var nationalIndicators = document.getElementById('nationalLevelIndicators');
           var question = '';
           var layout = '';
           // If the community tab is active, use its template, else, use the
           // national template and add a question if applicable
-          if (communityTab.className.search('active') > -1) {
+          if (communityTab.className.search('active-panel') > -1) {
             layout = 'landmark_comm';
           } else {
             layout = 'landmark_nat';
@@ -486,11 +486,15 @@ define([
           printParameters.template = template;
           //- Add a loading class to the print button and remove it when loading is complete
           domClass.add('print-widget', 'loading');
+          debugger;
 
           printTask.execute(printParameters, function (response) {
+            debugger;
+            console.log('executed');
             domClass.remove('print-widget', 'loading');
             window.open(response.url);
           }, function (failure) {
+            debugger;
             console.log(failure);
             domClass.remove('print-widget', 'loading');
           });
