@@ -450,25 +450,25 @@ define([
           var layout = '';
           // If the community tab is active, use its template, else, use the
           // national template and add a question if applicable
-          if (communityTab.className.search('active-panel') > -1) {
+          if (communityTab) {
             layout = 'landmark_comm';
           } else {
             layout = 'landmark_nat';
             // Get the current question if the right layer is active (indigenous/community)
             // Need to find a better way to do this, we need a data model or flux implemented
             // as querying the dom is not the way to go
-            if (nationalIndicators.className === 'checked') {
-              var indigenousTab = document.getElementById('land-tenure-indigenous');
-              var querySelector = '.national-layer-list-item.active .national-layer-list-item-question';
-              var questionNode;
-              if (indigenousTab.className.search('active') > -1) {
-                questionNode = document.querySelector('.indigenous-national-list ' + querySelector);
-                question = questionNode && questionNode.innerHTML;
-              } else {
-                questionNode = document.querySelector('.community-national-list ' + querySelector);
-                question = questionNode && questionNode.innerHTML;
-              }
-            }
+            // if (nationalIndicators.className === 'checked') {
+            //   var indigenousTab = document.getElementById('land-tenure-indigenous');
+            //   var querySelector = '.national-layer-list-item.active .national-layer-list-item-question';
+            //   var questionNode;
+            //   if (indigenousTab.className.search('active') > -1) {
+            //     questionNode = document.querySelector('.indigenous-national-list ' + querySelector);
+            //     question = questionNode && questionNode.innerHTML;
+            //   } else {
+            //     questionNode = document.querySelector('.community-national-list ' + querySelector);
+            //     question = questionNode && questionNode.innerHTML;
+            //   }
+            // }
           }
 
           template.format = "pdf";
@@ -486,15 +486,12 @@ define([
           printParameters.template = template;
           //- Add a loading class to the print button and remove it when loading is complete
           domClass.add('print-widget', 'loading');
-          debugger;
 
           printTask.execute(printParameters, function (response) {
-            debugger;
             console.log('executed');
             domClass.remove('print-widget', 'loading');
             window.open(response.url);
           }, function (failure) {
-            debugger;
             console.log(failure);
             domClass.remove('print-widget', 'loading');
           });
