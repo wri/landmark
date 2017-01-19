@@ -23,7 +23,7 @@ define([
 
             on(document.getElementById('share-button'), 'click', self.toggleShareContainer);
             on(document.getElementById('embedShare'), 'click', WidgetsController.showEmbedCode);
-            on(document.getElementById('csvShare'), 'click', self.downloadCSV);
+            on(document.getElementById('csvShare'), 'click', self.downloadCSV.bind(this));
 
             var bounds = new Extent({
               "xmin":-16045622,
@@ -71,6 +71,7 @@ define([
 
             countryQT.execute(countryQuery, function (result) {
               if (result.features && result.features[0]) {
+                self.countryData = result.features[0].attributes;
                 self.map.setExtent(result.features[0].geometry.getExtent());
                 console.log(result.features[0]);
 
@@ -158,15 +159,21 @@ define([
         },
 
         downloadCSV: function() {
-          console.log('downloadCSV');
-          //TODO: Create a global CSV out of our queried data and process it, then access it here!
+          var self = this, fieldValues = [], values = [], csv;
 
-          // var blob = new Blob([window.payload.csv], {
-          //     type: "text/csv;charset=utf-8;"
-          // });
-          //
-          // saveAs(blob, "LandMarkCountryResults.csv");
+          Object.keys(this.countryData).forEach(function(key) {
+            fieldValues.push(key);
+            values.push(self.countryData[key]);
+          });
 
+          csv = fieldValues.join(",") + '\n';
+          csv += values.join(",") + '\n';
+
+          var blob = new Blob([csv], {
+              type: "text/csv;charset=utf-8;"
+          });
+
+          saveAs(blob, "LandMarkCountryResults.csv");
         },
 
         addLayers: function (country) {
