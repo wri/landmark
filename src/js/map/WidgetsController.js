@@ -215,6 +215,13 @@ define([
 
         },
 
+        togglePrintModal: function() {
+          console.log(document.querySelector('.print-modal-wrapper'));
+          // document.querySelector('.layer-tab-container')
+          var printModal = document.querySelector('.print-modal-wrapper')
+          domClass.toggle(printModal, 'hidden');
+        },
+
         /**
          * Toggle the mobile menu open or close
          */
@@ -439,7 +446,7 @@ define([
             domClass.toggle('upload-form-content', 'hidden');
         },
 
-        printMap: function() {
+        printMap: function(title, dpi, format, layoutType) {
           brApp.debug('WidgetsController >>> printMap');
           var printTask = new PrintTask(AppConfig.printUrl);
           var printParameters = new PrintParameters();
@@ -471,15 +478,20 @@ define([
             // }
           }
 
-          template.format = "pdf";
+          template.format = format;
           template.layout = layout;
           template.preserveScale = false;
           //- Custom Text Elements to be used in the layout,
           //- This is the way to add custom labels to the layout
           template.layoutOptions = {
+            titleText: title,
             customTextElements: [
               {'question': question }
             ]
+          };
+
+          template.exportOptions = {
+            dpi: dpi
           };
 
           printParameters.map = brApp.map;

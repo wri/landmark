@@ -6,6 +6,7 @@ define([
     'map/MapConfig',
     'map/MapAssets',
     'components/LayerTabContainer',
+    'components/PrintModal',
     'map/WidgetsController',
     'utils/Helper',
     'dojo/on',
@@ -38,7 +39,7 @@ define([
     "esri/layers/LayerDrawingOptions",
     'esri/layers/FeatureLayer'
 
-], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
+], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, PrintModal, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
 
     'use strict';
 
@@ -71,7 +72,9 @@ define([
             // on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
             on(document.getElementById('basemap-button'), 'click', WidgetsController.toggleBasemapGallery.bind(WidgetsController));
             on(document.getElementById('share-button'), 'click', WidgetsController.toggleShareContainer.bind(WidgetsController));
-            on(document.getElementById('print-button'), 'click', WidgetsController.printMap);
+            // on(document.getElementById('print-button'), 'click', WidgetsController.printMap);
+            on(document.getElementById('print-button'), 'click', WidgetsController.togglePrintModal);
+            // on(document.getElementById('close-print-modal'), 'click', WidgetsController.togglePrintModal);
 
             on(document.getElementById('tree-title-pane'), 'click', WidgetsController.toggleTreeContainer);
 
@@ -241,6 +244,7 @@ define([
             var basemapGallery,
                 self = this,
                 tabContainer,
+                printModal,
                 legendComponent,
                 homeWidget,
                 searchWidget,
@@ -271,6 +275,7 @@ define([
             });
 
             tabContainer = new LayerTabContainer('layer-content');
+            printModal = new PrintModal('print-modal');
 
             // Start all widgets that still need to be started
             basemapGallery.startup();
