@@ -169,7 +169,6 @@ define([
 
         getNationalLevelIndicatorCode: function() {
             var nationalIndicatorCode;
-            console.log(brApp.currentLayer)
             switch (brApp.currentLayer) {
                 case "averageScoreTenure":
                     nationalIndicatorCode = "Avg_Scr";

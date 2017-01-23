@@ -23,23 +23,16 @@ define([
           mapLayer = element.data;
           return element;
         }
-        // return element.layerId === 'landTenure';
+
       }
-      //
-      // var mapLayer = brApp.layerInfos.some(isLandTenure)
-      // console.log(mapLayer);
-      // for (var i = 0; i < brApp.layerInfos.length; i++) {
-      //   if (brApp.layerInfos[i].layerId === 'landTenure') {
-      //     var mapLayer = brApp.layerInfos[i].data;
-        if (brApp.layerInfos.some(isLandTenure)) {
-          for (var j = 0; j < mapLayer.layers.length; j++) {
-            if (mapLayer.layers[j].layerId === self.props.legendObject.layerIdValue) {
-              this.setState({legendInfos: mapLayer.layers[j].legend});
-            }
+
+      if (brApp.layerInfos.some(isLandTenure)) {
+        for (var j = 0; j < mapLayer.layers.length; j++) {
+          if (mapLayer.layers[j].layerId === self.props.legendObject.layerIdValue) {
+            this.setState({legendInfos: mapLayer.layers[j].legend});
           }
         }
-      //   }
-      // }
+      }
 
     },
 

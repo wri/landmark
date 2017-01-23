@@ -102,9 +102,6 @@ define([
                  attributes,
                  store;
 
-                 console.log('file', file);
-                 console.log(reader);
-
              fileLoaded = function() {
                  // Create a CSV Store and fetch all items from it afterwards
                  store = new CsvStore({
@@ -144,7 +141,6 @@ define([
 
              // Read the CSV File
              reader.onload = fileLoaded;
-             console.log(file);
              reader.readAsText(file);
          },
 
@@ -236,15 +232,14 @@ define([
                 extent;
 
             arrayUtils.forEach(featureSet.features, function(feature) {
+              // Add Custom Attributes if needed or some unique Id, which can help
+              // in deleting features from popups
+              var attributeID = graphicsLayer.graphics.length + 1;
+              feature.attributes.attributeID = attributeID;
+
               if (feature.geometry.rings) {
                 // Mixin attributes here if necessary
                 polygon = new Polygon(feature.geometry);
-
-                // Add Custom Attributes if needed or some unique Id, which can help
-                // in deleting features from popups
-                var attributeID = graphicsLayer.graphics.length + 1;
-                feature.attributes.attributeID = attributeID;
-
                 graphic = new Graphic(polygon, symbol, feature.attributes);
                 extent = extent ? extent.union(polygon.getExtent()) : polygon.getExtent();
                 graphicsLayer.add(graphic);
