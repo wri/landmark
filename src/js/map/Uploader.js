@@ -42,7 +42,8 @@ define([
             }
 
             if (filename.indexOf('.csv') > -1) {
-              this.uploadCSV(evt);
+                this.uploadCSV(evt);
+                return;
             } else if (filename.indexOf('.zip') < 0) {
                 alert('Currently only shapefiles with a ".zip" extension and .csv files are supported.');
                 return;
@@ -126,12 +127,6 @@ define([
                          });
 
                          self.formatCSVDataForStore(store, items);
-
-                        //  self.generateDropdown(attributeStore, function(name) {
-                        //      if (name) {
-                        //          self.formatCSVDataForStore(store, items, name);
-                        //      }
-                        //  });
 
                      },
                      onError: self.uploadError
