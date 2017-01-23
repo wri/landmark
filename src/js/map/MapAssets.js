@@ -34,7 +34,7 @@ define([
               new Color([0,255,0,0.95]));
         },
 
-        getHoverSymbol: () => {
+        getHoverSymbol: function() {
           if (hoverSymbol) { return hoverSymbol; }
           hoverSymbol = new SimpleFillSymbol(
             SimpleFillSymbol.STYLE_SOLID,
@@ -44,7 +44,7 @@ define([
           return hoverSymbol;
         },
 
-        getPointHoverSymbol: () => {
+        getPointHoverSymbol: function() {
           if (pointHoverSymbol) { return pointHoverSymbol; }
           pointHoverSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 8,
             new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
