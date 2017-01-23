@@ -1755,7 +1755,7 @@ define([
                     brApp.map.infoWindow.setTitle(theTitle);
                     brApp.map.infoWindow.resize(375, 600);
                     $("#identifyNote").remove();
-                    brApp.map.infoWindow.show(mapPoint);
+                    brApp.map.infoWindow.show(mapPoint.mapPoint);
 
                     var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
                         self.removeCustomGraphic(graphic.attributes.attributeID);
