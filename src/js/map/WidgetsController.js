@@ -493,6 +493,7 @@ define([
           template.exportOptions = {
             dpi: dpi
           };
+          console.log(template);
 
           printParameters.map = brApp.map;
           printParameters.template = template;

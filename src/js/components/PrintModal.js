@@ -24,7 +24,8 @@ define([
 
     close: function () {
       console.log('close?');
-      this.setState({visible: false})
+      // this.setState({visible: false})
+      WidgetsController.togglePrintModal()
     },
 
     print: function () {

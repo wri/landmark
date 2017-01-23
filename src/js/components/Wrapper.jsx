@@ -56,7 +56,7 @@ define([
 
     render: function () {
 
-      var visible = this.props.visible;
+      // var visible = this.props.visible;
       var close = this.props.close;
       var theme = this.props.theme;
       var containerStyle = Object.assign({}, stylesheet.modalContainer);
@@ -69,7 +69,7 @@ define([
       // containerStyle.display = visible ? '' : 'hidden';
 
       return (
-        <div className={'print-modal-wrapper hidden' + (visible ? '' : ' hidden')} style={containerStyle}>
+        <div className={'print-modal-wrapper hidden'} style={containerStyle}>
           <div style={stylesheet.modalBackground} onClick={close} />
           <article {...modalAttrs}>
             <div id='close-print-modal' title='close' style={stylesheet.close} onClick={close}>
