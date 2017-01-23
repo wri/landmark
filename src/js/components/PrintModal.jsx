@@ -23,7 +23,6 @@ define([
       },
 
     close: function () {
-      console.log('close?');
       // this.setState({visible: false})
       WidgetsController.togglePrintModal()
     },
@@ -37,17 +36,14 @@ define([
     },
 
     handleMapTitle: function (evt) {
-      console.log(evt.target.value);
       this.setState({mapTitle: evt.target.value})
     },
 
     handleDpi: function (evt) {
-      console.log(evt.target.value);
       this.setState({dpi: evt.target.value})
     },
 
     handleFormat: function (evt) {
-      console.log(evt.target.value);
       this.setState({format: evt.target.value})
     },
 
