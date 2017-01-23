@@ -26,7 +26,6 @@ define([
     },
 
     setActiveTab: function(key) {
-      console.log(key);
       this.setState({activeTab: key});
     },
 

@@ -17,7 +17,6 @@ define([
       init: function() {
 
         var self = this;
-        // console.log(document.getElementById('analysis-export'));
 
         on(document.getElementById('analysis-export'), 'click', function() {
             self.exportAnalysisResult(window.payload.csv);
@@ -27,7 +26,6 @@ define([
         //     self.exportAnalysisResult(brApp.csv);
         // });
 
-        // console.log(window.payload);
         var identityData = { //Identity
           indigenous: 0,
           community: 0
@@ -49,7 +47,6 @@ define([
         //brApp.csv = fields.join(",") + '\n';
 
         function getTextContent(graphic, even) {
-          // console.log(graphic);
             if (graphic.feature.attributes.Identity === "Indigenous (self-identified)") {
                 graphic.feature.attributes.Identity = "Indigenous";
             }

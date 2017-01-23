@@ -1573,7 +1573,6 @@ define([
 
                 for (var attr in item.feature.attributes) {
                     if (item.feature.attributes[attr] == "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
-                      console.log(item.feature.attributes[attr]);
                       item.feature.attributes[attr] = "Unknown";
                     }
                 }
@@ -1649,7 +1648,6 @@ define([
             }
 
             var indicator = feature.attributes[stringified];
-            console.log(indicator)
             switch (indicator) {
                 case "0":
                     indScore = 'No review yet done';
@@ -1760,7 +1758,7 @@ define([
                     brApp.map.infoWindow.show(mapPoint);
 
                     var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
-                        self.removeCustomGraphic(graphic.attributes.OBJECTID);
+                        self.removeCustomGraphic(graphic.attributes.attributeID);
                         brApp.map.infoWindow.hide();
                     });
 
@@ -1847,7 +1845,7 @@ define([
                 }
 
                 var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
-                    self.removeCustomGraphic(graphic.attributes.OBJECTID);
+                    self.removeCustomGraphic(graphic.attributes.attributeID);
                     $("#infowindowContainer").html('');
                     $("#infowindowContainer").hide();
                     $('.esriPopupWrapper').removeClass("noPositioning");
@@ -1877,7 +1875,7 @@ define([
                 graphicToRemove;
 
             arrayUtils.some(graphics.graphics, function(graphic) {
-                if (graphic.attributes["OBJECTID"] === uniqueId) {
+                if (graphic.attributes["attributeID"] === uniqueId) {
                     graphicToRemove = graphic;
                     return true;
                 }
