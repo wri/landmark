@@ -1,93 +1,112 @@
-div.mobile-menu#mobileMenu
-    div.mobile-menu-close-button.pointer#mobile-menu-close
+div#report__container
+  div.map__container
+    div.mobile-menu#mobileMenu
+        div.mobile-menu-close-button.pointer#mobile-menu-close
 
-div#report-map-header
-  span.flag-icon#flag-icon
-  div#country-name.country-name
-  div#country-land-area.country-land-area
-  div#country-hectares.country-area
-  
-  div#land-count.land-count
-  
-div#reportMap.reportMap
+    div#report-map-header
+      span.flag-icon#flag-icon
+      div#country-name.country-name
+      div#country-land-area.country-land-area
+      div#country-hectares.country-area
 
-div.map-component.button-widget.share-button.pointer.hideOnLoad#share-button(title="Share")
-    div.share-icon
-div.map-component.share-container.hidden
-    div#share-widgets
-        .sharing_toolbox
-            .addthis_sharing_toolbox(data-title='Global Platform of Indigenous and Community Lands')
-            div#embedShare
-            div#csvShare
-            div#twitterShare
-            div#facebookShare
-            div#moreShare
-            div#emailShare
-            div#googleShare
-            
-div.map-component.share-connector.connector.hidden
-    
-div.report-component
-  h3.report-header Indigenous Peoples and Community Lands
-  div.total-lands
-    div.estimated-chart-container
-      div#estimated-chart
-  div.comm-indig-lands Land Mapped on Landmark
+    div#report-map-body
+      div.report-map-body__contant
+        div#reportMap.reportMap
+
+        div#land-count.land-count
+
+        div.map-component.button-widget.share-button.pointer.hideOnLoad#share-button(title="Share")
+            div.share-icon
+        div.map-component.share-container.hidden
+            div#share-widgets
+                .sharing_toolbox
+                    .addthis_sharing_toolbox(data-title='Global Platform of Indigenous and Community Lands')
+                    div#embedShare
+                    div#csvShare
+                    div#twitterShare
+                    div#facebookShare
+                    div#moreShare
+                    div#emailShare
+                    div#googleShare
+
+        div.map-component.share-connector.connector.hidden
+
+  div.report-component.charts__container
+    h3.report-header Indigenous Peoples and Communities Lands as Percentage of The Country Land Area
+    div.total-lands
+      div.estimated-chart-container
+        div#estimated-chart
+
+    hr
+
+    h3.report-header Land Mapped on Landmark
     div.lands-mapped-chart-container
       div#community-lands-chart.inline-chart
       div#indigenous-lands-chart.inline-chart
-      
-div.report-component
-  h3.report-header Indicators of the Legal Security of Indigenous and Community Lands
-  div.indicator-table-container
-    table.report-value-table
-      tr.header-row
-        td#average-score-comm
-        td.middle-column AVERAGE SCORE
-        td#average-score-indig
-      tr
-        td#legal-status-comm 
-        td.middle-column Legal Status
-        td#legal-status-indig
-      tr
-        td#land-rights-comm
-        td.middle-column Land Rights and Common Property
-        td#land-rights-indig
-      tr
-        td#formal-doc-comm
-        td.middle-column Formal Documentation
-        td#formal-doc-indig
-      tr
-        td#legal-person-comm
-        td.middle-column Legal Person
-        td#legal-person-indig
-      tr
-        td#legal-authority-comm
-        td.middle-column Legal Authority
-        td#legal-authority-indig
-      tr
-        td#right-consent-comm
-        td.middle-column Rights to Consent
-        td#right-consent-indig
-      tr
-        td#right-trees-comm
-        td.middle-column Rights to Trees
-        td#right-trees-indig
-      tr
-        td#right-water-comm
-        td.middle-column Rights to Water
-        td#right-water-indig
-      tr
-        td#land-rights-protected-comm
-        td.middle-column Land Rights and Protected Areas
-        td#land-rights-protected-indig
-  div.indicator-footer-container
-    h3.footer-header Indicators Scoring
-    div.footer-child
-      div.low 1
-    div.footer-child
-      div.medium 2
-    div.footer-child
-      div.high 3
-    div.footer-child
-      div.highest 4
+
+  div.report-component.indicators-table__container
+    h3.report-header Indicators of the Legal Security of Indigenous and Community Lands
+    div.indicators-table__body
+      div.indicators-table__body-content
+        div.indicator-table-container
+          table.report-value-table
+            tr.header-row
+              td#average-score-comm
+              td.middle-column AVERAGE SCORE
+              td#average-score-indig
+            tr
+              td#legal-status-comm
+              td.middle-column Legal Status
+              td#legal-status-indig
+            tr
+              td#land-rights-comm
+              td.middle-column Land Rights and Common Property
+              td#land-rights-indig
+            tr
+              td#formal-doc-comm
+              td.middle-column Formal Documentation
+              td#formal-doc-indig
+            tr
+              td#legal-person-comm
+              td.middle-column Legal Person
+              td#legal-person-indig
+            tr
+              td#legal-authority-comm
+              td.middle-column Legal Authority
+              td#legal-authority-indig
+            tr
+              td#right-consent-comm
+              td.middle-column Rights to Consent
+              td#right-consent-indig
+            tr
+              td#right-trees-comm
+              td.middle-column Rights to Trees
+              td#right-trees-indig
+            tr
+              td#right-water-comm
+              td.middle-column Rights to Water
+              td#right-water-indig
+            tr
+              td#land-rights-protected-comm
+              td.middle-column Land Rights and Protected Areas
+              td#land-rights-protected-indig
+        div.indicator-footer-container
+          h3.footer-header Indicators Scoring
+          div.footer-child
+            div.low 1
+            span.footer-child__label Issue Fully Addresses
+          div.footer-child
+            div.medium 2
+            span.footer-child__label Significant progress
+          div.footer-child
+            div.high 3
+            span.footer-child__label Limited progress
+          div.footer-child
+            div.highest 4
+            span.footer-child__label Issue not Addressedd
+
+          p.comments
+            strong Not Applicable
+            |: The subject Matter is non exhistant
+            strong No Data
+            |: Not enough Data to Score
