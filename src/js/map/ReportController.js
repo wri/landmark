@@ -164,14 +164,16 @@ define([
         },
 
         downloadCSV: function() {
-          var self = this, fieldValues = [], values = [], csv;
+          var self = this, fields = ReportConfig.fieldAliases, values = [], csv;
 
           Object.keys(this.countryData).forEach(function(key) {
-            fieldValues.push(key);
-            values.push(self.countryData[key]);
+            if (key !== 'OBJECTID' && key !== 'Shape_Area' && key !== 'Shape_Length') {
+              values.push(self.countryData[key]);
+              var valuesLength = values.length;
+            }
           });
 
-          csv = fieldValues.join(",") + '\n';
+          csv = fields.join(",") + '\n';
           csv += values.join(",") + '\n';
 
           var blob = new Blob([csv], {
