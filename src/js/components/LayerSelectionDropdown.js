@@ -111,7 +111,6 @@ define([
     },
 
     showHelp: function (evt) {
-      console.log("ss")
       WidgetsController.showHelp(evt);
     },
 
@@ -154,7 +153,6 @@ define([
 
 
     render: function () {
-      // console.log(this.state.activeSelection);
       return (
         React.createElement("div", {className: "layer-selection-drop-container"}, 
           React.createElement("div", {className: "left-panel-headers"}, 

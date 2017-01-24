@@ -71,14 +71,12 @@ define([
     			break;
     		case LandTenure:
 					if (this.state.landTenureCategory === LandTenureInd) {
-						console.log('activeIndigenousKey',this.state.activeIndigenousKey)
 						if (this.state.activeIndigenousKey === "averageScoreTenure") {
 							visibleLayers = [2];
 						} else {
 							visibleLayers = [3];
 						}
 					} else {
-						console.log('activeCommunityKey',this.state.activeCommunityKey)
 						if (this.state.activeCommunityKey === "averageScoreTenure") {
 							visibleLayers = [0];
 						} else {
@@ -91,7 +89,6 @@ define([
     			// visibleLayers = (this.state.landTenureCategory === LandTenureInd ? [0] : [2]);
     			break;
     		case PercentIndigenous:
-					// console.log(state.activePercentIndigenousLayer);
     			visibleLayers = [state.activePercentIndigenousLayer];
 					brApp.currentLayer = 'percentIndigenousLayers';
     			break;
@@ -107,7 +104,6 @@ define([
     },
 
 		changePercentIndigenousLayer: function (key, layer) {
-			// console.log(layer, key);
 			if (!layer) {
 				return;
 			}

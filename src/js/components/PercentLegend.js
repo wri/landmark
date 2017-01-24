@@ -41,7 +41,7 @@ define([
       var self = this;
       var mapLayer;
       var element = brApp.layerInfos;
-      console.log(element.length);
+
       for (var i = 0; i < element.length; i++) {
         if (element[i].layerId === self.props.legendObject.name) {
           mapLayer = element[i].data;
