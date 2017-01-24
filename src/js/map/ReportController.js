@@ -114,10 +114,10 @@ define([
                   }
                 }
 
-                dom.byId('land-count').innerHTML = 'Number of Indigenous and Community Lands Mapped: ' + result.features[0].attributes.NB_Maps;
+                dom.byId('land-count').innerHTML =  '<strong>' + result.features[0].attributes.NB_Maps + '</strong> indigenous and community lands mapped on Landmark';
                 dom.byId('country-name').innerHTML = result.features[0].attributes.Country;
                 dom.byId('country-land-area').innerHTML = 'COUNTRY LAND AREA:'
-                dom.byId('country-hectares').innerHTML = Math.round(countryLand) + ' Hectares';
+                dom.byId('country-hectares').innerHTML = '<strong>' + Math.round(countryLand) + ' Hectares</strong>';
                 dom.byId('average-score-comm').innerHTML = result.features[0].attributes.ind_C_A;
                 dom.byId('average-score-indig').innerHTML = result.features[0].attributes.ind_IP_A;
                 // dom.byId('pct-ack-gov').innerHTML = 'Acknowledged: ' + result.features[0].attributes.Pct_F;
