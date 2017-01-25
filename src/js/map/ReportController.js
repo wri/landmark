@@ -253,15 +253,15 @@ define([
               plotBorderWidth: 0,
               plotShadow: false
             },
-            colors: ['#f4e0d7', '#e5aa92'],
+            colors: ['#f4e0d7', '#e5aa92', 'gray'],
             title: {
               useHTML: true,
               shape: 'circle',
-              style: { "height": "100px", "color": "white", "background-color": "#152f3e", "padding": "25px", "padding-left": "30px", "padding-right": "30px", "border-radius": "50%", "fontSize": "18px" },
+              style: { "height": "50px", "color": "white", "background-color": "#152f3e", "padding": "20px", "padding-top": "25px", "padding": "30px", "border-radius": "50%", "fontSize": "14px" },
               text: '<p class="chart-center chart-percent"> ' + fixedTotal + '%</p><p class="chart-center">Total</p> ',
               align: 'center',
               verticalAlign: 'middle',
-              y: 20
+              y: -40
             },
             tooltip: {
               pointFormat: '<b>{point.y}%</b>'
@@ -276,9 +276,10 @@ define([
                     color: 'white'
                   }
                 },
-                startAngle: -(angle),
-                endAngle: angle,
-                center: ['50%', '75%']
+                size:'100%'
+                // ,
+                // startAngle: -(angle),
+                // endAngle: angle
               }
             },
             series: [{
@@ -288,6 +289,7 @@ define([
               data: [
                 [data.attributes.Pct_F + '% Acknowledged by gov',   data.attributes.Pct_F],
                 [data.attributes.Pct_NF + '% Not acknowledged',       data.attributes.Pct_NF],
+                [Math.round(100 - data.attributes.Pct_F - data.attributes.Pct_NF) + '% No Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF],
                 {
                   name: 'Proprietary or Undetectable',
                   y: 0.2,
