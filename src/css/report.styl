@@ -311,3 +311,29 @@ body
         height: auto;
     }
 }
+
+@media screen and (max-width: 800px) {
+    #report__container {
+        flex-direction: column
+    }
+
+    .map__container,
+    .report-component {
+        width 100%
+        height: auto;
+    }
+    .report-component {
+        margin-top 2em
+        padding-top 2em
+        border-top: 2px solid #2fa3d9
+    }
+
+    #reportMap {
+        display: block;
+    }
+
+    #reportMap,
+    .report-map-body__contant {
+        margin: auto;
+    }
+}
