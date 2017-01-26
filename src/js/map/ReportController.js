@@ -117,7 +117,9 @@ define([
 
                 dom.byId('land-count').innerHTML =  '<strong>' + result.features[0].attributes.NB_Maps + '</strong> indigenous and community lands mapped on Landmark';
                 dom.byId('country-name').innerHTML = result.features[0].attributes.Country;
-                dom.byId('country-land-area').innerHTML = 'COUNTRY LAND AREA:'
+                dom.byId('country-land-area').innerHTML = 'COUNTRY LAND AREA:';
+                var landCount = Math.round(countryLand);
+                //TODO: comma seperate this and #land-count !!
                 dom.byId('country-hectares').innerHTML = '<strong>' + Math.round(countryLand) + ' Hectares</strong>';
                 dom.byId('average-score-comm').innerHTML = result.features[0].attributes.ind_C_A;
                 dom.byId('average-score-indig').innerHTML = result.features[0].attributes.ind_IP_A;
@@ -139,6 +141,9 @@ define([
                 self.map.disableMapNavigation();
 
                 self.addCharts(result.features[0]);
+                //TODO: Use out of the box Highcharts, 3d??
+                //TODO: If we don't have data for one of our charts, chart it anyways as a blank chart
+                //per that one comp
               }
             });
 
@@ -159,14 +164,16 @@ define([
         },
 
         downloadCSV: function() {
-          var self = this, fieldValues = [], values = [], csv;
+          var self = this, fields = ReportConfig.fieldAliases, values = [], csv;
 
           Object.keys(this.countryData).forEach(function(key) {
-            fieldValues.push(key);
-            values.push(self.countryData[key]);
+            if (key !== 'OBJECTID' && key !== 'Shape_Area' && key !== 'Shape_Length') {
+              values.push(self.countryData[key]);
+              var valuesLength = values.length;
+            }
           });
 
-          csv = fieldValues.join(",") + '\n';
+          csv = fields.join(",") + '\n';
           csv += values.join(",") + '\n';
 
           var blob = new Blob([csv], {
