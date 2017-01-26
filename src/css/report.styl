@@ -161,6 +161,10 @@ body
 		text-align center
 		margin 0.5em 0
 
+.indicator-footer-container__body
+		display: flex;
+		justify-content: space-around;
+
 .footer-header
 		margin 0
 		font-size 1em
@@ -249,8 +253,6 @@ body
 		height 2.4em !important
 		width 2em !important
 
-.header-row td
-		border-bottom 1px solid #175e79
 
 .report-header
 		font-size 1.25em
@@ -267,8 +269,9 @@ body
 .report-value-table
 		margin 0 auto
 
+.header-row td
 .indicator-table-container
-		border-bottom 1px solid #175e79
+		border-bottom 2px solid #175e79
 
 .indicators-table__body
 		height: calc(100% - 60px);
@@ -293,9 +296,50 @@ body
 		strong
 				padding-left 1em
 
-@media screen and (min-height: 900px) {
+@media screen and (min-height: 800px) {
 		.report-component,
 		.map__container {
-				height 85%
+				height 800px
+		}
+}
+
+@media screen and (min-width: 801px) and (max-width: 1040px) {
+		#report__container {
+				flex-wrap: wrap;
+		}
+
+		.charts__container {
+				width: calc(100vw - 400px);
+		}
+
+		.indicators-table__container {
+				width 100%
+				height: auto;
+		}
+}
+
+@media screen and (max-width: 800px) {
+		#report__container {
+				flex-direction: column
+		}
+
+		.map__container,
+		.report-component {
+				width 100%
+				height: auto;
+		}
+		.report-component {
+				margin-top 2em
+				padding-top 2em
+				border-top: 2px solid #2fa3d9
+		}
+
+		#reportMap {
+				display: block;
+		}
+
+		#reportMap,
+		.report-map-body__contant {
+				margin: auto;
 		}
 }
