@@ -249,19 +249,24 @@ define([
           Highcharts.chart('estimated-chart', {
             chart: {
               plotBackgroundColor: null,
-              backgroundColor: 'gray',
+              backgroundColor: '#404040',
               plotBorderWidth: 0,
-              plotShadow: false
+              plotShadow: false,
+              margin: [0, 0, 0, 0],
+              spacingTop: 0,
+              spacingBottom: 0,
+              spacingLeft: 0,
+              spacingRight: 0
             },
-            colors: ['#f4e0d7', '#e5aa92', 'gray'],
+            colors: ['gray','#f4e0d7', '#e5aa92'],
             title: {
               useHTML: true,
               shape: 'circle',
-              style: { "height": "50px", "color": "white", "background-color": "#152f3e", "padding": "20px", "padding-top": "25px", "padding": "30px", "border-radius": "50%", "fontSize": "14px" },
+              style: { "height": "auto", "color": "white", "background-color": "#152f3e", "padding": "5%", "border-radius": "50%", "fontSize": "14px", "width": "50%" },
               text: '<p class="chart-center chart-percent"> ' + fixedTotal + '%</p><p class="chart-center">Total</p> ',
               align: 'center',
               verticalAlign: 'middle',
-              y: -40
+              y: -48
             },
             tooltip: {
               pointFormat: '<b>{point.y}%</b>'
@@ -270,7 +275,7 @@ define([
               pie: {
                 dataLabels: {
                   enabled: true,
-                  distance: -50,
+                  distance: -10,
                   style: {
                     fontWeight: 'bold',
                     color: 'white'
@@ -287,9 +292,9 @@ define([
               // name: 'Browser share',
               innerSize: '60%',
               data: [
+                [(100 - data.attributes.Pct_F.toFixed(2) - data.attributes.Pct_NF.toFixed(2)).toFixed(2) + '% No Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF],
                 [data.attributes.Pct_F + '% Acknowledged by gov',   data.attributes.Pct_F],
                 [data.attributes.Pct_NF + '% Not acknowledged',       data.attributes.Pct_NF],
-                [Math.round(100 - data.attributes.Pct_F - data.attributes.Pct_NF) + '% No Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF],
                 {
                   name: 'Proprietary or Undetectable',
                   y: 0.2,
@@ -301,19 +306,19 @@ define([
             }]
           });
 
-
-          if (!data.attributes.Map_C_F && !data.attributes.Map_C_NF) {
-            dom.byId('community-lands-chart').innerHTML = '<h2>No Data!</h2>';
-          } else {
             Highcharts.chart('community-lands-chart', {
               chart: {
-                height: 250,
-                width: 250,
                 plotBackgroundColor: null,
-                backgroundColor: 'gray',
+                backgroundColor: '#404040',
                 plotBorderWidth: 0,
-                plotShadow: false
+                plotShadow: false,
+                margin: [0, 0, 0, 0],
+                spacingTop: 0,
+                spacingBottom: 0,
+                spacingLeft: 0,
+                spacingRight: 0
               },
+              colors: ['gray','#f4e0d7', '#e5aa92'],
               title: {
                 useHTML: true,
                 shape: 'circle',
@@ -336,9 +341,10 @@ define([
                       color: 'white'
                     }
                   },
-                  startAngle: -(data.attributes.Map_C_T / 100) * 180,
-                  endAngle: (data.attributes.Map_C_T / 100) * 180,
-                  center: ['50%', '75%']
+                  size:'100%'
+                  // startAngle: -(data.attributes.Map_C_T / 100) * 180,
+                  // endAngle: (data.attributes.Map_C_T / 100) * 180,
+                  // center: ['50%', '75%']
                 }
               },
               series: [{
@@ -346,6 +352,7 @@ define([
                 // name: 'Browser share',
                 innerSize: '60%',
                 data: [
+                  [(100 - data.attributes.Map_C_F.toFixed(2) - data.attributes.Map_C_NF.toFixed(2)).toFixed(2) + '% No Data', 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF],
                   [data.attributes.Map_C_F + '% Acknowledged by gov',   data.attributes.Map_C_F],
                   [data.attributes.Map_C_NF + '% Not acknowledged',       data.attributes.Map_C_NF],
                   {
@@ -358,21 +365,21 @@ define([
                 ]
               }]
             });
-          }
 
 
-          if (!data.attributes.Map_IP_F && !data.attributes.Map_IP_NF) {
-            dom.byId('indigenous-lands-chart').innerHTML = '<h2>No Data!</h2>';
-          } else {
             Highcharts.chart('indigenous-lands-chart', {
               chart: {
-                height: 250,
-                width: 250,
                 plotBackgroundColor: null,
-                backgroundColor: 'gray',
+                backgroundColor: '#404040',
                 plotBorderWidth: 0,
-                plotShadow: false
+                plotShadow: false,
+                margin: [0, 0, 0, 0],
+                spacingTop: 0,
+                spacingBottom: 0,
+                spacingLeft: 0,
+                spacingRight: 0
               },
+              colors: ['gray','#f4e0d7', '#e5aa92'],
               title: {
                 useHTML: true,
                 shape: 'circle',
@@ -395,9 +402,10 @@ define([
                       color: 'white'
                     }
                   },
-                  startAngle: -(data.attributes.Map_IP_T / 100) * 180,
-                  endAngle: (data.attributes.Map_IP_T / 100) * 180,
-                  center: ['50%', '75%']
+                  size:'100%'
+                  // startAngle: -(data.attributes.Map_IP_T / 100) * 180,
+                  // endAngle: (data.attributes.Map_IP_T / 100) * 180,
+                  // center: ['50%', '75%']
                 }
               },
               series: [{
@@ -405,6 +413,7 @@ define([
                 // name: 'Browser share',
                 innerSize: '60%',
                 data: [
+                  [(100 - data.attributes.Map_IP_F.toFixed(2) - data.attributes.Map_IP_NF.toFixed(2)).toFixed(2) + '% No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF],
                   [data.attributes.Map_IP_F.toFixed(2) + '% Acknowledged by gov',   data.attributes.Map_IP_F],
                   [data.attributes.Map_IP_NF.toFixed(2) + '% Not acknowledged',       data.attributes.Map_IP_NF],
                   {
@@ -417,7 +426,6 @@ define([
                 ]
               }]
             });
-          }
 
         },
 

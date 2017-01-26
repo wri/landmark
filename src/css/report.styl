@@ -1,5 +1,12 @@
 $report-header-height = 60px
 
+.estimated-chart-container
+	position relative
+	height 100% !important
+
+#estimated-chart
+	height 100% !important
+
 #report__container
 		padding: 0 0.5em;
 		display: flex;
@@ -49,6 +56,7 @@ body
 //#reportMap_root
 #reportMap
 		width 325px !important
+		height 75%
 
 .report-component
 		display inline-block
@@ -148,7 +156,7 @@ body
 		width 100%
 
 .total-lands, .comm-indig-lands
-		height 45%
+		height 40%
 
 .indicator-table-container
 //height 75%
@@ -253,12 +261,12 @@ body
 		border-bottom 1px solid #175e79
 
 .report-header
-		font-size 1.25em
-		padding 0 1em
+		font-size 1em
+		padding 0.5em 1em
 		margin 0
 		text-transform uppercase
 		text-align center
-		min-height: $report-header-height;
+		// min-height: $report-header-height;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -279,9 +287,11 @@ body
 .lands-mapped-chart-container
 		display: flex;
 		justify-content: space-between;
+		height 40%
 
 		.inline-chart
 				width 50%
+				height 100%
 				display: flex;
 				justify-content: center;
 				align-items: center;
