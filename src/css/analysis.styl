@@ -1,33 +1,71 @@
+html, body
+	height 100%
 
+body
+	font-family Raleway
 
-// .analysis-report
-// 	width 50%
+.analysis-report
+	height 100%
 // 	display inline-block
 
 .analysis-table-container, .analysis-chart
-	width 45%
+	width 100%
 	display inline-block
-	position absolute
+	// position absolute
 	top 100px
 
-.chart-container-doc
-	width 45%
+#analysis-table
+	margin 0 auto
+	width 75%
+
+#analysis-title
+	padding-bottom 0.5em
+
+#analysisTable
+	width 100%
+	border-collapse collapse
+
+#column-header
+	color #00356C
+	border-bottom #00A9DA 1px solid
+
+.even-row, .odd-row
+	color #00A9DA
+
+// .chart-container-doc
+// 	width 45%
+// 	display inline-block
+// 	position absolute
+// 	top 325px
+
+.charts-container
+	height 50%
+
+.chart-container
 	display inline-block
-	position absolute
-	top 325px
+	width 30%
+	height 100%
 
 .analysis-table-container
 	left 0
-	height 200px
+	height 25%
 	overflow-y auto
 
 .analysis-title
-	text-align center
+	text-align left
+	margin 0
+	padding-left 12.5%
+	background-color #00617A
+	color white
 
 .analysis-export
 	cursor pointer
-	color blue
+	color #00356C
 	font-size 14px
+	text-align right
+	padding-right 12.5%
+	margin-top 1em
+	margin-bottom 1em
 
 .analysis-chart
 	left 50%
@@ -41,3 +79,6 @@
 
 .upload-instructions li
 	font-size 12px
+
+#documentation-pie, #identity-pie, #recognition-pie
+	height 100%

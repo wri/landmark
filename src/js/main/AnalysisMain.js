@@ -123,6 +123,11 @@ define([
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
+            margin: [0, 0, 0, 0],
+            spacingTop: 0,
+            spacingBottom: 0,
+            spacingLeft: 0,
+            spacingRight: 0,
             type: 'pie',
             options3d: {
                 enabled: true,
@@ -130,15 +135,17 @@ define([
             }
           },
           title: {
-            text: 'Indigenous and Community lands: Identity'
+            margin: 0,
+            text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Identity</b>',
+            style: { 'font-size': '14px', 'color': '#00356C'}
           },
           tooltip: {
             pointFormat: '<b>{point.y} features</b>'
           },
           plotOptions: {
             pie: {
-              size: 200,
-              innerSize: 100,
+              size:'50%',
+              innerSize: '60%',
               depth: 45,
               allowPointSelect: true,
               cursor: 'pointer',
@@ -168,6 +175,11 @@ define([
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
+            margin: [0, 0, 0, 0],
+            spacingTop: 0,
+            spacingBottom: 0,
+            spacingLeft: 0,
+            spacingRight: 0,
             type: 'pie',
             options3d: {
                 enabled: true,
@@ -175,15 +187,17 @@ define([
             }
           },
           title: {
-            text: 'Indigenous and Community lands: Recognition'
+            margin: 0,
+            text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Recognition</b>',
+            style: { 'font-size': '14px', 'color': '#00356C'}
           },
           tooltip: {
             pointFormat: '<b>{point.y} features</b>'
           },
           plotOptions: {
             pie: {
-              size: 200,
-              innerSize: 100,
+              size:'50%',
+              innerSize: '60%',
               depth: 45,
               allowPointSelect: true,
               cursor: 'pointer',
@@ -213,6 +227,11 @@ define([
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
+            margin: [0, 0, 0, 0],
+            spacingTop: 0,
+            spacingBottom: 0,
+            spacingLeft: 0,
+            spacingRight: 0,
             type: 'pie',
             options3d: {
                 enabled: true,
@@ -220,15 +239,17 @@ define([
             }
           },
           title: {
-            text: 'Indigenous and Community lands: Documentation'
+            margin: 0,
+            text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Documentation</b>',
+            style: { 'font-size': '14px', 'color': '#00356C'}
           },
           tooltip: {
             pointFormat: '<b>{point.y} features</b>'
           },
           plotOptions: {
             pie: {
-              size: 200,
-              innerSize: 100,
+              size:'50%',
+              innerSize: '60%',
               depth: 45,
               allowPointSelect: true,
               cursor: 'pointer',
