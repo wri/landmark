@@ -296,8 +296,8 @@ define([
               innerSize: '60%',
               data: [
                 [(100 - data.attributes.Pct_F.toFixed(2) - data.attributes.Pct_NF.toFixed(2)).toFixed(2) + '% No Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF > 0 ? 100 - data.attributes.Pct_F - data.attributes.Pct_NF : null],
-                [data.attributes.Pct_F + '% Acknowledged by gov',   data.attributes.Pct_F > 0 ? data.attributes.Pct_F : null],
-                [data.attributes.Pct_NF + '% Not acknowledged',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null],
+                [data.attributes.Pct_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Pct_F > 0 ? data.attributes.Pct_F : null],
+                [data.attributes.Pct_NF + '% <br><b>Not</b> <br><b>acknowledged</b>',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null],
                 {
                   name: 'Proprietary or Undetectable',
                   y: 0.2,
@@ -421,8 +421,8 @@ define([
                 innerSize: '60%',
                 data: [
                   [(100 - data.attributes.Map_C_F.toFixed(2) - data.attributes.Map_C_NF.toFixed(2)).toFixed(2) + '% No Data', 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],
-                  [data.attributes.Map_C_F + '% Acknowledged by gov',   data.attributes.Map_C_F > 0 ? data.attributes.Map_C_F : null],
-                  [data.attributes.Map_C_NF + '% Not acknowledged',     data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_NF : null],
+                  [data.attributes.Map_C_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Map_C_F > 0 ? data.attributes.Map_C_F : null],
+                  [data.attributes.Map_C_NF + '% <br><b>Not</b> <br><b>acknowledged</b>',     data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_NF : null],
                   {
                     name: 'Proprietary or Undetectable',
                     y: 0.2,
@@ -545,8 +545,8 @@ define([
                 innerSize: '60%',
                 data: [
                   [(100 - data.attributes.Map_IP_F.toFixed(2) - data.attributes.Map_IP_NF.toFixed(2)).toFixed(2) + '% No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF : null],
-                  [data.attributes.Map_IP_F.toFixed(2) + '% Acknowledged by gov',   data.attributes.Map_IP_F > 0 ? data.attributes.Map_IP_F : null],
-                  [data.attributes.Map_IP_NF.toFixed(2) + '% Not acknowledged',       data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_NF : null],
+                  [data.attributes.Map_IP_F.toFixed(2) + '% <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Map_IP_F > 0 ? data.attributes.Map_IP_F : null],
+                  [data.attributes.Map_IP_NF.toFixed(2) + '% <br><b>Not</b> <br><b>acknowledged</b>',       data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_NF : null],
                   {
                     name: 'Proprietary or Undetectable',
                     y: 0.2,
