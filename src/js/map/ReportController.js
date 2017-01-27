@@ -359,7 +359,7 @@ define([
                   color: 'white'
                 }
               },
-              size:'75%'
+              size:'50%'
             }
           },
           series: [{
@@ -409,7 +409,7 @@ define([
                       color: 'white'
                     }
                   },
-                  size:'75%'
+                  size:'50%'
                   // startAngle: -(data.attributes.Map_C_T / 100) * 180,
                   // endAngle: (data.attributes.Map_C_T / 100) * 180,
                   // center: ['50%', '75%']
@@ -436,7 +436,7 @@ define([
             function(chart1) { // on complete
             var xpos = '50%';
             var ypos = '50%';
-            var circleradius = 50;
+            var circleradius = 40;
             var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(2)
 
             // Render the circle
@@ -483,7 +483,7 @@ define([
                     color: 'white'
                   }
                 },
-                size:'75%'
+                size:'50%'
               }
             },
             series: [{
@@ -533,7 +533,7 @@ define([
                       color: 'white'
                     }
                   },
-                  size:'75%'
+                  size:'50%'
                   // startAngle: -(data.attributes.Map_IP_T / 100) * 180,
                   // endAngle: (data.attributes.Map_IP_T / 100) * 180,
                   // center: ['50%', '75%']
@@ -560,7 +560,7 @@ define([
             function(chart1) { // on complete
             var xpos = '50%';
             var ypos = '50%';
-            var circleradius = 50;
+            var circleradius = 40;
             var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(2)
 
             // Render the circle
