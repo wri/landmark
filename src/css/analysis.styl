@@ -4,6 +4,10 @@ html, body
 body
 	font-family Raleway
 
+td
+	padding-left 5px
+	padding-right 5px
+
 .analysis-report
 	height 100%
 // 	display inline-block
@@ -43,7 +47,7 @@ body
 
 .chart-container
 	display inline-block
-	width 30%
+	width 33%
 	height 100%
 
 .analysis-table-container
@@ -82,3 +86,33 @@ body
 
 #documentation-pie, #identity-pie, #recognition-pie
 	height 100%
+
+@media screen and (min-width: 801px) and (max-width: 1040px) {
+	.charts-container {
+		height auto
+	}
+
+	.recognition-container {
+		display block
+		width 100%
+	}
+
+	.documentation-containter, .identity-container {
+		width 49%
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.charts-container {
+		height auto
+	}
+
+	.recognition-container, .documentation-containter, .identity-container {
+		display block
+		width 100%
+	}
+
+	#analysis-table{
+		width 100%
+	}
+}
