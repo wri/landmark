@@ -103,6 +103,7 @@ define([
                 });
 
                 var countryLand = result.features[0].attributes.Ctry_Land ? result.features[0].attributes.Ctry_Land : 0;
+                var NB_Maps = result.features[0].attributes.NB_Maps ? result.features[0].attributes.NB_Maps : 0;
                 // var iso2Value = ReportConfig.countryCodeExceptions.includes(result.features[0].attributes.ISO_ALPHA) ?
                 var iso2Value;
                 var countryCodeExceptions = ReportConfig.countryCodeExceptions
