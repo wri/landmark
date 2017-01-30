@@ -58,13 +58,14 @@ define([
             }
 
             var str;
+            var areaGis = graphic.feature.attributes.Area_GIS ? parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2) : '0.00%';
             if (even === "even") {
                 str = "<tr class='even-row'><td class='country'>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
                     graphic.feature.attributes.Name + "</td><td class='ident'>" +
                     graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
                     graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
                     graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
-                    parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2) + "</td></tr>";
+                    areaGis + "</td></tr>";
                 var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Area_GIS];
                 //- brApp.csv += fieldValues.join(",") + '\n';
             } else {
@@ -73,7 +74,7 @@ define([
                     graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
                     graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
                     graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
-                    parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2) + "</td></tr>";
+                    areaGis + "</td></tr>";
                 var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Area_GIS];
                 //- brApp.csv += fieldValues.join(",") + '\n';
             }
