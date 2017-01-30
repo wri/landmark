@@ -21,18 +21,22 @@ html
     <![endif]-->
   body.tundra.crl
     div.analysis-report
-      h1.analysis-title Analysis Results 
-        span#analysis-export.analysis-export  Export Data
-      h4#analysis-title.analysis-title
+      div.header-container
+        h1.analysis-title Analysis Results 
+        h4#analysis-title.analysis-title
+      div#analysis-export.analysis-export
+        img(src="css/images/export.png" alt="export")
+        span Export Data
+      div.charts-container
+        div.chart-container.documentation-containter
+          div#documentation-pie
+        //- div#analysis-chart.analysis-chart
+        div.chart-container.identity-container
+          div#identity-pie
+        div.chart-container.recognition-container
+          div#recognition-pie
       div.analysis-table-container
         div#analysis-table
-      div.chart-container-doc
-        span#documentation-pie
-      div#analysis-chart.analysis-chart
-        div.chart-container
-          span#identity-pie
-        div.chart-container
-          span#recognition-pie
         
     //- script(async, src='js/map/AnalysisController.js?#{appVersion}')
     script(async, src='js/analysisBootstrap.js?#{appVersion}')

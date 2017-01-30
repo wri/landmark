@@ -58,13 +58,14 @@ define([
             }
 
             var str;
+            var areaGis = graphic.feature.attributes.Area_GIS ? parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2) : '0.00';
             if (even === "even") {
                 str = "<tr class='even-row'><td class='country'>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
                     graphic.feature.attributes.Name + "</td><td class='ident'>" +
                     graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
                     graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
                     graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
-                    graphic.feature.attributes.Area_GIS + "</td></tr>";
+                    areaGis + "</td></tr>";
                 var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Area_GIS];
                 //- brApp.csv += fieldValues.join(",") + '\n';
             } else {
@@ -73,7 +74,7 @@ define([
                     graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
                     graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
                     graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
-                    graphic.feature.attributes.Area_GIS + "</td></tr>";
+                    areaGis + "</td></tr>";
                 var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Area_GIS];
                 //- brApp.csv += fieldValues.join(",") + '\n';
             }
@@ -123,6 +124,11 @@ define([
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
+            margin: [0, 0, 0, 0],
+            spacingTop: 0,
+            spacingBottom: 0,
+            spacingLeft: 0,
+            spacingRight: 0,
             type: 'pie',
             options3d: {
                 enabled: true,
@@ -130,21 +136,30 @@ define([
             }
           },
           title: {
-            text: 'Indigenous and Community lands: Identity'
+            margin: 0,
+            text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Identity</b>',
+            style: { 'font-size': '14px', 'color': '#00356C'}
+          },
+          credits: {
+            enabled: false
+          },
+          exporting: {
+            enabled: false
           },
           tooltip: {
             pointFormat: '<b>{point.y} features</b>'
           },
           plotOptions: {
             pie: {
-              size: 200,
-              innerSize: 100,
+              size:'50%',
+              innerSize: '60%',
               depth: 45,
               allowPointSelect: true,
               cursor: 'pointer',
               dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                format: '<b>{point.name}</b><br> {point.percentage:.1f} %',
+                distance: 10,
                 style: {
                   color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                 }
@@ -168,6 +183,11 @@ define([
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
+            margin: [0, 0, 0, 0],
+            spacingTop: 0,
+            spacingBottom: 0,
+            spacingLeft: 0,
+            spacingRight: 0,
             type: 'pie',
             options3d: {
                 enabled: true,
@@ -175,21 +195,30 @@ define([
             }
           },
           title: {
-            text: 'Indigenous and Community lands: Recognition'
+            margin: 0,
+            text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Recognition</b>',
+            style: { 'font-size': '14px', 'color': '#00356C'}
+          },
+          credits: {
+            enabled: false
+          },
+          exporting: {
+            enabled: false
           },
           tooltip: {
             pointFormat: '<b>{point.y} features</b>'
           },
           plotOptions: {
             pie: {
-              size: 200,
-              innerSize: 100,
+              size:'50%',
+              innerSize: '60%',
               depth: 45,
               allowPointSelect: true,
               cursor: 'pointer',
               dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                format: '<b>{point.name}</b><br> {point.percentage:.1f} %',
+                distance: 10,
                 style: {
                   color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                 }
@@ -199,10 +228,10 @@ define([
           series: [{
             colorByPoint: true,
             data: [{
-              name: 'Not formally recognized',
+              name: 'Not formally <br> recognized',
               y: recognitionData.informal
             }, {
-              name: 'Formally recognized',
+              name: 'Formally <br> recognized',
               y: recognitionData.formal
             }]
           }]
@@ -213,6 +242,11 @@ define([
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
+            margin: [0, 0, 0, 0],
+            spacingTop: 0,
+            spacingBottom: 0,
+            spacingLeft: 0,
+            spacingRight: 0,
             type: 'pie',
             options3d: {
                 enabled: true,
@@ -220,21 +254,30 @@ define([
             }
           },
           title: {
-            text: 'Indigenous and Community lands: Documentation'
+            margin: 0,
+            text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Documentation</b>',
+            style: { 'font-size': '14px', 'color': '#00356C'}
+          },
+          credits: {
+            enabled: false
+          },
+          exporting: {
+            enabled: false
           },
           tooltip: {
             pointFormat: '<b>{point.y} features</b>'
           },
           plotOptions: {
             pie: {
-              size: 200,
-              innerSize: 100,
+              size:'50%',
+              innerSize: '60%',
               depth: 45,
               allowPointSelect: true,
               cursor: 'pointer',
               dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                format: '<b>{point.name}</b><br> {point.percentage:.1f} %',
+                distance: 10,
                 style: {
                   color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                 }
@@ -250,13 +293,13 @@ define([
               name: 'No doc',
               y: documentationData.noDoc
             }, {
-              name: 'Occupied w/o formal petition',
+              name: 'Occupied w/o <br> formal petition',
               y: documentationData.occupied
             }, {
-              name: 'Formal petition',
+              name: 'Formal <br> petition',
               y: documentationData.formalLand
             }, {
-              name: 'Doc in process',
+              name: 'Doc <br> in process',
               y: documentationData.inProcess
             }]
           }]

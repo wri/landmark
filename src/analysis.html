@@ -19,15 +19,24 @@
   </head>
   <body class="tundra crl">
     <div class="analysis-report">
-      <h1 class="analysis-title">Analysis Results <span id="analysis-export" class="analysis-export"> Export Data</span></h1>
-      <h4 id="analysis-title" class="analysis-title"></h4>
+      <div class="header-container">
+        <h1 class="analysis-title">Analysis Results </h1>
+        <h4 id="analysis-title" class="analysis-title"></h4>
+      </div>
+      <div id="analysis-export" class="analysis-export"><img src="css/images/export.png" alt="export"><span>Export Data</span></div>
+      <div class="charts-container">
+        <div class="chart-container documentation-containter">
+          <div id="documentation-pie"></div>
+        </div>
+        <div class="chart-container identity-container">
+          <div id="identity-pie"></div>
+        </div>
+        <div class="chart-container recognition-container">
+          <div id="recognition-pie"></div>
+        </div>
+      </div>
       <div class="analysis-table-container">
         <div id="analysis-table"></div>
-      </div>
-      <div class="chart-container-doc"><span id="documentation-pie"></span></div>
-      <div id="analysis-chart" class="analysis-chart">
-        <div class="chart-container"><span id="identity-pie"></span></div>
-        <div class="chart-container"><span id="recognition-pie"></span></div>
       </div>
     </div>
     <script async src="js/analysisBootstrap.js?1.1.2"></script>
