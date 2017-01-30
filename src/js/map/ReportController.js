@@ -292,7 +292,7 @@ define([
               // name: 'Browser share',
               innerSize: '60%',
               data: [
-                [(100 - data.attributes.Pct_F.toFixed(2) - data.attributes.Pct_NF.toFixed(2)).toFixed(2) + '% No Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF > 0 ? 100 - data.attributes.Pct_F - data.attributes.Pct_NF : null],
+                [(100 - data.attributes.Pct_F - data.attributes.Pct_NF).toFixed(2) + '% No Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF > 0 ? 100 - data.attributes.Pct_F - data.attributes.Pct_NF : null],
                 [data.attributes.Pct_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Pct_F > 0 ? data.attributes.Pct_F : null],
                 [data.attributes.Pct_NF + '% <br><b>Not</b> <br><b>acknowledged</b>',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null],
                 {
@@ -417,14 +417,58 @@ define([
                 // name: 'Browser share',
                 innerSize: '60%',
                 data: [
-                  [(100 - data.attributes.Map_C_F.toFixed(2) - data.attributes.Map_C_NF.toFixed(2)).toFixed(2) + '% No Data', 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],
-                  [data.attributes.Map_C_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Map_C_F > 0 ? data.attributes.Map_C_F : null],
-                  [data.attributes.Map_C_NF + '% <br><b>Not</b> <br><b>acknowledged</b>',     data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_NF : null],
+                  // [(100 - data.attributes.Map_C_F.toFixed(2) - data.attributes.Map_C_NF.toFixed(2)).toFixed(2) + '% No Data', 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],
+                  // [data.attributes.Map_C_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Map_C_F > 0 ? data.attributes.Map_C_F : null],
+                  // [data.attributes.Map_C_NF + '% <br><b>Not</b> <br><b>acknowledged</b>',     data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_NF : null],
                   {
-                    name: 'Proprietary or Undetectable',
-                    y: 0.2,
+                    name: 'Acknowledged by Gov',
+                    y: data.attributes.Map_C_F > 0 ? data.attributes.Map_C_F : null,
                     dataLabels: {
-                      enabled: false
+                      enabled: true,
+                      y:-5,
+                      color:"white",
+                      crop: false,
+                      overflow: 'none',
+                      style: {
+                        fontSize: "10px"
+                      },
+                       formatter: function(){
+                         return data.attributes.Map_C_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>'
+                       }
+                    }
+                  },
+                  {
+                    name: 'Not Acknowledged by Gov',
+                    y: data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_NF : null,
+                    dataLabels: {
+                      enabled: true,
+                      y:-5,
+                      color:"white",
+                      crop: false,
+                      overflow: 'none',
+                      style: {
+                        fontSize: "10px"
+                      },
+                       formatter: function(){
+                         return data.attributes.Map_C_NF + '% <br><b>Not</b> <br><b>acknowledged</b>'
+                       }
+                    }
+                  },
+                  {
+                    name: 'No Data',
+                    y: 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF : null,
+                    dataLabels: {
+                      enabled: true,
+                      y:-5,
+                      color:"white",
+                      overflow: 'none',
+                      crop: false,
+                      style: {
+                        fontSize: "10px"
+                      },
+                       formatter: function(){
+                         return (100 - data.attributes.Map_C_F - data.attributes.Map_C_NF).toFixed(2) + '% No Data'
+                       }
                     }
                   }
                 ]
@@ -504,7 +548,7 @@ define([
                 spacingLeft: 0,
                 spacingRight: 0
               },
-              colors: ['gray','#f4e0d7', '#e5aa92'],
+              colors: ['#f4e0d7', '#e5aa92','gray'],
               // title: {
               //   useHTML: true,
               //   shape: 'circle',
@@ -525,9 +569,13 @@ define([
                   dataLabels: {
                     enabled: true,
                     distance: 10,
+                    crop: false,
+                    overflow: 'none',
                     style: {
                       fontWeight: 'bold',
-                      color: 'white'
+                      color: 'white',
+                      width: '10px',
+                      overflow: 'visible'
                     }
                   },
                   size:'50%'
@@ -541,14 +589,68 @@ define([
                 // name: 'Browser share',
                 innerSize: '60%',
                 data: [
-                  [(100 - data.attributes.Map_IP_F.toFixed(2) - data.attributes.Map_IP_NF.toFixed(2)).toFixed(2) + '% No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF : null],
-                  [data.attributes.Map_IP_F.toFixed(2) + '% <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Map_IP_F > 0 ? data.attributes.Map_IP_F : null],
-                  [data.attributes.Map_IP_NF.toFixed(2) + '% <br><b>Not</b> <br><b>acknowledged</b>',       data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_NF : null],
+                  // [(100 - data.attributes.Map_IP_F.toFixed(2) - data.attributes.Map_IP_NF.toFixed(2)).toFixed(2) + '% No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF : null],
+                  // [data.attributes.Map_IP_F.toFixed(2) + '% <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Map_IP_F > 0 ? data.attributes.Map_IP_F : null],
+                  // [data.attributes.Map_IP_NF.toFixed(2) + '% <br><b>Not</b> <br><b>acknowledged</b>',       data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_NF : null],
+                  // {
+                  //   name: 'Proprietary or Undetectable',
+                  //   y: 0.2,
+                  //   dataLabels: {
+                  //     enabled: false
+                  //   }
+                  // }
                   {
-                    name: 'Proprietary or Undetectable',
-                    y: 0.2,
+                    name: 'Acknowledged by Gov',
+                    y: data.attributes.Map_IP_F > 0 ? data.attributes.Map_IP_F : null,
                     dataLabels: {
-                      enabled: false
+                      enabled: true,
+                      y:-5,
+                      color:"white",
+                      crop: false,
+                      overflow: 'none',
+                      style: {
+                        fontSize: "10px"
+                      },
+                       formatter: function(){
+                         return data.attributes.Map_IP_F.toFixed(2) + '% <br><b>Acknowledged</b> <br><b>by gov</b>'
+                       }
+                    }
+                  },
+                  {
+                    name: 'Not Acknowledged by Gov',
+                    y: data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_NF : null,
+                    dataLabels: {
+                      enabled: true,
+                      y:-5,
+                      color:"white",
+                      crop: false,
+                      overflow: 'none',
+                      style: {
+                        fontSize: "10px"
+                      },
+                       formatter: function(){
+                         console.log(this);
+                         this.x = -20;
+                         this.y = -20;
+                         return data.attributes.Map_IP_NF.toFixed(2) + '% <br><b>Not</b> <br><b>acknowledged</b>'
+                       }
+                    }
+                  },
+                  {
+                    name: 'No Data',
+                    y: 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF : null,
+                    dataLabels: {
+                      enabled: true,
+                      y:-5,
+                      color:"white",
+                      overflow: 'none',
+                      crop: false,
+                      style: {
+                        fontSize: "10px"
+                      },
+                       formatter: function(){
+                         return (100 - data.attributes.Map_IP_F.toFixed(2) - data.attributes.Map_IP_NF.toFixed(2)).toFixed(2) + '% No Data'
+                       }
                     }
                   }
                 ]
