@@ -215,10 +215,10 @@ define([
           series: [{
             colorByPoint: true,
             data: [{
-              name: 'Not formally recognized',
+              name: 'Not formally <br> recognized',
               y: recognitionData.informal
             }, {
-              name: 'Formally recognized',
+              name: 'Formally <br> recognized',
               y: recognitionData.formal
             }]
           }]
@@ -274,13 +274,13 @@ define([
               name: 'No doc',
               y: documentationData.noDoc
             }, {
-              name: 'Occupied w/o formal petition',
+              name: 'Occupied w/o <br> formal petition',
               y: documentationData.occupied
             }, {
-              name: 'Formal petition',
+              name: 'Formal <br> petition',
               y: documentationData.formalLand
             }, {
-              name: 'Doc in process',
+              name: 'Doc <br> in process',
               y: documentationData.inProcess
             }]
           }]
