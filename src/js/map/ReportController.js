@@ -434,6 +434,7 @@ define([
                         fontSize: "10px"
                       },
                        formatter: function(){
+                         var map_C_F = data.attributes.Map_C_F ? data.attributes.Map_C_F.toFixed(2) : 0;
                          return data.attributes.Map_C_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>'
                        }
                     }
@@ -451,6 +452,7 @@ define([
                         fontSize: "10px"
                       },
                        formatter: function(){
+                         var map_C_NF = data.attributes.Map_C_NF ? data.attributes.Map_C_NF.toFixed(2) : 0;
                          return data.attributes.Map_C_NF + '% <br><b>Not</b> <br><b>acknowledged</b>'
                        }
                     }
@@ -613,7 +615,8 @@ define([
                         fontSize: "10px"
                       },
                        formatter: function(){
-                         return data.attributes.Map_IP_F.toFixed(2) + '% <br><b>Acknowledged</b> <br><b>by gov</b>'
+                         var map_IP_F = data.attributes.Map_IP_F ? data.attributes.Map_IP_F.toFixed(2) : 0;
+                         return map_IP_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>'
                        }
                     }
                   },
@@ -630,10 +633,8 @@ define([
                         fontSize: "10px"
                       },
                        formatter: function(){
-                         console.log(this);
-                         this.x = -20;
-                         this.y = -20;
-                         return data.attributes.Map_IP_NF.toFixed(2) + '% <br><b>Not</b> <br><b>acknowledged</b>'
+                         var map_IP_NF = data.attributes.Map_IP_NF ? data.attributes.Map_IP_NF.toFixed(2) : 0;
+                         return map_IP_NF + '% <br><b>Not</b> <br><b>acknowledged</b>'
                        }
                     }
                   },
@@ -650,7 +651,7 @@ define([
                         fontSize: "10px"
                       },
                        formatter: function(){
-                         return (100 - data.attributes.Map_IP_F.toFixed(2) - data.attributes.Map_IP_NF.toFixed(2)).toFixed(2) + '% No Data'
+                         return (100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF).toFixed(2) + '% No Data'
                        }
                     }
                   }
