@@ -73,7 +73,6 @@ define([
               if (result.features && result.features[0]) {
                 self.countryData = result.features[0].attributes;
                 self.map.setExtent(result.features[0].geometry.getExtent());
-                console.log(result.features[0]);
 
                 ReportConfig.reportAttributes.forEach(function(attribute){
                   switch (result.features[0].attributes[attribute.attr]) {
@@ -231,7 +230,6 @@ define([
         },
 
         addCharts: function(data) {
-          console.log('data!!', data);
           var fixedTotal = data.attributes.Pct_tot;
           if (fixedTotal) {
             fixedTotal = fixedTotal.toFixed(2);
@@ -240,7 +238,6 @@ define([
           }
 
           var angle = (fixedTotal / 100) * 180;
-          console.log(angle);
 
           if (angle === 0) {
             angle = 180
@@ -272,7 +269,7 @@ define([
               text: null
             },
             tooltip: {
-              pointFormat: '<b>{point.y}%</b>'
+              pointFormat: '<b>{point.y:.2f}%</b>'
             },
             plotOptions: {
               pie: {
@@ -320,7 +317,7 @@ define([
           }).add();
 
           // Render the text
-          var chart1Text = chart1.renderer.text(centerText + '%').css({
+          var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
               width: circleradius * 2,
               color: '#4572A7',
               fontSize: '14px'
@@ -397,7 +394,7 @@ define([
                 text: null
               },
               tooltip: {
-                pointFormat: '<b>{point.y}%</b>'
+                pointFormat: '<b>{point.y:.2f}%</b>'
               },
               plotOptions: {
                 pie: {
@@ -445,10 +442,10 @@ define([
             }).add();
 
             // Render the text
-            var chart1Text = chart1.renderer.text(centerText + '%').css({
+            var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
                 width: circleradius * 2,
                 color: '#4572A7',
-                fontSize: '14px'
+                fontSize: '12px'
             }).attr({
                 // why doesn't zIndex get the text in front of the chart?
                 zIndex: 999
@@ -477,7 +474,7 @@ define([
               pie: {
                 dataLabels: {
                   enabled: true,
-                  distance: 20,
+                  distance: 10,
                   style: {
                     fontWeight: 'bold',
                     color: 'white'
@@ -521,13 +518,13 @@ define([
                 text: null
               },
               tooltip: {
-                pointFormat: '<b>{point.y}%</b>'
+                pointFormat: '<b>{point.y:.2f}%</b>'
               },
               plotOptions: {
                 pie: {
                   dataLabels: {
                     enabled: true,
-                    distance: 20,
+                    distance: 10,
                     style: {
                       fontWeight: 'bold',
                       color: 'white'
@@ -569,10 +566,10 @@ define([
             }).add();
 
             // Render the text
-            var chart1Text = chart1.renderer.text(centerText + '%').css({
+            var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
                 width: circleradius * 2,
                 color: '#4572A7',
-                fontSize: '14px'
+                fontSize: '12px'
             }).attr({
                 // why doesn't zIndex get the text in front of the chart?
                 zIndex: 999
