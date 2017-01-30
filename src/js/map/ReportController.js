@@ -115,7 +115,7 @@ define([
                   }
                 }
 
-                dom.byId('land-count').innerHTML =  '<strong>' + result.features[0].attributes.NB_Maps.toLocaleString() + '</strong> indigenous and community lands mapped on Landmark';
+                dom.byId('land-count').innerHTML =  '<strong>' + NB_Maps.toLocaleString() + '</strong> indigenous and community lands mapped on Landmark';
                 dom.byId('country-name').innerHTML = result.features[0].attributes.Country;
                 dom.byId('country-land-area').innerHTML = 'COUNTRY LAND AREA:';
                 var landCount = Math.round(countryLand);
