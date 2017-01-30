@@ -64,7 +64,7 @@ define([
                     graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
                     graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
                     graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
-                    graphic.feature.attributes.Area_GIS + "</td></tr>";
+                    parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2) + "</td></tr>";
                 var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Area_GIS];
                 //- brApp.csv += fieldValues.join(",") + '\n';
             } else {
@@ -73,7 +73,7 @@ define([
                     graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
                     graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
                     graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
-                    graphic.feature.attributes.Area_GIS + "</td></tr>";
+                    parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2) + "</td></tr>";
                 var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Area_GIS];
                 //- brApp.csv += fieldValues.join(",") + '\n';
             }
@@ -139,6 +139,12 @@ define([
             text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Identity</b>',
             style: { 'font-size': '14px', 'color': '#00356C'}
           },
+          credits: {
+            enabled: false
+          },
+          exporting: {
+            enabled: false
+          },
           tooltip: {
             pointFormat: '<b>{point.y} features</b>'
           },
@@ -192,6 +198,12 @@ define([
             text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Recognition</b>',
             style: { 'font-size': '14px', 'color': '#00356C'}
           },
+          credits: {
+            enabled: false
+          },
+          exporting: {
+            enabled: false
+          },
           tooltip: {
             pointFormat: '<b>{point.y} features</b>'
           },
@@ -244,6 +256,12 @@ define([
             margin: 0,
             text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Documentation</b>',
             style: { 'font-size': '14px', 'color': '#00356C'}
+          },
+          credits: {
+            enabled: false
+          },
+          exporting: {
+            enabled: false
           },
           tooltip: {
             pointFormat: '<b>{point.y} features</b>'
