@@ -17,11 +17,11 @@ define([
      */
     function applyLayout() {
         width = domGeom.position(body).w;
-        if (width < threshold) {
-            domClass.add(body, "mobile");
-        } else {
-            domClass.remove(body, "mobile");
-        }
+        // if (width < threshold) {
+        //     domClass.add(body, "mobile");
+        // } else {
+        //     domClass.remove(body, "mobile");
+        // }
 
         if (prevWidth > mobileThreshold && width < mobileThreshold) {
             if ($("#toolsMenuButton").hasClass('active')) {
@@ -55,7 +55,8 @@ define([
          * @return {boolean} whether or not the width of the screen is above or below the threshold
          */
         isMobile: function() {
-            return width ? width < threshold : domGeom.position(body).w < threshold;
+            // return width ? width < threshold : domGeom.position(body).w < threshold;
+            return false
         }
 
     };

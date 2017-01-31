@@ -6,6 +6,7 @@ define([
     'map/MapConfig',
     'map/MapAssets',
     'components/LayerTabContainer',
+    'components/MobileFooter',
     'map/WidgetsController',
     'utils/Helper',
     'dojo/on',
@@ -38,7 +39,7 @@ define([
     "esri/layers/LayerDrawingOptions",
     'esri/layers/FeatureLayer'
 
-], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
+], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, MobileFooter, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
 
     'use strict';
 
@@ -241,6 +242,7 @@ define([
             var basemapGallery,
                 self = this,
                 tabContainer,
+                mobileFooter,
                 legendComponent,
                 homeWidget,
                 searchWidget,
@@ -271,6 +273,7 @@ define([
             });
 
             tabContainer = new LayerTabContainer('layer-content');
+            mobileFooter = new MobileFooter('mobile-footer')
 
             // Start all widgets that still need to be started
             basemapGallery.startup();
