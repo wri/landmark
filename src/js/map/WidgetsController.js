@@ -215,59 +215,107 @@ define([
 
         },
 
+        toggleMobileTree: function() {
+          var layerTree = document.querySelector('.tree-widget-container')
+          var searchButton = document.querySelector('.search-button')
+          var reportButton = document.querySelector('.report-button')
+
+          registry.byId('analysis-dialog').hide();
+
+          if (!domClass.contains(searchButton, "hidden")) {
+            domClass.toggle(searchButton, 'hidden');
+          }
+          if (!domClass.contains(reportButton, "hidden")) {
+            domClass.toggle(reportButton, 'hidden');
+          }
+          domClass.toggle(layerTree, 'hidden');
+        },
+
+        toggleMobileSearch: function() {
+          var layerTree = document.querySelector('.tree-widget-container')
+          var searchButton = document.querySelector('.search-button')
+          var reportButton = document.querySelector('.report-button')
+
+          registry.byId('analysis-dialog').hide();
+
+          if (!domClass.contains(layerTree, "hidden")) {
+            domClass.toggle(layerTree, 'hidden');
+          }
+          if (!domClass.contains(reportButton, "hidden")) {
+            domClass.toggle(reportButton, 'hidden');
+          }
+          domClass.toggle(searchButton, 'hidden');
+        },
+
+        toggleMobileCountrySearch: function() {
+          var layerTree = document.querySelector('.tree-widget-container')
+          var searchButton = document.querySelector('.search-button')
+          var reportButton = document.querySelector('.report-button')
+
+          registry.byId('analysis-dialog').hide();
+
+          if (!domClass.contains(layerTree, "hidden")) {
+            domClass.toggle(layerTree, 'hidden');
+          }
+          if (!domClass.contains(searchButton, "hidden")) {
+            domClass.toggle(searchButton, 'hidden');
+          }
+          domClass.toggle(reportButton, 'hidden');
+        },
+
         /**
          * Toggle the mobile menu open or close
          */
-        toggleMobileMenu: function() {
-            brApp.debug('WidgetsController >>> toggleMobileMenu');
-            var mapNode = document.getElementById('brMap'),
-                // accordion = registry.byId('layer-accordion'),
-
-                menuNodeId = 'mobileMenu',
-                menuButton = 'mobile-menu-toggle',
-                isClosing = domClass.contains(menuNodeId, 'open'),
-                left = isClosing ? 0 : 290;
-
-            if ($('#layer-content').css("height") === "0px") {
-                $('#layer-content').css("height", "auto");
-            }
-
-
-            $("#community-level-toggle_button").hide();
-
-
-            if (!isClosing) {
-                $("#mobile-menu-toggle").css("display", "none");
-                domClass.toggle(menuNodeId, 'open');
-                domClass.toggle(menuButton, 'hidden');
-
-            } else {
-                $("#mobile-menu-toggle").css("display", "block");
-                domClass.remove(menuButton, 'hidden');
-            }
-
-
-            Fx.animateProperty({
-                node: mapNode,
-                properties: {
-                    left: left
-                },
-                duration: DURATION,
-                onEnd: function() {
-                    brApp.map.resize();
-                    if (isClosing) {
-                        domClass.toggle(menuNodeId, 'open');
-                    }
-
-                    $("#community-level-toggle_button").show();
-                    // setTimeout(function() {
-                    //     accordion.resize();
-                    // }, 0);
-
-                }
-            }).play();
-
-        },
+        // toggleMobileMenu: function() {
+        //     brApp.debug('WidgetsController >>> toggleMobileMenu');
+        //     var mapNode = document.getElementById('brMap'),
+        //         // accordion = registry.byId('layer-accordion'),
+        //
+        //         menuNodeId = 'mobileMenu',
+        //         menuButton = 'mobile-menu-toggle',
+        //         isClosing = domClass.contains(menuNodeId, 'open'),
+        //         left = isClosing ? 0 : 290;
+        //
+        //     if ($('#layer-content').css("height") === "0px") {
+        //         $('#layer-content').css("height", "auto");
+        //     }
+        //
+        //
+        //     $("#community-level-toggle_button").hide();
+        //
+        //
+        //     if (!isClosing) {
+        //         $("#mobile-menu-toggle").css("display", "none");
+        //         domClass.toggle(menuNodeId, 'open');
+        //         domClass.toggle(menuButton, 'hidden');
+        //
+        //     } else {
+        //         $("#mobile-menu-toggle").css("display", "block");
+        //         domClass.remove(menuButton, 'hidden');
+        //     }
+        //
+        //
+        //     Fx.animateProperty({
+        //         node: mapNode,
+        //         properties: {
+        //             left: left
+        //         },
+        //         duration: DURATION,
+        //         onEnd: function() {
+        //             brApp.map.resize();
+        //             if (isClosing) {
+        //                 domClass.toggle(menuNodeId, 'open');
+        //             }
+        //
+        //             $("#community-level-toggle_button").show();
+        //             // setTimeout(function() {
+        //             //     accordion.resize();
+        //             // }, 0);
+        //
+        //         }
+        //     }).play();
+        //
+        // },
 
         /**
          * notifies of the status of the mobile settings menu
@@ -503,6 +551,20 @@ define([
         showAnalysisDialog: function(customGraphics) {
             brApp.debug('WidgetsController >>> showAnalysisDialog');
 
+            var layerTree = document.querySelector('.tree-widget-container')
+            var searchButton = document.querySelector('.search-button')
+            var reportButton = document.querySelector('.report-button')
+
+            if (!domClass.contains(layerTree, "hidden")) {
+              domClass.toggle(layerTree, 'hidden');
+            }
+            if (!domClass.contains(searchButton, "hidden")) {
+              domClass.toggle(searchButton, 'hidden');
+            }
+            if (!domClass.contains(reportButton, "hidden")) {
+              domClass.toggle(reportButton, 'hidden');
+            }
+
             if (customGraphics.graphics.length > 0) {
                 $('#remove-graphics').removeClass('hidden');
                 $('#draw-shape').addClass('display-three');
@@ -516,7 +578,12 @@ define([
                 $('#draw-shape').removeClass('display-three');
                 $('#upload-shapefile').removeClass('display-three');
             }
-            registry.byId('analysis-dialog').show();
+
+            if (dom.byId('analysis-dialog').style.display != 'none') {
+              registry.byId('analysis-dialog').hide();
+            } else {
+              registry.byId('analysis-dialog').show();
+            }
         },
 
         showHelp: function(click) {
