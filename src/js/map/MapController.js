@@ -10,6 +10,8 @@ define([
     'map/WidgetsController',
     'utils/Helper',
     'dojo/on',
+    'dojo/dom-geometry',
+    'dojo/_base/window',
     'dojo/query',
     'dojo/dom-class',
     'dojo/dom-construct',
@@ -39,7 +41,7 @@ define([
     "esri/layers/LayerDrawingOptions",
     'esri/layers/FeatureLayer'
 
-], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, MobileFooter, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
+], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, MobileFooter, WidgetsController, Helper, on, domGeom, win, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
 
     'use strict';
 
@@ -74,7 +76,16 @@ define([
             on(document.getElementById('share-button'), 'click', WidgetsController.toggleShareContainer.bind(WidgetsController));
             on(document.getElementById('print-button'), 'click', WidgetsController.printMap);
 
-            on(document.getElementById('tree-title-pane'), 'click', WidgetsController.toggleTreeContainer);
+            on(document.getElementById('tree-title-pane'), 'click', function(){
+              var body = win.body()
+              var width = domGeom.position(body).w;
+              if (width > 500) {
+                WidgetsController.toggleTreeContainer();
+              } else {
+                console.log('clicked');
+                WidgetsController.toggleMobileTree();
+              }
+            });
 
             on(document.getElementById('analysis-button'), 'click', function() {
                 if (this.classList.contains("grayOut")) {

@@ -2,36 +2,39 @@
 define([
   'react',
   'dojo/topic',
-  'map/MapConfig'
-], function (React, topic, MapConfig) {
+  'map/MapConfig',
+  'map/WidgetsController'
+], function (React, topic, MapConfig, WidgetsController) {
   'use strict';
 
 
   var MobileFooter = React.createClass({displayName: "MobileFooter",
 
-    getInitialState: function () {
-
-        return {
-
-        };
-      },
-
-    close: function () {
-      // this.setState({visible: false})
+    toggleTree: function() {
+      WidgetsController.toggleMobileTree();
     },
 
-    dataMapper: function(array) {
-      return React.createElement("option", {value: array}, array);
+    toggleSearch: function() {
+      WidgetsController.toggleMobileSearch();
+    },
+
+    toggleAnalysis: function() {
+      var customGraphics = brApp.map.getLayer("CustomFeatures");
+      WidgetsController.showAnalysisDialog(customGraphics);
+    },
+
+    toggleCountry: function() {
+      WidgetsController.toggleMobileCountrySearch();
     },
 
     render: function () {
 
       return (
         React.createElement("div", {className: "mobile-footer-container"}, 
-          React.createElement("div", {className: "mobile-footer-child"}, "Layer"), 
-          React.createElement("div", {className: "mobile-footer-child"}, "Country"), 
-          React.createElement("div", {className: "mobile-footer-child"}, "Search"), 
-          React.createElement("div", {className: "mobile-footer-child"}, "Analyze")
+          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleTree}, "Layer"), 
+          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleCountry}, "Country"), 
+          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleSearch}, "Search"), 
+          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleAnalysis}, "Analyze")
         )
       );
     }

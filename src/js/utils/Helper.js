@@ -23,6 +23,17 @@ define([
         //     domClass.remove(body, "mobile");
         // }
 
+        if (width <= mobileThreshold) {
+          var layerTree = document.querySelector('.tree-widget-container')
+          var searchButton = document.querySelector('.search-button')
+          var analysisButton = document.querySelector('.analysis-button')
+          var reportButton = document.querySelector('.report-button')
+          domClass.add(layerTree, 'hidden');
+          domClass.add(searchButton, 'hidden');
+          domClass.add(analysisButton, 'hidden');
+          domClass.add(reportButton, 'hidden');
+        }
+
         if (prevWidth > mobileThreshold && width < mobileThreshold) {
             if ($("#toolsMenuButton").hasClass('active')) {
                 $('#layersMenuButton').click();
