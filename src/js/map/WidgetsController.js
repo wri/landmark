@@ -578,7 +578,12 @@ define([
                 $('#draw-shape').removeClass('display-three');
                 $('#upload-shapefile').removeClass('display-three');
             }
-            registry.byId('analysis-dialog').show();
+
+            if (dom.byId('analysis-dialog').style.display != 'none') {
+              registry.byId('analysis-dialog').hide();
+            } else {
+              registry.byId('analysis-dialog').show();
+            }
         },
 
         showHelp: function(click) {
