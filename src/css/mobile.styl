@@ -3,6 +3,9 @@
 .mobile-footer
 	display none
 
+.map-selection-close
+	display none
+
 @media (max-width: 500px)
 	.mobile-footer
 		display block
@@ -12,6 +15,11 @@
 		width 100%
 		background white
 		height 3.5em
+
+	.map-selection-close
+		display inline
+		position absolute
+		right 0
 
 	.mobile-footer-container
 		height 100%
@@ -29,19 +37,24 @@
 	.footer-logo-container, .footer-button-text
 		height 50%
 
+	.footer-button-text
+		font-size 0.5em
+		line-height 3em
+
 	.tree-logo-container
-		background-image url('images/layer-icon.svg')
+		background-image url('images/layers-icon.svg')
 
 	.country-logo-container
 		background-image url('images/globe.svg')
 
 	.search-logo-container
-		background-image url('images/layer-icon.svg')
+		background-image url('images/search-ex.svg')
 
 	.analysis-logo-container
-		background-image url('images/icon_analysis.png')
+		background-image url('images/line-chart.svg')
 
 	.tree-logo-container, .country-logo-container, .search-logo-container, .analysis-logo-container
+		border-top 5px solid #2fa3d9
 		background-repeat no-repeat
 		background-size contain
 		background-position center
@@ -85,3 +98,9 @@
 
 	.national-level-layer-lists
 		margin-top 30px
+
+	.print-button
+		display none
+
+	#draw-shape-icon
+		margin-left -15px

@@ -34,13 +34,13 @@ define([
           React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleTree}, 
             React.createElement("div", {className: "footer-logo-container tree-logo-container"}), 
             React.createElement("div", {className: "footer-button-text"}, 
-              "Layer"
+              "Map Selection"
             )
           ), 
           React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleCountry}, 
             React.createElement("div", {className: "footer-logo-container country-logo-container"}), 
             React.createElement("div", {className: "footer-button-text"}, 
-              "Country"
+              "Country Profiles"
             )
           ), 
           React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleSearch}, 

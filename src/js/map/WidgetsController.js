@@ -216,30 +216,50 @@ define([
         },
 
         toggleMobileTree: function() {
-          console.log(document.querySelector('.tree-widget-container'));
-          // document.querySelector('.layer-tab-container')
           var layerTree = document.querySelector('.tree-widget-container')
+          var searchButton = document.querySelector('.search-button')
+          var reportButton = document.querySelector('.report-button')
+
+          registry.byId('analysis-dialog').hide();
+
+          if (!domClass.contains(searchButton, "hidden")) {
+            domClass.toggle(searchButton, 'hidden');
+          }
+          if (!domClass.contains(reportButton, "hidden")) {
+            domClass.toggle(reportButton, 'hidden');
+          }
           domClass.toggle(layerTree, 'hidden');
         },
 
         toggleMobileSearch: function() {
-          console.log(document.querySelector('.search-button'));
-          // document.querySelector('.layer-tab-container')
+          var layerTree = document.querySelector('.tree-widget-container')
           var searchButton = document.querySelector('.search-button')
+          var reportButton = document.querySelector('.report-button')
+
+          registry.byId('analysis-dialog').hide();
+
+          if (!domClass.contains(layerTree, "hidden")) {
+            domClass.toggle(layerTree, 'hidden');
+          }
+          if (!domClass.contains(reportButton, "hidden")) {
+            domClass.toggle(reportButton, 'hidden');
+          }
           domClass.toggle(searchButton, 'hidden');
         },
 
-        toggleMobileAnalysis: function() {
-          console.log(document.querySelector('.analysis-button'));
-          // document.querySelector('.layer-tab-container')
-          var analysisButton = document.querySelector('.analysis-button')
-          domClass.toggle(analysisButton, 'hidden');
-        },
-
         toggleMobileCountrySearch: function() {
-          console.log(document.querySelector('.report-button'));
-          // document.querySelector('.layer-tab-container')
+          var layerTree = document.querySelector('.tree-widget-container')
+          var searchButton = document.querySelector('.search-button')
           var reportButton = document.querySelector('.report-button')
+
+          registry.byId('analysis-dialog').hide();
+
+          if (!domClass.contains(layerTree, "hidden")) {
+            domClass.toggle(layerTree, 'hidden');
+          }
+          if (!domClass.contains(searchButton, "hidden")) {
+            domClass.toggle(searchButton, 'hidden');
+          }
           domClass.toggle(reportButton, 'hidden');
         },
 
@@ -530,6 +550,20 @@ define([
          */
         showAnalysisDialog: function(customGraphics) {
             brApp.debug('WidgetsController >>> showAnalysisDialog');
+
+            var layerTree = document.querySelector('.tree-widget-container')
+            var searchButton = document.querySelector('.search-button')
+            var reportButton = document.querySelector('.report-button')
+
+            if (!domClass.contains(layerTree, "hidden")) {
+              domClass.toggle(layerTree, 'hidden');
+            }
+            if (!domClass.contains(searchButton, "hidden")) {
+              domClass.toggle(searchButton, 'hidden');
+            }
+            if (!domClass.contains(reportButton, "hidden")) {
+              domClass.toggle(reportButton, 'hidden');
+            }
 
             if (customGraphics.graphics.length > 0) {
                 $('#remove-graphics').removeClass('hidden');

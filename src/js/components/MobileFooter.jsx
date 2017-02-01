@@ -34,13 +34,13 @@ define([
           <div className='mobile-footer-child' onClick={this.toggleTree}>
             <div className='footer-logo-container tree-logo-container'></div>
             <div className='footer-button-text'>
-              Layer
+              Map Selection
             </div>
           </div>
           <div className='mobile-footer-child' onClick={this.toggleCountry}>
             <div className='footer-logo-container country-logo-container'></div>
             <div className='footer-button-text'>
-              Country
+              Country Profiles
             </div>
           </div>
           <div className='mobile-footer-child' onClick={this.toggleSearch}>
