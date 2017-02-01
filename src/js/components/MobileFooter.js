@@ -31,10 +31,26 @@ define([
 
       return (
         React.createElement("div", {className: "mobile-footer-container"}, 
-          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleTree}, "Layer"), 
-          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleCountry}, "Country"), 
-          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleSearch}, "Search"), 
-          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleAnalysis}, "Analyze")
+          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleTree}, 
+            React.createElement("div", null, 
+              "Layer"
+            )
+          ), 
+          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleCountry}, 
+            React.createElement("div", null, 
+              "Country"
+            )
+          ), 
+          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleSearch}, 
+            React.createElement("div", null, 
+              "Search"
+            )
+          ), 
+          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleAnalysis}, 
+            React.createElement("div", null, 
+              "Analyze"
+            )
+          )
         )
       );
     }

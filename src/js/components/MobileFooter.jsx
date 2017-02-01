@@ -31,10 +31,26 @@ define([
 
       return (
         <div className='mobile-footer-container'>
-          <div className='mobile-footer-child' onClick={this.toggleTree} >Layer</div>
-          <div className='mobile-footer-child' onClick={this.toggleCountry} >Country</div>
-          <div className='mobile-footer-child' onClick={this.toggleSearch} >Search</div>
-          <div className='mobile-footer-child' onClick={this.toggleAnalysis} >Analyze</div>
+          <div className='mobile-footer-child' onClick={this.toggleTree}>
+            <div>
+              Layer
+            </div>
+          </div>
+          <div className='mobile-footer-child' onClick={this.toggleCountry}>
+            <div>
+              Country
+            </div>
+          </div>
+          <div className='mobile-footer-child' onClick={this.toggleSearch}>
+            <div>
+              Search
+            </div>
+          </div>
+          <div className='mobile-footer-child' onClick={this.toggleAnalysis}>
+            <div>
+              Analyze
+            </div>
+          </div>
         </div>
       );
     }
