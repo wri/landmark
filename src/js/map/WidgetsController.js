@@ -479,7 +479,7 @@ define([
           // }
 
           template.format = format;
-          template.layout = 'landmark_comm';
+          template.layout = 'landmark_nat_portrait';
           // template.layout = layoutType;
           template.preserveScale = false;
           //- Custom Text Elements to be used in the layout,
