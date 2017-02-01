@@ -32,22 +32,26 @@ define([
       return (
         <div className='mobile-footer-container'>
           <div className='mobile-footer-child' onClick={this.toggleTree}>
-            <div>
+            <div className='footer-logo-container tree-logo-container'></div>
+            <div className='footer-button-text'>
               Layer
             </div>
           </div>
           <div className='mobile-footer-child' onClick={this.toggleCountry}>
-            <div>
+            <div className='footer-logo-container country-logo-container'></div>
+            <div className='footer-button-text'>
               Country
             </div>
           </div>
           <div className='mobile-footer-child' onClick={this.toggleSearch}>
-            <div>
+            <div className='footer-logo-container search-logo-container'></div>
+            <div className='footer-button-text'>
               Search
             </div>
           </div>
           <div className='mobile-footer-child' onClick={this.toggleAnalysis}>
-            <div>
+            <div className='footer-logo-container analysis-logo-container'></div>
+            <div className='footer-button-text'>
               Analyze
             </div>
           </div>
