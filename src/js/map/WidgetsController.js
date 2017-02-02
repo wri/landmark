@@ -10,9 +10,8 @@ define([
     'dijit/registry',
     'esri/tasks/PrintTask',
     'esri/tasks/PrintTemplate',
-    'esri/tasks/PrintParameters',
-    'esri/tasks/LegendLayer'
-], function(AppConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters, LegendLayer) {
+    'esri/tasks/PrintParameters'
+], function(AppConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters) {
     'use strict';
 
     var DURATION = 300;
@@ -500,7 +499,6 @@ define([
           var printTask = new PrintTask(AppConfig.printUrl);
           var printParameters = new PrintParameters();
           var template = new PrintTemplate();
-          var legendLayer = new LegendLayer();
           var communityTab = document.getElementById('IndigAndCommLandMaps');
           var percentOfCountryList = document.getElementById('PercentOfCountryList');
           var indicatorsOfLegalSecurityList = document.getElementById('IndicatorsOfLegalSecurityList');
@@ -525,7 +523,6 @@ define([
             layout = 'MAP_ONLY'
           }
 
-          legendLayer.layerId = 'indigenous_NoDocFeature';
           template.format = format;
           template.layout = layout;
           // template.layout = layoutType;
@@ -534,7 +531,6 @@ define([
           //- This is the way to add custom labels to the layout
           template.layoutOptions = {
             titleText: title,
-            legendLayers: [legendLayer],
             customTextElements: [
               {'question': question }
             ]
