@@ -6,7 +6,16 @@
 .map-selection-close
 	display none
 
-@media (max-width: 500px)
+.clickable-div
+	cursor pointer
+
+@media (max-width: 1050px)
+	.report-button
+		right 300px
+		top 70px
+
+
+@media (max-width: 768px)
 	.mobile-footer
 		display block
 		bottom 0
@@ -81,15 +90,15 @@
 	.search-button, .report-button, .analysis-button
 		right 70px
 		z-index 100
-		top auto
-		bottom 15em
+		top 13em
+		// bottom 15em
 
 	.report-button, .search-button, .analysis-button
-		left 20px
+		left 40px
 		right 0
 		margin-left auto
 		margin-right auto
-		width 50%
+		width 200px
 
 	.search-button
 		left 0
@@ -106,3 +115,6 @@
 
 	#draw-shape-icon
 		margin-left -15px
+
+	#upload-shapefile
+		display none

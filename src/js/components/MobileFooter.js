@@ -31,25 +31,25 @@ define([
 
       return (
         React.createElement("div", {className: "mobile-footer-container"}, 
-          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleTree}, 
+          React.createElement("div", {className: "mobile-footer-child clickable-div", onClick: this.toggleTree}, 
             React.createElement("div", {className: "footer-logo-container tree-logo-container"}), 
             React.createElement("div", {className: "footer-button-text"}, 
               "Map Selection"
             )
           ), 
-          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleCountry}, 
+          React.createElement("div", {className: "mobile-footer-child clickable-div", onClick: this.toggleCountry}, 
             React.createElement("div", {className: "footer-logo-container country-logo-container"}), 
             React.createElement("div", {className: "footer-button-text"}, 
               "Country Profiles"
             )
           ), 
-          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleSearch}, 
+          React.createElement("div", {className: "mobile-footer-child clickable-div", onClick: this.toggleSearch}, 
             React.createElement("div", {className: "footer-logo-container search-logo-container"}), 
             React.createElement("div", {className: "footer-button-text"}, 
               "Search"
             )
           ), 
-          React.createElement("div", {className: "mobile-footer-child", onClick: this.toggleAnalysis}, 
+          React.createElement("div", {className: "mobile-footer-child clickable-div", onClick: this.toggleAnalysis}, 
             React.createElement("div", {className: "footer-logo-container analysis-logo-container"}), 
             React.createElement("div", {className: "footer-button-text"}, 
               "Analyze"

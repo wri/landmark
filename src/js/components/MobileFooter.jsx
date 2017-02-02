@@ -31,25 +31,25 @@ define([
 
       return (
         <div className='mobile-footer-container'>
-          <div className='mobile-footer-child' onClick={this.toggleTree}>
+          <div className='mobile-footer-child clickable-div' onClick={this.toggleTree}>
             <div className='footer-logo-container tree-logo-container'></div>
             <div className='footer-button-text'>
               Map Selection
             </div>
           </div>
-          <div className='mobile-footer-child' onClick={this.toggleCountry}>
+          <div className='mobile-footer-child clickable-div' onClick={this.toggleCountry}>
             <div className='footer-logo-container country-logo-container'></div>
             <div className='footer-button-text'>
               Country Profiles
             </div>
           </div>
-          <div className='mobile-footer-child' onClick={this.toggleSearch}>
+          <div className='mobile-footer-child clickable-div' onClick={this.toggleSearch}>
             <div className='footer-logo-container search-logo-container'></div>
             <div className='footer-button-text'>
               Search
             </div>
           </div>
-          <div className='mobile-footer-child' onClick={this.toggleAnalysis}>
+          <div className='mobile-footer-child clickable-div' onClick={this.toggleAnalysis}>
             <div className='footer-logo-container analysis-logo-container'></div>
             <div className='footer-button-text'>
               Analyze

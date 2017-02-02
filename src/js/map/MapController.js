@@ -82,7 +82,7 @@ define([
             on(document.getElementById('tree-title-pane'), 'click', function(){
               var body = win.body()
               var width = domGeom.position(body).w;
-              if (width > 500) {
+              if (width > 768) {
                 WidgetsController.toggleTreeContainer();
               } else {
                 console.log('clicked');

@@ -10,8 +10,10 @@ define([
     'dijit/registry',
     'esri/tasks/PrintTask',
     'esri/tasks/PrintTemplate',
-    'esri/tasks/PrintParameters'
-], function(AppConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters) {
+    'esri/tasks/PrintParameters',
+    'dojo/dom-geometry',
+    'dojo/_base/window'
+], function(AppConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters, domGeom, win) {
     'use strict';
 
     var DURATION = 300;
@@ -567,15 +569,21 @@ define([
             var searchButton = document.querySelector('.search-button')
             var reportButton = document.querySelector('.report-button')
 
-            if (!domClass.contains(layerTree, "hidden")) {
-              domClass.toggle(layerTree, 'hidden');
+            var body = win.body()
+            var width = domGeom.position(body).w;
+
+            if (width <= 768) {
+              if (!domClass.contains(layerTree, "hidden")) {
+                domClass.toggle(layerTree, 'hidden');
+              }
+              if (!domClass.contains(searchButton, "hidden")) {
+                domClass.toggle(searchButton, 'hidden');
+              }
+              if (!domClass.contains(reportButton, "hidden")) {
+                domClass.toggle(reportButton, 'hidden');
+              }
             }
-            if (!domClass.contains(searchButton, "hidden")) {
-              domClass.toggle(searchButton, 'hidden');
-            }
-            if (!domClass.contains(reportButton, "hidden")) {
-              domClass.toggle(reportButton, 'hidden');
-            }
+
 
             if (customGraphics.graphics.length > 0) {
                 $('#remove-graphics').removeClass('hidden');
