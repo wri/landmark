@@ -215,6 +215,13 @@ define([
 
         },
 
+        togglePrintModal: function() {
+          console.log(document.querySelector('.print-modal-wrapper'));
+          // document.querySelector('.layer-tab-container')
+          var printModal = document.querySelector('.print-modal-wrapper')
+          domClass.toggle(printModal, 'hidden');
+        },
+
         toggleMobileTree: function() {
           var layerTree = document.querySelector('.tree-widget-container')
           var searchButton = document.querySelector('.search-button')
@@ -487,48 +494,55 @@ define([
             domClass.toggle('upload-form-content', 'hidden');
         },
 
-        printMap: function() {
+        printMap: function(title, dpi, format, layoutType) {
           brApp.debug('WidgetsController >>> printMap');
           var printTask = new PrintTask(AppConfig.printUrl);
           var printParameters = new PrintParameters();
           var template = new PrintTemplate();
-          var communityTab = document.getElementById('community-level-tab');
+          var communityTab = document.getElementById('IndigAndCommLandMaps');
           var nationalIndicators = document.getElementById('nationalLevelIndicators');
           var question = '';
-          var layout = '';
-          // If the community tab is active, use its template, else, use the
-          // national template and add a question if applicable
-          if (communityTab.className.search('active') > -1) {
-            layout = 'landmark_comm';
-          } else {
-            layout = 'landmark_nat';
-            // Get the current question if the right layer is active (indigenous/community)
-            // Need to find a better way to do this, we need a data model or flux implemented
-            // as querying the dom is not the way to go
-            if (nationalIndicators.className === 'checked') {
-              var indigenousTab = document.getElementById('land-tenure-indigenous');
-              var querySelector = '.national-layer-list-item.active .national-layer-list-item-question';
-              var questionNode;
-              if (indigenousTab.className.search('active') > -1) {
-                questionNode = document.querySelector('.indigenous-national-list ' + querySelector);
-                question = questionNode && questionNode.innerHTML;
-              } else {
-                questionNode = document.querySelector('.community-national-list ' + querySelector);
-                question = questionNode && questionNode.innerHTML;
-              }
-            }
-          }
+          // var layout = '';
+          // // If the community tab is active, use its template, else, use the
+          // // national template and add a question if applicable
+          // if (communityTab) {
+          //   layout = 'landmark_comm';
+          // } else {
+          //   layout = 'landmark_nat';
+          //   // Get the current question if the right layer is active (indigenous/community)
+          //   // Need to find a better way to do this, we need a data model or flux implemented
+          //   // as querying the dom is not the way to go
+          //   // if (nationalIndicators.className === 'checked') {
+          //   //   var indigenousTab = document.getElementById('land-tenure-indigenous');
+          //   //   var querySelector = '.national-layer-list-item.active .national-layer-list-item-question';
+          //   //   var questionNode;
+          //   //   if (indigenousTab.className.search('active') > -1) {
+          //   //     questionNode = document.querySelector('.indigenous-national-list ' + querySelector);
+          //   //     question = questionNode && questionNode.innerHTML;
+          //   //   } else {
+          //   //     questionNode = document.querySelector('.community-national-list ' + querySelector);
+          //   //     question = questionNode && questionNode.innerHTML;
+          //   //   }
+          //   // }
+          // }
 
-          template.format = "pdf";
-          template.layout = layout;
+          template.format = format;
+          template.layout = 'landmark_nat_portrait';
+          // template.layout = layoutType;
           template.preserveScale = false;
           //- Custom Text Elements to be used in the layout,
           //- This is the way to add custom labels to the layout
           template.layoutOptions = {
+            titleText: title,
             customTextElements: [
               {'question': question }
             ]
           };
+
+          template.exportOptions = {
+            dpi: dpi
+          };
+          console.log(template);
 
           printParameters.map = brApp.map;
           printParameters.template = template;
@@ -536,6 +550,7 @@ define([
           domClass.add('print-widget', 'loading');
 
           printTask.execute(printParameters, function (response) {
+            console.log('executed');
             domClass.remove('print-widget', 'loading');
             window.open(response.url);
           }, function (failure) {
