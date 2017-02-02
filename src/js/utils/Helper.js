@@ -17,10 +17,21 @@ define([
      */
     function applyLayout() {
         width = domGeom.position(body).w;
-        if (width < threshold) {
-            domClass.add(body, "mobile");
-        } else {
-            domClass.remove(body, "mobile");
+        // if (width < threshold) {
+        //     domClass.add(body, "mobile");
+        // } else {
+        //     domClass.remove(body, "mobile");
+        // }
+
+        if (width <= mobileThreshold) {
+          var layerTree = document.querySelector('.tree-widget-container')
+          var searchButton = document.querySelector('.search-button')
+          var analysisButton = document.querySelector('.analysis-button')
+          var reportButton = document.querySelector('.report-button')
+          domClass.add(layerTree, 'hidden');
+          domClass.add(searchButton, 'hidden');
+          domClass.add(analysisButton, 'hidden');
+          domClass.add(reportButton, 'hidden');
         }
 
         if (prevWidth > mobileThreshold && width < mobileThreshold) {
@@ -55,7 +66,8 @@ define([
          * @return {boolean} whether or not the width of the screen is above or below the threshold
          */
         isMobile: function() {
-            return width ? width < threshold : domGeom.position(body).w < threshold;
+            // return width ? width < threshold : domGeom.position(body).w < threshold;
+            return false
         }
 
     };

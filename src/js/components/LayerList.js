@@ -38,7 +38,6 @@ define([
 
   		/* jshint ignore:start */
   		render: function () {
-				// console.log(this.props.layerActive);
   			return (
   				React.createElement("div", {className: this.props.class || 'national-level-layer-list'}, 
   					this.props.data.map(this.dataMapper, this)

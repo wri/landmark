@@ -1,230 +1,108 @@
 @import "config"
 
-.mobile-menu
-	background-color white
-	position absolute
-	width 295px
-	bottom 0
-	left 0
-	top 0
-
-.mobile-menu-toggle-button
-	background url('images/ico-gear.png') no-repeat center #FFF
-	background-size 19px
-	text-align center
-	// line-height 28px
-	// font-size 32px
-	height 30px
-	width 30px
-	// color #777
-	left 20px
-	top 20px
-
-.mobile-menu-close-button
-	background url('images/close_x_symbol.png') no-repeat center
-	background-size 18px
-	position absolute
-	height 16px
-	width 16px
-	right 16px
-	top 20px
-
-.mobile-menu-content
-	position absolute
-	overflow-y auto
-	padding 0 10px
-	bottom 5px
-	top 50px
-	right 0
-	left 0
-
-.mobile-menu:not(.open)
+.mobile-footer
 	display none
 
-.mobile-menu .segmented-menu-button
-	text-align center
-	padding 5px 15px
-	padding-left 20px
-	color #808080
-	background-color #e4e4e4
-	font-size 13px
-	font-weight bold
-
-.mobile-menu .segmented-menu-button.active
-	background-color #2FA3D9
-	color white
-	background url("images/icon_toggle_checkmark.svg") no-repeat #2fa3d9 10% 50%
-
-
-.mobile-menu-content:not(.active)
+.map-selection-close
 	display none
-
-.mobile-menu .menu-controls
-	text-align center
-	padding-top 17px
-	background-color #055d7d
-	height 50px
-	margin-left -12px
-
-.mobile-menu .segmented-menu-button:first-of-type
-	border-radius-left(5px)
-	border-right 1px solid #b8b9b9
-
-.mobile-menu .segmented-menu-button:last-of-type
-	border-radius-right(5px)
-	border-left 1px solid #b8b9b9
-
-body:not(.mobile) .mobile-menu
-body:not(.mobile) .mobile-menu-toggle-button
-	display none
-
-/** These Styles are Activated when the Helper class adds a mobile class to the body tag **/
-.mobile .launch-map-button
-	display block
-	margin 0 auto
-
-.mobile .basemap-container
-	height 250px
-	width 150px
-
-.mobile .esriBasemapGallery
-	margin 10px
-
-.mobile .basemap-container
-	top 20px
-
-.mobile .esriControlsBR
-	right 5px
-
-.mobile #legend
-	max-height inherit
-
-.mobile .data-completeness-container
-.mobile .tree-widget-container
-.mobile .geocoder-container
-.mobile .analysis-button
-.mobile #legend-component
-.mobile .title-area .name h1
-.mobile .esriAttribution
-.mobile #upload-shapefile
-	display none
-
-
-.minimizedAdjust
-	border-top-right-radius 5px
-	border-bottom-right-radius 5px
-	-moz-border-radius-topright 5px
-	-moz-border-radius-bottomright 5px
-	-webkit-border-top-right-radius 5px
-	-webkit-border-bottom-right-radius 5px
-
-.minimizedHide
-	display none !important
-
-
-/** These Are Styles we need to override with Media Queries as they may need to be
-		applied before the JavaScript can detect were on mobile and add the mobile class **/
-
-// @media (max-width: 1130px)
-// 	.geocoder-container, .analysis-button, .data-completeness-container
-// 		right 70px !important
-// 	.geocoder-container
-// 		top 159px !important
-// 	.analysis-button
-// 		top 97px !important
-
-
-@media (max-width: 800px)
-	// .title-area .name h1
-	// 	display none
-	#mobile-menu-toggle
-		display block !important
-		visibility visible !important
-	#data-completeness-container, #analysis-button
-		display none !important
-
-	.legend-component-container
-		max-height none
-		width 270px
-		right inherit
-		top 0
-		left 5px
-
-	.legend-component-controls
-		display none
-
-	.legend-component-content
-		max-height none
-		padding 5px
-		width 100%
-		overflow-x hidden
-
-	.legend-item-name
-		margin-left 5px
-
-	.legend-item-group
-		margin-left 0px
-
-	.legend-item-name
-		font-size 10px
-		width 85%
-
-	.layer-tab-container
-		width 100%
-
-	.community-tab
-		text-align center
-		padding 5px 10px
-		padding-left 15px
-		color #808080
-		font-size 13px
-		font-weight bold
-		background-color #e4e4e4
-
-	.layer-tab-controls
-		background-color white
-
-	.community-tab.active
-		background-color #2fa3d9
-		color #fff
-		background url("images/icon_toggle_checkmark.svg") no-repeat #2fa3d9 2% 50%
-
-	.community-tab:first-of-type
-		border-radius-left(5px)
-		border-right 0
-
-	.community-tab:last-of-type
-		border-radius-right(5px)
-		border-left 0
-
-	#draw-shape-icon
-		display none
-
-	#removeGraphic:before, #remove-graphics:before
-		background none
-
-	#remove-graphics, #draw-shape-words
-		font-size 13px
-
-	#remove-graphics, #draw-shape
-		width 200px
-		margin 10px !important
-		margin-left 0px !important
-		padding 10px !important
-		text-indent inherit
-		left 0
-
-	#removeGraphic
-		margin 0px !important
-
 
 @media (max-width: 500px)
-	#legendMenuButton
-		border-top-right-radius 5px
-		border-bottom-right-radius 5px
-		-moz-border-radius-topright 5px
-		-moz-border-radius-bottomright 5px
-		-webkit-border-top-right-radius 5px
-		-webkit-border-bottom-right-radius 5px
-	#toolsMenuButton
-		display none !important
+	.mobile-footer
+		display block
+		bottom 0
+		position absolute
+		z-index 1000
+		width 100%
+		background white
+		height 3.5em
+
+	.map-selection-close
+		display inline
+		position absolute
+		right 0
+
+	.mobile-footer-container
+		height 100%
+		width 100%
+
+	.mobile-footer-child
+		height 100%
+		width calc(25% - 2px)
+		display inline-block
+		text-align center
+		border 1px solid white
+		background #2fa3d9
+		color white
+
+	.footer-logo-container, .footer-button-text
+		height 50%
+
+	.footer-button-text
+		font-size 0.5em
+		line-height 3em
+
+	.tree-logo-container
+		background-image url('images/layers-icon.svg')
+
+	.country-logo-container
+		background-image url('images/globe.svg')
+
+	.search-logo-container
+		background-image url('images/search-ex.svg')
+
+	.analysis-logo-container
+		background-image url('images/line-chart.svg')
+
+	.tree-logo-container, .country-logo-container, .search-logo-container, .analysis-logo-container
+		border-top 5px solid #2fa3d9
+		background-repeat no-repeat
+		background-size contain
+		background-position center
+
+
+	.tree-widget-container
+		height auto
+		max-height 75%
+		z-index 100
+		left 5%
+		width 90%
+		top 4em
+		overflow scroll
+
+	.tree-container-toggle
+		display none
+
+	.layer-tab-container, .tree-width
+		width 100%
+
+	.arcgisSearch .searchGroup .searchInput
+		width 150px !important
+
+	.search-button, .report-button, .analysis-button
+		right 70px
+		z-index 100
+		top auto
+		bottom 15em
+
+	.report-button, .search-button, .analysis-button
+		left 20px
+		right 0
+		margin-left auto
+		margin-right auto
+		width 50%
+
+	.search-button
+		left 0
+		width calc(50% + 25px)
+
+	.disclaimer
+		margin-top auto
+
+	.national-level-layer-lists
+		margin-top 30px
+
+	.print-button
+		display none
+
+	#draw-shape-icon
+		margin-left -15px

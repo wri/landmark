@@ -27,6 +27,16 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
 
         layers: {
 
+          'percentLandsFeature': {
+              url: 'http://gis.wri.org/arcgis/rest/services/LandMark/pct_comm_lands/MapServer/1',
+              type: 'feature',
+              visible: false
+          }, //How should these work? No styles, then highlight onHover? YES!
+          //only visible when their parent layer is visible? YES!
+          //Should only polygon layers get the hover (what about dots?) BOTH!
+          //USE ONE NATIONAL LEVEL LAYER TO HIGHLIGHT ALLLL OF THE NAT LEVEL LAYERS!
+          //GIVE ALL FEATURELAYERS A NULL SYMBOL ON CREATION!
+
           //Percent of Indigenous and Community Lands layer
           'percentLands': {
               url: percentLandsUrl,
@@ -58,11 +68,31 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
+            'indigenous_FormalClaimFeature': {
+                url: community_indigenous_FormalClaim + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'indigenous_FormalClaimFeaturePoint': {
+                url: community_indigenous_FormalClaim + '/0',
+                type: 'feature',
+                visible: true
+            },
             'indigenous_FormalDoc': {
                 url: community_indigenous_FormalDoc,
                 type: 'dynamic',
                 minZoom: 2315000,
                 defaultLayers: [0,1],
+                visible: true
+            },
+            'indigenous_FormalDocFeature': {
+                url: community_indigenous_FormalDoc + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'indigenous_FormalDocFeaturePoint': {
+                url: community_indigenous_FormalDoc + '/0',
+                type: 'feature',
                 visible: true
             },
             'indigenous_InProcess': {
@@ -72,11 +102,31 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
+            'indigenous_InProcessFeature': {
+                url: community_indigenous_InProcess + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'indigenous_InProcessFeaturePoint': {
+                url: community_indigenous_InProcess + '/0',
+                type: 'feature',
+                visible: true
+            },
             'indigenous_NoDoc': {
                 url: community_indigenous_NoDoc,
                 type: 'dynamic',
                 minZoom: 2315000,
                 defaultLayers: [0,1],
+                visible: true
+            },
+            'indigenous_NoDocFeature': {
+                url: community_indigenous_NoDoc + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'indigenous_NoDocFeaturePoint': {
+                url: community_indigenous_NoDoc + '/0',
+                type: 'feature',
                 visible: true
             },
             'indigenous_Occupied': {
@@ -86,11 +136,31 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
+            'indigenous_OccupiedFeature': {
+                url: community_indigenous_Occupied + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'indigenous_OccupiedFeaturePoint': {
+                url: community_indigenous_Occupied + '/0',
+                type: 'feature',
+                visible: true
+            },
             'community_FormalClaim': {
                 url: community_community_FormalClaim,
                 type: 'dynamic',
                 minZoom: 2315000,
                 defaultLayers: [0,1],
+                visible: true
+            },
+            'community_FormalClaimFeature': {
+                url: community_community_FormalClaim + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'community_FormalClaimFeaturePoint': {
+                url: community_community_FormalClaim + '/0',
+                type: 'feature',
                 visible: true
             },
             'community_FormalDoc': {
@@ -100,11 +170,31 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
+            'community_FormalDocFeature': {
+                url: community_community_FormalDoc + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'community_FormalDocFeaturePoint': {
+                url: community_community_FormalDoc + '/0',
+                type: 'feature',
+                visible: true
+            },
             'community_InProcess': {
                 url: community_community_InProcess,
                 type: 'dynamic',
                 minZoom: 2315000,
                 defaultLayers: [0,1],
+                visible: true
+            },
+            'community_InProcessFeature': {
+                url: community_community_InProcess + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'community_InProcessFeaturePoint': {
+                url: community_community_InProcess + '/0',
+                type: 'feature',
                 visible: true
             },
             'community_NoDoc': {
@@ -114,11 +204,31 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
+            'community_NoDocFeature': {
+                url: community_community_NoDoc + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'community_NoDocFeaturePoint': {
+                url: community_community_NoDoc + '/0',
+                type: 'feature',
+                visible: true
+            },
             'community_Occupied': {
                 url: community_community_Occupied,
                 type: 'dynamic',
                 minZoom: 2315000,
                 defaultLayers: [0,1],
+                visible: true
+            },
+            'community_OccupiedFeature': {
+                url: community_community_Occupied + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'community_OccupiedFeaturePoint': {
+                url: community_community_Occupied + '/0',
+                type: 'feature',
                 visible: true
             },
             'indigenous_FormalClaim_Tiled': {

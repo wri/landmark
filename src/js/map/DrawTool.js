@@ -48,7 +48,6 @@ define([
             polygon = new Polygon(evt.geometry);
             graphic = new Graphic(polygon, symbol, attributes);
             graphicsLayer.add(graphic);
-            console.log(graphic);
 
             $('#remove-graphics').removeClass('hidden');
 

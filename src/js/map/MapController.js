@@ -7,9 +7,12 @@ define([
     'map/MapAssets',
     'components/LayerTabContainer',
     'components/PrintModal',
+    'components/MobileFooter',
     'map/WidgetsController',
     'utils/Helper',
     'dojo/on',
+    'dojo/dom-geometry',
+    'dojo/_base/window',
     'dojo/query',
     'dojo/dom-class',
     'dojo/dom-construct',
@@ -39,7 +42,7 @@ define([
     "esri/layers/LayerDrawingOptions",
     'esri/layers/FeatureLayer'
 
-], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, PrintModal, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
+], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, PrintModal, MobileFooter, WidgetsController, Helper, on, domGeom, win, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
 
     'use strict';
 
@@ -76,7 +79,16 @@ define([
             on(document.getElementById('print-button'), 'click', WidgetsController.togglePrintModal);
             // on(document.getElementById('close-print-modal'), 'click', WidgetsController.togglePrintModal);
 
-            on(document.getElementById('tree-title-pane'), 'click', WidgetsController.toggleTreeContainer);
+            on(document.getElementById('tree-title-pane'), 'click', function(){
+              var body = win.body()
+              var width = domGeom.position(body).w;
+              if (width > 500) {
+                WidgetsController.toggleTreeContainer();
+              } else {
+                console.log('clicked');
+                WidgetsController.toggleMobileTree();
+              }
+            });
 
             on(document.getElementById('analysis-button'), 'click', function() {
                 if (this.classList.contains("grayOut")) {
@@ -245,6 +257,7 @@ define([
                 self = this,
                 tabContainer,
                 printModal,
+                mobileFooter,
                 legendComponent,
                 homeWidget,
                 searchWidget,
@@ -276,6 +289,7 @@ define([
 
             tabContainer = new LayerTabContainer('layer-content');
             printModal = new PrintModal('print-modal');
+            mobileFooter = new MobileFooter('mobile-footer')
 
             // Start all widgets that still need to be started
             basemapGallery.startup();
@@ -1578,7 +1592,6 @@ define([
 
                 for (var attr in item.feature.attributes) {
                     if (item.feature.attributes[attr] == "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
-                      console.log(item.feature.attributes[attr]);
                       item.feature.attributes[attr] = "Unknown";
                     }
                 }
@@ -1654,7 +1667,6 @@ define([
             }
 
             var indicator = feature.attributes[stringified];
-            console.log(indicator)
             switch (indicator) {
                 case "0":
                     indScore = 'No review yet done';
@@ -1762,10 +1774,10 @@ define([
                     brApp.map.infoWindow.setTitle(theTitle);
                     brApp.map.infoWindow.resize(375, 600);
                     $("#identifyNote").remove();
-                    brApp.map.infoWindow.show(mapPoint);
+                    brApp.map.infoWindow.show(mapPoint.mapPoint);
 
                     var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
-                        self.removeCustomGraphic(graphic.attributes.OBJECTID);
+                        self.removeCustomGraphic(graphic.attributes.attributeID);
                         brApp.map.infoWindow.hide();
                     });
 
@@ -1852,7 +1864,7 @@ define([
                 }
 
                 var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
-                    self.removeCustomGraphic(graphic.attributes.OBJECTID);
+                    self.removeCustomGraphic(graphic.attributes.attributeID);
                     $("#infowindowContainer").html('');
                     $("#infowindowContainer").hide();
                     $('.esriPopupWrapper').removeClass("noPositioning");
@@ -1882,7 +1894,7 @@ define([
                 graphicToRemove;
 
             arrayUtils.some(graphics.graphics, function(graphic) {
-                if (graphic.attributes["OBJECTID"] === uniqueId) {
+                if (graphic.attributes["attributeID"] === uniqueId) {
                     graphicToRemove = graphic;
                     return true;
                 }
