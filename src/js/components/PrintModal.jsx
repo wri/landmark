@@ -70,15 +70,9 @@ define([
       ];
 
       var layoutOptions = [
-        'A3 Landscape',
-        'A3 Portrait',
-        'A4 Landscape',
-        'A4 Portrait',
-        'Letter ANSI A Landscape',
-        'Letter ANSI A Portrait',
-        'MAP_ONLY',
-        'Tabloid ANSI B Landscape',
-        'Tabloid ANSI B Portrait'
+        'Landscape',
+        'Portrait',
+        'MAP_ONLY'
       ];
 
       return (

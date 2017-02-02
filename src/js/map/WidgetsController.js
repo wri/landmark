@@ -10,8 +10,9 @@ define([
     'dijit/registry',
     'esri/tasks/PrintTask',
     'esri/tasks/PrintTemplate',
-    'esri/tasks/PrintParameters'
-], function(AppConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters) {
+    'esri/tasks/PrintParameters',
+    'esri/tasks/LegendLayer'
+], function(AppConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters, LegendLayer) {
     'use strict';
 
     var DURATION = 300;
@@ -499,41 +500,41 @@ define([
           var printTask = new PrintTask(AppConfig.printUrl);
           var printParameters = new PrintParameters();
           var template = new PrintTemplate();
+          var legendLayer = new LegendLayer();
           var communityTab = document.getElementById('IndigAndCommLandMaps');
-          var nationalIndicators = document.getElementById('nationalLevelIndicators');
+          var percentOfCountryList = document.getElementById('PercentOfCountryList');
+          var indicatorsOfLegalSecurityList = document.getElementById('IndicatorsOfLegalSecurityList');
           var question = '';
-          // var layout = '';
-          // // If the community tab is active, use its template, else, use the
-          // // national template and add a question if applicable
-          // if (communityTab) {
-          //   layout = 'landmark_comm';
-          // } else {
-          //   layout = 'landmark_nat';
-          //   // Get the current question if the right layer is active (indigenous/community)
-          //   // Need to find a better way to do this, we need a data model or flux implemented
-          //   // as querying the dom is not the way to go
-          //   // if (nationalIndicators.className === 'checked') {
-          //   //   var indigenousTab = document.getElementById('land-tenure-indigenous');
-          //   //   var querySelector = '.national-layer-list-item.active .national-layer-list-item-question';
-          //   //   var questionNode;
-          //   //   if (indigenousTab.className.search('active') > -1) {
-          //   //     questionNode = document.querySelector('.indigenous-national-list ' + querySelector);
-          //   //     question = questionNode && questionNode.innerHTML;
-          //   //   } else {
-          //   //     questionNode = document.querySelector('.community-national-list ' + querySelector);
-          //   //     question = questionNode && questionNode.innerHTML;
-          //   //   }
-          //   // }
-          // }
+          var layout = '';
 
+          console.log(brApp);
+
+          if (layoutType === 'Portrait') {
+            if (communityTab) {
+              layout = 'landmark_comm_portrait';
+            } else if (percentOfCountryList || indicatorsOfLegalSecurityList) {
+              layout = 'landmark_nat_portrait';
+            }
+          } else if (layoutType === 'Landscape') {
+            if (communityTab) {
+              layout = 'landmark_comm_landscape';
+            } else if (percentOfCountryList || indicatorsOfLegalSecurityList) {
+              layout = 'landmark_nat_landscape';
+            }
+          } else {
+            layout = 'MAP_ONLY'
+          }
+
+          legendLayer.layerId = 'indigenous_NoDocFeature';
           template.format = format;
-          template.layout = 'landmark_nat_portrait';
+          template.layout = layout;
           // template.layout = layoutType;
           template.preserveScale = false;
           //- Custom Text Elements to be used in the layout,
           //- This is the way to add custom labels to the layout
           template.layoutOptions = {
             titleText: title,
+            legendLayers: [legendLayer],
             customTextElements: [
               {'question': question }
             ]
