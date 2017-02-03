@@ -78,6 +78,7 @@ define([
       return (
         React.createElement(Wrapper, {theme: 'basemap-modal', visible: this.state.visible, close: this.close}, 
           React.createElement("h3", {className: "print-modal-header"}, "Print Map"), 
+          React.createElement("div", {id: "print-preview--map_container"}), 
           React.createElement("div", {className: "print-input-container"}, 
             React.createElement("label", {className: "print-modal-label"}, "Map Title: "), 
             React.createElement("input", {
@@ -110,6 +111,7 @@ define([
             )
           ), 
 
+          React.createElement("canvas", {id: "mapCanvas", className: "mapCanvas hidden"}), 
           React.createElement("button", {className: "modal-print-button", onClick: this.print}, "Print")
         )
       );

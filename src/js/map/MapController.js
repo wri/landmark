@@ -203,10 +203,11 @@ define([
             // when the zoom level is less then 9 to force legends to show in the printout, due to the way we are
             // showing tiled layers up to 9 and then dynamic from there on out
             esriRequest.setRequestPreCallback(function (ioArgs) {
-              if (ioArgs.url !== AppConfig.printUrl + '/execute') {
+
+              if (ioArgs.url !== AppConfig.printUrl) {
                 return ioArgs;
               }
-
+              
               // Print Request
               // If zoom level is greater then 8, remove layer 0, after this is only necessary for zoom levels 0 - 8
               if (brApp.map.getZoom() > 8) {

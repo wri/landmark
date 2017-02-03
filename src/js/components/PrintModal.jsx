@@ -78,6 +78,7 @@ define([
       return (
         <Wrapper theme={'basemap-modal'} visible={this.state.visible} close={this.close}>
           <h3 className='print-modal-header'>Print Map</h3>
+          <div id='print-preview--map_container'></div>
           <div className='print-input-container'>
             <label className='print-modal-label'>Map Title: </label>
             <input
@@ -110,6 +111,7 @@ define([
             </select>
           </div>
 
+          <canvas id="mapCanvas" className="mapCanvas hidden"></canvas>
           <button className='modal-print-button' onClick={this.print}>Print</button>
         </Wrapper>
       );

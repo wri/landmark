@@ -11,7 +11,7 @@ define([
     position: 'fixed',
     height: '100%',
     width: '100%',
-    zIndex: 10,
+    zIndex: 1000,
     left: 0,
     top: 0
   },
