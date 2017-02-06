@@ -30,6 +30,7 @@ define([
       if (!brApp.layerInfos) {
         return;
       }
+      brApp.activeLayer = this.state.selection;
       this.setState({
         activeSelection: this.state.selection
       });

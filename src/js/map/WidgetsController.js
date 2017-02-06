@@ -486,58 +486,84 @@ define([
         },
 
         printMap: function(title, dpi, format, layoutType) {
-          var self = this;
-          // set print dimensions;
-          var map = brApp.map;
-          var printTitle = title;
-      		var printDimensions = {height: map.height, width: map.width},
-      			printTask = new PrintTask(AppConfig.printUrl),
-      			params = new PrintParameters(),
-      			mapScale = map.getScale(),
-      			mapHeight = printDimensions.height,
-      			mapWidth = printDimensions.width,
-      			printTemplate = new PrintTemplate(),
-      			// mapMultiplyer = (map.getZoom() > 5) ? 1 : 3;
-            mapMultiplyer = 1;
+          if (brApp.activeLayer === 'community-lands' || brApp.activeLayer === undefined){
+            this.printCommunityMap(title, dpi, format, layoutType);
+          } else {
+            var self = this;
+            // set print dimensions;
+            var map = brApp.map;
+            var printTitle = title;
+        		var printDimensions = {height: map.height, width: map.width},
+        			printTask = new PrintTask(AppConfig.printUrl),
+        			params = new PrintParameters(),
+        			mapScale = map.getScale(),
+        			mapHeight = printDimensions.height,
+        			mapWidth = printDimensions.width,
+        			printTemplate = new PrintTemplate(),
+        			// mapMultiplyer = (map.getZoom() > 5) ? 1 : 3;
+              mapMultiplyer = 1;
 
-      		params.map = map;
-
-
-      		printTemplate.exportOptions = {
-      		    width: mapWidth * mapMultiplyer, //multiply width
-      		    height: mapHeight * mapMultiplyer, //multiply height
-      		    dpi: mapMultiplyer * 96 //multiply dpi
-      		};
-      		printTemplate.format = 'PNG32';
-      		printTemplate.layout = 'MAP_ONLY';
-      		printTemplate.preserveScale = true;
-
-      		//set scale with multiplyer
-      		printTemplate.outScale = mapScale / mapMultiplyer;
-
-      		params.template = printTemplate;
+        		params.map = map;
 
 
-      		printTask.execute(params, function(response){
-      			var printedMapImage = new Image(mapWidth * mapMultiplyer, mapHeight * mapMultiplyer);
-            var logoImage = new Image(200, 100);
-            logoImage.src = './css/images/bienLogo.png';
-      			//onload needs to go before cors and src
-      			printedMapImage.onload = function(){
+        		printTemplate.exportOptions = {
+        		    width: mapWidth * mapMultiplyer, //multiply width
+        		    height: mapHeight * mapMultiplyer, //multiply height
+        		    dpi: mapMultiplyer * 96 //multiply dpi
+        		};
+        		printTemplate.format = 'PNG32';
+        		printTemplate.layout = 'MAP_ONLY';
+        		printTemplate.preserveScale = true;
 
-      				self._addCanvasElements(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage);
+        		//set scale with multiplyer
+        		printTemplate.outScale = mapScale / mapMultiplyer;
 
-      			};
-      			//set crossOrigin to anonymous for cors
-      			printedMapImage.setAttribute('crossOrigin', 'anonymous');
-      			printedMapImage.src = response.url;
+        		params.template = printTemplate;
 
-      		}, function(error){
-            console.log(error)
-          });
+
+        		printTask.execute(params, function(response){
+        			var printedMapImage = new Image(mapWidth * mapMultiplyer, mapHeight * mapMultiplyer);
+              var logoImage = new Image(200, 100);
+              var legendImage = new Image(400, 200);
+              legendImage.src = './css/images/LMacknowledged.png';
+              logoImage.src = './css/images/bienLogo.png';
+        			//onload needs to go before cors and src
+        			printedMapImage.onload = function(){
+                //Check for active layer to determine what legend to use
+
+                // if (brApp.activeLayer === 'land-tenure') {
+                //   legendImage.src = './css/images/LMlegalSec.png';
+                //   self._addCanvasElements(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage);
+                // } else {
+                //   switch (brApp.activeKey) {
+                //     case 'combinedTotal':
+                //       legendImage.src = './css/images/LMtotal.png';
+                //       break;
+                //     case 'combinedFormal':
+                //       console.log('combinedFormal');
+                //       legendImage.src = './css/images/LMacknowledged.png';
+                //       break;
+                //     case 'combinedInformal':
+                //       legendImage.src = './css/images/LMnotAcknowledged.png';
+                //       break;
+                //     default:
+                //       legendImage.src = './css/images/LMacknowledged.png';
+                //   }
+                  self._addCanvasElements(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage);
+                // }
+
+        			};
+        			//set crossOrigin to anonymous for cors
+        			printedMapImage.setAttribute('crossOrigin', 'anonymous');
+        			printedMapImage.src = response.url;
+
+        		}, function(error){
+              console.log(error)
+            });
+          }
         },
 
-        _addCanvasElements: function(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage){
+        _addCanvasElements: function(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage){
           console.log('hit canvas');
       		//initiate fabric canvas
       		var mapCanvas = new fabric.Canvas('mapCanvas', {
@@ -559,28 +585,18 @@ define([
       		mapCanvas.add(new fabric.Rect({width: rectWidth, height: rectHeight, left: 0, top: 0, fill: 'white', angle: 0}));
 
       		//add text to top
-      		mapCanvas.add(new fabric.Text(printTitle, {fontSize: (80/deMulptiplyer), top: 25, left: (rectWidth/2), textAlign: 'center', originX: 'center', fontFamily: 'GillSansRegular'}));
+      		mapCanvas.add(new fabric.Text(printTitle, {fontSize: (80/deMulptiplyer), top: 100, left: (rectWidth/2), textAlign: 'center', originX: 'center', fontFamily: 'GillSansRegular'}));
 
           //add logo to top
-          mapCanvas.add(new fabric.Image(logoImage, {top: 25, left: 20}));
+          mapCanvas.add(new fabric.Image(logoImage, {top: 100, left: 50}));
+
+          //add legend image
+          var legendHeight = (mapHeight * mapMultiplyer) + (mapHeight/3);
+          console.log(legendHeight);
+          mapCanvas.add(new fabric.Image(legendImage, {top: legendHeight, left: (mapWidth/5)}));
 
       		//add map image
       		mapCanvas.add(new fabric.Image(printedMapImage, {left: (mapWidth/5), top: (mapHeight/3)}));
-
-
-      		// legendArray.map(function(legendItem, index){
-          //
-      		// 	var imageLeftPosition = 40 * index; //find image left position
-      		// 	var textLeftPosition = imageLeftPosition + 100;
-          //
-      		// 	var imageTopPosition = 40 * index; //find image top position
-      		// 	var textTopPosition = imageTopPosition;
-          //
-      		// 	mapCanvas.add(new fabric.Rect({fill: legendItem.color, height: 90/deMulptiplyer, width: 90/deMulptiplyer, left: imageLeftPosition, top: imageTopPosition}));
-      		// 	mapCanvas.add(new fabric.Text(legendItem.label + "", { left: textLeftPosition, top: textTopPosition, textAlign: 'left', fontFamily: 'GillSansLight', fontSize: Math.round(60/deMulptiplyer)}));
-          //
-      		// });
-
 
       		this._exportCanvasMap(printTitle);
 
@@ -605,68 +621,54 @@ define([
       		});
       	},
 
-        // printMap: function(title, dpi, format, layoutType) {
-        //   brApp.debug('WidgetsController >>> printMap');
-        //   var printTask = new PrintTask(AppConfig.printUrl);
-        //   var printParameters = new PrintParameters();
-        //   var template = new PrintTemplate();
-        //   var communityTab = document.getElementById('IndigAndCommLandMaps');
-        //   var percentOfCountryList = document.getElementById('PercentOfCountryList');
-        //   var indicatorsOfLegalSecurityList = document.getElementById('IndicatorsOfLegalSecurityList');
-        //   var question = '';
-        //   var layout = '';
-        //
-        //   console.log(brApp.map);
-        //
-        //   if (layoutType === 'Portrait') {
-        //     if (communityTab) {
-        //       layout = 'landmark_comm_portrait';
-        //     } else if (percentOfCountryList || indicatorsOfLegalSecurityList) {
-        //       layout = 'landmark_nat_portrait';
-        //     }
-        //   } else if (layoutType === 'Landscape') {
-        //     if (communityTab) {
-        //       layout = 'landmark_comm_landscape';
-        //     } else if (percentOfCountryList || indicatorsOfLegalSecurityList) {
-        //       layout = 'landmark_nat_landscape';
-        //     }
-        //   } else {
-        //     layout = 'MAP_ONLY'
-        //   }
-        //
-        //   template.format = format;
-        //   template.layout = layout;
-        //   // template.layout = layoutType;
-        //   template.preserveScale = false;
-        //   //- Custom Text Elements to be used in the layout,
-        //   //- This is the way to add custom labels to the layout
-        //   template.layoutOptions = {
-        //     titleText: title,
-        //     customTextElements: [
-        //       {'question': question }
-        //     ]
-        //   };
-        //
-        //   template.exportOptions = {
-        //     dpi: dpi
-        //   };
-        //   console.log(template);
-        //
-        //   printParameters.map = brApp.map;
-        //   printParameters.template = template;
-        //   //- Add a loading class to the print button and remove it when loading is complete
-        //   domClass.add('print-widget', 'loading');
-        //
-        //   printTask.execute(printParameters, function (response) {
-        //     console.log('executed');
-        //     domClass.remove('print-widget', 'loading');
-        //     window.open(response.url);
-        //   }, function (failure) {
-        //     console.log(failure);
-        //     domClass.remove('print-widget', 'loading');
-        //   });
-        //
-        // },
+        printCommunityMap: function(title, dpi, format, layoutType) {
+          brApp.debug('WidgetsController >>> printMap');
+          var printTask = new PrintTask(AppConfig.printUrl);
+          var printParameters = new PrintParameters();
+          var template = new PrintTemplate();
+          var question = '';
+          var layout = '';
+
+          if (layoutType === 'Portrait') {
+            layout = 'landmark_comm_portrait';
+          } else if (layoutType === 'Landscape') {
+            layout = 'landmark_comm_landscape';
+          } else {
+            layout = 'MAP_ONLY'
+          }
+
+          template.format = format;
+          template.layout = layout;
+          // template.layout = layoutType;
+          template.preserveScale = false;
+          //- Custom Text Elements to be used in the layout,
+          //- This is the way to add custom labels to the layout
+          template.layoutOptions = {
+            titleText: title,
+            customTextElements: [
+              {'question': question }
+            ]
+          };
+
+          template.exportOptions = {
+            dpi: dpi
+          };
+
+          printParameters.map = brApp.map;
+          printParameters.template = template;
+          //- Add a loading class to the print button and remove it when loading is complete
+          domClass.add('print-widget', 'loading');
+
+          printTask.execute(printParameters, function (response) {
+            console.log('executed');
+            domClass.remove('print-widget', 'loading');
+            window.open(response.url);
+          }, function (failure) {
+            console.log(failure);
+            domClass.remove('print-widget', 'loading');
+          });
+
+        },
 
         /**
          * Show the Analysis Dialog with the draw and upload buttons

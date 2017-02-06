@@ -49,6 +49,7 @@ define([
     			this.state.activeIndigenousKey :
     			this.state.activeCommunityKey
     	);
+			brApp.activeKey = 'combinedFormal';
       	this.setState({active: PercentIndigenous});
 				this.props.setActiveTab(this.props.activeSelection)
     },
@@ -110,6 +111,8 @@ define([
 			if (layer !== -1) {
 				this.props.setActiveTab(this.props.activeSelection)
 			}
+			brApp.activeKey = key;
+			console.log(key);
     	this.setState({
     		activePercentIndigenousLayer: layer,
 				active: PercentIndigenous
