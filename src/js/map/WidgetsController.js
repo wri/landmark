@@ -493,12 +493,14 @@ define([
             // set print dimensions;
             var map = brApp.map;
             var printTitle = title;
+            var layoutTypeHeight = layoutType === 'Landscape' ? 530 : layoutType === 'Portrait' ? 750 : map.height;
+            var layoutTypeWidth = layoutType === 'Landscape' ? 998 : layoutType === 'Portrait' ? 570 : map.height;
         		var printDimensions = {height: map.height, width: map.width},
         			printTask = new PrintTask(AppConfig.printUrl),
         			params = new PrintParameters(),
         			mapScale = map.getScale(),
-        			mapHeight = printDimensions.height,
-        			mapWidth = printDimensions.width,
+              mapHeight = layoutType === 'MAP_ONLY' ? ((layoutTypeHeight) + (layoutTypeHeight/2.5)) : layoutTypeHeight,
+        			mapWidth = layoutType === 'MAP_ONLY' ? ((layoutTypeWidth) + (layoutTypeWidth/2.5)): layoutTypeWidth,
         			printTemplate = new PrintTemplate(),
         			// mapMultiplyer = (map.getZoom() > 5) ? 1 : 3;
               mapMultiplyer = 1;
@@ -524,33 +526,33 @@ define([
         		printTask.execute(params, function(response){
         			var printedMapImage = new Image(mapWidth * mapMultiplyer, mapHeight * mapMultiplyer);
               var logoImage = new Image(200, 100);
-              var legendImage = new Image(400, 200);
-              legendImage.src = './css/images/LMacknowledged.png';
-              logoImage.src = './css/images/bienLogo.png';
+              var legendImage = new Image(300, 150);
+              // legendImage.src = './css/images/LMacknowledged.png';
+              logoImage.src = './css/images/LandMark_final.png';
+
+              // Check for active layer to determine what legend to use
+              if (brApp.activeLayer === 'land-tenure') {
+                legendImage.src = './css/images/LMlegalSec.png';
+              } else {
+                switch (brApp.activeKey) {
+                  case 'combinedTotal':
+                    legendImage.src = './css/images/LMtotal.png';
+                    break;
+                  case 'combinedFormal':
+                    console.log('combinedFormal');
+                    legendImage.src = './css/images/LMacknowledged.png';
+                    break;
+                  case 'combinedInformal':
+                    legendImage.src = './css/images/LMnotAcknowledged.png';
+                    break;
+                  default:
+                    legendImage.src = './css/images/LMacknowledged.png';
+                }
+              }
+
         			//onload needs to go before cors and src
         			printedMapImage.onload = function(){
-                //Check for active layer to determine what legend to use
-
-                // if (brApp.activeLayer === 'land-tenure') {
-                //   legendImage.src = './css/images/LMlegalSec.png';
-                //   self._addCanvasElements(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage);
-                // } else {
-                //   switch (brApp.activeKey) {
-                //     case 'combinedTotal':
-                //       legendImage.src = './css/images/LMtotal.png';
-                //       break;
-                //     case 'combinedFormal':
-                //       console.log('combinedFormal');
-                //       legendImage.src = './css/images/LMacknowledged.png';
-                //       break;
-                //     case 'combinedInformal':
-                //       legendImage.src = './css/images/LMnotAcknowledged.png';
-                //       break;
-                //     default:
-                //       legendImage.src = './css/images/LMacknowledged.png';
-                //   }
-                  self._addCanvasElements(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage);
-                // }
+                self._addCanvasElements(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage, format, layoutType);
 
         			};
         			//set crossOrigin to anonymous for cors
@@ -563,7 +565,7 @@ define([
           }
         },
 
-        _addCanvasElements: function(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage){
+        _addCanvasElements: function(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage, format, layoutType){
           console.log('hit canvas');
       		//initiate fabric canvas
       		var mapCanvas = new fabric.Canvas('mapCanvas', {
@@ -572,6 +574,8 @@ define([
       			background: '#fff'
       		});
 
+          var footerMessage = 'Terms of use are available online at www.landmarkmap.org';
+
       		var deMulptiplyer = 2,
       			heightAllowance = 40,
       			legendArray = [
@@ -579,46 +583,84 @@ define([
       				{color: '#0f0', label: 'green color'}
       			],
       			rectWidth = (mapWidth * mapMultiplyer) + (mapWidth/2.5),
-      			rectHeight = (mapHeight * mapMultiplyer) + (mapHeight/1.5);
+      			rectHeight = (mapHeight * mapMultiplyer) + (mapHeight/1.5),
+            logoLeft = layoutType === 'Landscape' ? 200 : 50,
+            mapImageTop = layoutType === 'Portrait' ? 150 : (mapHeight/3),
+            legendHeight = layoutType === 'Portrait' ? ((mapHeight * mapMultiplyer) + (mapHeight/3)) - 75 : ((mapHeight * mapMultiplyer) + (mapHeight/3)),
+            footerTop = layoutType === 'Portrait' ? (legendHeight - 15) : legendHeight;
 
-      		//add white background
-      		mapCanvas.add(new fabric.Rect({width: rectWidth, height: rectHeight, left: 0, top: 0, fill: 'white', angle: 0}));
+            console.log(legendImage);
 
-      		//add text to top
-      		mapCanvas.add(new fabric.Text(printTitle, {fontSize: (80/deMulptiplyer), top: 100, left: (rectWidth/2), textAlign: 'center', originX: 'center', fontFamily: 'GillSansRegular'}));
+            //add white background
+        		mapCanvas.add(new fabric.Rect({width: rectWidth, height: rectHeight, left: 0, top: 0, fill: 'white', angle: 0}));
 
-          //add logo to top
-          mapCanvas.add(new fabric.Image(logoImage, {top: 100, left: 50}));
+          if (layoutType != 'MAP_ONLY') {
 
-          //add legend image
-          var legendHeight = (mapHeight * mapMultiplyer) + (mapHeight/3);
-          console.log(legendHeight);
-          mapCanvas.add(new fabric.Image(legendImage, {top: legendHeight, left: (mapWidth/5)}));
+        		//add text to top
+        		mapCanvas.add(new fabric.Text(printTitle, {fontSize: (80/deMulptiplyer), top: 100, left: (rectWidth/2), textAlign: 'center', originX: 'center', fontFamily: 'GillSansRegular'}));
 
-      		//add map image
-      		mapCanvas.add(new fabric.Image(printedMapImage, {left: (mapWidth/5), top: (mapHeight/3)}));
+            //add logo to top
+            mapCanvas.add(new fabric.Image(logoImage, {top: 50, left: logoLeft}));
 
-      		this._exportCanvasMap(printTitle);
+            //add legend image
+            mapCanvas.add(new fabric.Image(legendImage, {top: legendHeight, left: (mapWidth/5)}));
+
+            // add footer message
+            mapCanvas.add(new fabric.Text(footerMessage, {fontSize: (16), top: footerTop, left: (mapWidth/2), fontFamily: 'GillSansRegular'}));
+
+        		//add map image
+        		mapCanvas.add(new fabric.Image(printedMapImage, {left: (mapWidth/5), top: mapImageTop}));
+          } else {
+            mapCanvas.add(new fabric.Image(printedMapImage, {left: (mapWidth/5), top: mapImageTop}));
+          }
+
+      		this._exportCanvasMap(printTitle, rectWidth, rectHeight, format);
 
 
       	},
 
-        _exportCanvasMap: function(printTitle){
+        _exportCanvasMap: function(printTitle, rectWidth, rectHeight, format){
           console.log('hit export');
       		var canvas = document.getElementById('mapCanvas');
       		var canvasContext = canvas.getContext('2d');
 
       		canvasContext.scale(1, 1)
+          // var dataUrl = canvas.toDataURL();
 
-      		// document.getElementById('mapPrintContainerBackground').classList.add('hidden');
+          // var pdf = new jsPDF();
+          // pdf.addImage(dataUrl, 'png', 0, 0);
+          // pdf.save('pdf.pdf')
 
-
-      		canvas.toBlob(function(blob) {
+          if (format === 'PDF') {
+            document.querySelector('.canvas-container').classList.add('hidden')
+            // var pdfUrl = canvas.toDataURL('image/jpeg');
+            var dataUrl = canvas.toDataURL();
+            var pdf = new jsPDF('p', 'px', [rectHeight, rectWidth]);
+            pdf.addImage(dataUrl, 0, 0, rectWidth, rectHeight);
+            // console.log(pdfUrl);
+            // window.open(pdf, '_blank', 'fullscreen=yes');
+            window.open(pdf)
+            // pdf.save(printTitle + '.pdf');
+          } else if (format === 'jpg') {
+            document.querySelector('.canvas-container').classList.add('hidden')
+            var pdfUrl = canvas.toDataURL('image/jpeg');
+            // var pdf = new jsPDF('p', 'px', [rectHeight, rectWidth]);
+            // pdf.addImage(dataUrl, 0, 0, rectWidth, rectHeight);
+            console.log(pdfUrl);
+            // debugger;
+            // window.open(pdf, '_blank', 'fullscreen=yes');
+            window.open(pdfUrl)
+            // pdf.save(printTitle + '.pdf');
+          } else {
+            canvas.toBlob(function(blob) {
               document.querySelector('.canvas-container').classList.add('hidden')
-      		   	saveAs(blob, printTitle.split(' ').join('_')+".png");
+              var dataUrl = canvas.toDataURL();
+              window.open(dataUrl);
+              // saveAs(blob, printTitle.split(' ').join('_')+".png");
 
-      			// $('#printLoader').addClass('hidden');
-      		});
+              // $('#printLoader').addClass('hidden');
+            });
+          }
       	},
 
         printCommunityMap: function(title, dpi, format, layoutType) {

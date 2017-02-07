@@ -60,13 +60,8 @@ define([
 
       var formatOptions = [
         'pdf',
-        'png32',
-        'png8',
-        'jpg',
-        'gif',
-        'eps',
-        'svg',
-        'svgz'
+        'png',
+        'jpg'
       ];
 
       var layoutOptions = [
