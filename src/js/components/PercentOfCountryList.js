@@ -112,7 +112,6 @@ define([
 				this.props.setActiveTab(this.props.activeSelection)
 			}
 			brApp.activeKey = key;
-			console.log(key);
     	this.setState({
     		activePercentIndigenousLayer: layer,
 				active: PercentIndigenous

@@ -64,8 +64,6 @@ define([
                 zoom: wholeHash.l
             });
 
-            console.log(self.map)
-
             self.map.on('load', function() {
                 self.emit('map-ready', self.initialCountry);
                 // Clear out Phantom Graphics thanks to esri's graphics layer
