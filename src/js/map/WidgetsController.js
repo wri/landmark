@@ -613,7 +613,7 @@ define([
             mapCanvas.add(new fabric.Image(printedMapImage, {left: (mapWidth/5), top: mapImageTop}));
           }
 
-      		this._exportCanvasMap(printTitle, rectWidth, rectHeight, format);
+      		this._exportCanvasMap(printTitle, rectWidth, rectHeight, format, layoutType);
 
 
       	},
@@ -628,8 +628,17 @@ define([
             var dataUrl = canvas.toDataURL();
             var doc = new PDFDocument();
             var stream = doc.pipe(blobStream());
+            var fitWidth, fitHeight;
 
-            doc.image(canvas.toDataURL(), 20, 0, {fit: [rectWidth/1.4, rectHeight/1.4]});
+            if (layoutType === 'Landscape') {
+              fitWidth = rectHeight/1.4;
+              fitHeight = rectWidth/1.4;
+            } else if (layoutType === 'Landscape') {
+              fitWidth = rectWidth/1.4;
+              fitHeight = rectHeight/1.4;
+            }
+
+            doc.image(canvas.toDataURL(), 20, 0, {fit: [fitWidth, fitHeight]});
           	doc.end();
 
           	stream.on('finish', function() {
