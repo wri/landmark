@@ -1,5 +1,6 @@
 .tree-widget-container
-  height 95%
+  // height calc(95% - 20px)
+  top 20px
 
 
 .tree-widget-title-pane
@@ -16,13 +17,15 @@
   width 100%
 
 #layer-content
-  height 100%
+  max-height 35em
+  overflow-y auto
+  overflow-x hidden
 
 .layer-tab-container
   width 360px
-  max-height 90%
-  overflow-y auto
-  overflow-x hidden
+  // max-height 90%
+  // overflow-y auto
+  // overflow-x hidden
 
 body:not(.mobile) .layer-tab-container .tab-panel
   padding 5px 5px 5px

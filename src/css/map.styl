@@ -1,5 +1,6 @@
 @import "config"
 @import "analysis"
+@import "modal"
 
 .launch-dialog-title
 	margin 0
@@ -320,6 +321,10 @@ label
 
 .print-icon
 	background url('images/print-icon.png') 4px 8px no-repeat #fff
+	&.loading
+		background url('images/print-loader.gif') center no-repeat #fff
+
+.modal-print-button
 	&.loading
 		background url('images/print-loader.gif') center no-repeat #fff
 
@@ -1024,10 +1029,10 @@ button
 	// background-size cover
 
 #report-button
-	.searchIcon.esriIconZoom:before
+	.searchIcon.esri-icon-search:before
 		content none !important
 
-	.searchIcon.esriIconZoom
+	.searchIcon.esri-icon-search
 		background url("images/globe.svg") no-repeat
 		background-size cover
 
@@ -1040,7 +1045,7 @@ button
 	-webkit-border-radius inherit !important
   border-radius inherit
 
-.searchIcon.esriIconZoom
+.searchIcon.esri-icon-search
 	color white !important
 
 .arcgisSearch .showSources .sourcesMenu

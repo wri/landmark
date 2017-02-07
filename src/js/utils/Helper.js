@@ -7,7 +7,7 @@ define([
 ], function(on, topic, domClass, domGeom, win) {
 
     var body = win.body(),
-        mobileThreshold = 500,
+        mobileThreshold = 768,
         threshold = 800,
         prevWidth,
         width;

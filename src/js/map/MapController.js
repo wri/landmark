@@ -6,6 +6,7 @@ define([
     'map/MapConfig',
     'map/MapAssets',
     'components/LayerTabContainer',
+    'components/PrintModal',
     'components/MobileFooter',
     'map/WidgetsController',
     'utils/Helper',
@@ -41,7 +42,7 @@ define([
     "esri/layers/LayerDrawingOptions",
     'esri/layers/FeatureLayer'
 
-], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, MobileFooter, WidgetsController, Helper, on, domGeom, win, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
+], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, PrintModal, MobileFooter, WidgetsController, Helper, on, domGeom, win, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
 
     'use strict';
 
@@ -74,12 +75,14 @@ define([
             // on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
             on(document.getElementById('basemap-button'), 'click', WidgetsController.toggleBasemapGallery.bind(WidgetsController));
             on(document.getElementById('share-button'), 'click', WidgetsController.toggleShareContainer.bind(WidgetsController));
-            on(document.getElementById('print-button'), 'click', WidgetsController.printMap);
+            // on(document.getElementById('print-button'), 'click', WidgetsController.printMap);
+            on(document.getElementById('print-button'), 'click', WidgetsController.togglePrintModal);
+            // on(document.getElementById('close-print-modal'), 'click', WidgetsController.togglePrintModal);
 
             on(document.getElementById('tree-title-pane'), 'click', function(){
               var body = win.body()
               var width = domGeom.position(body).w;
-              if (width > 500) {
+              if (width > 768) {
                 WidgetsController.toggleTreeContainer();
               } else {
                 console.log('clicked');
@@ -200,10 +203,11 @@ define([
             // when the zoom level is less then 9 to force legends to show in the printout, due to the way we are
             // showing tiled layers up to 9 and then dynamic from there on out
             esriRequest.setRequestPreCallback(function (ioArgs) {
-              if (ioArgs.url !== AppConfig.printUrl + '/execute') {
+
+              if (ioArgs.url !== AppConfig.printUrl) {
                 return ioArgs;
               }
-
+              
               // Print Request
               // If zoom level is greater then 8, remove layer 0, after this is only necessary for zoom levels 0 - 8
               if (brApp.map.getZoom() > 8) {
@@ -253,6 +257,7 @@ define([
             var basemapGallery,
                 self = this,
                 tabContainer,
+                printModal,
                 mobileFooter,
                 legendComponent,
                 homeWidget,
@@ -284,6 +289,7 @@ define([
             });
 
             tabContainer = new LayerTabContainer('layer-content');
+            printModal = new PrintModal('print-modal');
             mobileFooter = new MobileFooter('mobile-footer')
 
             // Start all widgets that still need to be started

@@ -30,6 +30,7 @@ define([
       if (!brApp.layerInfos) {
         return;
       }
+      brApp.activeLayer = this.state.selection;
       this.setState({
         activeSelection: this.state.selection
       });
@@ -164,17 +165,17 @@ define([
             
           ), 
           this.state.activeSelection === 'community-lands' ?
-          React.createElement("div", {className: 'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}, 
+          React.createElement("div", {id: "IndigAndCommLandMaps", className: 'national-layer-selection-label' + (this.state.openTab ? ' active-panel': 'hidden')}, 
             React.createElement(IndigAndCommLandMaps, {data: MapConfig.communityLevelLayers, layerMapper: this.layerMapper, parentClicked: this.parentClicked, showHelp: this.showHelp})
           )
           : null, 
         this.state.activeSelection === 'percent-indigenous' ?
-          React.createElement("div", {className: 'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}, 
+          React.createElement("div", {id: "PercentOfCountryList", className: 'national-layer-selection-label' + (this.state.openTab ? ' active-panel': 'hidden')}, 
             React.createElement(PercentOfCountryList, {activeTab: this.props.activeTab, setActiveTab: this.props.setActiveTab, activeSelection: this.state.activeSelection, data: MapConfig.percentIndigenousLayersCombined})
           )
           : null, 
           this.state.activeSelection === 'land-tenure' ?
-          React.createElement("div", {className: 'national-layer-selection-label' + (this.state.openTab ? '': 'hidden')}, 
+          React.createElement("div", {id: "IndicatorsOfLegalSecurityList", className: 'national-layer-selection-label' + (this.state.openTab ? ' active-panel': 'hidden')}, 
             React.createElement(IndicatorsOfLegalSecurityList, {activeTab: this.props.activeTab, setActiveTab: this.props.setActiveTab, activeSelection: this.state.activeSelection, data: MapConfig.landTenureCommunityLayers})
           )
           : null

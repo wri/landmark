@@ -1,5 +1,6 @@
 define([
     'main/config',
+    'map/Map',
     'dojo/on',
     'dojo/dom',
     'dijit/Dialog',
@@ -10,8 +11,10 @@ define([
     'dijit/registry',
     'esri/tasks/PrintTask',
     'esri/tasks/PrintTemplate',
-    'esri/tasks/PrintParameters'
-], function(AppConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters) {
+    'esri/tasks/PrintParameters',
+    'dojo/dom-geometry',
+    'dojo/_base/window'
+], function(AppConfig, Map, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters, domGeom, win) {
     'use strict';
 
     var DURATION = 300;
@@ -175,19 +178,6 @@ define([
             height = active ? 0 : (topBar.offsetHeight - 34);
             width = active ? 180 : 360;
 
-
-            // Fx.animateProperty({
-            //     node: node,
-            //     properties: {
-            //         height: height
-            //     },
-            //     duration: DURATION,
-            //     onEnd: function() {
-            //       domClass.toggle(node, 'active');
-            //       $('#tree-widget-container').css('height', '95%');
-            //       $('#layer-content').css('height', '100%');
-            //     }
-            // }).play();
             domClass.toggle(node, 'active');
             $(node).css('height', height);
             $(node).css('width', width);
@@ -197,22 +187,30 @@ define([
             $('#tree-widget-container').css('height', '95%');
             $('#layer-content').css('height', '100%');
 
-            // Fx.animateProperty({
-            //     node: node,
-            //     properties: {
-            //         width: width
-            //     },
-            //     duration: DURATION
-            // }).play();
-            //
-            // Fx.animateProperty({
-            //     node: treeTitle,
-            //     properties: {
-            //         width: width
-            //     },
-            //     duration: DURATION
-            // }).play();
+        },
 
+        togglePrintModal: function() {
+          console.log(document.querySelector('.print-modal-wrapper'));
+          var printModal = document.querySelector('.print-modal-wrapper')
+          domClass.toggle(printModal, 'hidden');
+          //
+          // var Map = brApp.map;
+          // console.log(Map);
+          // var centerPoint = Map.extent.getCenter();
+    			// //get map node
+    			// var mapNode = document.getElementById("brMap");
+    			// //get contaomer node
+    			// var previewNode = document.getElementById("print-preview--map_container");
+    			// //append map node to preview node
+    			// previewNode.appendChild(mapNode);
+          //
+    			// //center map on update at center point from previous view
+    			// on.once(Map, 'update-end', function(){
+    			// 	Map.centerAt(centerPoint);
+    			// });
+          //
+    			// //resize map to fit new node
+    			// Map.resize();
         },
 
         toggleMobileTree: function() {
@@ -487,60 +485,237 @@ define([
             domClass.toggle('upload-form-content', 'hidden');
         },
 
-        printMap: function() {
+        printMap: function(title, dpi, format, layoutType) {
+          if (brApp.activeLayer === 'community-lands' || brApp.activeLayer === undefined){
+            this.printCommunityMap(title, dpi, format, layoutType);
+          } else {
+            var self = this;
+            // set print dimensions;
+            var map = brApp.map;
+            var printTitle = title;
+            var layoutTypeHeight = layoutType === 'Landscape' ? 530 : layoutType === 'Portrait' ? 750 : map.height;
+            var layoutTypeWidth = layoutType === 'Landscape' ? 998 : layoutType === 'Portrait' ? 570 : map.height;
+        		var printDimensions = {height: map.height, width: map.width},
+        			printTask = new PrintTask(AppConfig.printUrl),
+        			params = new PrintParameters(),
+        			mapScale = map.getScale(),
+              mapHeight = layoutType === 'MAP_ONLY' ? ((layoutTypeHeight) + (layoutTypeHeight/2.5)) : layoutTypeHeight,
+        			mapWidth = layoutType === 'MAP_ONLY' ? ((layoutTypeWidth) + (layoutTypeWidth/2.5)): layoutTypeWidth,
+        			printTemplate = new PrintTemplate();
+            var dayStrings = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+              monthStrings = ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December'],
+              date = new Date(),
+              currentMonth = monthStrings[date.getMonth()],
+              currentDay = dayStrings[date.getDay()],
+              currentYear = date.getFullYear(),
+              dateString = currentDay + ', ' + currentMonth + ' ' + date.getDate() + ', ' + currentYear;
+
+        		params.map = map;
+
+        		printTemplate.exportOptions = {
+        		    width: mapWidth, //multiply width
+        		    height: mapHeight, //multiply height
+        		    dpi: dpi //multiply dpi
+        		};
+        		printTemplate.format = 'PNG32';
+        		printTemplate.layout = 'MAP_ONLY';
+        		printTemplate.preserveScale = true;
+
+        		//set scale with multiplyer
+        		printTemplate.outScale = mapScale;
+
+        		params.template = printTemplate;
+
+            domClass.add('modal-print-button', 'loading');
+
+
+        		printTask.execute(params, function(response){
+        			var printedMapImage = new Image(mapWidth, mapHeight);
+              var logoImage = new Image(200, 100);
+              var legendImage = new Image(300, 100);
+              // legendImage.src = './css/images/LMacknowledged.png';
+              logoImage.src = './css/images/LandMark_final.png';
+
+              // Check for active layer to determine what legend to use
+              if (brApp.activeLayer === 'land-tenure') {
+                legendImage.src = './css/images/LMlegalSec.png';
+              } else {
+                switch (brApp.activeKey) {
+                  case 'combinedTotal':
+                    legendImage.src = './css/images/LMtotal.png';
+                    break;
+                  case 'combinedFormal':
+                    legendImage.src = './css/images/LMacknowledged.png';
+                    break;
+                  case 'combinedInformal':
+                    legendImage.src = './css/images/LMnotAcknowledged.png';
+                    break;
+                  default:
+                    legendImage.src = './css/images/LMacknowledged.png';
+                }
+              }
+
+        			//onload needs to go before cors and src
+        			printedMapImage.onload = function(){
+                self._addCanvasElements(mapHeight, mapWidth, printedMapImage, printTitle, logoImage, legendImage, format, layoutType, dateString);
+
+        			};
+        			//set crossOrigin to anonymous for cors
+        			printedMapImage.setAttribute('crossOrigin', 'anonymous');
+        			printedMapImage.src = response.url;
+        		}, function(error){
+              console.log(error)
+              domClass.remove('modal-print-button', 'loading');
+            });
+          }
+        },
+
+        _addCanvasElements: function(mapHeight, mapWidth, printedMapImage, printTitle, logoImage, legendImage, format, layoutType, dateString){
+      		//initiate fabric canvas
+      		var mapCanvas = new fabric.Canvas('mapCanvas', {
+      			height: (mapHeight) + (mapHeight/1.5),
+      			width: (mapWidth) + (mapWidth/2.5),
+      			background: '#fff'
+      		});
+
+          var footerMessage = 'Terms of use are available online at www.landmarkmap.org';
+
+      		var heightAllowance = 40,
+      			rectWidth = (mapWidth) + (mapWidth/2.5),
+      			rectHeight = (mapHeight) + (mapHeight/1.5),
+            logoLeft = layoutType === 'Landscape' ? 200 : 50,
+            mapImageTop = layoutType === 'Portrait' ? 150 : (mapHeight/3),
+            legendHeight = layoutType === 'Portrait' ? ((mapHeight) + (mapHeight/3)) - 75 : ((mapHeight) + (mapHeight/3)),
+            footerTop = layoutType === 'Portrait' ? (legendHeight - 15) : legendHeight;
+
+            //add white background
+        		mapCanvas.add(new fabric.Rect({width: rectWidth, height: rectHeight, left: 0, top: 0, fill: 'white', angle: 0}));
+
+          if (layoutType != 'MAP_ONLY') {
+
+        		//add text to top
+        		mapCanvas.add(new fabric.Text(printTitle, {fontSize: (20), top: 100, left: (rectWidth/2), textAlign: 'center', originX: 'center', fontFamily: 'Raleway'}));
+            mapCanvas.add(new fabric.Text(dateString, {fontSize: (12), top: 100, left: (rectWidth/1.25), textAlign: 'center', originX: 'center', fontFamily: 'Raleway'}));
+
+            //add logo to top
+            mapCanvas.add(new fabric.Image(logoImage, {top: 50, left: logoLeft}));
+
+            //add legend image
+            mapCanvas.add(new fabric.Image(legendImage, {top: legendHeight, left: (mapWidth/5)}));
+
+            // add footer message
+            mapCanvas.add(new fabric.Text(footerMessage, {fontSize: (12), top: footerTop, left: (mapWidth/2), fontFamily: 'Raleway'}));
+
+        		//add map image
+        		mapCanvas.add(new fabric.Image(printedMapImage, {left: (mapWidth/5), top: mapImageTop}));
+          } else {
+            mapCanvas.add(new fabric.Image(printedMapImage, {left: (mapWidth/5), top: mapImageTop}));
+          }
+
+      		this._exportCanvasMap(printTitle, rectWidth, rectHeight, format, layoutType);
+
+
+      	},
+
+        _exportCanvasMap: function(printTitle, rectWidth, rectHeight, format, layoutType){
+      		var canvas = document.getElementById('mapCanvas');
+      		var canvasContext = canvas.getContext('2d');
+      		canvasContext.scale(1, 1)
+
+          if (format === 'pdf') {
+            document.querySelector('.canvas-container').classList.add('hidden')
+            var dataUrl = canvas.toDataURL();
+            var doc = new PDFDocument();
+            var stream = doc.pipe(blobStream());
+            var fitWidth, fitHeight;
+
+            if (layoutType === 'Landscape') {
+              fitWidth = rectHeight/1.4;
+              fitHeight = rectWidth/1.4;
+            } else if (layoutType === 'Portrait') {
+              fitWidth = rectWidth/1.4;
+              fitHeight = rectHeight/1.4;
+            }
+
+            doc.image(canvas.toDataURL(), 20, 0, {fit: [fitWidth, fitHeight]});
+          	doc.end();
+
+          	stream.on('finish', function() {
+          		var fileRead = new FileReader();
+          		fileRead.onload = function(e) {
+          			window.open(e.currentTarget.result)
+          		}
+          		fileRead.readAsDataURL(stream.toBlob('application/pdf'));
+          	});
+
+          } else if (format === 'jpg') {
+            document.querySelector('.canvas-container').classList.add('hidden')
+            var pdfUrl = canvas.toDataURL('image/jpeg');
+            // var pdf = new jsPDF('p', 'px', [rectHeight, rectWidth]);
+            // pdf.addImage(dataUrl, 0, 0, rectWidth, rectHeight);
+            console.log(pdfUrl);
+            // debugger;
+            // window.open(pdf, '_blank', 'fullscreen=yes');
+            window.open(pdfUrl)
+            // pdf.save(printTitle + '.pdf');
+          } else {
+            canvas.toBlob(function(blob) {
+              document.querySelector('.canvas-container').classList.add('hidden')
+              var dataUrl = canvas.toDataURL();
+              window.open(dataUrl);
+              // saveAs(blob, printTitle.split(' ').join('_')+".png");
+
+              // $('#printLoader').addClass('hidden');
+            });
+          }
+          domClass.remove('modal-print-button', 'loading');
+      	},
+
+        printCommunityMap: function(title, dpi, format, layoutType) {
           brApp.debug('WidgetsController >>> printMap');
           var printTask = new PrintTask(AppConfig.printUrl);
           var printParameters = new PrintParameters();
           var template = new PrintTemplate();
-          var communityTab = document.getElementById('community-level-tab');
-          var nationalIndicators = document.getElementById('nationalLevelIndicators');
           var question = '';
           var layout = '';
-          // If the community tab is active, use its template, else, use the
-          // national template and add a question if applicable
-          if (communityTab.className.search('active') > -1) {
-            layout = 'landmark_comm';
+
+          if (layoutType === 'Portrait') {
+            layout = 'landmark_comm_portrait';
+          } else if (layoutType === 'Landscape') {
+            layout = 'landmark_comm_landscape';
           } else {
-            layout = 'landmark_nat';
-            // Get the current question if the right layer is active (indigenous/community)
-            // Need to find a better way to do this, we need a data model or flux implemented
-            // as querying the dom is not the way to go
-            if (nationalIndicators.className === 'checked') {
-              var indigenousTab = document.getElementById('land-tenure-indigenous');
-              var querySelector = '.national-layer-list-item.active .national-layer-list-item-question';
-              var questionNode;
-              if (indigenousTab.className.search('active') > -1) {
-                questionNode = document.querySelector('.indigenous-national-list ' + querySelector);
-                question = questionNode && questionNode.innerHTML;
-              } else {
-                questionNode = document.querySelector('.community-national-list ' + querySelector);
-                question = questionNode && questionNode.innerHTML;
-              }
-            }
+            layout = 'MAP_ONLY'
           }
 
-          template.format = "pdf";
+          template.format = format;
           template.layout = layout;
+          // template.layout = layoutType;
           template.preserveScale = false;
           //- Custom Text Elements to be used in the layout,
           //- This is the way to add custom labels to the layout
           template.layoutOptions = {
+            titleText: title,
             customTextElements: [
               {'question': question }
             ]
           };
 
+          template.exportOptions = {
+            dpi: dpi
+          };
+
           printParameters.map = brApp.map;
           printParameters.template = template;
           //- Add a loading class to the print button and remove it when loading is complete
-          domClass.add('print-widget', 'loading');
+          domClass.add('modal-print-button', 'loading');
 
           printTask.execute(printParameters, function (response) {
-            domClass.remove('print-widget', 'loading');
+            console.log('executed');
+            domClass.remove('modal-print-button', 'loading');
             window.open(response.url);
           }, function (failure) {
             console.log(failure);
-            domClass.remove('print-widget', 'loading');
+            domClass.remove('modal-print-button', 'loading');
           });
 
         },
@@ -555,15 +730,21 @@ define([
             var searchButton = document.querySelector('.search-button')
             var reportButton = document.querySelector('.report-button')
 
-            if (!domClass.contains(layerTree, "hidden")) {
-              domClass.toggle(layerTree, 'hidden');
+            var body = win.body()
+            var width = domGeom.position(body).w;
+
+            if (width <= 768) {
+              if (!domClass.contains(layerTree, "hidden")) {
+                domClass.toggle(layerTree, 'hidden');
+              }
+              if (!domClass.contains(searchButton, "hidden")) {
+                domClass.toggle(searchButton, 'hidden');
+              }
+              if (!domClass.contains(reportButton, "hidden")) {
+                domClass.toggle(reportButton, 'hidden');
+              }
             }
-            if (!domClass.contains(searchButton, "hidden")) {
-              domClass.toggle(searchButton, 'hidden');
-            }
-            if (!domClass.contains(reportButton, "hidden")) {
-              domClass.toggle(reportButton, 'hidden');
-            }
+
 
             if (customGraphics.graphics.length > 0) {
                 $('#remove-graphics').removeClass('hidden');
