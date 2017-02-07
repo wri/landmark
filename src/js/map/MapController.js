@@ -207,7 +207,7 @@ define([
               if (ioArgs.url !== AppConfig.printUrl) {
                 return ioArgs;
               }
-              
+
               // Print Request
               // If zoom level is greater then 8, remove layer 0, after this is only necessary for zoom levels 0 - 8
               if (brApp.map.getZoom() > 8) {

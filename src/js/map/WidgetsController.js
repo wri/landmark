@@ -681,8 +681,14 @@ define([
 
           if (layoutType === 'Portrait') {
             layout = 'landmark_comm_portrait';
+            template.exportOptions = {
+              dpi: dpi
+            };
           } else if (layoutType === 'Landscape') {
             layout = 'landmark_comm_landscape';
+            template.exportOptions = {
+              dpi: dpi
+            };
           } else {
             layout = 'MAP_ONLY'
           }
@@ -698,10 +704,6 @@ define([
             customTextElements: [
               {'question': question }
             ]
-          };
-
-          template.exportOptions = {
-            dpi: dpi
           };
 
           printParameters.map = brApp.map;
