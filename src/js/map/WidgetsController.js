@@ -501,9 +501,7 @@ define([
         			mapScale = map.getScale(),
               mapHeight = layoutType === 'MAP_ONLY' ? ((layoutTypeHeight) + (layoutTypeHeight/2.5)) : layoutTypeHeight,
         			mapWidth = layoutType === 'MAP_ONLY' ? ((layoutTypeWidth) + (layoutTypeWidth/2.5)): layoutTypeWidth,
-        			printTemplate = new PrintTemplate(),
-        			// mapMultiplyer = (map.getZoom() > 5) ? 1 : 3;
-              mapMultiplyer = 1;
+        			printTemplate = new PrintTemplate();
             var dayStrings = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
               monthStrings = ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December'],
               date = new Date(),
@@ -515,16 +513,16 @@ define([
         		params.map = map;
 
         		printTemplate.exportOptions = {
-        		    width: mapWidth * mapMultiplyer, //multiply width
-        		    height: mapHeight * mapMultiplyer, //multiply height
-        		    dpi: mapMultiplyer * dpi //multiply dpi
+        		    width: mapWidth, //multiply width
+        		    height: mapHeight, //multiply height
+        		    dpi: dpi //multiply dpi
         		};
         		printTemplate.format = 'PNG32';
         		printTemplate.layout = 'MAP_ONLY';
         		printTemplate.preserveScale = true;
 
         		//set scale with multiplyer
-        		printTemplate.outScale = mapScale / mapMultiplyer;
+        		printTemplate.outScale = mapScale;
 
         		params.template = printTemplate;
 
@@ -532,7 +530,7 @@ define([
 
 
         		printTask.execute(params, function(response){
-        			var printedMapImage = new Image(mapWidth * mapMultiplyer, mapHeight * mapMultiplyer);
+        			var printedMapImage = new Image(mapWidth, mapHeight);
               var logoImage = new Image(200, 100);
               var legendImage = new Image(300, 100);
               // legendImage.src = './css/images/LMacknowledged.png';
@@ -559,7 +557,7 @@ define([
 
         			//onload needs to go before cors and src
         			printedMapImage.onload = function(){
-                self._addCanvasElements(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage, format, layoutType, dateString);
+                self._addCanvasElements(mapHeight, mapWidth, printedMapImage, printTitle, logoImage, legendImage, format, layoutType, dateString);
 
         			};
         			//set crossOrigin to anonymous for cors
@@ -572,23 +570,22 @@ define([
           }
         },
 
-        _addCanvasElements: function(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage, format, layoutType, dateString){
+        _addCanvasElements: function(mapHeight, mapWidth, printedMapImage, printTitle, logoImage, legendImage, format, layoutType, dateString){
       		//initiate fabric canvas
       		var mapCanvas = new fabric.Canvas('mapCanvas', {
-      			height: (mapHeight * mapMultiplyer) + (mapHeight/1.5),
-      			width: (mapWidth * mapMultiplyer) + (mapWidth/2.5),
+      			height: (mapHeight) + (mapHeight/1.5),
+      			width: (mapWidth) + (mapWidth/2.5),
       			background: '#fff'
       		});
 
           var footerMessage = 'Terms of use are available online at www.landmarkmap.org';
 
-      		var deMulptiplyer = 2,
-      			heightAllowance = 40,
-      			rectWidth = (mapWidth * mapMultiplyer) + (mapWidth/2.5),
-      			rectHeight = (mapHeight * mapMultiplyer) + (mapHeight/1.5),
+      		var heightAllowance = 40,
+      			rectWidth = (mapWidth) + (mapWidth/2.5),
+      			rectHeight = (mapHeight) + (mapHeight/1.5),
             logoLeft = layoutType === 'Landscape' ? 200 : 50,
             mapImageTop = layoutType === 'Portrait' ? 150 : (mapHeight/3),
-            legendHeight = layoutType === 'Portrait' ? ((mapHeight * mapMultiplyer) + (mapHeight/3)) - 75 : ((mapHeight * mapMultiplyer) + (mapHeight/3)),
+            legendHeight = layoutType === 'Portrait' ? ((mapHeight) + (mapHeight/3)) - 75 : ((mapHeight) + (mapHeight/3)),
             footerTop = layoutType === 'Portrait' ? (legendHeight - 15) : legendHeight;
 
             //add white background
