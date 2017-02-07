@@ -107,7 +107,7 @@ define([
           ), 
 
           React.createElement("canvas", {id: "mapCanvas", className: "mapCanvas hidden"}), 
-          React.createElement("button", {className: "modal-print-button", onClick: this.print}, "Print")
+          React.createElement("button", {id: "modal-print-button", className: "modal-print-button", onClick: this.print}, "Print")
         )
       );
     }

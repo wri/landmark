@@ -528,6 +528,8 @@ define([
 
         		params.template = printTemplate;
 
+            domClass.add('modal-print-button', 'loading');
+
 
         		printTask.execute(params, function(response){
         			var printedMapImage = new Image(mapWidth * mapMultiplyer, mapHeight * mapMultiplyer);
@@ -563,9 +565,9 @@ define([
         			//set crossOrigin to anonymous for cors
         			printedMapImage.setAttribute('crossOrigin', 'anonymous');
         			printedMapImage.src = response.url;
-
         		}, function(error){
               console.log(error)
+              domClass.remove('modal-print-button', 'loading');
             });
           }
         },
@@ -595,8 +597,8 @@ define([
           if (layoutType != 'MAP_ONLY') {
 
         		//add text to top
-        		mapCanvas.add(new fabric.Text(printTitle, {fontSize: (80/deMulptiplyer), top: 100, left: (rectWidth/2), textAlign: 'center', originX: 'center', fontFamily: 'GillSansRegular'}));
-            mapCanvas.add(new fabric.Text(dateString, {fontSize: (16), top: 100, left: (rectWidth/1.25), textAlign: 'center', originX: 'center', fontFamily: 'GillSansRegular'}));
+        		mapCanvas.add(new fabric.Text(printTitle, {fontSize: (20), top: 100, left: (rectWidth/2), textAlign: 'center', originX: 'center', fontFamily: 'Raleway'}));
+            mapCanvas.add(new fabric.Text(dateString, {fontSize: (12), top: 100, left: (rectWidth/1.25), textAlign: 'center', originX: 'center', fontFamily: 'Raleway'}));
 
             //add logo to top
             mapCanvas.add(new fabric.Image(logoImage, {top: 50, left: logoLeft}));
@@ -605,7 +607,7 @@ define([
             mapCanvas.add(new fabric.Image(legendImage, {top: legendHeight, left: (mapWidth/5)}));
 
             // add footer message
-            mapCanvas.add(new fabric.Text(footerMessage, {fontSize: (16), top: footerTop, left: (mapWidth/2), fontFamily: 'GillSansRegular'}));
+            mapCanvas.add(new fabric.Text(footerMessage, {fontSize: (12), top: footerTop, left: (mapWidth/2), fontFamily: 'Raleway'}));
 
         		//add map image
         		mapCanvas.add(new fabric.Image(printedMapImage, {left: (mapWidth/5), top: mapImageTop}));
@@ -618,7 +620,7 @@ define([
 
       	},
 
-        _exportCanvasMap: function(printTitle, rectWidth, rectHeight, format){
+        _exportCanvasMap: function(printTitle, rectWidth, rectHeight, format, layoutType){
       		var canvas = document.getElementById('mapCanvas');
       		var canvasContext = canvas.getContext('2d');
       		canvasContext.scale(1, 1)
@@ -633,7 +635,7 @@ define([
             if (layoutType === 'Landscape') {
               fitWidth = rectHeight/1.4;
               fitHeight = rectWidth/1.4;
-            } else if (layoutType === 'Landscape') {
+            } else if (layoutType === 'Portrait') {
               fitWidth = rectWidth/1.4;
               fitHeight = rectHeight/1.4;
             }
@@ -669,6 +671,7 @@ define([
               // $('#printLoader').addClass('hidden');
             });
           }
+          domClass.remove('modal-print-button', 'loading');
       	},
 
         printCommunityMap: function(title, dpi, format, layoutType) {
@@ -707,15 +710,15 @@ define([
           printParameters.map = brApp.map;
           printParameters.template = template;
           //- Add a loading class to the print button and remove it when loading is complete
-          domClass.add('print-widget', 'loading');
+          domClass.add('modal-print-button', 'loading');
 
           printTask.execute(printParameters, function (response) {
             console.log('executed');
-            domClass.remove('print-widget', 'loading');
+            domClass.remove('modal-print-button', 'loading');
             window.open(response.url);
           }, function (failure) {
             console.log(failure);
-            domClass.remove('print-widget', 'loading');
+            domClass.remove('modal-print-button', 'loading');
           });
 
         },

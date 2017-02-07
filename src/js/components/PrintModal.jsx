@@ -107,7 +107,7 @@ define([
           </div>
 
           <canvas id="mapCanvas" className="mapCanvas hidden"></canvas>
-          <button className='modal-print-button' onClick={this.print}>Print</button>
+          <button id='modal-print-button' className='modal-print-button' onClick={this.print}>Print</button>
         </Wrapper>
       );
     }
