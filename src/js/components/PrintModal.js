@@ -17,7 +17,7 @@ define([
           visible: true,
           mapTitle: 'Landmark Map',
           dpi: 96,
-          format: 'PDF',
+          format: 'pdf',
           layout: 'MAP_ONLY'
         };
       },

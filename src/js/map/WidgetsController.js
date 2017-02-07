@@ -504,14 +504,20 @@ define([
         			printTemplate = new PrintTemplate(),
         			// mapMultiplyer = (map.getZoom() > 5) ? 1 : 3;
               mapMultiplyer = 1;
+            var dayStrings = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+              monthStrings = ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December'],
+              date = new Date(),
+              currentMonth = monthStrings[date.getMonth()],
+              currentDay = dayStrings[date.getDay()],
+              currentYear = date.getFullYear(),
+              dateString = currentDay + ', ' + currentMonth + ' ' + date.getDate() + ', ' + currentYear;
 
         		params.map = map;
-
 
         		printTemplate.exportOptions = {
         		    width: mapWidth * mapMultiplyer, //multiply width
         		    height: mapHeight * mapMultiplyer, //multiply height
-        		    dpi: mapMultiplyer * 96 //multiply dpi
+        		    dpi: mapMultiplyer * dpi //multiply dpi
         		};
         		printTemplate.format = 'PNG32';
         		printTemplate.layout = 'MAP_ONLY';
@@ -526,7 +532,7 @@ define([
         		printTask.execute(params, function(response){
         			var printedMapImage = new Image(mapWidth * mapMultiplyer, mapHeight * mapMultiplyer);
               var logoImage = new Image(200, 100);
-              var legendImage = new Image(300, 150);
+              var legendImage = new Image(300, 100);
               // legendImage.src = './css/images/LMacknowledged.png';
               logoImage.src = './css/images/LandMark_final.png';
 
@@ -539,7 +545,6 @@ define([
                     legendImage.src = './css/images/LMtotal.png';
                     break;
                   case 'combinedFormal':
-                    console.log('combinedFormal');
                     legendImage.src = './css/images/LMacknowledged.png';
                     break;
                   case 'combinedInformal':
@@ -552,7 +557,7 @@ define([
 
         			//onload needs to go before cors and src
         			printedMapImage.onload = function(){
-                self._addCanvasElements(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage, format, layoutType);
+                self._addCanvasElements(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage, format, layoutType, dateString);
 
         			};
         			//set crossOrigin to anonymous for cors
@@ -565,8 +570,7 @@ define([
           }
         },
 
-        _addCanvasElements: function(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage, format, layoutType){
-          console.log('hit canvas');
+        _addCanvasElements: function(mapHeight, mapWidth, printedMapImage, mapMultiplyer, printTitle, logoImage, legendImage, format, layoutType, dateString){
       		//initiate fabric canvas
       		var mapCanvas = new fabric.Canvas('mapCanvas', {
       			height: (mapHeight * mapMultiplyer) + (mapHeight/1.5),
@@ -578,18 +582,12 @@ define([
 
       		var deMulptiplyer = 2,
       			heightAllowance = 40,
-      			legendArray = [
-      				{color: '#f00', label: 'red color'},
-      				{color: '#0f0', label: 'green color'}
-      			],
       			rectWidth = (mapWidth * mapMultiplyer) + (mapWidth/2.5),
       			rectHeight = (mapHeight * mapMultiplyer) + (mapHeight/1.5),
             logoLeft = layoutType === 'Landscape' ? 200 : 50,
             mapImageTop = layoutType === 'Portrait' ? 150 : (mapHeight/3),
             legendHeight = layoutType === 'Portrait' ? ((mapHeight * mapMultiplyer) + (mapHeight/3)) - 75 : ((mapHeight * mapMultiplyer) + (mapHeight/3)),
             footerTop = layoutType === 'Portrait' ? (legendHeight - 15) : legendHeight;
-
-            console.log(legendImage);
 
             //add white background
         		mapCanvas.add(new fabric.Rect({width: rectWidth, height: rectHeight, left: 0, top: 0, fill: 'white', angle: 0}));
@@ -598,6 +596,7 @@ define([
 
         		//add text to top
         		mapCanvas.add(new fabric.Text(printTitle, {fontSize: (80/deMulptiplyer), top: 100, left: (rectWidth/2), textAlign: 'center', originX: 'center', fontFamily: 'GillSansRegular'}));
+            mapCanvas.add(new fabric.Text(dateString, {fontSize: (16), top: 100, left: (rectWidth/1.25), textAlign: 'center', originX: 'center', fontFamily: 'GillSansRegular'}));
 
             //add logo to top
             mapCanvas.add(new fabric.Image(logoImage, {top: 50, left: logoLeft}));
@@ -620,27 +619,27 @@ define([
       	},
 
         _exportCanvasMap: function(printTitle, rectWidth, rectHeight, format){
-          console.log('hit export');
       		var canvas = document.getElementById('mapCanvas');
       		var canvasContext = canvas.getContext('2d');
-
       		canvasContext.scale(1, 1)
-          // var dataUrl = canvas.toDataURL();
 
-          // var pdf = new jsPDF();
-          // pdf.addImage(dataUrl, 'png', 0, 0);
-          // pdf.save('pdf.pdf')
-
-          if (format === 'PDF') {
+          if (format === 'pdf') {
             document.querySelector('.canvas-container').classList.add('hidden')
-            // var pdfUrl = canvas.toDataURL('image/jpeg');
             var dataUrl = canvas.toDataURL();
-            var pdf = new jsPDF('p', 'px', [rectHeight, rectWidth]);
-            pdf.addImage(dataUrl, 0, 0, rectWidth, rectHeight);
-            // console.log(pdfUrl);
-            // window.open(pdf, '_blank', 'fullscreen=yes');
-            window.open(pdf)
-            // pdf.save(printTitle + '.pdf');
+            var doc = new PDFDocument();
+            var stream = doc.pipe(blobStream());
+
+            doc.image(canvas.toDataURL(), 20, 0, {fit: [rectWidth/1.4, rectHeight/1.4]});
+          	doc.end();
+
+          	stream.on('finish', function() {
+          		var fileRead = new FileReader();
+          		fileRead.onload = function(e) {
+          			window.open(e.currentTarget.result)
+          		}
+          		fileRead.readAsDataURL(stream.toBlob('application/pdf'));
+          	});
+
           } else if (format === 'jpg') {
             document.querySelector('.canvas-container').classList.add('hidden')
             var pdfUrl = canvas.toDataURL('image/jpeg');
