@@ -343,8 +343,7 @@ define([
             plotBackgroundColor: null,
             backgroundColor: '#404040',
             plotBorderWidth: 0,
-            plotShadow: false,
-            marginTop: -150
+            plotShadow: false
           },
           colors: ['gray'],
           title: {
@@ -383,7 +382,6 @@ define([
                 plotBorderWidth: 0,
                 plotShadow: false,
                 margin: [0, 0, 0, 0],
-                marginTop: -150,
                 spacingTop: 0,
                 spacingBottom: 0,
                 spacingLeft: 0,
@@ -490,7 +488,7 @@ define([
             },
             function(chart1) { // on complete
             var xpos = '50%';
-            var ypos = '25%';
+            var ypos = '50%';
             var circleradius = 30;
             var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(2)
 
@@ -521,8 +519,7 @@ define([
               plotBackgroundColor: null,
               backgroundColor: '#404040',
               plotBorderWidth: 0,
-              plotShadow: false,
-              marginTop: -150
+              plotShadow: false
             },
             colors: ['gray'],
             title: {
@@ -561,7 +558,6 @@ define([
                 plotBorderWidth: 0,
                 plotShadow: false,
                 margin: [0, 0, 0, 0],
-                marginTop: -150,
                 spacingTop: 0,
                 spacingBottom: 0,
                 spacingLeft: 0,
@@ -630,6 +626,8 @@ define([
                       color:"white",
                       crop: false,
                       overflow: 'none',
+                      // useHTML: true,
+                      // format: '<div class="chart-data-label__container">{data.attributes.Map_IP_F}% <span class="chart-data-label__name">Acknowledged by Gov</span>',
                       style: {
                         fontSize: "10px"
                       },
@@ -679,7 +677,7 @@ define([
             },
             function(chart1) { // on complete
             var xpos = '50%';
-            var ypos = '25%';
+            var ypos = '50%';
             var circleradius = 30;
             var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(2)
 
