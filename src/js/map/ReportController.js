@@ -269,6 +269,9 @@ define([
             title: {
               text: null
             },
+            credits: {
+              enabled: false
+            },
             tooltip: {
               pointFormat: '<b>{point.y:.2f}%</b>'
             },
@@ -321,7 +324,7 @@ define([
           var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
               width: circleradius * 2,
               color: '#4572A7',
-              fontSize: '14px'
+              fontSize: '16px'
           }).attr({
               // why doesn't zIndex get the text in front of the chart?
               zIndex: 999
@@ -345,6 +348,9 @@ define([
           colors: ['gray'],
           title: {
             text: null
+          },
+          credits: {
+            enabled: false
           },
           tooltip: { enabled: false },
           plotOptions: {
@@ -393,6 +399,9 @@ define([
               // },
               title: {
                 text: null
+              },
+              credits: {
+                enabled: false
               },
               tooltip: {
                 pointFormat: '<b>{point.y:.2f}%</b>'
@@ -492,7 +501,7 @@ define([
             var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
                 width: circleradius * 2,
                 color: '#4572A7',
-                fontSize: '12px'
+                fontSize: '10px'
             }).attr({
                 // why doesn't zIndex get the text in front of the chart?
                 zIndex: 999
@@ -515,6 +524,9 @@ define([
             colors: ['gray'],
             title: {
               text: null
+            },
+            credits: {
+              enabled: false
             },
             tooltip: { enabled: false },
             plotOptions: {
@@ -563,6 +575,9 @@ define([
               // },
               title: {
                 text: null
+              },
+              credits: {
+                enabled: false
               },
               tooltip: {
                 pointFormat: '<b>{point.y:.2f}%</b>'
@@ -673,7 +688,7 @@ define([
             var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
                 width: circleradius * 2,
                 color: '#4572A7',
-                fontSize: '12px'
+                fontSize: '10px'
             }).attr({
                 // why doesn't zIndex get the text in front of the chart?
                 zIndex: 999
