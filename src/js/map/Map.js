@@ -55,6 +55,7 @@ define([
               wholeHash.y = MainConfig.defaultState.y;
               wholeHash.l = MainConfig.defaultState.l;
             }
+
             self.initialCountry = wholeHash.country;
 
             self.map = new Map(this.element, {
@@ -70,6 +71,13 @@ define([
                 self.map.graphics.clear();
                 self.map.resize();
                 self.addLayers();
+
+                var wholeHash = HashController.getHash();
+                console.log(wholeHash);
+
+                if (wholeHash.a) {
+                  self.applyLayerVisibility(wholeHash.a);
+                }
 
                 self.connectLayerEvents(self.map.graphicsLayerIds);
                 self.map.on("extent-change", function(e) {
@@ -152,6 +160,56 @@ define([
 
             // Initialize Add This
             addthis.init();
+        },
+
+        applyLayerVisibility: function(hash) {
+          self = this;
+          var layers = hash.split(',');
+          //find layers that are visible by default that are not in the layers array
+          //hide those layers
+          for (var layer in MapConfig.layers) {
+            var mapLayer = self.map.getLayer(layer);
+            if (layers.indexOf(layer) === -1 ) {
+              mapLayer.hide();
+            } else {
+              var mapLayerFeature = self.map.getLayer('indigenous_FormalDocFeature');
+              var mapLayerPoint = self.map.getLayer(layer + 'Point');
+              var mapLayerTile = self.map.getLayer(layer + '_Tiled');
+              console.log(layer + 'Feature');
+              console.log('SHOW '+layer);
+              if (mapLayer) {
+                console.log('SHOW '+mapLayer);
+                mapLayer.show();
+              }
+              if (mapLayerFeature) {
+                console.log('SHOW '+mapLayerFeature);
+                mapLayerFeature.show()
+              }
+              if (mapLayerPoint) {
+                console.log('SHOW '+mapLayerPoint);
+                mapLayerPoint.show()
+              }
+              if (mapLayerTile) {
+                console.log('SHOW '+mapLayerTile);
+                mapLayerTile.show()
+              }
+            }
+          }
+
+          // console.log(layers);
+          // layers.forEach(function(layerId) {
+          //   var mapLayer = self.map.getLayer(layerId);
+          //   mapLayer.show();
+          //   console.log(mapLayer.visible);
+          // });
+
+
+          //uncheck checkboxes if necessary
+          MapConfig.communityLevelLayers.forEach(function(layer) {
+            if (layer.id && layers.indexOf(layer.id) === -1 ) {
+              layer.checked = false;
+            }
+          });
         },
 
         //Connect mouse-over graphics

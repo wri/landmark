@@ -5,8 +5,9 @@ define([
     'map/MapConfig',
     'map/MapAssets',
     'dojo/_base/array',
-    'esri/layers/LayerDrawingOptions'
-], function(topic, on, registry, MapConfig, MapAssets, arrayUtils, LayerDrawingOptions) {
+    'esri/layers/LayerDrawingOptions',
+    'utils/HashController',
+], function(topic, on, registry, MapConfig, MapAssets, arrayUtils, LayerDrawingOptions, HashController) {
     'use strict';
 
 
@@ -26,6 +27,12 @@ define([
                 layer,
                 self = this;
 
+            var hash = HashController.getHash();
+            var hashActiveLayers = hash.a;
+            if (!hashActiveLayers) {
+              hashActiveLayers = '';
+            }
+
             if (isNationalLevelData) {
               visibleLayers = keys;
 
@@ -35,6 +42,19 @@ define([
                 otherDynamic = brApp.map.getLayer('landTenure');
                 if (otherDynamic) {
                   otherDynamic.hide();
+                  var hashIndex = hashActiveLayers.indexOf(otherDynamic.id);
+                  if (hashIndex > -1) {
+                    var hashLayers = hashActiveLayers.split(',');
+                    var index = hashLayers.indexOf(otherDynamic.id);
+                    hashLayers.splice(index,1);
+                    hashActiveLayers = hashLayers.join();
+                  }
+                  HashController.updateHash({
+                    x: hash.x,
+                    y: hash.y,
+                    l: hash.l,
+                    a: hashActiveLayers
+                  });
                 }
 
                 dynamicLayer = brApp.map.getLayer('percentLands');
@@ -48,19 +68,62 @@ define([
 
                   if (visibleLayers[0] === -1) {
                     nationalLevelFeature.hide();
+                    console.log('none');
+                    var hashIndex = hashActiveLayers.indexOf(dynamicLayer.id);
+                    if (hashIndex > -1) {
+                      var hashLayers = hashActiveLayers.split(',');
+                      var index = hashLayers.indexOf(dynamicLayer.id);
+                      hashLayers.splice(index,1);
+                      hashActiveLayers = hashLayers.join();
+                    }
+                    HashController.updateHash({
+                      x: hash.x,
+                      y: hash.y,
+                      l: hash.l,
+                      a: hashActiveLayers
+                    });
                   } else {
                     nationalLevelFeature.show();
                   }
 
                   dynamicLayer.setVisibleLayers(visibleLayers);
                   dynamicLayer.show();
-                }
+                  if (visibleLayers[0] !== -1) {
+                    var hashIndex = hashActiveLayers.indexOf(dynamicLayer.id);
+                    if (hashIndex === -1) {
+                      if (hashActiveLayers) {
+                        hashActiveLayers += ',' + dynamicLayer.id;
+                      } else {
+                        hashActiveLayers = dynamicLayer.id;
+                      }
+                    }
+                  }
 
+                  HashController.updateHash({
+                    x: hash.x,
+                    y: hash.y,
+                    l: hash.l,
+                    a: hashActiveLayers
+                  });
+                }
 
               } else {
                 otherDynamic = brApp.map.getLayer('percentLands');
                 if (otherDynamic) {
                   otherDynamic.hide();
+                  var hashIndex = hashActiveLayers.indexOf(otherDynamic.id);
+                  if (hashIndex > -1) {
+                    var hashLayers = hashActiveLayers.split(',');
+                    var index = hashLayers.indexOf(otherDynamic.id);
+                    hashLayers.splice(index,1);
+                    hashActiveLayers = hashLayers.join();
+                  }
+                  HashController.updateHash({
+                    x: hash.x,
+                    y: hash.y,
+                    l: hash.l,
+                    a: hashActiveLayers
+                  });
                 }
 
                 //TODO: figure out what this is - especially on load
@@ -75,15 +138,43 @@ define([
                   });
                   dynamicLayer.setVisibleLayers(visibleLayers, true);
                   dynamicLayer.show();
+                  console.log(otherDynamic);
+                  var hashIndex = hashActiveLayers.indexOf(dynamicLayer.id);
+                  if (hashIndex === -1) {
+                    if (hashActiveLayers) {
+                      hashActiveLayers += ',' + dynamicLayer.id;
+                    } else {
+                      hashActiveLayers = dynamicLayer.id;
+                    }
+                  }
+                }
+                  HashController.updateHash({
+                    x: hash.x,
+                    y: hash.y,
+                    l: hash.l,
+                    a: hashActiveLayers
+                  });
                 }
 
                 if (brApp.currentLayer === "none") {
                   nationalLevelFeature.hide();
+                  console.log('none');
+                  var hashIndex = hashActiveLayers.indexOf(dynamicLayer.id);
+                  if (hashIndex > -1) {
+                    var hashLayers = hashActiveLayers.split(',');
+                    var index = hashLayers.indexOf(dynamicLayer.id);
+                    hashLayers.splice(index,1);
+                    hashActiveLayers = hashLayers.join();
+                  }
+                  HashController.updateHash({
+                    x: hash.x,
+                    y: hash.y,
+                    l: hash.l,
+                    a: hashActiveLayers
+                  });
                 } else {
                   nationalLevelFeature.show();
                 }
-
-              }
 
               topic.publish('refresh-legend');
 
@@ -106,17 +197,42 @@ define([
                   });
 
                   if (off === true) {
+                    // TODO: remove layer hashes from url
                     layer.hide();
                     tiledLayer.hide();
                     featureLayer.hide();
                     featureLayerPoints.hide();
+                    var hashIndex = hashActiveLayers.indexOf(layer.id);
+                    if (hashIndex > -1) {
+                      var hashLayers = hashActiveLayers.split(',');
+                      var index = hashLayers.indexOf(layer.id);
+                      hashLayers.splice(index,1);
+                      hashActiveLayers = hashLayers.join();
+                    }
                   } else {
+                    // TODO: add layer hashes from url
                     self.turnOffNationalLevelData();
                     layer.show();
                     tiledLayer.show();
                     featureLayer.show();
                     featureLayerPoints.show();
+
+                  var hashIndex = hashActiveLayers.indexOf(layer.id);
+                  if (hashIndex === -1) {
+                    if (hashActiveLayers) {
+                      hashActiveLayers += ',' + layer.id;
+                    } else {
+                      hashActiveLayers = layer.id;
+                    }
                   }
+
+                  }
+                  HashController.updateHash({
+                    x: hash.x,
+                    y: hash.y,
+                    l: hash.l,
+                    a: hashActiveLayers
+                  });
 
                 }
 
