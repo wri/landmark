@@ -518,7 +518,7 @@ define([
         		    dpi: dpi //multiply dpi
         		};
         		printTemplate.format = 'PNG32';
-        		printTemplate.layout = layoutType === 'Portrait' ? 'landmark_custom_portrait' : layoutType === 'Landscape' ? 'landmark_custom_portrait' : 'MAP_ONLY';
+        		printTemplate.layout = layoutType === 'Portrait' ? 'landmark_custom_portrait' : layoutType === 'Landscape' ? 'landmark_custom_landscape' : 'MAP_ONLY';
         		printTemplate.preserveScale = true;
 
         		//set scale with multiplyer
