@@ -269,6 +269,9 @@ define([
             title: {
               text: null
             },
+            credits: {
+              enabled: false
+            },
             tooltip: {
               pointFormat: '<b>{point.y:.2f}%</b>'
             },
@@ -276,7 +279,7 @@ define([
               pie: {
                 dataLabels: {
                   enabled: true,
-                  distance: 20,
+                  distance: 10,
                   style: {
                     fontWeight: 'bold',
                     color: 'white'
@@ -293,7 +296,7 @@ define([
               // name: 'Browser share',
               innerSize: '60%',
               data: [
-                [(100 - data.attributes.Pct_F - data.attributes.Pct_NF).toFixed(2) + '% No Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF > 0 ? 100 - data.attributes.Pct_F - data.attributes.Pct_NF : null],
+                [(100 - data.attributes.Pct_F - data.attributes.Pct_NF).toFixed(2) + '% No <br> Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF > 0 ? 100 - data.attributes.Pct_F - data.attributes.Pct_NF : null],
                 [data.attributes.Pct_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Pct_F > 0 ? data.attributes.Pct_F : null],
                 [data.attributes.Pct_NF + '% <br><b>Not</b> <br><b>acknowledged</b>',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null],
                 {
@@ -321,7 +324,7 @@ define([
           var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
               width: circleradius * 2,
               color: '#4572A7',
-              fontSize: '14px'
+              fontSize: '16px'
           }).attr({
               // why doesn't zIndex get the text in front of the chart?
               zIndex: 999
@@ -329,7 +332,7 @@ define([
 
           var textBBox = chart1Text.getBBox();
           var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.5);
-          var y = chart1.plotTop  + (chart1.plotHeight * 0.5) - (textBBox.height * 0.5);
+          var y = chart1.plotTop  + (chart1.plotHeight * 0.5) - (textBBox.height * 0.4);
           chart1Text.attr({x: x, y: y});
       });
 
@@ -345,6 +348,9 @@ define([
           colors: ['gray'],
           title: {
             text: null
+          },
+          credits: {
+            enabled: false
           },
           tooltip: { enabled: false },
           plotOptions: {
@@ -381,7 +387,7 @@ define([
                 spacingLeft: 0,
                 spacingRight: 0
               },
-              colors: ['gray','#f4e0d7', '#e5aa92'],
+              colors: ['#f4e0d7', '#e5aa92', 'gray'],
               // title: {
               //   useHTML: true,
               //   shape: 'circle',
@@ -393,6 +399,9 @@ define([
               // },
               title: {
                 text: null
+              },
+              credits: {
+                enabled: false
               },
               tooltip: {
                 pointFormat: '<b>{point.y:.2f}%</b>'
@@ -407,7 +416,7 @@ define([
                       color: 'white'
                     }
                   },
-                  size:'50%'
+                  size:'40%'
                   // startAngle: -(data.attributes.Map_C_T / 100) * 180,
                   // endAngle: (data.attributes.Map_C_T / 100) * 180,
                   // center: ['50%', '75%']
@@ -480,7 +489,7 @@ define([
             function(chart1) { // on complete
             var xpos = '50%';
             var ypos = '50%';
-            var circleradius = 40;
+            var circleradius = 30;
             var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(2)
 
             // Render the circle
@@ -492,7 +501,7 @@ define([
             var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
                 width: circleradius * 2,
                 color: '#4572A7',
-                fontSize: '12px'
+                fontSize: '10px'
             }).attr({
                 // why doesn't zIndex get the text in front of the chart?
                 zIndex: 999
@@ -500,7 +509,7 @@ define([
 
             var textBBox = chart1Text.getBBox();
             var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.5);
-            var y = chart1.plotTop  + (chart1.plotHeight * 0.5) - (textBBox.height * 0.5);
+            var y = chart1.plotTop  + (chart1.plotHeight * 0.5) - (textBBox.height * 0.25);
             chart1Text.attr({x: x, y: y});
         })};
 
@@ -515,6 +524,9 @@ define([
             colors: ['gray'],
             title: {
               text: null
+            },
+            credits: {
+              enabled: false
             },
             tooltip: { enabled: false },
             plotOptions: {
@@ -564,6 +576,9 @@ define([
               title: {
                 text: null
               },
+              credits: {
+                enabled: false
+              },
               tooltip: {
                 pointFormat: '<b>{point.y:.2f}%</b>'
               },
@@ -581,7 +596,7 @@ define([
                       overflow: 'visible'
                     }
                   },
-                  size:'50%'
+                  size:'40%'
                   // startAngle: -(data.attributes.Map_IP_T / 100) * 180,
                   // endAngle: (data.attributes.Map_IP_T / 100) * 180,
                   // center: ['50%', '75%']
@@ -611,6 +626,8 @@ define([
                       color:"white",
                       crop: false,
                       overflow: 'none',
+                      // useHTML: true,
+                      // format: '<div class="chart-data-label__container">{data.attributes.Map_IP_F}% <span class="chart-data-label__name">Acknowledged by Gov</span>',
                       style: {
                         fontSize: "10px"
                       },
@@ -661,7 +678,7 @@ define([
             function(chart1) { // on complete
             var xpos = '50%';
             var ypos = '50%';
-            var circleradius = 40;
+            var circleradius = 30;
             var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(2)
 
             // Render the circle
@@ -673,7 +690,7 @@ define([
             var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
                 width: circleradius * 2,
                 color: '#4572A7',
-                fontSize: '12px'
+                fontSize: '10px'
             }).attr({
                 // why doesn't zIndex get the text in front of the chart?
                 zIndex: 999
@@ -681,7 +698,7 @@ define([
 
             var textBBox = chart1Text.getBBox();
             var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.5);
-            var y = chart1.plotTop  + (chart1.plotHeight * 0.5) - (textBBox.height * 0.5);
+            var y = chart1.plotTop  + (chart1.plotHeight * 0.5) - (textBBox.height * 0.25);
             chart1Text.attr({x: x, y: y});
         })};
 
