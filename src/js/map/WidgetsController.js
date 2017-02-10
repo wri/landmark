@@ -1,6 +1,7 @@
 define([
     'main/config',
     'map/Map',
+    'map/MapConfig',
     'dojo/on',
     'dojo/dom',
     'dijit/Dialog',
@@ -14,7 +15,7 @@ define([
     'esri/tasks/PrintParameters',
     'dojo/dom-geometry',
     'dojo/_base/window'
-], function(AppConfig, Map, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters, domGeom, win) {
+], function(AppConfig, Map, MapConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters, domGeom, win) {
     'use strict';
 
     var DURATION = 300;
@@ -190,27 +191,8 @@ define([
         },
 
         togglePrintModal: function() {
-          console.log(document.querySelector('.print-modal-wrapper'));
           var printModal = document.querySelector('.print-modal-wrapper')
           domClass.toggle(printModal, 'hidden');
-          //
-          // var Map = brApp.map;
-          // console.log(Map);
-          // var centerPoint = Map.extent.getCenter();
-    			// //get map node
-    			// var mapNode = document.getElementById("brMap");
-    			// //get contaomer node
-    			// var previewNode = document.getElementById("print-preview--map_container");
-    			// //append map node to preview node
-    			// previewNode.appendChild(mapNode);
-          //
-    			// //center map on update at center point from previous view
-    			// on.once(Map, 'update-end', function(){
-    			// 	Map.centerAt(centerPoint);
-    			// });
-          //
-    			// //resize map to fit new node
-    			// Map.resize();
         },
 
         toggleMobileTree: function() {
@@ -486,7 +468,24 @@ define([
         },
 
         printMap: function(title, dpi, format, layoutType) {
-          if (brApp.activeLayer === 'community-lands' || brApp.activeLayer === undefined){
+          var isCommunityActive = true;
+          var activeNationalData = '';
+          var visibleCommunityLayers = [];
+          for (var layer in MapConfig.layers) {
+            if (MapConfig.layers[layer].type === 'dynamic') {
+              var mapLayer = brApp.map.getLayer(layer);
+              if (layer === 'percentLands' || layer === 'landTenure') {
+                if (mapLayer.visible && mapLayer.visibleLayers[0] !== -1) {
+                  activeNationalData = layer;
+                }
+              } else {
+                if (mapLayer.visible && mapLayer.visibleLayers[0] !== -1) {
+                  visibleCommunityLayers.push(layer);
+                }
+              }
+            }
+          }
+          if ((brApp.activeLayer === 'community-lands' || brApp.activeLayer === undefined) && visibleCommunityLayers.length > 0 && activeNationalData === ''){
             this.printCommunityMap(title, dpi, format, layoutType);
           } else {
             var self = this;
@@ -533,8 +532,10 @@ define([
         			var printedMapImage = new Image(mapWidth, mapHeight);
               var logoImage = new Image(200, 100);
               var legendImage = new Image(300, 100);
+              var commLegendImage = new Image(300, 100);
               // legendImage.src = './css/images/LMacknowledged.png';
               logoImage.src = './css/images/LandMark_final.png';
+              commLegendImage.src = './css/images/legend-comm-landscape.jpg';
 
               // Check for active layer to determine what legend to use
               if (brApp.activeLayer === 'land-tenure') {
@@ -557,7 +558,8 @@ define([
 
         			//onload needs to go before cors and src
         			printedMapImage.onload = function(){
-                self._addCanvasElements(mapHeight, mapWidth, printedMapImage, printTitle, logoImage, legendImage, format, layoutType, dateString);
+                var visibleCommunityLayersLength = visibleCommunityLayers.length;
+                self._addCanvasElements(mapHeight, mapWidth, printedMapImage, printTitle, logoImage, legendImage, format, layoutType, dateString, commLegendImage, visibleCommunityLayersLength);
 
         			};
         			//set crossOrigin to anonymous for cors
@@ -570,7 +572,7 @@ define([
           }
         },
 
-        _addCanvasElements: function(mapHeight, mapWidth, printedMapImage, printTitle, logoImage, legendImage, format, layoutType, dateString){
+        _addCanvasElements: function(mapHeight, mapWidth, printedMapImage, printTitle, logoImage, legendImage, format, layoutType, dateString, commLegendImage, visibleCommunityLayersLength){
       		//initiate fabric canvas
       		var mapCanvas = new fabric.Canvas('mapCanvas', {
       			height: (mapHeight) + (mapHeight/1.5),
@@ -601,7 +603,16 @@ define([
             mapCanvas.add(new fabric.Image(logoImage, {top: 50, left: logoLeft}));
 
             //add legend image
-            mapCanvas.add(new fabric.Image(legendImage, {top: legendHeight, left: (mapWidth/5)}));
+            mapCanvas.add(new fabric.Image(legendImage, {top: legendHeight, left: (mapWidth/6)}));
+
+            //add comm legend image
+            if (visibleCommunityLayersLength > 0) {
+              if (layoutType === 'Portrait') {
+                mapCanvas.add(new fabric.Image(commLegendImage, {top: legendHeight, left: (mapWidth/1.5)}));
+              } else {
+                mapCanvas.add(new fabric.Image(commLegendImage, {top: legendHeight + 25, left: (mapWidth/1.25)}));
+              }
+            }
 
             // add footer message
             mapCanvas.add(new fabric.Text(footerMessage, {fontSize: (12), top: footerTop, left: (mapWidth/2), fontFamily: 'Raleway'}));
@@ -651,21 +662,12 @@ define([
           } else if (format === 'jpg') {
             document.querySelector('.canvas-container').classList.add('hidden')
             var pdfUrl = canvas.toDataURL('image/jpeg');
-            // var pdf = new jsPDF('p', 'px', [rectHeight, rectWidth]);
-            // pdf.addImage(dataUrl, 0, 0, rectWidth, rectHeight);
-            console.log(pdfUrl);
-            // debugger;
-            // window.open(pdf, '_blank', 'fullscreen=yes');
             window.open(pdfUrl)
-            // pdf.save(printTitle + '.pdf');
           } else {
             canvas.toBlob(function(blob) {
               document.querySelector('.canvas-container').classList.add('hidden')
               var dataUrl = canvas.toDataURL();
               window.open(dataUrl);
-              // saveAs(blob, printTitle.split(' ').join('_')+".png");
-
-              // $('#printLoader').addClass('hidden');
             });
           }
           domClass.remove('modal-print-button', 'loading');
@@ -712,7 +714,6 @@ define([
           domClass.add('modal-print-button', 'loading');
 
           printTask.execute(printParameters, function (response) {
-            console.log('executed');
             domClass.remove('modal-print-button', 'loading');
             window.open(response.url);
           }, function (failure) {

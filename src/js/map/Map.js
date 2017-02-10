@@ -25,7 +25,8 @@ define([
     'esri/layers/ArcGISTiledMapServiceLayer',
     'esri/layers/FeatureLayer',
     "esri/layers/GraphicsLayer",
-], function(Evented, declare, number, MapConfig, MainConfig, MapAssets, on, registry, HashController, Map, SimpleFillSymbol, SimpleMarkerSymbol, SimpleLineSymbol, Color, SimpleRenderer, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, GraphicsLayer) {
+    "map/LayerController"
+], function(Evented, declare, number, MapConfig, MainConfig, MapAssets, on, registry, HashController, Map, SimpleFillSymbol, SimpleMarkerSymbol, SimpleLineSymbol, Color, SimpleRenderer, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, GraphicsLayer, LayerController) {
     'use strict';
 
     var _map = declare([Evented], {
@@ -55,6 +56,7 @@ define([
               wholeHash.y = MainConfig.defaultState.y;
               wholeHash.l = MainConfig.defaultState.l;
             }
+
             self.initialCountry = wholeHash.country;
 
             self.map = new Map(this.element, {
@@ -71,9 +73,16 @@ define([
                 self.map.resize();
                 self.addLayers();
 
+                var wholeHash = HashController.getHash();
+
+                if (wholeHash.a) {
+                  self.applyLayerVisibility(wholeHash.a);
+                }
+
                 self.connectLayerEvents(self.map.graphicsLayerIds);
                 self.map.on("extent-change", function(e) {
 
+                    var updatedHash = HashController.getHash();
                     var delta = e.delta;
                     var extent = webMercatorUtils.webMercatorToGeographic(e.extent);
                     var levelChange = e.levelChange;
@@ -86,7 +95,8 @@ define([
                     HashController.updateHash({
                         x: x,
                         y: y,
-                        l: lod.level
+                        l: lod.level,
+                        a: updatedHash.a
                     });
 
                     if (brApp.map.infoWindow.isShowing) {
@@ -152,6 +162,48 @@ define([
 
             // Initialize Add This
             addthis.init();
+        },
+
+        applyLayerVisibility: function(hash) {
+          self = this;
+          var layers = hash.split(',');
+          var allLayers = [];
+          layers.forEach(function(layer) {
+            //check if this layer isnt our landTenure or our percentLands layers, then duplicate him w/ adjustments
+            allLayers.push(layer);
+            if (layer !== 'landTenure' && layer !== 'percentLands') {
+              allLayers.push(layer + 'Feature');
+              allLayers.push(layer + 'FeaturePoint');
+              allLayers.push(layer + '_Tiled');
+            }
+          });
+          //find layers that are visible by default that are not in the layers array
+          //hide those layers
+          for (var layer in MapConfig.layers) {
+            var mapLayer = self.map.getLayer(layer);
+            if (allLayers.indexOf(layer) === -1) {
+              mapLayer.hide();
+            } else {
+              if (layer === 'landTenure') {
+                mapLayer.visibleLayers = [2];
+                brApp.currentLayer = 'averageScoreTenure';
+                LayerController.updateVisibleLayers(mapLayer.visibleLayers, true);
+              } else if (layer === 'percentLands') {
+                mapLayer.visibleLayers = [2];
+                brApp.currentLayer = 'percentIndigenousLayers';
+                LayerController.updateVisibleLayers(mapLayer.visibleLayers, true);
+              } else {
+                mapLayer.show();
+              }
+            }
+          }
+
+          //uncheck checkboxes if necessary
+          MapConfig.communityLevelLayers.forEach(function(layer) {
+            if (layer.id && layers.indexOf(layer.id) === -1 ) {
+              layer.checked = false;
+            }
+          });
         },
 
         //Connect mouse-over graphics

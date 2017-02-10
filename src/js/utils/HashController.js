@@ -32,8 +32,6 @@ define(["dojo/hash", "dojo/topic", "dojo/_base/lang", "dojo/io-query", "dojo/_ba
         };
 
         o.handleHashChange = function(newState, oldState) {
-            var that = this;
-
             o.newState = newState;
 
             var changedView = oldState.v != newState.v;
@@ -46,15 +44,10 @@ define(["dojo/hash", "dojo/topic", "dojo/_base/lang", "dojo/io-query", "dojo/_ba
 
 
         o.updateHash = function(updateState) {
-
-            var that = this;
-
-
             //merge with current hash (newState)
             var _currentState = lang.clone(currentState);
 
             lang.mixin(_currentState, updateState);
-
 
             var newHashStr = ioQuery.objectToQuery(_currentState);
 
@@ -67,6 +60,5 @@ define(["dojo/hash", "dojo/topic", "dojo/_base/lang", "dojo/io-query", "dojo/_ba
         };
 
         return o;
-
 
     });

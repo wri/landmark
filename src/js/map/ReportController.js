@@ -119,19 +119,10 @@ define([
                 dom.byId('country-name').innerHTML = result.features[0].attributes.Country;
                 dom.byId('country-land-area').innerHTML = 'COUNTRY LAND AREA:';
                 var landCount = Math.round(countryLand);
-                //TODO: comma seperate this and #land-count !!
+
                 dom.byId('country-hectares').innerHTML = '<strong>' + Math.round(countryLand).toLocaleString() + ' Hectares</strong>';
                 dom.byId('average-score-comm').innerHTML = result.features[0].attributes.ind_C_A;
                 dom.byId('average-score-indig').innerHTML = result.features[0].attributes.ind_IP_A;
-                // dom.byId('pct-ack-gov').innerHTML = 'Acknowledged: ' + result.features[0].attributes.Pct_F;
-                // dom.byId('pct-no-ack-gov').innerHTML = 'Not acknowledged: ' + result.features[0].attributes.Pct_NF;
-                // dom.byId('pct-total-ack').innerHTML = 'total: ' + result.features[0].attributes.Pct_tot;
-                // dom.byId('comm-ack-gov').innerHTML = result.features[0].attributes.Map_C_F;
-                // dom.byId('comm-no-ack-gov').innerHTML = result.features[0].attributes.Map_C_NF;
-                // dom.byId('comm-total-ack').innerHTML = result.features[0].attributes.Map_C_T;
-                // dom.byId('indig-ack-gov').innerHTML = result.features[0].attributes.Map_IP_F;
-                // dom.byId('indig-no-ack-gov').innerHTML = result.features[0].attributes.Map_IP_NF;
-                // dom.byId('indig-total-ack').innerHTML = result.features[0].attributes.Map_IP_T;
 
                 self.map.setExtent(result.features[0].geometry.getExtent());
                 self.map.disablePan();
@@ -141,9 +132,7 @@ define([
                 self.map.disableMapNavigation();
 
                 self.addCharts(result.features[0]);
-                //TODO: Use out of the box Highcharts, 3d??
-                //TODO: If we don't have data for one of our charts, chart it anyways as a blank chart
-                //per that one comp
+
               }
             });
 
@@ -152,7 +141,6 @@ define([
         },
 
         toggleShareContainer: function() {
-          console.log('toggleShareContainer');
             var connector = document.querySelector('.share-container'),
                 container = document.querySelector('.share-connector');
 

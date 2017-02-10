@@ -8,8 +8,8 @@ define([], function() {
         defaultState: {
             x: -102.46,
             y: 13.47,
-            l: 3 //,
-            //lyrs: 'Active_Fires'
+            l: 3,
+            a: 'community_FormalDoc,community_NoDoc,community_FormalClaim,community_Occupied,indigenous_FormalDoc,indigenous_NoDoc,indigenous_FormalClaim,indigenous_Occupied'
         },
 
         portalGenerateFeaturesURL: 'http://www.arcgis.com/sharing/rest/content/features/generate',
