@@ -181,9 +181,6 @@ define([
                   nationalLevelFeature.show();
                 }
 
-              }
-
-
             } else { // Community Level
 
                 for (var i = 0; i < keys.length; i++) {
