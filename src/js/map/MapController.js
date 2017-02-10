@@ -553,19 +553,6 @@ define([
           return deferred;
         },
 
-
-        resetCommunityLevelTree: function () {
-            if (communityLayerList) {
-                communityLayerList.toggleOff();
-            }
-        },
-
-        resetNationalLayerList: function () {
-            if (nationalLayerList) {
-                nationalLayerList.setToNone();
-            }
-        },
-
         handleClick: function(evt) {
             brApp.debug('MapController >>> handleClick');
 
