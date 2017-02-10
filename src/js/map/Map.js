@@ -169,30 +169,22 @@ define([
           //hide those layers
           for (var layer in MapConfig.layers) {
             var mapLayer = self.map.getLayer(layer);
-            if (layers.indexOf(layer) === -1 ) {
+            if (layers.indexOf(layer) === -1 && layer != 'indigenous_FormalClaimFeature' && layer != 'indigenous_FormalClaimFeaturePoint' && layer != 'indigenous_FormalClaim_Tiled') {
               mapLayer.hide();
+              console.log(layer);
             } else {
-              var mapLayerFeature = self.map.getLayer('indigenous_FormalDocFeature');
-              var mapLayerPoint = self.map.getLayer(layer + 'Point');
-              var mapLayerTile = self.map.getLayer(layer + '_Tiled');
-              console.log(layer + 'Feature');
-              console.log('SHOW '+layer);
-              if (mapLayer) {
-                console.log('SHOW '+mapLayer);
+              console.log(layer);
+              // var mapLayerFeature = self.map.getLayer(layer + 'Feature');
+              // var mapLayerPoint = self.map.getLayer(layer + 'FeaturePoint');
+              // var mapLayerTile = self.map.getLayer(layer + '_Tiled');
+              console.log(mapLayer);
+              // console.log(mapLayerFeature);
+              // console.log(mapLayerPoint);
+              // console.log(mapLayerTile);
                 mapLayer.show();
-              }
-              if (mapLayerFeature) {
-                console.log('SHOW '+mapLayerFeature);
-                mapLayerFeature.show()
-              }
-              if (mapLayerPoint) {
-                console.log('SHOW '+mapLayerPoint);
-                mapLayerPoint.show()
-              }
-              if (mapLayerTile) {
-                console.log('SHOW '+mapLayerTile);
-                mapLayerTile.show()
-              }
+                // mapLayerFeature.show()
+                // mapLayerPoint.show()
+                // mapLayerTile.show()
             }
           }
 

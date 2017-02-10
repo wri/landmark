@@ -182,6 +182,7 @@ define([
 
                 for (var i = 0; i < keys.length; i++) {
                   layer = brApp.map.getLayer(keys[i]);
+                  console.log(keys[i]);
 
                   var tiledLayer = brApp.map.getLayer(keys[i] + "_Tiled");
                   var featureLayer = brApp.map.getLayer(keys[i] + 'Feature');
