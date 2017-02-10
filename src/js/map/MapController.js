@@ -728,15 +728,15 @@ define([
 
                     brApp.map.infoWindow.show(mapPoint);
 
-                    // var centerPoint = new Point(brApp.map.extent.getCenter());
-                    // var centerPointScreen = brApp.map.toScreen(centerPoint);
-                    // if (centerPointScreen.y > 300) {
-                    //     centerPointScreen.y -= 100;
-                    // }
+                    var centerPoint = new Point(brApp.map.extent.getCenter());
+                    var centerPointScreen = brApp.map.toScreen(mapPoint);
+                    if (centerPointScreen.y > 300) {
+                        centerPointScreen.y -= 100;
+                    }
 
-                    // centerPoint = brApp.map.toMap(centerPointScreen);
+                    centerPoint = brApp.map.toMap(centerPointScreen);
 
-                    // brApp.map.centerAt(centerPoint);
+                    brApp.map.centerAt(centerPoint);
 
                     if (window.innerWidth < 1000) {
                         brApp.map.infoWindow.maximize();
