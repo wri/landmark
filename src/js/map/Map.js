@@ -73,7 +73,6 @@ define([
                 self.addLayers();
 
                 var wholeHash = HashController.getHash();
-                console.log(wholeHash);
 
                 if (wholeHash.a) {
                   self.applyLayerVisibility(wholeHash.a);
@@ -82,6 +81,7 @@ define([
                 self.connectLayerEvents(self.map.graphicsLayerIds);
                 self.map.on("extent-change", function(e) {
 
+                    var updatedHash = HashController.getHash();
                     var delta = e.delta;
                     var extent = webMercatorUtils.webMercatorToGeographic(e.extent);
                     var levelChange = e.levelChange;
@@ -94,7 +94,8 @@ define([
                     HashController.updateHash({
                         x: x,
                         y: y,
-                        l: lod.level
+                        l: lod.level,
+                        a: updatedHash.a
                     });
 
                     if (brApp.map.infoWindow.isShowing) {
@@ -165,19 +166,26 @@ define([
         applyLayerVisibility: function(hash) {
           self = this;
           var layers = hash.split(',');
+          var allLayers = [];
+          layers.forEach(function(layer) {
+            //check if this layer isnt our landTenure or our percentLands layers, then duplicate him w/ adjustments
+            allLayers.push(layer);
+            if (layer !== 'landTenure' || layer !== 'percentLands') {
+              allLayers.push(layer + 'Feature');
+              allLayers.push(layer + 'FeaturePoint');
+              allLayers.push(layer + '_Tiled');
+            }
+          });
           //find layers that are visible by default that are not in the layers array
           //hide those layers
           for (var layer in MapConfig.layers) {
             var mapLayer = self.map.getLayer(layer);
-            if (layers.indexOf(layer) === -1 && layer != 'indigenous_FormalClaimFeature' && layer != 'indigenous_FormalClaimFeaturePoint' && layer != 'indigenous_FormalClaim_Tiled') {
+            if (allLayers.indexOf(layer) === -1) {
               mapLayer.hide();
-              console.log(layer);
             } else {
-              console.log(layer);
               // var mapLayerFeature = self.map.getLayer(layer + 'Feature');
               // var mapLayerPoint = self.map.getLayer(layer + 'FeaturePoint');
               // var mapLayerTile = self.map.getLayer(layer + '_Tiled');
-              console.log(mapLayer);
               // console.log(mapLayerFeature);
               // console.log(mapLayerPoint);
               // console.log(mapLayerTile);
