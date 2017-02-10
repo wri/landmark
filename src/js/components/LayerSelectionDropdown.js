@@ -52,6 +52,12 @@ define([
       var self = this;
 
       return function (item) {
+        if (item.id) {
+          var mapLayer = brApp.map.getLayer(item.id);
+          if (!mapLayer.visible) {
+            item.checked = false;
+          }
+        }
         return item.group !== group ? null :
         (
           item.isCategory ? React.createElement("div", {className: "layer-category"}, item.label) :
