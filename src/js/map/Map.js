@@ -177,6 +177,7 @@ define([
               allLayers.push(layer + '_Tiled');
             }
           });
+          allLayers.push('CustomFeatures');
           //find layers that are visible by default that are not in the layers array
           //hide those layers
           for (var layer in MapConfig.layers) {
