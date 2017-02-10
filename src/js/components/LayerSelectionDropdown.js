@@ -45,9 +45,7 @@ define([
     },
 
     toggleOff: function (layers, off) {
-
       LayerController.updateVisibleLayers(layers, false, off);
-      // LayerController.updateVisibleLayers(keys, isNationalLevelData)
     },
 
     layerMapper: function (group) {
