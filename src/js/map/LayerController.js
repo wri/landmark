@@ -21,6 +21,7 @@ define([
          */
         updateVisibleLayers: function(keys, isNationalLevelData, off) {
             brApp.debug('LayerController >>> updateVisibleLayers');
+            console.log('UPDATE VLs' + isNationalLevelData);
             var visibleLayers = [],
                 dynamicLayer,
                 otherDynamic,

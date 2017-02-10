@@ -25,7 +25,8 @@ define([
     'esri/layers/ArcGISTiledMapServiceLayer',
     'esri/layers/FeatureLayer',
     "esri/layers/GraphicsLayer",
-], function(Evented, declare, number, MapConfig, MainConfig, MapAssets, on, registry, HashController, Map, SimpleFillSymbol, SimpleMarkerSymbol, SimpleLineSymbol, Color, SimpleRenderer, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, GraphicsLayer) {
+    "map/LayerController"
+], function(Evented, declare, number, MapConfig, MainConfig, MapAssets, on, registry, HashController, Map, SimpleFillSymbol, SimpleMarkerSymbol, SimpleLineSymbol, Color, SimpleRenderer, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, GraphicsLayer, LayerController) {
     'use strict';
 
     var _map = declare([Evented], {
@@ -170,7 +171,7 @@ define([
           layers.forEach(function(layer) {
             //check if this layer isnt our landTenure or our percentLands layers, then duplicate him w/ adjustments
             allLayers.push(layer);
-            if (layer !== 'landTenure' || layer !== 'percentLands') {
+            if (layer !== 'landTenure' && layer !== 'percentLands') {
               allLayers.push(layer + 'Feature');
               allLayers.push(layer + 'FeaturePoint');
               allLayers.push(layer + '_Tiled');
@@ -183,26 +184,19 @@ define([
             if (allLayers.indexOf(layer) === -1) {
               mapLayer.hide();
             } else {
-              // var mapLayerFeature = self.map.getLayer(layer + 'Feature');
-              // var mapLayerPoint = self.map.getLayer(layer + 'FeaturePoint');
-              // var mapLayerTile = self.map.getLayer(layer + '_Tiled');
-              // console.log(mapLayerFeature);
-              // console.log(mapLayerPoint);
-              // console.log(mapLayerTile);
+              if (layer === 'landTenure') {
+                mapLayer.visibleLayers = [2];
+                brApp.currentLayer = 'averageScoreTenure';
+                LayerController.updateVisibleLayers(mapLayer.visibleLayers, true);
+              } else if (layer === 'percentLands') {
+                mapLayer.visibleLayers = [2];
+                brApp.currentLayer = 'percentIndigenousLayers';
+                LayerController.updateVisibleLayers(mapLayer.visibleLayers, true);
+              } else {
                 mapLayer.show();
-                // mapLayerFeature.show()
-                // mapLayerPoint.show()
-                // mapLayerTile.show()
+              }
             }
           }
-
-          // console.log(layers);
-          // layers.forEach(function(layerId) {
-          //   var mapLayer = self.map.getLayer(layerId);
-          //   mapLayer.show();
-          //   console.log(mapLayer.visible);
-          // });
-
 
           //uncheck checkboxes if necessary
           MapConfig.communityLevelLayers.forEach(function(layer) {
