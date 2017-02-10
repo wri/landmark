@@ -629,7 +629,7 @@ define([
               if (layoutType === 'Portrait') {
                 mapCanvas.add(new fabric.Image(commLegendImage, {top: legendHeight, left: (mapWidth/1.5)}));
               } else {
-                mapCanvas.add(new fabric.Image(commLegendImage, {top: legendHeight + 25, left: (mapWidth/1.5)}));
+                mapCanvas.add(new fabric.Image(commLegendImage, {top: legendHeight + 25, left: (mapWidth/1.25)}));
               }
             }
 
