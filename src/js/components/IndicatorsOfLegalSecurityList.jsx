@@ -53,14 +53,7 @@ define([
 			this.props.setActiveTab(this.props.activeSelection)
     },
 
-    setToNone: function () {
-
-        if (this.state.active !== 'none') {
-            this.setState({ active: 'none' });
-        }
-    },
-
-    componentDidUpdate: function () {
+    componentDidUpdate: function (prevProps, prevState) {
     	var visibleLayers,
     			state = this.state;
 
@@ -87,7 +80,13 @@ define([
 						}
 
 					}
+
+          if (this.props.activeTab === PercentIndigenous) {
+            visibleLayers = [-1];
+          }
+
 					brApp.currentLayer = (state.landTenureCategory === LandTenureInd ? state.activeIndigenousKey : state.activeCommunityKey);
+
     			// // If Current Category is Land Tenure Indigenous, visible layers is [0], else, its [2]
     			// visibleLayers = (this.state.landTenureCategory === LandTenureInd ? [0] : [2]);
     			break;
@@ -97,9 +96,7 @@ define([
     			break;
     	}
 
-
     	// Update the currentLayer in brApp, Our popup needs to know the selection so it can format the content correctly
-
 
     	// The true signifies that this is the national layer being updated
     	LayerController.updateVisibleLayers(visibleLayers, true);
@@ -114,7 +111,7 @@ define([
 
     changeLandTenureLayer: function (key, layer) {
 			if (layer !== -1) {
-				this.props.setActiveTab(this.props.activeSelection)
+				this.props.setActiveTab(this.props.activeSelection);
 			}
     	// If layer === 0, update Active Community Key, else, update Active Indigenous Key
     	if (layer === 0 || layer === 1) {
@@ -133,12 +130,10 @@ define([
 
     /* jshint ignore:start */
     render: function () {
-
       var legendObject = {
         name: 'landTenure',
         layerIdValue: 0
       }
-
 
     	return (
     		<div className='national-level-layer-lists'>

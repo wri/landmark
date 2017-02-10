@@ -54,17 +54,9 @@ define([
 				this.props.setActiveTab(this.props.activeSelection)
     },
 
-    setToNone: function () {
-
-        if (this.state.active !== 'none') {
-            this.setState({ active: 'none' });
-        }
-    },
-
     componentDidUpdate: function () {
     	var visibleLayers,
     			state = this.state;
-
 
     	switch (state.active) {
     		case 'none':
@@ -94,7 +86,6 @@ define([
 					brApp.currentLayer = 'percentIndigenousLayers';
     			break;
     	}
-
 
     	// Update the currentLayer in brApp, Our popup needs to know the selection so it can format the content correctly
 

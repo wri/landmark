@@ -34,7 +34,9 @@ define([
               if (brApp.currentLayer === "percentIndigenousLayers") {
                 otherDynamic = brApp.map.getLayer('landTenure');
                 if (otherDynamic) {
-                  otherDynamic.hide();
+                  if (visibleLayers[0] !== -1) {
+                    otherDynamic.hide();
+                  }
                 }
 
                 dynamicLayer = brApp.map.getLayer('percentLands');
@@ -56,11 +58,12 @@ define([
                   dynamicLayer.show();
                 }
 
-
               } else {
                 otherDynamic = brApp.map.getLayer('percentLands');
                 if (otherDynamic) {
-                  otherDynamic.hide();
+                  if (visibleLayers[0] !== -1) {
+                    otherDynamic.hide();
+                  }
                 }
 
                 //TODO: figure out what this is - especially on load
@@ -85,7 +88,10 @@ define([
 
               }
 
-              topic.publish('refresh-legend');
+
+
+
+
 
             } else { // Community Level
 
@@ -121,7 +127,6 @@ define([
                 }
 
                 // dynamicLayer.setVisibleLayers(visibleLayers);
-                topic.publish('refresh-legend');
 
             }
         },
@@ -156,7 +161,6 @@ define([
             }
 
             // This will call MapController.resetCommunityLevelTree
-            // topic.publish('reset-community-tree');
 
             $("#toolsMenuButton").addClass("minimizedHide");
             $("#legendMenuButton").addClass("minimizedAdjust");
@@ -180,7 +184,6 @@ define([
          * National Level Data related things off
          */
         turnOffNationalLevelData: function () {
-            // topic.publish('reset-national-layer-list');
             $("#toolsMenuButton").removeClass("minimizedHide");
             $("#legendMenuButton").removeClass("minimizedAdjust");
 
@@ -211,7 +214,6 @@ define([
               landTenure = brApp.map.getLayer('landTenure');
               if (landTenure) {
                 landTenure.setVisibleLayers(visibleLayers, true);
-                topic.publish('refresh-legend');
               }
 
               brApp.map.setExtent(brApp.map.extent);
@@ -228,9 +230,7 @@ define([
                 layerDrawingOptionsArray[layer] = layerDrawingOption;
             });
 
-
             landTenure.setLayerDrawingOptions(layerDrawingOptionsArray);
-            topic.publish('refresh-legend');
             brApp.map.setExtent(brApp.map.extent);
         }
 

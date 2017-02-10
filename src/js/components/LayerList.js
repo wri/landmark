@@ -33,7 +33,6 @@ define([
   				};
   			}
 
-
   		},
 
   		/* jshint ignore:start */
@@ -58,7 +57,6 @@ define([
 					active = false;
 				};
 
-
   			return (
   				React.createElement("div", {className: 'national-layer-list-item ', key: item.id}, 
   					React.createElement("div", {className: 'national-layer-list-item-label ' + (active && this.props.layerActive !== 'none' ? 'active' : '') + (subTitle ? 'subTitle' : '') + (subLayer ? 'subLayer' : ''), onClick: layer != undefined ? this.setActiveLayer.bind(this, item.id, item.layer) : null}, item.label), 
@@ -79,11 +77,7 @@ define([
   			// Notify Parent and let parent dispatch updates
   			this.props.change(key, layer);
 
-  		},
-
-			removeLayer: function () {
-				console.log('removed');
-			}
+  		}
 
   	});
 
