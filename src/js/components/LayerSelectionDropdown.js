@@ -54,8 +54,6 @@ define([
       return function (item) {
         if (item.id) {
           var mapLayer = brApp.map.getLayer(item.id);
-          console.log(mapLayer.visible);
-          console.log(item.id);
           if (!mapLayer.visible) {
             item.checked = false;
           } else {
