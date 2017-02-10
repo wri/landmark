@@ -52,6 +52,14 @@ define([
       var self = this;
 
       return function (item) {
+        if (item.id) {
+          var mapLayer = brApp.map.getLayer(item.id);
+          if (!mapLayer.visible) {
+            item.checked = false;
+          } else {
+            item.checked = true;
+          }
+        }
         return item.group !== group ? null :
         (
           item.isCategory ? <div className='layer-category'>{item.label}</div> :
