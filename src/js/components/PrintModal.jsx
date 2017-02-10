@@ -28,7 +28,6 @@ define([
     },
 
     print: function () {
-      console.log(this.state);
       var title = this.state.mapTitle;
       var dpi = this.state.dpi;
       var format = this.state.format;

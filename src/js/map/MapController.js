@@ -85,7 +85,6 @@ define([
               if (width > 768) {
                 WidgetsController.toggleTreeContainer();
               } else {
-                console.log('clicked');
                 WidgetsController.toggleMobileTree();
               }
             });
@@ -527,7 +526,6 @@ define([
             if (result.features && result.features[0]) {
               brApp.map.setExtent(result.features[0].geometry.getExtent());
             }
-            //TODO: Turn on community level data!
           });
 
         },
@@ -757,46 +755,6 @@ define([
             });
 
         },
-
-        // identifyIndigenous: function(mapPoint) {
-        //     brApp.debug('MapController >>> identifyIndigenous');
-        //
-        //     var deferred = new Deferred(),
-        //         identifyTask = new IdentifyTask(MapConfig.layers.indigenousLands.url),
-        //         params = new IdentifyParameters(),
-        //         mapLayer = brApp.map.getLayer('indigenousLands');
-        //
-        //     params.tolerance = 3;
-        //     params.returnGeometry = true;
-        //     params.width = brApp.map.width;
-        //     params.height = brApp.map.height;
-        //     params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
-        //     params.geometry = mapPoint;
-        //     params.mapExtent = brApp.map.extent;
-        //     params.layerIds = mapLayer.visibleLayers;
-        //     if (params.layerIds.indexOf(17) > -1) {
-        //         params.layerIds.splice(params.layerIds.indexOf(17), 1);
-        //     }
-        //
-        //     params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
-        //
-        //     identifyTask.execute(params, function(features) {
-        //         if (features.length > 0) {
-        //             console.log(features);
-        //             deferred.resolve({
-        //                 layer: "indigenousLands",
-        //                 features: features
-        //             });
-        //         } else {
-        //             deferred.resolve(false);
-        //         }
-        //     }, function(error) {
-        //         deferred.resolve(false);
-        //     });
-        //
-        //     return deferred.promise;
-        //
-        // },
 
         identifyIndigenous_FormalClaims: function(mapPoint) {
             brApp.debug('MapController >>> identifyIndigenous_FormalClaims');

@@ -145,7 +145,7 @@ define([
          * @param {array} items - Array of items resulting from a fetch on the csv store
          */
         formatCSVDataForStore: function(store, items) {
-            var counter = 0, //TODO: makeUpSomething()
+            var counter = 0,
                 newFeatures = [],
                 nameField = 'Name',
                 attributes,

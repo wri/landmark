@@ -191,27 +191,8 @@ define([
         },
 
         togglePrintModal: function() {
-          console.log(document.querySelector('.print-modal-wrapper'));
           var printModal = document.querySelector('.print-modal-wrapper')
           domClass.toggle(printModal, 'hidden');
-          //
-          // var Map = brApp.map;
-          // console.log(Map);
-          // var centerPoint = Map.extent.getCenter();
-    			// //get map node
-    			// var mapNode = document.getElementById("brMap");
-    			// //get contaomer node
-    			// var previewNode = document.getElementById("print-preview--map_container");
-    			// //append map node to preview node
-    			// previewNode.appendChild(mapNode);
-          //
-    			// //center map on update at center point from previous view
-    			// on.once(Map, 'update-end', function(){
-    			// 	Map.centerAt(centerPoint);
-    			// });
-          //
-    			// //resize map to fit new node
-    			// Map.resize();
         },
 
         toggleMobileTree: function() {
@@ -681,21 +662,12 @@ define([
           } else if (format === 'jpg') {
             document.querySelector('.canvas-container').classList.add('hidden')
             var pdfUrl = canvas.toDataURL('image/jpeg');
-            // var pdf = new jsPDF('p', 'px', [rectHeight, rectWidth]);
-            // pdf.addImage(dataUrl, 0, 0, rectWidth, rectHeight);
-            console.log(pdfUrl);
-            // debugger;
-            // window.open(pdf, '_blank', 'fullscreen=yes');
             window.open(pdfUrl)
-            // pdf.save(printTitle + '.pdf');
           } else {
             canvas.toBlob(function(blob) {
               document.querySelector('.canvas-container').classList.add('hidden')
               var dataUrl = canvas.toDataURL();
               window.open(dataUrl);
-              // saveAs(blob, printTitle.split(' ').join('_')+".png");
-
-              // $('#printLoader').addClass('hidden');
             });
           }
           domClass.remove('modal-print-button', 'loading');
@@ -742,7 +714,6 @@ define([
           domClass.add('modal-print-button', 'loading');
 
           printTask.execute(printParameters, function (response) {
-            console.log('executed');
             domClass.remove('modal-print-button', 'loading');
             window.open(response.url);
           }, function (failure) {

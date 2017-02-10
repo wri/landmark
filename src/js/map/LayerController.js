@@ -21,7 +21,6 @@ define([
          */
         updateVisibleLayers: function(keys, isNationalLevelData, off) {
             brApp.debug('LayerController >>> updateVisibleLayers');
-            console.log('UPDATE VLs' + isNationalLevelData);
             var visibleLayers = [],
                 dynamicLayer,
                 otherDynamic,
@@ -72,7 +71,6 @@ define([
 
                   if (visibleLayers[0] === -1) {
                     nationalLevelFeature.hide();
-                    console.log('none');
                     var hashIndex = hashActiveLayers.indexOf(dynamicLayer.id);
                     if (hashIndex > -1) {
                       var hashLayers = hashActiveLayers.split(',');
@@ -132,7 +130,6 @@ define([
                   }
                 }
 
-                //TODO: figure out what this is - especially on load
                 this.setLandTenureRenderer(visibleLayers);
                 dynamicLayer = brApp.map.getLayer('landTenure');
                 if (dynamicLayer) {
@@ -144,7 +141,7 @@ define([
                   });
                   dynamicLayer.setVisibleLayers(visibleLayers, true);
                   dynamicLayer.show();
-                  console.log(otherDynamic);
+
                   var hashIndex = hashActiveLayers.indexOf(dynamicLayer.id);
                   if (hashIndex === -1) {
                     if (hashActiveLayers) {
@@ -164,7 +161,7 @@ define([
 
                 if (brApp.currentLayer === "none") {
                   nationalLevelFeature.hide();
-                  console.log('none');
+
                   var hashIndex = hashActiveLayers.indexOf(dynamicLayer.id);
                   if (hashIndex > -1) {
                     var hashLayers = hashActiveLayers.split(',');
@@ -186,7 +183,6 @@ define([
 
                 for (var i = 0; i < keys.length; i++) {
                   layer = brApp.map.getLayer(keys[i]);
-                  console.log(keys[i]);
 
                   var tiledLayer = brApp.map.getLayer(keys[i] + "_Tiled");
                   var featureLayer = brApp.map.getLayer(keys[i] + 'Feature');
@@ -202,7 +198,6 @@ define([
                   });
 
                   if (off === true) {
-                    // TODO: remove layer hashes from url
                     layer.hide();
                     tiledLayer.hide();
                     featureLayer.hide();
@@ -215,7 +210,6 @@ define([
                       hashActiveLayers = hashLayers.join();
                     }
                   } else {
-                    // TODO: add layer hashes from url
                     self.turnOffNationalLevelData();
                     layer.show();
                     tiledLayer.show();
