@@ -10,13 +10,22 @@
 	cursor pointer
 
 @media (max-width: 1050px)
+	.search-button, .report-button, .analysis-button
+		position fixed
+
 	.report-button
 		right 300px
 		top 70px
 
+	.esriPopupWrapper
+		.sizer
+			width 100% !important
+		.sizer.content
+			width 100% !important
+
 @media (max-width: 900px)
 	.report-button
-		right 70px
+		right 112px
 		top 120px
 
 	.search-button
@@ -27,7 +36,7 @@
 @media (max-width: 768px)
 	.basemap-container
 		width auto !important
-		
+
 	.mobile-footer
 		display block
 		bottom 0
@@ -97,24 +106,30 @@
 		width 100%
 
 	.arcgisSearch .searchGroup .searchInput
-		width 150px !important
+		width 120px !important
 
 	.search-button, .report-button, .analysis-button
 		right 70px
 		z-index 100
-		top 13em
+		top 7.5em
 		// bottom 15em
 
-	.report-button, .search-button, .analysis-button
-		left 40px
-		right 0
+	.report-button
+		right 112px
+
+	#esri-search-holder_menu_button
+		right -60px
+
+	.report-button, .analysis-button
+		// left 40px
+		// right 0
 		margin-left auto
 		margin-right auto
 		width 200px
 
 	.search-button
-		left 0
-		width calc(50% + 25px)
+		left 50px
+		width 140px
 
 	.disclaimer
 		margin-top auto
@@ -130,3 +145,7 @@
 
 	#upload-shapefile
 		display none
+
+@media (max-width: 500px)
+	#removeGraphic, #exportAnalysis
+		left 0px

@@ -291,6 +291,21 @@ define([
             printModal = new PrintModal('print-modal');
             mobileFooter = new MobileFooter('mobile-footer')
 
+            var body = win.body(),
+                mobileThreshold = 800,
+                width = domGeom.position(body).w;
+
+            if (width <= mobileThreshold) {
+              var layerTree = document.querySelector('.tree-widget-container')
+              var searchButton = document.querySelector('.search-button')
+              var analysisButton = document.querySelector('.analysis-button')
+              var reportButton = document.querySelector('.report-button')
+              domClass.add(layerTree, 'hidden');
+              domClass.add(searchButton, 'hidden');
+              domClass.add(analysisButton, 'hidden');
+              domClass.add(reportButton, 'hidden');
+            }
+
             // Start all widgets that still need to be started
             basemapGallery.startup();
             homeWidget.startup();
