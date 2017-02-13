@@ -511,6 +511,12 @@ define([
 
              reportWidget.on('select-result', function(results) {
                if (results.result.feature && results.result.feature.attributes.Country) {
+                //  var win = window.open('report.html?country=' + results.result.feature.attributes.Country);
+                //  if (win == null || typeof(win)=='undefined') {
+                //    alert("Turn off your pop-up blocker!");
+                //  } else {
+                //    window.open('report.html?country=' + results.result.feature.attributes.Country);
+                //  }
                  window.open('report.html?country=' + results.result.feature.attributes.Country);
                }
              });
