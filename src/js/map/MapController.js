@@ -512,8 +512,8 @@ define([
              reportWidget.on('select-result', function(results) {
                if (results.result.feature && results.result.feature.attributes.Country) {
                  //If popup blocker is on, alert!
-                 var win = window.open('report.html?country=' + results.result.feature.attributes.Country);
-                 if (win == null || typeof(win)=='undefined') {
+                 var openWindow = window.open('report.html?country=' + results.result.feature.attributes.Country);
+                 if (openWindow == null || typeof(openWindow)=='undefined') {
                    alert("Turn off your pop-up blocker!");
                  } else {
                    window.open('report.html?country=' + results.result.feature.attributes.Country);
@@ -1793,8 +1793,8 @@ define([
                 };
 
 
-                var win = window.open('analysis.html');
-                if (win == null || typeof(win)=='undefined') {
+                var openWindow = window.open('analysis.html');
+                if (openWindow == null || typeof(openWindow)=='undefined') {
                   alert("Turn off your pop-up blocker!");
                   win.payload = payload;
                 } else {
@@ -1806,10 +1806,15 @@ define([
                 template.content = "<p class='middle-column'>The area of interest intersects with " + value.features.length + " indigenous and/or community lands</p>";
 
                 var theTitle = "<div id='title_title'>Analysis Results</div>";
+                var body = win.body(),
+                width = domGeom.position(body).w,
+                mobileThreshold = 800;
 
                 brApp.map.infoWindow.setTitle(theTitle);
                 brApp.map.infoWindow.setContent(template.content);
-                brApp.map.infoWindow.resize(650, 350);
+                if (width > mobileThreshold) {
+                  brApp.map.infoWindow.resize(650, 350);
+                }
 
                 $("#identifyNote").remove();
 
