@@ -141,11 +141,9 @@ define([
         },
 
         toggleShareContainer: function() {
-            var connector = document.querySelector('.share-container'),
-                container = document.querySelector('.share-connector');
+            var container = document.querySelector('.share-container');
 
-            if (connector && container) {
-                domClass.toggle(connector, 'hidden');
+            if (container) {
                 domClass.toggle(container, 'hidden');
             }
 
