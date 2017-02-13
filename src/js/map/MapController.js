@@ -728,13 +728,12 @@ define([
 
                     brApp.map.infoWindow.show(mapPoint);
 
-                    var centerPoint = new Point(brApp.map.extent.getCenter());
                     var centerPointScreen = brApp.map.toScreen(mapPoint);
                     if (centerPointScreen.y > 300) {
                         centerPointScreen.y -= 100;
                     }
 
-                    centerPoint = brApp.map.toMap(centerPointScreen);
+                    var centerPoint = brApp.map.toMap(centerPointScreen);
 
                     brApp.map.centerAt(centerPoint);
 
