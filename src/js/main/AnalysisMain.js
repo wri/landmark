@@ -129,11 +129,7 @@ define([
             spacingBottom: 0,
             spacingLeft: 0,
             spacingRight: 0,
-            type: 'pie',
-            options3d: {
-                enabled: true,
-                alpha: 45
-            }
+            type: 'pie'
           },
           title: {
             margin: 0,
@@ -188,11 +184,7 @@ define([
             spacingBottom: 0,
             spacingLeft: 0,
             spacingRight: 0,
-            type: 'pie',
-            options3d: {
-                enabled: true,
-                alpha: 45
-            }
+            type: 'pie'
           },
           title: {
             margin: 0,
@@ -247,11 +239,7 @@ define([
             spacingBottom: 0,
             spacingLeft: 0,
             spacingRight: 0,
-            type: 'pie',
-            options3d: {
-                enabled: true,
-                alpha: 45
-            }
+            type: 'pie'
           },
           title: {
             margin: 0,
