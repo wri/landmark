@@ -1786,8 +1786,13 @@ define([
                 };
 
 
-                var win = window.open('analysis.html', '_blank');
-                win.payload = payload;
+                var win = window.open('analysis.html');
+                if (win == null || typeof(win)=='undefined') {
+                  alert("Turn off your pop-up blocker!");
+                  win.payload = payload;
+                } else {
+                  win.payload = payload;
+                }
 
                 var template = new InfoTemplate();
 
