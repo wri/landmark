@@ -518,7 +518,6 @@ define([
                  } else {
                    window.open('report.html?country=' + results.result.feature.attributes.Country);
                  }
-                 window.open('report.html?country=' + results.result.feature.attributes.Country);
                }
              });
 
