@@ -58,7 +58,9 @@ define([
             }
 
             var str;
-            var areaGis = graphic.feature.attributes.Area_GIS ? parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2) : '0.00';
+
+            var areaGis = graphic.feature.attributes.Area_GIS && graphic.feature.attributes.Area_GIS !== 'Null' ? parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2) : '0.00';
+
             if (even === "even") {
                 str = "<tr class='even-row'><td class='country'>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
                     graphic.feature.attributes.Name + "</td><td class='ident'>" +

@@ -1256,7 +1256,7 @@ define([
                 }
 
                 var area_Ofcl = item.feature.attributes.Area_Ofcl ? item.feature.attributes.Area_Ofcl : 0;
-                var area_GIS = item.feature.attributes.Area_GIS ? item.feature.attributes.Area_GIS : 0;
+                var area_GIS = item.feature.attributes.Area_GIS && item.feature.attributes.Area_GIS !== 'Null' ? parseFloat(item.feature.attributes.Area_GIS).toFixed(2) : '0.00';
 
                 template = new InfoTemplate(item.value,
                     "<div id='tableWrapper'><table id='indigenousTable'>" +
@@ -1763,6 +1763,7 @@ define([
                 }
 
                 function getTextContent(graphic) {
+                    var gisArea = graphic.feature.attributes.Area_GIS && graphic.feature.attributes.Area_GIS !== 'Null' ? parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2) : '0.00';
                     if (graphic.feature.attributes.Identity === "Indigenous (self-identified)") {
                         graphic.feature.attributes.Identity = "Indigenous";
                     }
@@ -1773,7 +1774,7 @@ define([
                         graphic.feature.attributes.Form_Rec = "Officially recognized";
                     }
 
-                    var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status, graphic.feature.attributes.Area_GIS];
+                    var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status, gisArea];
                     brApp.csv += fieldValues.join(",") + '\n';
 
                 }
