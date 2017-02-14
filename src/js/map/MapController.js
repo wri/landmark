@@ -1796,9 +1796,9 @@ define([
                 var openWindow = window.open('analysis.html');
                 if (openWindow == null || typeof(openWindow)=='undefined') {
                   alert("Turn off your pop-up blocker!");
-                  win.payload = payload;
+                  openWindow.payload = payload;
                 } else {
-                  win.payload = payload;
+                  openWindow.payload = payload;
                 }
 
                 var template = new InfoTemplate();
