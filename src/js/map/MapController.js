@@ -291,6 +291,21 @@ define([
             printModal = new PrintModal('print-modal');
             mobileFooter = new MobileFooter('mobile-footer')
 
+            var body = win.body(),
+                mobileThreshold = 800,
+                width = domGeom.position(body).w;
+
+            if (width <= mobileThreshold) {
+              var layerTree = document.querySelector('.tree-widget-container')
+              var searchButton = document.querySelector('.search-button')
+              var analysisButton = document.querySelector('.analysis-button')
+              var reportButton = document.querySelector('.report-button')
+              domClass.add(layerTree, 'hidden');
+              domClass.add(searchButton, 'hidden');
+              domClass.add(analysisButton, 'hidden');
+              domClass.add(reportButton, 'hidden');
+            }
+
             // Start all widgets that still need to be started
             basemapGallery.startup();
             homeWidget.startup();
@@ -496,7 +511,13 @@ define([
 
              reportWidget.on('select-result', function(results) {
                if (results.result.feature && results.result.feature.attributes.Country) {
-                 window.open('report.html?country=' + results.result.feature.attributes.Country);
+                 //If popup blocker is on, alert!
+                 var openWindow = window.open('report.html?country=' + results.result.feature.attributes.Country);
+                 if (openWindow == null || typeof(openWindow)=='undefined') {
+                   alert("Turn off your pop-up blocker!");
+                 } else {
+                   window.open('report.html?country=' + results.result.feature.attributes.Country);
+                 }
                }
              });
 
@@ -1234,7 +1255,7 @@ define([
                 }
 
                 var area_Ofcl = item.feature.attributes.Area_Ofcl ? item.feature.attributes.Area_Ofcl : 0;
-                var area_GIS = item.feature.attributes.Area_GIS ? item.feature.attributes.Area_GIS : 0;
+                var area_GIS = item.feature.attributes.Area_GIS && item.feature.attributes.Area_GIS !== 'Null' ? parseFloat(item.feature.attributes.Area_GIS).toFixed(2) : '0.00';
 
                 template = new InfoTemplate(item.value,
                     "<div id='tableWrapper'><table id='indigenousTable'>" +
@@ -1741,6 +1762,7 @@ define([
                 }
 
                 function getTextContent(graphic) {
+                    var gisArea = graphic.feature.attributes.Area_GIS && graphic.feature.attributes.Area_GIS !== 'Null' ? parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2) : '0.00';
                     if (graphic.feature.attributes.Identity === "Indigenous (self-identified)") {
                         graphic.feature.attributes.Identity = "Indigenous";
                     }
@@ -1751,7 +1773,7 @@ define([
                         graphic.feature.attributes.Form_Rec = "Officially recognized";
                     }
 
-                    var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status, graphic.feature.attributes.Area_GIS];
+                    var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status, gisArea];
                     brApp.csv += fieldValues.join(",") + '\n';
 
                 }
@@ -1771,18 +1793,28 @@ define([
                 };
 
 
-                var win = window.open('analysis.html', '_blank');
-                win.payload = payload;
+                var openWindow = window.open('analysis.html');
+                if (openWindow == null || typeof(openWindow)=='undefined') {
+                  alert("Turn off your pop-up blocker!");
+                  openWindow.payload = payload;
+                } else {
+                  openWindow.payload = payload;
+                }
 
                 var template = new InfoTemplate();
 
                 template.content = "<p class='middle-column'>The area of interest intersects with " + value.features.length + " indigenous and/or community lands</p>";
 
                 var theTitle = "<div id='title_title'>Analysis Results</div>";
+                var body = win.body(),
+                width = domGeom.position(body).w,
+                mobileThreshold = 800;
 
                 brApp.map.infoWindow.setTitle(theTitle);
                 brApp.map.infoWindow.setContent(template.content);
-                brApp.map.infoWindow.resize(650, 350);
+                if (width > mobileThreshold) {
+                  brApp.map.infoWindow.resize(650, 350);
+                }
 
                 $("#identifyNote").remove();
 

@@ -55,7 +55,6 @@ define([
             if (queryString) {
                 params = ioQuery.queryToObject(queryString);
             }
-
             // Enable Responsive Layout
             Helper.enableLayout();
             // Have the dispatcher start listnening for events

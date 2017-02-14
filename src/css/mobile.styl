@@ -27,7 +27,7 @@
 @media (max-width: 768px)
 	.basemap-container
 		width auto !important
-		
+
 	.mobile-footer
 		display block
 		bottom 0
@@ -102,7 +102,7 @@
 	.search-button, .report-button, .analysis-button
 		right 70px
 		z-index 100
-		top 13em
+		top 12em
 		// bottom 15em
 
 	.report-button, .search-button, .analysis-button
@@ -114,7 +114,6 @@
 
 	.search-button
 		left 0
-		width calc(50% + 25px)
 
 	.disclaimer
 		margin-top auto
@@ -130,3 +129,7 @@
 
 	#upload-shapefile
 		display none
+
+@media (max-width: 500px)
+	#removeGraphic, #exportAnalysis
+		left 0px
