@@ -4,7 +4,7 @@ define([
   'dojo/topic',
   'map/MapConfig'
 ], function (React, topic, MapConfig) {
-  'use strict';
+  
 
 
   var PercentLegend = React.createClass({

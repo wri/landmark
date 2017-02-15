@@ -8,7 +8,7 @@ define([
     'esri/layers/LayerDrawingOptions',
     'utils/HashController',
 ], function(topic, on, registry, MapConfig, MapAssets, arrayUtils, LayerDrawingOptions, HashController) {
-    'use strict';
+    
 
 
     var LayerController = {

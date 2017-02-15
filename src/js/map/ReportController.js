@@ -74,6 +74,7 @@ define([
                 self.map.setExtent(result.features[0].geometry.getExtent());
 
                 ReportConfig.reportAttributes.forEach(function(attribute){
+                  console.log(result.features[0].attributes[attribute.attr]);
                   switch (result.features[0].attributes[attribute.attr]) {
                     case '1':
                       dom.byId(attribute.domId).innerHTML = '<div class="low">1</div>'
@@ -97,7 +98,7 @@ define([
                       dom.byId(attribute.domId).innerHTML = '<div class="unavailable">No Data</div>'
                       break;
                     default:
-
+                      dom.byId(attribute.domId).innerHTML = '<div class="unavailable">No Data</div>'
                   }
                 });
 
@@ -412,9 +413,6 @@ define([
                 // name: 'Browser share',
                 innerSize: '60%',
                 data: [
-                  // [(100 - data.attributes.Map_C_F.toFixed(2) - data.attributes.Map_C_NF.toFixed(2)).toFixed(2) + '% No Data', 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],
-                  // [data.attributes.Map_C_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Map_C_F > 0 ? data.attributes.Map_C_F : null],
-                  // [data.attributes.Map_C_NF + '% <br><b>Not</b> <br><b>acknowledged</b>',     data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_NF : null],
                   {
                     name: 'Acknowledged by Gov',
                     y: data.attributes.Map_C_F > 0 ? data.attributes.Map_C_F : null,
@@ -429,7 +427,7 @@ define([
                       },
                        formatter: function(){
                          var map_C_F = data.attributes.Map_C_F ? data.attributes.Map_C_F.toFixed(2) : 0;
-                         return data.attributes.Map_C_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>'
+                         return map_C_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>'
                        }
                     }
                   },

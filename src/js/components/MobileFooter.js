@@ -5,7 +5,7 @@ define([
   'map/MapConfig',
   'map/WidgetsController'
 ], function (React, topic, MapConfig, WidgetsController) {
-  'use strict';
+  
 
 
   var MobileFooter = React.createClass({displayName: "MobileFooter",

@@ -6,7 +6,7 @@ define([
   'components/PercentLegend',
 	'components/LayerList'
 ], function (React, MapConfig, LayerController, PercentLegend, LayerList) {
-	'use strict';
+	
 
 	// CONSTANTS
 	var LandTenureInd = 'land-tenure-indigenous';

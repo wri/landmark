@@ -4,7 +4,7 @@ define([
   'dojo/topic',
   'map/MapConfig'
 ], function (React, topic, MapConfig) {
-  'use strict';
+
 
   var stylesheet = {
   modalContainer: {
@@ -59,7 +59,7 @@ define([
       // var visible = this.props.visible;
       var close = this.props.close;
       var theme = this.props.theme;
-      var containerStyle = Object.assign({}, stylesheet.modalContainer);
+      var containerStyle = stylesheet.modalContainer;
       //- Build up the attributes
       var modalAttrs = {
         style: stylesheet.modal

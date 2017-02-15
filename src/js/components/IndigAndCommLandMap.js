@@ -4,7 +4,7 @@ define([
 	'map/MapConfig',
 	'map/LayerController'
 ], function (React, MapConfig, LayerController) {
-	'use strict';
+	
 
 	var IndigAndCommLandMap = React.createClass({displayName: "IndigAndCommLandMap",
   //

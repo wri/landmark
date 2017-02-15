@@ -6,7 +6,7 @@ define([
   'components/IndicatorsLegend',
 	'components/LayerList'
 ], function (React, MapConfig, LayerController, IndicatorsLegend, LayerList) {
-	'use strict';
+	
 
 	// CONSTANTS
 	var LandTenureInd = 'land-tenure-indigenous';

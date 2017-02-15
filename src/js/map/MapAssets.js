@@ -6,7 +6,7 @@ define([
     'esri/symbols/SimpleMarkerSymbol'
 
 ], function(Color, SimpleFillSymbol, SimpleLineSymbol, UniqueValueRenderer, SimpleMarkerSymbol) {
-    'use strict';
+    
 
     var hoverSymbol, pointHoverSymbol;
 

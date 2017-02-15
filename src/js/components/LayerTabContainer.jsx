@@ -5,7 +5,7 @@ define([
   'components/LayerSelectionDropdown',
 	'map/WidgetsController'
 ], function (React, MapConfig, LayerSelectionDropdown, WidgetsController) {
-  'use strict';
+  
 
   var TabContainer = React.createClass({
 

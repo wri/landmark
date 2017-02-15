@@ -11,7 +11,7 @@ define([
     // 'esri/tasks/QueryTask',
 
 ], function(ReportConfig, on) {
-    'use strict';
+    
 
     var Main = {
       init: function() {

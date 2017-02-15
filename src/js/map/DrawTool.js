@@ -7,7 +7,7 @@ define([
     "esri/toolbars/draw",
     "esri/geometry/Polygon"
 ], function(MapAssets, WidgetsController, MapConfig, Graphic, registry, Draw, Polygon) {
-    'use strict';
+    
 
     var isActive,
         toolbar;

@@ -28,7 +28,8 @@ define([
          */
         launchApp: function() {
             var queryString = location.href.split('?')[1];
-            var country = queryString.split('=')[1];
+            var country = decodeURI(queryString.split('=')[1]);
+
 
             // Enable Responsive Layout
             // Helper.enableLayout();

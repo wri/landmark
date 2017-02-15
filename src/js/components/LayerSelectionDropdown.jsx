@@ -8,7 +8,7 @@ define([
   'components/IndicatorsOfLegalSecurityList',
 	'map/WidgetsController'
 ], function (React, MapConfig, LayerController, PercentOfCountryList, IndigAndCommLandMaps, IndicatorsOfLegalSecurityList, WidgetsController) {
-  'use strict';
+  
 
   var SelectionDropdown = React.createClass({
 
