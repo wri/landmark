@@ -108,9 +108,9 @@ define([
                 var countryCodeExceptions = ReportConfig.countryCodeExceptions
                 for (var i = 0; i < countryCodeExceptions.length; i++) {
                   if (result.features[0].attributes.ISO_Code === countryCodeExceptions[i].ISO) {
-                    dom.byId('flag-icon').classList = 'flag-icon flag-icon-'+countryCodeExceptions[i].ISO2.toLowerCase();
+                    dom.byId('flag-icon').className += ' flag-icon-'+countryCodeExceptions[i].ISO2.toLowerCase();
                   } else {
-                    dom.byId('flag-icon').classList = 'flag-icon flag-icon-'+result.features[0].attributes.ISO_ALPHA2.toLowerCase();
+                    dom.byId('flag-icon').className += ' flag-icon-'+result.features[0].attributes.ISO_ALPHA2.toLowerCase();
                   }
                 }
 
