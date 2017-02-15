@@ -16,7 +16,7 @@ define([
     "esri/geometry/scaleUtils",
     "esri/graphicsUtils"
 ], function(AppConfig, MapAssets, GeoHelper, sniff, Graphic, esriRequest, registry, arrayUtils, Memory, domConstruct, ComboBox, CsvStore, Polygon, Point, scaleUtils, graphicsUtils) {
-    'use strict';
+    
 
     var Uploader = {
         /**

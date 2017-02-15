@@ -9,7 +9,7 @@ define([
     'utils/Helper',
     'map/WidgetsController',
 ], function(on, topic, registry, domStyle, domClass, domConstruct, cookie, Helper, WidgetsController) {
-    'use strict';
+    
 
     var AppController = {
 

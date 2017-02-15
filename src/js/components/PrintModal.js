@@ -6,7 +6,7 @@ define([
   'components/Wrapper',
   'map/WidgetsController'
 ], function (React, topic, MapConfig, Wrapper, WidgetsController) {
-  'use strict';
+  
 
 
   var PrintModal = React.createClass({displayName: "PrintModal",

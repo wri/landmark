@@ -2,7 +2,7 @@ define([
     'dojo/topic',
     'map/MapController'
 ], function(topic, MapController) {
-    'use strict';
+    
 
     var Dispatcher = {
 

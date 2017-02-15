@@ -9,7 +9,7 @@ define([
     'main/AppController',
     'map/WidgetsController'
 ], function(esriConfig, AppConfig, Helper, HashController, ioQuery, Dispatcher, MapController, AppController, WidgetsController) {
-    'use strict';
+    
 
     var Main = {
 

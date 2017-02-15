@@ -16,7 +16,7 @@ define([
     'dojo/dom-geometry',
     'dojo/_base/window'
 ], function(AppConfig, Map, MapConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters, domGeom, win) {
-    'use strict';
+    
 
     var DURATION = 300;
 

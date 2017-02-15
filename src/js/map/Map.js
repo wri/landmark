@@ -27,7 +27,7 @@ define([
     "esri/layers/GraphicsLayer",
     "map/LayerController"
 ], function(Evented, declare, number, MapConfig, MainConfig, MapAssets, on, registry, HashController, Map, SimpleFillSymbol, SimpleMarkerSymbol, SimpleLineSymbol, Color, SimpleRenderer, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, GraphicsLayer, LayerController) {
-    'use strict';
+    
 
     var _map = declare([Evented], {
 
