@@ -16,7 +16,7 @@ define([
     'dojo/dom-geometry',
     'dojo/_base/window'
 ], function(AppConfig, Map, MapConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters, domGeom, win) {
-    
+
 
     var DURATION = 300;
 
@@ -695,7 +695,8 @@ define([
             layout = 'MAP_ONLY'
           }
 
-          template.format = format;
+
+          template.format = format === 'png' ? 'PNG32' : format;
           template.layout = layout;
           // template.layout = layoutType;
           template.preserveScale = false;
