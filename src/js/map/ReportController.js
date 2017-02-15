@@ -12,7 +12,6 @@ define([
     'esri/tasks/QueryTask',
 
 ], function(ReportConfig, WidgetsController, Map, on, dom, domClass, Extent, ImageParameters, ArcGISDynamicMapServiceLayer, Query, QueryTask) {
-    'use strict';
 
     var ReportController = {
 

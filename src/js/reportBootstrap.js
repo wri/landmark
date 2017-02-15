@@ -1,5 +1,4 @@
 (function(win, doc) {
-    'use strict';
 
     var base = location.pathname.replace(/\/[^/]+$/, ''),
         isWordpress = location.hostname.search('landmark.blueraster.io') > -1,

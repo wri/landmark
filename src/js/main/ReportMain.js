@@ -2,7 +2,6 @@ define([
     'main/config',
     'map/ReportController'
 ], function(AppConfig, ReportController) {
-    'use strict';
 
     var Main = {
 
@@ -35,7 +34,6 @@ define([
             // Helper.enableLayout();
             // Init the Map
             ReportController.init(country);
-
 
         }
 
