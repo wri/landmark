@@ -6,7 +6,7 @@ define([
   'components/Wrapper',
   'map/WidgetsController'
 ], function (React, topic, MapConfig, Wrapper, WidgetsController) {
-  
+
 
 
   var PrintModal = React.createClass({
@@ -76,7 +76,7 @@ define([
           <div className='print-input-container'>
             <label className='print-modal-label'>Map Title: </label>
             <input
-            className='print-input'
+            className='print-input print-input-text'
             type='text'
             value={this.state.mapTitle}
             onChange={this.handleMapTitle}/>
@@ -85,7 +85,7 @@ define([
           <div className='print-input-container'>
             <label className='print-modal-label'>dpi: </label>
             <input
-            className='print-input'
+            className='print-input print-input-text'
             type='text'
             value={this.state.dpi}
             onChange={this.handleDpi}/>
