@@ -8,7 +8,7 @@ define([
     'esri/layers/LayerDrawingOptions',
     'utils/HashController',
 ], function(topic, on, registry, MapConfig, MapAssets, arrayUtils, LayerDrawingOptions, HashController) {
-    
+
 
 
     var LayerController = {
@@ -159,7 +159,7 @@ define([
                   });
                 }
 
-                if (brApp.currentLayer === "none") {
+                if (brApp.currentLayer === 'none' || dynamicLayer.visibleLayers.indexOf(-1) > -1) {
                   nationalLevelFeature.hide();
 
                   var hashIndex = hashActiveLayers.indexOf(dynamicLayer.id);
@@ -178,7 +178,6 @@ define([
                 } else {
                   nationalLevelFeature.show();
                 }
-
             } else { // Community Level
 
                 for (var i = 0; i < keys.length; i++) {
