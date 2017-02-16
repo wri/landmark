@@ -30,6 +30,9 @@ define([
             var queryString = location.href.split('?')[1];
             var country = decodeURI(queryString.split('=')[1]);
 
+            if (country.indexOf('#') > -1) {
+              country = country.split('#')[0];
+            }
 
             // Enable Responsive Layout
             // Helper.enableLayout();
