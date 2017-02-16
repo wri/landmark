@@ -66,7 +66,7 @@ define([
                 },
                 duration: DURATION //,
                 // onEnd: function() {
-                //     if (width != 260) {
+                //     if (width !== 260) {
                 //         // Update the size of the legend as it grows so no scrollbars
                 //         $("#legend-toggle-icon").css("left", "170px");
                 //     } else {
@@ -82,7 +82,7 @@ define([
                 },
                 duration: 300 //,
                 // onEnd: function() {
-                //     if (width != 260) {
+                //     if (width !== 260) {
                 //         // Update the size of the legend as it grows so no scrollbars
                 //         $("#legend-toggle-icon").css("left", "170px");
                 //     } else {
@@ -170,7 +170,6 @@ define([
               innerNode = document.querySelector('.layer-tab-container'),
               height, width;
 
-
             labelNode.innerHTML = active ? '&plus;' : '&minus;';
             domClass.toggle(labelNode, 'padding-right');
             domClass.toggle(innerNode, 'hidden');
@@ -244,60 +243,6 @@ define([
         },
 
         /**
-         * Toggle the mobile menu open or close
-         */
-        // toggleMobileMenu: function() {
-        //     brApp.debug('WidgetsController >>> toggleMobileMenu');
-        //     var mapNode = document.getElementById('brMap'),
-        //         // accordion = registry.byId('layer-accordion'),
-        //
-        //         menuNodeId = 'mobileMenu',
-        //         menuButton = 'mobile-menu-toggle',
-        //         isClosing = domClass.contains(menuNodeId, 'open'),
-        //         left = isClosing ? 0 : 290;
-        //
-        //     if ($('#layer-content').css("height") === "0px") {
-        //         $('#layer-content').css("height", "auto");
-        //     }
-        //
-        //
-        //     $("#community-level-toggle_button").hide();
-        //
-        //
-        //     if (!isClosing) {
-        //         $("#mobile-menu-toggle").css("display", "none");
-        //         domClass.toggle(menuNodeId, 'open');
-        //         domClass.toggle(menuButton, 'hidden');
-        //
-        //     } else {
-        //         $("#mobile-menu-toggle").css("display", "block");
-        //         domClass.remove(menuButton, 'hidden');
-        //     }
-        //
-        //
-        //     Fx.animateProperty({
-        //         node: mapNode,
-        //         properties: {
-        //             left: left
-        //         },
-        //         duration: DURATION,
-        //         onEnd: function() {
-        //             brApp.map.resize();
-        //             if (isClosing) {
-        //                 domClass.toggle(menuNodeId, 'open');
-        //             }
-        //
-        //             $("#community-level-toggle_button").show();
-        //             // setTimeout(function() {
-        //             //     accordion.resize();
-        //             // }, 0);
-        //
-        //         }
-        //     }).play();
-        //
-        // },
-
-        /**
          * notifies of the status of the mobile settings menu
          * @return {boolean}
          */
@@ -347,10 +292,6 @@ define([
             domClass.add(target, 'active');
             domClass.add(id, 'active');
 
-            // if (id === "mobile-layers-content") {
-            //     registry.byId("layer-accordion").resize();
-            // }
-
         },
 
         showEmbedCode: function() {
@@ -387,9 +328,6 @@ define([
         showWelcomeDialog: function() {
             brApp.debug('WidgetsController >>> showWelcomeDialog');
             //Check is the user has specified to hide the dialog
-            // if (brApp.hideDialog) {
-            //     return;
-            // }
 
             var dialogContent = AppConfig.welcomeDialogContent,
                 id = 'launch-dialog',
@@ -442,21 +380,6 @@ define([
                 cleanup(true);
             }
 
-
-            // if (document.getElementById('welcomeDialogMemory').checked == true) {
-            //     brApp.hideDialog = true;
-            // }
-            //     registry.byId(id).hide();
-            // });
-            // cleanup(true);
-
-
-
-
-            // } else {
-            //     registry.byId(id).show();
-            // }
-
         },
 
         /**
@@ -501,6 +424,7 @@ define([
               mapHeight = layoutType === 'MAP_ONLY' ? ((layoutTypeHeight) + (layoutTypeHeight/2.5)) : layoutTypeHeight,
         			mapWidth = layoutType === 'MAP_ONLY' ? ((layoutTypeWidth) + (layoutTypeWidth/2.5)): layoutTypeWidth,
         			printTemplate = new PrintTemplate();
+
             var dayStrings = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
               monthStrings = ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December'],
               date = new Date(),
@@ -526,7 +450,6 @@ define([
         		params.template = printTemplate;
 
             domClass.add('modal-print-button', 'loading');
-
 
         		printTask.execute(params, function(response){
         			var printedMapImage = new Image(mapWidth, mapHeight);
@@ -593,7 +516,7 @@ define([
             //add white background
         		mapCanvas.add(new fabric.Rect({width: rectWidth, height: rectHeight, left: 0, top: 0, fill: 'white', angle: 0}));
 
-          if (layoutType != 'MAP_ONLY') {
+          if (layoutType !== 'MAP_ONLY') {
 
         		//add text to top
         		mapCanvas.add(new fabric.Text(printTitle, {fontSize: (20), top: 100, left: (rectWidth/2), textAlign: 'center', originX: 'center', fontFamily: 'Raleway'}));
@@ -631,7 +554,7 @@ define([
         _exportCanvasMap: function(printTitle, rectWidth, rectHeight, format, layoutType){
       		var canvas = document.getElementById('mapCanvas');
       		var canvasContext = canvas.getContext('2d');
-      		canvasContext.scale(1, 1)
+      		canvasContext.scale(1, 1);
 
           if (format === 'pdf') {
             document.querySelector('.canvas-container').classList.add('hidden')
@@ -644,11 +567,13 @@ define([
             if (layoutType === 'Landscape') {
               fitWidth = rectHeight;
               fitHeight = rectWidth;
-              fitLeft = -40
+              fitLeft = -40;
             } else if (layoutType === 'Portrait') {
               fitWidth = rectWidth/1.4;
               fitHeight = rectHeight/1.4;
-              fitLeft = 20
+              fitLeft = 20;
+            } else if (layoutType === 'MAP_ONLY') {
+              //JOE
             }
 
             doc.image(canvas.toDataURL(), fitLeft, 0, {fit: [fitWidth, fitHeight]});
@@ -657,7 +582,7 @@ define([
           	stream.on('finish', function() {
           		var fileRead = new FileReader();
           		fileRead.onload = function(e) {
-          			window.open(e.currentTarget.result)
+          			window.open(e.currentTarget.result);
           		}
           		fileRead.readAsDataURL(stream.toBlob('application/pdf'));
           	});
@@ -665,7 +590,7 @@ define([
           } else if (format === 'jpg') {
             document.querySelector('.canvas-container').classList.add('hidden')
             var pdfUrl = canvas.toDataURL('image/jpeg');
-            window.open(pdfUrl)
+            window.open(pdfUrl);
           } else {
             canvas.toBlob(function(blob) {
               document.querySelector('.canvas-container').classList.add('hidden')
@@ -697,7 +622,6 @@ define([
           } else {
             layout = 'MAP_ONLY'
           }
-
 
           template.format = format === 'png' ? 'PNG32' : format;
           template.layout = layout;
@@ -752,14 +676,10 @@ define([
               }
             }
 
-
             if (customGraphics.graphics.length > 0) {
                 $('#remove-graphics').removeClass('hidden');
                 $('#draw-shape').addClass('display-three');
                 $('#upload-shapefile').addClass('display-three');
-
-
-
 
             } else {
                 $('#remove-graphics').addClass('hidden');
@@ -767,7 +687,7 @@ define([
                 $('#upload-shapefile').removeClass('display-three');
             }
 
-            if (dom.byId('analysis-dialog').style.display != 'none') {
+            if (dom.byId('analysis-dialog').style.display !== 'none') {
               registry.byId('analysis-dialog').hide();
             } else {
               registry.byId('analysis-dialog').show();
@@ -807,10 +727,6 @@ define([
                     $('#help-dialog-completeness').css("left", left);
                     break;
             }
-
-
-
-
 
         }
 
