@@ -562,21 +562,26 @@ define([
             var pdfLayout = layoutType === 'Landscape' ? 'landscape' : layoutType === 'Portrait' ? 'portrait' : 'MAP_ONLY';
             var doc = new PDFDocument({layout: pdfLayout});
             var stream = doc.pipe(blobStream());
-            var fitWidth, fitHeight, fitLeft;
+            var fitWidth, fitHeight, fitLeft, fitTop;
 
             if (layoutType === 'Landscape') {
               fitWidth = rectHeight;
               fitHeight = rectWidth;
               fitLeft = -40;
+              fitTop = 0;
             } else if (layoutType === 'Portrait') {
               fitWidth = rectWidth/1.4;
               fitHeight = rectHeight/1.4;
               fitLeft = 20;
+              fitTop = 0;
             } else if (layoutType === 'MAP_ONLY') {
-              //JOE
+              fitWidth = rectWidth/1.6;
+              fitHeight = rectHeight/1.6;
+              fitLeft = 0;
+              fitTop = -150;
             }
 
-            doc.image(canvas.toDataURL(), fitLeft, 0, {fit: [fitWidth, fitHeight]});
+            doc.image(canvas.toDataURL(), fitLeft, fitTop, {fit: [fitWidth, fitHeight]});
           	doc.end();
 
           	stream.on('finish', function() {
