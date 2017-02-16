@@ -9,11 +9,11 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
     var community_indigenous_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_NoDoc/MapServer';
     var community_indigenous_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Occupied/MapServer';
 
-    var community_community_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalClaim/MapServer';
-    var community_community_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer';
+    var community_community_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalClaim_temp/MapServer';
+    var community_community_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Documented_temp/MapServer';
     var community_community_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_InProcess/MapServer';
-    var community_community_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NoDoc/MapServer';
-    var community_community_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Occupied/MapServer';
+    var community_community_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NotDocumented_temp/MapServer';
+    var community_community_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_CustomaryTenure_temp/MapServer';
 
     var MapConfig = {
 
@@ -326,7 +326,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'indigenousLands'
           },
           {
-            label: 'Titled',
+            label: 'Documented',
             id: 'indigenous_FormalDoc',
             checked: true,
             group: 'indigenousLands'
@@ -338,7 +338,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
           //   group: 'indigenousLands'
           // },
           {
-            label: 'Not titled',
+            label: 'Not documented',
             id: 'indigenous_NoDoc',
             checked: true,
             group: 'indigenousLands'
@@ -366,7 +366,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             group: 'communityLands'
           },
           {
-            label: 'Titled',
+            label: 'Documented',
             id: 'community_FormalDoc',
             checked: true,
             group: 'communityLands'
@@ -378,7 +378,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
           //   group: 'communityLands'
           // },
           {
-            label: 'Not titled',
+            label: 'Not documented',
             id: 'community_NoDoc',
             checked: true,
             group: 'communityLands'
