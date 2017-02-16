@@ -8,7 +8,6 @@ define([
 ], function (React, topic, MapConfig, Wrapper, WidgetsController) {
 
 
-
   var PrintModal = React.createClass({
 
     getInitialState: function () {
@@ -32,6 +31,9 @@ define([
       var dpi = this.state.dpi;
       var format = this.state.format;
       var layout = this.state.layout;
+      if (layout === 'Map Only') {
+        layout = 'MAP_ONLY';
+      }
       WidgetsController.printMap(title, dpi, format, layout);
     },
 
@@ -66,7 +68,7 @@ define([
       var layoutOptions = [
         'Landscape',
         'Portrait',
-        'MAP_ONLY'
+        'Map Only'
       ];
 
       return (

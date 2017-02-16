@@ -542,6 +542,10 @@ define([
 
           countryQT.execute(countryQuery, function (result) {
             if (result.features && result.features[0]) {
+              var countryExtent = result.features[0];
+              on.once(brApp.map, 'extent-change', function(evt) {
+                brApp.map.setZoom(evt.lod.level - 1)
+              });
               brApp.map.setExtent(result.features[0].geometry.getExtent());
             }
           });

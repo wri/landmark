@@ -317,8 +317,8 @@ define([
           }).add();
 
           var textBBox = chart1Text.getBBox();
-          var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.5);
-          var y = chart1.plotTop  + (chart1.plotHeight * 0.5) - (textBBox.height * 0.4);
+          var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.45);
+          var y = chart1.plotTop  + (chart1.plotHeight * 0.5) - (textBBox.height * 0.2);
           chart1Text.attr({x: x, y: y});
       });
 
@@ -491,7 +491,7 @@ define([
             }).add();
 
             var textBBox = chart1Text.getBBox();
-            var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.5);
+            var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.45);
             var y = chart1.plotTop  + (chart1.plotHeight * 0.5) - (textBBox.height * 0.25);
             chart1Text.attr({x: x, y: y});
         })};
@@ -680,7 +680,7 @@ define([
             }).add();
 
             var textBBox = chart1Text.getBBox();
-            var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.5);
+            var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.45);
             var y = chart1.plotTop  + (chart1.plotHeight * 0.5) - (textBBox.height * 0.25);
             chart1Text.attr({x: x, y: y});
         })};
