@@ -636,19 +636,22 @@ define([
           if (format === 'pdf') {
             document.querySelector('.canvas-container').classList.add('hidden')
             var dataUrl = canvas.toDataURL();
-            var doc = new PDFDocument();
+            var pdfLayout = layoutType === 'Landscape' ? 'landscape' : layoutType === 'Portrait' ? 'portrait' : 'MAP_ONLY';
+            var doc = new PDFDocument({layout: pdfLayout});
             var stream = doc.pipe(blobStream());
-            var fitWidth, fitHeight;
+            var fitWidth, fitHeight, fitLeft;
 
             if (layoutType === 'Landscape') {
-              fitWidth = rectHeight/1.4;
-              fitHeight = rectWidth/1.4;
+              fitWidth = rectHeight;
+              fitHeight = rectWidth;
+              fitLeft = -40
             } else if (layoutType === 'Portrait') {
               fitWidth = rectWidth/1.4;
               fitHeight = rectHeight/1.4;
+              fitLeft = 20
             }
 
-            doc.image(canvas.toDataURL(), 20, 0, {fit: [fitWidth, fitHeight]});
+            doc.image(canvas.toDataURL(), fitLeft, 0, {fit: [fitWidth, fitHeight]});
           	doc.end();
 
           	stream.on('finish', function() {
