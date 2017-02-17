@@ -62,11 +62,12 @@ define([
 
                 dynamicLayer = brApp.map.getLayer('percentLands');
                 if (dynamicLayer) {
+                  var loadingIcon = document.getElementById('map-loading-icon');
                   on.once(dynamicLayer, 'update-start', function() {
-                    $('#map-loading-icon').show();
+                    loadingIcon.style.display = 'block';
                   });
                   on.once(dynamicLayer, 'update-end', function() {
-                    $('#map-loading-icon').hide();
+                    loadingIcon.style.display = 'none';
                   });
 
                   if (visibleLayers[0] === -1) {
@@ -133,11 +134,12 @@ define([
                 this.setLandTenureRenderer(visibleLayers);
                 dynamicLayer = brApp.map.getLayer('landTenure');
                 if (dynamicLayer) {
+                  var loadingIcon = document.getElementById('map-loading-icon');
                   on.once(dynamicLayer, 'update-start', function() {
-                    $('#map-loading-icon').show();
+                    loadingIcon.style.display = 'block';
                   });
                   on(dynamicLayer, 'update-end', function() {
-                    $('#map-loading-icon').hide();
+                    loadingIcon.style.display = 'none';
                   });
                   dynamicLayer.setVisibleLayers(visibleLayers, true);
                   dynamicLayer.show();
@@ -189,11 +191,12 @@ define([
                   var zoom = brApp.map.getZoom();
 
                   var legend = registry.byId('legend');
+                  var loadingIcon = document.getElementById('map-loading-icon');
                   on.once(layer, 'update-start', function() {
-                      $('#map-loading-icon').show();
+                      loadingIcon.style.display = 'block';
                   });
                   on(layer, 'update-end', function() {
-                      $('#map-loading-icon').hide();
+                      loadingIcon.style.display = 'none';
                   });
 
                   if (off === true) {
@@ -209,7 +212,6 @@ define([
                       hashActiveLayers = hashLayers.join();
                     }
                   } else {
-                    self.turnOffNationalLevelData();
                     layer.show();
                     tiledLayer.show();
                     featureLayer.show();
@@ -237,69 +239,6 @@ define([
                 // dynamicLayer.setVisibleLayers(visibleLayers);
 
             }
-        },
-
-        /**
-         * Turn Off all Community Level data, deselect all checkboxes in the tree, change the buttons specific
-         * to this data set
-         * This is Mutually Exclusive with National Level Data so this is a helper to toggle all
-         * Community Level Data related things off
-         */
-        turnOffCommunityLevelData: function () {
-            // Dont turn of dom nodes controlled by React, will result in unexpected behavior
-
-            var indigButton = $('#indigenousLands')[0].firstChild;
-
-            var commButton = $('#communityLands')[0].firstChild;
-
-            if (indigButton.classList.contains("parent-layer-checked-true") && commButton.classList.contains("parent-layer-checked-true")) {
-              indigButton.click();
-              commButton.click();
-            } else if (indigButton.classList.contains("parent-layer-checked-true")) {
-              indigButton.click();
-            } else if (commButton.classList.contains("parent-layer-checked-true")) {
-              commButton.click();
-            } else {
-              var checkboxes = document.querySelectorAll('.layer-node');
-              for (var i = 0; i < checkboxes.length; i++) {
-                if (checkboxes[i].getAttribute('data-clicked') == 'true') {
-                  checkboxes[i].firstChild.click();
-                }
-              }
-            }
-
-            // This will call MapController.resetCommunityLevelTree
-
-            $("#toolsMenuButton").addClass("minimizedHide");
-            $("#legendMenuButton").addClass("minimizedAdjust");
-
-            $("#analysis-button").addClass("grayOut");
-            $("#analysisLogo").addClass("grayOutButton");
-            $("#analysis-help").addClass("grayOutIcon");
-
-
-            $('#analysis-button').mouseenter(function() {
-                $("#analysis-button-tt").show();
-            });
-            $('#analysis-button').mouseleave(function() {
-                $("#analysis-button-tt").hide();
-            });
-        },
-
-        /**
-         * Turn Off all National Level data, set list to None
-         * This is Mutually Exclusive with Community Level Data so this is a helper to toggle all
-         * National Level Data related things off
-         */
-        turnOffNationalLevelData: function () {
-            $("#toolsMenuButton").removeClass("minimizedHide");
-            $("#legendMenuButton").removeClass("minimizedAdjust");
-
-            $("#analysis-button").removeClass("grayOut");
-            $("#analysisLogo").removeClass("grayOutButton");
-            $("#analysis-help").removeClass("grayOutIcon");
-            $('#analysis-button').unbind('mouseenter mouseleave');
-            $('#nationalLevelNone').click();
         },
 
         /**

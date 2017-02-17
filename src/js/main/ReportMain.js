@@ -34,8 +34,6 @@ define([
               country = country.split('#')[0];
             }
 
-            // Enable Responsive Layout
-            // Helper.enableLayout();
             // Init the Map
             ReportController.init(country);
 

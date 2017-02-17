@@ -35,14 +35,6 @@ define([
                 width = active ? 200 : 260,
                 height = active ? 0 : node.scrollHeight;
 
-            if (active) {
-                $("#legend-toggle-icon").html("+");
-                //$("#legend-toggle-icon").css("background", "url('css/images/checkbox_checked.png')");
-            } else {
-                $("#legend-toggle-icon").html("&ndash;");
-                //$("#legend-toggle-icon").css("background", "url('css/images/close_minus_symbol.png')");
-            }
-
             domClass.toggle(legendNode, 'active');
 
             Fx.animateProperty({
@@ -64,15 +56,7 @@ define([
                 properties: {
                     width: width
                 },
-                duration: DURATION //,
-                // onEnd: function() {
-                //     if (width !== 260) {
-                //         // Update the size of the legend as it grows so no scrollbars
-                //         $("#legend-toggle-icon").css("left", "170px");
-                //     } else {
-                //         $("#legend-toggle-icon").css("left", "230px");
-                //     }
-                // }
+                duration: DURATION
             }).play();
 
             Fx.animateProperty({
@@ -80,15 +64,7 @@ define([
                 properties: {
                     left: left
                 },
-                duration: 300 //,
-                // onEnd: function() {
-                //     if (width !== 260) {
-                //         // Update the size of the legend as it grows so no scrollbars
-                //         $("#legend-toggle-icon").css("left", "170px");
-                //     } else {
-                //         $("#legend-toggle-icon").css("left", "230px");
-                //     }
-                // }
+                duration: 300
             }).play();
         },
 
@@ -150,18 +126,19 @@ define([
         toggleTreeContainer: function() {
             brApp.debug('WidgetsController >>> toggleTreeContainer');
 
-            var commTab = $('.community-layers-tab');
+            var commTab = document.querySelector('.community-layers-tab');
 
             var node = document.getElementById('layer-content');
             var active = domClass.contains(node, 'active');
+            var treeWidget = document.querySelector('.tree-widget-container');
             if (!active) {
-              if (commTab.hasClass('hidden')) {
-                $(".tree-widget-container").css('height', '200px');
+              if (commTab.classList.contains('hidden')) {
+                treeWidget.style.height = '200px';
               } else {
-                  $(".tree-widget-container").css('height', '500px');
+                  treeWidget.style.height = '500px';
               }
             } else {
-              $('.tree-widget-container').css('height', 'auto');
+              treeWidget.style.height = 'auto';
             }
 
             var topBar = document.getElementById('tree-widget-container'),
@@ -179,13 +156,13 @@ define([
             width = active ? 180 : 360;
 
             domClass.toggle(node, 'active');
-            $(node).css('height', height);
-            $(node).css('width', width);
-            $('#tree-title').css('width', width);
-            $(node).css('treeTitle', treeTitle);
+            dom.byId('layer-content').style.height = height+'px';
+            dom.byId('layer-content').style.width = width+'px';
+            domStyle.set('tree-title', 'width', width+'px');
+            dom.byId('layer-content').style.treeTitle = treeTitle;
 
-            $('#tree-widget-container').css('height', '95%');
-            $('#layer-content').css('height', '100%');
+            dom.byId('tree-widget-container').style.height = '95%';
+            dom.byId('layer-content').style.height = '100%';
 
         },
 
@@ -682,14 +659,14 @@ define([
             }
 
             if (customGraphics.graphics.length > 0) {
-                $('#remove-graphics').removeClass('hidden');
-                $('#draw-shape').addClass('display-three');
-                $('#upload-shapefile').addClass('display-three');
+                domClass.remove('remove-graphics', 'hidden');
+                domClass.add('draw-shape', 'display-three');
+                domClass.add('upload-shapefile', 'display-three');
 
             } else {
-                $('#remove-graphics').addClass('hidden');
-                $('#draw-shape').removeClass('display-three');
-                $('#upload-shapefile').removeClass('display-three');
+                domClass.add('remove-graphics', 'hidden');
+                domClass.remove('draw-shape', 'display-three');
+                domClass.remove('upload-shapefile', 'display-three');
             }
 
             if (dom.byId('analysis-dialog').style.display !== 'none') {
@@ -713,23 +690,23 @@ define([
 
                     dialog = registry.byId('help-dialog-indigenous');
                     dialog.show();
-                    $('#help-dialog-indigenous').css("top", top);
-                    $('#help-dialog-indigenous').css("left", left);
+                    dom.byId('help-dialog-indigenous').style.top = top;
+                    dom.byId('help-dialog-indigenous').style.left = left;
 
                     break;
                 case "community-lands-help":
                     dialog = registry.byId('help-dialog-community');
                     dialog.show();
-                    $('#help-dialog-community').css("top", top);
-                    $('#help-dialog-community').css("left", left);
+                    dom.byId('help-dialog-community').style.top = top;
+                    dom.byId('help-dialog-community').style.left = left;
 
                     break;
                 case "analysis-help":
                     var left = (click.pageX - 300) + "px";
                     dialog = registry.byId('help-dialog-completeness');
                     dialog.show();
-                    $('#help-dialog-completeness').css("top", top);
-                    $('#help-dialog-completeness').css("left", left);
+                    dom.byId('help-dialog-completeness').style.top = top;
+                    dom.byId('help-dialog-completeness').style.left = left;
                     break;
             }
 
