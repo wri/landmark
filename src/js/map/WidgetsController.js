@@ -22,53 +22,6 @@ define([
 
     var Controller = {
         /**
-         * Toggle the legend container open or close
-         */
-        toggleLegend: function() {
-            brApp.debug('WidgetsController >>> toggleLegend');
-            var node = document.getElementById('legend-content'),
-                legendNode = document.querySelector('.brMap .legend-content'),
-                topBar = document.getElementById('legend-container'),
-                toggler = document.getElementById('legend-toggle-icon'),
-                active = domClass.contains(legendNode, 'active'),
-                left = active ? 170 : 210,
-                width = active ? 200 : 260,
-                height = active ? 0 : node.scrollHeight;
-
-            domClass.toggle(legendNode, 'active');
-
-            Fx.animateProperty({
-                node: node,
-                properties: {
-                    height: height
-                },
-                duration: DURATION,
-                onEnd: function() {
-                    if (height !== 0) {
-                        // Update the size of the legend as it grows so no scrollbars
-                        node.style.height = 'auto';
-                    }
-                }
-            }).play();
-
-            Fx.animateProperty({
-                node: topBar,
-                properties: {
-                    width: width
-                },
-                duration: DURATION
-            }).play();
-
-            Fx.animateProperty({
-                node: toggler,
-                properties: {
-                    left: left
-                },
-                duration: 300
-            }).play();
-        },
-
-        /**
          * Toggle the basemap gallery container open or close
          */
         toggleBasemapGallery: function() {
