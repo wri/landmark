@@ -9,7 +9,6 @@ define([
     'components/PrintModal',
     'components/MobileFooter',
     'map/WidgetsController',
-    'utils/Helper',
     'dojo/on',
     'dojo/dom-geometry',
     'dojo/_base/window',
@@ -42,7 +41,7 @@ define([
     "esri/layers/LayerDrawingOptions",
     'esri/layers/FeatureLayer'
 
-], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, PrintModal, MobileFooter, WidgetsController, Helper, on, domGeom, win, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
+], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, PrintModal, MobileFooter, WidgetsController, on, domGeom, win, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
 
 
 
@@ -173,8 +172,6 @@ define([
 
                   brApp.layerInfos = layers;
 
-                  // var legendComponent = new LegendComponent('legend-component');
-                  topic.publish('legend-loaded');
                   on(document.getElementById('layersMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
                   on(document.getElementById('legendMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
                   on(document.getElementById('toolsMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
@@ -184,8 +181,6 @@ define([
             });
 
             // Mobile Specific Events
-            // If we are ok with the app not responding to mobile, only loading in mobile or loading in Desktop
-            // We could conditionally add handles for the above and below events by using Helper.isMobile()
             on(document.getElementById('mobile-menu-toggle'), 'click', WidgetsController.toggleMobileMenu);
             on(document.getElementById('mobile-menu-close'), 'click', WidgetsController.toggleMobileMenu);
 
