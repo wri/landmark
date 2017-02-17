@@ -9,7 +9,7 @@ define([
     'utils/Helper',
     'map/WidgetsController',
 ], function(on, topic, registry, domStyle, domClass, domConstruct, cookie, Helper, WidgetsController) {
-    
+
 
     var AppController = {
 
@@ -18,29 +18,7 @@ define([
          */
         init: function() {
             brApp.debug('AppController >>> init');
-            this.overrideEvents();
             this.bindEvents();
-
-            // If we are loading on a mobile device, move the content into the correct panel
-            // if (Helper.isMobile()) {
-            //   var that = this;
-            //   setTimeout(function () {
-            //     that.layoutChangedToMobile();
-            //   }, 500).bind(this);
-            //
-            // }
-            // brApp.hideDialog = false;
-
-        },
-
-        /**
-         * Override default events here, such as routing to the home or map page when were in the map
-         */
-        overrideEvents: function() {
-            brApp.debug('AppController >>> overrideEvents');
-            //on(document.getElementById('home-page-link'), 'click', this.overrideNav);
-            // on(document.getElementById('map-page-link'), 'click', this.overrideNav);
-
         },
 
         /**
@@ -65,23 +43,6 @@ define([
                 }
             }.bind(this));
 
-        },
-
-        /**
-         * Prevent routing to new page and handle special behaviors here as well
-         */
-        overrideNav: function(evt) {
-            brApp.debug('AppController >>> overrideNav');
-            // Hack Fix for top-bar shifting
-            $('.toggle-topbar').click();
-            $('.top-bar').css('height', 'auto');
-            evt.preventDefault();
-            // Get a reference to the clicked element
-            var target = evt.target ? evt.target : evt.srcElement;
-            // If they clicked home, show launch dialog
-            if (target.id === 'map-page-link') {
-                WidgetsController.showWelcomeDialog();
-            }
         },
 
         /**

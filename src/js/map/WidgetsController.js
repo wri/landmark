@@ -37,10 +37,8 @@ define([
 
             if (active) {
                 $("#legend-toggle-icon").html("+");
-                //$("#legend-toggle-icon").css("background", "url('css/images/checkbox_checked.png')");
             } else {
                 $("#legend-toggle-icon").html("&ndash;");
-                //$("#legend-toggle-icon").css("background", "url('css/images/close_minus_symbol.png')");
             }
 
             domClass.toggle(legendNode, 'active');
@@ -64,15 +62,7 @@ define([
                 properties: {
                     width: width
                 },
-                duration: DURATION //,
-                // onEnd: function() {
-                //     if (width !== 260) {
-                //         // Update the size of the legend as it grows so no scrollbars
-                //         $("#legend-toggle-icon").css("left", "170px");
-                //     } else {
-                //         $("#legend-toggle-icon").css("left", "230px");
-                //     }
-                // }
+                duration: DURATION
             }).play();
 
             Fx.animateProperty({
@@ -80,15 +70,7 @@ define([
                 properties: {
                     left: left
                 },
-                duration: 300 //,
-                // onEnd: function() {
-                //     if (width !== 260) {
-                //         // Update the size of the legend as it grows so no scrollbars
-                //         $("#legend-toggle-icon").css("left", "170px");
-                //     } else {
-                //         $("#legend-toggle-icon").css("left", "230px");
-                //     }
-                // }
+                duration: 300
             }).play();
         },
 

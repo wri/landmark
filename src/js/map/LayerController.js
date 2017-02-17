@@ -240,58 +240,12 @@ define([
         },
 
         /**
-         * Turn Off all Community Level data, deselect all checkboxes in the tree, change the buttons specific
-         * to this data set
-         * This is Mutually Exclusive with National Level Data so this is a helper to toggle all
-         * Community Level Data related things off
-         */
-        turnOffCommunityLevelData: function () {
-            // Dont turn of dom nodes controlled by React, will result in unexpected behavior
-
-            var indigButton = $('#indigenousLands')[0].firstChild;
-
-            var commButton = $('#communityLands')[0].firstChild;
-
-            if (indigButton.classList.contains("parent-layer-checked-true") && commButton.classList.contains("parent-layer-checked-true")) {
-              indigButton.click();
-              commButton.click();
-            } else if (indigButton.classList.contains("parent-layer-checked-true")) {
-              indigButton.click();
-            } else if (commButton.classList.contains("parent-layer-checked-true")) {
-              commButton.click();
-            } else {
-              var checkboxes = document.querySelectorAll('.layer-node');
-              for (var i = 0; i < checkboxes.length; i++) {
-                if (checkboxes[i].getAttribute('data-clicked') == 'true') {
-                  checkboxes[i].firstChild.click();
-                }
-              }
-            }
-
-            // This will call MapController.resetCommunityLevelTree
-
-            $("#toolsMenuButton").addClass("minimizedHide");
-            $("#legendMenuButton").addClass("minimizedAdjust");
-
-            $("#analysis-button").addClass("grayOut");
-            $("#analysisLogo").addClass("grayOutButton");
-            $("#analysis-help").addClass("grayOutIcon");
-
-
-            $('#analysis-button').mouseenter(function() {
-                $("#analysis-button-tt").show();
-            });
-            $('#analysis-button').mouseleave(function() {
-                $("#analysis-button-tt").hide();
-            });
-        },
-
-        /**
          * Turn Off all National Level data, set list to None
          * This is Mutually Exclusive with Community Level Data so this is a helper to toggle all
          * National Level Data related things off
          */
         turnOffNationalLevelData: function () {
+            //Outdated!! Remove these, or recreate with dojo!
             $("#toolsMenuButton").removeClass("minimizedHide");
             $("#legendMenuButton").removeClass("minimizedAdjust");
 
