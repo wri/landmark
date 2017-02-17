@@ -464,7 +464,7 @@ define([
                   brApp.map.infoWindow.show(brApp.map.extent.getCenter());
                   if (window.innerWidth < 1000) {
                     brApp.map.infoWindow.maximize();
-                    $(".esriPopup .contentPane").css("height", "inherit");
+                    document.querySelector('.esriPopup .contentPane').style.height = 'inherit';
                   }
                   on.once(brApp.map.infoWindow, "hide", function() {
                     brApp.map.infoWindow.resize(375, 600);
@@ -755,8 +755,7 @@ define([
 
                     if (window.innerWidth < 1000) {
                         brApp.map.infoWindow.maximize();
-                        $(".esriPopup .contentPane").css("height", "inherit");
-
+                        document.querySelector('.esriPopup .contentPane').style.height = 'inherit';
                     }
 
 
@@ -1699,9 +1698,7 @@ define([
             brApp.map.infoWindow.hide();
             var infowindowContainer = dom.byId('infowindowContainer');
             infowindowContainer.innerHTML = '';
-            // $("#infowindowContainer").html('');
             infowindowContainer.style.display = 'none';
-            // $("#infowindowContainer").hide();
 
             var failure = function(err) {
                 console.log(err);
@@ -1823,16 +1820,17 @@ define([
                 }
 
                 var extraContent = "<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:10px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended.</div></div>";
+                console.log(extraContent);
+                console.log(document.querySelector('.esriPopupWrapper'));
+                domConstruct.place(extraContent, document.querySelector('.esriPopupWrapper'));
 
-                $('.esriPopupWrapper').append(extraContent);
                 var esriPopupWrapper = document.querySelector('.esriPopupWrapper');
-                console.log('help meeeee');
                 domClass.add(esriPopupWrapper, 'noPositioning');
 
                 arrayUtils.forEach(brApp.map.infoWindow.domNode.children, function(node) {
                     if (node) {
                         var newNode = node.cloneNode(true);
-                        $("#infowindowContainer").append(newNode);
+                        domConstruct.place(newNode, document.getElementById('infowindowContainer'));
                     }
                 });
 
@@ -1840,33 +1838,29 @@ define([
                 var infowindowContainer = document.getElementById('infowindowContainer');
                 newHeight += "px";
                 infowindowContainer.style.height = newHeight;
-
-                $("#infowindowContainer").show();
+                infowindowContainer.style.display = 'block';
 
                 if (value.features.length > 8) {
-                  domClass.add('column-header', 'lessColumnWidth');
+                  if (dom.byId('column-header')){
+                    domClass.add('column-header', 'lessColumnWidth');
+                  }
                 }
 
                 var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
                     self.removeCustomGraphic(graphic.attributes.attributeID);
-                    $("#infowindowContainer").html('');
-                    $("#infowindowContainer").hide();
+                    infowindowContainer.innerHTML = '';
+                    infowindowContainer.style.display = 'none';
                     var esriPopupWrapper = document.querySelector('.esriPopupWrapper');
-                    console.log('pleasssseee');
                     domClass.remove(esriPopupWrapper, 'noPositioning');
                 });
 
-                $("div.titleButton.close").click(function() {
-                    $("#infowindowContainer").html('');
-                    $("#infowindowContainer").hide();
-                    handle.remove();
-                    var esriPopupWrapper = document.querySelector('.esriPopupWrapper');
-                    console.log('pleasssseee');
-                    domClass.remove(esriPopupWrapper, 'noPositioning');
-                });
-
-                var parent = $("#analysisTable").parent()[0];
-                var table = $("#analysisTable")[0];
+                document.querySelector('div.titleButton.close').addEventListener('click', function(){
+                  infowindowContainer.innerHTML = '';
+                  infowindowContainer.style.display = 'none';
+                  handle.remove();
+                  var esriPopupWrapper = document.querySelector('.esriPopupWrapper');
+                  domClass.remove(esriPopupWrapper, 'noPositioning');
+                })
 
                 on.once(document.getElementById('exportAnalysis'), 'click', function() {
                     self.exportAnalysisResult(brApp.csv);

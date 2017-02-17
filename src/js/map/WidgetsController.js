@@ -34,15 +34,6 @@ define([
                 left = active ? 170 : 210,
                 width = active ? 200 : 260,
                 height = active ? 0 : node.scrollHeight;
-            //     var legendToggle = document.getElementById('legend-toggle-icon');
-            //
-            // if (active) {
-            //     legendToggle.innerHTML = '+';
-            //     // $("#legend-toggle-icon").html("+");
-            // } else {
-            //   legendToggle.innerHTML = '&ndash;';
-            //     // $("#legend-toggle-icon").html("&ndash;");
-            // }
 
             domClass.toggle(legendNode, 'active');
 
@@ -141,7 +132,7 @@ define([
             var active = domClass.contains(node, 'active');
             var treeWidget = document.querySelector('.tree-widget-container');
             if (!active) {
-              if (commTab.className.contains('hidden')) {
+              if (commTab.classList.contains('hidden')) {
                 treeWidget.style.height = '200px';
               } else {
                   treeWidget.style.height = '500px';
@@ -165,11 +156,9 @@ define([
             width = active ? 180 : 360;
 
             domClass.toggle(node, 'active');
-            dom.byId('layer-content').style.height = height;
-            dom.byId('layer-content').style.width = width;
-            //TODO - fix this
-            dom.byId('tree-title').style.width = width;
-            // $('#tree-title').css('width', 180);
+            dom.byId('layer-content').style.height = height+'px';
+            dom.byId('layer-content').style.width = width+'px';
+            domStyle.set('tree-title', 'width', width+'px');
             dom.byId('layer-content').style.treeTitle = treeTitle;
 
             dom.byId('tree-widget-container').style.height = '95%';
