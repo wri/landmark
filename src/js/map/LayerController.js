@@ -62,11 +62,12 @@ define([
 
                 dynamicLayer = brApp.map.getLayer('percentLands');
                 if (dynamicLayer) {
+                  var loadingIcon = document.getElementById('map-loading-icon');
                   on.once(dynamicLayer, 'update-start', function() {
-                    $('#map-loading-icon').show();
+                    loadingIcon.style.display = 'block';
                   });
                   on.once(dynamicLayer, 'update-end', function() {
-                    $('#map-loading-icon').hide();
+                    loadingIcon.style.display = 'none';
                   });
 
                   if (visibleLayers[0] === -1) {
@@ -133,11 +134,12 @@ define([
                 this.setLandTenureRenderer(visibleLayers);
                 dynamicLayer = brApp.map.getLayer('landTenure');
                 if (dynamicLayer) {
+                  var loadingIcon = document.getElementById('map-loading-icon');
                   on.once(dynamicLayer, 'update-start', function() {
-                    $('#map-loading-icon').show();
+                    loadingIcon.style.display = 'block';
                   });
                   on(dynamicLayer, 'update-end', function() {
-                    $('#map-loading-icon').hide();
+                    loadingIcon.style.display = 'none';
                   });
                   dynamicLayer.setVisibleLayers(visibleLayers, true);
                   dynamicLayer.show();
@@ -189,11 +191,12 @@ define([
                   var zoom = brApp.map.getZoom();
 
                   var legend = registry.byId('legend');
+                  var loadingIcon = document.getElementById('map-loading-icon');
                   on.once(layer, 'update-start', function() {
-                      $('#map-loading-icon').show();
+                      loadingIcon.style.display = 'block';
                   });
                   on(layer, 'update-end', function() {
-                      $('#map-loading-icon').hide();
+                      loadingIcon.style.display = 'none';
                   });
 
                   if (off === true) {
@@ -209,7 +212,6 @@ define([
                       hashActiveLayers = hashLayers.join();
                     }
                   } else {
-                    self.turnOffNationalLevelData();
                     layer.show();
                     tiledLayer.show();
                     featureLayer.show();
@@ -237,23 +239,6 @@ define([
                 // dynamicLayer.setVisibleLayers(visibleLayers);
 
             }
-        },
-
-        /**
-         * Turn Off all National Level data, set list to None
-         * This is Mutually Exclusive with Community Level Data so this is a helper to toggle all
-         * National Level Data related things off
-         */
-        turnOffNationalLevelData: function () {
-            //Outdated!! Remove these, or recreate with dojo!
-            $("#toolsMenuButton").removeClass("minimizedHide");
-            $("#legendMenuButton").removeClass("minimizedAdjust");
-
-            $("#analysis-button").removeClass("grayOut");
-            $("#analysisLogo").removeClass("grayOutButton");
-            $("#analysis-help").removeClass("grayOutIcon");
-            $('#analysis-button').unbind('mouseenter mouseleave');
-            $('#nationalLevelNone').click();
         },
 
         /**

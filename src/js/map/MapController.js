@@ -10,6 +10,7 @@ define([
     'components/MobileFooter',
     'map/WidgetsController',
     'dojo/on',
+    'dojo/dom',
     'dojo/dom-geometry',
     'dojo/_base/window',
     'dojo/query',
@@ -41,7 +42,7 @@ define([
     "esri/layers/LayerDrawingOptions",
     'esri/layers/FeatureLayer'
 
-], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, PrintModal, MobileFooter, WidgetsController, on, domGeom, win, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
+], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, PrintModal, MobileFooter, WidgetsController, on, dom, domGeom, win, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
 
 
 
@@ -185,13 +186,6 @@ define([
             on(document.getElementById('mobile-menu-close'), 'click', WidgetsController.toggleMobileMenu);
 
             on(document.getElementById('embedShare'), 'click', WidgetsController.showEmbedCode);
-
-            // $('#print-button').mouseenter(function() {
-            //     $("#print-button-tt").show();
-            // });
-            // $('#print-button').mouseleave(function() {
-            //     $("#print-button-tt").hide();
-            // });
 
             // Hack for the print service, tiled layers need to be added to operational layers
             // when the zoom level is less then 9 to force legends to show in the printout, due to the way we are
@@ -460,7 +454,11 @@ define([
               if (features.length > 0) {
                 brApp.map.infoWindow.setFeatures(features);
                 brApp.map.infoWindow.resize(375, 600);
-                $("#identifyNote").remove();
+
+                var domNote = document.getElementById('identifyNote');
+                if (domNote) {
+                  domNote.parentNode.removeChild(domNote);
+                }
 
                 on.once(brApp.map, "extent-change", function() {
                   brApp.map.infoWindow.show(brApp.map.extent.getCenter());
@@ -739,9 +737,10 @@ define([
                     brApp.map.infoWindow.setFeatures(features);
                     brApp.map.infoWindow.resize(375, 600);
 
-                    // $(".esriPopup").removeClass("analysis-location");
-                    // $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
-                    $("#identifyNote").remove();
+                    var domNote = document.getElementById('identifyNote');
+                    if (domNote) {
+                      domNote.parentNode.removeChild(domNote);
+                    }
 
                     brApp.map.infoWindow.show(mapPoint);
 
@@ -1681,6 +1680,7 @@ define([
 
         selectCustomGraphics: function(mapPoint) {
             brApp.debug('MapController >>> selectCustomGraphics');
+            console.log('custom');
 
             brApp.mapPoint = mapPoint;
 
@@ -1697,8 +1697,11 @@ define([
             mapPoint.stopPropagation();
 
             brApp.map.infoWindow.hide();
-            $("#infowindowContainer").html('');
-            $("#infowindowContainer").hide();
+            var infowindowContainer = dom.byId('infowindowContainer');
+            infowindowContainer.innerHTML = '';
+            // $("#infowindowContainer").html('');
+            infowindowContainer.style.display = 'none';
+            // $("#infowindowContainer").hide();
 
             var failure = function(err) {
                 console.log(err);
@@ -1735,7 +1738,10 @@ define([
 
                     brApp.map.infoWindow.setTitle(theTitle);
                     brApp.map.infoWindow.resize(375, 600);
-                    $("#identifyNote").remove();
+                    var domNote = document.getElementById('identifyNote');
+                    if (domNote) {
+                      domNote.parentNode.removeChild(domNote);
+                    }
                     brApp.map.infoWindow.show(mapPoint.mapPoint);
 
                     var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
@@ -1811,12 +1817,17 @@ define([
                   brApp.map.infoWindow.resize(650, 350);
                 }
 
-                $("#identifyNote").remove();
+                var domNote = document.getElementById('identifyNote');
+                if (domNote) {
+                  domNote.parentNode.removeChild(domNote);
+                }
 
                 var extraContent = "<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:10px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended.</div></div>";
 
                 $('.esriPopupWrapper').append(extraContent);
-                $('.esriPopupWrapper').addClass("noPositioning");
+                var esriPopupWrapper = document.querySelector('.esriPopupWrapper');
+                console.log('help meeeee');
+                domClass.add(esriPopupWrapper, 'noPositioning');
 
                 arrayUtils.forEach(brApp.map.infoWindow.domNode.children, function(node) {
                     if (node) {
@@ -1826,27 +1837,32 @@ define([
                 });
 
                 var newHeight = (value.features.length * 44) + 210;
+                var infowindowContainer = document.getElementById('infowindowContainer');
                 newHeight += "px";
-                $("#infowindowContainer").css("height", newHeight);
+                infowindowContainer.style.height = newHeight;
 
                 $("#infowindowContainer").show();
 
                 if (value.features.length > 8) {
-                  $('#column-header').addClass('lessColumnWidth');
+                  domClass.add('column-header', 'lessColumnWidth');
                 }
 
                 var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
                     self.removeCustomGraphic(graphic.attributes.attributeID);
                     $("#infowindowContainer").html('');
                     $("#infowindowContainer").hide();
-                    $('.esriPopupWrapper').removeClass("noPositioning");
+                    var esriPopupWrapper = document.querySelector('.esriPopupWrapper');
+                    console.log('pleasssseee');
+                    domClass.remove(esriPopupWrapper, 'noPositioning');
                 });
 
                 $("div.titleButton.close").click(function() {
                     $("#infowindowContainer").html('');
                     $("#infowindowContainer").hide();
                     handle.remove();
-                    $('.esriPopupWrapper').removeClass("noPositioning");
+                    var esriPopupWrapper = document.querySelector('.esriPopupWrapper');
+                    console.log('pleasssseee');
+                    domClass.remove(esriPopupWrapper, 'noPositioning');
                 });
 
                 var parent = $("#analysisTable").parent()[0];
@@ -1882,9 +1898,9 @@ define([
             var graphics = brApp.map.getLayer("CustomFeatures");
             graphics.clear();
             graphics.redraw();
-            $('#remove-graphics').addClass('hidden');
-            $('#draw-shape').removeClass('display-three');
-            $('#upload-shapefile').removeClass('display-three');
+            domClass.add('remove-graphics', 'hidden');
+            domClass.remove('draw-shape', 'display-three');
+            domClass.remove('upload-shapefile', 'display-three');;
         },
 
         getLandTenureRenderer: function() {
