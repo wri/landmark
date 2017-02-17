@@ -5,9 +5,8 @@ define([
     'dojo/io-query',
     'main/Dispatcher',
     'map/MapController',
-    'main/AppController',
     'map/WidgetsController'
-], function(esriConfig, AppConfig, HashController, ioQuery, Dispatcher, MapController, AppController, WidgetsController) {
+], function(esriConfig, AppConfig, HashController, ioQuery, Dispatcher, MapController, WidgetsController) {
 
 
     var Main = {
