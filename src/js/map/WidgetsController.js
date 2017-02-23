@@ -340,8 +340,16 @@ define([
         		printTask.execute(params, function(response){
         			var printedMapImage = new Image(mapWidth, mapHeight);
               var logoImage = new Image(200, 100);
-              var legendImage = new Image(300, 100);
+              var legendImage;
+              console.log(brApp.activeLayer);
+              if (brApp.activeLayer === 'land-tenure') {
+                legendImage = new Image(275, 100);
+              } else {
+                legendImage = new Image(275, 121);
+              }
               var commLegendImage = new Image(300, 100);
+              // 549/128
+              // 275/61
               // legendImage.src = './css/images/LMacknowledged.png';
               logoImage.src = './css/images/LandMark_final.png';
               commLegendImage.src = './css/images/legend-comm-landscape.jpg';
@@ -352,16 +360,16 @@ define([
               } else {
                 switch (brApp.activeKey) {
                   case 'combinedTotal':
-                    legendImage.src = './css/images/LMtotal.png';
+                    legendImage.src = './css/images/LMtotal.jpg';
                     break;
                   case 'combinedFormal':
-                    legendImage.src = './css/images/LMacknowledged.png';
+                    legendImage.src = './css/images/LMacknowledged.jpg';
                     break;
                   case 'combinedInformal':
-                    legendImage.src = './css/images/LMnotAcknowledged.png';
+                    legendImage.src = './css/images/LMnotAcknowledged.jpg';
                     break;
                   default:
-                    legendImage.src = './css/images/LMacknowledged.png';
+                    legendImage.src = './css/images/LMacknowledged.jpg';
                 }
               }
 
