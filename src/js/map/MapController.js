@@ -173,17 +173,12 @@ define([
 
                   brApp.layerInfos = layers;
 
-                  on(document.getElementById('layersMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
-                  on(document.getElementById('legendMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
-                  on(document.getElementById('toolsMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
-
                 });
 
             });
 
             // Mobile Specific Events
             on(document.getElementById('mobile-menu-toggle'), 'click', WidgetsController.toggleMobileMenu);
-            on(document.getElementById('mobile-menu-close'), 'click', WidgetsController.toggleMobileMenu);
 
             on(document.getElementById('embedShare'), 'click', WidgetsController.showEmbedCode);
 

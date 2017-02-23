@@ -12,7 +12,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
     var community_community_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalClaim_temp/MapServer';
     var community_community_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Documented_temp/MapServer';
     var community_community_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_InProcess/MapServer';
-    var community_community_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NotDocumented_temp/MapServer';
+    var community_community_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NoDoc/MapServer';
     var community_community_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_CustomaryTenure_temp/MapServer';
 
     var MapConfig = {

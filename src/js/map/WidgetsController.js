@@ -180,50 +180,6 @@ define([
             return domClass.contains('mobileMenu', 'open');
         },
 
-        /**
-         * Toggle the appropriate container's visibility based on which button was clicked in the UI
-         */
-        toggleMobileMenuContainer: function(evt) {
-            brApp.debug('WidgetsController >>> toggleMobileMenuContainer');
-            var target = evt.target ? evt.target : evt.srcElement,
-                menuNode = document.querySelector('.segmented-menu-button.active'),
-                containerNode = document.querySelector('.mobile-menu-content.active'),
-                id;
-
-            // If section is already active, back out now
-            // Else remove active class from target and containerNode
-            if (domClass.contains(target, 'active')) {
-                return;
-            }
-
-            if (menuNode) {
-                domClass.remove(menuNode, 'active');
-            }
-
-            if (containerNode) {
-                domClass.remove(containerNode, 'active');
-            }
-
-            // Now add the active class to the target and to the container
-            switch (target.id) {
-                case "legendMenuButton":
-                    id = 'mobile-legend-content';
-                    break;
-                case "toolsMenuButton":
-                    id = 'mobile-tools-content';
-                    break;
-                case "layersMenuButton":
-                    id = 'mobile-layers-content';
-
-
-                    break;
-            }
-
-            domClass.add(target, 'active');
-            domClass.add(id, 'active');
-
-        },
-
         showEmbedCode: function() {
             if (registry.byId("embedCodeShareDialog")) {
                 registry.byId("embedCodeShareDialog").destroy();
