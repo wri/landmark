@@ -356,7 +356,7 @@ define([
 
               // Check for active layer to determine what legend to use
               if (brApp.activeLayer === 'land-tenure') {
-                legendImage.src = './css/images/LMlegalSec.png';
+                legendImage.src = './css/images/LMlegalSec.jpg';
               } else {
                 switch (brApp.activeKey) {
                   case 'combinedTotal':
