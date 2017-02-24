@@ -27,7 +27,7 @@ define([
     "esri/layers/GraphicsLayer",
     "map/LayerController"
 ], function(Evented, declare, number, MapConfig, MainConfig, MapAssets, on, registry, HashController, Map, SimpleFillSymbol, SimpleMarkerSymbol, SimpleLineSymbol, Color, SimpleRenderer, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, GraphicsLayer, LayerController) {
-    
+
 
     var _map = declare([Evented], {
 
@@ -148,7 +148,6 @@ define([
 
             on.once(this.map, 'layers-add-result', function(response) {
                 self.emit('layers-loaded', response);
-
                 var layerInfos = response.layers.map(function(item) {
                     return {
                         layer: item.layer

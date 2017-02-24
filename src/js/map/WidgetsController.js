@@ -180,50 +180,6 @@ define([
             return domClass.contains('mobileMenu', 'open');
         },
 
-        /**
-         * Toggle the appropriate container's visibility based on which button was clicked in the UI
-         */
-        toggleMobileMenuContainer: function(evt) {
-            brApp.debug('WidgetsController >>> toggleMobileMenuContainer');
-            var target = evt.target ? evt.target : evt.srcElement,
-                menuNode = document.querySelector('.segmented-menu-button.active'),
-                containerNode = document.querySelector('.mobile-menu-content.active'),
-                id;
-
-            // If section is already active, back out now
-            // Else remove active class from target and containerNode
-            if (domClass.contains(target, 'active')) {
-                return;
-            }
-
-            if (menuNode) {
-                domClass.remove(menuNode, 'active');
-            }
-
-            if (containerNode) {
-                domClass.remove(containerNode, 'active');
-            }
-
-            // Now add the active class to the target and to the container
-            switch (target.id) {
-                case "legendMenuButton":
-                    id = 'mobile-legend-content';
-                    break;
-                case "toolsMenuButton":
-                    id = 'mobile-tools-content';
-                    break;
-                case "layersMenuButton":
-                    id = 'mobile-layers-content';
-
-
-                    break;
-            }
-
-            domClass.add(target, 'active');
-            domClass.add(id, 'active');
-
-        },
-
         showEmbedCode: function() {
             if (registry.byId("embedCodeShareDialog")) {
                 registry.byId("embedCodeShareDialog").destroy();
@@ -384,28 +340,36 @@ define([
         		printTask.execute(params, function(response){
         			var printedMapImage = new Image(mapWidth, mapHeight);
               var logoImage = new Image(200, 100);
-              var legendImage = new Image(300, 100);
+              var legendImage;
+              console.log(brApp.activeLayer);
+              if (brApp.activeLayer === 'land-tenure') {
+                legendImage = new Image(275, 100);
+              } else {
+                legendImage = new Image(275, 121);
+              }
               var commLegendImage = new Image(300, 100);
+              // 549/128
+              // 275/61
               // legendImage.src = './css/images/LMacknowledged.png';
               logoImage.src = './css/images/LandMark_final.png';
               commLegendImage.src = './css/images/legend-comm-landscape.jpg';
 
               // Check for active layer to determine what legend to use
               if (brApp.activeLayer === 'land-tenure') {
-                legendImage.src = './css/images/LMlegalSec.png';
+                legendImage.src = './css/images/LMlegalSec.jpg';
               } else {
                 switch (brApp.activeKey) {
                   case 'combinedTotal':
-                    legendImage.src = './css/images/LMtotal.png';
+                    legendImage.src = './css/images/LMtotal.jpg';
                     break;
                   case 'combinedFormal':
-                    legendImage.src = './css/images/LMacknowledged.png';
+                    legendImage.src = './css/images/LMacknowledged.jpg';
                     break;
                   case 'combinedInformal':
-                    legendImage.src = './css/images/LMnotAcknowledged.png';
+                    legendImage.src = './css/images/LMnotAcknowledged.jpg';
                     break;
                   default:
-                    legendImage.src = './css/images/LMacknowledged.png';
+                    legendImage.src = './css/images/LMacknowledged.jpg';
                 }
               }
 
