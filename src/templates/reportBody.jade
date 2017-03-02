@@ -30,14 +30,14 @@ div#report__container
                     div#googleShare
 
   div.report-component.charts__container
-    h3.report-header Indigenous Peoples and Communities Lands as Percentage of The Country Land Area
+    h3.report-header Indigenous and Community Lands as Percentage of the Country Land Area
     div.total-lands
       div.estimated-chart-container
         div#estimated-chart
 
     hr
 
-    h3.report-header Land Mapped on Landmark
+    h3.report-header Lands Mapped on Landmark
     div.lands-mapped-chart-container
       div#community-lands-chart.inline-chart
       div#indigenous-lands-chart.inline-chart
@@ -48,6 +48,11 @@ div#report__container
       div.indicators-table__body-content
         div.indicator-table-container
           table.report-value-table
+            tr.table-header
+              td#comm-label Communities
+              td.middle-column
+              td#indig-label Indigenous People
+            
             tr.header-row
               td#average-score-comm
               td.middle-column AVERAGE SCORE
@@ -104,8 +109,9 @@ div#report__container
               div.highest 4
               span.footer-child__label Issue not Addressedd
 
-          p.comments
+          div.comments
             strong Not Applicable
-            |: The subject Matter is non existant
+            |: The subject matter is non existent
+          div.comments
             strong No Data
-            |: Not enough Data to Score
+            |: Not enough data to Score

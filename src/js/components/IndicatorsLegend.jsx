@@ -4,7 +4,7 @@ define([
   'dojo/topic',
   'map/MapConfig'
 ], function (React, topic, MapConfig) {
-  
+
 
 
   var IndicatorsLegend = React.createClass({

@@ -6,7 +6,7 @@ define([
   'components/IndicatorsLegend',
 	'components/LayerList'
 ], function (React, MapConfig, LayerController, IndicatorsLegend, LayerList) {
-	
+
 
 	// CONSTANTS
 	var LandTenureInd = 'land-tenure-indigenous';
@@ -110,6 +110,7 @@ define([
     },
 
     changeLandTenureLayer: function (key, layer) {
+			console.log(key, layer);
 			if (layer !== -1) {
 				this.props.setActiveTab(this.props.activeSelection);
 			}

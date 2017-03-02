@@ -4,7 +4,7 @@ define([
   'dojo/topic',
   'map/MapConfig'
 ], function (React, topic, MapConfig) {
-  
+
 
 
   var IndicatorsLegend = React.createClass({displayName: "IndicatorsLegend",
@@ -28,6 +28,7 @@ define([
 
       if (brApp.layerInfos.some(isLandTenure)) {
         for (var j = 0; j < mapLayer.layers.length; j++) {
+          console.log(mapLayer.layers[j].layerId);
           if (mapLayer.layers[j].layerId === self.props.legendObject.layerIdValue) {
             this.setState({legendInfos: mapLayer.layers[j].legend});
           }

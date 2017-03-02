@@ -282,7 +282,7 @@ define([
               // name: 'Browser share',
               innerSize: '60%',
               data: [
-                [(100 - data.attributes.Pct_F - data.attributes.Pct_NF).toFixed(2) + '% No <br> Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF > 0 ? 100 - data.attributes.Pct_F - data.attributes.Pct_NF : null],
+                [(100 - data.attributes.Pct_F - data.attributes.Pct_NF).toFixed(1) + '% No <br> Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF > 0 ? 100 - data.attributes.Pct_F - data.attributes.Pct_NF : null],
                 [data.attributes.Pct_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Pct_F > 0 ? data.attributes.Pct_F : null],
                 [data.attributes.Pct_NF + '% <br><b>Not</b> <br><b>acknowledged</b>',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null],
                 {
@@ -299,7 +299,7 @@ define([
           var xpos = '50%';
           var ypos = '50%';
           var circleradius = 75;
-          var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(2)
+          var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(1)
 
           // Render the circle
           chart1.renderer.circle(xpos, ypos, circleradius).attr({
@@ -426,7 +426,7 @@ define([
                         fontSize: "10px"
                       },
                        formatter: function(){
-                         var map_C_F = data.attributes.Map_C_F ? data.attributes.Map_C_F.toFixed(2) : 0;
+                         var map_C_F = data.attributes.Map_C_F ? data.attributes.Map_C_F.toFixed(1) : 0;
                          return map_C_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>'
                        }
                     }
@@ -444,7 +444,7 @@ define([
                         fontSize: "10px"
                       },
                        formatter: function(){
-                         var map_C_NF = data.attributes.Map_C_NF ? data.attributes.Map_C_NF.toFixed(2) : 0;
+                         var map_C_NF = data.attributes.Map_C_NF ? data.attributes.Map_C_NF.toFixed(1) : 0;
                          return data.attributes.Map_C_NF + '% <br><b>Not</b> <br><b>acknowledged</b>'
                        }
                     }
@@ -462,7 +462,7 @@ define([
                         fontSize: "10px"
                       },
                        formatter: function(){
-                         return (100 - data.attributes.Map_C_F - data.attributes.Map_C_NF).toFixed(2) + '% No Data'
+                         return (100 - data.attributes.Map_C_F - data.attributes.Map_C_NF).toFixed(1) + '% No Data'
                        }
                     }
                   }
@@ -473,7 +473,7 @@ define([
             var xpos = '50%';
             var ypos = '50%';
             var circleradius = 30;
-            var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(2)
+            var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(1)
 
             // Render the circle
             chart1.renderer.circle(xpos, ypos, circleradius).attr({
@@ -615,7 +615,7 @@ define([
                         fontSize: "10px"
                       },
                        formatter: function(){
-                         var map_IP_F = data.attributes.Map_IP_F ? data.attributes.Map_IP_F.toFixed(2) : 0;
+                         var map_IP_F = data.attributes.Map_IP_F ? data.attributes.Map_IP_F.toFixed(1) : 0;
                          return map_IP_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>'
                        }
                     }
@@ -633,7 +633,7 @@ define([
                         fontSize: "10px"
                       },
                        formatter: function(){
-                         var map_IP_NF = data.attributes.Map_IP_NF ? data.attributes.Map_IP_NF.toFixed(2) : 0;
+                         var map_IP_NF = data.attributes.Map_IP_NF ? data.attributes.Map_IP_NF.toFixed(1) : 0;
                          return map_IP_NF + '% <br><b>Not</b> <br><b>acknowledged</b>'
                        }
                     }
@@ -651,7 +651,7 @@ define([
                         fontSize: "10px"
                       },
                        formatter: function(){
-                         return (100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF).toFixed(2) + '% No Data'
+                         return (100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF).toFixed(1) + '% No Data'
                        }
                     }
                   }
@@ -662,7 +662,7 @@ define([
             var xpos = '50%';
             var ypos = '50%';
             var circleradius = 30;
-            var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(2)
+            var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(1)
 
             // Render the circle
             chart1.renderer.circle(xpos, ypos, circleradius).attr({

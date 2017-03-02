@@ -298,6 +298,8 @@ define([
               map: brApp.map,
               showArcGISBasemaps: true,
               showInfoWindowOnSelect: false
+              // ,
+              // activeSourceIndex: 1
             }, 'esri-search-holder');
 
             var sources = searchWidget.get("sources");
@@ -1467,7 +1469,7 @@ define([
                 icnf = 'Unknown';
               }
 
-              var data = item.feature.attributes.IC_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + ict + " " + item.feature.attributes.IC_T_Src + "</div><div class='indentTD'><span class='inlineBold'>Formally recognized</span>: " + icf + " " + item.feature.attributes.IC_F_Src + "</div><div class='indentTD'><span class='inlineBold'>Not formally recognized</span>: " + icnf + " " + item.feature.attributes.IC_NF_Src + "</div></td></tr>" : "";
+              var data = item.feature.attributes.IC_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + ict + " " + item.feature.attributes.IC_T_Src + "</div><div class='indentTD'><span class='inlineBold'>Acknowledged by government</span>: " + icf + " " + item.feature.attributes.IC_F_Src + "</div><div class='indentTD'><span class='inlineBold'>Not acknowledged by government</span>: " + icnf + " " + item.feature.attributes.IC_NF_Src + "</div></td></tr>" : "";
               var source = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IC_Notes + '</td></tr>' : '';
 
               template.content = "<div id='tableWrapper'><table id='nationalTable'>" +
