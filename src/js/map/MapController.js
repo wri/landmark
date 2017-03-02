@@ -298,8 +298,6 @@ define([
               map: brApp.map,
               showArcGISBasemaps: true,
               showInfoWindowOnSelect: false
-              // ,
-              // activeSourceIndex: 1
             }, 'esri-search-holder');
 
             var sources = searchWidget.get("sources");
@@ -407,6 +405,7 @@ define([
             });
 
             searchWidget.set("sources", sources);
+            searchWidget.set('activeSourceIndex', 1);
 
             searchWidget.startup();
 

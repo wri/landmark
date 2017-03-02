@@ -42,7 +42,8 @@ define([
               isShiftDoubleClickZoom: false,
               isZoomSlider: false,
               isPan: false,
-              slider: false
+              slider: false,
+              logo:false
 
             });
 
@@ -233,7 +234,7 @@ define([
           var estimatedChart = Highcharts.chart('estimated-chart', {
             chart: {
               plotBackgroundColor: null,
-              backgroundColor: '#404040',
+              backgroundColor: '#F0F0F0',
               plotBorderWidth: 0,
               plotShadow: false,
               margin: [0, 0, 0, 0],
@@ -305,7 +306,7 @@ define([
           // Render the text
           var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
               width: circleradius * 2,
-              color: '#4572A7',
+              color: '#1c1c1c',
               fontSize: '16px'
           }).attr({
               // why doesn't zIndex get the text in front of the chart?
@@ -323,7 +324,7 @@ define([
         var commLandsChart = Highcharts.chart('community-lands-chart', {
           chart: {
             plotBackgroundColor: null,
-            backgroundColor: '#404040',
+            backgroundColor: '#F0F0F0',
             plotBorderWidth: 0,
             plotShadow: false,
             margin: [0, 0, 0, 0],
@@ -369,7 +370,7 @@ define([
             var indigenousLandsChart = Highcharts.chart('indigenous-lands-chart', {
               chart: {
                 plotBackgroundColor: null,
-                backgroundColor: '#404040',
+                backgroundColor: '#F0F0F0',
                 plotBorderWidth: 0,
                 plotShadow: false,
                 margin: [0, 0, 0, 0],
@@ -378,11 +379,10 @@ define([
                 spacingLeft: 0,
                 spacingRight: 0
               },
-              colors: ['#f4e0d7', '#e5aa92','gray', '#e5aa92','gray'],
               title: {
                 text: 'Community Lands & Indigenous Peoples',
                 style: {
-                  color: '#ccc',
+                  color: '#1c1c1c',
                   fontSize: '14px'
                 }
               },
@@ -403,6 +403,7 @@ define([
               },
               series: [
                 {
+                  colors: ['gray', '#D50010', '#FF9900'],
                   type: 'pie',
                   size: '60%',
                   data: [
@@ -411,6 +412,7 @@ define([
                     ['<b>Community</b>', data.attributes.Map_C_F + data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_F + data.attributes.Map_C_NF : null]
                   ]
                 }, {
+                colors: ['gray', '#FF6240', '#00768A', '#FF9900', '#00C1CC'],
                 type: 'pie',
                 size: '80%',
                 innerSize: '60%',
