@@ -1817,8 +1817,6 @@ define([
                 }
 
                 var extraContent = "<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:10px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended.</div></div>";
-                console.log(extraContent);
-                console.log(document.querySelector('.esriPopupWrapper'));
                 domConstruct.place(extraContent, document.querySelector('.esriPopupWrapper'));
 
                 var esriPopupWrapper = document.querySelector('.esriPopupWrapper');

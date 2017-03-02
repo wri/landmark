@@ -75,7 +75,6 @@ define([
                 self.map.setExtent(result.features[0].geometry.getExtent());
 
                 ReportConfig.reportAttributes.forEach(function(attribute){
-                  console.log(result.features[0].attributes[attribute.attr]);
                   switch (result.features[0].attributes[attribute.attr]) {
                     case '1':
                       dom.byId(attribute.domId).innerHTML = '<div class="low">1</div>'

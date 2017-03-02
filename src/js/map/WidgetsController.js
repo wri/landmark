@@ -341,7 +341,7 @@ define([
         			var printedMapImage = new Image(mapWidth, mapHeight);
               var logoImage = new Image(200, 100);
               var legendImage;
-              console.log(brApp.activeLayer);
+
               if (brApp.activeLayer === 'land-tenure') {
                 legendImage = new Image(275, 100);
               } else {

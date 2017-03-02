@@ -110,7 +110,6 @@ define([
     },
 
     changeLandTenureLayer: function (key, layer) {
-			console.log(key, layer);
 			if (layer !== -1) {
 				this.props.setActiveTab(this.props.activeSelection);
 			}
@@ -132,7 +131,9 @@ define([
     /* jshint ignore:start */
     render: function () {
 			let layerIdValue;
-			if (this.state.activeIndigenousKey === 'averageScoreTenure') {
+			if (this.state.activeIndigenousKey === 'averageScoreTenure' && this.state.landTenureCategory === 'land-tenure-indigenous') {
+				layerIdValue = 0;
+			} else if (this.state.activeCommunityKey === 'averageScoreTenure' && this.state.landTenureCategory === 'land-tenure-community') {
 				layerIdValue = 0;
 			} else {
 				layerIdValue = 1;
@@ -141,7 +142,7 @@ define([
         name: 'landTenure',
         layerIdValue: layerIdValue
       }
-			
+
     	return (
     		React.createElement("div", {className: "national-level-layer-lists"}, 
     			React.createElement("div", {className: "land-tenure-layer-list"}, 
