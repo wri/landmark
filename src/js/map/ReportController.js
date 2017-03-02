@@ -378,9 +378,9 @@ define([
                 spacingLeft: 0,
                 spacingRight: 0
               },
-              colors: ['#f4e0d7', '#e5aa92','gray'],
+              colors: ['#f4e0d7', '#e5aa92','gray', '#e5aa92','gray'],
               title: {
-                text: 'Indigenous Peoples',
+                text: 'Community Lands & Indigenous Peoples',
                 style: {
                   color: '#ccc',
                   fontSize: '14px'
@@ -407,7 +407,7 @@ define([
                   size: '60%',
                   data: [
                     ['No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],
-                    ['<b>Indigenous</b> <br><b>Peoples</b>', data.attributes.Map_IP_F+data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_F+data.attributes.Map_IP_NF : null],
+                    ['<b>Indigenous</b> <br><b>Peoples</b>', data.attributes.Map_IP_F + data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_F + data.attributes.Map_IP_NF : null],
                     ['<b>Community</b>', data.attributes.Map_C_F + data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_F + data.attributes.Map_C_NF : null]
                   ]
                 }, {
@@ -416,10 +416,10 @@ define([
                 innerSize: '60%',
                 data: [
                   ['No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],
-                  ['Indigenous <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Map_IP_F > 0 ? data.attributes.Map_IP_F : null],
-                  ['Community <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Map_C_F > 0 ? data.attributes.Map_C_F : null],
-                  ['Indigenous <br><b>Not</b> <br><b>acknowledged</b>',       data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_NF : null]
-                  ['Community <br><b>Not</b> <br><b>acknowledged</b>',       data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_NF : null]
+                  ['Indigenous <br><b>Acknowledged</b> <br><b>by gov</b>', data.attributes.Map_IP_F > 0 ? data.attributes.Map_IP_F : null],
+                  ['Community <br><b>Acknowledged</b> <br><b>by gov</b>', data.attributes.Map_C_F > 0 ? data.attributes.Map_C_F : null],
+                  ['Indigenous <br><b>Not</b> <br><b>acknowledged</b>', data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_NF : null],
+                  ['Community <br><b>Not</b> <br><b>acknowledged</b>', data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_NF : null]
                 ]
               }]
             })
