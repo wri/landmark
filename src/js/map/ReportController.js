@@ -259,7 +259,7 @@ define([
               enabled: false
             },
             tooltip: {
-              pointFormat: '<b>{point.y:.2f}%</b>'
+              pointFormat: '<b>{point.y:.1f}%</b>'
             },
             plotOptions: {
               pie: {
@@ -389,7 +389,7 @@ define([
                 enabled: false
               },
               tooltip: {
-                pointFormat: '<b>{point.y:.2f}%</b>'
+                pointFormat: '<b>{point.y:.1f}%</b>'
               },
               plotOptions: {
                 pie: {
