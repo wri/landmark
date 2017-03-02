@@ -402,7 +402,7 @@ define([
               },
               series: [
                 {
-                  colors: ['gray', '#D50010', '#FF9900'],
+                  colors: ['gray', '#D50010', '#00647A'],
                   type: 'pie',
                   size: '60%',
                   data: [
