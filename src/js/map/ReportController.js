@@ -243,7 +243,7 @@ define([
               spacingLeft: 0,
               spacingRight: 0
             },
-            colors: ['gray','#f4e0d7', '#e5aa92'],
+            colors: ['gray','#962A74', '#CF3684'],
             // title: {
             //   useHTML: true,
             //   shape: 'circle',
