@@ -264,12 +264,13 @@ define([
             plotOptions: {
               pie: {
                 dataLabels: {
-                  enabled: true,
-                  distance: 10,
-                  style: {
-                    fontWeight: 'bold',
-                    color: 'white'
-                  }
+                  enabled: false
+                  // ,
+                  // distance: 10,
+                  // style: {
+                  //   fontWeight: 'bold',
+                  //   color: 'white'
+                  // }
                 },
                 size:'75%'
                 // ,
@@ -282,9 +283,9 @@ define([
               // name: 'Browser share',
               innerSize: '60%',
               data: [
-                [(100 - data.attributes.Pct_F - data.attributes.Pct_NF).toFixed(1) + '% No <br> Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF > 0 ? 100 - data.attributes.Pct_F - data.attributes.Pct_NF : null],
-                [data.attributes.Pct_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Pct_F > 0 ? data.attributes.Pct_F : null],
-                [data.attributes.Pct_NF + '% <br><b>Not</b> <br><b>acknowledged</b>',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null],
+                ['No <br> Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF > 0 ? 100 - data.attributes.Pct_F - data.attributes.Pct_NF : null],
+                ['<b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Pct_F > 0 ? data.attributes.Pct_F : null],
+                ['<b>Not</b> <br><b>acknowledged</b>',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null],
                 {
                   name: 'Proprietary or Undetectable',
                   y: 0.2,
@@ -299,12 +300,7 @@ define([
           var xpos = '50%';
           var ypos = '50%';
           var circleradius = 75;
-          var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(1)
-
-          // Render the circle
-          chart1.renderer.circle(xpos, ypos, circleradius).attr({
-              fill: '#ddd',
-          }).add();
+          var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(1);
 
           // Render the text
           var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
@@ -323,17 +319,26 @@ define([
       });
 
 
-      if (!data.attributes.Map_C_F && !data.attributes.Map_C_NF) {
+      if (!data.attributes.Map_C_F && !data.attributes.Map_C_NF && !data.attributes.Map_IP_F && !data.attributes.Map_IP_NF) {
         var commLandsChart = Highcharts.chart('community-lands-chart', {
           chart: {
             plotBackgroundColor: null,
             backgroundColor: '#404040',
             plotBorderWidth: 0,
-            plotShadow: false
+            plotShadow: false,
+            margin: [0, 0, 0, 0],
+            spacingTop: 0,
+            spacingBottom: 0,
+            spacingLeft: 0,
+            spacingRight: 0
           },
           colors: ['gray'],
           title: {
-            text: null
+            text: 'Community Lands',
+            style: {
+              color: '#ccc',
+              fontSize: '14px'
+            }
           },
           credits: {
             enabled: false
@@ -349,7 +354,7 @@ define([
                   color: 'white'
                 }
               },
-              size:'50%'
+              size:'40%'
             }
           },
           series: [{
@@ -361,179 +366,6 @@ define([
           }]
         })
       } else {
-            var commLandsChart = Highcharts.chart('community-lands-chart', {
-              chart: {
-                plotBackgroundColor: null,
-                backgroundColor: '#404040',
-                plotBorderWidth: 0,
-                plotShadow: false,
-                margin: [0, 0, 0, 0],
-                spacingTop: 0,
-                spacingBottom: 0,
-                spacingLeft: 0,
-                spacingRight: 0
-              },
-              colors: ['#f4e0d7', '#e5aa92', 'gray'],
-              // title: {
-              //   useHTML: true,
-              //   shape: 'circle',
-              //   // style: { "height": "100px", "color": "white", "background-color": "#055d7d", "padding": "20px", "border-radius": "50%", "fontSize": "18px" },
-              //   // text: '<p class="chart-center">Lands held:</p> <p class="chart-center chart-percent"> ' + data.attributes.Map_C_T.toFixed(2) + '%</p>',
-              //   align: 'center',
-              //   verticalAlign: 'middle',
-              //   y: 40
-              // },
-              title: {
-                text: null
-              },
-              credits: {
-                enabled: false
-              },
-              tooltip: {
-                pointFormat: '<b>{point.y:.2f}%</b>'
-              },
-              plotOptions: {
-                pie: {
-                  dataLabels: {
-                    enabled: true,
-                    distance: 20,
-                    style: {
-                      fontWeight: 'bold',
-                      color: 'white'
-                    }
-                  },
-                  size:'40%'
-                  // startAngle: -(data.attributes.Map_C_T / 100) * 180,
-                  // endAngle: (data.attributes.Map_C_T / 100) * 180,
-                  // center: ['50%', '75%']
-                }
-              },
-              series: [{
-                type: 'pie',
-                // name: 'Browser share',
-                innerSize: '60%',
-                data: [
-                  {
-                    name: 'Acknowledged by Gov',
-                    y: data.attributes.Map_C_F > 0 ? data.attributes.Map_C_F : null,
-                    dataLabels: {
-                      enabled: true,
-                      y:-5,
-                      color:"white",
-                      crop: false,
-                      overflow: 'none',
-                      style: {
-                        fontSize: "10px"
-                      },
-                       formatter: function(){
-                         var map_C_F = data.attributes.Map_C_F ? data.attributes.Map_C_F.toFixed(1) : 0;
-                         return map_C_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>'
-                       }
-                    }
-                  },
-                  {
-                    name: 'Not Acknowledged by Gov',
-                    y: data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_NF : null,
-                    dataLabels: {
-                      enabled: true,
-                      y:-5,
-                      color:"white",
-                      crop: false,
-                      overflow: 'none',
-                      style: {
-                        fontSize: "10px"
-                      },
-                       formatter: function(){
-                         var map_C_NF = data.attributes.Map_C_NF ? data.attributes.Map_C_NF.toFixed(1) : 0;
-                         return data.attributes.Map_C_NF + '% <br><b>Not</b> <br><b>acknowledged</b>'
-                       }
-                    }
-                  },
-                  {
-                    name: 'No Data',
-                    y: 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF : null,
-                    dataLabels: {
-                      enabled: true,
-                      y:-5,
-                      color:"white",
-                      overflow: 'none',
-                      crop: false,
-                      style: {
-                        fontSize: "10px"
-                      },
-                       formatter: function(){
-                         return (100 - data.attributes.Map_C_F - data.attributes.Map_C_NF).toFixed(1) + '% No Data'
-                       }
-                    }
-                  }
-                ]
-              }]
-            },
-            function(chart1) { // on complete
-            var xpos = '50%';
-            var ypos = '50%';
-            var circleradius = 30;
-            var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(1)
-
-            // Render the circle
-            chart1.renderer.circle(xpos, ypos, circleradius).attr({
-                fill: '#ddd',
-            }).add();
-
-            // Render the text
-            var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
-                width: circleradius * 2,
-                color: '#4572A7',
-                fontSize: '10px'
-            }).attr({
-                // why doesn't zIndex get the text in front of the chart?
-                zIndex: 999
-            }).add();
-
-            var textBBox = chart1Text.getBBox();
-            var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.45);
-            var y = chart1.plotTop  + (chart1.plotHeight * 0.5) - (textBBox.height * 0.25);
-            chart1Text.attr({x: x, y: y});
-        })};
-
-        if (!data.attributes.Map_IP_F && !data.attributes.Map_IP_NF) {
-          var indigenousLandsChart = Highcharts.chart('indigenous-lands-chart', {
-            chart: {
-              plotBackgroundColor: null,
-              backgroundColor: '#404040',
-              plotBorderWidth: 0,
-              plotShadow: false
-            },
-            colors: ['gray'],
-            title: {
-              text: null
-            },
-            credits: {
-              enabled: false
-            },
-            tooltip: { enabled: false },
-            plotOptions: {
-              pie: {
-                dataLabels: {
-                  enabled: true,
-                  distance: 10,
-                  style: {
-                    fontWeight: 'bold',
-                    color: 'white'
-                  }
-                },
-                size:'50%'
-              }
-            },
-            series: [{
-              type: 'pie',
-              innerSize: '60%',
-              data: [
-                ['No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF : null]
-              ]
-            }]
-          })
-        } else {
             var indigenousLandsChart = Highcharts.chart('indigenous-lands-chart', {
               chart: {
                 plotBackgroundColor: null,
@@ -547,17 +379,12 @@ define([
                 spacingRight: 0
               },
               colors: ['#f4e0d7', '#e5aa92','gray'],
-              // title: {
-              //   useHTML: true,
-              //   shape: 'circle',
-              //   // style: { "height": "100px", "color": "white", "background-color": "#055d7d", "padding": "20px", "border-radius": "50%", "fontSize": "18px" },
-              //   // text: '<p class="chart-center">Lands held:</p> <p class="chart-center chart-percent"> ' + data.attributes.Map_IP_T.toFixed(2) + '%</p>',
-              //   align: 'center',
-              //   verticalAlign: 'middle',
-              //   y: 40
-              // },
               title: {
-                text: null
+                text: 'Indigenous Peoples',
+                style: {
+                  color: '#ccc',
+                  fontSize: '14px'
+                }
               },
               credits: {
                 enabled: false
@@ -568,123 +395,35 @@ define([
               plotOptions: {
                 pie: {
                   dataLabels: {
-                    enabled: true,
-                    distance: 10,
-                    crop: false,
-                    overflow: 'none',
-                    style: {
-                      fontWeight: 'bold',
-                      color: 'white',
-                      width: '10px',
-                      overflow: 'visible'
-                    }
+                    enabled: false
                   },
-                  size:'40%'
-                  // startAngle: -(data.attributes.Map_IP_T / 100) * 180,
-                  // endAngle: (data.attributes.Map_IP_T / 100) * 180,
-                  // center: ['50%', '75%']
+                  size:'50%',
+                  center: ['50%', '50%']
                 }
               },
-              series: [{
+              series: [
+                {
+                  type: 'pie',
+                  size: '60%',
+                  data: [
+                    ['No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],
+                    ['<b>Indigenous</b> <br><b>Peoples</b>', data.attributes.Map_IP_F+data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_F+data.attributes.Map_IP_NF : null],
+                    ['<b>Community</b>', data.attributes.Map_C_F + data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_F + data.attributes.Map_C_NF : null]
+                  ]
+                }, {
                 type: 'pie',
-                // name: 'Browser share',
+                size: '80%',
                 innerSize: '60%',
                 data: [
-                  // [(100 - data.attributes.Map_IP_F.toFixed(2) - data.attributes.Map_IP_NF.toFixed(2)).toFixed(2) + '% No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF : null],
-                  // [data.attributes.Map_IP_F.toFixed(2) + '% <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Map_IP_F > 0 ? data.attributes.Map_IP_F : null],
-                  // [data.attributes.Map_IP_NF.toFixed(2) + '% <br><b>Not</b> <br><b>acknowledged</b>',       data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_NF : null],
-                  // {
-                  //   name: 'Proprietary or Undetectable',
-                  //   y: 0.2,
-                  //   dataLabels: {
-                  //     enabled: false
-                  //   }
-                  // }
-                  {
-                    name: 'Acknowledged by Gov',
-                    y: data.attributes.Map_IP_F > 0 ? data.attributes.Map_IP_F : null,
-                    dataLabels: {
-                      enabled: true,
-                      y:-5,
-                      color:"white",
-                      crop: false,
-                      overflow: 'none',
-                      // useHTML: true,
-                      // format: '<div class="chart-data-label__container">{data.attributes.Map_IP_F}% <span class="chart-data-label__name">Acknowledged by Gov</span>',
-                      style: {
-                        fontSize: "10px"
-                      },
-                       formatter: function(){
-                         var map_IP_F = data.attributes.Map_IP_F ? data.attributes.Map_IP_F.toFixed(1) : 0;
-                         return map_IP_F + '% <br><b>Acknowledged</b> <br><b>by gov</b>'
-                       }
-                    }
-                  },
-                  {
-                    name: 'Not Acknowledged by Gov',
-                    y: data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_NF : null,
-                    dataLabels: {
-                      enabled: true,
-                      y:-5,
-                      color:"white",
-                      crop: false,
-                      overflow: 'none',
-                      style: {
-                        fontSize: "10px"
-                      },
-                       formatter: function(){
-                         var map_IP_NF = data.attributes.Map_IP_NF ? data.attributes.Map_IP_NF.toFixed(1) : 0;
-                         return map_IP_NF + '% <br><b>Not</b> <br><b>acknowledged</b>'
-                       }
-                    }
-                  },
-                  {
-                    name: 'No Data',
-                    y: 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF : null,
-                    dataLabels: {
-                      enabled: true,
-                      y:-5,
-                      color:"white",
-                      overflow: 'none',
-                      crop: false,
-                      style: {
-                        fontSize: "10px"
-                      },
-                       formatter: function(){
-                         return (100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF).toFixed(1) + '% No Data'
-                       }
-                    }
-                  }
+                  ['No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],
+                  ['Indigenous <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Map_IP_F > 0 ? data.attributes.Map_IP_F : null],
+                  ['Community <br><b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Map_C_F > 0 ? data.attributes.Map_C_F : null],
+                  ['Indigenous <br><b>Not</b> <br><b>acknowledged</b>',       data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_NF : null]
+                  ['Community <br><b>Not</b> <br><b>acknowledged</b>',       data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_NF : null]
                 ]
               }]
-            },
-            function(chart1) { // on complete
-            var xpos = '50%';
-            var ypos = '50%';
-            var circleradius = 30;
-            var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(1)
-
-            // Render the circle
-            chart1.renderer.circle(xpos, ypos, circleradius).attr({
-                fill: '#ddd',
-            }).add();
-
-            // Render the text
-            var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
-                width: circleradius * 2,
-                color: '#4572A7',
-                fontSize: '10px'
-            }).attr({
-                // why doesn't zIndex get the text in front of the chart?
-                zIndex: 999
-            }).add();
-
-            var textBBox = chart1Text.getBBox();
-            var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.45);
-            var y = chart1.plotTop  + (chart1.plotHeight * 0.5) - (textBBox.height * 0.25);
-            chart1Text.attr({x: x, y: y});
-        })};
-
+            })
+          };
         },
 
         exportAnalysisResult: function(text) {

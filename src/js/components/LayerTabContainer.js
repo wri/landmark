@@ -6,7 +6,6 @@ define([
 	'map/WidgetsController'
 ], function (React, MapConfig, LayerSelectionDropdown, WidgetsController) {
 
-
   var TabContainer = React.createClass({displayName: "TabContainer",
 
     getInitialState: function () {

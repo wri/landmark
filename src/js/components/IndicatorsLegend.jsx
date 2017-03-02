@@ -36,6 +36,29 @@ define([
 
     },
 
+    componentDidUpdate: function (prevProps, prevState) {
+      if (prevProps.legendObject.layerIdValue !== this.props.legendObject.layerIdValue) {
+        console.log('updated!');
+        var self = this;
+        var mapLayer;
+        function isLandTenure(element, index, array) {
+          if (element.layerId === self.props.legendObject.name) {
+            mapLayer = element.data;
+            return element;
+          }
+        }
+
+        if (brApp.layerInfos.some(isLandTenure)) {
+          for (var j = 0; j < mapLayer.layers.length; j++) {
+            if (mapLayer.layers[j].layerId === self.props.legendObject.layerIdValue) {
+              console.log(mapLayer.layers[j].legend);
+              this.setState({legendInfos: mapLayer.layers[j].legend});
+            }
+          }
+        }
+      }
+    },
+
     dataMapper: function(data) {
         if (data.label === 'Not applicable') {
           data.label = 'n/a'

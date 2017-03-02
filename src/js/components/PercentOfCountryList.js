@@ -96,7 +96,6 @@ define([
     },
 
 		changePercentIndigenousLayer: function (key, layer) {
-			console.log(key, layer);
 			if (!layer) {
 				return;
 			}

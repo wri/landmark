@@ -131,10 +131,17 @@ define([
 
     /* jshint ignore:start */
     render: function () {
+			let layerIdValue;
+			if (this.state.activeIndigenousKey === 'averageScoreTenure') {
+				layerIdValue = 0;
+			} else {
+				layerIdValue = 1;
+			}
       var legendObject = {
         name: 'landTenure',
-        layerIdValue: 0
+        layerIdValue: layerIdValue
       }
+			console.log('rendering');
 
     	return (
     		React.createElement("div", {className: "national-level-layer-lists"}, 
