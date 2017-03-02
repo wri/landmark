@@ -141,8 +141,7 @@ define([
         name: 'landTenure',
         layerIdValue: layerIdValue
       }
-			console.log('rendering');
-
+			
     	return (
     		React.createElement("div", {className: "national-level-layer-lists"}, 
     			React.createElement("div", {className: "land-tenure-layer-list"}, 

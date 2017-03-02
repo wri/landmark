@@ -141,8 +141,7 @@ define([
         name: 'landTenure',
         layerIdValue: layerIdValue
       }
-			console.log('rendering');
-
+			
     	return (
     		<div className='national-level-layer-lists'>
     			<div className='land-tenure-layer-list'>
