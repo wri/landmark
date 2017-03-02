@@ -297,7 +297,8 @@ define([
             searchWidget = new Search({
               map: brApp.map,
               showArcGISBasemaps: true,
-              showInfoWindowOnSelect: false
+              showInfoWindowOnSelect: false,
+              enableSearchingAll: false
             }, 'esri-search-holder');
 
             var sources = searchWidget.get("sources");
@@ -405,7 +406,7 @@ define([
             });
 
             searchWidget.set("sources", sources);
-            searchWidget.set('activeSourceIndex', 1);
+            // searchWidget.set('activeSourceIndex', 1);
 
             searchWidget.startup();
 
