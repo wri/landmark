@@ -297,7 +297,8 @@ define([
             searchWidget = new Search({
               map: brApp.map,
               showArcGISBasemaps: true,
-              showInfoWindowOnSelect: false
+              showInfoWindowOnSelect: false,
+              enableSearchingAll: false
             }, 'esri-search-holder');
 
             var sources = searchWidget.get("sources");
@@ -405,6 +406,7 @@ define([
             });
 
             searchWidget.set("sources", sources);
+            // searchWidget.set('activeSourceIndex', 1);
 
             searchWidget.startup();
 
@@ -1467,7 +1469,7 @@ define([
                 icnf = 'Unknown';
               }
 
-              var data = item.feature.attributes.IC_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + ict + " " + item.feature.attributes.IC_T_Src + "</div><div class='indentTD'><span class='inlineBold'>Formally recognized</span>: " + icf + " " + item.feature.attributes.IC_F_Src + "</div><div class='indentTD'><span class='inlineBold'>Not formally recognized</span>: " + icnf + " " + item.feature.attributes.IC_NF_Src + "</div></td></tr>" : "";
+              var data = item.feature.attributes.IC_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + ict + " " + item.feature.attributes.IC_T_Src + "</div><div class='indentTD'><span class='inlineBold'>Acknowledged by government</span>: " + icf + " " + item.feature.attributes.IC_F_Src + "</div><div class='indentTD'><span class='inlineBold'>Not acknowledged by government</span>: " + icnf + " " + item.feature.attributes.IC_NF_Src + "</div></td></tr>" : "";
               var source = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IC_Notes + '</td></tr>' : '';
 
               template.content = "<div id='tableWrapper'><table id='nationalTable'>" +
@@ -1815,8 +1817,6 @@ define([
                 }
 
                 var extraContent = "<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:10px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended.</div></div>";
-                console.log(extraContent);
-                console.log(document.querySelector('.esriPopupWrapper'));
                 domConstruct.place(extraContent, document.querySelector('.esriPopupWrapper'));
 
                 var esriPopupWrapper = document.querySelector('.esriPopupWrapper');

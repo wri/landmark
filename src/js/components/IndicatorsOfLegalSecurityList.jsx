@@ -6,7 +6,7 @@ define([
   'components/IndicatorsLegend',
 	'components/LayerList'
 ], function (React, MapConfig, LayerController, IndicatorsLegend, LayerList) {
-	
+
 
 	// CONSTANTS
 	var LandTenureInd = 'land-tenure-indigenous';
@@ -130,9 +130,17 @@ define([
 
     /* jshint ignore:start */
     render: function () {
+			let layerIdValue;
+			if (this.state.activeIndigenousKey === 'averageScoreTenure' && this.state.landTenureCategory === 'land-tenure-indigenous') {
+				layerIdValue = 0;
+			} else if (this.state.activeCommunityKey === 'averageScoreTenure' && this.state.landTenureCategory === 'land-tenure-community') {
+				layerIdValue = 0;
+			} else {
+				layerIdValue = 1;
+			}
       var legendObject = {
         name: 'landTenure',
-        layerIdValue: 0
+        layerIdValue: layerIdValue
       }
 
     	return (

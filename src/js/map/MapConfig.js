@@ -5,13 +5,13 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
 
     var community_indigenous_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim_temp/MapServer';
     var community_indigenous_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Documented_temp/MapServer';
-    var community_indigenous_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_InProcess/MapServer';
+    // var community_indigenous_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_InProcess/MapServer';
     var community_indigenous_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_NotDocumented_temp/MapServer';
     var community_indigenous_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_CustomaryTenure_temp/MapServer';
 
     var community_community_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalClaim_temp/MapServer';
     var community_community_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Documented_temp/MapServer';
-    var community_community_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_InProcess/MapServer';
+    // var community_community_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_InProcess/MapServer';
     var community_community_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NotDocumented_temp/MapServer';
     var community_community_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_CustomaryTenure_temp/MapServer';
 
@@ -95,23 +95,23 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 type: 'feature',
                 visible: true
             },
-            'indigenous_InProcess': {
-                url: community_indigenous_InProcess,
-                type: 'dynamic',
-                minZoom: 2315000,
-                defaultLayers: [0,1],
-                visible: true
-            },
-            'indigenous_InProcessFeature': {
-                url: community_indigenous_InProcess + '/1',
-                type: 'feature',
-                visible: true
-            },
-            'indigenous_InProcessFeaturePoint': {
-                url: community_indigenous_InProcess + '/0',
-                type: 'feature',
-                visible: true
-            },
+            // 'indigenous_InProcess': {
+            //     url: community_indigenous_InProcess,
+            //     type: 'dynamic',
+            //     minZoom: 2315000,
+            //     defaultLayers: [0,1],
+            //     visible: true
+            // },
+            // 'indigenous_InProcessFeature': {
+            //     url: community_indigenous_InProcess + '/1',
+            //     type: 'feature',
+            //     visible: true
+            // },
+            // 'indigenous_InProcessFeaturePoint': {
+            //     url: community_indigenous_InProcess + '/0',
+            //     type: 'feature',
+            //     visible: true
+            // },
             'indigenous_NoDoc': {
                 url: community_indigenous_NoDoc,
                 type: 'dynamic',
@@ -180,23 +180,23 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 type: 'feature',
                 visible: true
             },
-            'community_InProcess': {
-                url: community_community_InProcess,
-                type: 'dynamic',
-                minZoom: 2315000,
-                defaultLayers: [0,1],
-                visible: true
-            },
-            'community_InProcessFeature': {
-                url: community_community_InProcess + '/1',
-                type: 'feature',
-                visible: true
-            },
-            'community_InProcessFeaturePoint': {
-                url: community_community_InProcess + '/0',
-                type: 'feature',
-                visible: true
-            },
+            // 'community_InProcess': {
+            //     url: community_community_InProcess,
+            //     type: 'dynamic',
+            //     minZoom: 2315000,
+            //     defaultLayers: [0,1],
+            //     visible: true
+            // },
+            // 'community_InProcessFeature': {
+            //     url: community_community_InProcess + '/1',
+            //     type: 'feature',
+            //     visible: true
+            // },
+            // 'community_InProcessFeaturePoint': {
+            //     url: community_community_InProcess + '/0',
+            //     type: 'feature',
+            //     visible: true
+            // },
             'community_NoDoc': {
                 url: community_community_NoDoc,
                 type: 'dynamic',
@@ -243,12 +243,12 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
-            'indigenous_InProcess_Tiled': {
-                url: community_indigenous_InProcess,
-                type: 'tiled',
-                defaultLayers: [0,1],
-                visible: true
-            },
+            // 'indigenous_InProcess_Tiled': {
+            //     url: community_indigenous_InProcess,
+            //     type: 'tiled',
+            //     defaultLayers: [0,1],
+            //     visible: true
+            // },
             'indigenous_NoDoc_Tiled': {
                 url: community_indigenous_NoDoc,
                 type: 'tiled',
@@ -273,12 +273,12 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
-            'community_InProcess_Tiled': {
-                url: community_community_InProcess,
-                type: 'tiled',
-                defaultLayers: [0,1],
-                visible: true
-            },
+            // 'community_InProcess_Tiled': {
+            //     url: community_community_InProcess,
+            //     type: 'tiled',
+            //     defaultLayers: [0,1],
+            //     visible: true
+            // },
             'community_NoDoc_Tiled': {
                 url: community_community_NoDoc,
                 type: 'tiled',
