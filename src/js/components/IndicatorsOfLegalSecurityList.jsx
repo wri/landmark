@@ -130,7 +130,7 @@ define([
 
     /* jshint ignore:start */
     render: function () {
-			let layerIdValue;
+			var layerIdValue;
 			if (this.state.activeIndigenousKey === 'averageScoreTenure' && this.state.landTenureCategory === 'land-tenure-indigenous') {
 				layerIdValue = 0;
 			} else if (this.state.activeCommunityKey === 'averageScoreTenure' && this.state.landTenureCategory === 'land-tenure-community') {
