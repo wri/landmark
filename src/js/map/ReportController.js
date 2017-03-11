@@ -318,9 +318,8 @@ define([
           chart1Text.attr({x: x, y: y});
       });
 
-
       if (!data.attributes.Map_C_F && !data.attributes.Map_C_NF && !data.attributes.Map_IP_F && !data.attributes.Map_IP_NF) {
-        var commLandsChart = Highcharts.chart('community-lands-chart', {
+        var commLandsChart = Highcharts.chart('indigenous-lands-chart', {
           chart: {
             plotBackgroundColor: null,
             backgroundColor: '#F0F0F0',
@@ -354,7 +353,7 @@ define([
                   color: 'white'
                 }
               },
-              size:'40%'
+              size:'60%'
             }
           },
           series: [{
