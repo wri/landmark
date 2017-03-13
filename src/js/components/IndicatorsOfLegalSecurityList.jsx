@@ -54,6 +54,7 @@ define([
     },
 
     componentDidUpdate: function (prevProps, prevState) {
+			console.log(this.state.activeIndigenousKey);
     	var visibleLayers,
     			state = this.state;
 
@@ -110,6 +111,7 @@ define([
     },
 
     changeLandTenureLayer: function (key, layer) {
+			console.log(key);
 			if (layer !== -1) {
 				this.props.setActiveTab(this.props.activeSelection);
 			}

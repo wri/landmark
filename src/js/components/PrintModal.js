@@ -85,7 +85,7 @@ define([
           ), 
 
           React.createElement("div", {className: "print-input-container"}, 
-            React.createElement("label", {className: "print-modal-label"}, "dpi: "), 
+            React.createElement("label", {className: "print-modal-label"}, "Resolution (dpi): "), 
             React.createElement("input", {
             className: "print-input print-input-text", 
             type: "text", 

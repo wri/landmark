@@ -353,6 +353,8 @@ define([
               // legendImage.src = './css/images/LMacknowledged.png';
               logoImage.src = './css/images/LandMark_final.png';
               commLegendImage.src = './css/images/legend-comm-landscape.jpg';
+              console.log(brApp.activeLayer);
+              console.log(brApp.activeKey);
 
               // Check for active layer to determine what legend to use
               if (brApp.activeLayer === 'land-tenure') {
