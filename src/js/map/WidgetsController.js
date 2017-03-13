@@ -341,9 +341,10 @@ define([
         			var printedMapImage = new Image(mapWidth, mapHeight);
               var logoImage = new Image(200, 100);
               var legendImage;
+              console.log(activeNationalData);
 
-              if (brApp.activeLayer === 'land-tenure') {
-                legendImage = new Image(275, 100);
+              if (brApp.activeLayer === 'land-tenure' || brApp.activeKey === 'initialIndicator' || activeNationalData === 'landTenure') {
+                legendImage = new Image(325, 100);
               } else {
                 legendImage = new Image(275, 121);
               }
@@ -353,11 +354,9 @@ define([
               // legendImage.src = './css/images/LMacknowledged.png';
               logoImage.src = './css/images/LandMark_final.png';
               commLegendImage.src = './css/images/legend-comm-landscape.jpg';
-              console.log(brApp.activeLayer);
-              console.log(brApp.activeKey);
 
               // Check for active layer to determine what legend to use
-              if (brApp.activeLayer === 'land-tenure') {
+              if (brApp.activeLayer === 'land-tenure' || activeNationalData === 'landTenure') {
                 legendImage.src = './css/images/LMlegalSec.jpg';
               } else {
                 switch (brApp.activeKey) {
@@ -369,6 +368,9 @@ define([
                     break;
                   case 'combinedInformal':
                     legendImage.src = './css/images/LMnotAcknowledged.jpg';
+                    break;
+                  case 'initialIndicator':
+                    legendImage.src = './css/images/LMlegalSec.jpg';
                     break;
                   default:
                     legendImage.src = './css/images/LMacknowledged.jpg';
