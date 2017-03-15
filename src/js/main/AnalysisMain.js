@@ -11,7 +11,7 @@ define([
     // 'esri/tasks/QueryTask',
 
 ], function(ReportConfig, on) {
-    
+
 
     var Main = {
       init: function() {
@@ -190,7 +190,7 @@ define([
           },
           title: {
             margin: 0,
-            text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Recognition</b>',
+            text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Recognition Status</b>',
             style: { 'font-size': '14px', 'color': '#00356C'}
           },
           credits: {
@@ -245,7 +245,7 @@ define([
           },
           title: {
             margin: 0,
-            text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Documentation</b>',
+            text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Documentation Status</b>',
             style: { 'font-size': '14px', 'color': '#00356C'}
           },
           credits: {

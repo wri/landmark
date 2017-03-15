@@ -177,7 +177,11 @@ define([
          * @return {boolean}
          */
         mobileMenuIsOpen: function() {
-            return domClass.contains('mobileMenu', 'open');
+            if (document.getElementById('mobileMenu')) {
+              return domClass.contains('mobileMenu', 'open');
+            } else {
+              return false;
+            }
         },
 
         showEmbedCode: function() {
