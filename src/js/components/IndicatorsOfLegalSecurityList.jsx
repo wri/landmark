@@ -43,7 +43,7 @@ define([
     componentDidMount: function () {
     	// If we need to set the state based on the url, do so here, but also set up global defaults for other
     	// parts of the app to use, such as currentLayer
-
+			brApp.activeKey = 'initialIndicator';
     	brApp.currentLayer = (
     		this.state.landTenureCategory === LandTenureInd ?
     			this.state.activeIndigenousKey :
@@ -110,6 +110,7 @@ define([
     },
 
     changeLandTenureLayer: function (key, layer) {
+			brApp.activeLandTenureKey = key;
 			if (layer !== -1) {
 				this.props.setActiveTab(this.props.activeSelection);
 			}

@@ -85,7 +85,7 @@ define([
           </div>
 
           <div className='print-input-container'>
-            <label className='print-modal-label'>dpi: </label>
+            <label className='print-modal-label'>Resolution (dpi): </label>
             <input
             className='print-input print-input-text'
             type='text'

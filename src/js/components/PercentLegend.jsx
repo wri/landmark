@@ -4,7 +4,7 @@ define([
   'dojo/topic',
   'map/MapConfig'
 ], function (React, topic, MapConfig) {
-  
+
 
 
   var PercentLegend = React.createClass({
@@ -62,7 +62,7 @@ define([
         <div className='legend--item-image-container'>
           <img className='legend-item-img' src={'data:image/png;base64,'+data.imageData}></img>
         </div>
-        <div className={'percent-legend-text-container' + (data.label === '0%' || data.label === '0.1-5%' || data.label === '5.1-20%' ? ' not-app-label' : '')}>
+        <div className={'percent-legend-text-container' + (data.label === '0%' || data.label === '0.1-5%' || data.label === '5.1-20%' ? ' not-app-label-percent' : '')}>
           {data.label}
         </div>
         </div>

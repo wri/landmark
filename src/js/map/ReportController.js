@@ -318,9 +318,8 @@ define([
           chart1Text.attr({x: x, y: y});
       });
 
-
       if (!data.attributes.Map_C_F && !data.attributes.Map_C_NF && !data.attributes.Map_IP_F && !data.attributes.Map_IP_NF) {
-        var commLandsChart = Highcharts.chart('community-lands-chart', {
+        var commLandsChart = Highcharts.chart('indigenous-lands-chart', {
           chart: {
             plotBackgroundColor: null,
             backgroundColor: '#F0F0F0',
@@ -334,11 +333,12 @@ define([
           },
           colors: ['gray'],
           title: {
-            text: 'Community Lands',
-            style: {
-              color: '#ccc',
-              fontSize: '14px'
-            }
+            text: null
+            // text: 'Community Lands',
+            // style: {
+            //   color: '#ccc',
+            //   fontSize: '14px'
+            // }
           },
           credits: {
             enabled: false
@@ -347,14 +347,14 @@ define([
           plotOptions: {
             pie: {
               dataLabels: {
-                enabled: true,
-                distance: 20,
-                style: {
-                  fontWeight: 'bold',
-                  color: 'white'
-                }
+                enabled: false,
+                // distance: 20,
+                // style: {
+                //   fontWeight: 'bold',
+                //   color: 'white'
+                // }
               },
-              size:'40%'
+              size:'60%'
             }
           },
           series: [{
@@ -364,6 +364,27 @@ define([
               ['No Data', 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_C_F - data.attributes.Map_C_NF : null]
             ]
           }]
+        },
+        function(chart1) { // on complete
+          var xpos = '50%';
+          var ypos = '50%';
+          var circleradius = 75;
+          var centerText = 'No Data';
+
+          // Render the text
+          var chart1Text = chart1.renderer.text(centerText).css({
+            width: circleradius * 2,
+            color: '#1c1c1c',
+            fontSize: '14px'
+          }).attr({
+            // why doesn't zIndex get the text in front of the chart?
+            zIndex: 999
+          }).add();
+
+          var textBBox = chart1Text.getBBox();
+          var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.5);
+          var y = chart1.plotTop  + (chart1.plotHeight * 0.55) - (textBBox.height * 0.5);
+          chart1Text.attr({x: x, y: y});
         })
       } else {
             var indigenousLandsChart = Highcharts.chart('indigenous-lands-chart', {
@@ -379,11 +400,12 @@ define([
                 spacingRight: 0
               },
               title: {
-                text: 'Community Lands & Indigenous Peoples',
-                style: {
-                  color: '#1c1c1c',
-                  fontSize: '14px'
-                }
+                text: null
+                // text: 'Community Lands & Indigenous Peoples',
+                // style: {
+                //   color: '#1c1c1c',
+                //   fontSize: '14px'
+                // }
               },
               credits: {
                 enabled: false
@@ -401,16 +423,17 @@ define([
                 }
               },
               series: [
+                // {
+                //   colors: ['gray', '#D50010', '#00647A'],
+                //   type: 'pie',
+                //   size: '60%',
+                //   data: [
+                //     ['No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],
+                //     ['<b>Indigenous</b> <br><b>Peoples</b>', data.attributes.Map_IP_F + data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_F + data.attributes.Map_IP_NF : null],
+                //     ['<b>Community</b>', data.attributes.Map_C_F + data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_F + data.attributes.Map_C_NF : null]
+                //   ]
+                // },
                 {
-                  colors: ['gray', '#D50010', '#00647A'],
-                  type: 'pie',
-                  size: '60%',
-                  data: [
-                    ['No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],
-                    ['<b>Indigenous</b> <br><b>Peoples</b>', data.attributes.Map_IP_F + data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_F + data.attributes.Map_IP_NF : null],
-                    ['<b>Community</b>', data.attributes.Map_C_F + data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_F + data.attributes.Map_C_NF : null]
-                  ]
-                }, {
                 colors: ['gray', '#FF6240', '#00768A', '#FF9900', '#00C1CC'],
                 type: 'pie',
                 size: '80%',
@@ -423,6 +446,28 @@ define([
                   ['Community <br><b>Not</b> <br><b>acknowledged</b>', data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_NF : null]
                 ]
               }]
+            },
+            function(chart1) { // on complete
+              var xpos = '50%';
+              var ypos = '50%';
+              var circleradius = 75;
+              var totalValue = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)+parseFloat(chart1.series[0].data[3].percentage)+parseFloat(chart1.series[0].data[4].percentage)).toFixed(1);
+              var centerText = totalValue;
+
+              // Render the text
+              var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
+                width: circleradius * 2,
+                color: '#1c1c1c',
+                fontSize: '14px'
+              }).attr({
+                // why doesn't zIndex get the text in front of the chart?
+                zIndex: 999
+              }).add();
+
+              var textBBox = chart1Text.getBBox();
+              var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.5);
+              var y = chart1.plotTop  + (chart1.plotHeight * 0.55) - (textBBox.height * 0.5);
+              chart1Text.attr({x: x, y: y});
             })
           };
         },

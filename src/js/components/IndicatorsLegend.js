@@ -62,7 +62,7 @@ define([
           data.label = 'n/a'
         }
         return React.createElement("div", {className: (this.props.legendObject.layerIdValue === 0 ? 'indicator-legend' : 'special-indicator-legend')}, 
-        React.createElement("div", {className: "legend--item-image-container"}, 
+        React.createElement("div", {className: (this.props.legendObject.layerIdValue === 0 ? 'legend--item-image-container' : 'special-legend--item-image-container')}, 
           React.createElement("img", {className: "legend-item-img", src: 'data:image/png;base64,'+data.imageData})
         ), 
         React.createElement("div", {className: (this.props.legendObject.layerIdValue === 0 ? 'legend-item-text-container' : 'special-legend-item-text-container') + (data.label === 'n/a' ? ' not-app-label' : '')}, 
@@ -72,12 +72,7 @@ define([
     },
 
     render: function () {
-      // <span className='best-text-indicator'>
-      //   BEST
-      // </span>
-      // <span className='worst-text-indicator'>
-      //   WORST
-      // </span>
+
       return (
 
         React.createElement("div", {className: (this.props.legendObject.layerIdValue === 0 ? 'legend-component-container' : 'special-legend-component-container')}, 

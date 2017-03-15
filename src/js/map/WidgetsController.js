@@ -177,7 +177,11 @@ define([
          * @return {boolean}
          */
         mobileMenuIsOpen: function() {
-            return domClass.contains('mobileMenu', 'open');
+            if (document.getElementById('mobileMenu')) {
+              return domClass.contains('mobileMenu', 'open');
+            } else {
+              return false;
+            }
         },
 
         showEmbedCode: function() {
@@ -339,15 +343,9 @@ define([
 
         		printTask.execute(params, function(response){
         			var printedMapImage = new Image(mapWidth, mapHeight);
-              var logoImage = new Image(200, 100);
-              var legendImage;
-
-              if (brApp.activeLayer === 'land-tenure') {
-                legendImage = new Image(275, 100);
-              } else {
-                legendImage = new Image(275, 121);
-              }
-              var commLegendImage = new Image(300, 100);
+              var logoImage = new Image(250, 100);
+              var legendImage = new Image(200, 88);
+              var commLegendImage = new Image(350, 117);
               // 549/128
               // 275/61
               // legendImage.src = './css/images/LMacknowledged.png';
@@ -355,8 +353,13 @@ define([
               commLegendImage.src = './css/images/legend-comm-landscape.jpg';
 
               // Check for active layer to determine what legend to use
-              if (brApp.activeLayer === 'land-tenure') {
-                legendImage.src = './css/images/LMlegalSec.jpg';
+              if (brApp.activeLayer === 'land-tenure' || activeNationalData === 'landTenure') {
+                if (brApp.activeLandTenureKey === 'averageScoreTenure') {
+                  legendImage.src = './css/images/LMlegalSec.jpg';
+                } else {
+                  legendImage = new Image(150, 127.5);
+                  legendImage.src = './css/images/longLegend.jpg';
+                }
               } else {
                 switch (brApp.activeKey) {
                   case 'combinedTotal':
@@ -367,6 +370,9 @@ define([
                     break;
                   case 'combinedInformal':
                     legendImage.src = './css/images/LMnotAcknowledged.jpg';
+                    break;
+                  case 'initialIndicator':
+                    legendImage.src = './css/images/LMlegalSec.jpg';
                     break;
                   default:
                     legendImage.src = './css/images/LMacknowledged.jpg';

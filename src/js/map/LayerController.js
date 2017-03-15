@@ -5,9 +5,10 @@ define([
     'map/MapConfig',
     'map/MapAssets',
     'dojo/_base/array',
+    'dojo/dom-class',
     'esri/layers/LayerDrawingOptions',
     'utils/HashController',
-], function(topic, on, registry, MapConfig, MapAssets, arrayUtils, LayerDrawingOptions, HashController) {
+], function(topic, on, registry, MapConfig, MapAssets, arrayUtils, domClass, LayerDrawingOptions, HashController) {
 
 
 
@@ -235,9 +236,15 @@ define([
                   });
 
                 }
-
-                // dynamicLayer.setVisibleLayers(visibleLayers);
-
+                if (hashActiveLayers.indexOf('community') === -1 && hashActiveLayers.indexOf('indigenous') === -1) {
+                  domClass.add('analysis-button', 'grayOut')
+                  domClass.add('analysisLogo', 'grayOutButton')
+                  domClass.add('analysis-help', 'grayOutIcon')
+                } else {
+                  domClass.remove('analysis-button', 'grayOut')
+                  domClass.remove('analysisLogo', 'grayOutButton')
+                  domClass.remove('analysis-help', 'grayOutIcon')
+                }
             }
         },
 

@@ -34,27 +34,33 @@ define([], function() {
           domId: 'legal-authority-indig'
         }, {
           attr: 'ind_C_6',
-          domId: 'right-consent-comm'
+          domId: 'perpetuity-comm'
         }, {
           attr: 'ind_IP_6',
-          domId: 'right-consent-indig'
+          domId: 'perpetuity-indig'
         }, {
           attr: 'ind_C_7',
-          domId: 'right-trees-comm'
+          domId: 'right-consent-comm'
         }, {
           attr: 'ind_IP_7',
-          domId: 'right-trees-indig'
+          domId: 'right-consent-indig'
         }, {
           attr: 'ind_C_8',
-          domId: 'right-water-comm'
+          domId: 'right-trees-comm'
         }, {
           attr: 'ind_IP_8',
-          domId: 'right-water-indig'
+          domId: 'right-trees-indig'
         }, {
           attr: 'ind_C_9',
-          domId: 'land-rights-protected-comm'
+          domId: 'right-water-comm'
         }, {
           attr: 'ind_IP_9',
+          domId: 'right-water-indig'
+        }, {
+          attr: 'ind_C_10',
+          domId: 'land-rights-protected-comm'
+        }, {
+          attr: 'ind_IP_10',
           domId: 'land-rights-protected-indig'
         }],
 
@@ -112,7 +118,7 @@ define([], function() {
           'Indigenous Peoples Legal Person',
           'Indigenous Peoples Legal Authority',
           'Indigenous Peoples Perpetuity',
-          'Indigenous Peoples Rights to Consent Before Land Acquisition',
+          'Indigenous Peoples Right to Consent Before Land Acquisition',
           'Indigenous Peoples Rights to Trees',
           'Indigenous Peoples Rights to Water',
           'Indigenous Peoples Land Rights in Protected Areas',
@@ -123,7 +129,7 @@ define([], function() {
           'Communities Legal Person',
           'Communities Legal Authority',
           'Communities Perpetuity',
-          'Communities Rights to Consent Before Land Acquisition',
+          'Communities Right to Consent Before Land Acquisition',
           'Communities Rights to Trees',
           'Communities Rights to Water',
           'Communities Land Rights in Protected Areas',
