@@ -73,7 +73,6 @@ define([
               if (result.features && result.features[0]) {
                 self.countryData = result.features[0].attributes;
                 self.map.setExtent(result.features[0].geometry.getExtent());
-                console.log(result.features);
 
                 ReportConfig.reportAttributes.forEach(function(attribute){
                   switch (result.features[0].attributes[attribute.attr]) {
