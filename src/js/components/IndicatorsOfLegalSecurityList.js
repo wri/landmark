@@ -110,6 +110,7 @@ define([
     },
 
     changeLandTenureLayer: function (key, layer) {
+			brApp.activeLandTenureKey = key;
 			if (layer !== -1) {
 				this.props.setActiveTab(this.props.activeSelection);
 			}

@@ -339,7 +339,7 @@ define([
 
         		printTask.execute(params, function(response){
         			var printedMapImage = new Image(mapWidth, mapHeight);
-              var logoImage = new Image(200, 100);
+              var logoImage = new Image(250, 100);
               var legendImage = new Image(200, 88);
               var commLegendImage = new Image(350, 117);
               // 549/128
@@ -350,7 +350,12 @@ define([
 
               // Check for active layer to determine what legend to use
               if (brApp.activeLayer === 'land-tenure' || activeNationalData === 'landTenure') {
-                legendImage.src = './css/images/LMlegalSec.jpg';
+                if (brApp.activeLandTenureKey === 'averageScoreTenure') {
+                  legendImage.src = './css/images/LMlegalSec.jpg';
+                } else {
+                  legendImage = new Image(150, 127.5);
+                  legendImage.src = './css/images/longLegend.jpg';
+                }
               } else {
                 switch (brApp.activeKey) {
                   case 'combinedTotal':
