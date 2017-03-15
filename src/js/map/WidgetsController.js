@@ -340,15 +340,8 @@ define([
         		printTask.execute(params, function(response){
         			var printedMapImage = new Image(mapWidth, mapHeight);
               var logoImage = new Image(200, 100);
-              var legendImage;
-              console.log(activeNationalData);
-
-              if (brApp.activeLayer === 'land-tenure' || brApp.activeKey === 'initialIndicator' || activeNationalData === 'landTenure') {
-                legendImage = new Image(325, 100);
-              } else {
-                legendImage = new Image(275, 121);
-              }
-              var commLegendImage = new Image(300, 100);
+              var legendImage = new Image(200, 88);
+              var commLegendImage = new Image(350, 117);
               // 549/128
               // 275/61
               // legendImage.src = './css/images/LMacknowledged.png';

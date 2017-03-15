@@ -72,12 +72,7 @@ define([
     },
 
     render: function () {
-      // <span className='best-text-indicator'>
-      //   BEST
-      // </span>
-      // <span className='worst-text-indicator'>
-      //   WORST
-      // </span>
+
       return (
 
         <div className={(this.props.legendObject.layerIdValue === 0 ? 'legend-component-container' : 'special-legend-component-container')}>
