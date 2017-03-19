@@ -298,7 +298,7 @@ define([
               }
             }
           }
-          if ((brApp.activeLayer === 'community-lands' || brApp.activeLayer === undefined) && visibleCommunityLayers.length > 0 && activeNationalData === ''){
+          if ((brApp.activeLayer === 'community-lands' || brApp.activeLayer === undefined || brApp.activeLayer === 'none') && visibleCommunityLayers.length > 0 && activeNationalData === ''){
             this.printCommunityMap(title, dpi, format, layoutType);
           } else {
             var self = this;

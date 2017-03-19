@@ -44,6 +44,7 @@ define([
     	// If we need to set the state based on the url, do so here, but also set up global defaults for other
     	// parts of the app to use, such as currentLayer
 			brApp.activeKey = 'initialIndicator';
+			brApp.activeLandTenureKey = 'averageScoreTenure';
     	brApp.currentLayer = (
     		this.state.landTenureCategory === LandTenureInd ?
     			this.state.activeIndigenousKey :

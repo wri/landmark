@@ -14,7 +14,7 @@ define([
 
         return {
           visible: true,
-          mapTitle: 'Landmark Map',
+          mapTitle: 'LandMark Map',
           dpi: 96,
           format: 'pdf',
           layout: 'Portrait'
