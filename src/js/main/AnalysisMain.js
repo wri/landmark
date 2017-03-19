@@ -156,7 +156,15 @@ define([
               cursor: 'pointer',
               dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b><br> {point.percentage:.1f} %',
+                formatter: function() {
+                  console.log(this);
+                  if (this.point.percentage != 0) {
+                    return '<b>' + this.point.name + '</b><br>' + this.point.percentage.toFixed(1) + '%';
+                  } else {
+                    return null;
+                  }
+                },
+                // format: '<b>{point.name}</b><br> {point.percentage:.1f} %',
                 distance: 10,
                 style: {
                   color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
@@ -211,7 +219,15 @@ define([
               cursor: 'pointer',
               dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b><br> {point.percentage:.1f} %',
+                formatter: function() {
+                  console.log(this);
+                  if (this.point.percentage != 0) {
+                    return '<b>' + this.point.name + '</b><br>' + this.point.percentage.toFixed(1) + '%';
+                  } else {
+                    return null;
+                  }
+                },
+                // format: '<b>{point.name}</b><br> {point.percentage:.1f} %',
                 distance: 10,
                 style: {
                   color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
@@ -266,7 +282,15 @@ define([
               cursor: 'pointer',
               dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b><br> {point.percentage:.1f} %',
+                formatter: function() {
+                  console.log(this);
+                  if (this.point.percentage != 0) {
+                    return '<b>' + this.point.name + '</b><br>' + this.point.percentage.toFixed(1) + '%';
+                  } else {
+                    return null;
+                  }
+                },
+                // format: '<b>{point.name}</b><br> {point.percentage:.1f} %',
                 distance: 10,
                 style: {
                   color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
