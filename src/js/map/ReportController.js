@@ -60,7 +60,7 @@ define([
             var self = this;
 
             map.on('click', function (evt) {
-              window.open('../map-app/map.html#country=' + self.country);
+              window.open('/map/#country=' + self.country);
             });
 
             var countryQT = new QueryTask(ReportConfig.countrySnapUrl + '/' + ReportConfig.countrySnapIndex)
