@@ -104,6 +104,7 @@ define([
 
                 var countryLand = result.features[0].attributes.Ctry_Land ? result.features[0].attributes.Ctry_Land : 0;
                 var NB_Maps = result.features[0].attributes.NB_Maps ? result.features[0].attributes.NB_Maps : 0;
+                var ha_IPC = result.features[0].attributes.ha_IPC ? Math.round(result.features[0].attributes.ha_IPC) : 0;
                 // var iso2Value = ReportConfig.countryCodeExceptions.includes(result.features[0].attributes.ISO_ALPHA) ?
                 var iso2Value;
                 var countryCodeExceptions = ReportConfig.countryCodeExceptions
@@ -116,6 +117,9 @@ define([
                 }
 
                 dom.byId('land-count').innerHTML =  '<strong>' + NB_Maps.toLocaleString() + '</strong> indigenous and community lands mapped on Landmark';
+                if (ha_IPC > 0) {
+                  dom.byId('hectare-count').innerHTML = 'Covering <strong>' + ha_IPC.toLocaleString() + '</strong> hectares';
+                }
                 dom.byId('country-name').innerHTML = result.features[0].attributes.Country;
                 dom.byId('country-land-area').innerHTML = 'COUNTRY LAND AREA:';
                 var landCount = Math.round(countryLand);
