@@ -5,7 +5,7 @@ define([
 	'map/LayerController',
   'components/PercentLegend'
 ], function (React, MapConfig, LayerController, PercentLegend) {
-	
+
 
   	// CONSTANTS
   	var LandTenureInd = 'land-tenure-indigenous';
@@ -70,6 +70,9 @@ define([
   		},
   		/* jshint ignore:end */
   		setActiveLayer: function (key, layer) {
+				if (key === 'none') {
+					brApp.activeLayer = 'none';
+				}
   			this.setState({
   				'active': key
   			});

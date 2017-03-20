@@ -375,7 +375,7 @@ define([
           var chart1Text = chart1.renderer.text(centerText).css({
             width: circleradius * 2,
             color: '#1c1c1c',
-            fontSize: '14px'
+            fontSize: '16px'
           }).attr({
             // why doesn't zIndex get the text in front of the chart?
             zIndex: 999
@@ -458,7 +458,7 @@ define([
               var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
                 width: circleradius * 2,
                 color: '#1c1c1c',
-                fontSize: '14px'
+                fontSize: '16px'
               }).attr({
                 // why doesn't zIndex get the text in front of the chart?
                 zIndex: 999
