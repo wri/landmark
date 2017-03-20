@@ -1676,7 +1676,6 @@ define([
 
         selectCustomGraphics: function(mapPoint) {
             brApp.debug('MapController >>> selectCustomGraphics');
-            console.log('custom');
 
             brApp.mapPoint = mapPoint;
 

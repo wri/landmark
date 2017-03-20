@@ -259,7 +259,14 @@ define([
               enabled: false
             },
             tooltip: {
-              pointFormat: '<b>{point.y:.1f}%</b>'
+              // pointFormat: '<b>{point.y:.1f}%</b>',
+              formatter: function() {
+                if (this.point.name === 'No <br> Data') {
+                  return false;
+                } else {
+                  return this.point.name + '<br><b>' + this.point.percentage.toFixed(1) + '%</b>';
+                }
+              },
             },
             plotOptions: {
               pie: {
@@ -283,9 +290,19 @@ define([
               // name: 'Browser share',
               innerSize: '60%',
               data: [
+                // {
+                //   name: 'Acknowledged by Gov',
+                //   y: data.attributes.Pct_F > 0 ? data.attributes.Pct_F : null,
+                //   dataLabels: {
+                //     enabled: false
+                //   },
+                //   tooltip: {
+                //     enabled: false
+                //   }
+                // },
                 ['No <br> Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF > 0 ? 100 - data.attributes.Pct_F - data.attributes.Pct_NF : null],
-                ['<b>Acknowledged</b> <br><b>by gov</b>',   data.attributes.Pct_F > 0 ? data.attributes.Pct_F : null],
-                ['<b>Not</b> <br><b>acknowledged</b>',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null],
+                ['Acknowledged <br>by gov',   data.attributes.Pct_F > 0 ? data.attributes.Pct_F : null],
+                ['Not <br>acknowledged',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null],
                 {
                   name: 'Proprietary or Undetectable',
                   y: 0.2,
@@ -411,7 +428,14 @@ define([
                 enabled: false
               },
               tooltip: {
-                pointFormat: '<b>{point.y:.1f}%</b>'
+                // pointFormat: '<b>{point.y:.1f}%</b>',
+                formatter: function() {
+                  if (this.point.name === 'No Data') {
+                    return false;
+                  } else {
+                    return this.point.name + '<br>' + '<b>' + this.point.percentage.toFixed(1) + '%</b>';
+                  }
+                },
               },
               plotOptions: {
                 pie: {
@@ -440,10 +464,10 @@ define([
                 innerSize: '60%',
                 data: [
                   ['No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],
-                  ['Indigenous <br><b>Acknowledged</b> <br><b>by gov</b>', data.attributes.Map_IP_F > 0 ? data.attributes.Map_IP_F : null],
-                  ['Community <br><b>Acknowledged</b> <br><b>by gov</b>', data.attributes.Map_C_F > 0 ? data.attributes.Map_C_F : null],
-                  ['Indigenous <br><b>Not</b> <br><b>acknowledged</b>', data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_NF : null],
-                  ['Community <br><b>Not</b> <br><b>acknowledged</b>', data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_NF : null]
+                  ['Indigenous <br>Acknowledged <br>by gov', data.attributes.Map_IP_F > 0 ? data.attributes.Map_IP_F : null],
+                  ['Community <br>Acknowledged <br>by gov', data.attributes.Map_C_F > 0 ? data.attributes.Map_C_F : null],
+                  ['Indigenous <br>Not <br>acknowledged', data.attributes.Map_IP_NF > 0 ? data.attributes.Map_IP_NF : null],
+                  ['Community <br>Not <br>acknowledged', data.attributes.Map_C_NF > 0 ? data.attributes.Map_C_NF : null]
                 ]
               }]
             },
