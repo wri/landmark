@@ -157,7 +157,6 @@ define([
               dataLabels: {
                 enabled: true,
                 formatter: function() {
-                  console.log(this);
                   if (this.point.percentage != 0) {
                     return '<b>' + this.point.name + '</b><br>' + this.point.percentage.toFixed(1) + '%';
                   } else {
@@ -220,7 +219,6 @@ define([
               dataLabels: {
                 enabled: true,
                 formatter: function() {
-                  console.log(this);
                   if (this.point.percentage != 0) {
                     return '<b>' + this.point.name + '</b><br>' + this.point.percentage.toFixed(1) + '%';
                   } else {
@@ -283,7 +281,6 @@ define([
               dataLabels: {
                 enabled: true,
                 formatter: function() {
-                  console.log(this);
                   if (this.point.percentage != 0) {
                     return '<b>' + this.point.name + '</b><br>' + this.point.percentage.toFixed(1) + '%';
                   } else {
