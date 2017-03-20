@@ -166,7 +166,7 @@ define([
             React.createElement("div", {className: 'panel-drop-header' + (this.state.openTab ? ' checked' : ' unchecked'), onClick: this.clickDropdown}), 
             React.createElement("div", {className: 'layer-selection-drop-text' + (this.props.selection === 'community-lands' ? ' land-map-layer-selection' : ''), onClick: this.clickDropdown}, this.state.title), 
             this.state.activeSelection === 'community-lands' ?
-              React.createElement("div", {className: "disclaimer"}, "Note that the absence of data does not indicate the absence of indigenous or community land")
+              React.createElement("div", {className: "disclaimer-br"}, "Note that the absence of data does not indicate the absence of indigenous or community land")
               : null
             
           ), 

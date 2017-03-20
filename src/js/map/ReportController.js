@@ -60,7 +60,7 @@ define([
             var self = this;
 
             map.on('click', function (evt) {
-              window.open('map.html#country=' + self.country);
+              window.open('../map-app/map.html#country=' + self.country);
             });
 
             var countryQT = new QueryTask(ReportConfig.countrySnapUrl + '/' + ReportConfig.countrySnapIndex)
@@ -116,9 +116,10 @@ define([
                   }
                 }
 
-                dom.byId('land-count').innerHTML =  '<strong>' + NB_Maps.toLocaleString() + '</strong> indigenous and community lands mapped on Landmark';
                 if (ha_IPC > 0) {
-                  dom.byId('hectare-count').innerHTML = 'Covering <strong>' + ha_IPC.toLocaleString() + '</strong> hectares';
+                  dom.byId('land-count').innerHTML =  '<strong>' + NB_Maps.toLocaleString() + '</strong> indigenous and community lands mapped on Landmark, covering <strong>' + ha_IPC.toLocaleString() + '</strong> hectares';
+                } else {
+                  dom.byId('land-count').innerHTML =  '<strong>' + NB_Maps.toLocaleString() + '</strong> indigenous and community lands mapped on Landmark,';
                 }
                 dom.byId('country-name').innerHTML = result.features[0].attributes.Country;
                 dom.byId('country-land-area').innerHTML = 'COUNTRY LAND AREA:';
