@@ -166,7 +166,7 @@ define([
             <div className={'panel-drop-header' + (this.state.openTab ? ' checked' : ' unchecked')} onClick={this.clickDropdown}></div>
             <div className={'layer-selection-drop-text' + (this.props.selection === 'community-lands' ? ' land-map-layer-selection' : '')} onClick={this.clickDropdown}>{this.state.title}</div>
             {this.state.activeSelection === 'community-lands' ?
-              <div className='disclaimer'>Note that the absence of data does not indicate the absence of indigenous or community land</div>
+              <div className='disclaimer-br'>Note that the absence of data does not indicate the absence of indigenous or community land</div>
               : null
             }
           </div>
