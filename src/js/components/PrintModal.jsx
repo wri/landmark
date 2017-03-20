@@ -93,7 +93,7 @@ define([
             onChange={this.handleDpi}/>
           </div>
 
-          <div className='print-input-container'>
+          <div className='print-input-container middle-print'>
             <label className='print-modal-label'>Format: </label>
             <select className='print-input' value={this.state.format} onChange={this.handleFormat}>
               {formatOptions.map(this.dataMapper)}
