@@ -37,6 +37,7 @@ html
 							li Select a zip file(.zip) containing a shapefile(.shp,.dbf,.prj) from your local file system.
 							li The shapefile must be in Geographic Coordinate System (WGS84).
 							li The shapefile must not exceed 1 Megabyte.
+							li Or, select a CSV from your local file system. The CSV should contain a header row with columns for Name, Latitude, and Longitude.
 						form(enctype='multipart/form-data',method='post',id='uploadForm',name='uploadForm')
 							label
 								input(type='file',name='file',id='shapefileUpload')
