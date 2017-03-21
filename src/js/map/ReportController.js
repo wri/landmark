@@ -265,6 +265,7 @@ define([
             },
             tooltip: {
               // pointFormat: '<b>{point.y:.1f}%</b>',
+              backgroundColor: 'rgba(255,255,255,1)',
               formatter: function() {
                 if (this.point.name === 'No <br> Data') {
                   return false;
@@ -376,7 +377,7 @@ define([
                 //   color: 'white'
                 // }
               },
-              size:'60%'
+              size:'75%'
             }
           },
           series: [{
@@ -434,6 +435,7 @@ define([
               },
               tooltip: {
                 // pointFormat: '<b>{point.y:.1f}%</b>',
+                backgroundColor: 'rgba(255,255,255,1)',
                 formatter: function() {
                   if (this.point.name === 'No Data') {
                     return false;
@@ -447,7 +449,7 @@ define([
                   dataLabels: {
                     enabled: false
                   },
-                  size:'50%',
+                  size:'40%',
                   center: ['50%', '50%']
                 }
               },
@@ -465,7 +467,7 @@ define([
                 {
                 colors: ['gray', '#FF6240', '#00768A', '#FF9900', '#00C1CC'],
                 type: 'pie',
-                size: '80%',
+                size: '65%',
                 innerSize: '60%',
                 data: [
                   ['No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],
@@ -495,7 +497,7 @@ define([
 
               var textBBox = chart1Text.getBBox();
               var x = chart1.plotLeft + (chart1.plotWidth  * 0.5) - (textBBox.width  * 0.5);
-              var y = chart1.plotTop  + (chart1.plotHeight * 0.55) - (textBBox.height * 0.5);
+              var y = chart1.plotTop  + (chart1.plotHeight * 0.54) - (textBBox.height * 0.5);
               chart1Text.attr({x: x, y: y});
             })
           };
