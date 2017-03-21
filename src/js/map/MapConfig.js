@@ -3,17 +3,17 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
     var landTenureURL = 'http://gis.wri.org/arcgis/rest/services/LandMark/land_tenure/MapServer';
     var percentLandsUrl = 'http://gis.wri.org/arcgis/rest/services/LandMark/pct_comm_lands/MapServer';
 
-    var community_indigenous_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim_temp/MapServer';
-    var community_indigenous_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Documented_temp/MapServer';
+    var community_indigenous_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalLandClaim/MapServer';
+    var community_indigenous_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Documented/MapServer';
     // var community_indigenous_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_InProcess/MapServer';
-    var community_indigenous_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_NotDocumented_temp/MapServer';
-    var community_indigenous_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_CustomaryTenure_temp/MapServer';
+    var community_indigenous_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_NotDocumented/MapServer';
+    var community_indigenous_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_CustomaryTenure/MapServer';
 
-    var community_community_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalClaim_temp/MapServer';
-    var community_community_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Documented_temp/MapServer';
+    var community_community_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalLandClaim/MapServer';
+    var community_community_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Documented/MapServer';
     // var community_community_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_InProcess/MapServer';
-    var community_community_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NotDocumented_temp/MapServer';
-    var community_community_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_CustomaryTenure_temp/MapServer';
+    var community_community_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NotDocumented/MapServer';
+    var community_community_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_CustomaryTenure/MapServer';
 
     var MapConfig = {
 
