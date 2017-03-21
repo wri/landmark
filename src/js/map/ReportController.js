@@ -117,9 +117,9 @@ define([
                 }
 
                 if (ha_IPC > 0) {
-                  dom.byId('land-count').innerHTML =  '<strong>' + NB_Maps.toLocaleString() + '</strong> indigenous and community lands mapped on Landmark, covering <strong>' + ha_IPC.toLocaleString() + '</strong> hectares';
+                  dom.byId('land-count').innerHTML =  '<strong>' + NB_Maps.toLocaleString() + '</strong> indigenous and community lands mapped on Landmark, representing <strong>' + ha_IPC.toLocaleString() + '</strong> ha.';
                 } else {
-                  dom.byId('land-count').innerHTML =  '<strong>' + NB_Maps.toLocaleString() + '</strong> indigenous and community lands mapped on Landmark,';
+                  dom.byId('land-count').innerHTML =  '<strong>' + NB_Maps.toLocaleString() + '</strong> indigenous and community lands mapped on Landmark.';
                 }
                 dom.byId('country-name').innerHTML = result.features[0].attributes.Country;
                 dom.byId('country-land-area').innerHTML = 'COUNTRY LAND AREA:';

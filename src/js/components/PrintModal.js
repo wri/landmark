@@ -93,7 +93,7 @@ define([
             onChange: this.handleDpi})
           ), 
 
-          React.createElement("div", {className: "print-input-container"}, 
+          React.createElement("div", {className: "print-input-container middle-print"}, 
             React.createElement("label", {className: "print-modal-label"}, "Format: "), 
             React.createElement("select", {className: "print-input", value: this.state.format, onChange: this.handleFormat}, 
               formatOptions.map(this.dataMapper)
