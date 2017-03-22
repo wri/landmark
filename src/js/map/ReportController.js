@@ -333,7 +333,14 @@ define([
                 // },
                 ['No <br> Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF > 0 ? 100 - data.attributes.Pct_F - data.attributes.Pct_NF : null],
                 ['Acknowledged <br>by gov',   data.attributes.Pct_F > 0 ? data.attributes.Pct_F : null],
-                ['Not <br>acknowledged',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null]
+                ['Not <br>acknowledged',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null],
+                {
+                  name: 'Proprietary or Undetectable',
+                  y: 0.2,
+                  dataLabels: {
+                    enabled: false
+                  }
+                }
               ]
             }]
           },
