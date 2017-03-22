@@ -348,35 +348,35 @@ define([
               var commLegendImage = new Image(350, 117);
               // 549/128
               // 275/61
-              //http://landmark.blueraster.io/map-app/css/images/LMtotal.jpg
+              //http://landmarkmap.org/map-app/css/images/LMtotal.jpg
               // legendImage.src = 'legendImage.src = './css/images/LMacknowledged.png';
-              logoImage.src = 'http://landmark.blueraster.io/map-app/css/images/LandMark_final.png';
-              commLegendImage.src = 'http://landmark.blueraster.io/map-app/css/images/legend-comm-landscape.jpg';
+              logoImage.src = 'http://landmarkmap.org/map-app/css/images/LandMark_final.png';
+              commLegendImage.src = 'http://landmarkmap.org/map-app/css/images/legend-comm-landscape.jpg';
 
               // Check for active layer to determine what legend to use
               if (brApp.activeLayer === 'land-tenure' || activeNationalData === 'landTenure') {
                 if (brApp.activeLandTenureKey === 'averageScoreTenure') {
-                  legendImage.src = 'http://landmark.blueraster.io/map-app/css/images/LMlegalSec.jpg';
+                  legendImage.src = 'http://landmarkmap.org/map-app/css/images/LMlegalSec.jpg';
                 } else {
                   legendImage = new Image(150, 127.5);
-                  legendImage.src = 'http://landmark.blueraster.io/map-app/css/images/longLegend.jpg';
+                  legendImage.src = 'http://landmarkmap.org/map-app/css/images/longLegend.jpg';
                 }
               } else {
                 switch (brApp.activeKey) {
                   case 'combinedTotal':
-                    legendImage.src = 'http://landmark.blueraster.io/map-app/css/images/LMtotal.jpg';
+                    legendImage.src = 'http://landmarkmap.org/map-app/css/images/LMtotal.jpg';
                     break;
                   case 'combinedFormal':
-                    legendImage.src = 'http://landmark.blueraster.io/map-app/css/images/LMacknowledged.jpg';
+                    legendImage.src = 'http://landmarkmap.org/map-app/css/images/LMacknowledged.jpg';
                     break;
                   case 'combinedInformal':
-                    legendImage.src = 'http://landmark.blueraster.io/map-app/css/images/LMnotAcknowledged.jpg';
+                    legendImage.src = 'http://landmarkmap.org/map-app/css/images/LMnotAcknowledged.jpg';
                     break;
                   case 'initialIndicator':
-                    legendImage.src = 'http://landmark.blueraster.io/map-app/css/images/LMlegalSec.jpg';
+                    legendImage.src = 'http://landmarkmap.org/map-app/css/images/LMlegalSec.jpg';
                     break;
                   default:
-                    legendImage.src = 'http://landmark.blueraster.io/map-app/css/images/LMacknowledged.jpg';
+                    legendImage.src = 'http://landmarkmap.org/map-app/css/images/LMacknowledged.jpg';
                 }
               }
 
