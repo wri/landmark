@@ -273,6 +273,31 @@ define([
                   return this.point.name + '<br><b>' + this.point.percentage.toFixed(1) + '%</b>';
                 }
               },
+              positioner: function (labelWidth, labelHeight, point) {
+                console.log(labelWidth);
+                console.log(labelHeight);
+                console.log(point);
+                var tooltipX, tooltipY;
+                if (point.plotY < 60) {
+                  tooltipX = point.plotX - 75;
+                  tooltipY = point.plotY - 30;
+                } else if (point.plotY < 120) {
+                  tooltipX = point.plotX - 75;
+                  tooltipY = point.plotY - 50;
+                } else {
+                  tooltipX = point.plotX - 75;
+                  tooltipY = point.plotY - 25;
+                }
+
+                if (point.plotX > 270) {
+                  tooltipX = point.plotX + 20;
+                }
+
+                return {
+                  x: tooltipX,
+                  y: tooltipY
+                };
+              }
             },
             plotOptions: {
               pie: {
@@ -308,14 +333,7 @@ define([
                 // },
                 ['No <br> Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF > 0 ? 100 - data.attributes.Pct_F - data.attributes.Pct_NF : null],
                 ['Acknowledged <br>by gov',   data.attributes.Pct_F > 0 ? data.attributes.Pct_F : null],
-                ['Not <br>acknowledged',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null],
-                {
-                  name: 'Proprietary or Undetectable',
-                  y: 0.2,
-                  dataLabels: {
-                    enabled: false
-                  }
-                }
+                ['Not <br>acknowledged',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null]
               ]
             }]
           },
@@ -443,6 +461,31 @@ define([
                     return this.point.name + '<br>' + '<b>' + this.point.percentage.toFixed(1) + '%</b>';
                   }
                 },
+                positioner: function (labelWidth, labelHeight, point) {
+                  // console.log(labelWidth);
+                  // console.log(labelHeight);
+                  // console.log(point);
+                  var tooltipX, tooltipY;
+                  if (point.plotY < 60) {
+                    tooltipX = point.plotX - 75;
+                    tooltipY = point.plotY - 30;
+                  } else if (point.plotY < 120) {
+                    tooltipX = point.plotX - 75;
+                    tooltipY = point.plotY - 50;
+                  } else {
+                    tooltipX = point.plotX - 75;
+                    tooltipY = point.plotY - 25;
+                  }
+
+                  if (point.plotX > 270) {
+                    tooltipX = point.plotX + 20;
+                  }
+
+                  return {
+                    x: tooltipX,
+                    y: tooltipY
+                  };
+                }
               },
               plotOptions: {
                 pie: {

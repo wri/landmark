@@ -2,7 +2,7 @@
     
 
     var base = location.pathname.replace(/\/[^/]+$/, ''),
-        isWordpress = location.hostname.search('landmark.blueraster.io') > -1,
+        isWordpress = location.hostname.search('landmarkmap.org') > -1,
         base = isWordpress ? base.replace('map', 'map-app') : base,
 
         appVersion = '1.1.2',
