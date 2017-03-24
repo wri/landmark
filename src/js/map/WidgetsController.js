@@ -1,5 +1,7 @@
 define([
     'main/config',
+    'map/Map',
+    'map/MapConfig',
     'dojo/on',
     'dojo/dom',
     'dijit/Dialog',
@@ -10,84 +12,15 @@ define([
     'dijit/registry',
     'esri/tasks/PrintTask',
     'esri/tasks/PrintTemplate',
-    'esri/tasks/PrintParameters'
-], function(AppConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters) {
-    'use strict';
+    'esri/tasks/PrintParameters',
+    'dojo/dom-geometry',
+    'dojo/_base/window'
+], function(AppConfig, Map, MapConfig, on, dom, Dialog, Fx, domClass, cookie, domStyle, registry, PrintTask, PrintTemplate, PrintParameters, domGeom, win) {
+
 
     var DURATION = 300;
 
     var Controller = {
-        /**
-         * Toggle the legend container open or close
-         */
-        toggleLegend: function() {
-            brApp.debug('WidgetsController >>> toggleLegend');
-            var node = document.getElementById('legend-content'),
-                legendNode = document.querySelector('.brMap .legend-content'),
-                topBar = document.getElementById('legend-container'),
-                toggler = document.getElementById('legend-toggle-icon'),
-                active = domClass.contains(legendNode, 'active'),
-                left = active ? 170 : 210,
-                width = active ? 200 : 260,
-                height = active ? 0 : node.scrollHeight;
-
-            if (active) {
-                $("#legend-toggle-icon").html("+");
-                //$("#legend-toggle-icon").css("background", "url('css/images/checkbox_checked.png')");
-            } else {
-                $("#legend-toggle-icon").html("&ndash;");
-                //$("#legend-toggle-icon").css("background", "url('css/images/close_minus_symbol.png')");
-            }
-
-            domClass.toggle(legendNode, 'active');
-
-            Fx.animateProperty({
-                node: node,
-                properties: {
-                    height: height
-                },
-                duration: DURATION,
-                onEnd: function() {
-                    if (height !== 0) {
-                        // Update the size of the legend as it grows so no scrollbars
-                        node.style.height = 'auto';
-                    }
-                }
-            }).play();
-
-            Fx.animateProperty({
-                node: topBar,
-                properties: {
-                    width: width
-                },
-                duration: DURATION //,
-                // onEnd: function() {
-                //     if (width != 260) {
-                //         // Update the size of the legend as it grows so no scrollbars
-                //         $("#legend-toggle-icon").css("left", "170px");
-                //     } else {
-                //         $("#legend-toggle-icon").css("left", "230px");
-                //     }
-                // }
-            }).play();
-
-            Fx.animateProperty({
-                node: toggler,
-                properties: {
-                    left: left
-                },
-                duration: 300 //,
-                // onEnd: function() {
-                //     if (width != 260) {
-                //         // Update the size of the legend as it grows so no scrollbars
-                //         $("#legend-toggle-icon").css("left", "170px");
-                //     } else {
-                //         $("#legend-toggle-icon").css("left", "230px");
-                //     }
-                // }
-            }).play();
-        },
-
         /**
          * Toggle the basemap gallery container open or close
          */
@@ -146,18 +79,19 @@ define([
         toggleTreeContainer: function() {
             brApp.debug('WidgetsController >>> toggleTreeContainer');
 
-            var commTab = $('.community-layers-tab');
+            var commTab = document.querySelector('.community-layers-tab');
 
             var node = document.getElementById('layer-content');
             var active = domClass.contains(node, 'active');
+            var treeWidget = document.querySelector('.tree-widget-container');
             if (!active) {
-              if (commTab.hasClass('hidden')) {
-                $(".tree-widget-container").css('height', '200px');
+              if (commTab.classList.contains('hidden')) {
+                treeWidget.style.height = '200px';
               } else {
-                  $(".tree-widget-container").css('height', '500px');
+                  treeWidget.style.height = '500px';
               }
             } else {
-              $('.tree-widget-container').css('height', 'auto');
+              treeWidget.style.height = 'auto';
             }
 
             var topBar = document.getElementById('tree-widget-container'),
@@ -165,7 +99,6 @@ define([
               treeTitle = document.getElementById('tree-title'),
               innerNode = document.querySelector('.layer-tab-container'),
               height, width;
-
 
             labelNode.innerHTML = active ? '&plus;' : '&minus;';
             domClass.toggle(labelNode, 'padding-right');
@@ -175,98 +108,68 @@ define([
             height = active ? 0 : (topBar.offsetHeight - 34);
             width = active ? 180 : 360;
 
-
-            // Fx.animateProperty({
-            //     node: node,
-            //     properties: {
-            //         height: height
-            //     },
-            //     duration: DURATION,
-            //     onEnd: function() {
-            //       domClass.toggle(node, 'active');
-            //       $('#tree-widget-container').css('height', '95%');
-            //       $('#layer-content').css('height', '100%');
-            //     }
-            // }).play();
             domClass.toggle(node, 'active');
-            $(node).css('height', height);
-            $(node).css('width', width);
-            $('#tree-title').css('width', width);
-            $(node).css('treeTitle', treeTitle);
+            dom.byId('layer-content').style.height = height+'px';
+            dom.byId('layer-content').style.width = width+'px';
+            domStyle.set('tree-title', 'width', width+'px');
+            dom.byId('layer-content').style.treeTitle = treeTitle;
 
-            $('#tree-widget-container').css('height', '95%');
-            $('#layer-content').css('height', '100%');
-
-            // Fx.animateProperty({
-            //     node: node,
-            //     properties: {
-            //         width: width
-            //     },
-            //     duration: DURATION
-            // }).play();
-            //
-            // Fx.animateProperty({
-            //     node: treeTitle,
-            //     properties: {
-            //         width: width
-            //     },
-            //     duration: DURATION
-            // }).play();
+            dom.byId('tree-widget-container').style.height = '95%';
+            dom.byId('layer-content').style.height = '100%';
 
         },
 
-        /**
-         * Toggle the mobile menu open or close
-         */
-        toggleMobileMenu: function() {
-            brApp.debug('WidgetsController >>> toggleMobileMenu');
-            var mapNode = document.getElementById('brMap'),
-                // accordion = registry.byId('layer-accordion'),
+        togglePrintModal: function() {
+          var printModal = document.querySelector('.print-modal-wrapper')
+          domClass.toggle(printModal, 'hidden');
+        },
 
-                menuNodeId = 'mobileMenu',
-                menuButton = 'mobile-menu-toggle',
-                isClosing = domClass.contains(menuNodeId, 'open'),
-                left = isClosing ? 0 : 290;
+        toggleMobileTree: function() {
+          var layerTree = document.querySelector('.tree-widget-container')
+          var searchButton = document.querySelector('.search-button')
+          var reportButton = document.querySelector('.report-button')
 
-            if ($('#layer-content').css("height") === "0px") {
-                $('#layer-content').css("height", "auto");
-            }
+          registry.byId('analysis-dialog').hide();
 
+          if (!domClass.contains(searchButton, "hidden")) {
+            domClass.toggle(searchButton, 'hidden');
+          }
+          if (!domClass.contains(reportButton, "hidden")) {
+            domClass.toggle(reportButton, 'hidden');
+          }
+          domClass.toggle(layerTree, 'hidden');
+        },
 
-            $("#community-level-toggle_button").hide();
+        toggleMobileSearch: function() {
+          var layerTree = document.querySelector('.tree-widget-container')
+          var searchButton = document.querySelector('.search-button')
+          var reportButton = document.querySelector('.report-button')
 
+          registry.byId('analysis-dialog').hide();
 
-            if (!isClosing) {
-                $("#mobile-menu-toggle").css("display", "none");
-                domClass.toggle(menuNodeId, 'open');
-                domClass.toggle(menuButton, 'hidden');
+          if (!domClass.contains(layerTree, "hidden")) {
+            domClass.toggle(layerTree, 'hidden');
+          }
+          if (!domClass.contains(reportButton, "hidden")) {
+            domClass.toggle(reportButton, 'hidden');
+          }
+          domClass.toggle(searchButton, 'hidden');
+        },
 
-            } else {
-                $("#mobile-menu-toggle").css("display", "block");
-                domClass.remove(menuButton, 'hidden');
-            }
+        toggleMobileCountrySearch: function() {
+          var layerTree = document.querySelector('.tree-widget-container')
+          var searchButton = document.querySelector('.search-button')
+          var reportButton = document.querySelector('.report-button')
 
+          registry.byId('analysis-dialog').hide();
 
-            Fx.animateProperty({
-                node: mapNode,
-                properties: {
-                    left: left
-                },
-                duration: DURATION,
-                onEnd: function() {
-                    brApp.map.resize();
-                    if (isClosing) {
-                        domClass.toggle(menuNodeId, 'open');
-                    }
-
-                    $("#community-level-toggle_button").show();
-                    // setTimeout(function() {
-                    //     accordion.resize();
-                    // }, 0);
-
-                }
-            }).play();
-
+          if (!domClass.contains(layerTree, "hidden")) {
+            domClass.toggle(layerTree, 'hidden');
+          }
+          if (!domClass.contains(searchButton, "hidden")) {
+            domClass.toggle(searchButton, 'hidden');
+          }
+          domClass.toggle(reportButton, 'hidden');
         },
 
         /**
@@ -274,55 +177,11 @@ define([
          * @return {boolean}
          */
         mobileMenuIsOpen: function() {
-            return domClass.contains('mobileMenu', 'open');
-        },
-
-        /**
-         * Toggle the appropriate container's visibility based on which button was clicked in the UI
-         */
-        toggleMobileMenuContainer: function(evt) {
-            brApp.debug('WidgetsController >>> toggleMobileMenuContainer');
-            var target = evt.target ? evt.target : evt.srcElement,
-                menuNode = document.querySelector('.segmented-menu-button.active'),
-                containerNode = document.querySelector('.mobile-menu-content.active'),
-                id;
-
-            // If section is already active, back out now
-            // Else remove active class from target and containerNode
-            if (domClass.contains(target, 'active')) {
-                return;
+            if (document.getElementById('mobileMenu')) {
+              return domClass.contains('mobileMenu', 'open');
+            } else {
+              return false;
             }
-
-            if (menuNode) {
-                domClass.remove(menuNode, 'active');
-            }
-
-            if (containerNode) {
-                domClass.remove(containerNode, 'active');
-            }
-
-            // Now add the active class to the target and to the container
-            switch (target.id) {
-                case "legendMenuButton":
-                    id = 'mobile-legend-content';
-                    break;
-                case "toolsMenuButton":
-                    id = 'mobile-tools-content';
-                    break;
-                case "layersMenuButton":
-                    id = 'mobile-layers-content';
-
-
-                    break;
-            }
-
-            domClass.add(target, 'active');
-            domClass.add(id, 'active');
-
-            // if (id === "mobile-layers-content") {
-            //     registry.byId("layer-accordion").resize();
-            // }
-
         },
 
         showEmbedCode: function() {
@@ -359,9 +218,6 @@ define([
         showWelcomeDialog: function() {
             brApp.debug('WidgetsController >>> showWelcomeDialog');
             //Check is the user has specified to hide the dialog
-            // if (brApp.hideDialog) {
-            //     return;
-            // }
 
             var dialogContent = AppConfig.welcomeDialogContent,
                 id = 'launch-dialog',
@@ -414,21 +270,6 @@ define([
                 cleanup(true);
             }
 
-
-            // if (document.getElementById('welcomeDialogMemory').checked == true) {
-            //     brApp.hideDialog = true;
-            // }
-            //     registry.byId(id).hide();
-            // });
-            // cleanup(true);
-
-
-
-
-            // } else {
-            //     registry.byId(id).show();
-            // }
-
         },
 
         /**
@@ -439,47 +280,263 @@ define([
             domClass.toggle('upload-form-content', 'hidden');
         },
 
-        printMap: function() {
+        printMap: function(title, dpi, format, layoutType) {
+          var isCommunityActive = true;
+          var activeNationalData = '';
+          var visibleCommunityLayers = [];
+          for (var layer in MapConfig.layers) {
+            if (MapConfig.layers[layer].type === 'dynamic') {
+              var mapLayer = brApp.map.getLayer(layer);
+              if (layer === 'percentLands' || layer === 'landTenure') {
+                if (mapLayer.visible && mapLayer.visibleLayers[0] !== -1) {
+                  activeNationalData = layer;
+                }
+              } else {
+                if (mapLayer.visible && mapLayer.visibleLayers[0] !== -1) {
+                  visibleCommunityLayers.push(layer);
+                }
+              }
+            }
+          }
+          if ((brApp.activeLayer === 'community-lands' || brApp.activeLayer === undefined || brApp.activeLayer === 'none') && visibleCommunityLayers.length > 0 && activeNationalData === ''){
+            this.printCommunityMap(title, dpi, format, layoutType);
+          } else {
+            var self = this;
+            // set print dimensions;
+            var map = brApp.map;
+            var printTitle = title;
+            var layoutTypeHeight = layoutType === 'Landscape' ? 530 : layoutType === 'Portrait' ? 750 : map.height;
+            var layoutTypeWidth = layoutType === 'Landscape' ? 998 : layoutType === 'Portrait' ? 570 : map.height;
+        		var printDimensions = {height: map.height, width: map.width},
+        			printTask = new PrintTask(AppConfig.printUrl),
+        			params = new PrintParameters(),
+        			mapScale = map.getScale(),
+              mapHeight = layoutType === 'MAP_ONLY' ? ((layoutTypeHeight) + (layoutTypeHeight/2.5)) : layoutTypeHeight,
+        			mapWidth = layoutType === 'MAP_ONLY' ? ((layoutTypeWidth) + (layoutTypeWidth/2.5)): layoutTypeWidth,
+        			printTemplate = new PrintTemplate();
+
+            var dayStrings = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+              monthStrings = ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December'],
+              date = new Date(),
+              currentMonth = monthStrings[date.getMonth()],
+              currentDay = dayStrings[date.getDay()],
+              currentYear = date.getFullYear(),
+              dateString = currentDay + ', ' + currentMonth + ' ' + date.getDate() + ', ' + currentYear;
+
+        		params.map = map;
+
+        		printTemplate.exportOptions = {
+        		    width: mapWidth, //multiply width
+        		    height: mapHeight, //multiply height
+        		    dpi: dpi //multiply dpi
+        		};
+        		printTemplate.format = 'PNG32';
+        		printTemplate.layout = layoutType === 'Portrait' ? 'landmark_custom_portrait' : layoutType === 'Landscape' ? 'landmark_custom_landscape' : 'MAP_ONLY';
+        		printTemplate.preserveScale = true;
+
+        		//set scale with multiplyer
+        		printTemplate.outScale = mapScale;
+
+        		params.template = printTemplate;
+
+            domClass.add('modal-print-button', 'loading');
+
+        		printTask.execute(params, function(response){
+        			var printedMapImage = new Image(mapWidth, mapHeight);
+              var logoImage = new Image(250, 100);
+              var legendImage = new Image(200, 88);
+              var commLegendImage = new Image(350, 117);
+              // 549/128
+              // 275/61
+              //http://landmarkmap.org/map-app/css/images/LMtotal.jpg
+              // legendImage.src = 'legendImage.src = './css/images/LMacknowledged.png';
+              logoImage.src = 'http://landmarkmap.org/map-app/css/images/LandMark_final.png';
+              commLegendImage.src = 'http://landmarkmap.org/map-app/css/images/legend-comm-landscape.jpg';
+
+              // Check for active layer to determine what legend to use
+              if (brApp.activeLayer === 'land-tenure' || activeNationalData === 'landTenure') {
+                if (brApp.activeLandTenureKey === 'averageScoreTenure') {
+                  legendImage.src = 'http://landmarkmap.org/map-app/css/images/LMlegalSec.jpg';
+                } else {
+                  legendImage = new Image(150, 127.5);
+                  legendImage.src = 'http://landmarkmap.org/map-app/css/images/longLegend.jpg';
+                }
+              } else {
+                switch (brApp.activeKey) {
+                  case 'combinedTotal':
+                    legendImage.src = 'http://landmarkmap.org/map-app/css/images/LMtotal.jpg';
+                    break;
+                  case 'combinedFormal':
+                    legendImage.src = 'http://landmarkmap.org/map-app/css/images/LMacknowledged.jpg';
+                    break;
+                  case 'combinedInformal':
+                    legendImage.src = 'http://landmarkmap.org/map-app/css/images/LMnotAcknowledged.jpg';
+                    break;
+                  case 'initialIndicator':
+                    legendImage.src = 'http://landmarkmap.org/map-app/css/images/LMlegalSec.jpg';
+                    break;
+                  default:
+                    legendImage.src = 'http://landmarkmap.org/map-app/css/images/LMacknowledged.jpg';
+                }
+              }
+
+        			//onload needs to go before cors and src
+        			printedMapImage.onload = function(){
+                var visibleCommunityLayersLength = visibleCommunityLayers.length;
+                self._addCanvasElements(mapHeight, mapWidth, printedMapImage, printTitle, logoImage, legendImage, format, layoutType, dateString, commLegendImage, visibleCommunityLayersLength);
+
+        			};
+        			//set crossOrigin to anonymous for cors
+        			printedMapImage.setAttribute('crossOrigin', 'anonymous');
+        			printedMapImage.src = response.url;
+        		}, function(error){
+              console.log(error)
+              domClass.remove('modal-print-button', 'loading');
+            });
+          }
+        },
+
+        _addCanvasElements: function(mapHeight, mapWidth, printedMapImage, printTitle, logoImage, legendImage, format, layoutType, dateString, commLegendImage, visibleCommunityLayersLength){
+      		//initiate fabric canvas
+      		var mapCanvas = new fabric.Canvas('mapCanvas', {
+      			height: (mapHeight) + (mapHeight/1.5),
+      			width: (mapWidth) + (mapWidth/2.5),
+      			background: '#fff'
+      		});
+
+          var footerMessage = 'Terms of use are available online at www.landmarkmap.org';
+
+      		var heightAllowance = 40,
+      			rectWidth = (mapWidth) + (mapWidth/2.5),
+      			rectHeight = (mapHeight) + (mapHeight/1.5),
+            logoLeft = layoutType === 'Landscape' ? 200 : 50,
+            mapImageTop = layoutType === 'Portrait' ? 150 : (mapHeight/3),
+            legendHeight = layoutType === 'Portrait' ? ((mapHeight) + (mapHeight/3)) - 75 : ((mapHeight) + (mapHeight/3)),
+            footerTop = layoutType === 'Portrait' ? (legendHeight - 15) : legendHeight;
+
+            //add white background
+        		mapCanvas.add(new fabric.Rect({width: rectWidth, height: rectHeight, left: 0, top: 0, fill: 'white', angle: 0}));
+
+          if (layoutType !== 'MAP_ONLY') {
+
+        		//add text to top
+        		mapCanvas.add(new fabric.Text(printTitle, {fontSize: (20), top: 100, left: (rectWidth/2), textAlign: 'center', originX: 'center', fontFamily: 'Raleway'}));
+            mapCanvas.add(new fabric.Text(dateString, {fontSize: (12), top: 100, left: (rectWidth/1.25), textAlign: 'center', originX: 'center', fontFamily: 'Raleway'}));
+
+            //add logo to top
+            mapCanvas.add(new fabric.Image(logoImage, {top: 50, left: logoLeft}));
+
+            //add legend image
+            mapCanvas.add(new fabric.Image(legendImage, {top: legendHeight, left: (mapWidth/6)}));
+
+            //add comm legend image
+            if (visibleCommunityLayersLength > 0) {
+              if (layoutType === 'Portrait') {
+                mapCanvas.add(new fabric.Image(commLegendImage, {top: legendHeight, left: (mapWidth/1.5)}));
+              } else {
+                mapCanvas.add(new fabric.Image(commLegendImage, {top: legendHeight + 25, left: (mapWidth/1.25)}));
+              }
+            }
+
+            // add footer message
+            mapCanvas.add(new fabric.Text(footerMessage, {fontSize: (12), top: footerTop, left: (mapWidth/2), fontFamily: 'Raleway'}));
+
+        		//add map image
+        		mapCanvas.add(new fabric.Image(printedMapImage, {left: (mapWidth/5), top: mapImageTop}));
+          } else {
+            mapCanvas.add(new fabric.Image(printedMapImage, {left: (mapWidth/5), top: mapImageTop}));
+          }
+
+      		this._exportCanvasMap(printTitle, rectWidth, rectHeight, format, layoutType);
+
+
+      	},
+
+        _exportCanvasMap: function(printTitle, rectWidth, rectHeight, format, layoutType){
+      		var canvas = document.getElementById('mapCanvas');
+      		var canvasContext = canvas.getContext('2d');
+      		canvasContext.scale(1, 1);
+
+          if (format === 'pdf') {
+            document.querySelector('.canvas-container').classList.add('hidden')
+            var dataUrl = canvas.toDataURL();
+            var pdfLayout = layoutType === 'Landscape' ? 'landscape' : layoutType === 'Portrait' ? 'portrait' : 'MAP_ONLY';
+            var doc = new PDFDocument({layout: pdfLayout});
+            var stream = doc.pipe(blobStream());
+            var fitWidth, fitHeight, fitLeft, fitTop;
+
+            if (layoutType === 'Landscape') {
+              fitWidth = rectHeight;
+              fitHeight = rectWidth;
+              fitLeft = -40;
+              fitTop = 0;
+            } else if (layoutType === 'Portrait') {
+              fitWidth = rectWidth/1.4;
+              fitHeight = rectHeight/1.4;
+              fitLeft = 20;
+              fitTop = 0;
+            } else if (layoutType === 'MAP_ONLY') {
+              fitWidth = rectWidth/1.6;
+              fitHeight = rectHeight/1.6;
+              fitLeft = 0;
+              fitTop = -150;
+            }
+
+            doc.image(canvas.toDataURL(), fitLeft, fitTop, {fit: [fitWidth, fitHeight]});
+          	doc.end();
+
+          	stream.on('finish', function() {
+          		var fileRead = new FileReader();
+          		fileRead.onload = function(e) {
+          			window.open(e.currentTarget.result);
+          		}
+          		fileRead.readAsDataURL(stream.toBlob('application/pdf'));
+          	});
+
+          } else if (format === 'jpg') {
+            document.querySelector('.canvas-container').classList.add('hidden')
+            var pdfUrl = canvas.toDataURL('image/jpeg');
+            window.open(pdfUrl);
+          } else {
+            canvas.toBlob(function(blob) {
+              document.querySelector('.canvas-container').classList.add('hidden')
+              var dataUrl = canvas.toDataURL();
+              window.open(dataUrl);
+            });
+          }
+          domClass.remove('modal-print-button', 'loading');
+      	},
+
+        printCommunityMap: function(title, dpi, format, layoutType) {
           brApp.debug('WidgetsController >>> printMap');
           var printTask = new PrintTask(AppConfig.printUrl);
           var printParameters = new PrintParameters();
           var template = new PrintTemplate();
-          var communityTab = document.getElementById('community-level-tab');
-          var nationalIndicators = document.getElementById('nationalLevelIndicators');
           var question = '';
           var layout = '';
-          // If the community tab is active, use its template, else, use the
-          // national template and add a question if applicable
-          if (communityTab.className.search('active') > -1) {
-            layout = 'landmark_comm';
-          } else {
-            layout = 'landmark_nat';
-            // Get the current question if the right layer is active (indigenous/community)
-            // Need to find a better way to do this, we need a data model of flux implemented
-            // as querying the dom is not the way to go
-            if (nationalIndicators.className.search('checked') >  -1) {
-              var indigenousTab = document.getElementById('land-tenure-indigenous');
-              var querySelector = '.national-layer-list-item.active .national-layer-list-item-question';
-              var questionNode;
-              if (indigenousTab.className.search('active') > -1) {
-                questionNode = document.querySelector('.indigenous-national-list ' + querySelector);
-                question = questionNode && questionNode.innerHTML;
-              } else {
-                questionNode = document.querySelector('.community-national-list ' + querySelector);
-                question = questionNode && questionNode.innerHTML;
-              }
-            }
 
-            console.log(questionNode);
-            console.log(question);
+          if (layoutType === 'Portrait') {
+            layout = 'landmark_comm_portrait';
+            template.exportOptions = {
+              dpi: dpi
+            };
+          } else if (layoutType === 'Landscape') {
+            layout = 'landmark_comm_landscape';
+            template.exportOptions = {
+              dpi: dpi
+            };
+          } else {
+            layout = 'MAP_ONLY'
           }
 
-          template.format = "pdf";
+          template.format = format === 'png' ? 'PNG32' : format;
           template.layout = layout;
+          // template.layout = layoutType;
           template.preserveScale = false;
           //- Custom Text Elements to be used in the layout,
           //- This is the way to add custom labels to the layout
           template.layoutOptions = {
+            titleText: title,
             customTextElements: [
               {'question': question }
             ]
@@ -488,14 +545,14 @@ define([
           printParameters.map = brApp.map;
           printParameters.template = template;
           //- Add a loading class to the print button and remove it when loading is complete
-          domClass.add('print-widget', 'loading');
+          domClass.add('modal-print-button', 'loading');
 
           printTask.execute(printParameters, function (response) {
-            domClass.remove('print-widget', 'loading');
+            domClass.remove('modal-print-button', 'loading');
             window.open(response.url);
           }, function (failure) {
             console.log(failure);
-            domClass.remove('print-widget', 'loading');
+            domClass.remove('modal-print-button', 'loading');
           });
 
         },
@@ -506,20 +563,41 @@ define([
         showAnalysisDialog: function(customGraphics) {
             brApp.debug('WidgetsController >>> showAnalysisDialog');
 
+            var layerTree = document.querySelector('.tree-widget-container')
+            var searchButton = document.querySelector('.search-button')
+            var reportButton = document.querySelector('.report-button')
+
+            var body = win.body()
+            var width = domGeom.position(body).w;
+
+            if (width <= 768) {
+              if (!domClass.contains(layerTree, "hidden")) {
+                domClass.toggle(layerTree, 'hidden');
+              }
+              if (!domClass.contains(searchButton, "hidden")) {
+                domClass.toggle(searchButton, 'hidden');
+              }
+              if (!domClass.contains(reportButton, "hidden")) {
+                domClass.toggle(reportButton, 'hidden');
+              }
+            }
+
             if (customGraphics.graphics.length > 0) {
-                $('#remove-graphics').removeClass('hidden');
-                $('#draw-shape').addClass('display-three');
-                $('#upload-shapefile').addClass('display-three');
-
-
-
+                domClass.remove('remove-graphics', 'hidden');
+                domClass.add('draw-shape', 'display-three');
+                domClass.add('upload-shapefile', 'display-three');
 
             } else {
-                $('#remove-graphics').addClass('hidden');
-                $('#draw-shape').removeClass('display-three');
-                $('#upload-shapefile').removeClass('display-three');
+                domClass.add('remove-graphics', 'hidden');
+                domClass.remove('draw-shape', 'display-three');
+                domClass.remove('upload-shapefile', 'display-three');
             }
-            registry.byId('analysis-dialog').show();
+
+            if (dom.byId('analysis-dialog').style.display !== 'none') {
+              registry.byId('analysis-dialog').hide();
+            } else {
+              registry.byId('analysis-dialog').show();
+            }
         },
 
         showHelp: function(click) {
@@ -536,29 +614,25 @@ define([
 
                     dialog = registry.byId('help-dialog-indigenous');
                     dialog.show();
-                    $('#help-dialog-indigenous').css("top", top);
-                    $('#help-dialog-indigenous').css("left", left);
+                    dom.byId('help-dialog-indigenous').style.top = top;
+                    dom.byId('help-dialog-indigenous').style.left = left;
 
                     break;
                 case "community-lands-help":
                     dialog = registry.byId('help-dialog-community');
                     dialog.show();
-                    $('#help-dialog-community').css("top", top);
-                    $('#help-dialog-community').css("left", left);
+                    dom.byId('help-dialog-community').style.top = top;
+                    dom.byId('help-dialog-community').style.left = left;
 
                     break;
                 case "analysis-help":
                     var left = (click.pageX - 300) + "px";
                     dialog = registry.byId('help-dialog-completeness');
                     dialog.show();
-                    $('#help-dialog-completeness').css("top", top);
-                    $('#help-dialog-completeness').css("left", left);
+                    dom.byId('help-dialog-completeness').style.top = top;
+                    dom.byId('help-dialog-completeness').style.left = left;
                     break;
             }
-
-
-
-
 
         }
 

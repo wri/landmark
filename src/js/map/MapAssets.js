@@ -2,10 +2,13 @@ define([
     'esri/Color',
     'esri/symbols/SimpleFillSymbol',
     'esri/symbols/SimpleLineSymbol',
-    'esri/renderers/UniqueValueRenderer'
+    'esri/renderers/UniqueValueRenderer',
+    'esri/symbols/SimpleMarkerSymbol'
 
-], function(Color, SimpleFillSymbol, SimpleLineSymbol, UniqueValueRenderer) {
-    'use strict';
+], function(Color, SimpleFillSymbol, SimpleLineSymbol, UniqueValueRenderer, SimpleMarkerSymbol) {
+    
+
+    var hoverSymbol, pointHoverSymbol;
 
     /**
      * This Class is a good place to store popup templates and symbols that are used in more then one location
@@ -24,12 +27,38 @@ define([
                 new Color([255, 255, 255, 0.5]));
         },
 
+        getDrawUploadSymbolPoint: function() {
+            return new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 10,
+              new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+              new Color([255,0,0]), 1),
+              new Color([0,255,0,0.95]));
+        },
+
+        getHoverSymbol: function() {
+          if (hoverSymbol) { return hoverSymbol; }
+          hoverSymbol = new SimpleFillSymbol(
+            SimpleFillSymbol.STYLE_SOLID,
+            new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color('#4099CE'), 3),
+            new Color([210, 210, 210, 0.0])
+          );
+          return hoverSymbol;
+        },
+
+        getPointHoverSymbol: function() {
+          if (pointHoverSymbol) { return pointHoverSymbol; }
+          pointHoverSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 8,
+            new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+            new Color('#4099CE'), 1),
+            new Color('#4099CE'));
+          return pointHoverSymbol;
+        },
+
         /**
          *	@param {string} fieldName - Field Name to be used in the Unique Value Renderer
          * @return {UniqueValueRenderer - object} The Created Unique Value Renderer Ready to Use on a Dynamic Layer
          */
         getUniqueValueRendererForNationalDataWithField: function(fieldName, layer) {
-          
+
             var noReviewSymbol, lawSilentSymbol, legalAddressesSymbol,
                 legalMeetsSymbol, legalFullyMeetsSymbol, notApplicableSymbol,
                 renderer;
@@ -140,7 +169,6 @@ define([
 
         getNationalLevelIndicatorCode: function() {
             var nationalIndicatorCode;
-            console.log(brApp.currentLayer)
             switch (brApp.currentLayer) {
                 case "averageScoreTenure":
                     nationalIndicatorCode = "Avg_Scr";

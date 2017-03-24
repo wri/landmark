@@ -23,6 +23,9 @@
   ],
   "author": "BlueRaster",
   "dependencies": {
+    "canvas": "^1.6.2",
+    "fabric": "^1.7.3",
+    "flag-icon-css": "^2.8.0",
     "gulp": "^3.8.10",
     "gulp-imagemin": "^2.0.0",
     "gulp-jade": "^0.10.0",
@@ -34,7 +37,6 @@
   },
   "devDependencies": {
     "browser-sync": "^2.9.8",
-    "esrislurp": "^1.2.3",
     "intern": "^3.0.6"
   }
 }

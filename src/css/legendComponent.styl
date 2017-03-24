@@ -1,13 +1,22 @@
 
 .legend-component-container
-  position absolute
+  // position absolute
   background white
   // height 325px
   max-height 300px
   width 270px
   z-index 55
   bottom 0px
-  right 30px
+  // right 30px
+  margin-left 1em
+
+.special-legend-component-container
+  background #fff
+  height 160px
+  width 340px
+  z-index 55
+  bottom 0px
+  margin-bottom: 10px;
 
 .legend-component-container.collapsed
   height 32px
@@ -40,7 +49,7 @@
   color #fff
   font-family Raleway
   font-size 16px
-  line-height 32px
+  line-height 30px
   padding-left 15px
   cursor pointer
 
@@ -48,7 +57,11 @@
   padding 10px
   font-size 12px
   max-height 275px
-  overflow-y auto
+  // overflow-y auto
+
+.special-legend-component-content
+  padding 10px
+  font-size 12px
 
 
 .legend-component-content.collapsed
@@ -74,7 +87,66 @@
   background-color #2fa3d9
   font-family Raleway
   font-size 14px
-  line-height 32px
-  width 32px
+  line-height 30px
+  width 30px
   float right
   text-align center
+
+.indicator-legend
+  display inline-block
+  width 12%
+
+.special-indicator-legend
+  display flex
+  width 100%
+  height 100%
+  vertical-align top
+  align-items center
+  margin-bottom 3px
+
+.legend-item-text-container
+  transform rotate(-45deg)
+  height 30px
+  width 50px
+  margin-top 5px
+  margin-left -15px
+
+.special-legend-item-text-container
+  width 85%
+  font-size 10px
+
+.special-legend--item-image-container
+  display inline-block
+
+.percent-legend-text-container
+  transform rotate(-45deg)
+  height 30px
+  width 75px
+  margin-top 5px
+  margin-left -27px
+
+.not-app-label
+  text-align left
+
+.not-app-label-percent
+  text-align center
+
+.percent-legend-component-container
+  padding-bottom 10px
+
+
+.best-text
+	position absolute
+	left 10px
+
+.worst-text
+	position absolute
+	right 50px
+
+.best-text-indicator
+	position absolute
+	left 20px
+
+.worst-text-indicator
+	position absolute
+	right 25px

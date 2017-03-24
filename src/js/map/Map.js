@@ -5,6 +5,8 @@ define([
     "dojo/number",
     // My Modules
     'map/MapConfig',
+    'main/config',
+    "map/MapAssets",
     // Dojo Modules
     'dojo/on',
     'dijit/registry',
@@ -12,13 +14,20 @@ define([
     'utils/HashController',
     // Esri Modules
     'esri/map',
+    "esri/symbols/SimpleFillSymbol",
+    "esri/symbols/SimpleMarkerSymbol",
+    "esri/symbols/SimpleLineSymbol",
+    "esri/Color",
+    "esri/renderers/SimpleRenderer",
     "esri/geometry/webMercatorUtils",
     'esri/layers/ImageParameters',
     'esri/layers/ArcGISDynamicMapServiceLayer',
     'esri/layers/ArcGISTiledMapServiceLayer',
+    'esri/layers/FeatureLayer',
     "esri/layers/GraphicsLayer",
-], function(Evented, declare, number, MapConfig, on, registry, HashController, Map, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, GraphicsLayer) {
-    'use strict';
+    "map/LayerController"
+], function(Evented, declare, number, MapConfig, MainConfig, MapAssets, on, registry, HashController, Map, SimpleFillSymbol, SimpleMarkerSymbol, SimpleLineSymbol, Color, SimpleRenderer, webMercatorUtils, ImageParameters, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, GraphicsLayer, LayerController) {
+
 
     var _map = declare([Evented], {
 
@@ -42,9 +51,13 @@ define([
 
             var wholeHash = HashController.getHash();
 
-            var hashX = self.centerX;
-            var hashY = self.centerY;
-            var hashL = self.zoom;
+            if (wholeHash.country) {
+              wholeHash.x = MainConfig.defaultState.x;
+              wholeHash.y = MainConfig.defaultState.y;
+              wholeHash.l = MainConfig.defaultState.l;
+            }
+
+            self.initialCountry = wholeHash.country;
 
             self.map = new Map(this.element, {
                 basemap: this.basemap,
@@ -54,13 +67,22 @@ define([
             });
 
             self.map.on('load', function() {
-                self.emit('map-ready', {});
+                self.emit('map-ready', self.initialCountry);
                 // Clear out Phantom Graphics thanks to esri's graphics layer
                 self.map.graphics.clear();
                 self.map.resize();
                 self.addLayers();
+
+                var wholeHash = HashController.getHash();
+
+                if (wholeHash.a) {
+                  self.applyLayerVisibility(wholeHash.a);
+                }
+
+                self.connectLayerEvents(self.map.graphicsLayerIds);
                 self.map.on("extent-change", function(e) {
 
+                    var updatedHash = HashController.getHash();
                     var delta = e.delta;
                     var extent = webMercatorUtils.webMercatorToGeographic(e.extent);
                     var levelChange = e.levelChange;
@@ -69,11 +91,12 @@ define([
 
                     var x = number.round(extent.getCenter().x, 2);
                     var y = number.round(extent.getCenter().y, 2);
-                    //console.log(x + ' ' + y + ' ' + lod.level);
+
                     HashController.updateHash({
                         x: x,
                         y: y,
-                        l: lod.level
+                        l: lod.level,
+                        a: updatedHash.a
                     });
 
                     if (brApp.map.infoWindow.isShowing) {
@@ -115,6 +138,9 @@ define([
                     case 'tiled':
                         layers.push(self.addTiledLayer(key, layerConfig[key], layerConfig[key]));
                         break;
+                    case 'feature':
+                        layers.push(self.addFeatureLayer(key, layerConfig[key], layerConfig[key]));
+                        break;
                     default:
                         break;
                 }
@@ -122,7 +148,6 @@ define([
 
             on.once(this.map, 'layers-add-result', function(response) {
                 self.emit('layers-loaded', response);
-
                 var layerInfos = response.layers.map(function(item) {
                     return {
                         layer: item.layer
@@ -136,6 +161,100 @@ define([
 
             // Initialize Add This
             addthis.init();
+        },
+
+        applyLayerVisibility: function(hash) {
+          self = this;
+          var layers = hash.split(',');
+          var allLayers = [];
+          layers.forEach(function(layer) {
+            //check if this layer isnt our landTenure or our percentLands layers, then duplicate him w/ adjustments
+            allLayers.push(layer);
+            if (layer !== 'landTenure' && layer !== 'percentLands') {
+              allLayers.push(layer + 'Feature');
+              allLayers.push(layer + 'FeaturePoint');
+              allLayers.push(layer + '_Tiled');
+            }
+          });
+          allLayers.push('CustomFeatures');
+          //find layers that are visible by default that are not in the layers array
+          //hide those layers
+          for (var layer in MapConfig.layers) {
+            var mapLayer = self.map.getLayer(layer);
+            if (allLayers.indexOf(layer) === -1) {
+              mapLayer.hide();
+            } else {
+              if (layer === 'landTenure') {
+                mapLayer.visibleLayers = [2];
+                brApp.currentLayer = 'averageScoreTenure';
+                LayerController.updateVisibleLayers(mapLayer.visibleLayers, true);
+              } else if (layer === 'percentLands') {
+                mapLayer.visibleLayers = [2];
+                brApp.currentLayer = 'percentIndigenousLayers';
+                LayerController.updateVisibleLayers(mapLayer.visibleLayers, true);
+              } else {
+                mapLayer.show();
+              }
+            }
+          }
+
+          //uncheck checkboxes if necessary
+          MapConfig.communityLevelLayers.forEach(function(layer) {
+            if (layer.id && layers.indexOf(layer.id) === -1 ) {
+              layer.checked = false;
+            }
+          });
+        },
+
+        //Connect mouse-over graphics
+        connectLayerEvents: function (layers) {
+          var self = this;
+          layers.forEach(function(layer) {
+            if (layer !== 'CustomFeatures') {
+              var mapLayer = brApp.map.getLayer(layer);
+              if (mapLayer) {
+                mapLayer.on('mouse-over', self.HoverOn);
+                mapLayer.on('mouse-out', self.HoverOff);
+              }
+            }
+          });
+          // var percentLandsLayer = brApp.map.getLayer('percentLandsFeature');
+          // if (percentLandsLayer) {
+          //   percentLandsLayer.on('mouse-over', this.HoverOn);
+          //   percentLandsLayer.on('mouse-out', this.HoverOff);
+          // }
+          //
+          // var indigenous_FormalClaimLayer = brApp.map.getLayer('indigenous_FormalClaimFeature');
+          // if (indigenous_FormalClaimLayer) {
+          //   indigenous_FormalClaimLayer.on('mouse-over', this.HoverOn);
+          //   indigenous_FormalClaimLayer.on('mouse-out', this.HoverOff);
+          // }
+          //
+          // var indigenous_FormalDocLayer = brApp.map.getLayer('indigenous_FormalDocFeature');
+          // if (indigenous_FormalDocLayer) {
+          //   indigenous_FormalDocLayer.on('mouse-over', this.HoverOn);
+          //   indigenous_FormalDocLayer.on('mouse-out', this.HoverOff);
+          // }
+        },
+
+        //Connect mouse-over graphics
+        HoverOn: function (evt) {
+          var graphic = evt.graphic;
+          if (graphic) {
+            if (graphic.geometry.type === 'polygon') {
+              graphic.setSymbol(MapAssets.getHoverSymbol());
+            } else if (graphic.geometry.type === 'point') {
+              graphic.setSymbol(MapAssets.getPointHoverSymbol());
+            }
+          }
+        },
+
+        //Connect mouse-over graphics
+        HoverOff: function (evt) {
+          var graphic = evt.graphic;
+          if (graphic) {
+            graphic.setSymbol(null);
+          }
         },
 
         /**
@@ -184,6 +303,42 @@ define([
 
             layer.on('error', this.addLayerError.bind(this));
             return layer;
+        },
+
+        addFeatureLayer: function(key, layerConfig) {
+
+          var symbol;
+
+          if (key.indexOf('Point') > -1) {
+            symbol = new SimpleMarkerSymbol();
+            symbol.setColor(new Color([0,0,0,0]));
+            symbol.setOutline(null);
+
+            new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 10,
+              new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+              new Color([255,0,0]), 1),
+              new Color([0,255,0,0.25]));
+          } else {
+            symbol = new SimpleFillSymbol();
+            symbol.setColor(new Color([0,0,0,0]));
+            symbol.setOutline(null);
+          }
+
+
+          var renderer = new SimpleRenderer(symbol);
+
+            var featureLayer = new FeatureLayer(layerConfig.url, {
+                id: key,
+                minScale: 4700000,
+                maxScale: 0,
+                visible: layerConfig.visible || false
+                // minScale: 1000000000,
+                // maxScale: 4700000
+            });
+            featureLayer.setRenderer(renderer);
+
+            featureLayer.on('error', this.addLayerError.bind(this));
+            return featureLayer;
         },
 
         addGraphicLayer: function(key, layerConfig) {

@@ -1,9 +1,134 @@
-.upload-instructions li
-	font-size 12px
-	
+html, body
+	height 100%
+
+body
+	font-family Raleway
+
+td
+	padding-left 5px
+	padding-right 5px
+	width 20%
+
+.analysis-report
+	height 100%
+// 	display inline-block
+
+.analysis-table-container, .analysis-chart
+	width 100%
+	display inline-block
+	// position absolute
+	top 100px
+
+#analysis-table
+	margin 0 auto
+	width 85%
+
+#analysis-title
+	padding-bottom 0.5em
+
+#analysisTable
+	width 100%
+	border-collapse collapse
+	border 1px solid #00a9da
+
+#column-header
+	color #00356C
+	border-bottom #00A9DA 1px solid
+
+.even-row, .odd-row
+	color #00A9DA
+
+// .chart-container-doc
+// 	width 45%
+// 	display inline-block
+// 	position absolute
+// 	top 325px
+
+.charts-container
+	height 50%
+
+.chart-container
+	display inline-block
+	width 33%
+	height 100%
+
+.header-container
+	margin-top 10px
+
+.analysis-table-container
+	left 0
+	height 25%
+	overflow-y auto
+
+.analysis-title
+	text-align left
+	margin 0
+	padding-left 7.5%
+	color #00617A
+	background-color white
+
+.analysis-export
+	display inline-block
+	cursor pointer
+	color #00356C
+	font-size 14px
+	text-align right
+	// padding-right 12.5%
+	margin-top 1em
+	margin-bottom 1em
+	margin-left calc(87.5% - 92px)
+
+.analysis-chart
+	left 50%
+
 .analysis-buttons
 	text-align center
 	margin 10px 0
-	
+
 .analysis-buttons button
 	margin 2px 10px
+
+.upload-instructions li
+	font-size 12px
+
+#documentation-pie, #identity-pie, #recognition-pie
+	height 100%
+
+@media screen and (min-width: 801px) and (max-width: 1040px) {
+	.charts-container {
+		height auto
+	}
+
+	.recognition-container {
+		display block
+		width 100%
+	}
+
+	.documentation-containter, .identity-container {
+		width 49%
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.charts-container {
+		height auto
+	}
+
+	.recognition-container, .documentation-containter, .identity-container {
+		display block
+		width 100%
+	}
+
+	#analysis-table{
+		width 100%
+	}
+
+	.analysis-export {
+		margin-left 65%
+	}
+
+	.analysis-table-container {
+		margin-bottom 2em
+		padding-left 0.5em
+	}
+}

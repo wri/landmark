@@ -1,0 +1,41 @@
+doctype html
+html
+  head
+    title LandMark: Global Platform of Indigenous and Community Lands
+    meta(name='author', content='BlueRaster, WRI')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=7, IE=9, IE=10')
+    link(rel='shortcut icon', type='image/png', href='css/images/favicon.png')
+    style.
+      html,body{height:100%;width:100%;padding:0;margin:0;}	
+    link(rel='stylesheet', href='css/base.css?#{appVersion}')
+    link(rel='stylesheet', href='css/report.css?#{appVersion}')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css?#{appVersion}')
+    link(rel='stylesheet', type='text/css', href='//fonts.googleapis.com/css?family=Raleway:400,600,700')
+    script(src='https://code.highcharts.com/highcharts.js')
+    //- script(src='https://code.highcharts.com/modules/exporting.js')
+    <!--[if lt IE 9]>
+    script(src='libs/es5-shim.min.js')
+    script(src='libs/es5-sham.min.js')
+    script(src='libs/html5shiv.js')
+    <![endif]-->
+  body.tundra.crl
+    div.app-body
+      include templates/reportBody.jade
+    div.hidden
+    script(async, src='js/reportBootstrap.js?#{appVersion}')
+    script(async, src='libs/FileSaver.js')
+    script(type='text/javascript').
+      var addthis_share = {
+        url_transforms: {
+          shorten: {
+            twitter: 'bitly',
+            facebook: 'bitly'
+          }
+        },
+        shorteners: {
+          bitly: {}
+        }
+      }; //end addThis_share
+    script(async, src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53ab205a21ddceee&async=1')

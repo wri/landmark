@@ -1,23 +1,14 @@
-div.mobile-menu#mobileMenu
-    div.mobile-menu-close-button.pointer#mobile-menu-close
-    div.menu-controls#menuControls
-        span.segmented-menu-button.active.pointer#layersMenuButton Layers
-        span.segmented-menu-button.pointer#legendMenuButton Legend
-        span.segmented-menu-button.pointer#toolsMenuButton Tools
-    div.mobile-menu-content.mobile-layers-content.active#mobile-layers-content
-    div.mobile-menu-content.mobile-legend-content#mobile-legend-content
-      div#legend-component2.brMap
-    div.mobile-menu-content.mobile-tools-content#mobile-tools-content
+div#print-modal.print-modal
 div#brMap.brMap
     div.hideInMap#infowindowContainer
     div.map-component.mobile-menu-toggle-button.hideOnLoad.pointer#mobile-menu-toggle
     div.map-component.tree-widget-container.hideOnLoad#tree-widget-container
         div.tree-widget-title-pane#tree-title-pane
             span.tree-title-text.tree-width#tree-title
-                span Layer Selection
+                span Map Selection
+                span.map-selection-close X
             span.tree-container-toggle.pointer#tree-container-toggle &minus;
         div#layer-content.layer-content.active
-    div#legend-component.legend-component.active
 
     div.map-component.geocoder-container.hideOnLoad#geocoder-container
         div#geocoder
@@ -27,6 +18,15 @@ div#brMap.brMap
     //-     span.data-completeness-label Show Data Completeness
     //-         span#analysis-help.help-marker(style='margin-top: 9px;')
     //-     div#completeness-slider
+    div.map-component.report-button.hideOnLoad.pointer#report-button
+        span#reportLogo
+        span.search-button-label#esri-report-holder
+        //- span.report-button-label
+        //- span.analysis-button-label Country Profiles
+        
+    div.map-component.search-button.hideOnLoad.pointer#search-button
+        span.search-button-label#esri-search-holder
+
     div.map-component.analysis-button.hideOnLoad.pointer#analysis-button
         
         span#analysisLogo
@@ -43,13 +43,7 @@ div#brMap.brMap
     div.map-component.basemap-container.hidden
         div#basemap-gallery
     div.map-component.basemap-connector.connector.hidden
-    //- div.map-component.legend-container.hideOnLoad#legend-container
-    //-     div.legend-title-pane
-    //-         span(class='legend-title pointer', title='Legend', id='legend-toggle') Legend
-    //-             div(id="legend-toggle-icon")!='&ndash;'
-    //-             //-div(id="legend-toggle-icon")
-    //-     div.legend-content.active#legend-content
-    //-         div#legend
+
     div.map-component.button-widget.share-button.pointer.hideOnLoad#share-button(title="Share")
         div.share-icon
     div.map-component.share-container.hidden
@@ -75,4 +69,5 @@ div#brMap.brMap
       div#printToolText Please disable pop-up blockers before using this tool
     div.map-component.print-connector.connector.hidden
     div#map-loading-icon.hideInMap
+    div#mobile-footer.mobile-footer
     

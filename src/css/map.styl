@@ -1,5 +1,6 @@
 @import "config"
 @import "analysis"
+@import "modal"
 
 .launch-dialog-title
 	margin 0
@@ -45,11 +46,8 @@ label
 	position absolute
 	z-index 30
 
-#basemap-gallery > div
-	box-sizing content-box !important
-
 .esriControlsBR
-	right 325px !important
+	right 0px !important
 
 .brMap .HomeButton .home
 	background url('images/map_tools_home.png') no-repeat center
@@ -75,7 +73,12 @@ label
 	color white
 
 .legend-container
-	right 20px
+	//right 20px
+	margin-left 10px
+	z-index 50
+	bottom 5px
+
+.special-legend-container
 	z-index 50
 	bottom 5px
 
@@ -154,10 +157,6 @@ label
 	width 650px
 	left 50%
 	top 50%
-
-// .esriPopup .contentPane > div
-// 	transition-property inherit !important
-// 	transform inherit !important
 
 .introTextStrong
 	font-weight bold
@@ -275,16 +274,17 @@ label
 #embedShare
 	display inline-block
 	cursor pointer
-	height 32px
-	width 32px
+	height 33px
+	width 33px
 	background url(images/embed_icon.png) no-repeat #fff
-	margin-left 2px
+	margin-left -4px
 
 #mobile-legend-content
 	font-size: 11px
 
 .addthis_sharing_toolbox
 	display inline-block
+	vertical-align bottom
 
 .share-button
 .share-connector
@@ -325,6 +325,10 @@ label
 
 .print-icon
 	background url('images/print-icon.png') 4px 8px no-repeat #fff
+	&.loading
+		background url('images/print-loader.gif') center no-repeat #fff
+
+.modal-print-button
 	&.loading
 		background url('images/print-loader.gif') center no-repeat #fff
 
@@ -402,13 +406,13 @@ label
 .esriBasemapGalleryLabelContainer
 	font-size 13px
 	padding 5px 0
-	box-sizing content-box !important
-
-.esriBasemapGallerySelectedNode .esriBasemapGalleryThumbnail
-	margin 1px !important
+	height 3.5em !important
 
 .esriBasemapGallery
 	margin 10px 5px
+
+.esriBasemapGallerySelectedNode .esriBasemapGalleryThumbnail
+	margin 1px !important
 
 .share-container
 	background-color white
@@ -528,8 +532,6 @@ label
 	font-weight bold
 	cursor pointer
 	float right
-	font-size 12px
-	bottom 12px
 
 .esriSimpleSliderDecrementButton
 	border-top 1px solid #2fa3d9
@@ -561,6 +563,14 @@ label
 .analysis-buttons button
 	&:focus, &:active
 		outline 0 !important
+
+.remove-only
+	width 50% !important
+	margin-left 20% !important
+
+.remove-only-text
+	padding-left 10px
+	padding-right 10px
 
 #removeGraphic
 #exportAnalysis
@@ -642,17 +652,12 @@ label
 		left 50%
 		margin-left -77px
 
-// #removeGraphic
-//	left 9px
-
-// .mobile-active
-// 	height auto !important
 
 #uploadComboNameWidget
 	height 0
 
 #uploadNameSelectContainer
-	margin-top -10px
+	padding-top 10px
 	padding-bottom 10px
 
 
@@ -707,9 +712,14 @@ label
 .lessColumnWidth
 	width 635px !important
 
-#title_title
-	float left
+.middle-column
+	padding-left 10px
 	padding-right 10px
+
+#title_title
+	text-align center
+	font-size 16px
+	padding 1px
 
 #titleResults
 	font-size 12px
@@ -724,6 +734,7 @@ label
 	font-size 14px
 	overflow-y auto
 	overflow-x hidden
+	background white
 
 .noPositioning
 	top 0px !important
@@ -862,7 +873,7 @@ button
 .tree-content .tester
 	height 200px
 
-.analysis-button
+.analysis-button, .search-button, .report-button
 	border-radius(5px)
 	background-color white
 	text-align center
@@ -871,14 +882,28 @@ button
 	right 70px
 	top 20px
 
+.search-button
+	right 300px
+	// width 200px
+
+.report-button
+	right 603px
+	// width 200px
+
+#report-button
+	.arcgisSearch .searchGroup .searchInput
+		border-right 0 !important
+		-webkit-border-radius 0
+		border-radius 0
+
 .simpleGeocoder .esriGeocoder input
 	font-family Raleway
 
-.data-completeness-label, .analysis-button-label
+.data-completeness-label, .analysis-button-label, .search-button-label
 	font-size 13px
 	font-family Raleway
 
-.analysis-button-label
+.analysis-button-label, .search-button-label
 .data-completeness-label
 .data-completeness-toggle
 	padding 0 10px
@@ -930,7 +955,7 @@ button
 	padding-left 10px
 	padding-right 10px
 
-#analysisToolText, #printToolText
+#analysisToolText, #printToolText, #reportToolText
 	width 190px
 	display inline-block
 	text-align center
@@ -991,7 +1016,7 @@ button
 .esriSimpleSliderVertical .esriSimpleSliderDecrementButton
 	border-radius 0px !important
 
-#analysisLogo
+#analysisLogo, #searchLogo
 	background url("images/icon_analysis.png") no-repeat 9px
 	background-color #2fa3d9
 	width 33px
@@ -999,6 +1024,46 @@ button
 	display block
 	margin-left -33px
 	position absolute
+
+#reportLogo
+	// background url("images/globe.svg") no-repeat 9px
+	background-color #2fa3d9
+	width 33px
+	height 32px
+	display block
+	margin-left -33px
+	position absolute
+	// z-index 10
+	// background-size cover
+
+#report-button
+	.searchIcon.esri-icon-search:before
+		content none !important
+
+	.searchIcon.esri-icon-search
+		background url("images/globe.svg") no-repeat
+		background-size cover
+
+.searchBtn.searchSubmit
+	float inherit
+	display inline-block
+	position absolute
+	left -44px
+	background #2fa3d9 !important
+	-webkit-border-radius inherit !important
+  border-radius inherit
+
+.searchIcon.esri-icon-search
+	color white !important
+
+.arcgisSearch .showSources .sourcesMenu
+	width 100% !important
+
+#esri-search-holder_menu_button
+	position absolute
+	right -44px
+	-webkit-border-radius inherit
+  border-radius inherit
 
 .simpleGeocoder .esriGeocoder, .esriSimpleSlider, .button-widget
 	border none !important
@@ -1058,6 +1123,16 @@ button
 	box-shadow none
 	height 20px
 
+.arcgisSearch .searchBtn
+	border none !important
+
+.arcgisSearch .searchGroup .searchInput
+	border none !important
+	// border-right 1px solid grey !important
+
+.arcgisSearch .searchClear
+	right 1px !important
+
 .analysis-popup-button
 	display inline-block
 	margin 5px
@@ -1072,25 +1147,6 @@ button
 	padding-top 12px
 	padding-bottom 12px
 	width 80px
-
-#legend-toggle-icon
-	//-background url('images/close_minus_symbol.png')
-	//background url(images/legendToggle.png) no-repeat #fff
-	-webkit-font-smoothing antialiased
-	-moz-osx-font-smoothing grayscale
-	height 32px
-	width 32px
-	line-height 32px
-	position absolute
-	display block
-	top 0
-	right 0
-	left auto !important
-	text-align center
-	font-size 22px
-	background-color #2FA3D9
-	// font-size 24px
-	// cursor pointer
 
 .titlePane.analysis-header
 	font-size 21px !important
@@ -1122,6 +1178,11 @@ button
 .hideLegend
 	display none !important
 
+#welcomeDialogMemory
+	cursor pointer
+
+.arcgisSearch .searchMenu
+	text-align left !important
 
 //Legend Styles
 
@@ -1205,6 +1266,7 @@ body:not(.mobile) .launch-map-button
 		margin-left 0
 		// left 1%
 		overflow-x auto
+
 	#column-header
 		width 98% !important
 		position inherit

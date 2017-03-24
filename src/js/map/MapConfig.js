@@ -3,17 +3,17 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
     var landTenureURL = 'http://gis.wri.org/arcgis/rest/services/LandMark/land_tenure/MapServer';
     var percentLandsUrl = 'http://gis.wri.org/arcgis/rest/services/LandMark/pct_comm_lands/MapServer';
 
-    var community_indigenous_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer';
-    var community_indigenous_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalDoc/MapServer';
-    var community_indigenous_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_InProcess/MapServer';
-    var community_indigenous_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_NoDoc/MapServer';
-    var community_indigenous_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Occupied/MapServer';
+    var community_indigenous_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalLandClaim/MapServer';
+    var community_indigenous_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Documented/MapServer';
+    // var community_indigenous_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_InProcess/MapServer';
+    var community_indigenous_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_NotDocumented/MapServer';
+    var community_indigenous_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_CustomaryTenure/MapServer';
 
-    var community_community_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalClaim/MapServer';
-    var community_community_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer';
-    var community_community_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_InProcess/MapServer';
-    var community_community_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NoDoc/MapServer';
-    var community_community_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Occupied/MapServer';
+    var community_community_FormalClaim = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalLandClaim/MapServer';
+    var community_community_FormalDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Documented/MapServer';
+    // var community_community_InProcess = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_InProcess/MapServer';
+    var community_community_NoDoc = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NotDocumented/MapServer';
+    var community_community_Occupied = 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_CustomaryTenure/MapServer';
 
     var MapConfig = {
 
@@ -26,6 +26,16 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
         },
 
         layers: {
+
+          'percentLandsFeature': {
+              url: 'http://gis.wri.org/arcgis/rest/services/LandMark/pct_comm_lands/MapServer/1',
+              type: 'feature',
+              visible: false
+          }, //How should these work? No styles, then highlight onHover? YES!
+          //only visible when their parent layer is visible? YES!
+          //Should only polygon layers get the hover (what about dots?) BOTH!
+          //USE ONE NATIONAL LEVEL LAYER TO HIGHLIGHT ALLLL OF THE NAT LEVEL LAYERS!
+          //GIVE ALL FEATURELAYERS A NULL SYMBOL ON CREATION!
 
           //Percent of Indigenous and Community Lands layer
           'percentLands': {
@@ -42,6 +52,13 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1], //[1,2,3,4]
                 visible: false
             },
+            'landTenure': {
+                url: landTenureURL,
+                type: 'dynamic',
+                // Not all the layers are present in the tree, when they are, include 0 - 9
+                defaultLayers: [-1], //[0,1,2,3,4,5,6,7,8,9]
+                visible: true
+            },
 
             // CommunityLevel
             'indigenous_FormalClaim': {
@@ -51,6 +68,16 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
+            'indigenous_FormalClaimFeature': {
+                url: community_indigenous_FormalClaim + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'indigenous_FormalClaimFeaturePoint': {
+                url: community_indigenous_FormalClaim + '/0',
+                type: 'feature',
+                visible: true
+            },
             'indigenous_FormalDoc': {
                 url: community_indigenous_FormalDoc,
                 type: 'dynamic',
@@ -58,13 +85,33 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
-            'indigenous_InProcess': {
-                url: community_indigenous_InProcess,
-                type: 'dynamic',
-                minZoom: 2315000,
-                defaultLayers: [0,1],
+            'indigenous_FormalDocFeature': {
+                url: community_indigenous_FormalDoc + '/1',
+                type: 'feature',
                 visible: true
             },
+            'indigenous_FormalDocFeaturePoint': {
+                url: community_indigenous_FormalDoc + '/0',
+                type: 'feature',
+                visible: true
+            },
+            // 'indigenous_InProcess': {
+            //     url: community_indigenous_InProcess,
+            //     type: 'dynamic',
+            //     minZoom: 2315000,
+            //     defaultLayers: [0,1],
+            //     visible: true
+            // },
+            // 'indigenous_InProcessFeature': {
+            //     url: community_indigenous_InProcess + '/1',
+            //     type: 'feature',
+            //     visible: true
+            // },
+            // 'indigenous_InProcessFeaturePoint': {
+            //     url: community_indigenous_InProcess + '/0',
+            //     type: 'feature',
+            //     visible: true
+            // },
             'indigenous_NoDoc': {
                 url: community_indigenous_NoDoc,
                 type: 'dynamic',
@@ -72,11 +119,116 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
+            'indigenous_NoDocFeature': {
+                url: community_indigenous_NoDoc + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'indigenous_NoDocFeaturePoint': {
+                url: community_indigenous_NoDoc + '/0',
+                type: 'feature',
+                visible: true
+            },
             'indigenous_Occupied': {
                 url: community_indigenous_Occupied,
                 type: 'dynamic',
                 minZoom: 2315000,
                 defaultLayers: [0,1],
+                visible: true
+            },
+            'indigenous_OccupiedFeature': {
+                url: community_indigenous_Occupied + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'indigenous_OccupiedFeaturePoint': {
+                url: community_indigenous_Occupied + '/0',
+                type: 'feature',
+                visible: true
+            },
+            'community_FormalClaim': {
+                url: community_community_FormalClaim,
+                type: 'dynamic',
+                minZoom: 2315000,
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'community_FormalClaimFeature': {
+                url: community_community_FormalClaim + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'community_FormalClaimFeaturePoint': {
+                url: community_community_FormalClaim + '/0',
+                type: 'feature',
+                visible: true
+            },
+            'community_FormalDoc': {
+                url: community_community_FormalDoc,
+                type: 'dynamic',
+                minZoom: 2315000,
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'community_FormalDocFeature': {
+                url: community_community_FormalDoc + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'community_FormalDocFeaturePoint': {
+                url: community_community_FormalDoc + '/0',
+                type: 'feature',
+                visible: true
+            },
+            // 'community_InProcess': {
+            //     url: community_community_InProcess,
+            //     type: 'dynamic',
+            //     minZoom: 2315000,
+            //     defaultLayers: [0,1],
+            //     visible: true
+            // },
+            // 'community_InProcessFeature': {
+            //     url: community_community_InProcess + '/1',
+            //     type: 'feature',
+            //     visible: true
+            // },
+            // 'community_InProcessFeaturePoint': {
+            //     url: community_community_InProcess + '/0',
+            //     type: 'feature',
+            //     visible: true
+            // },
+            'community_NoDoc': {
+                url: community_community_NoDoc,
+                type: 'dynamic',
+                minZoom: 2315000,
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'community_NoDocFeature': {
+                url: community_community_NoDoc + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'community_NoDocFeaturePoint': {
+                url: community_community_NoDoc + '/0',
+                type: 'feature',
+                visible: true
+            },
+            'community_Occupied': {
+                url: community_community_Occupied,
+                type: 'dynamic',
+                minZoom: 2315000,
+                defaultLayers: [0,1],
+                visible: true
+            },
+            'community_OccupiedFeature': {
+                url: community_community_Occupied + '/1',
+                type: 'feature',
+                visible: true
+            },
+            'community_OccupiedFeaturePoint': {
+                url: community_community_Occupied + '/0',
+                type: 'feature',
                 visible: true
             },
             'indigenous_FormalClaim_Tiled': {
@@ -91,12 +243,12 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
-            'indigenous_InProcess_Tiled': {
-                url: community_indigenous_InProcess,
-                type: 'tiled',
-                defaultLayers: [0,1],
-                visible: true
-            },
+            // 'indigenous_InProcess_Tiled': {
+            //     url: community_indigenous_InProcess,
+            //     type: 'tiled',
+            //     defaultLayers: [0,1],
+            //     visible: true
+            // },
             'indigenous_NoDoc_Tiled': {
                 url: community_indigenous_NoDoc,
                 type: 'tiled',
@@ -106,42 +258,6 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             'indigenous_Occupied_Tiled': {
                 url: community_indigenous_Occupied,
                 type: 'tiled',
-                defaultLayers: [0,1],
-                visible: true
-            },
-
-            'community_FormalClaim': {
-                url: community_community_FormalClaim,
-                type: 'dynamic',
-                minZoom: 2315000,
-                defaultLayers: [0,1],
-                visible: true
-            },
-            'community_FormalDoc': {
-                url: community_community_FormalDoc,
-                type: 'dynamic',
-                minZoom: 2315000,
-                defaultLayers: [0,1],
-                visible: true
-            },
-            'community_InProcess': {
-                url: community_community_InProcess,
-                type: 'dynamic',
-                minZoom: 2315000,
-                defaultLayers: [0,1],
-                visible: true
-            },
-            'community_NoDoc': {
-                url: community_community_NoDoc,
-                type: 'dynamic',
-                minZoom: 2315000,
-                defaultLayers: [0,1],
-                visible: true
-            },
-            'community_Occupied': {
-                url: community_community_Occupied,
-                type: 'dynamic',
-                minZoom: 2315000,
                 defaultLayers: [0,1],
                 visible: true
             },
@@ -157,12 +273,12 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 defaultLayers: [0,1],
                 visible: true
             },
-            'community_InProcess_Tiled': {
-                url: community_community_InProcess,
-                type: 'tiled',
-                defaultLayers: [0,1],
-                visible: true
-            },
+            // 'community_InProcess_Tiled': {
+            //     url: community_community_InProcess,
+            //     type: 'tiled',
+            //     defaultLayers: [0,1],
+            //     visible: true
+            // },
             'community_NoDoc_Tiled': {
                 url: community_community_NoDoc,
                 type: 'tiled',
@@ -173,14 +289,6 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
                 url: community_community_Occupied,
                 type: 'tiled',
                 defaultLayers: [0,1],
-                visible: true
-            },
-
-            'landTenure': {
-                url: landTenureURL,
-                type: 'dynamic',
-                // Not all the layers are present in the tree, when they are, include 0 - 9
-                defaultLayers: [-1], //[0,1,2,3,4,5,6,7,8,9]
                 visible: true
             },
 
@@ -213,81 +321,81 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
         // noCheckbox: true/false, should there be a checkbox on this tree node
 
         communityLevelLayers: [{
-            label: 'Formally recognized',
+            label: 'Acknowledged by government',
             isCategory: true,
             group: 'indigenousLands'
           },
           {
-            label: 'Formal documentation',
+            label: 'Documented',
             id: 'indigenous_FormalDoc',
             checked: true,
             group: 'indigenousLands'
           },
+          // {
+          //   label: 'In process of documentation',
+          //   id: 'indigenous_InProcess',
+          //   checked: true,
+          //   group: 'indigenousLands'
+          // },
           {
-            label: 'In process of documentation',
-            id: 'indigenous_InProcess',
-            checked: true,
-            group: 'indigenousLands'
-          },
-          {
-            label: 'No documentation',
+            label: 'Not documented',
             id: 'indigenous_NoDoc',
             checked: true,
             group: 'indigenousLands'
           },
           {
-            label: 'Not formally recognized',
+            label: 'Not acknowledged by government',
             isCategory: true,
             group: 'indigenousLands'
           },
           {
-            label: 'Formal land petition',
+            label: 'Held or used with formal land claim submitted',
             id: 'indigenous_FormalClaim',
             checked: true,
             group: 'indigenousLands'
           },
           {
-            label: 'Occupied or used without formal land petition',
+            label: 'Held or used under customary tenure',
             id: 'indigenous_Occupied',
             checked: true,
             group: 'indigenousLands'
           },
           {
-            label: 'Formally recognized',
+            label: 'Acknowledged by government',
             isCategory: true,
             group: 'communityLands'
           },
           {
-            label: 'Formal documentation',
+            label: 'Documented',
             id: 'community_FormalDoc',
             checked: true,
             group: 'communityLands'
           },
+          // {
+          //   label: 'In process of documentation',
+          //   id: 'community_InProcess',
+          //   checked: true,
+          //   group: 'communityLands'
+          // },
           {
-            label: 'In process of documentation',
-            id: 'community_InProcess',
-            checked: true,
-            group: 'communityLands'
-          },
-          {
-            label: 'No documentation',
+            label: 'Not documented',
             id: 'community_NoDoc',
             checked: true,
             group: 'communityLands'
           },
           {
-            label: 'Not formally recognized',
+            label: 'Not acknowledged by government',
             isCategory: true,
             group: 'communityLands'
           },
           {
-            label: 'Formal land petition',
+            label: 'Held or used with formal land claim submitted',
             id: 'community_FormalClaim',
             checked: true,
             group: 'communityLands'
           },
           {
-            label: 'Occupied or used without formal land petition',
+            label: 'Held or used under customary tenure',
             id: 'community_Occupied',
             checked: true,
             group: 'communityLands'
@@ -418,6 +526,10 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             id: 'landRightsProtectedAreasTenure',
             question: "Does the law uphold community land rights in the ownership and governance of national parks and other protected areas?",
             layer: 1
+        }, {
+            label: 'NONE',
+            id: 'none',
+            layer: 0
         }], //, {
         //     label: 'Resource Rights: Sub-surface minerals',
         //     id: 'subsurfaceMinerals',
@@ -520,13 +632,29 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
             id: 'landRightsProtectedAreasTenure',
             question: "Does the law uphold indigenous land rights in the ownership and governance of national parks and other protected areas?",
             layer: 3
+        }, {
+            label: 'NONE',
+            id: 'none',
+            layer: -1
         }],
 
 
         percentIndigenousLayersCombined: [{
-          label: 'Indigenous and Community Lands (combined)',
+          label: 'Traditional or Customary Rights',
           id: 'percentIndigAndCommunity',
           subTitle: true
+        }, {
+          label: 'Acknowledged by government',
+          id: 'combinedFormal',
+          question: false,
+          layer: 2,
+          subLayer: true
+        }, {
+          label: 'Not acknowledged by government',
+          id: 'combinedInformal',
+          question: false,
+          layer: 3,
+          subLayer: true
         }, {
           label: 'Total',
           id: 'combinedTotal',
@@ -534,70 +662,68 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
           layer: 1,
           subLayer: true
         }, {
-          label: 'Formally recognized',
-          id: 'combinedFormal',
+          label: 'None',
+          id: 'none',
           question: false,
-          layer: 2,
+          layer: -1,
           subLayer: true
-        }, {
-          label: 'Not formally recognized',
-          id: 'combinedInformal',
-          question: false,
-          layer: 3,
-          subLayer: true
-        }, {
-          label: 'Indigenous Lands (only) - Coming soon',
-          id: 'percentIndigNational',
-          subTitle: true,
-          comingSoon: true
-        }, {
-          label: 'Total',
-          id: 'indigTotal',
-          question: false,
-          layer: 5,
-          subLayer: true,
-          comingSoon: true
-        }, {
-          label: 'Formally recognized',
-          id: 'indigFormal',
-          question: false,
-          layer: 6,
-          subLayer: true,
-          comingSoon: true
-        }, {
-          label: 'Not formally recognized',
-          id: 'indigInformal',
-          question: false,
-          layer: 7,
-          subLayer: true,
-          comingSoon: true
-        }, {
-          label: 'Community Lands (only) - Coming soon',
-          id: 'percentNonIndigenous',
-          subTitle: true,
-          comingSoon: true
-        }, {
-          label: 'Total',
-          id: 'commTotal',
-          question: false,
-          layer: 9,
-          subLayer: true,
-          comingSoon: true
-        }, {
-          label: 'Formally recognized',
-          id: 'commFormal',
-          question: false,
-          layer: 10,
-          subLayer: true,
-          comingSoon: true
-        }, {
-          label: 'Not formally recognized',
-          id: 'commInformal',
-          question: false,
-          layer: 11,
-          subLayer: true,
-          comingSoon: true
-        }],
+        }
+        // ,
+        // {
+        //   label: 'Indigenous Lands (only) - Coming soon',
+        //   id: 'percentIndigNational',
+        //   subTitle: true,
+        //   comingSoon: true
+        // },
+        // {
+        //   label: 'Total',
+        //   id: 'indigTotal',
+        //   question: false,
+        //   layer: 5,
+        //   subLayer: true,
+        //   comingSoon: true
+        // }, {
+        //   label: 'Formally recognized',
+        //   id: 'indigFormal',
+        //   question: false,
+        //   layer: 6,
+        //   subLayer: true,
+        //   comingSoon: true
+        // }, {
+        //   label: 'Not formally recognized',
+        //   id: 'indigInformal',
+        //   question: false,
+        //   layer: 7,
+        //   subLayer: true,
+        //   comingSoon: true
+        // }, {
+        //   label: 'Community Lands (only) - Coming soon',
+        //   id: 'percentNonIndigenous',
+        //   subTitle: true,
+        //   comingSoon: true
+        // }, {
+        //   label: 'Total',
+        //   id: 'commTotal',
+        //   question: false,
+        //   layer: 9,
+        //   subLayer: true,
+        //   comingSoon: true
+        // }, {
+        //   label: 'Formally recognized',
+        //   id: 'commFormal',
+        //   question: false,
+        //   layer: 10,
+        //   subLayer: true,
+        //   comingSoon: true
+        // }, {
+        //   label: 'Not formally recognized',
+        //   id: 'commInformal',
+        //   question: false,
+        //   layer: 11,
+        //   subLayer: true,
+        //   comingSoon: true
+        // }
+      ],
         // Only leafs in the tree should control any layers, use blank arrays for any branch or root nodes
         layerMapping: {
             'indigenousLands': [],

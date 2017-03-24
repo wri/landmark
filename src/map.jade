@@ -36,8 +36,8 @@ html
 						ul.upload-instructions
 							li Select a zip file(.zip) containing a shapefile(.shp,.dbf,.prj) from your local file system.
 							li The shapefile must be in Geographic Coordinate System (WGS84).
-							li The shapefile must be of POLYGON geometry type.
 							li The shapefile must not exceed 1 Megabyte.
+							li Or, select a CSV from your local file system. The CSV should contain a header row with columns for Name, Latitude, and Longitude.
 						form(enctype='multipart/form-data',method='post',id='uploadForm',name='uploadForm')
 							label
 								input(type='file',name='file',id='shapefileUpload')
@@ -50,19 +50,19 @@ html
 							//- End not normally needed inputs
 						div(id='uploadNameSelectContainer')
 			div(id='help-dialog-indigenous',title='Layer Info',data-dojo-type='dijit/Dialog')
-				p Click 
-					a(href='./data/#data-5' target='_blank') here 
-					span for definitions of these terms
+				p Indigenous Lands or territories refer to the collectively-held and governed lands of Indigenous Peoples... 
+					a(href='http://www.landmarkmap.org/data/#data-1' target='_blank') Read More 
 			div(id='help-dialog-community',title='Layer Info',data-dojo-type='dijit/Dialog')
-				p Click 
-					a(href='./data/#data-5' target='_blank') here 
-					span for definitions of these terms
+				p Community Lands are all lands that fall under the customary governance of the community whether or not this is recognized in national law... 
+					a(href='http://www.landmarkmap.org/data/#data-1' target='_blank') Read More
 			div(id='help-dialog-completeness',title='Analysis Tool',data-dojo-type='dijit/Dialog')
 				p This tool allows you to upload or draw a custom area to analyze indigenous and community lands. 
 
 
-		script(src='libs/jquery-2.1.3.min.js')
 		script(async, src='libs/FileSaver.js')
+		script(async, src='libs/fabric.min.js')
+		script(async, src='libs/pdfkit.js')
+		script(async, src='libs/blob-stream-v0.1.2.js')
 		script(async, src='js/dojoBootstrap.js?#{appVersion}')
 		script(type='text/javascript').
 			var addthis_share = {

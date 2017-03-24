@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LandMark: Global Platform of Indigenous and Community Lands</title>
+    <meta name="author" content="BlueRaster, WRI">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
+    <link rel="shortcut icon" type="image/png" href="css/images/favicon.png">
+    <style>html,body{height:100%;width:100%;padding:0;margin:0;}	</style>
+    <link rel="stylesheet" href="css/base.css?1.1.2">
+    <link rel="stylesheet" href="css/analysis.css?1.1.2">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway:400,600,700">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script><!--[if lt IE 9]>
+    <script src="libs/es5-shim.min.js"></script>
+    <script src="libs/html5shiv.js"></script><![endif]-->
+  </head>
+  <body class="tundra crl">
+    <div class="analysis-report">
+      <div class="header-container">
+        <h1 class="analysis-title">Analysis Results </h1>
+        <h4 id="analysis-title" class="analysis-title"></h4>
+      </div>
+      <div id="analysis-export" class="analysis-export"><img src="map-app/css/images/export.png" alt="export"><span>Export Data</span></div>
+      <div class="charts-container">
+        <div class="chart-container documentation-containter">
+          <div id="documentation-pie"></div>
+        </div>
+        <div class="chart-container identity-container">
+          <div id="identity-pie"></div>
+        </div>
+        <div class="chart-container recognition-container">
+          <div id="recognition-pie"></div>
+        </div>
+      </div>
+      <div class="analysis-table-container">
+        <div id="analysis-table"></div>
+      </div>
+    </div>
+    <script async src="js/analysisBootstrap.js?1.1.2"></script>
+    <script async src="libs/FileSaver.js"></script>
+  </body>
+</html>

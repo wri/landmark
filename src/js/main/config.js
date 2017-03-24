@@ -1,5 +1,5 @@
 define([], function() {
-    'use strict';
+    
 
     var config = {
 
@@ -8,13 +8,13 @@ define([], function() {
         defaultState: {
             x: -102.46,
             y: 13.47,
-            l: 3 //,
-            //lyrs: 'Active_Fires'
+            l: 3,
+            a: 'community_FormalDoc,community_NoDoc,community_FormalClaim,community_Occupied,indigenous_FormalDoc,indigenous_NoDoc,indigenous_FormalClaim,indigenous_Occupied'
         },
 
         portalGenerateFeaturesURL: 'http://www.arcgis.com/sharing/rest/content/features/generate',
 
-        printUrl: 'http://gis.wri.org/arcgis/rest/services/ExportWebMap/GPServer/Export%20Web%20Map',
+        printUrl: 'http://gis.wri.org/arcgis/rest/services/LandMarkExportWebMap/GPServer/Export%20Web%20Map',
 
         // Launch Button to Close Dialog added in Code
         // welcomeDialogContent: "<h2 class='launch-dialog-title'>About Global Map of Indigenous and Community Lands</h2>" +

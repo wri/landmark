@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="61px" height="18px" viewBox="0 0 61 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="61" height="18" rx="3"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="61" height="18" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(0.000000, -3.000000)">
+            <g id="Group" transform="translate(0.000000, 3.000000)">
+                <use id="Rectangle" stroke="#D0011B" mask="url(#mask-2)" stroke-width="0.5" fill="#FFFFFF" xlink:href="#path-1"></use>
+                <g id="Group-2" transform="translate(5.000000, 2.000000)" fill="#D0011B">
+                    <text id="Delete" font-family="Raleway-Medium, Raleway" font-size="12" font-weight="400">
+                        <tspan x="12" y="11">Remove</tspan>
+                    </text>
+                    <polygon id="+" transform="translate(6.547241, 7.536574) rotate(45.000000) translate(-6.547241, -7.536574) " points="10.7306154 6.96425592 10.7306154 8.10889252 7.18769265 8.10889252 7.18769265 11.9516011 5.93404305 11.9516011 5.93404305 8.10889252 2.363867 8.10889252 2.363867 6.96425592 5.93404305 6.96425592 5.93404305 3.12154735 7.18769265 3.12154735 7.18769265 6.96425592"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

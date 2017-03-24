@@ -6,10 +6,13 @@ define([
     'map/MapConfig',
     'map/MapAssets',
     'components/LayerTabContainer',
-    'components/LegendComponent',
+    'components/PrintModal',
+    'components/MobileFooter',
     'map/WidgetsController',
-    'utils/Helper',
     'dojo/on',
+    'dojo/dom',
+    'dojo/dom-geometry',
+    'dojo/_base/window',
     'dojo/query',
     'dojo/dom-class',
     'dojo/dom-construct',
@@ -24,6 +27,7 @@ define([
     'esri/dijit/Legend',
     'esri/dijit/HomeButton',
     'esri/dijit/BasemapGallery',
+    'esri/dijit/Search',
     'esri/dijit/Scalebar',
     "esri/request",
     "esri/geometry/Point",
@@ -35,11 +39,12 @@ define([
     "esri/tasks/QueryTask",
     "dijit/form/HorizontalSlider",
     "dijit/form/HorizontalRuleLabels",
-    "esri/layers/LayerDrawingOptions"
+    "esri/layers/LayerDrawingOptions",
+    'esri/layers/FeatureLayer'
 
-], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, LegendComponent, WidgetsController, Helper, on, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions) {
+], function(AppConfig, Map, Uploader, DrawTool, MapConfig, MapAssets, LayerTabContainer, PrintModal, MobileFooter, WidgetsController, on, dom, domGeom, win, dojoQuery, domClass, domConstruct, arrayUtils, all, Deferred, dojoNumber, topic, Toggler, registry, ContentPane, Legend, HomeButton, BasemapGallery, Search, Scalebar, esriRequest, Point, Polygon, IdentifyTask, IdentifyParameters, InfoTemplate, Query, QueryTask, HorizontalSlider, HorizontalRuleLabels, LayerDrawingOptions, FeatureLayer) {
 
-    'use strict';
+
 
     // Some Widgets That will need to be accessed outside the renderComponents method
     var nationalLayerList,
@@ -60,16 +65,29 @@ define([
             brApp.map = mapObject.map;
 
             // Bind Events now, Map Events then UI Events
-            mapObject.on('map-ready', function() {
+            mapObject.on('map-ready', function(country) {
+                if (country) {
+                  self.zoomToCountry(country);
+                }
                 self.renderComponents();
             });
 
             // on(document.getElementById('legend-toggle'), 'click', WidgetsController.toggleLegend);
             on(document.getElementById('basemap-button'), 'click', WidgetsController.toggleBasemapGallery.bind(WidgetsController));
             on(document.getElementById('share-button'), 'click', WidgetsController.toggleShareContainer.bind(WidgetsController));
-            on(document.getElementById('print-button'), 'click', WidgetsController.printMap);
+            // on(document.getElementById('print-button'), 'click', WidgetsController.printMap);
+            on(document.getElementById('print-button'), 'click', WidgetsController.togglePrintModal);
+            // on(document.getElementById('close-print-modal'), 'click', WidgetsController.togglePrintModal);
 
-            on(document.getElementById('tree-title-pane'), 'click', WidgetsController.toggleTreeContainer);
+            on(document.getElementById('tree-title-pane'), 'click', function(){
+              var body = win.body()
+              var width = domGeom.position(body).w;
+              if (width > 768) {
+                WidgetsController.toggleTreeContainer();
+              } else {
+                WidgetsController.toggleMobileTree();
+              }
+            });
 
             on(document.getElementById('analysis-button'), 'click', function() {
                 if (this.classList.contains("grayOut")) {
@@ -113,8 +131,6 @@ define([
                 }
               }
 
-              console.log(evt.lod.level);
-
             });
             on(brApp.map, 'layers-add-result', function(layersAdded) {
 
@@ -157,37 +173,21 @@ define([
 
                   brApp.layerInfos = layers;
 
-                  var legendComponent = new LegendComponent('legend-component');
-                  topic.publish('legend-loaded');
-                  on(document.getElementById('layersMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
-                  on(document.getElementById('legendMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
-                  on(document.getElementById('toolsMenuButton'), 'click', WidgetsController.toggleMobileMenuContainer);
-
                 });
 
             });
 
-
             // Mobile Specific Events
-            // If we are ok with the app not responding to mobile, only loading in mobile or loading in Desktop
-            // We could conditionally add handles for the above and below events by using Helper.isMobile()
             on(document.getElementById('mobile-menu-toggle'), 'click', WidgetsController.toggleMobileMenu);
-            on(document.getElementById('mobile-menu-close'), 'click', WidgetsController.toggleMobileMenu);
 
             on(document.getElementById('embedShare'), 'click', WidgetsController.showEmbedCode);
-
-            $('#print-button').mouseenter(function() {
-                $("#print-button-tt").show();
-            });
-            $('#print-button').mouseleave(function() {
-                $("#print-button-tt").hide();
-            });
 
             // Hack for the print service, tiled layers need to be added to operational layers
             // when the zoom level is less then 9 to force legends to show in the printout, due to the way we are
             // showing tiled layers up to 9 and then dynamic from there on out
             esriRequest.setRequestPreCallback(function (ioArgs) {
-              if (ioArgs.url !== AppConfig.printUrl + '/execute') {
+
+              if (ioArgs.url !== AppConfig.printUrl) {
                 return ioArgs;
               }
 
@@ -240,8 +240,12 @@ define([
             var basemapGallery,
                 self = this,
                 tabContainer,
+                printModal,
+                mobileFooter,
                 legendComponent,
                 homeWidget,
+                searchWidget,
+                reportWidget,
                 scalebar,
                 node;
 
@@ -268,11 +272,242 @@ define([
             });
 
             tabContainer = new LayerTabContainer('layer-content');
+            printModal = new PrintModal('print-modal');
+            mobileFooter = new MobileFooter('mobile-footer')
+
+            var body = win.body(),
+                mobileThreshold = 800,
+                width = domGeom.position(body).w;
+
+            if (width <= mobileThreshold) {
+              var layerTree = document.querySelector('.tree-widget-container')
+              var searchButton = document.querySelector('.search-button')
+              var analysisButton = document.querySelector('.analysis-button')
+              var reportButton = document.querySelector('.report-button')
+              domClass.add(layerTree, 'hidden');
+              domClass.add(searchButton, 'hidden');
+              domClass.add(analysisButton, 'hidden');
+              domClass.add(reportButton, 'hidden');
+            }
 
             // Start all widgets that still need to be started
             basemapGallery.startup();
             homeWidget.startup();
 
+            searchWidget = new Search({
+              map: brApp.map,
+              showArcGISBasemaps: true,
+              showInfoWindowOnSelect: false,
+              enableSearchingAll: false
+            }, 'esri-search-holder');
+
+            // var sources = searchWidget.get("sources");
+            //
+            // sources.push({
+            //   featureLayer: new FeatureLayer(
+            //     // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+            //     'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1'
+            //   ),
+            //   searchFields: ['Name'],
+            //   displayField: 'Name',
+            //   exactMatch: false,
+            //   outFields: ['*'],
+            //   name: 'Community Formal Claim',
+            //   placeholder: 'Search',
+            //   enableSuggestions: true,
+            //   searchQueryParams: {
+            //     returnGeom: false
+            //   }
+            // });
+            //
+            // sources.push({
+            //   featureLayer: new FeatureLayer(
+            //     // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+            //     'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer/1'
+            //   ),
+            //   searchFields: ['Name'],
+            //   displayField: 'Name',
+            //   exactMatch: false,
+            //   outFields: ['*'],
+            //   name: 'Community Formal Doc',
+            //   placeholder: 'Search',
+            //   enableSuggestions: true,
+            //   searchQueryParams: {
+            //     returnGeom: false
+            //   }
+            // });
+            //
+            // sources.push({
+            //   featureLayer: new FeatureLayer(
+            //     // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+            //     'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Occupied/MapServer/1'
+            //   ),
+            //   searchFields: ['Name'],
+            //   displayField: 'Name',
+            //   exactMatch: false,
+            //   outFields: ['*'],
+            //   name: 'Community No Formal',
+            //   placeholder: 'Search',
+            //   enableSuggestions: true,
+            //   searchQueryParams: {
+            //     returnGeom: false
+            //   }
+            // });
+            //
+            // sources.push({
+            //   featureLayer: new FeatureLayer(
+            //     // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+            //     'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1'
+            //   ),
+            //   searchFields: ['Name'],
+            //   displayField: 'Name',
+            //   exactMatch: false,
+            //   outFields: ['*'],
+            //   name: 'Indigenous Formal Claim',
+            //   placeholder: 'Search',
+            //   enableSuggestions: true,
+            //   searchQueryParams: {
+            //     returnGeom: false
+            //   }
+            // });
+            //
+            // sources.push({
+            //   featureLayer: new FeatureLayer(
+            //     // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+            //     'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalDoc/MapServer/1'
+            //   ),
+            //   searchFields: ['Name'],
+            //   displayField: 'Name',
+            //   exactMatch: false,
+            //   outFields: ['*'],
+            //   name: 'Indigenous Formal Doc',
+            //   placeholder: 'Search',
+            //   enableSuggestions: true,
+            //   searchQueryParams: {
+            //     returnGeom: false
+            //   }
+            // });
+            //
+            // sources.push({
+            //   featureLayer: new FeatureLayer(
+            //     // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+            //     'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Occupied/MapServer/1'
+            //   ),
+            //   searchFields: ['Name'],
+            //   displayField: 'Name',
+            //   exactMatch: false,
+            //   outFields: ['*'],
+            //   name: 'Indigenous Occupied',
+            //   placeholder: 'Search',
+            //   enableSuggestions: true,
+            //   searchQueryParams: {
+            //     returnGeom: false
+            //   }
+            // });
+            //
+            // searchWidget.set("sources", sources);
+            // // searchWidget.set('activeSourceIndex', 1);
+
+            searchWidget.startup();
+
+            searchWidget.on('select-result', function(results) {
+              var features = self.setCommunityTemplates([results.result]);
+
+              switch (results.source.name) {
+                  case 'Indigenous Formal Claim':
+                      features = features.concat(self.setIndigenousTemplates([results.result]));
+                      break;
+                  case 'Indigenous Formal Doc':
+                      features = features.concat(self.setIndigenousTemplates([results.result]));
+                      break;
+                  case 'Indigenous Occupied':
+                      features = features.concat(self.setIndigenousTemplates([results.result]));
+                      break;
+
+                  case 'Community Formal Claim':
+                      features = features.concat(self.setCommunityTemplates([results.result]));
+                      break;
+                  case 'Community No Formal':
+                      features = features.concat(self.setCommunityTemplates([results.result]));
+                      break;
+                  case 'Community Formal Doc':
+                      features = features.concat(self.setCommunityTemplates([results.result]));
+                      break;
+
+                  case "landTenure":
+                      features = features.concat(self.setLandTenureTemplates([results.result]));
+                      break;
+                  case "percentLands":
+                      features = features.concat(self.setPercentLandsTemplates([results.result]));
+                      break;
+
+                  case "Esri World Geocoder":
+                      features = [];
+                      break;
+                  default: // Do Nothing
+                      break;
+              }
+
+              if (features.length > 0) {
+                brApp.map.infoWindow.setFeatures(features);
+                brApp.map.infoWindow.resize(375, 600);
+
+                var domNote = document.getElementById('identifyNote');
+                if (domNote) {
+                  domNote.parentNode.removeChild(domNote);
+                }
+
+                on.once(brApp.map, "extent-change", function() {
+                  brApp.map.infoWindow.show(brApp.map.extent.getCenter());
+                  if (window.innerWidth < 1000) {
+                    brApp.map.infoWindow.maximize();
+                    document.querySelector('.esriPopup .contentPane').style.height = 'inherit';
+                  }
+                  on.once(brApp.map.infoWindow, "hide", function() {
+                    brApp.map.infoWindow.resize(375, 600);
+                  });
+                });
+
+              }
+            });
+
+            reportWidget = new Search({
+              map: brApp.map,
+              autoNavigate: false,
+              enableHighlight: false,
+              showInfoWindowOnSelect: false
+            }, 'esri-report-holder');
+
+            var reportSources = [];
+
+            reportSources.push({
+              featureLayer: new FeatureLayer(
+                 // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
+                 'http://gis.wri.org/arcgis/rest/services/LandMark/Country_Snapshots/MapServer/0',
+                  {outFields: ['Country', 'ISO_Code']}
+               ),
+               searchFields: ['Country'],
+               displayField: 'Country',
+               exactMatch: false,
+               outFields: ['*'],
+               name: 'Country Profiles',
+               placeholder: 'Country Profiles',
+               enableSuggestions: true
+             });
+
+             reportWidget.set("sources", reportSources);
+
+             reportWidget.startup();
+
+             reportWidget.on('select-result', function(results) {
+               if (results.result.feature && results.result.feature.attributes.Country) {
+                 //If popup blocker is on, alert!
+                 var openWindow = window.open('/map/report/?country=' + results.result.feature.attributes.Country);
+                 if (openWindow == null || typeof(openWindow)=='undefined') {
+                   alert("Turn off your pop-up blocker!");
+                 }
+               }
+             });
 
             self.getLandTenureRenderer();
 
@@ -281,30 +516,29 @@ define([
 
             on(document.getElementById('analysis-help'), 'click', WidgetsController.showHelp);
 
-            //brApp.map.infoWindow.on("selection-change", function() {
-
-            // if (brApp.map.infoWindow.isShowing) {
-            //     // var toggler = new Toggler({
-            //     //     node: brApp.map.infoWindow.domNode,
-            //     //     showDuration: 50,
-            //     //     hideDuration: 50
-            //     // });
-
-
-            //     $(brApp.map.infoWindow.domNode).fadeToggle(50);
-            //     $(brApp.map.infoWindow.domNode).fadeToggle(50);
-            //     //$(brApp.map.infoWindow.domNode).fadeToggle("fast");
-            //     //$(brApp.map.infoWindow.domNode).fadeToggle("fast");
-            // }
-
-
-
-            //});
-
             // remove hideOnLoad classes
             dojoQuery('body .hideOnLoad').forEach(function(node) {
                 domClass.remove(node, 'hideOnLoad');
             });
+
+        },
+
+        zoomToCountry: function (country) {
+          var countryQT = new QueryTask('http://gis.wri.org/arcgis/rest/services/LandMark/Country_Snapshots/MapServer/0')
+          var countryQuery = new Query();
+          countryQuery.where = "Country = '" + country + "'";
+          countryQuery.returnGeometry = true;
+          countryQuery.outFields = [];
+
+          countryQT.execute(countryQuery, function (result) {
+            if (result.features && result.features[0]) {
+              var countryExtent = result.features[0];
+              on.once(brApp.map, 'extent-change', function(evt) {
+                brApp.map.setZoom(evt.lod.level - 1)
+              });
+              brApp.map.setExtent(result.features[0].geometry.getExtent());
+            }
+          });
 
         },
 
@@ -327,19 +561,6 @@ define([
           });
 
           return deferred;
-        },
-
-
-        resetCommunityLevelTree: function () {
-            if (communityLayerList) {
-                communityLayerList.toggleOff();
-            }
-        },
-
-        resetNationalLayerList: function () {
-            if (nationalLayerList) {
-                nationalLayerList.setToNone();
-            }
         },
 
         handleClick: function(evt) {
@@ -513,26 +734,25 @@ define([
                     brApp.map.infoWindow.setFeatures(features);
                     brApp.map.infoWindow.resize(375, 600);
 
-                    // $(".esriPopup").removeClass("analysis-location");
-                    // $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
-                    $("#identifyNote").remove();
+                    var domNote = document.getElementById('identifyNote');
+                    if (domNote) {
+                      domNote.parentNode.removeChild(domNote);
+                    }
 
                     brApp.map.infoWindow.show(mapPoint);
 
-                    // var centerPoint = new Point(brApp.map.extent.getCenter());
-                    // var centerPointScreen = brApp.map.toScreen(centerPoint);
-                    // if (centerPointScreen.y > 300) {
-                    //     centerPointScreen.y -= 100;
-                    // }
+                    var centerPointScreen = brApp.map.toScreen(mapPoint);
+                    if (centerPointScreen.y > 300) {
+                        centerPointScreen.y -= 100;
+                    }
 
-                    // centerPoint = brApp.map.toMap(centerPointScreen);
+                    var centerPoint = brApp.map.toMap(centerPointScreen);
 
-                    // brApp.map.centerAt(centerPoint);
+                    brApp.map.centerAt(centerPoint);
 
                     if (window.innerWidth < 1000) {
                         brApp.map.infoWindow.maximize();
-                        $(".esriPopup .contentPane").css("height", "inherit");
-
+                        document.querySelector('.esriPopup .contentPane').style.height = 'inherit';
                     }
 
 
@@ -546,46 +766,6 @@ define([
             });
 
         },
-
-        // identifyIndigenous: function(mapPoint) {
-        //     brApp.debug('MapController >>> identifyIndigenous');
-        //
-        //     var deferred = new Deferred(),
-        //         identifyTask = new IdentifyTask(MapConfig.layers.indigenousLands.url),
-        //         params = new IdentifyParameters(),
-        //         mapLayer = brApp.map.getLayer('indigenousLands');
-        //
-        //     params.tolerance = 3;
-        //     params.returnGeometry = true;
-        //     params.width = brApp.map.width;
-        //     params.height = brApp.map.height;
-        //     params.maxAllowableOffset = Math.floor(brApp.map.extent.getWidth() / brApp.map.width);
-        //     params.geometry = mapPoint;
-        //     params.mapExtent = brApp.map.extent;
-        //     params.layerIds = mapLayer.visibleLayers;
-        //     if (params.layerIds.indexOf(17) > -1) {
-        //         params.layerIds.splice(params.layerIds.indexOf(17), 1);
-        //     }
-        //
-        //     params.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
-        //
-        //     identifyTask.execute(params, function(features) {
-        //         if (features.length > 0) {
-        //             console.log(features);
-        //             deferred.resolve({
-        //                 layer: "indigenousLands",
-        //                 features: features
-        //             });
-        //         } else {
-        //             deferred.resolve(false);
-        //         }
-        //     }, function(error) {
-        //         deferred.resolve(false);
-        //     });
-        //
-        //     return deferred.promise;
-        //
-        // },
 
         identifyIndigenous_FormalClaims: function(mapPoint) {
             brApp.debug('MapController >>> identifyIndigenous_FormalClaims');
@@ -1027,10 +1207,9 @@ define([
                 var ethn2 = item.feature.attributes.Ethncty_2;
                 var ethn3 = item.feature.attributes.Ethncty_3;
 
-
                 if (!ethn1 || ethn1 == ' ' || ethn1 == 'Null') {
                     ethnStr = 'Unknown';
-                } else if (ethn1 && !ethn2 || ethn1 && ethn2 == 'Null') {
+                } else if (ethn1 && !ethn2) {
                     ethnStr = ethn1;
                 } else if (ethn1 && ethn2 && !ethn3) {
                     ethnStr = ethn1 + ", " + ethn2;
@@ -1043,7 +1222,6 @@ define([
                 var population = item.feature.attributes.Populatn == "Null" ? null : item.feature.attributes.Populatn;
                 var popSource = item.feature.attributes.Pop_Source == "Null" ? null : item.feature.attributes.Pop_Source;
                 var popYear = item.feature.attributes.Pop_Year == "Null" ? null : item.feature.attributes.Pop_Year;
-
 
                 if (!population || population == '0' || population == 'Null') {
                     popStr = 'Unknown';
@@ -1067,6 +1245,8 @@ define([
                     statDate = '';
                 }
 
+                var area_Ofcl = item.feature.attributes.Area_Ofcl ? item.feature.attributes.Area_Ofcl : 0;
+                var area_GIS = item.feature.attributes.Area_GIS && item.feature.attributes.Area_GIS !== 'Null' ? parseFloat(item.feature.attributes.Area_GIS).toFixed(2) : '0.00';
 
                 template = new InfoTemplate(item.value,
                     "<div id='tableWrapper'><table id='indigenousTable'>" +
@@ -1081,17 +1261,18 @@ define([
                     "<tr class='even-row'><td class='popup-header'>Land category</td><td>" + item.feature.attributes.Category + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + ethnStr + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Population (Source, Date)</td><td>" + popStr + '</td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header'>Land Area, offical and GIS</td><td>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Land Area, offical and GIS</td><td>Official area (ha): " + self.numberWithCommas(area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(area_GIS) + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Acquisition scale</td><td>" + item.feature.attributes.Scale + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Acquisition method</td><td>" + item.feature.attributes.Method + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Data source</td><td>" + item.feature.attributes.Data_Src + " (" + item.feature.attributes.Data_Date + ')</td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header'>Data Contributor</td><td>" + item.feature.attributes.Data_Ctrb + '</td></tr></table></div>');
+                    "<tr class='odd-row'><td class='popup-header'>Data Contributor</td><td>" + item.feature.attributes.Data_Ctrb + '</td></tr></table></div>' +
 
+                    "<div class='popup-last'>Date uploaded: " + item.feature.attributes.Upl_Date);
 
                 if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '' || item.feature.attributes.More_info == 'Unknown') {
                     template.content += '</div>';
                 } else {
-                    template.content += '<span><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></span></div><div class="popup-last">Date uploaded: ' + item.feature.attributes.Upl_Date + '</div>';
+                    template.content += '<span><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></span></div>';
                 }
 
                 var newLayerID;
@@ -1149,7 +1330,7 @@ define([
 
                 if (!ethn1 || ethn1 == ' ' || ethn1 == 'Null') {
                     ethnStr = 'Unknown';
-                } else if (ethn1 && !ethn2 || ethn1 && ethn2 == 'Null') {
+                } else if (ethn1 && !ethn2) {
                     ethnStr = ethn1;
                 } else if (ethn1 && ethn2 && !ethn3) {
                     ethnStr = ethn1 + ", " + ethn2;
@@ -1157,13 +1338,11 @@ define([
                     ethnStr = ethn1 + ", " + ethn2 + ", " + ethn3;
                 }
 
-
                 var popStr;
 
                 var population = item.feature.attributes.Populatn == "Null" ? null : item.feature.attributes.Populatn;
                 var popSource = item.feature.attributes.Pop_Source == "Null" ? null : item.feature.attributes.Pop_Source;
                 var popYear = item.feature.attributes.Pop_Year == "Null" ? null : item.feature.attributes.Pop_Year;
-
 
                 if (!population || population == '0' || population == 'Null') {
                     popStr = 'Unknown';
@@ -1187,13 +1366,8 @@ define([
                     statDate = '';
                 }
 
-                //todo (and in the other setTemplates thing that mirror this):
-                  //first, if we have an Unknown for the three big ones: Ethnic Groups, Population, Land area..
-                    //then, have a ternary that says only add this tr and this data if our var !== to 'Unknown'
-                      //to execture JS in this template, wrap JS in parenthesis
-
-
-
+                var area_Ofcl = item.feature.attributes.Area_Ofcl ? item.feature.attributes.Area_Ofcl : 0;
+                var area_GIS = item.feature.attributes.Area_GIS ? item.feature.attributes.Area_GIS : 0;
                 template = new InfoTemplate(item.value,
                     "<div id='tableWrapper'><table id='indigenousTable'>" +
                     "<tr class='even-row'><td class='popup-header'>Country</td><td>" + item.feature.attributes.Country + '</td></tr>' +
@@ -1207,20 +1381,19 @@ define([
                     "<tr class='even-row'><td class='popup-header'>Land category</td><td>" + item.feature.attributes.Category + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Ethnic groups</td><td>" + ethnStr + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Population (Source, Date)</td><td>" + popStr + '</td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header'>Land Area, offical and GIS</td><td>Official area (ha): " + self.numberWithCommas(item.feature.attributes.Area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(item.feature.attributes.Area_GIS) + '</td></tr>' +
+                    "<tr class='odd-row'><td class='popup-header'>Land Area, offical and GIS</td><td>Official area (ha): " + self.numberWithCommas(area_Ofcl) + "<br>GIS area (ha): " + self.numberWithCommas(area_GIS) + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Acquisition scale</td><td>" + item.feature.attributes.Scale + '</td></tr>' +
                     "<tr class='odd-row'><td class='popup-header'>Acquisition method</td><td>" + item.feature.attributes.Method + '</td></tr>' +
                     "<tr class='even-row'><td class='popup-header'>Data source</td><td>" + item.feature.attributes.Data_Src + " (" + item.feature.attributes.Data_Date + ')</td></tr>' +
-                    "<tr class='odd-row'><td class='popup-header'>Data Contributor</td><td>" + item.feature.attributes.Data_Ctrb + '</td></tr></table></div>');
+                    "<tr class='odd-row'><td class='popup-header'>Data Contributor</td><td>" + item.feature.attributes.Data_Ctrb + '</td></tr></table></div>' +
 
-                    // "<div class='popup-last'>Date uploaded: " + item.feature.attributes.Upl_Date);
+                    "<div class='popup-last'>Date uploaded: " + item.feature.attributes.Upl_Date);
 
                 if (item.feature.attributes.More_info == ' ' || item.feature.attributes.More_info == '' || item.feature.attributes.More_info == 'Unknown') {
-                    // template.content += '</div>';
-                    template.content += '</div><div class="popup-last">Date uploaded: ' + item.feature.attributes.Upl_Date + '</div>';
-                } else {//should this More_info be INSIDE of the next div??
-                  template.content += '</div><div class="popup-last">Date uploaded: ' + item.feature.attributes.Upl_Date + '<span><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></span></div>';
-              }
+                    template.content += '</div>';
+                } else {
+                    template.content += '<span><a href=' + item.feature.attributes.More_info + ' target="_blank" id="additionalInfo">More Info</a></span></div>';
+                }
 
                 var newLayerID;
                 switch (item.layerName) {
@@ -1281,30 +1454,29 @@ define([
                   }
               }
 
-              var data1 = item.feature.attributes.IC_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.IC_T + " " + item.feature.attributes.IC_T_Src + "</div><div class='indentTD'><span class='inlineBold'>Formally recognized</span>: " + item.feature.attributes.IC_F + " " + item.feature.attributes.IC_F_Src + "</div><div class='indentTD'><span class='inlineBold'>Not formally recognized</span>: " + item.feature.attributes.IC_NF + " " + item.feature.attributes.IC_NF_Src + "</div></td></tr>" : "";
-              var data2 = item.feature.attributes.I_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples only</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.I_T + ' ' + item.feature.attributes.I_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.I_F + ' ' + item.feature.attributes.I_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.I_NF + ' ' + item.feature.attributes.I_NF_Src + '</div></td></tr>' : "";
-              var data3 = item.feature.attributes.C_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.C_T + ' ' + item.feature.attributes.C_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.C_F + ' ' + item.feature.attributes.C_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.C_NF + ' ' + item.feature.attributes.C_NF_Src + '</div></td></tr>' : "";
+              var ict = item.feature.attributes.IC_T;
+              if (ict === 'No data') {
+                ict = 'Unknown';
+              }
 
+              var icf = item.feature.attributes.IC_F;
+              if (icf === 'No data') {
+                icf = 'Unknown';
+              }
 
-              var source1 = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IC_Notes + '</td></tr>' : '';
-              var source2 = item.feature.attributes.I_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.I_Notes + '</td></tr>' : '';
-              var source3 = item.feature.attributes.C_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.C_Notes + '</td></tr>' : '';
+              var icnf = item.feature.attributes.IC_NF;
+              if (icnf === 'No data') {
+                icnf = 'Unknown';
+              }
 
-              //todo: ternary operation to hide any data field: if null dont show them
+              var data = item.feature.attributes.IC_T ? "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + ict + " " + item.feature.attributes.IC_T_Src + "</div><div class='indentTD'><span class='inlineBold'>Acknowledged by government</span>: " + icf + " " + item.feature.attributes.IC_F_Src + "</div><div class='indentTD'><span class='inlineBold'>Not acknowledged by government</span>: " + icnf + " " + item.feature.attributes.IC_NF_Src + "</div></td></tr>" : "";
+              var source = item.feature.attributes.IC_Notes ? "<tr class='odd-row'><td class='popup-header nationalField'>Notes</td><td>" + item.feature.attributes.IC_Notes + '</td></tr>' : '';
 
               template.content = "<div id='tableWrapper'><table id='nationalTable'>" +
-              // "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples and communities</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.IC_T + ' ' + item.feature.attributes.IC_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.IC_F + ' ' + item.feature.attributes.IC_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.IC_NF + ' ' + item.feature.attributes.IC_NF_Src + '</div></td></tr>' +
-              data1 +
-              source1 +
-              data2 +
-              // "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by Indigenous peoples only</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.I_T + ' ' + item.feature.attributes.I_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.I_F + ' ' + item.feature.attributes.I_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.I_NF + ' ' + item.feature.attributes.I_NF_Src + '</div></td></tr>' +
-              source2 +
-              data3 +
-              // "<tr class='even-row'><td class='popup-header nationalField'>Percent of country area held or used by communities only</td><td><div><span class='inlineBold'>Total</span>: " + item.feature.attributes.C_T + ' ' + item.feature.attributes.C_T_Src + '</div><div class="indentTD"><span class="inlineBold">Formally recognized</span>: ' + item.feature.attributes.C_F + ' ' + item.feature.attributes.C_F_Src + '</div><div class="indentTD"><span class="inlineBold">Not formally recognized</span>: ' + item.feature.attributes.C_NF + ' ' + item.feature.attributes.C_NF_Src + '</div></td></tr>' +
-              source3 +
+              data +
+              source +
               '</table></div>' +
-              "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
-
+              "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.landmarkmap.org/data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
 
                 for (var j = 0; j < brApp.layerInfos.length; j++) {
                   if (brApp.layerInfos[j].data.layer === 'percentLands') {
@@ -1360,7 +1532,6 @@ define([
 
                 features.push(item.feature);
             });
-            console.log(features);
             return features;
         },
 
@@ -1378,11 +1549,9 @@ define([
 
                 for (var attr in item.feature.attributes) {
                     if (item.feature.attributes[attr] == "Null" || item.feature.attributes[attr] == "null" || item.feature.attributes[attr] == "" || item.feature.attributes[attr] == " ") {
-                      console.log(item.feature.attributes[attr]);
                       item.feature.attributes[attr] = "Unknown";
                     }
                 }
-                console.log('item.layerId',item.layerId)
 
                 if (item.layerId === 0 ||item.layerId === 2) { // Average Score
                   template.content = "<div id='tableWrapper'><table id='landTenureTable'>" +
@@ -1400,8 +1569,8 @@ define([
                   "<tr class='even-row'><td class='popup-header nationalField'>Q7: Right to Consent Before Land Acquisition</td><td>" + item.feature.attributes.I7_Scr + '</td></tr>' +
                   "<tr class='odd-row'><td class='popup-header nationalField'>Q8: Rights to Trees</td><td>" + item.feature.attributes.I8_Scr + '</td></tr>' +
                   "<tr class='even-row'><td class='popup-header nationalField'>Q9: Rights to Water</td><td>" + item.feature.attributes.I9_Scr + '</td></tr>' +
-                  "<tr class='odd-row'><td class='popup-header nationalField'>Q10: Land Rights in Protected Areas</td><td>" + item.feature.attributes.I10_Scr + '</td></tr></table></div>';
-
+                  "<tr class='odd-row'><td class='popup-header nationalField'>Q10: Land Rights in Protected Areas</td><td>" + item.feature.attributes.I10_Scr + '</td></tr></table></div>' +
+                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.landmarkmap.org/data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
 
                 } else { //1 & 3
                   template.content = "<div id='tableWrapper'><table id='landTenureTable'>" +
@@ -1411,13 +1580,10 @@ define([
                   "<tr class='odd-row'><td class='popup-header nationalField'>Justification of score</td><td>" + item.feature.attributes['I' + indNumber + '_Com'] + '</td></tr>' +
                   "<tr class='even-row'><td class='popup-header nationalField'>Laws and provisions reviewed</td><td>" + item.feature.attributes['I' + indNumber + '_LaP'] + '</td></tr>' +
                   "<tr class='odd-row'><td class='popup-header nationalField'>Additional comments</td><td>" + item.feature.attributes['I' + indNumber + '_AddInfo'] + '</td></tr>' +
-                  "<tr class='even-row'><td class='popup-header nationalField'>Review source (Year)</td><td>" + item.feature.attributes['I' + indNumber + '_Rev'] + '(' + item.feature.attributes['I' + indNumber + '_Year'] + ')</td></tr></table></div>';
+                  "<tr class='even-row'><td class='popup-header nationalField'>Review source (Year)</td><td>" + item.feature.attributes['I' + indNumber + '_Rev'] + '(' + item.feature.attributes['I' + indNumber + '_Year'] + ')</td></tr></table></div>' +
 
-                  // "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
+                  "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='http://www.landmarkmap.org/data/#data-5' target='_blank' class='popup-last-right'>More Info</a></div>";
                 }
-                template.content += "<div class='popup-last'>Date uploaded: " + item.feature.attributes['Upl_Date'] + "<a href='./data/#data-4' target='_blank' class='popup-last-right'>More Info</a></div>";
-                //might have to be for 0 & 2 only
-
 
                 for (var j = 0; j < brApp.layerInfos.length; j++) {
                   if (brApp.layerInfos[j].data.layer === 'landTenure') {
@@ -1445,7 +1611,6 @@ define([
 
                 features.push(item.feature);
             });
-            console.log(features);
             return features;
         },
 
@@ -1459,7 +1624,6 @@ define([
             }
 
             var indicator = feature.attributes[stringified];
-            console.log(indicator)
             switch (indicator) {
                 case "0":
                     indScore = 'No review yet done';
@@ -1527,10 +1691,10 @@ define([
 
             mapPoint.stopPropagation();
 
-            if (brApp.map.infoWindow.isShowing) {
-                brApp.map.infoWindow.hide();
-            }
-
+            brApp.map.infoWindow.hide();
+            var infowindowContainer = dom.byId('infowindowContainer');
+            infowindowContainer.innerHTML = '';
+            infowindowContainer.style.display = 'none';
 
             var failure = function(err) {
                 console.log(err);
@@ -1559,18 +1723,19 @@ define([
                         layer: "indigenousLands",
                         features: features
                     });
-
                 } else {
-                    console.log("no feats returned");
-
                     var template = new InfoTemplate();
-                    template.setContent("<b>The area of interest intersects with <i>Zero</i> indigenous and/or community lands</b><button id='removeGraphic'>Remove</button>");
+                    template.setContent("<p class='remove-only-text'>The area of interest intersects with <i>Zero</i> indigenous and/or community lands</p><button class='remove-only' id='removeGraphic'>Remove</button>");
                     brApp.map.infoWindow.setContent(template.content);
-                    brApp.map.infoWindow.setTitle("Analysis Results");
-                    //$(".esriPopup").addClass("analysis-location");
-                    // $(".esriPopup .titleButton.close").css('background-image', 'url("css/images/close_x_symbol.png")');
-                    $("#identifyNote").remove();
-                    brApp.map.infoWindow.show(mapPoint);
+                    var theTitle = "<div id='title_title'>Analysis Results</div>";
+
+                    brApp.map.infoWindow.setTitle(theTitle);
+                    brApp.map.infoWindow.resize(375, 600);
+                    var domNote = document.getElementById('identifyNote');
+                    if (domNote) {
+                      domNote.parentNode.removeChild(domNote);
+                    }
+                    brApp.map.infoWindow.show(mapPoint.mapPoint);
 
                     var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
                         self.removeCustomGraphic(graphic.attributes.attributeID);
@@ -1578,7 +1743,6 @@ define([
                     });
 
                     on.once(brApp.map.infoWindow, "hide", function() {
-                        //$(".esriPopup").removeClass("analysis-location");
                         handle.remove();
                     });
                     deferred.resolve(false);
@@ -1588,22 +1752,12 @@ define([
             });
             deferred.then(function(value) {
 
-
                 if (!value) {
                     return;
                 }
 
-                var template = new InfoTemplate();
-
-
-                template.setContent("<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Formal Recognition</b></td><td class='rec_status'><b>Documentation Status</b></td></tr><tr id='fillerColumn' style='height: 36px;'><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td><td><b></b></td></tr>");
-
-                var fields = ["Country", "Name", "Identity", "Recognition Status", "Documentation Status"];
-
-                brApp.csv = fields.join(",") + '\n';
-
-
-                function getTextContent(graphic, even) {
+                function getTextContent(graphic) {
+                    var gisArea = graphic.feature.attributes.Area_GIS && graphic.feature.attributes.Area_GIS !== 'Null' ? parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2) : '0.00';
                     if (graphic.feature.attributes.Identity === "Indigenous (self-identified)") {
                         graphic.feature.attributes.Identity = "Indigenous";
                     }
@@ -1614,111 +1768,97 @@ define([
                         graphic.feature.attributes.Form_Rec = "Officially recognized";
                     }
 
-                    var str;
-                    if (even === "even") {
+                    var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status, gisArea];
+                    brApp.csv += fieldValues.join(",") + '\n';
 
-                        str = "<tr class='even-row'><td class='country'>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
-                            graphic.feature.attributes.Name + "</td><td class='ident'>" +
-                            graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
-                            graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
-                            graphic.feature.attributes.Doc_Status + "</td></tr>";
-                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status];
-                        brApp.csv += fieldValues.join(",") + '\n';
-
-                    } else {
-                        str = "<tr class='odd-row'><td>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
-                            graphic.feature.attributes.Name + "</td><td class='ident'>" +
-                            graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
-                            graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
-                            graphic.feature.attributes.Doc_Status + "</td></tr>";
-                        var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Doc_Status];
-                        brApp.csv += fieldValues.join(",") + '\n';
-                    }
-                    return str;
                 }
 
+
+                var fields = ["Country", "Name", "Identity", "Recognition Status", "Documentation Status", "GIS Area"];
+
+                brApp.csv = fields.join(",") + '\n';
 
                 for (var i = 0; i < value.features.length; i++) {
-                    //if i is odd use odd row else use even row class
-                    if (i % 2 == 0) {
-                        template.content = template.content + getTextContent(value.features[i], 'even');
-                    } else {
-                        template.content = template.content + getTextContent(value.features[i], 'odd');
-                    }
-
+                    getTextContent(value.features[i]);
                 }
 
-                template.content += "</table>";
+                var payload = {
+                    features: value.features,
+                    csv: brApp.csv
+                };
+
+                var openWindow = window.open('/map/analysis/');
+                if (openWindow == null || typeof(openWindow)=='undefined') {
+                  alert("Turn off your pop-up blocker!");
+                  openWindow.payload = payload;
+                } else {
+                  openWindow.payload = payload;
+                }
+
+                var template = new InfoTemplate();
+
+                template.content = "<p class='middle-column'>The area of interest intersects with " + value.features.length + " indigenous and/or community lands</p>";
+
                 var theTitle = "<div id='title_title'>Analysis Results</div>";
-                var titleResults = "<div id='titleResults'><i>The area of interest intersects with " + value.features.length + " indigenous and/or community lands</i></div>";
-                brApp.map.infoWindow.setTitle(theTitle + titleResults);
-                //brApp.map.infoWindow.setTitle("temp");
+                var body = win.body(),
+                width = domGeom.position(body).w,
+                mobileThreshold = 800;
+
+                brApp.map.infoWindow.setTitle(theTitle);
                 brApp.map.infoWindow.setContent(template.content);
+                if (width > mobileThreshold) {
+                  brApp.map.infoWindow.resize(650, 350);
+                }
 
-                brApp.map.infoWindow.resize(650, 350);
-
-
-                $("#identifyNote").remove();
+                var domNote = document.getElementById('identifyNote');
+                if (domNote) {
+                  domNote.parentNode.removeChild(domNote);
+                }
 
                 var extraContent = "<div id='identifyNote'><div id='buttonBox'><button id='removeGraphic'>Remove</button><button id='exportAnalysis'>Export Analysis</button></div><div style='padding:10px;'>Note that the results of this analysis are only as complete as the data available on the platform. Additional indigenous and community lands may be present but are not contained in the available dataset; therefore, a local analysis is always recommended.</div></div>";
+                domConstruct.place(extraContent, document.querySelector('.esriPopupWrapper'));
 
-
-                $('.esriPopupWrapper').append(extraContent);
-                $('.esriPopupWrapper').addClass("noPositioning");
-
+                var esriPopupWrapper = document.querySelector('.esriPopupWrapper');
+                domClass.add(esriPopupWrapper, 'noPositioning');
 
                 arrayUtils.forEach(brApp.map.infoWindow.domNode.children, function(node) {
                     if (node) {
                         var newNode = node.cloneNode(true);
-                        $("#infowindowContainer").append(newNode);
-
+                        domConstruct.place(newNode, document.getElementById('infowindowContainer'));
                     }
                 });
 
                 var newHeight = (value.features.length * 44) + 210;
+                var infowindowContainer = document.getElementById('infowindowContainer');
                 newHeight += "px";
-                $("#infowindowContainer").css("height", newHeight);
-
-                $("#infowindowContainer").show();
+                infowindowContainer.style.height = newHeight;
+                infowindowContainer.style.display = 'block';
 
                 if (value.features.length > 8) {
-                  $('#column-header').addClass('lessColumnWidth');
+                  if (dom.byId('column-header')){
+                    domClass.add('column-header', 'lessColumnWidth');
+                  }
                 }
 
-                // brApp.map.infoWindow.maximize();
-                // brApp.map.infoWindow.show();
-                // brApp.map.infoWindow.resize(650, 250);
-
                 var handle = on.once(document.getElementById('removeGraphic'), 'click', function() {
-
                     self.removeCustomGraphic(graphic.attributes.attributeID);
-                    $("#infowindowContainer").html('');
-                    //brApp.map.infoWindow.hide();
-                    //$("#identifyNote").remove();
-                    $("#infowindowContainer").hide();
-                    $('.esriPopupWrapper').removeClass("noPositioning");
+                    infowindowContainer.innerHTML = '';
+                    infowindowContainer.style.display = 'none';
+                    var esriPopupWrapper = document.querySelector('.esriPopupWrapper');
+                    domClass.remove(esriPopupWrapper, 'noPositioning');
                 });
 
-
-
-                $("div.titleButton.close").click(function() {
-                    $("#infowindowContainer").html('');
-                    //$(".esriPopup").removeClass("analysis-location");
-                    $("#infowindowContainer").hide();
-                    handle.remove();
-                    $('.esriPopupWrapper').removeClass("noPositioning");
-                });
-
-
-                var parent = $("#analysisTable").parent()[0];
-                var table = $("#analysisTable")[0];
+                document.querySelector('div.titleButton.close').addEventListener('click', function(){
+                  infowindowContainer.innerHTML = '';
+                  infowindowContainer.style.display = 'none';
+                  handle.remove();
+                  var esriPopupWrapper = document.querySelector('.esriPopupWrapper');
+                  domClass.remove(esriPopupWrapper, 'noPositioning');
+                })
 
                 on.once(document.getElementById('exportAnalysis'), 'click', function() {
-
                     self.exportAnalysisResult(brApp.csv);
                 });
-
-                //$(".esriPopup .titleButton.close").html("&#10005;");
 
             });
 
@@ -1738,9 +1878,7 @@ define([
             });
 
             if (graphicToRemove) {
-
                 graphics.remove(graphicToRemove);
-
             }
         },
 
@@ -1748,9 +1886,9 @@ define([
             var graphics = brApp.map.getLayer("CustomFeatures");
             graphics.clear();
             graphics.redraw();
-            $('#remove-graphics').addClass('hidden');
-            $('#draw-shape').removeClass('display-three');
-            $('#upload-shapefile').removeClass('display-three');
+            domClass.add('remove-graphics', 'hidden');
+            domClass.remove('draw-shape', 'display-three');
+            domClass.remove('upload-shapefile', 'display-three');;
         },
 
         getLandTenureRenderer: function() {
@@ -1765,13 +1903,7 @@ define([
                 "callbackParamName": "callback"
             });
             requestHandle.then(function(response) {
-                var noReviewSymbol, lawSilentSymbol, legalAddressesSymbol,
-                    legalMeetsSymbol, legalFullyMeetsSymbol, notApplicableSymbol,
-                    renderer;
-
-
                 brApp.landTenureRenderer = response.drawingInfo.renderer;
-
             });
         },
 
@@ -1790,9 +1922,7 @@ define([
 
             if (menuNode) {
                 domClass.remove(menuNode, 'active');
-
             }
-
 
             // Now add the active class to the target and to the container
             switch (target.id) {
@@ -1805,8 +1935,6 @@ define([
                     id = 'national-level-tree-indigenous';
                     domClass.remove('national-level-tree-indigenous', 'hidden');
                     domClass.add('national-level-tree-percentage', 'hidden');
-
-                    domClass.remove
                     break;
                 case "nationalPercentageMenuButton":
                     id = 'national-level-tree-percentage';
@@ -1827,7 +1955,6 @@ define([
                     domClass.add('national-level-data-container', 'hidden');
                     //domClass.remove('national-level-tree-percentage', 'hidden');
                 case "none-toggle":
-
                     //id = 'national-level-tree-percentage';
                     domClass.add('national-level-data-container', 'hidden');
                     domClass.add('national-level-tree-percentage', 'hidden');
@@ -1836,8 +1963,6 @@ define([
             }
 
             domClass.add(target, 'active');
-            // domClass.add(id, 'active');
-            // domClass.remove(id, 'hidden');
 
         },
 
@@ -1855,16 +1980,13 @@ define([
         numberWithCommas: function(x) {
             var parts = x.toString().split(".");
             parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            //return parts.join(".");
             return parts[0];
         },
 
         printAnalysis: function(config) {
             brApp.debug('MapController >>> printAnalysis');
             window.print();
-
         },
-
 
     };
 

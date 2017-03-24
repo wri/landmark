@@ -5,9 +5,10 @@ define([
     "esri/graphic",
     "dijit/registry",
     "esri/toolbars/draw",
-    "esri/geometry/Polygon"
-], function(MapAssets, WidgetsController, MapConfig, Graphic, registry, Draw, Polygon) {
-    'use strict';
+    "esri/geometry/Polygon",
+    'dojo/dom-class'
+], function(MapAssets, WidgetsController, MapConfig, Graphic, registry, Draw, Polygon, domClass) {
+
 
     var isActive,
         toolbar;
@@ -48,9 +49,8 @@ define([
             polygon = new Polygon(evt.geometry);
             graphic = new Graphic(polygon, symbol, attributes);
             graphicsLayer.add(graphic);
-            console.log(graphic);
 
-            $('#remove-graphics').removeClass('hidden');
+            domClass.remove('remove-graphics', 'hidden');
 
         },
 
