@@ -6,3 +6,5 @@ node_modules
 *.sublime-project
 npm-debug.log
 src/**/*.css
+build
+
