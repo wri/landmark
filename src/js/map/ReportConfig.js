@@ -65,22 +65,28 @@ define([], function() {
         }],
 
         mapLayers: [{
-          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalDoc/MapServer',
+          // url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalDoc/MapServer',
+          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Documented/MapServer',
           layerIds: [0, 1]
         }, {
-          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer',
+          // url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer',
+          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalLandClaim/MapServer',
           layerIds: [0, 1]
         }, {
-          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Occupied/MapServer',
+          // url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Occupied/MapServer',
+          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_CustomaryTenure/MapServer',
           layerIds: [0, 1]
         }, {
-          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Occupied/MapServer',
+          // url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Occupied/MapServer',
+          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_CustomaryTenure/MapServer',
           layerIds: [0, 1]
         }, {
-          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer',
+          // url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer',
+          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Documented/MapServer',
           layerIds: [0, 1]
         }, {
-          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NoDoc/MapServer',
+          // url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NoDoc/MapServer',
+          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NotDocumented/MapServer',
           layerIds: [0, 1]
         }],
 

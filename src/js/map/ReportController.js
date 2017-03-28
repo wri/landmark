@@ -65,7 +65,14 @@ define([
 
             var countryQT = new QueryTask(ReportConfig.countrySnapUrl + '/' + ReportConfig.countrySnapIndex)
             var countryQuery = new Query();
+            // if (country === 'United Kingdom - England' || country === 'United Kingdom - Northern Ireland' || country === 'United Kingdom - Scotland' || country === 'United Kingdom - Wales') {
+            //   country = 'United Kingdom';
+            // }
+            // // if (country === 'United Kingdom') {
+            //     countryQuery.where = "Country = 'United Kingdom - England' OR Country = 'United Kingdom - Northern Ireland' OR Country = 'United Kingdom - Scotland' OR Country = 'United Kingdom - Wales'";
+            // }
             countryQuery.where = "Country = '" + country + "'";
+
             countryQuery.returnGeometry = true;
             countryQuery.outFields = ['*'];
 
@@ -102,17 +109,19 @@ define([
                   }
                 });
 
-                var countryLand = result.features[0].attributes.Ctry_Land ? result.features[0].attributes.Ctry_Land : 0;
+                var countryLand = result.features[0].attributes.CtryLand ? result.features[0].attributes.CtryLand : 0;
                 var NB_Maps = result.features[0].attributes.NB_Maps ? result.features[0].attributes.NB_Maps : 0;
                 var ha_IPC = result.features[0].attributes.ha_IPC ? Math.round(result.features[0].attributes.ha_IPC) : 0;
                 // var iso2Value = ReportConfig.countryCodeExceptions.includes(result.features[0].attributes.ISO_ALPHA) ?
-                var iso2Value;
+                // var iso2Value;
                 var countryCodeExceptions = ReportConfig.countryCodeExceptions
                 for (var i = 0; i < countryCodeExceptions.length; i++) {
                   if (result.features[0].attributes.ISO_Code === countryCodeExceptions[i].ISO) {
                     dom.byId('flag-icon').className += ' flag-icon-'+countryCodeExceptions[i].ISO2.toLowerCase();
                   } else {
-                    dom.byId('flag-icon').className += ' flag-icon-'+result.features[0].attributes.ISO_ALPHA2.toLowerCase();
+                    if (result.features[0].attributes.ISO_ALPHA2) {
+                      dom.byId('flag-icon').className += ' flag-icon-'+result.features[0].attributes.ISO_ALPHA2.toLowerCase();
+                    }
                   }
                 }
 
@@ -223,6 +232,8 @@ define([
 
         addCharts: function(data) {
           var fixedTotal = data.attributes.Pct_tot;
+          console.log(data.attributes);
+          fixedTotal = parseFloat(fixedTotal);
           if (fixedTotal) {
             fixedTotal = fixedTotal.toFixed(2);
           } else {
@@ -233,6 +244,14 @@ define([
 
           if (angle === 0) {
             angle = 180
+          }
+
+          if (typeof data.attributes.Pct_F === 'string') {
+            data.attributes.Pct_F = parseFloat(data.attributes.Pct_F);
+          }
+
+          if (typeof data.attributes.Pct_NF === 'string') {
+            data.attributes.Pct_NF = parseFloat(data.attributes.Pct_NF);
           }
 
           var estimatedChart = Highcharts.chart('estimated-chart', {

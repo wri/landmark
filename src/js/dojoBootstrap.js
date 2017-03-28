@@ -5,7 +5,7 @@
         isWordpress = location.hostname.search('landmarkmap.org') > -1,
         base = isWordpress ? base.replace('map', 'map-app') : base,
 
-        appVersion = '1.1.2',
+        appVersion = '1.1.3',
         esriVersion = '3.19',
         js = [
             '//js.arcgis.com/' + esriVersion + '/init.js'
