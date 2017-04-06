@@ -247,11 +247,19 @@ define([
           }
 
           if (typeof data.attributes.Pct_F === 'string') {
-            data.attributes.Pct_F = parseFloat(data.attributes.Pct_F);
+            if (data.attributes.Pct_F === 'None' || data.attributes.Pct_F === 'none') {
+              data.attributes.Pct_F = 0;
+            } else {
+              data.attributes.Pct_F = parseFloat(data.attributes.Pct_F);
+            }
           }
 
           if (typeof data.attributes.Pct_NF === 'string') {
-            data.attributes.Pct_NF = parseFloat(data.attributes.Pct_NF);
+            if (data.attributes.Pct_NF === 'None' || data.attributes.Pct_NF === 'none') {
+              data.attributes.Pct_NF = 0;
+            } else {
+              data.attributes.Pct_NF = parseFloat(data.attributes.Pct_NF);
+            }
           }
 
           var estimatedChart = Highcharts.chart('estimated-chart', {
@@ -293,9 +301,6 @@ define([
                 }
               },
               positioner: function (labelWidth, labelHeight, point) {
-                console.log(labelWidth);
-                console.log(labelHeight);
-                console.log(point);
                 var tooltipX, tooltipY;
                 if (point.plotY < 60) {
                   tooltipX = point.plotX - 75;
@@ -488,9 +493,6 @@ define([
                   }
                 },
                 positioner: function (labelWidth, labelHeight, point) {
-                  // console.log(labelWidth);
-                  // console.log(labelHeight);
-                  // console.log(point);
                   var tooltipX, tooltipY;
                   if (point.plotY < 60) {
                     tooltipX = point.plotX - 75;
