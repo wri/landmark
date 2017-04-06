@@ -97,22 +97,20 @@ define([
               identityData.community++;
             }
 
-            if (window.payload.features[i].feature.attributes.Form_Rec === 'Not formally recognized') {
+            if (window.payload.features[i].feature.attributes.Form_Rec === 'Not acknowledged by govt') {
               recognitionData.informal++;
-            } else if (window.payload.features[i].feature.attributes.Form_Rec === 'Formally recognized') {
+            } else if (window.payload.features[i].feature.attributes.Form_Rec === 'Acknowledged by govt') {
               recognitionData.formal++;
             }
 
-            if (window.payload.features[i].feature.attributes.Doc_Status === 'Formal documentation') {
+            if (window.payload.features[i].feature.attributes.Doc_Status === 'Documented') {
               documentationData.formalDoc++;
-            } else if (window.payload.features[i].feature.attributes.Doc_Status === 'No documentation') {
+            } else if (window.payload.features[i].feature.attributes.Doc_Status === 'Not documented') {
               documentationData.noDoc++;
-            } else if (window.payload.features[i].feature.attributes.Doc_Status === 'Occupied or used without formal land petition') {
+            } else if (window.payload.features[i].feature.attributes.Doc_Status === 'Held or used under customary tenure') {
               documentationData.occupied++;
-            } else if (window.payload.features[i].feature.attributes.Doc_Status === 'Formal land petition') {
+            } else if (window.payload.features[i].feature.attributes.Doc_Status === 'Held or used with formal land claim submitted') {
               documentationData.formalLand++;
-            } else if (window.payload.features[i].feature.attributes.Doc_Status === 'In process of documentation') {
-              documentationData.inProcess++;
             }
         }
 
@@ -236,10 +234,10 @@ define([
           series: [{
             colorByPoint: true,
             data: [{
-              name: 'Not formally <br> recognized',
+              name: 'Not acknowledged <br> by govt',
               y: recognitionData.informal
             }, {
-              name: 'Formally <br> recognized',
+              name: 'Acknowledged <br> by govt',
               y: recognitionData.formal
             }]
           }]
@@ -298,20 +296,17 @@ define([
           series: [{
             colorByPoint: true,
             data: [{
-              name: 'Formal doc',
+              name: 'Documented',
               y: documentationData.formalDoc
             }, {
-              name: 'No doc',
+              name: 'Not documented',
               y: documentationData.noDoc
             }, {
-              name: 'Occupied w/o <br> formal petition',
+              name: 'Held or used <br> under customary tenure',
               y: documentationData.occupied
             }, {
-              name: 'Formal <br> petition',
+              name: 'Formal land <br> claim submitted',
               y: documentationData.formalLand
-            }, {
-              name: 'Doc <br> in process',
-              y: documentationData.inProcess
             }]
           }]
         });
