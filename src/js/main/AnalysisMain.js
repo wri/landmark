@@ -42,8 +42,6 @@ define([
           inProcess: 0
         }
 
-        console.log(window.payload);
-
         var tableBody = "<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Formal Recognition</b></td><td class='rec_status'><b>Documentation Status</b></td><td class='rec_status'><b>GIS Area</b></td></tr>";
         //- var fields = ["Country", "Name", "Identity", "Formal Recognition", "Documentation Status", "Area_GIS"];
         //brApp.csv = fields.join(",") + '\n';
