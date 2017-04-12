@@ -143,7 +143,9 @@ define([
             enabled: false
           },
           tooltip: {
-            pointFormat: '<b>{point.y} features</b>'
+            formatter: function() {
+              return this.point.name + '<br><b>' + this.point.y + ' features</b>'
+            }
           },
           plotOptions: {
             pie: {
@@ -205,7 +207,9 @@ define([
             enabled: false
           },
           tooltip: {
-            pointFormat: '<b>{point.y} features</b>'
+            formatter: function() {
+              return this.point.name + '<br><b>' + this.point.y + ' features</b>'
+            }
           },
           plotOptions: {
             pie: {
@@ -267,7 +271,9 @@ define([
             enabled: false
           },
           tooltip: {
-            pointFormat: '<b>{point.y} features</b>'
+            formatter: function() {
+              return this.point.name + '<br><b>' + this.point.y + ' features</b>'
+            }
           },
           plotOptions: {
             pie: {
