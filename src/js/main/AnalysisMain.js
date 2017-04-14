@@ -42,7 +42,7 @@ define([
           inProcess: 0
         }
 
-        var tableBody = "<table id='analysisTable'><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Formal Recognition</b></td><td class='rec_status'><b>Documentation Status</b></td><td class='rec_status'><b>GIS Area</b></td></tr>";
+        var tableBody = "<table id='analysisTable'><thead><tr id='column-header'><td class='country'><b>Country</b></td><td class='name'><b>Name</b></td><td class='ident'><b>Identity</b></td><td class='offic_rec'><b>Formal Recognition</b></td><td class='rec_status'><b>Documentation Status</b></td><td class='rec_status'><b>GIS Area</b></td></tr></thead><tbody>";
         //- var fields = ["Country", "Name", "Identity", "Formal Recognition", "Documentation Status", "Area_GIS"];
         //brApp.csv = fields.join(",") + '\n';
 
@@ -114,7 +114,7 @@ define([
             }
         }
 
-        tableBody += "</table>";
+        tableBody += "</tbody></table>";
 
         document.getElementById('analysis-title').innerHTML = 'The area of interest intersects with ' + window.payload.features.length + ' indigenous and/or community lands';
         document.getElementById('analysis-table').innerHTML = tableBody;
@@ -302,17 +302,17 @@ define([
           series: [{
             colorByPoint: true,
             data: [{
-              name: 'Documented',
-              y: documentationData.formalDoc
-            }, {
-              name: 'Not documented',
-              y: documentationData.noDoc
-            }, {
               name: 'Held or used <br> under customary tenure',
               y: documentationData.occupied
             }, {
               name: 'Formal land <br> claim submitted',
               y: documentationData.formalLand
+            }, {
+              name: 'Documented',
+              y: documentationData.formalDoc
+            }, {
+              name: 'Not documented',
+              y: documentationData.noDoc
             }]
           }]
         });

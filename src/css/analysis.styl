@@ -22,20 +22,31 @@ td
 #analysis-table
 	margin 0 auto
 	width 85%
-	overflow-y auto
+	// overflow-y auto
 	height 100%
+	display block
+	thead
+		display block
+	tbody
+		height calc(100% - 45px)
+		overflow-y auto
+		display block
 
 #analysis-title
 	padding-bottom 0.5em
 
 #analysisTable
 	width 100%
+	height 100%
 	border-collapse collapse
 	border 1px solid #00a9da
+	display block
 
 #column-header
 	color #00356C
 	border-bottom #00A9DA 1px solid
+	td
+		height 42px;
 
 .even-row, .odd-row
 	color #00A9DA
