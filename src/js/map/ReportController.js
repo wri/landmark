@@ -372,10 +372,12 @@ define([
           var xpos = '50%';
           var ypos = '50%';
           var circleradius = 75;
-          var centerText = (parseFloat(chart1.series[0].data[1].percentage)+parseFloat(chart1.series[0].data[2].percentage)).toFixed(1);
+          var firstPercent = parseFloat(chart1.series[0].data[1].percentage);
+          var secondPercent = parseFloat(chart1.series[0].data[2].percentage);
+          var centerText = firstPercent + secondPercent === 0 ? 'No Data' : (firstPercent + secondPercent).toFixed(1) + '%' + '<br> Total';
 
           // Render the text
-          var chart1Text = chart1.renderer.text(centerText + '%' + '<br> Total').css({
+          var chart1Text = chart1.renderer.text(centerText).css({
               width: circleradius * 2,
               color: '#1c1c1c',
               fontSize: '16px'
