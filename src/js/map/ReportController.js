@@ -84,16 +84,16 @@ define([
                 ReportConfig.reportAttributes.forEach(function(attribute){
                   switch (result.features[0].attributes[attribute.attr]) {
                     case '1':
-                      dom.byId(attribute.domId).innerHTML = '<div class="low">1</div>'
+                      dom.byId(attribute.domId).innerHTML = '<div class="low"></div>'
                       break;
                     case '2':
-                      dom.byId(attribute.domId).innerHTML = '<div class="medium">2</div>'
+                      dom.byId(attribute.domId).innerHTML = '<div class="medium"></div>'
                       break;
                     case '3':
-                      dom.byId(attribute.domId).innerHTML = '<div class="high">3</div>'
+                      dom.byId(attribute.domId).innerHTML = '<div class="high"></div>'
                       break;
                     case '4':
-                      dom.byId(attribute.domId).innerHTML = '<div class="highest">4</div>'
+                      dom.byId(attribute.domId).innerHTML = '<div class="highest"></div>'
                       break;
                     case 'N/A':
                       dom.byId(attribute.domId).innerHTML = '<div class="unavailable">No Data</div>'
