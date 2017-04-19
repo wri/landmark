@@ -302,10 +302,10 @@ define([
           series: [{
             colorByPoint: true,
             data: [{
-              name: 'Held or used <br> under customary tenure',
+              name: 'Held or used <br> under <br> customary <br> tenure',
               y: documentationData.occupied
             }, {
-              name: 'Formal land <br> claim submitted',
+              name: 'Formal land <br> claim <br> submitted',
               y: documentationData.formalLand
             }, {
               name: 'Documented',
