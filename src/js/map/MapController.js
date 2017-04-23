@@ -502,7 +502,7 @@ define([
              reportWidget.on('select-result', function(results) {
                if (results.result.feature && results.result.feature.attributes.Country) {
                  //If popup blocker is on, alert!
-                 var openWindow = window.open('/map/report/?country=' + results.result.feature.attributes.Country);
+                 var openWindow = window.open('/report.html?country=' + results.result.feature.attributes.Country);
                  if (openWindow == null || typeof(openWindow)=='undefined') {
                    alert("Turn off your pop-up blocker!");
                  }
@@ -1787,7 +1787,7 @@ define([
                     csv: brApp.csv
                 };
 
-                var openWindow = window.open('/map/analysis/');
+                var openWindow = window.open('analysis.html');
                 if (openWindow == null || typeof(openWindow)=='undefined') {
                   alert("Turn off your pop-up blocker!");
                   openWindow.payload = payload;

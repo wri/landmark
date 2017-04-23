@@ -42,7 +42,7 @@ define([
           inProcess: 0
         }
 
-        var tableBody = "<table id='analysisTable'><thead><tr id='column-header'><td align='left' class='country'><b>Country</b></td><td align='left' class='name'><b>Name</b></td><td align='left' class='ident'><b>Identity</b></td><td align='left' class='offic_rec'><b>Formal Recognition</b></td><td align='left' class='rec_status'><b>Documentation Status</b></td><td align='left' class='rec_status'><b>GIS Area</b></td></tr></thead><tbody>";
+        var tableBody = "<table id='analysisTable'><thead><tr id='column-header'><td align='left' class='country'><b>Country</b></td><td align='left' class='name'><b>Name</b></td><td align='left' class='ident'><b>Identity</b></td><td align='left' class='offic_rec'><b>Recognition Status</b></td><td align='left' class='rec_status'><b>Documentation Status</b></td><td align='left' class='rec_status'><b>GIS Area</b></td></tr></thead><tbody>";
         //- var fields = ["Country", "Name", "Identity", "Formal Recognition", "Documentation Status", "Area_GIS"];
         //brApp.csv = fields.join(",") + '\n';
 
@@ -59,7 +59,7 @@ define([
 
             var str;
 
-            var areaGis = graphic.feature.attributes.Area_GIS && graphic.feature.attributes.Area_GIS !== 'Null' ? parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2) : '0.00';
+            var areaGis = graphic.feature.attributes.Area_GIS && graphic.feature.attributes.Area_GIS !== 'Null' ? parseFloat(parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2)).toLocaleString() : '0.00';
 
             if (even === "even") {
                 str = "<tr class='even-row'><td class='country'>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
@@ -131,6 +131,7 @@ define([
             spacingRight: 0,
             type: 'pie'
           },
+          colors: ['#F7A35C','#95CEFF'],
           title: {
             margin: 0,
             text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Identity</b>',
@@ -195,6 +196,7 @@ define([
             spacingRight: 0,
             type: 'pie'
           },
+          colors: ['#E5A5F8','#8908C4'],
           title: {
             margin: 0,
             text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Recognition Status</b>',
@@ -259,6 +261,7 @@ define([
             spacingRight: 0,
             type: 'pie'
           },
+          colors: ['#E5A5F8','#C670E6', '#8908C4', '#A73CD5'],
           title: {
             margin: 0,
             text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Documentation Status</b>',
