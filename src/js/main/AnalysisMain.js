@@ -196,7 +196,7 @@ define([
             spacingRight: 0,
             type: 'pie'
           },
-          colors: ['#E5A5F8','#8908C4'],
+          colors: ['#B8E16A','#47AB47'],
           title: {
             margin: 0,
             text: 'Indigenous and Community lands <br><b style="color:#00A9DA;">Recognition Status</b>',
