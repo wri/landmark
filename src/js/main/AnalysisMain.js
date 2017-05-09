@@ -42,7 +42,7 @@ define([
           inProcess: 0
         }
 
-        var tableBody = "<table id='analysisTable'><thead><tr id='column-header'><td align='left' class='country'><b>Country</b></td><td align='left' class='name'><b>Name</b></td><td align='left' class='ident'><b>Identity</b></td><td align='left' class='offic_rec'><b>Recognition Status</b></td><td align='left' class='rec_status'><b>Documentation Status</b></td><td align='left' class='rec_status'><b>GIS Area</b></td></tr></thead><tbody>";
+        var tableBody = "<table id='analysisTable'><thead><tr id='column-header'><td align='left' class='table-header-column'><b>Country</b></td><td align='left' class='table-header-column'><b>Name</b></td><td align='left' class='table-header-column'><b>Identity</b></td><td align='left' class='table-header-column'><b>Recognition Status</b></td><td align='left' class='table-header-column'><b>Documentation Status</b></td><td align='left' class='table-header-column'><b>GIS Area</b></td></tr></thead></table><div class='table-body-container'>";
         //- var fields = ["Country", "Name", "Identity", "Formal Recognition", "Documentation Status", "Area_GIS"];
         //brApp.csv = fields.join(",") + '\n';
 
@@ -62,21 +62,21 @@ define([
             var areaGis = graphic.feature.attributes.Area_GIS && graphic.feature.attributes.Area_GIS !== 'Null' ? parseFloat(parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2)).toLocaleString() : '0.00';
 
             if (even === "even") {
-                str = "<tr class='even-row'><td class='country'>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
-                    graphic.feature.attributes.Name + "</td><td class='ident'>" +
-                    graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
-                    graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
-                    graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
-                    areaGis + "</td></tr>";
+                str = "<div class='even-row'><div class='country'>" + graphic.feature.attributes.Country + "</div><div class='name'>" +
+                    graphic.feature.attributes.Name + "</div><div class='ident'>" +
+                    graphic.feature.attributes.Identity + "</div><div class='offic_rec'>" +
+                    graphic.feature.attributes.Form_Rec + "</div><div class='rec_status'>" +
+                    graphic.feature.attributes.Doc_Status + "</div><div class='rec_status'>" +
+                    areaGis + "</div></div>";
                 var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Area_GIS];
                 //- brApp.csv += fieldValues.join(",") + '\n';
             } else {
-                str = "<tr class='odd-row'><td>" + graphic.feature.attributes.Country + "</td><td class='name'>" +
-                    graphic.feature.attributes.Name + "</td><td class='ident'>" +
-                    graphic.feature.attributes.Identity + "</td><td class='offic_rec'>" +
-                    graphic.feature.attributes.Form_Rec + "</td><td class='rec_status'>" +
-                    graphic.feature.attributes.Doc_Status + "</td><td class='rec_status'>" +
-                    areaGis + "</td></tr>";
+                str = "<div class='odd-row'><div class='country'>" + graphic.feature.attributes.Country + "</div><div class='name'>" +
+                    graphic.feature.attributes.Name + "</div><div class='ident'>" +
+                    graphic.feature.attributes.Identity + "</div><div class='offic_rec'>" +
+                    graphic.feature.attributes.Form_Rec + "</div><div class='rec_status'>" +
+                    graphic.feature.attributes.Doc_Status + "</div><div class='rec_status'>" +
+                    areaGis + "</div></div>";
                 var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Area_GIS];
                 //- brApp.csv += fieldValues.join(",") + '\n';
             }
@@ -114,7 +114,7 @@ define([
             }
         }
 
-        tableBody += "</tbody></table>";
+        tableBody += "</div>";
 
         document.getElementById('analysis-title').innerHTML = 'The area of interest intersects with ' + window.payload.features.length + ' indigenous and/or community lands';
         document.getElementById('analysis-table').innerHTML = tableBody;
