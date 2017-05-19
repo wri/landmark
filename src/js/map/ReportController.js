@@ -84,16 +84,16 @@ define([
                 ReportConfig.reportAttributes.forEach(function(attribute){
                   switch (result.features[0].attributes[attribute.attr]) {
                     case '1':
-                      dom.byId(attribute.domId).innerHTML = '<div class="low">1</div>'
+                      dom.byId(attribute.domId).innerHTML = '<div class="low"></div>'
                       break;
                     case '2':
-                      dom.byId(attribute.domId).innerHTML = '<div class="medium">2</div>'
+                      dom.byId(attribute.domId).innerHTML = '<div class="medium"></div>'
                       break;
                     case '3':
-                      dom.byId(attribute.domId).innerHTML = '<div class="high">3</div>'
+                      dom.byId(attribute.domId).innerHTML = '<div class="high"></div>'
                       break;
                     case '4':
-                      dom.byId(attribute.domId).innerHTML = '<div class="highest">4</div>'
+                      dom.byId(attribute.domId).innerHTML = '<div class="highest"></div>'
                       break;
                     case 'N/A':
                       dom.byId(attribute.domId).innerHTML = '<div class="unavailable">No Data</div>'
@@ -126,9 +126,7 @@ define([
                 }
 
                 if (ha_IPC > 0) {
-                  dom.byId('land-count').innerHTML =  '<strong>' + NB_Maps.toLocaleString() + '</strong> indigenous and community lands mapped on Landmark, representing <strong>' + ha_IPC.toLocaleString() + '</strong> ha.';
-                } else {
-                  dom.byId('land-count').innerHTML =  '<strong>' + NB_Maps.toLocaleString() + '</strong> indigenous and community lands mapped on Landmark.';
+                  dom.byId('land-count').innerHTML =  '<strong>' + ha_IPC.toLocaleString() + '</strong> ha of indigenous and community lands mapped on LandMark.';
                 }
                 dom.byId('country-name').innerHTML = result.features[0].attributes.Country;
                 dom.byId('country-land-area').innerHTML = 'COUNTRY LAND AREA:';
@@ -313,7 +311,7 @@ define([
                   tooltipY = point.plotY - 25;
                 }
 
-                if (point.plotX > 270) {
+                if (point.plotX > 400) {
                   tooltipX = point.plotX + 20;
                 }
 
@@ -357,14 +355,7 @@ define([
                 // },
                 ['No <br> Data', 100 - data.attributes.Pct_F - data.attributes.Pct_NF > 0 ? 100 - data.attributes.Pct_F - data.attributes.Pct_NF : null],
                 ['Acknowledged <br>by gov',   data.attributes.Pct_F > 0 ? data.attributes.Pct_F : null],
-                ['Not <br>acknowledged',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null],
-                {
-                  name: 'Proprietary or Undetectable',
-                  y: 0.2,
-                  dataLabels: {
-                    enabled: false
-                  }
-                }
+                ['Not <br>acknowledged',       data.attributes.Pct_NF > 0 ? data.attributes.Pct_NF : null]
               ]
             }]
           },
@@ -507,10 +498,10 @@ define([
                     tooltipY = point.plotY - 25;
                   }
 
-                  if (point.plotX > 270) {
+                  if (point.plotX > 400) {
                     tooltipX = point.plotX + 20;
                   }
-
+                  
                   return {
                     x: tooltipX,
                     y: tooltipY

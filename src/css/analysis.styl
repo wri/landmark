@@ -5,9 +5,9 @@ body
 	font-family Raleway
 
 td
-	padding-left 5px
-	padding-right 5px
-	width 20%
+	// padding-left 5px
+	// padding-right 5px
+	width 16.6666667%
 
 .analysis-report
 	height 100%
@@ -26,30 +26,36 @@ td
 	height 100%
 	display block
 	thead
-		display block
+		display table
+		width calc(100% - 1em)
+		// border-bottom #00a9da 1px solid
 	tbody
-		height calc(100% - 45px)
+		height 255px
 		overflow-y auto
 		display block
+		width 100%
 
 #analysis-title
 	padding-bottom 0.5em
 
 #analysisTable
 	width 100%
-	height 100%
+	// height 100%
 	border-collapse collapse
 	border 1px solid #00a9da
 	display block
 
 #column-header
 	color #00356C
-	border-bottom #00A9DA 1px solid
 	td
 		height 42px;
 
-.even-row, .odd-row
-	color #00A9DA
+.even-row, .odd-row {
+	color: #00A9DA;
+	text-align: center;
+	align-items: center;
+	display: flex;
+}
 
 // .chart-container-doc
 // 	width 45%
@@ -66,11 +72,13 @@ td
 	height 100%
 
 .header-container
-	margin-top 10px
+	padding-top 10px
 
 .analysis-table-container
 	left 0
-	height 25%
+	height 300px
+	padding-top 1px
+	background white
 
 .analysis-title
 	text-align left
@@ -102,6 +110,25 @@ td
 
 .upload-instructions li
 	font-size 12px
+
+.table-header-column
+	// padding-left: 5px;
+	// padding-right: 5px;
+	width: 16.6666667%;
+	text-align: center;
+
+.country, .name, .ident, .offic_rec, .rec_status, .rec_status {
+	display: inline-block;
+	// padding-left: 5px;
+	// padding-right: 5px;
+	width: 16.6666667%;
+}
+
+.table-body-container {
+	height: 255px;
+	overflow-y: auto;
+	border: #00a9da 1px solid;
+}
 
 #documentation-pie, #identity-pie, #recognition-pie
 	height 100%
