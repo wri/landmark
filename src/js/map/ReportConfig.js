@@ -65,32 +65,32 @@ define([], function() {
         }],
 
         mapLayers: [{
-          // url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalDoc/MapServer',
-          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Documented/MapServer',
+          // url: 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_FormalDoc/MapServer',
+          url: 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_Documented/MapServer',
           layerIds: [0, 1]
         }, {
-          // url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalClaim/MapServer',
-          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_FormalLandClaim/MapServer',
+          // url: 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_FormalClaim/MapServer',
+          url: 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_FormalLandClaim/MapServer',
           layerIds: [0, 1]
         }, {
-          // url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_Occupied/MapServer',
-          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_ind_CustomaryTenure/MapServer',
+          // url: 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_Occupied/MapServer',
+          url: 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_CustomaryTenure/MapServer',
           layerIds: [0, 1]
         }, {
-          // url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Occupied/MapServer',
-          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_CustomaryTenure/MapServer',
+          // url: 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_comm_Occupied/MapServer',
+          url: 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_comm_CustomaryTenure/MapServer',
           layerIds: [0, 1]
         }, {
-          // url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_FormalDoc/MapServer',
-          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_Documented/MapServer',
+          // url: 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_comm_FormalDoc/MapServer',
+          url: 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_comm_Documented/MapServer',
           layerIds: [0, 1]
         }, {
-          // url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NoDoc/MapServer',
-          url: 'http://gis.wri.org/arcgis/rest/services/LandMark/comm_comm_NotDocumented/MapServer',
+          // url: 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_comm_NoDoc/MapServer',
+          url: 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_comm_NotDocumented/MapServer',
           layerIds: [0, 1]
         }],
 
-        countrySnapUrl: 'http://gis.wri.org/arcgis/rest/services/LandMark/Country_Snapshots/MapServer',
+        countrySnapUrl: 'https://gis-stage.wri.org/server/rest/services/LandMark/Country_Snapshots/MapServer',
         countrySnapIndex: 0,
 
         countryCodeExceptions: [

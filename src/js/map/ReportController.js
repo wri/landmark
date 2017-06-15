@@ -47,10 +47,14 @@ define([
 
             });
 
+            console.log(map);
+
             var countries = new ArcGISDynamicMapServiceLayer(ReportConfig.countrySnapUrl, {
               visible: true,
               outFields: ['*']
             });
+
+            console.log(countries);
 
             var layerDefinitions = [];
             layerDefinitions[0] = "Country = '" + country + "'";
@@ -501,7 +505,7 @@ define([
                   if (point.plotX > 400) {
                     tooltipX = point.plotX + 20;
                   }
-                  
+
                   return {
                     x: tooltipX,
                     y: tooltipY
