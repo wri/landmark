@@ -62,7 +62,7 @@ define([
             var areaGis = graphic.feature.attributes.Area_GIS && graphic.feature.attributes.Area_GIS !== 'Null' ? parseFloat(parseFloat(graphic.feature.attributes.Area_GIS).toFixed(2)).toLocaleString() : '0.00';
 
             if (even === "even") {
-                str = "<div class='even-row'><div class='country'>" + graphic.feature.attributes.Country + "</div><div class='name'>" +
+                str = "<div class='even-table-row'><div class='country'>" + graphic.feature.attributes.Country + "</div><div class='name'>" +
                     graphic.feature.attributes.Name + "</div><div class='ident'>" +
                     graphic.feature.attributes.Identity + "</div><div class='offic_rec'>" +
                     graphic.feature.attributes.Form_Rec + "</div><div class='rec_status'>" +
@@ -71,7 +71,7 @@ define([
                 var fieldValues = [graphic.feature.attributes.Country, graphic.feature.attributes.Name, graphic.feature.attributes.Identity, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Form_Rec, graphic.feature.attributes.Area_GIS];
                 //- brApp.csv += fieldValues.join(",") + '\n';
             } else {
-                str = "<div class='odd-row'><div class='country'>" + graphic.feature.attributes.Country + "</div><div class='name'>" +
+                str = "<div class='odd-table-row'><div class='country'>" + graphic.feature.attributes.Country + "</div><div class='name'>" +
                     graphic.feature.attributes.Name + "</div><div class='ident'>" +
                     graphic.feature.attributes.Identity + "</div><div class='offic_rec'>" +
                     graphic.feature.attributes.Form_Rec + "</div><div class='rec_status'>" +
