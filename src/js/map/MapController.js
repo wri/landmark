@@ -306,7 +306,7 @@ define([
             // sources.push({
             //   featureLayer: new FeatureLayer(
             //     // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-            //     'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1'
+            //     'https://gis.wri.org/server/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1'
             //   ),
             //   searchFields: ['Name'],
             //   displayField: 'Name',
@@ -323,7 +323,7 @@ define([
             // sources.push({
             //   featureLayer: new FeatureLayer(
             //     // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-            //     'https://gis-stage.wri.org/server/rest/services/LandMark/comm_comm_FormalDoc/MapServer/1'
+            //     'https://gis.wri.org/server/rest/services/LandMark/comm_comm_FormalDoc/MapServer/1'
             //   ),
             //   searchFields: ['Name'],
             //   displayField: 'Name',
@@ -340,7 +340,7 @@ define([
             // sources.push({
             //   featureLayer: new FeatureLayer(
             //     // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-            //     'https://gis-stage.wri.org/server/rest/services/LandMark/comm_comm_Occupied/MapServer/1'
+            //     'https://gis.wri.org/server/rest/services/LandMark/comm_comm_Occupied/MapServer/1'
             //   ),
             //   searchFields: ['Name'],
             //   displayField: 'Name',
@@ -357,7 +357,7 @@ define([
             // sources.push({
             //   featureLayer: new FeatureLayer(
             //     // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-            //     'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1'
+            //     'https://gis.wri.org/server/rest/services/LandMark/comm_ind_FormalClaim/MapServer/1'
             //   ),
             //   searchFields: ['Name'],
             //   displayField: 'Name',
@@ -374,7 +374,7 @@ define([
             // sources.push({
             //   featureLayer: new FeatureLayer(
             //     // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-            //     'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_FormalDoc/MapServer/1'
+            //     'https://gis.wri.org/server/rest/services/LandMark/comm_ind_FormalDoc/MapServer/1'
             //   ),
             //   searchFields: ['Name'],
             //   displayField: 'Name',
@@ -391,7 +391,7 @@ define([
             // sources.push({
             //   featureLayer: new FeatureLayer(
             //     // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-            //     'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_Occupied/MapServer/1'
+            //     'https://gis.wri.org/server/rest/services/LandMark/comm_ind_Occupied/MapServer/1'
             //   ),
             //   searchFields: ['Name'],
             //   displayField: 'Name',
@@ -483,7 +483,7 @@ define([
             reportSources.push({
               featureLayer: new FeatureLayer(
                  // url: layerConfig[0].url + '/' + layerConfig[0].sublayers[0].id
-                 'https://gis-stage.wri.org/server/rest/services/LandMark/Country_Snapshots/MapServer/0',
+                 'https://gis.wri.org/server/rest/services/LandMark/Country_Snapshots/MapServer/0',
                   {outFields: ['Country', 'ISO_Code']}
                ),
                searchFields: ['Country'],
@@ -524,7 +524,7 @@ define([
         },
 
         zoomToCountry: function (country) {
-          var countryQT = new QueryTask('https://gis-stage.wri.org/server/rest/services/LandMark/Country_Snapshots/MapServer/0')
+          var countryQT = new QueryTask('https://gis.wri.org/server/rest/services/LandMark/Country_Snapshots/MapServer/0')
           var countryQuery = new Query();
           countryQuery.where = "Country = '" + country + "'";
           countryQuery.returnGeometry = true;
@@ -1896,7 +1896,7 @@ define([
 
             var requestHandle = esriRequest({
 
-                "url": "https://gis-stage.wri.org/server/rest/services/LandMark/land_tenure/MapServer/1",
+                "url": "https://gis.wri.org/server/rest/services/LandMark/land_tenure/MapServer/1",
                 "content": {
                     "f": "json"
                 },

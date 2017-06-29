@@ -1,19 +1,19 @@
 define(["esri/InfoTemplate"], function(InfoTemplate) {
 
-    var landTenureURL = 'https://gis-stage.wri.org/server/rest/services/LandMark/land_tenure/MapServer';
-    var percentLandsUrl = 'https://gis-stage.wri.org/server/rest/services/LandMark/pct_comm_lands/MapServer';
+    var landTenureURL = 'https://gis.wri.org/server/rest/services/LandMark/land_tenure/MapServer';
+    var percentLandsUrl = 'https://gis.wri.org/server/rest/services/LandMark/pct_comm_lands/MapServer';
 
-    var community_indigenous_FormalClaim = 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_FormalLandClaim/MapServer';
-    var community_indigenous_FormalDoc = 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_Documented/MapServer';
-    // var community_indigenous_InProcess = 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_InProcess/MapServer';
-    var community_indigenous_NoDoc = 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_NotDocumented/MapServer';
-    var community_indigenous_Occupied = 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_ind_CustomaryTenure/MapServer';
+    var community_indigenous_FormalClaim = 'https://gis.wri.org/server/rest/services/LandMark/comm_ind_FormalLandClaim/MapServer';
+    var community_indigenous_FormalDoc = 'https://gis.wri.org/server/rest/services/LandMark/comm_ind_Documented/MapServer';
+    // var community_indigenous_InProcess = 'https://gis.wri.org/server/rest/services/LandMark/comm_ind_InProcess/MapServer';
+    var community_indigenous_NoDoc = 'https://gis.wri.org/server/rest/services/LandMark/comm_ind_NotDocumented/MapServer';
+    var community_indigenous_Occupied = 'https://gis.wri.org/server/rest/services/LandMark/comm_ind_CustomaryTenure/MapServer';
 
-    var community_community_FormalClaim = 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_comm_FormalLandClaim/MapServer';
-    var community_community_FormalDoc = 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_comm_Documented/MapServer';
-    // var community_community_InProcess = 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_comm_InProcess/MapServer';
-    var community_community_NoDoc = 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_comm_NotDocumented/MapServer';
-    var community_community_Occupied = 'https://gis-stage.wri.org/server/rest/services/LandMark/comm_comm_CustomaryTenure/MapServer';
+    var community_community_FormalClaim = 'https://gis.wri.org/server/rest/services/LandMark/comm_comm_FormalLandClaim/MapServer';
+    var community_community_FormalDoc = 'https://gis.wri.org/server/rest/services/LandMark/comm_comm_Documented/MapServer';
+    // var community_community_InProcess = 'https://gis.wri.org/server/rest/services/LandMark/comm_comm_InProcess/MapServer';
+    var community_community_NoDoc = 'https://gis.wri.org/server/rest/services/LandMark/comm_comm_NotDocumented/MapServer';
+    var community_community_Occupied = 'https://gis.wri.org/server/rest/services/LandMark/comm_comm_CustomaryTenure/MapServer';
 
     var MapConfig = {
 
@@ -28,7 +28,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
         layers: {
 
           'percentLandsFeature': {
-              url: 'https://gis-stage.wri.org/server/rest/services/LandMark/pct_comm_lands/MapServer/1',
+              url: 'https://gis.wri.org/server/rest/services/LandMark/pct_comm_lands/MapServer/1',
               type: 'feature',
               visible: false
           }, //How should these work? No styles, then highlight onHover? YES!
@@ -47,7 +47,7 @@ define(["esri/InfoTemplate"], function(InfoTemplate) {
 
             //Analysis Layer
             'analysisLayer': {
-                url: "https://gis-stage.wri.org/server/rest/services/LandMark/comm_analysis/MapServer",
+                url: "https://gis.wri.org/server/rest/services/LandMark/comm_analysis/MapServer",
                 type: 'dynamic',
                 defaultLayers: [0,1], //[1,2,3,4]
                 visible: false
