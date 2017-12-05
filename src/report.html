@@ -20,139 +20,146 @@
   <body class="tundra crl">
     <div class="app-body">
       <div id="report__container">
-        <div class="map__container">
-          <div id="mobileMenu" class="mobile-menu">
-            <div id="mobile-menu-close" class="mobile-menu-close-button pointer"></div>
-          </div>
-          <div id="report-map-header"><span id="flag-icon" class="flag-icon"></span>
-            <div id="country-name" class="country-name"></div>
-            <div id="country-land-area" class="country-land-area"></div>
-            <div id="country-hectares" class="country-area"></div>
-          </div>
-          <div id="report-map-body">
-            <div class="report-map-body__contant">
-              <div id="reportMap" class="reportMap"></div>
-              <div id="land-count" class="land-count"></div>
-              <div id="share-button" title="Share" class="map-component button-widget share-button pointer hideOnLoad">
-                <div class="share-icon"></div>
-              </div>
-              <div class="map-component share-container hidden">
-                <div id="share-widgets">
-                  <div class="sharing_toolbox">
-                    <div data-title="Global Platform of Indigenous and Community Lands" class="addthis_sharing_toolbox"></div>
-                    <div id="embedShare"></div>
-                    <div id="csvShare"></div>
-                    <div id="twitterShare"></div>
-                    <div id="facebookShare"></div>
-                    <div id="moreShare"></div>
-                    <div id="emailShare"></div>
-                    <div id="googleShare"></div>
+        <div id="report__select">
+          <h1>Country Data</h1>
+          <h3>Select a country to view statistics</h3>
+          <div id="report-holder" class="search-button-label"></div>
+        </div>
+        <div id="report__data" class="hidden">
+          <div class="map__container">
+            <div id="mobileMenu" class="mobile-menu">
+              <div id="mobile-menu-close" class="mobile-menu-close-button pointer"></div>
+            </div>
+            <div id="report-map-header"><span id="flag-icon" class="flag-icon"></span>
+              <div id="country-name" class="country-name"></div>
+              <div id="country-land-area" class="country-land-area"></div>
+              <div id="country-hectares" class="country-area"></div>
+            </div>
+            <div id="report-map-body">
+              <div class="report-map-body__contant">
+                <div id="reportMap" class="reportMap"></div>
+                <div id="land-count" class="land-count"></div>
+                <div id="share-button" title="Share" class="map-component button-widget share-button pointer hideOnLoad">
+                  <div class="share-icon"></div>
+                </div>
+                <div class="map-component share-container hidden">
+                  <div id="share-widgets">
+                    <div class="sharing_toolbox">
+                      <div data-title="Global Platform of Indigenous and Community Lands" class="addthis_sharing_toolbox"></div>
+                      <div id="embedShare"></div>
+                      <div id="csvShare"></div>
+                      <div id="twitterShare"></div>
+                      <div id="facebookShare"></div>
+                      <div id="moreShare"></div>
+                      <div id="emailShare"></div>
+                      <div id="googleShare"></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="report-component charts__container">
-          <h3 class="report-header">Indigenous and Community Lands as Percentage of the Country Land Area*</h3>
-          <div class="total-lands">
-            <div class="estimated-chart-container">
-              <div id="estimated-chart"></div>
-            </div>
-          </div>
-          <hr>
-          <h3 class="report-header">Lands Mapped on LandMark AS PERCENTAGE OF THE COUNTRY LAND AREA*</h3>
-          <div class="lands-mapped-chart-container">
-            <div id="indigenous-lands-chart" class="inline-chart"></div>
-          </div>
-          <div class="report-disclaimer">*The provided estimates are indicative, not absolute. They focus only on lands and exclude potential offshore rights over ocean areas, as well as major inland water values. Potential overlaps of different indigenous and community lands are not double counted.</div>
-        </div>
-        <div class="report-component indicators-table__container">
-          <h3 class="report-header">Indicators of the Legal Security of Indigenous and Community Lands</h3>
-          <div class="indicators-table__body">
-            <div class="indicators-table__body-content">
-              <div class="indicator-table-container">
-                <table class="report-value-table">
-                  <tr class="table-header">
-                    <td id="comm-label">Communities</td>
-                    <td class="middle-column"></td>
-                    <td id="indig-label">Indigenous Peoples</td>
-                  </tr>
-                  <tr class="header-row">
-                    <td id="average-score-comm"></td>
-                    <td class="middle-column">AVERAGE SCORE</td>
-                    <td id="average-score-indig"></td>
-                  </tr>
-                  <tr>
-                    <td id="legal-status-comm"></td>
-                    <td class="middle-column">Legal Status</td>
-                    <td id="legal-status-indig"></td>
-                  </tr>
-                  <tr>
-                    <td id="land-rights-comm"></td>
-                    <td class="middle-column">Land Rights and Common Property</td>
-                    <td id="land-rights-indig"></td>
-                  </tr>
-                  <tr>
-                    <td id="formal-doc-comm"></td>
-                    <td class="middle-column">Formal Documentation</td>
-                    <td id="formal-doc-indig"></td>
-                  </tr>
-                  <tr>
-                    <td id="legal-person-comm"></td>
-                    <td class="middle-column">Legal Person</td>
-                    <td id="legal-person-indig"></td>
-                  </tr>
-                  <tr>
-                    <td id="legal-authority-comm"></td>
-                    <td class="middle-column">Legal Authority</td>
-                    <td id="legal-authority-indig"></td>
-                  </tr>
-                  <tr>
-                    <td id="perpetuity-comm"></td>
-                    <td class="middle-column">Perpetuity</td>
-                    <td id="perpetuity-indig"></td>
-                  </tr>
-                  <tr>
-                    <td id="right-consent-comm"></td>
-                    <td class="middle-column">Right to Consent</td>
-                    <td id="right-consent-indig"></td>
-                  </tr>
-                  <tr>
-                    <td id="right-trees-comm"></td>
-                    <td class="middle-column">Rights to Trees</td>
-                    <td id="right-trees-indig"></td>
-                  </tr>
-                  <tr>
-                    <td id="right-water-comm"></td>
-                    <td class="middle-column">Rights to Water</td>
-                    <td id="right-water-indig"></td>
-                  </tr>
-                  <tr>
-                    <td id="land-rights-protected-comm"></td>
-                    <td class="middle-column">Land Rights and Protected Areas</td>
-                    <td id="land-rights-protected-indig"></td>
-                  </tr>
-                </table>
+          <div class="report-component charts__container">
+            <h3 class="report-header">Indigenous and Community Lands as Percentage of the Country Land Area*</h3>
+            <div class="total-lands">
+              <div class="estimated-chart-container">
+                <div id="estimated-chart"></div>
               </div>
-              <div class="indicator-footer-container">
-                <h3 class="footer-header">Indicators Scoring</h3>
-                <div class="indicator-footer-container__body">
-                  <div class="footer-child">
-                    <div class="low"></div><span class="footer-child__label">Issue fully addressed</span>
-                  </div>
-                  <div class="footer-child">
-                    <div class="medium"></div><span class="footer-child__label">Significant progress</span>
-                  </div>
-                  <div class="footer-child">
-                    <div class="high"></div><span class="footer-child__label">Limited progress</span>
-                  </div>
-                  <div class="footer-child">
-                    <div class="highest"></div><span class="footer-child__label">Issue not addressed</span>
-                  </div>
+            </div>
+            <hr>
+            <h3 class="report-header">Lands Mapped on LandMark AS PERCENTAGE OF THE COUNTRY LAND AREA*</h3>
+            <div class="lands-mapped-chart-container">
+              <div id="indigenous-lands-chart" class="inline-chart"></div>
+            </div>
+            <div class="report-disclaimer">*The provided estimates are indicative, not absolute. They focus only on lands and exclude potential offshore rights over ocean areas, as well as major inland water values. Potential overlaps of different indigenous and community lands are not double counted.</div>
+          </div>
+          <div class="report-component indicators-table__container">
+            <h3 class="report-header">Indicators of the Legal Security of Indigenous and Community Lands</h3>
+            <div class="indicators-table__body">
+              <div class="indicators-table__body-content">
+                <div class="indicator-table-container">
+                  <table class="report-value-table">
+                    <tr class="table-header">
+                      <td id="comm-label">Communities</td>
+                      <td class="middle-column"></td>
+                      <td id="indig-label">Indigenous Peoples</td>
+                    </tr>
+                    <tr class="header-row">
+                      <td id="average-score-comm"></td>
+                      <td class="middle-column">AVERAGE SCORE</td>
+                      <td id="average-score-indig"></td>
+                    </tr>
+                    <tr>
+                      <td id="legal-status-comm"></td>
+                      <td class="middle-column">Legal Status</td>
+                      <td id="legal-status-indig"></td>
+                    </tr>
+                    <tr>
+                      <td id="land-rights-comm"></td>
+                      <td class="middle-column">Land Rights and Common Property</td>
+                      <td id="land-rights-indig"></td>
+                    </tr>
+                    <tr>
+                      <td id="formal-doc-comm"></td>
+                      <td class="middle-column">Formal Documentation</td>
+                      <td id="formal-doc-indig"></td>
+                    </tr>
+                    <tr>
+                      <td id="legal-person-comm"></td>
+                      <td class="middle-column">Legal Person</td>
+                      <td id="legal-person-indig"></td>
+                    </tr>
+                    <tr>
+                      <td id="legal-authority-comm"></td>
+                      <td class="middle-column">Legal Authority</td>
+                      <td id="legal-authority-indig"></td>
+                    </tr>
+                    <tr>
+                      <td id="perpetuity-comm"></td>
+                      <td class="middle-column">Perpetuity</td>
+                      <td id="perpetuity-indig"></td>
+                    </tr>
+                    <tr>
+                      <td id="right-consent-comm"></td>
+                      <td class="middle-column">Right to Consent</td>
+                      <td id="right-consent-indig"></td>
+                    </tr>
+                    <tr>
+                      <td id="right-trees-comm"></td>
+                      <td class="middle-column">Rights to Trees</td>
+                      <td id="right-trees-indig"></td>
+                    </tr>
+                    <tr>
+                      <td id="right-water-comm"></td>
+                      <td class="middle-column">Rights to Water</td>
+                      <td id="right-water-indig"></td>
+                    </tr>
+                    <tr>
+                      <td id="land-rights-protected-comm"></td>
+                      <td class="middle-column">Land Rights and Protected Areas</td>
+                      <td id="land-rights-protected-indig"></td>
+                    </tr>
+                  </table>
                 </div>
-                <div class="comments"><i>Not Applicable:</i> The subject matter is non-existent</div>
-                <div class="comments"><i>No Data:</i> Not enough data to score</div>
+                <div class="indicator-footer-container">
+                  <h3 class="footer-header">Indicators Scoring</h3>
+                  <div class="indicator-footer-container__body">
+                    <div class="footer-child">
+                      <div class="low"></div><span class="footer-child__label">Issue fully addressed</span>
+                    </div>
+                    <div class="footer-child">
+                      <div class="medium"></div><span class="footer-child__label">Significant progress</span>
+                    </div>
+                    <div class="footer-child">
+                      <div class="high"></div><span class="footer-child__label">Limited progress</span>
+                    </div>
+                    <div class="footer-child">
+                      <div class="highest"></div><span class="footer-child__label">Issue not addressed</span>
+                    </div>
+                  </div>
+                  <div class="comments"><i>Not Applicable:</i> The subject matter is non-existent</div>
+                  <div class="comments"><i>No Data:</i> Not enough data to score</div>
+                </div>
               </div>
             </div>
           </div>

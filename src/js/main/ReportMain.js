@@ -27,15 +27,15 @@ define([
          * Launch the app here or run some browser compatability checks here before initializing the map
          */
         launchApp: function() {
-            var queryString = location.href.split('?')[1];
-            var country = decodeURI(queryString.split('=')[1]);
-
-            if (country.indexOf('#') > -1) {
-              country = country.split('#')[0];
-            }
+            // var queryString = location.href.split('?')[1];
+            // var country = decodeURI(queryString.split('=')[1]);
+            //
+            // if (country.indexOf('#') > -1) {
+            //   country = country.split('#')[0];
+            // }
 
             // Init the Map
-            ReportController.init(country);
+            ReportController.init();
 
         }
 
