@@ -76,7 +76,7 @@ define([
               exactMatch: false,
               outFields: ['*'],
               name: 'Country Profiles',
-              placeholder: 'Country Profiles',
+              placeholder: 'Type a country name',
               enableSuggestions: true
              });
 
