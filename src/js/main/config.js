@@ -14,7 +14,7 @@ define([], function() {
 
         portalGenerateFeaturesURL: 'http://www.arcgis.com/sharing/rest/content/features/generate',
 
-        printUrl: 'http://gis.wri.org/arcgis/rest/services/LandMarkExportWebMap/GPServer/Export%20Web%20Map',
+        printUrl: 'https://gis.wri.org/server/rest/services/LandMarkExportWebMap/GPServer/Export%20Web%20Map',
 
         // Launch Button to Close Dialog added in Code
         // welcomeDialogContent: "<h2 class='launch-dialog-title'>About Global Map of Indigenous and Community Lands</h2>" +
