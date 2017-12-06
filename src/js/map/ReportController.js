@@ -46,17 +46,12 @@ define([
               isPan: false,
               slider: false,
               logo:false
-
             });
-
-            console.log(map);
 
             var countries = new ArcGISDynamicMapServiceLayer(ReportConfig.countrySnapUrl, {
               visible: true,
               outFields: ['*']
             });
-
-            console.log(countries);
 
             var reportWidget = new Search({
               map: map,
@@ -87,11 +82,9 @@ define([
              reportWidget.on('select-result', function(results) {
                if (results.result.feature && results.result.feature.attributes.Country) {
                  var country = results.result.feature.attributes.Country;
-                 console.log(country);
                  self.country = country;
                  var reportDom = dom.byId('report__data');
                  reportDom.classList.remove('hidden');
-                 console.log('reportDom', reportDom);
                  var layerDefinitions = [];
                  layerDefinitions[0] = "Country = '" + country + "'";
                  countries.setLayerDefinitions(layerDefinitions);
@@ -99,104 +92,13 @@ define([
                }
              });
 
-            // var layerDefinitions = [];
-            // layerDefinitions[0] = "Country = '" + country + "'";
-            // countries.setLayerDefinitions(layerDefinitions);
             this.map = map;
-            // this.country = country;
-            // var self = this;
-            //
+
             map.on('click', function (evt) {
               window.open('/map/#country=' + self.country);
             });
-            //
-            // var countryQT = new QueryTask(ReportConfig.countrySnapUrl + '/' + ReportConfig.countrySnapIndex)
-            // var countryQuery = new Query();
-            // // if (country === 'United Kingdom - England' || country === 'United Kingdom - Northern Ireland' || country === 'United Kingdom - Scotland' || country === 'United Kingdom - Wales') {
-            // //   country = 'United Kingdom';
-            // // }
-            // // // if (country === 'United Kingdom') {
-            // //     countryQuery.where = "Country = 'United Kingdom - England' OR Country = 'United Kingdom - Northern Ireland' OR Country = 'United Kingdom - Scotland' OR Country = 'United Kingdom - Wales'";
-            // // }
-            // countryQuery.where = "Country = '" + country + "'";
-            //
-            // countryQuery.returnGeometry = true;
-            // countryQuery.outFields = ['*'];
-            //
-            // countryQT.execute(countryQuery, function (result) {
-            //   if (result.features && result.features[0]) {
-            //     self.countryData = result.features[0].attributes;
-            //     self.map.setExtent(result.features[0].geometry.getExtent());
-            //
-            //     ReportConfig.reportAttributes.forEach(function(attribute){
-            //       switch (result.features[0].attributes[attribute.attr]) {
-            //         case '1':
-            //           dom.byId(attribute.domId).innerHTML = '<div class="low"></div>'
-            //           break;
-            //         case '2':
-            //           dom.byId(attribute.domId).innerHTML = '<div class="medium"></div>'
-            //           break;
-            //         case '3':
-            //           dom.byId(attribute.domId).innerHTML = '<div class="high"></div>'
-            //           break;
-            //         case '4':
-            //           dom.byId(attribute.domId).innerHTML = '<div class="highest"></div>'
-            //           break;
-            //         case 'N/A':
-            //           dom.byId(attribute.domId).innerHTML = '<div class="unavailable">No Data</div>'
-            //           break;
-            //         case '':
-            //           dom.byId(attribute.domId).innerHTML = '<div class="unavailable">No Data</div>'
-            //           break;
-            //         case null:
-            //           dom.byId(attribute.domId).innerHTML = '<div class="unavailable">No Data</div>'
-            //           break;
-            //         default:
-            //           dom.byId(attribute.domId).innerHTML = '<div class="unavailable">No Data</div>'
-            //       }
-            //     });
-            //
-            //     var countryLand = result.features[0].attributes.CtryLand ? result.features[0].attributes.CtryLand : 0;
-            //     var NB_Maps = result.features[0].attributes.NB_Maps ? result.features[0].attributes.NB_Maps : 0;
-            //     var ha_IPC = result.features[0].attributes.ha_IPC ? Math.round(result.features[0].attributes.ha_IPC) : 0;
-            //     // var iso2Value = ReportConfig.countryCodeExceptions.includes(result.features[0].attributes.ISO_ALPHA) ?
-            //     // var iso2Value;
-            //     var countryCodeExceptions = ReportConfig.countryCodeExceptions
-            //     for (var i = 0; i < countryCodeExceptions.length; i++) {
-            //       if (result.features[0].attributes.ISO_Code === countryCodeExceptions[i].ISO) {
-            //         dom.byId('flag-icon').className += ' flag-icon-'+countryCodeExceptions[i].ISO2.toLowerCase();
-            //       } else {
-            //         if (result.features[0].attributes.ISO_ALPHA2) {
-            //           dom.byId('flag-icon').className += ' flag-icon-'+result.features[0].attributes.ISO_ALPHA2.toLowerCase();
-            //         }
-            //       }
-            //     }
-            //
-            //     if (ha_IPC > 0) {
-            //       dom.byId('land-count').innerHTML =  '<strong>' + ha_IPC.toLocaleString() + '</strong> ha of indigenous and community lands mapped on LandMark.';
-            //     }
-            //     dom.byId('country-name').innerHTML = result.features[0].attributes.Country;
-            //     dom.byId('country-land-area').innerHTML = 'COUNTRY LAND AREA:';
-            //     var landCount = Math.round(countryLand);
-            //
-            //     dom.byId('country-hectares').innerHTML = '<strong>' + Math.round(countryLand).toLocaleString() + ' Hectares</strong>';
-            //     dom.byId('average-score-comm').innerHTML = result.features[0].attributes.ind_C_A;
-            //     dom.byId('average-score-indig').innerHTML = result.features[0].attributes.ind_IP_A;
-            //
-            //     self.map.setExtent(result.features[0].geometry.getExtent());
-            //     self.map.disablePan();
-            //     self.map.disableDoubleClickZoom();
-            //     self.map.disableScrollWheelZoom();
-            //     self.map.disableKeyboardNavigation();
-            //     self.map.disableMapNavigation();
-            //
-            //     self.addCharts(result.features[0]);
-            //
-            //   }
-            // });
-            //
+
             map.addLayer(countries);
-            // this.addLayers(country);
         },
 
         toggleShareContainer: function() {
@@ -205,7 +107,6 @@ define([
             if (container) {
                 domClass.toggle(container, 'hidden');
             }
-
         },
 
         downloadCSV: function() {
@@ -232,8 +133,6 @@ define([
           var self = this;
 
           ReportConfig.mapLayers.forEach(function(layerConfig) {
-            console.log(layerConfig);
-
             if (self.map.getLayer(layerConfig.id)) {
               var layer = self.map.getLayer(layerConfig.id);
               var layerDefinitions = [];
@@ -263,7 +162,6 @@ define([
 
               self.map.addLayer(layer);
             }
-
 
             var countryQT = new QueryTask(ReportConfig.countrySnapUrl + '/' + ReportConfig.countrySnapIndex)
             var countryQuery = new Query();
@@ -350,34 +248,12 @@ define([
               }
             });
 
-
           });
-          // var params = new ImageParameters();
-          //
-          // params.layerOption = ImageParameters.LAYER_OPTION_SHOW;
-          // params.layerIds = [1];
-          // params.format = 'png32';
-          //
-          // var layer = new ArcGISDynamicMapServiceLayer(, {
-          //     visible: true,
-          //     imageParameters: params
-          // });
-          //
-          // var layer = new ArcGISDynamicMapServiceLayer(, {
-          //     visible: true,
-          //     imageParameters: params
-          // });
-          //
-          // var layerDefinitions = [];
-          // layerDefinitions[1] = "Country = '" + country + "'";
-          // layer.setLayerDefinitions(layerDefinitions);
-          //
-          // this.map.addLayer(layer);
+
         },
 
         addCharts: function(data) {
           var fixedTotal = data.attributes.Pct_tot;
-          console.log(data.attributes);
           fixedTotal = parseFloat(fixedTotal);
           if (fixedTotal) {
             fixedTotal = fixedTotal.toFixed(2);
@@ -735,7 +611,6 @@ define([
             window.print();
 
         },
-
 
     };
 
