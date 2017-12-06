@@ -25,7 +25,7 @@ module.exports = {
     jade: {
         base: 'src',
         watch: 'src/**/*.jade',
-        src: ['src/map.jade', 'src/report.jade', 'src/analysis.jade'],
+        src: ['src/map.jade', 'src/country-profile.jade', 'src/analysis.jade'],
         devOut: 'src',
         buildOut: 'build'
     },
