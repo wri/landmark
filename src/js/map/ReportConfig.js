@@ -67,27 +67,33 @@ define([], function() {
         mapLayers: [{
           // url: 'https://gis.wri.org/server/rest/services/LandMark/comm_ind_FormalDoc/MapServer',
           url: 'https://gis.wri.org/server/rest/services/LandMark/comm_ind_Documented/MapServer',
-          layerIds: [0, 1]
+          layerIds: [0, 1],
+          id: 'comm_ind_Documented'
         }, {
           // url: 'https://gis.wri.org/server/rest/services/LandMark/comm_ind_FormalClaim/MapServer',
           url: 'https://gis.wri.org/server/rest/services/LandMark/comm_ind_FormalLandClaim/MapServer',
-          layerIds: [0, 1]
+          layerIds: [0, 1],
+          id: 'comm_ind_FormalLandClaim'
         }, {
           // url: 'https://gis.wri.org/server/rest/services/LandMark/comm_ind_Occupied/MapServer',
           url: 'https://gis.wri.org/server/rest/services/LandMark/comm_ind_CustomaryTenure/MapServer',
-          layerIds: [0, 1]
+          layerIds: [0, 1],
+          id: 'comm_ind_CustomaryTenure'
         }, {
           // url: 'https://gis.wri.org/server/rest/services/LandMark/comm_comm_Occupied/MapServer',
           url: 'https://gis.wri.org/server/rest/services/LandMark/comm_comm_CustomaryTenure/MapServer',
-          layerIds: [0, 1]
+          layerIds: [0, 1],
+          id: 'comm_comm_CustomaryTenure'
         }, {
           // url: 'https://gis.wri.org/server/rest/services/LandMark/comm_comm_FormalDoc/MapServer',
           url: 'https://gis.wri.org/server/rest/services/LandMark/comm_comm_Documented/MapServer',
-          layerIds: [0, 1]
+          layerIds: [0, 1],
+          id: 'comm_comm_Documented'
         }, {
           // url: 'https://gis.wri.org/server/rest/services/LandMark/comm_comm_NoDoc/MapServer',
           url: 'https://gis.wri.org/server/rest/services/LandMark/comm_comm_NotDocumented/MapServer',
-          layerIds: [0, 1]
+          layerIds: [0, 1],
+          id: 'comm_comm_NotDocumented'
         }],
 
         countrySnapUrl: 'https://gis.wri.org/server/rest/services/LandMark/Country_Snapshots/MapServer',

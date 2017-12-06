@@ -2,20 +2,22 @@ define([
     'map/ReportConfig',
     'map/WidgetsController',
     'esri/map',
+    'esri/dijit/Search',
     'dojo/on',
     'dojo/dom',
     'dojo/dom-class',
     'esri/geometry/Extent',
     'esri/layers/ImageParameters',
     'esri/layers/ArcGISDynamicMapServiceLayer',
+    'esri/layers/FeatureLayer',
     'esri/tasks/query',
     'esri/tasks/QueryTask',
 
-], function(ReportConfig, WidgetsController, Map, on, dom, domClass, Extent, ImageParameters, ArcGISDynamicMapServiceLayer, Query, QueryTask) {
+], function(ReportConfig, WidgetsController, Map, Search, on, dom, domClass, Extent, ImageParameters, ArcGISDynamicMapServiceLayer, FeatureLayer, Query, QueryTask) {
 
     var ReportController = {
 
-        init: function(country) {
+        init: function() {
             esri.config.defaults.io.corsEnabledServers.push("http://gis.wri.org");
 
             var self = this;
@@ -33,7 +35,7 @@ define([
             });
 
             var map = new Map('reportMap', {
-              // basemap: 'none',
+              basemap: 'streets',
               extent: bounds,
               zoom: 4,
               isDoubleClickZoom: false,
@@ -44,28 +46,122 @@ define([
               isPan: false,
               slider: false,
               logo:false
-
             });
-
-            console.log(map);
 
             var countries = new ArcGISDynamicMapServiceLayer(ReportConfig.countrySnapUrl, {
               visible: true,
               outFields: ['*']
             });
 
-            console.log(countries);
+            var reportWidget = new Search({
+              map: map,
+              autoNavigate: false,
+              enableHighlight: false,
+              showInfoWindowOnSelect: false
+            }, 'report-holder');
 
-            var layerDefinitions = [];
-            layerDefinitions[0] = "Country = '" + country + "'";
-            countries.setLayerDefinitions(layerDefinitions);
+            var reportSources = [];
+
+            reportSources.push({
+              featureLayer: new FeatureLayer('https://gis.wri.org/server/rest/services/LandMark/Country_Snapshots/MapServer/0', {
+                outFields: ['Country', 'ISO_Code']
+              }),
+              searchFields: ['Country'],
+              displayField: 'Country',
+              exactMatch: false,
+              outFields: ['*'],
+              name: 'Country Profiles',
+              placeholder: 'Type a country name',
+              enableSuggestions: true
+             });
+
+             reportWidget.set("sources", reportSources);
+
+             reportWidget.startup();
+
+             reportWidget.on('select-result', function(results) {
+               if (results.result.feature && results.result.feature.attributes.Country) {
+                 var country = results.result.feature.attributes.Country;
+                 self.country = country;
+                 var reportDom = dom.byId('report__data');
+                 reportDom.classList.remove('hidden');
+                 var layerDefinitions = [];
+                 layerDefinitions[0] = "Country = '" + country + "'";
+                 countries.setLayerDefinitions(layerDefinitions);
+                 self.addLayers(country);
+               }
+             });
+
             this.map = map;
-            this.country = country;
-            var self = this;
 
             map.on('click', function (evt) {
               window.open('/map/#country=' + self.country);
             });
+
+            map.addLayer(countries);
+        },
+
+        toggleShareContainer: function() {
+            var container = document.querySelector('.share-container');
+
+            if (container) {
+                domClass.toggle(container, 'hidden');
+            }
+        },
+
+        downloadCSV: function() {
+          var self = this, fields = ReportConfig.fieldAliases, values = [], csv;
+
+          Object.keys(this.countryData).forEach(function(key) {
+            if (key !== 'OBJECTID' && key !== 'Shape_Area' && key !== 'Shape_Length') {
+              values.push(self.countryData[key]);
+              var valuesLength = values.length;
+            }
+          });
+
+          csv = fields.join(",") + '\n';
+          csv += values.join(",") + '\n';
+
+          var blob = new Blob([csv], {
+              type: "text/csv;charset=utf-8;"
+          });
+
+          saveAs(blob, "LandMarkCountryResults.csv");
+        },
+
+        addLayers: function (country) {
+          var self = this;
+
+          ReportConfig.mapLayers.forEach(function(layerConfig) {
+            if (self.map.getLayer(layerConfig.id)) {
+              var layer = self.map.getLayer(layerConfig.id);
+              var layerDefinitions = [];
+              layerDefinitions[layerConfig.layerIds[0]] = "Country = '" + country + "'";
+              if (layerConfig.layerIds.length > 1) {
+                layerDefinitions[layerConfig.layerIds[1]] = "Country = '" + country + "'";
+              }
+              layer.setLayerDefinitions(layerDefinitions);
+            } else {
+              var params = new ImageParameters();
+              params.layerOption = ImageParameters.LAYER_OPTION_SHOW;
+              params.layerIds = layerConfig.layerIds;
+              params.format = 'png32';
+
+              var layer = new ArcGISDynamicMapServiceLayer(layerConfig.url, {
+                  visible: true,
+                  imageParameters: params,
+                  id: layerConfig.id
+              });
+
+              var layerDefinitions = [];
+              layerDefinitions[layerConfig.layerIds[0]] = "Country = '" + country + "'";
+              if (layerConfig.layerIds.length > 1) {
+                layerDefinitions[layerConfig.layerIds[1]] = "Country = '" + country + "'";
+              }
+              layer.setLayerDefinitions(layerDefinitions);
+
+              self.map.addLayer(layer);
+            }
 
             var countryQT = new QueryTask(ReportConfig.countrySnapUrl + '/' + ReportConfig.countrySnapIndex)
             var countryQuery = new Query();
@@ -152,89 +248,12 @@ define([
               }
             });
 
-            map.addLayer(countries);
-            this.addLayers(country);
-        },
-
-        toggleShareContainer: function() {
-            var container = document.querySelector('.share-container');
-
-            if (container) {
-                domClass.toggle(container, 'hidden');
-            }
-
-        },
-
-        downloadCSV: function() {
-          var self = this, fields = ReportConfig.fieldAliases, values = [], csv;
-
-          Object.keys(this.countryData).forEach(function(key) {
-            if (key !== 'OBJECTID' && key !== 'Shape_Area' && key !== 'Shape_Length') {
-              values.push(self.countryData[key]);
-              var valuesLength = values.length;
-            }
           });
 
-          csv = fields.join(",") + '\n';
-          csv += values.join(",") + '\n';
-
-          var blob = new Blob([csv], {
-              type: "text/csv;charset=utf-8;"
-          });
-
-          saveAs(blob, "LandMarkCountryResults.csv");
-        },
-
-        addLayers: function (country) {
-          var self = this;
-
-          ReportConfig.mapLayers.forEach(function(layerConfig) {
-            var params = new ImageParameters();
-            params.layerOption = ImageParameters.LAYER_OPTION_SHOW;
-            params.layerIds = layerConfig.layerIds;
-            params.format = 'png32';
-
-            var layer = new ArcGISDynamicMapServiceLayer(layerConfig.url, {
-                visible: true,
-                imageParameters: params
-            });
-
-            var layerDefinitions = [];
-            layerDefinitions[layerConfig.layerIds[0]] = "Country = '" + country + "'";
-            if (layerConfig.layerIds.length > 1) {
-              layerDefinitions[layerConfig.layerIds[1]] = "Country = '" + country + "'";
-            }
-            layer.setLayerDefinitions(layerDefinitions);
-
-            self.map.addLayer(layer);
-
-          });
-          // var params = new ImageParameters();
-          //
-          // params.layerOption = ImageParameters.LAYER_OPTION_SHOW;
-          // params.layerIds = [1];
-          // params.format = 'png32';
-          //
-          // var layer = new ArcGISDynamicMapServiceLayer(, {
-          //     visible: true,
-          //     imageParameters: params
-          // });
-          //
-          // var layer = new ArcGISDynamicMapServiceLayer(, {
-          //     visible: true,
-          //     imageParameters: params
-          // });
-          //
-          // var layerDefinitions = [];
-          // layerDefinitions[1] = "Country = '" + country + "'";
-          // layer.setLayerDefinitions(layerDefinitions);
-          //
-          // this.map.addLayer(layer);
         },
 
         addCharts: function(data) {
           var fixedTotal = data.attributes.Pct_tot;
-          console.log(data.attributes);
           fixedTotal = parseFloat(fixedTotal);
           if (fixedTotal) {
             fixedTotal = fixedTotal.toFixed(2);
@@ -592,7 +611,6 @@ define([
             window.print();
 
         },
-
 
     };
 

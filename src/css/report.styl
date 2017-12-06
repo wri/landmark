@@ -3,6 +3,27 @@ $report-header-height = 60px
 body
 	background: #f0f0f0 !important;
 
+.hidden
+	display none
+
+#report__select
+	position absolute
+	left 0
+	top 0
+	width 100%
+	height 180px
+	text-align center
+	align-items center
+
+#report-holder
+	text-align center
+	padding-left calc(50% - 150px)
+
+#report__data
+	margin-top 180px
+	width 100%
+
+
 .estimated-chart-container
 	position relative
 	height 100% !important
@@ -18,9 +39,24 @@ body
 		background: #f0f0f0;
 
 .map__container
-		padding: 0 2em;
-		width 350px
-		box-sizing: border-box;
+	padding 0 2em
+	box-sizing border-box
+	display inline-block
+
+.report-component
+		display inline-block
+		height 100%
+		vertical-align top
+		padding 0 1em
+		box-sizing border-box
+
+.map__container, .report-component
+	width 33%
+
+.map-component
+		box-sizing initial
+		position absolute
+		z-index 30
 
 .reportMap
 		background-color #F0F0F0
@@ -34,9 +70,6 @@ body
 
 .map .container
 		background #F0F0F0 !important
-
-//.report-component.charts__container
-//	border-right: 2px solid #888;
 
 body
 		font-family Raleway
@@ -54,31 +87,14 @@ body
 		background #F0F0F0
 
 #report-map-body
-		// height: calc(100% - 120px);
-		// display: flex
-		// align-items center
 		margin-top 2em
 
 .report-map-body__contant
 		position: relative
 
-//#reportMap_root
 #reportMap
 		width 325px !important
 		height 75%
-
-.report-component
-		display inline-block
-		height 100%
-		width calc((100vw - 350px) / 2)
-		vertical-align top
-		padding: 0 1em;
-		box-sizing: border-box;
-
-.map-component
-		box-sizing initial
-		position absolute
-		z-index 30
 
 .button-widget
 		background-color white

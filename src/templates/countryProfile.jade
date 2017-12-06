@@ -1,0 +1,128 @@
+div#report__container
+  div#report__select
+    h1 Country Data
+    h3 Select a country to view statistics
+    div.search-button-label#report-holder
+
+  div#report__data.hidden
+    div.map__container
+      div.mobile-menu#mobileMenu
+          div.mobile-menu-close-button.pointer#mobile-menu-close
+
+      div#report-map-header
+        span.flag-icon#flag-icon
+        div#country-name.country-name
+        div#country-land-area.country-land-area
+        div#country-hectares.country-area
+
+      div#report-map-body
+        div.report-map-body__contant
+          div#reportMap.reportMap
+          
+          div#land-count.land-count
+
+          div.map-component.button-widget.share-button.pointer.hideOnLoad#share-button(title="Share")
+              div.share-icon
+          div.map-component.share-container.hidden
+              div#share-widgets
+                  .sharing_toolbox
+                      .addthis_sharing_toolbox(data-title='Global Platform of Indigenous and Community Lands')
+                      div#embedShare
+                      div#csvShare
+                      div#twitterShare
+                      div#facebookShare
+                      div#moreShare
+                      div#emailShare
+                      div#googleShare
+
+    div.report-component.charts__container
+      h3.report-header Indigenous and Community Lands as Percentage of the Country Land Area*
+      div.total-lands
+        div.estimated-chart-container
+          div#estimated-chart
+
+      hr
+
+      h3.report-header Lands Mapped on LandMark AS PERCENTAGE OF THE COUNTRY LAND AREA*
+      div.lands-mapped-chart-container
+        //- div#community-lands-chart.inline-chart
+        div#indigenous-lands-chart.inline-chart
+      div.report-disclaimer *The provided estimates are indicative, not absolute. They focus only on lands and exclude potential offshore rights over ocean areas, as well as major inland water values. Potential overlaps of different indigenous and community lands are not double counted.
+
+    div.report-component.indicators-table__container
+      h3.report-header Indicators of the Legal Security of Indigenous and Community Lands
+      div.indicators-table__body
+        div.indicators-table__body-content
+          div.indicator-table-container
+            table.report-value-table
+              tr.table-header
+                td#comm-label Communities
+                td.middle-column
+                td#indig-label Indigenous Peoples
+
+              tr.header-row
+                td#average-score-comm
+                td.middle-column AVERAGE SCORE
+                td#average-score-indig
+              tr
+                td#legal-status-comm
+                td.middle-column Legal Status
+                td#legal-status-indig
+              tr
+                td#land-rights-comm
+                td.middle-column Land Rights and Common Property
+                td#land-rights-indig
+              tr
+                td#formal-doc-comm
+                td.middle-column Formal Documentation
+                td#formal-doc-indig
+              tr
+                td#legal-person-comm
+                td.middle-column Legal Person
+                td#legal-person-indig
+              tr
+                td#legal-authority-comm
+                td.middle-column Legal Authority
+                td#legal-authority-indig
+              tr
+                td#perpetuity-comm
+                td.middle-column Perpetuity
+                td#perpetuity-indig
+              tr
+                td#right-consent-comm
+                td.middle-column Right to Consent
+                td#right-consent-indig
+              tr
+                td#right-trees-comm
+                td.middle-column Rights to Trees
+                td#right-trees-indig
+              tr
+                td#right-water-comm
+                td.middle-column Rights to Water
+                td#right-water-indig
+              tr
+                td#land-rights-protected-comm
+                td.middle-column Land Rights and Protected Areas
+                td#land-rights-protected-indig
+          div.indicator-footer-container
+            h3.footer-header Indicators Scoring
+            div.indicator-footer-container__body
+              div.footer-child
+                div.low
+                span.footer-child__label Issue fully addressed
+              div.footer-child
+                div.medium
+                span.footer-child__label Significant progress
+              div.footer-child
+                div.high
+                span.footer-child__label Limited progress
+              div.footer-child
+                div.highest
+                span.footer-child__label Issue not addressed
+
+            div.comments
+              i Not Applicable:
+              |  The subject matter is non-existent
+            div.comments
+              i No Data:
+              |  Not enough data to score
