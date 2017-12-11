@@ -35,7 +35,7 @@ define([
             });
 
             var map = new Map('reportMap', {
-              basemap: 'streets',
+              // basemap: 'streets',
               extent: bounds,
               zoom: 4,
               isDoubleClickZoom: false,
