@@ -40,11 +40,12 @@
                 "dojo/domReady!"
             ],
             callback: function() {
-              if (isWordpress) {
-                loadScript('/map-app/js/reportLoader.js');
-              } else {
-                loadScript('js/reportLoader.js');
-              }
+              // if (isWordpress) {
+              //   loadScript('/map-app/js/reportLoader.js');
+              // } else {
+              //   loadScript('js/reportLoader.js');
+              // }
+              loadScript('/country-profiles-app/js/reportLoader.js');
             }
         };
 
