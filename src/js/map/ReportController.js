@@ -63,7 +63,7 @@ define([
             var reportSources = [];
 
             reportSources.push({
-              featureLayer: new FeatureLayer('https://gis.wri.org/server/rest/services/LandMark/Country_Snapshots/MapServer/0', {
+              featureLayer: new FeatureLayer('http://gis.wri.org/server/rest/services/LandMark/Country_Snapshots/MapServer/0', {
                 outFields: ['Country', 'ISO_Code']
               }),
               searchFields: ['Country'],

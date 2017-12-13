@@ -96,7 +96,7 @@ define([], function() {
           id: 'comm_comm_NotDocumented'
         }],
 
-        countrySnapUrl: 'https://gis.wri.org/server/rest/services/LandMark/Country_Snapshots/MapServer',
+        countrySnapUrl: 'http://gis.wri.org/server/rest/services/LandMark/Country_Snapshots/MapServer',
         countrySnapIndex: 0,
 
         countryCodeExceptions: [
