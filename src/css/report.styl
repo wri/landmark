@@ -1,394 +1,259 @@
-$report-header-height = 60px
-
 body
-	background: #f0f0f0 !important;
-
+    background #f0f0f0 !important
+    font-family Raleway
+    background #F0F0F0
+    color #1c1c1c
 .hidden
-	display none
-
+    display none
 #report__select
-	position absolute
-	left 0
-	top 0
-	width 100%
-	height 180px
-	text-align center
-	align-items center
-
-#report-holder
-	text-align center
-	padding-left calc(50% - 150px)
-
-#report__data
-	margin-top 180px
-	width 100%
-
-
-.estimated-chart-container
-	position relative
-	height 100% !important
-
-#estimated-chart
-	height 100% !important
-
-#report__container
-		padding: 0 0.5em;
-		display: flex;
-		height: 100%;
-		justify-content: space-between;
-		background: #f0f0f0;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+    h1
+      margin 0
 .map__container
-	padding 0 2em
-	box-sizing border-box
-	display inline-block
-
+    display flex
+    justify-content center
+    align-content center
+.charts__container
+    height 800px
+.estimated-chart-container
+    position relative
+    height 85%
+    display flex
+    justify-content center
+    align-items center
+    #estimated-chart
+        height 100%
+        width 300px
+        position absolute
+#report__container
+    background #f0f0f0
+    display: flex;
+    flex-direction: column;
+#report__data
+    height 100%
+    flex-wrap wrap
+    justify-content space-around
+    align-items flex-start
 .report-component
-		display inline-block
-		height 100%
-		vertical-align top
-		padding 0 1em
-		box-sizing border-box
-
-.map__container, .report-component
-	width 33%
-
+    width 30%
+    min-width 500px
+    padding 0 1em
+    margin-bottom 30px
 .map-component
-		box-sizing initial
-		position absolute
-		z-index 30
-
+    box-sizing initial
+    position absolute
+    z-index 30
 .reportMap
-		background-color #F0F0F0
-		height 600px
-		left 0
-		display inline-block
-		padding 1px
-
+    background-color #F0F0F0
+    height 600px
+    left 0
+    padding 1px
 #reportMap_container
-		cursor pointer !important
-
-.map .container
-		background #F0F0F0 !important
-
-body
-		font-family Raleway
-		background #F0F0F0
-		color #1c1c1c
-
+    cursor pointer !important
+.map
+    .container
+        background #F0F0F0 !important
 .country-name
-		font-size 2em
-		margin-left 1.1em
-		color #005e7a
-
+    font-size 2em
+    margin-left 1.1em
+    color #005e7a
 #report-map-header
-		// height 81px
-		z-index 50
-		background #F0F0F0
-
+    z-index 50
+    background #F0F0F0
 #report-map-body
-		margin-top 2em
-
+    margin-top 2em
 .report-map-body__contant
-		position: relative
-
+    position relative
 #reportMap
-		width 325px !important
-		height 75%
-
+    width 325px !important
+    height 75%
 .button-widget
-		background-color white
-		border 1px solid black
-		border-radius(5px)
-		height 30px
-		width 30px
-		display block
-
+    background-color white
+    border 1px solid black
+    border-radius 5px
+    height 30px
+    width 30px
+    display block
 .share-container
-		background-color white
-		border-radius(5px)
-		overflow-y auto
-		min-width 50px
-		height 60px
-		width auto
-		left 31px
-		top -15px
-
-
+    background-color white
+    border-radius 5px
+    overflow-y auto
+    min-width 50px
+    height 60px
+    width auto
+    left 31px
+    top -15px
 .highcharts-tooltip span
     background-color white
-    // border 6px solid green
     opacity 1 !important
     z-index 9999 !important
-
 .tooltip-custom
-		z-index 1000
-		opacity 1 !important
-
+    z-index 1000
+    opacity 1 !important
 .share-button
-		top 0px
-
-		.share-connector
-				top 161px
-
+    top 0px
+    .share-connector
+        top 161px
 #share-widgets
-		padding 14px 15px 0
-
+        padding 14px 15px 0
 #embedShare
-		display inline-block
-		cursor pointer
-		height 33px
-		width 33px
-		background url(images/embed_icon.png) no-repeat #fff
-		margin-left -4px
-
+    display inline-block
+    cursor pointer
+    height 33px
+    width 33px
+    background url('images/embed_icon.png') no-repeat #fff
+    margin-left -4px
 #csvShare
-		display inline-block
-		cursor pointer
-		height 33px
-		width 33px
-		background url(images/export-archive.png) no-repeat gray 62% 35%
-
-//TODO: replace icon
+    display inline-block
+    cursor pointer
+    height 33px
+    width 33px
+    background url('images/export-archive.png') no-repeat gray 62% 35%
+// TODO: replace icon
 .addthis_sharing_toolbox
-		display inline-block
-		vertical-align bottom
-
+    display inline-block
+    vertical-align bottom
 .at_flat_counter
-		display none !important
-
+    display none !important
 .share-icon
-		background url('images/map_tools_share.png') no-repeat
-		background-position 8px 8px
-
+    background url('images/map_tools_share.png') no-repeat
+    background-position 8px 8px
 .share-icon
-		height 100%
-		width 100%
-
+    height 100%
+    width 100%
 .share-icon:hover
-		background-color #eee
-
-.tundra .dijitDialogTitleBar
-		background #055d7d !important
-		padding 6px !important
-
-.tundra .dijitDialogCloseIcon
-		background url('images/close_x_symbol.png') no-repeat !important
-		top 8px !important
-
-.tundra .dijitDialogTitle
-		color white
-
-.tundra .dijitDialogPaneContent
-		color black
-
+    background-color #eee
+.tundra
+    .dijitDialogTitleBar
+        background #055d7d !important
+        padding 6px !important
+.tundra
+    .dijitDialogCloseIcon
+        background url('images/close_x_symbol.png') no-repeat !important
+        top 8px !important
+.tundra
+    .dijitDialogTitle
+        color white
+.tundra
+    .dijitDialogPaneContent
+        color black
 .total-lands, .comm-indig-lands, .indicator-table-container, .indicator-footer-container
-		width 100%
-
+    width 100%
 .total-lands, .comm-indig-lands
-		height 35%
-
+    height 35%
 .report-disclaimer
-		font-size 0.7em
-		padding-bottom 5px
-
+    font-size 0.7em
+    padding-bottom 5px
 .indicator-table-container
-//height 75%
-		padding-bottom 1em
-		text-align center
-		tr
-				height 2em
-		.table-header
-				height 1em
-
+    padding-bottom 1em
+    text-align center
+    tr
+        height 2em
+    .table-header
+        height 1em
 .indicator-footer-container
-		text-align center
-		margin 0.5em 0
-
+    text-align center
+    margin 0.5em 0
 .indicator-footer-container__body
-		display: flex;
-		justify-content: space-around;
-
+    display flex
+    justify-content space-around
 .footer-header
-		margin 0
-		font-size 1em
-		margin-bottom 1em
-
+    margin 0
+    font-size 1em
+    margin-bottom 1em
 .footer-child
-		display inline-block
-		width 22.5%
-		vertical-align text-top
-
+    display inline-block
+    width 22.5%
+    vertical-align text-top
 .footer-child__label
-		padding-top .5em
-		display block
-		font-size: .7em
-
+    padding-top 0.5em
+    display block
+    font-size 0.7em
 .low, .medium, .high, .highest
-		height 26px
-		width 26px
-		border-radius 50%
-		line-height 26px
-		margin 0 auto
-		color #1c1c1c
-		padding 2px
-		background-size contain
-		background-repeat no-repeat
-
+    height 26px
+    width 26px
+    border-radius 50%
+    line-height 26px
+    margin 0 auto
+    color #1c1c1c
+    padding 2px
+    background-size contain
+    background-repeat no-repeat
 .low
-		background-image url('images/1.svg')
-
+    background-image url('images/1.svg')
 .medium
-		background-image url('images/2.svg')
-
+    background-image url('images/2.svg')
 .high
-		background-image url('images/3.svg')
-
+    background-image url('images/3.svg')
 .highest
-		background-image url('images/4.svg')
-
+    background-image url('images/4.svg')
 .unavailable
-		color grey
-		font-size 12px
-		font-style italic
-
+    color grey
+    font-size 12px
+    font-style italic
 .middle-column
-		padding-left 10px
-		padding-right 10px
-
+    padding-left 10px
+    padding-right 10px
 .chart-center
-		text-align center
-		line-height .3
-
+    text-align center
+    line-height 0.3
 .chart-percent
-		color white
-		font-weight bold
-		font-size 24px
-
-// line-height 0
-
+    color white
+    font-weight bold
+    font-size 24px
 .chart-circle
-		border-radius 20px
-		background red
-		line-height 0
-
+    border-radius 20px
+    background red
+    line-height 0
 .inline-chart
-		display inline-block
-
+    display inline-block
 .flag-icon
-		position absolute !important
-		height 2.4em !important
-		width 2em !important
-
-
+    position absolute !important
+    height 2.4em !important
+    width 2em !important
 .report-header
-		font-size 1em
-		padding 0.5em 1em
-		margin 0
-		text-transform uppercase
-		text-align center
-		// min-height: $report-header-height;
-		// display: flex;
-		// align-items: center;
-		// justify-content: center;
-		font-weight 100
-		color #005e7a
-
+    font-size 1em
+    padding 0.5em 1em
+    margin 0
+    text-transform uppercase
+    text-align center
+    font-weight 100
+    color #005e7a
 .report-value-table
-		margin 0 auto
-
-.header-row td
-.indicator-table-container
-		border-bottom 2px solid #005e7a
-
-.indicators-table__body
-		// height: calc(100% - 60px);
-		// display: flex;
-		// align-items: center;
-		// justify-content: center;
-
+    margin 0 auto
+.report-chart-container
+    height 45%
+    width 100%
+    min-height 250px
 .lands-mapped-chart-container
-		display: flex;
-		justify-content: space-between;
-		height 40%
-
-		.inline-chart
-				width 100%
-				height 100%
-				display: flex;
-				justify-content: center;
-				align-items: center;
-
+    position relative
+    height 85%
+    display flex
+    justify-content center
+    align-items center
+    #indigenous-lands-chart
+        height 100%
+        width 300px
+        position absolute
 .comments
-		font-size: .8em
-		padding-top 5px
-		text-align left
-		color #808080
+    font-size 0.8em
+    padding-top 5px
+    text-align left
+    color #808080
+    strong
+        padding-left 1em
 
-		strong
-				padding-left 1em
-
-@media screen and (min-height: 800px) {
-		.report-component,
-		.map__container {
-				height 800px
-		}
-}
-
-@media screen and (min-width: 801px) and (max-width: 1040px) {
-		#report__container {
-				flex-wrap: wrap;
-		}
-
-		.charts__container {
-				width: calc(100vw - 400px);
-		}
-
-		.indicators-table__container {
-				width 100%
-				height: auto;
-		}
-}
-
-@media screen and (max-width: 800px) {
-		.share-button {
-				top 10px
-		}
-
-		.share-container {
-				top -5px
-		}
-
-		#report__container {
-				flex-direction: column
-		}
-
-		.map__container,
-		.report-component {
-				width 100%
-				height: auto;
-		}
-		.report-component {
-				margin-top 2em
-				padding-top 2em
-				border-top: 2px solid #2fa3d9
-		}
-
-		#reportMap {
-				display: block;
-		}
-
-		#reportMap,
-		.report-map-body__contant {
-				margin: auto;
-		}
-}
-
-@media print {
-	body {
-		width: 1200px;
-	}
-	#share-button {
-		display: none;
-	}
-}
+@media screen and (max-width: 800px)
+    .share-button
+        top 10px
+    .share-container
+        top -5px
+@media print
+    body
+        width 1200px
+    #share-button
+        display none

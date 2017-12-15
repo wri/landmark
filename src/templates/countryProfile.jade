@@ -5,7 +5,7 @@ div#report__container
     div.search-button-label#report-holder
 
   div#report__data.hidden
-    div.map__container
+    div.map__container.report-component
       div.mobile-menu#mobileMenu
           div.mobile-menu-close-button.pointer#mobile-menu-close
 
@@ -36,17 +36,17 @@ div#report__container
                       div#googleShare
 
     div.report-component.charts__container
-      h3.report-header Indigenous and Community Lands as Percentage of the Country Land Area*
-      div.total-lands
+      div.report-chart-container
+        h3.report-header Indigenous and Community Lands as Percentage of the Country Land Area*
         div.estimated-chart-container
           div#estimated-chart
 
       hr
 
-      h3.report-header Lands Mapped on LandMark AS PERCENTAGE OF THE COUNTRY LAND AREA*
-      div.lands-mapped-chart-container
-        //- div#community-lands-chart.inline-chart
-        div#indigenous-lands-chart.inline-chart
+      div.report-chart-container
+        h3.report-header Lands Mapped on LandMark AS PERCENTAGE OF THE COUNTRY LAND AREA*
+        div.lands-mapped-chart-container
+          div#indigenous-lands-chart
       div.report-disclaimer *The provided estimates are indicative, not absolute. They focus only on lands and exclude potential offshore rights over ocean areas, as well as major inland water values. Potential overlaps of different indigenous and community lands are not double counted. In the case of data disparities between the estimated Percentages of the County Land Area and Lands Mapped on LandMark, refer to the attribute table of the Percentage data layer.
 
     div.report-component.indicators-table__container
