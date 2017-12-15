@@ -85,7 +85,6 @@ define([
                  self.country = country;
                  var reportDom = dom.byId('report__data');
                  reportDom.classList.remove('hidden');
-                 reportDom.style.display = 'flex';
                  var layerDefinitions = [];
                  layerDefinitions[0] = "Country = '" + country + "'";
                  countries.setLayerDefinitions(layerDefinitions);
@@ -443,7 +442,7 @@ define([
                 //   color: 'white'
                 // }
               },
-              size:'60%'
+              size: '70%'
             }
           },
           series: [{
@@ -537,7 +536,7 @@ define([
                   dataLabels: {
                     enabled: false
                   },
-                  size:'60%',
+                  size:'70%',
                   center: ['50%', '50%']
                 }
               },
@@ -555,7 +554,7 @@ define([
                 {
                 colors: ['gray', '#FF6240', '#00768A', '#FF9900', '#00C1CC'],
                 type: 'pie',
-                size: '60%',
+                size: '70%',
                 innerSize: '60%',
                 data: [
                   ['No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],
