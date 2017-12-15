@@ -74,9 +74,9 @@ define([
               placeholder: 'Type a country name',
               enableSuggestions: true
              });
-
+             
              reportWidget.set("sources", reportSources);
-
+             
              reportWidget.startup();
 
              reportWidget.on('select-result', function(results) {
@@ -324,13 +324,13 @@ define([
               positioner: function (labelWidth, labelHeight, point) {
                 var tooltipX, tooltipY;
                 if (point.plotY < 60) {
-                  tooltipX = point.plotX - 75;
+                  tooltipX = point.plotX - 65;
                   tooltipY = point.plotY - 30;
                 } else if (point.plotY < 120) {
-                  tooltipX = point.plotX - 75;
+                  tooltipX = point.plotX - 65;
                   tooltipY = point.plotY - 50;
                 } else {
-                  tooltipX = point.plotX - 75;
+                  tooltipX = point.plotX - 65;
                   tooltipY = point.plotY - 25;
                 }
 
@@ -355,7 +355,7 @@ define([
                   //   color: 'white'
                   // }
                 },
-                size:'75%'
+                size:'60%'
                 // ,
                 // startAngle: -(angle),
                 // endAngle: angle
@@ -442,7 +442,7 @@ define([
                 //   color: 'white'
                 // }
               },
-              size:'75%'
+              size: '70%'
             }
           },
           series: [{
@@ -511,13 +511,13 @@ define([
                 positioner: function (labelWidth, labelHeight, point) {
                   var tooltipX, tooltipY;
                   if (point.plotY < 60) {
-                    tooltipX = point.plotX - 75;
+                    tooltipX = point.plotX - 65;
                     tooltipY = point.plotY - 30;
                   } else if (point.plotY < 120) {
-                    tooltipX = point.plotX - 75;
+                    tooltipX = point.plotX - 65;
                     tooltipY = point.plotY - 50;
                   } else {
-                    tooltipX = point.plotX - 75;
+                    tooltipX = point.plotX - 65;
                     tooltipY = point.plotY - 25;
                   }
 
@@ -536,7 +536,7 @@ define([
                   dataLabels: {
                     enabled: false
                   },
-                  size:'40%',
+                  size:'70%',
                   center: ['50%', '50%']
                 }
               },
@@ -554,7 +554,7 @@ define([
                 {
                 colors: ['gray', '#FF6240', '#00768A', '#FF9900', '#00C1CC'],
                 type: 'pie',
-                size: '65%',
+                size: '70%',
                 innerSize: '60%',
                 data: [
                   ['No Data', 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF > 0 ? 100 - data.attributes.Map_IP_F - data.attributes.Map_IP_NF - data.attributes.Map_C_F - data.attributes.Map_C_NF : null],

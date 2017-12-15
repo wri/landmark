@@ -25,8 +25,8 @@
           <h3>Select a country to view statistics</h3>
           <div id="report-holder" class="search-button-label"></div>
         </div>
-        <div id="report__data" class="hidden">
-          <div class="map__container">
+        <div id="report__data" class="flex-row hidden">
+          <div class="map__container report-component">
             <div id="mobileMenu" class="mobile-menu">
               <div id="mobile-menu-close" class="mobile-menu-close-button pointer"></div>
             </div>
@@ -60,16 +60,18 @@
             </div>
           </div>
           <div class="report-component charts__container">
-            <h3 class="report-header">Indigenous and Community Lands as Percentage of the Country Land Area*</h3>
-            <div class="total-lands">
+            <div class="report-chart-container">
+              <h3 class="report-header">Indigenous and Community Lands as Percentage of the Country Land Area*</h3>
               <div class="estimated-chart-container">
                 <div id="estimated-chart"></div>
               </div>
             </div>
             <hr>
-            <h3 class="report-header">Lands Mapped on LandMark AS PERCENTAGE OF THE COUNTRY LAND AREA*</h3>
-            <div class="lands-mapped-chart-container">
-              <div id="indigenous-lands-chart" class="inline-chart"></div>
+            <div class="report-chart-container">
+              <h3 class="report-header">Lands Mapped on LandMark AS PERCENTAGE OF THE COUNTRY LAND AREA*</h3>
+              <div class="lands-mapped-chart-container">
+                <div id="indigenous-lands-chart"></div>
+              </div>
             </div>
             <div class="report-disclaimer">*The provided estimates are indicative, not absolute. They focus only on lands and exclude potential offshore rights over ocean areas, as well as major inland water values. Potential overlaps of different indigenous and community lands are not double counted. In the case of data disparities between the estimated Percentages of the County Land Area and Lands Mapped on LandMark, refer to the attribute table of the Percentage data layer.</div>
           </div>
